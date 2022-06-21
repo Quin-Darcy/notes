@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+%\usepackage{slashed}
+%\usepackage{colonequals}
+\usepackage{fancyhdr}
+%\usepackage{import}
+%\usepackage{xifthen}
+%\usepackage{pdfpages}
+%\usepackage{transparent}
+
+%\newcommand{\incfig}[1]{%
+%    \def\svgwidth{\columnwidth}
+%    \import{/home/arbegla/figures/}{#1.pdf_tex}
+%}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+
+\begin{document}
+\title{Measure Theory Notes}
+\author{Quin Darcy}
+\date{31 March 2022}
+\maketitle
+\section{General Measure Spaces}
+    \begin{definition}
+        Let $M$ be a nonempty set. Then a collection of subsets
+        $\sigma\subseteq\mathcal{P}(M)$ is called a $\sigma$-algebra if 
+        \begin{enumerate}
+            \item $M\in\sigma$
+            \item $A\in\sigma\to M\backslash A\in\sigma$
+            \item $A_1, A_2, \dots\in\sigma\to\bigcup_{n=1}^{\infty}A_n\in\sigma$
+        \end{enumerate}
+        The pair $(M, \sigma)$ is called a measurable space. 
+    \end{definition}
+    \begin{definition}
+        A measure $\mu:\sigma\to \overline{R}$ on a measure space $(M, \sigma)$ is
+        a map satisfying
+        \begin{enumerate}
+            \item $\mu(\varnothing)=0$
+            \item $A_1, A_2, \dots\in\sigma$, $A_i\cap A_j=\varnothing$ when $i\neq
+            j$
+                \begin{equation*}
+                    \mu\bigg(\bigcup_{n\geq 1}A_n\bigg)=\sum_{n\geq 1}\mu(A_n).
+                \end{equation*}
+        \end{enumerate}
+        The tuple $(M, \sigma, \mu)$ is called a measure space. 
+    \end{definition}
+\section{Properties of a Meausre}
+    Given a measure space $(M, \sigma, \mu)$
+    \begin{enumerate}
+        \item $A_1, A_2\in\sigma$ and $A_1\subset A_2$, then $\mu(A_1)\leq\mu(A_2)$.
+        \item $A_1, A_2, \dots\in\sigma$ then
+            \begin{equation*}
+                \mu\bigg(\bigcup_{n\geq 1}A_n\bigg)\leq\sum_{n\geq 1}\mu(A_n).
+            \end{equation*}
+        \item Contiuity from below. An increasing sequence of measurable sets
+            $A_1\subseteq A_2\subseteq\cdots$ where $\bigcup_{n\geq 1}A_n=A$,
+            then 
+            \begin{equation*}
+                \lim_{n\to\infty}\mu(A_n)=\mu(A).
+            \end{equation*}
+        \item A decreasing sequence of measurable sets $A_1\supseteq
+            A_2\supseteq\cdots$ where $\bigcap_{n\geq 1}A_n=A$ and
+            $\mu(A_1)<\infty$, then 
+            \begin{equation*}
+                \lim_{n\to\infty}\mu(A_n)=\mu(A). 
+            \end{equation*}
+    \end{enumerate}
+\end{document}

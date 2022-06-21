@@ -1,0 +1,184 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 230B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newenvironment{solution}
+{\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+{\end{proof}}
+\newenvironment{psmall}{\left(\begin{smallmatrix}}{\end{smallmatrix}\right)}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 230B}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 02/02/2022   \\
+    { Instructor:}\ Dr. Ricciotti \hspace{\fill} Assignment:
+    PRACTICE \\ \hrule}
+
+    \begin{enumerate}
+        \item Let $a<b$ be real numbers and $f:(a, b)\to\mathbb{R}$ be
+            differentiable with $|f'(x)|\leq M$ for all $x\in(a, b)$ where
+            $M>0$. Prove that $\lim_{x\to b^{-}}f(x)$.
+            \begin{proof}
+                We need to show that for $f(t_n)\to L$ as $n\to\infty$ for all
+                sequences $\{t_n\}$ in $(a, b)$ such that $t_n\to b$. To start
+                we will show that $f$ is uniformly continuous on $(a, b)$. Let
+                $x, y\in (a, b)$. Then $f$ is continuous on $[x, y]$ and
+                differentiable on $(x, y)$. With these two premises in hand, we
+                can apply the MVT to obtain some $z\in (x, y)$ such that 
+                \begin{equation}
+                    f(y)-f(x)=f'(z)(y-x).
+                \end{equation}
+                Since $f'$ is bounded my $M$, then from (1) it follows that 
+                \begin{equation}
+                    f(y)-f(x)\leq M(y-x).
+                \end{equation}
+                Furthermore, since this is true for all $x, y\in(a, b)$, then
+                we get that 
+                \begin{equation}
+                    |f(y)-f(x)|\leq M|y-x|.
+                \end{equation}
+                Hence, $f$ is Lipschitz continuous on $(a, b)$. Thus, in
+                letting $\varepsilon>0$ and choosing $\delta=\varepsilon/M$,
+                then for any $x, y\in(a, b)$ such that $|y-x|<\delta$, then 
+                \begin{equation}
+                    |f(y)-f(x)|\leq M|y-x|<M\delta=M\frac{\varepsilon}{M}=\varepsilon.
+                \end{equation}
+                Therefore $f$ is uniformly continuous over $(a, b)$. Now that
+                uniform continuity has been established, we move on to showing
+                the initial statement of this proof. \par\hspace{4mm}Let ${c_n}_n$ be any
+                sequence of $(a, b)$ such that $c_n\to b$ as $n\to\infty$.
+                Recall that every convergent sequence in Cauchy (since for any
+                $\varepsilon>0$, there exists $N$ such that for all $n>N$,
+                $|x_n-a|<\varepsilon/2$ and so for $m, n>N$, the triangle
+                inequality gives us $|x_n-x_m|\leq
+                |x_n-a|+|a-x_m|<\varepsilon$). With this we have that $\{c_n\}$ is
+                Cauchy. Letting $\varepsilon>0$, then since $f$ is uniformly
+                continuous, there exists $\delta>0$ such that for all $x,
+                y\in(a, b)$ with $|x-y|<\delta$, then
+                $|f(x)-f(y)|<\varepsilon$. Moreover, since $\{c_n\}$ is
+                Cauchy, then there exists some $N$ such that for all $m, n\geq
+                N$ we get $|c_n-c_m|<\delta$ and hence
+                $|f(c_n)-f(c_m)|<\varepsilon$. Therefore, $\{f(c_n)\}$ is
+                Cauchy and therefore convergent. Hence,
+                $\lim_{n\to\infty}f(c_n)\in\mathbb{R}$ for all sequences in $(a,
+                b)$ that converge to $b$. Therefore $\lim_{x\to b^-}f(x)$
+                exists.   
+            \end{proof}
+        \item Let $f:(0, \infty)\to\mathbb{R}$ be differentiable. Prove that if
+            $\lim_{x\to\infty}f(x)=M\in\mathbb{R}$, then there exists
+            a sequence $\{x_n\}_n$ in $(0, \infty)$ such that $f'(x_n)$
+            converges to 0.
+            \begin{proof}
+               Let $\varepsilon>0$ then there exists $\delta>0$ such that for
+               all $x\in (0, \infty)$ with $x>\delta$, $|f(x)-M|<\varepsilon$.
+               By the Archimedean principle, there exists $N(\varepsilon)>\delta$ with
+               $N\in\mathbb{Z}$ such that for any $n>N(\varepsilon)$ we have
+               $|f(n)-M|<\varepsilon$. Hence $\{f(n)\}_n$ is convergent and
+               therefor Cauchy. Thus, letting $m=N(\varepsilon)+1$ and $n=m+1$,
+               then 
+               \begin{equation}
+                   |f(n)-f(m)|<\varepsilon.
+               \end{equation}
+               From (5) it follows that 
+               \begin{equation}
+                   \frac{f(n)-f(m)}{n-m}\leq
+                   \frac{|f(n)-f(m)|}{|n-m|}<\varepsilon.
+               \end{equation}
+               Then since $f$ is differentiable over $(m, n)$ and continuous
+               over $[m, n]$ then by the MVT, there exists
+               $z=z(N(\varepsilon))\in(m, n)$ such that 
+               \begin{equation}
+                   f'(z)=\frac{f(n)-f(m)}{n-m}<\varepsilon.
+               \end{equation}
+               Now define the following sequence $\{z_k\}_k$ where for each
+               $k\in\mathbb{N}$, we define $\varepsilon=1/k$, and from which we
+               obtain $N(\varepsilon)$, and from that we obtain
+               $m=N(\varepsilon)+1$ and $n=m+1$, and finally $z_k\in(m, n)$
+               which satisfies (7). From this we see that $\{f'(z_k)\}$ is
+               a sequence which converges to zero. 
+            \end{proof}
+        \item Let $f:[0, 1]\to\mathbb{R}$ be defined as 
+            \begin{equation}
+                f(x)=\begin{cases}
+                    1&\text{ if $x=\frac{1}{n}$ where $n\in\mathbb{N}$} \\
+                    0&\text{ otherwise. }
+                \end{cases}
+            \end{equation}
+            Determine (with proof) whether $f\in\mathcal{R}[0, 1]$ and if so,
+            compute $\int_{0}^{1}f$.
+            \begin{proof}
+                Let $\varepsilon>0$, then let $k$ be the smallest integer such
+                that $\frac{1}{k}<\varepsilon/2$. Let $P=\{x_0, \dots,
+                x_{2k+1}\}$ be a partition where $x_0=0$, $x_{2k}=1-\delta/2$,
+                $x_{2k+1}=1$, and for each $i\in\{2, \dots, k\}$,
+                $x_{2(k-i)+1}=\frac{1}{i}-\frac{\delta}{2}$, and
+                $x_{2(k-i)+2}=\frac{1}{i}+\frac{\delta}{2}$, where
+                \begin{equation*}
+                    \delta<\min\{\frac{k\varepsilon-1}{k(k-2)},
+                    \frac{1}{2}\big(\frac{1}{k}-\frac{1}{k+1}\big)\}.
+                \end{equation*}
+                The term in the left of the min comes from requiring that
+                $\delta$ be such that 
+                \begin{equation*}
+                    \frac{1}{k}-\frac{\delta}{2}+(k-2)\delta+\frac{\delta}{2}<\varepsilon.
+                \end{equation*}
+                Where the first two terms denote the distance between $x_0$ and
+                $x_1$, the term in the middle is the sum of the rectangle's
+                widths around $1/2, 1/3, \dots, 1/k$, and the last term is the
+                length between $x_{2k}$ and $x_{2k+1}$. The term in the right 
+                of the min assures that $\delta$ is
+                smaller than the length between $\frac{1}{k}$ and
+                $\frac{1}{k+1}$. With this we have that 
+                for any $s\in\{2, \dots, 2k+1\}$, then 
+                \begin{align*}
+                    M_s&=\sup_{[x_{s-1}, x_s]}f=\begin{cases}
+                        1 &\text{if $s$ is even} \\
+                        0 &\text{if $s$ is odd.}
+                    \end{cases}
+                \end{align*}
+                This is because if $s$ is even, then there is some $i\in\{2,
+                \dots, k\}$ such that $s=2(k-i)+2$ and between $x_s$ and
+                $x_{s-1}$ is $\frac{1}{i}$ and so $f$ would take on a value of
+                1 over that interval. Whereas, if $s$ is odd, then there is no
+                $i\in\mathbb{N}$ such that $x_{s-1}\leq\frac{1}{i}\leq x_s$ and
+                so $f$ is 0 over the interval. With this in mind we compute the
+                upper sum 
+                \begin{align*}
+                    S(f, P)&=\sum_{s=1}^{2k+1}M_s\Delta x_s \\
+                    &=\frac{1}{k}-\frac{\delta}{2}+\sum_{s=2}^{2k}M_s\delta+\frac{\delta}{2}
+                    \\
+                    &=\frac{1}{k}+(k-2)\delta \\
+                    &< \frac{1}{k}+(k-2)\frac{k\varepsilon-1}{(k-2)k} \\
+                    &= \frac{1}{k}+\frac{k\varepsilon-1}{k} \\
+                    &=\frac{k\varepsilon}{k}=\varepsilon.
+                \end{align*}
+                Seeing as $L(f, P)=0$ since between any two $x_{i-1}$ and $x_i$
+                there is an irrational number, then it follows that 
+                \begin{equation*}
+                    U(f, P)-L(f, P)=U(f, P)<\varepsilon.
+                \end{equation*}
+                Therefore $f\in\mathcal{R}[0, 1]$. To compute the integral we
+                only need to note that $L(f, P)=0$ for all partitions (reason
+                given above) and so the $\underline{S}(f)=0$. Hence
+                \begin{equation*}
+                    \int_{0}^1f=0.
+                \end{equation*}
+           \end{proof}
+    \end{enumerate}
+\end{document}

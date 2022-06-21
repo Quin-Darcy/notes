@@ -1,0 +1,330 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 296C}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{/home/arbegla/figures/}{#1.pdf_tex}
+}
+
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+  {\end{proof}}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 296C}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 5/17/21 \\
+    { Instructor:}\ Dr. Krauel \hspace{\fill} Assignment:
+    Final Exam \\  \hrule}
+
+    \begin{enumerate}
+        \item Explain your work for everything done.
+            \begin{enumerate}[label=\textbf{\alph*}.]
+                \item Do \textbf{one} of the following:
+                    \begin{enumerate}[label=(\Roman*)]
+                        \item Construct a rank 2 root system associated with
+                            the angle $\theta=3\pi/4$. (Include a diagram of
+                            the roots, along with their labels.)
+                            \begin{solution}
+                                Taking $\alpha, \beta\in\Phi$ such that
+                                $\beta\neq\pm\alpha$ and the angle between
+                                these roots is $3\pi/4$, then as this is an
+                                obtuse angle, we get that
+                                $\alpha+\beta\in\Phi$. Additionally, we get
+                                that $-\alpha, -\beta, -\alpha-\beta\in\Phi$.
+                                Next we want to calculate the angle between
+                                $\alpha$ and $\alpha+\beta$. Thus, we want to
+                                calculate the $\theta$ which satisfies
+                                \begin{equation*}
+                                    \langle\alpha+\beta,
+                                    \alpha\rangle\langle\alpha,
+                                    \alpha+\beta\rangle=4\cos^2\theta.
+                                \end{equation*}
+                                By Table 1 from the notes, we have that
+                                $\langle\alpha, \beta\rangle = -1$ and
+                                $\langle\beta, \alpha\rangle=-2$. Using this, we find that 
+                                \begin{equation*}
+                                    \begin{split}
+                                        \langle\alpha+\beta,
+                                        \alpha\rangle&=\frac{2(\alpha+\beta,
+                                        \alpha)}{(\alpha, \alpha)} \\
+                                        &=\frac{2(\alpha, \alpha)+2(\beta,
+                                        \alpha)}{(\alpha, \alpha)} \\
+                                        &=2+\langle\beta, \alpha\rangle \\
+                                        &=2+(-2) \\
+                                        &=0.
+                                    \end{split}
+                                \end{equation*}
+                                Hence, $\cos^2\theta=0$. This implies that
+                                $\theta=\pi/2$. Next, we consider the
+                                reflection of $-\beta$ over $\alpha$:
+                                \begin{equation*}
+                                    \begin{split}
+                                        \sigma_{\alpha}(-\beta)&=-\beta-\frac{2(-\beta,
+                                        \alpha)}{(\alpha, \alpha)}\alpha \\
+                                        &=-\beta+\frac{2(\beta,
+                                        \alpha)}{(\alpha, \alpha)}\alpha \\
+                                        &=-\beta+\langle\beta,
+                                        \alpha\rangle\alpha \\
+                                        &=-\beta-2\alpha.
+                                    \end{split}
+                                \end{equation*}
+                                From this we also get that
+                                $\pm(2\alpha+\beta)\in\Phi$. Using the same
+                                technique from above, we can determing the
+                                angle between $\alpha$ and $2\alpha+\beta$. We
+                                get that $\theta=\pi/4$. Thus our root system
+                                is $\Phi=\{\pm\alpha, \pm\beta,
+                                \pm(\alpha+\beta), \pm(2\alpha+\beta)\}$. This
+                                root system is isomorphic to $B_2$.
+                            \end{solution}
+                    \end{enumerate}
+                \item Find the Cartan matrix for your choice of (a).
+                    \begin{solution}
+                        Seeing that $\Delta=\{\alpha, \beta\}$ is a base for
+                        our choice in (a). This is true since $\alpha$ and
+                        $\beta$ generated the root system in (a). With this we
+                        calculate the Cartan matrix as 
+                        \begin{equation*}
+                            C=\begin{bmatrix}\langle\alpha,
+                            \alpha\rangle&\langle\alpha,
+                        \beta\rangle\\ \langle\beta,
+                    \alpha\rangle&\langle\beta, \beta\rangle
+                \end{bmatrix}=\begin{bmatrix}2&-1\\-2&2 \end{bmatrix}  
+                        \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+            \begin{enumerate}[label=(\Alph*)]
+                \item Performing the same procedure as above we get that with
+                    the two roots $\alpha, \beta\in\Phi$, it follows that
+                    $-\alpha, -\beta\in\Phi$. And since $\theta=5\pi/6$ is
+                    obtuse, then $\pm(\alpha+\beta)$. Via reflections across
+                    the roots in $\Phi$, we also obtain $\pm(\alpha+2\beta)$,
+                    $\pm(2\alpha+\beta)$, $\pm(3\alpha+2\beta)$, and
+                    $\pm(3\alpha+\beta)$. This gives us a root system
+                    isomorphic to $G_2$.
+                \item In part I, we found that $\Phi$ had 8 roots, 4 of them
+                    positive. So the Weyl group would be the set of all
+                    compositions of the elements 
+                    $\{\sigma_{\alpha},\sigma_{\beta},\sigma_{\alpha+\beta},\sigma_{2\alpha_\beta}\}$,
+                    since $\sigma_{\alpha}(\beta)=\sigma_{-\alpha}(\beta)$ (at
+                    least I think so?).
+                \item If $\langle\alpha, \beta\rangle\langle\beta,
+                    \alpha\rangle=2$, then lets assume $\langle\alpha,
+                    \beta\rangle=1$. This forces $\langle\beta,
+                    \alpha\rangle=2$. Hence, $2=4\cos^2\theta$ which implies
+                    $\cos\theta=\pm\sqrt{2}/2$. Note that we have $(\alpha, \beta)>0$, and thus $\theta$ is
+                    acute. Hence, we get that $\cos\theta=\sqrt{2}/2$ and thus $\theta=\pi/4$. Moreover, we find
+                    that $(\beta, \beta)/(\alpha, \alpha)=2$.\par\hspace{4mm}
+                    If instead, $\langle\beta, \alpha\rangle=-2$, everythig
+                    above is the same except we have that $(\alpha, \beta)<0$
+                    and so the angle is obtuse. Thus, $\cos\theta=-\sqrt{2}/2$,
+                    and hence $\theta=3\pi/4$.
+            \end{enumerate}
+        \item Do the following.
+            \begin{enumerate}[label=(\Alph*)]
+                \item State the roots of $G_2$.
+            \begin{solution}
+                As vectors in a 2-dimensional subspace of a 3-dimensional
+                space, the roots are
+                \begin{align*}
+                    &(1, -1, 0)& &(-1, 1, 0)& &(2, -1, -1)& &(-2, 1, 1)& \\
+                    &(1, 0, -1)& &(-1, 0, 1)& &(1, -2, 1)& &(-1, 2, -1)& \\
+                    &(0, 1, -1)& &(0, -1, 1)& &(1, 1, -2)& &(-1, -1, 2)
+                \end{align*}
+            \end{solution}
+        \item Provide the Cartan matrix of $G_2$.
+            \begin{solution}
+                The Cartan matrix of $G_2$ is 
+                \begin{equation*}
+                    C=\begin{bmatrix} 2&-3\\-1&2 \end{bmatrix} 
+                \end{equation*}
+            \end{solution}
+        \item Explain how one can obtain the Cartan matrix from a base of
+            roots.
+            \begin{solution}
+                Given a base $\Delta=\{\alpha_1, \dots, \alpha_n\}$ of a root
+                system $E$, the Cartan matrix can be found by calculating
+                $\langle\alpha_i, \alpha_j\rangle$ for all $1\leq i, j\leq n$
+                and it is the result of each of these calculations which which
+                will serve as the entries in the matrix. For example, the entry
+                at the $i$-th row and $j$-th column would be $\langle\alpha_i,
+                \alpha_j\rangle$.
+            \end{solution}
+        \item Provide the Dynkin diagram for $G_2$.
+            \begin{solution}\hfill\par
+                \begin{figure}[htp!]
+                    \incfig{G2}
+               \end{figure}\hfill\par
+               Sorry for how crazy big this turned out. I'm a lot better at
+               LaTeX/InkScape than this, I swear!
+            \end{solution}
+        \item Explain how one can obtain the Cartan matrix from the Dynkin
+            diagram. In the explanation, actually construct the Cartan matrix. 
+            \begin{solution}
+                Given a Dynkin diagram, we first count the number of vertices.
+                This will tell us how many simple roots are in our base,
+                $\Delta$. Let's
+                say there are $n$ many. Between any two vertices, we count the
+                number of lines (edges) connecting them. This number is
+                $n_{\alpha_i, \alpha_j}$ for $\alpha_i, \alpha_j\in\Delta$.
+                Knowing this number gives us $\langle\alpha_i,
+                \alpha_j\rangle\langle\alpha_j, \alpha_i\rangle$. This number
+                is always going to be an element of $\{0, 1, 2, 3\}$. Since
+                $\langle\alpha_i, \alpha_j\rangle\in\mathbb{Z}$, for all $i,
+                j$, then this leaves a finite number of possibilities for what
+                $\langle\alpha_i, \alpha_j\rangle$, and $\langle\alpha_j,
+                \alpha_i\rangle$ can be. Each possibility for one decides the
+                value for the other. Supposing $\langle\alpha_i,
+                \alpha_j\rangle=a$ and $\langle\alpha_j, \alpha_i\rangle=b$,
+                where $ab=n_{\alpha_i, \alpha_j}$, we have now just calculated
+                two entries of the Cartan matrix. Namely, the $ij$-th entry and
+                the $ji$-th entry. Continuing in this way, looking at every
+                consecutive pair of vertices, this will yield all entries in
+                the matrix. 
+            \end{solution}
+        \item Explain how one can obtain the Dynkin diagram from the Cartan
+            matrix. In the explanation, actually construct the Dynkin diagram.
+            \begin{solution}
+                Given the Cartan matrix, $C$, we can begin our Dynkin diagram
+                by drawing as many vertices as there are rows or columns in the
+                matrix. At this point, we can recall that the $ij$-th entry in
+                the matrix is $\langle\alpha_i, \alpha_j\rangle$, and so we can
+                associate each consecutive pair of vertices with a particular
+                entry in the matrix. The entry will tell us the number of lines
+                or edges which connect the consecutive pair of points, via the
+                product of the entry with its transpose, i.e.,
+                $\langle\alpha_i, \alpha_j\rangle\langle\alpha_j,
+                \alpha_i\rangle$.
+                Additionally, we stipulate that if this product is greater than
+                1, then we draw an arrow pointing towards the vertex whose
+                associated root has a greater magnitude betweeen the pair. 
+            \end{solution}
+            \end{enumerate} 
+        \item In your own words, write a 1 page overview of what we covered on
+            Lie algebras. Attempt to weave the themes together.
+            \begin{solution}
+                To start, I must say that this is one of those classes that
+                I would happily take again. It is a subject one joyously swan
+                dives into if given the time. In this class we began by simply
+                giving a definition. The definition was of a Lie algebra, and
+                it is essentially (details omitted)
+                a vector space equipped with a strange operator. But this
+                humble beginning resulted in significant
+                implications.\par\hspace{4mm} We were exposed to a few examples
+                of these Lie algebras, but we set our sights on one in
+                particular as it proved a very demonstrative choice for many of
+                the concepts we looked at. The Lie algebra we focused on was
+                $\mathfrak{sl}_2(\mathbb{C})$. We quickly moved to studying how
+                this Lie algebra ``acted" on other spaces. It was through this
+                lense that we found an entry point to the classification of
+                certain types of Lie algebras.\par\hspace{4mm} In my naive
+                understanding, with an operator called the adjoint operator,
+                this allowed us to place the elements into the setting which
+                was where we studied the techniques of decomposing a space.
+                This operator allowed us to see how the Lie algebra acted on
+                itself and we were able to decompose the Lie algebra into
+                simpler structures. Moreover, we looked at particular elements of the Lie
+                algebra which we called semisimple. And these elements it was
+                these elements which specifically provided us with the
+                constituents of the decomposition. \par\hspace{4mm} The
+                semisimple elements, had adjoint representations which were
+                diagonalizable and yielded eigenvalues, which then in turn,
+                yielded eigenspaces, whose direct sum was the Lie
+                algebra.\par\hspace{4mm} In taking a closer look at the set of
+                the adjoint representation of the
+                semisimple (and abelian) elements of the Lie algebra, we found
+                that these elements had common eigenvectors. For such
+                a common eigenvector, we considered the eigenvalues associated
+                to it with respect to the particular semisimple element for
+                which it was an eigenvector. Said less horribly, being
+                a simulateous eigenvector for all of these semisimple elements
+                means that for each semisimple element, the eigenvector has
+                a different eigenvalue. The set of these eigenvalues is what we
+                called a root. We also considered the root to be a linear
+                functional whose inputs were the semisimple elements and whose
+                outputs were the eigenvalue for that given
+                input.\par\hspace{4mm} Okay, we have this set of roots, big
+                deal! But wait, we also looked at something called the Killing
+                form which is a symmetric bilinear nondegenerate map, you know,
+                one of those things $\dots$ This Killing form allowed us to
+                define an inner product on the space spanned by our roots which
+                is quite significant since this gives rise to a kind of
+                geometry in the space! Namely, we were able to discuss lengths
+                and angles, like one does on Thanksgiving at grandma's
+                house.\par\hspace{4mm} So along with this geometry, we also
+                looked at ways to reflect the roots across a hyperplane. This
+                one of the tools needed in recovering all of the roots of a Lie
+                algebra. In addition to the reflection, there were many small
+                results about the inner product and the properties of the
+                geometry which all together suggested that at the level of root
+                spaces, there are only finitely many of them. And if any
+                arbitrary one of these special types of Lie algebras
+                corresponds to one of these root systems, then this implies
+                that a classifiaction of the root systems might be able to pull
+                back into a classification of the Lie algebras themselves. This
+                turns out to be true!\par\hspace{4mm} Better yet, the root
+                spaces have a few different, very compact, forms. We looked at
+                root diagrams, which emphasized the geometry of the root space
+                as the diagrams are like a crystallographic arrangement of
+                arrows. Then there are the Cartan matrices whose entries give
+                you all the information you need about the inner product
+                between any two roots. Finally, there are the Dynkin diagrams,
+                which, like the Cartan matrix, tells you about the inner
+                product of any two roots, but it also conveys information
+                regarding the lengths of the roots which is something seen in
+                the root diagram.\par\hspace{4mm} All in all, and despite this
+                (very) inaccurate summaries, this was one of, if not, the most
+                interesting class I have ever had the pleasure of taking.
+                Thank you very much for teaching it, Dr. Krauel. You did an
+                incredible job!
+            \end{solution}
+    \end{enumerate}
+\end{document}

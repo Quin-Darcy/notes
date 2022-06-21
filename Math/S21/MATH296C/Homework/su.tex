@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{enumitem}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{/home/arbegla/figures/}{#1.pdf_tex}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+
+\begin{document}
+\title{The Lie algebra $\mathfrak{sl}_n(\mathbb{C})$ and its eigenvalues}
+\author{Quin Darcy}
+\date{March, 5 2021}
+\maketitle
+    \section{Definition and remarks}
+    The Lie algebra $\mathfrak{sl}_n(\mathbb{C})$ is defined to be the set of all $n\times
+    n$ matrices with trace 0 and whose entries are complex numbers. As the
+    title of this paper suggests, this set is a Lie algebra. Recall the
+    following definition:
+    \begin{definition}
+        A Lie algebra is a vector space $L$ over some field $F$ equipped with
+        a binary operation $[\cdot, \cdot]:L\times L\to L$ such that for all
+        $x, y, z\in L$, the
+        following conditions hold:
+        \begin{enumerate}[label=(\roman*)]
+            \item $[\cdot, \cdot]$ is a bilinear map.
+            \item $[x, x] = 0$
+            \item $[x, [y, z]]+[y, [z, x]]+[z, [x, y]] = 0$.
+            \end{enumerate}
+    \end{definition}
+    \noindent With the above definition in hand, if we define $[X, Y]
+    = XY-YX$ for all $X, Y\in\mathfrak{sl}_n(\mathbb{C})$, then this will
+    satisfy the above three conditions.
+\end{document}

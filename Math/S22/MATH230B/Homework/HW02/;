@@ -1,0 +1,43 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 230B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newenvironment{solution}
+{\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+{\end{proof}}
+\newenvironment{psmall}{\left(\begin{smallmatrix}}{\end{smallmatrix}\right)}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 230B}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 02/18/2022   \\
+    { Instructor:}\ Dr. Ricciotti \hspace{\fill} Assignment:
+    Homework 02 \\ \hrule}
+
+    \begin{enumerate}
+        \item Let $f:[0, 1]\to\mathbb{R}$ be defined as 
+            \begin{equation*}
+                f(x)=\begin{cases}\frac{1}{n}&\text{if $x=\frac{1}{n}$ where
+                    $n\in\mathbb{N}$} \\
+                0 &\text{otherwise}\end{cases}.
+            \end{equation*}
+            Determine (with proof) whether $f\in\mathcal{R}[a, b]$ if so,
+            compute $\int_{0}^{1}f$.
+    \end{enumerate}
+\end{document}

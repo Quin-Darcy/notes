@@ -1,0 +1,243 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 230B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newenvironment{solution}
+{\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+{\end{proof}}
+\newenvironment{psmall}{\left(\begin{smallmatrix}}{\end{smallmatrix}\right)}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 230B}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 04/15/2022   \\
+    { Instructor:}\ Dr. Ricciotti \hspace{\fill} Assignment:
+    Homework 05 \\ \hrule}
+
+    \begin{enumerate}
+        \item Let $A_n\subseteq\mathbb{R}$ satisfy $A_{n+1}\subseteq A_n$ for
+            all $n\in\mathbb{N}$ and denote $A=\bigcap_{n\in\mathbb{N}}A_n$.
+            Prove that the sequence of indicator functions $f_n=1_{A_n}$
+            converges pointwise to the function $f=1_A$ on $\mathbb{R}$. 
+            \begin{proof}
+                Let $x\in\mathbb{R}$. Then either $x\in A$ or $x\notin A$. If
+                $x\in A$, then $x\in\bigcap_{n\in\mathbb{N}}A_n$ which implies
+                that for all $n\in\mathbb{N}$, $x\in A_n$. Thus $f_n(x)=1$ for
+                all $n\in\mathbb{N}$. The final implication is that for $N=1$
+                and for $n\geq N$, then $|f_n(x)-1|=0<\varepsilon$, for all
+                $\varepsilon>0$. Therefore $\lim_{n\to\infty}f_n(x)=1$ for all
+                $x\in A$.\par\hspace{4mm} If $x\notin A$, then
+                $x\notin\bigcap_{n\in\mathbb{N}}A_n$ which implies that for
+                some $m\geq 1$, $x\notin A_m$. Thus for all $n\geq m$, $x\in
+                A_n$, and so $f_n(x)=0$ for all $n\geq m$. Letting
+                $\varepsilon>0$, $N=m$, and $n\geq N$, then
+                $|f_n(x)-0|<\varepsilon$. Hence $\lim_{n\to\infty}f_n(x)=0$ for
+                all $x\notin A$. Therefore 
+                \begin{equation*}
+                    \lim_{n\to\infty}f_n(x)=f.
+                \end{equation*}
+            \end{proof}
+        \item Discuss the pointwise/uniform convergence on $[0, 1]$ of the
+            sequence of functions 
+            \begin{equation*}
+                f_n(x)=\frac{nx}{1+n^3x^2}.
+            \end{equation*}
+            \begin{solution}
+                Letting $x\in[0, 1]$, then 
+                \begin{align*}
+                    \lim_{n\to\infty}\frac{nx}{1+n^3x^2} &=
+                    \lim_{n\to\infty}\frac{n}{1+n^3x^2}\cdot x \\
+                    &=\lim_{n\to\infty}\frac{1/n^2}{1/n^3+x^2}\cdot x \\
+                    &=\frac{0}{0+x^2}\cdot x \\
+                    &= 0.
+                \end{align*}
+                This shows that the sequence $\{f_n(x)\}$ converges for all
+                $x\in[0, 1]$ and thus $\{f_n\}$ converges pointwise on $[0,
+                1]$ to $f=0$.\par\hspace{4mm} Let $x\in[0, 1]$ and $n\in\mathbb{N}$, then 
+                \begin{align*}
+                    \lim_{t\to x}\frac{f_n(t)-f_n(x)}{t-x} &=
+                    \lim_{t\to x}\frac{\frac{n(t-x)}{(1+n^3x^2)(1+n^3t^2)}}{t-x} \\
+                    &=\lim_{t\to x}\frac{n}{(1+n^3x^2)(1+n^3t^2)} \\
+                    &=\frac{n}{(1+n^3x^2)^2}\in\mathbb{R}.
+                \end{align*}
+                Thus $f_n(x)$ is differentiable over $[0, 1]$. With this we can
+                solve for the maximum, if it exists, of $f_n$
+                \begin{align*}
+                    f'_n(x)=0 &\Leftrightarrow
+                    \frac{n(1-n^3x^2)}{(1+n^3x^2)^2}=0 \\
+                    &\Leftrightarrow 1-n^3x^2=0 \\
+                    &\Leftrightarrow x=\pm\frac{1}{\sqrt{n^3}}.
+                \end{align*}
+                Thus 
+                \begin{equation*}
+                    \sup_{x\in[0,
+                    1]}\{f_n(x)-0\}=f(1/\sqrt{n^3})
+                    =\frac{n(1/\sqrt{n^3})}{1+n^3(1/\sqrt{n^3})^2}
+                    =\frac{1}{2\sqrt{n}}.
+                \end{equation*}
+                In summary, we have that $\{f_n\}$ converges pointwise to $f=0$
+                and that
+                \begin{equation*}
+                    \lim_{n\to\infty}\sup\{f_n(x)-f\}
+                    =\lim_{n\to\infty}\frac{1}{2\sqrt{n}}=0.
+                \end{equation*}
+                By Theorem 7.9 (Rudin), $\{f_n\}$ converges uniformly to $f=0$. 
+            \end{solution}
+        \item Let $f:[a, b]\to\mathbb{R}$ be a function and let $f_n\in C[a,
+            b]$ for all $n\in\mathbb{N}$. Assume that $\{x_n\}$ is a sequence
+            that converges to $x\in[a, b]$.
+            \begin{enumerate}[(a)]
+                \item Prove that, if $\{f_n\}_n$ converges uniformly to $f$ on
+                    $[a, b]$, then the numerical sequence $\{f_n(x_n)\}_n$
+                    converges to $f(x)$. 
+                    \begin{proof}
+                        Let $\varepsilon>0$. Since $\{f_n\}$ converges
+                        uniformly, then there exists $N_1$ such that for all
+                        $n>N_1$, we have 
+                        \begin{equation*}
+                            |f_n(y)-f(y)|<\frac{\varepsilon}{2}
+                        \end{equation*}
+                        for all $y\in[a, b]$. It also follows from the uniform
+                        convergence (and that each $f_n$ is continuous on $[a,
+                        b]$) that $f$ is continuous on $[a, b]$, by Theorem
+                        7.12 (Rudin). Specifically, $f$ is continuous at $x$.
+                        This means that for some $\delta>0$ and any $y\in[a,
+                        b]$ with $|y-x|<\delta$, then
+                        $|f(y)-f(x)|<\varepsilon/2$. Moreover, since $x_n\to
+                        x$, then there exists $N_2$ such that for all $n>N_2$,
+                        we have $|x_n-x|<\delta$. Letting $N=\max\{N_1, N_2\}$,
+                        then for any $n>N$ it follows that 
+                        \begin{equation*}
+                            |x_n-x|<\delta\Rightarrow|f(x_n)-f(x)|<\frac{\varepsilon}{2}
+                        \end{equation*}
+                        and since $n>N>N_1$, then 
+                        \begin{equation*}
+                            |f_n(x_n)-f(x_n)|<\frac{\varepsilon}{2}.
+                        \end{equation*}
+                        Finally, from the triangle inequality, we get that 
+                        \begin{equation*}
+                            |f_n(x_n)-f(x)|\leq|f_n(x_n)-f(x_n)|+|f(x_n)-f(x)|<\varepsilon.
+                        \end{equation*}
+                        Therefore $\lim_{n\to\infty}f_n(x_n)=f(x)$. 
+                    \end{proof}
+                \item Is the same conclusion true if $\{f_n\}_n$ converges to
+                    $f$ pointwise on $[a, b]$?
+                    \begin{solution}
+                        Let $\{f_n\}$ be a sequence of functions defined as 
+                        \begin{equation*}
+                            f_n(x)=nx^n(1-x)
+                        \end{equation*}
+                        for each $n\in\mathbb{N}$, where $f_n:[0,
+                        1]\to\mathbb{R}$. For each $n$, $f_n$ is continuous. We
+                        also have that for all $x\in(0, 1)$
+                        \begin{equation*}
+                            \lim_{n\to\infty}f_n(x)=\lim_{n\to\infty}nx^n(1-x)=0.
+                        \end{equation*}
+                        The last equality holds since if we let $a_n=nx^n$,
+                        where $x\in(0, 1)$, then 
+                        \begin{align*}
+                            \lim_{n\to\infty}\sup\bigg|\frac{a_{n+1}}{a_n}\bigg|
+                            &=\lim_{n\to\infty}\sup\bigg|\frac{(n+1)x^{n+1}}{nx^n}\bigg|\\
+                            &=\lim_{n\to\infty}\sup\bigg(\frac{n+1}{n}\bigg)|x|
+                            \\
+                            &=\lim_{n\to\infty}\sup\bigg(\frac{1+\frac{1}{n}}{1}\bigg)|x|\\
+                            &=|x|<1.
+                        \end{align*}
+                        Thus $\sum_{n=1}^{\infty}a_n$ converges which implies
+                        that $a_n=nx^n\to0$ as $n\to\infty$. Additionally,
+                        $f_n(0)=0=f_n(1)$. Now define $x_n=1-1/n$. Then
+                        $\lim_{n\to\infty}x_n=x=1$. As stated before
+                        $f_n(x)=f_n(1)=0$. However, 
+                        \begin{align*}
+                            \lim_{n\to\infty}f_n(x_n)&
+                            =\lim_{n\to\infty}n\bigg(1-\frac{1}{n}\bigg)^n\bigg(\frac{1}{n}\bigg)
+                            \\
+                            &=\lim_{n\to\infty}\bigg(1-\frac{1}{n}\bigg)^n \\
+                            &=\frac{1}{e}.
+                        \end{align*}
+                        In summary we have a sequence of continuous functions
+                        $\{f_n\}$ which converge pointwise to $f=0$ and we have
+                        a sequence $x_n$ which converges to $x\in[0, 1]$.
+                        However, $\lim_{n\to\infty}f_n(x_n)\neq f(x)$. 
+                    \end{solution}
+            \end{enumerate}
+        \item Let $g$ be a continuous function on $\mathbb{R}$. Compute (with
+            proof) the following limit
+            \begin{equation*}
+                \lim_{n\to\infty}\int_{0}^{1}\frac{nxg(x)}{1+n^2x}dx.
+            \end{equation*}
+            \begin{solution}
+                Let $x\in[0, 1]$ be fixed. Then 
+                \begin{equation*}
+                    \lim_{n\to\infty}\frac{nx}{1+n^2x}=\lim_{n\to\infty}\frac{x}{\frac{1}{n}+nx}
+                    =0.
+                \end{equation*}
+                Thus if
+                \begin{equation*}
+                    f_n(x)=\frac{nx}{1+n^3x^2}
+                \end{equation*}
+                then $\{f_n\}$ converges to $f=0$ pointwise over $[0, 1]$. 
+                Let $n\in\mathbb{N}$ and $x_1, x_2\in[0, 1]$ with $x_1<x_2$.
+                Then 
+                \begin{align*}
+                    n^3x_1x_2&=n^3x_1x_2 \\
+                    &\Leftrightarrow nx_1+n^3x_1x_2 < nx_2+n^3x_1x_2 \\
+                    &\Leftrightarrow nx_1(1+n^2x_2)<nx_2(1+n^2x_1) \\
+                    &\Leftrightarrow\frac{nx_1}{1+n^2x_1}<\frac{nx_2}{1+n^2x_2}.
+                \end{align*}
+                This proves that 
+                \begin{equation*}
+                    f_n(x)=\frac{nx}{1+n^2x}
+                \end{equation*}
+                is strictly increasing over $[0, 1]$ for all $n\in\mathbb{N}$.
+                It follows that for $x=1$, $f_n(x)=\sup_{x\in[0, 1]}f_n(x)$
+                since $f_n$ is strictly increasing and is continuous over
+                a compact interval for all $n\in\mathbb{N}$. Thus 
+                \begin{equation*}
+                    \lim_{n\to\infty}\sup\{f_n(x)-f\}=\lim_{n\to\infty}\frac{n}{1+n^2}=0.
+                \end{equation*}
+                Therefore $\{f_n\}$ converges uniformly to $f=0$. Now we note
+                that since $g(x)$ is continuous over $[0, 1]\subset\mathbb{R}$,
+                then $g$ is bounded by some $M\in\mathbb{R}$. Thus 
+                \begin{align*}
+                    \bigg|\lim_{n\to\infty}\int_{0}^{1}\frac{nxg(x)}{1+n^2x}dx\bigg|&\leq
+                    \bigg|\lim_{n\to\infty}\int_{0}^{1}\frac{nxM}{1+n^2x}dx\bigg|
+                    \\
+                    &=\bigg|M\int_{0}^{1}\lim_{n\to\infty}\frac{nx}{1+n^2x}dx\bigg| \\
+                    &=\bigg|M\int_{0}^{1}0dx\bigg| \\
+                    &=0.
+                \end{align*}
+                Therefore 
+                \begin{equation*}
+                    \lim_{n\to\infty}\int_{0}^{1}\frac{nxg(x)}{1+n^2x}dx=0.
+                \end{equation*}
+            \end{solution}
+        \item Let $\{f_n\}_n$ be a sequence of functions with domain $[0, 1]$.
+            Assume that there exists $L>0$ such that 
+            \begin{equation*}
+                |f_n(x)-f_n(y)|\leq L|x-y|\text{ for all $x, y\in[0, 1]$,
+                $n\in\mathbb{N}$. }
+            \end{equation*}
+            Prove that if $\{f_n\}_n$ converges pointwise to $f$ on $[0, 1]$,
+            then $\{f_n\}_n$ converges uniformly to $f$ on $[0, 1]$. 
+            \begin{proof}
+                
+            \end{proof}
+    \end{enumerate}
+\end{document}

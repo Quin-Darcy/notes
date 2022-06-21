@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{/home/arbegla/figures/}{#1.pdf_tex}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+
+\begin{document}
+\title{A Brief Explanation of The Images and Videos}
+\author{Quin Darcy}
+\date{Feb, 15 2021}
+\maketitle
+    We start with an image which can be thought of as a grid, where in each cell is
+    a pixel identified by an RGB tuple. This tuple determines the color of the
+    pixel. The tuples are in the form $(R, G, B)$, where $R, G,
+    B\in\mathbb{Z}_{255}$. The program scans through (from left to right and
+    top to bottom) and at each pixel, it stores a 3x3 window whose top left
+    cell is the current pixel being scanned, call it $P_{i, j}$. \par The
+    second element of this program is called a \textit{kernel}. This kernel,
+    call it $K$,  is
+    a 3x3 matrix whose entries are real numbers. In this case our kernel is 
+        \begin{equation*}
+            K=\begin{pmatrix}0 & -1 & 0 \\ -1 & 4 & -1 \\ 0 & -1 & 0 \end{pmatrix} 
+        \end{equation*}
+    From this point forward, we deviate quite a bit from what is typically done
+    with the window and kernel. These objects have many uses, one of which is
+    edge detection and to understand this more, refer to image
+    convolution.\par Instead we are going to first take every tuple in the
+    window and make 3 matrices. A matrix, $R$, whose entries are the red
+    components of the
+    tuples in the window, another matrix, $G$, whose entries are the green components, and a third
+    matrix, $B$, whose entries are the blue components. With these matrices we will
+    calculate the following:
+        \begin{equation*}
+            R'=\det(RK-KR), \quad G'=\det(GK-KG), \quad B'=\det(BK-KB).
+        \end{equation*}
+    After this we are left with a new tuple $(R', G', B')$. Note that we 
+    if any of the components are greater than 254 or less than 0, we replace it
+    with its equivalence class modulo 255. With this new tuple, the last thing
+    we do is replace the center of the window with this tuple by setting
+    $P_{i+1, j+1}=(R', G', B')$. This completes the process and the program
+    then goes on the the next pixel $P_{i+1, j}$ and repeats the process. This
+    is done until the entire image has been scanned.\par It is quite apparent
+    that defining $R', G', B'$ in the way that we did was arbitrary and not
+    necessarily meaningful. However, having just learned about the Lie bracket
+    (abuse of terminology since we are not in a Lie algebra),
+    it was interesting to see its effects on an image when applied this way. \par Below is
+    a diagram of the process.
+        \begin{figure}[htp!]
+        \centering
+          \incfig{convol}
+          \caption{Program}
+          \label{fig:action}
+      \end{figure}\hfill\par\newpage
+    Another thing worth noting is that in the RGB color space, if you take
+    a point $(R, G, B)$, then its ``negative" is given by $(255-R, 255-G,
+    255-B)$. This effect is used in a few of the images. There are a handful of
+    other techniques used in the images, like converting from the RGB color
+    space to the HSV (Hue, Saturation, Value) color space and then running the
+    program. Anyways, please enjoy!
+\end{document}

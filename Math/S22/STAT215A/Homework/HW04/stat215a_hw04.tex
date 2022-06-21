@@ -1,0 +1,197 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{STAT 215A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newenvironment{solution}
+{\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+{\end{proof}}
+\newenvironment{psmall}{\left(\begin{smallmatrix}}{\end{smallmatrix}\right)}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large STAT 215A}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 04/26/2022   \\
+    { Instructor:}\ Dr. Cetin \hspace{\fill} Assignment:
+    Homework 04 \\ \hrule}
+
+    \begin{enumerate}
+        \item Let $\{X_k:k\in\mathbb{N}\}$ be a sequence of i.i.d. discrete
+            random variables such that each member has the following pmf:
+            $P(X_k=1)=p$ and $P(X_k=-1)=1-p$, where $0<p<1$. For
+            $n\in\mathbb{N}$, define $S_n=\sum\limits_{k=1}^{n}X_k$. 
+            \begin{enumerate}[(a)]
+                \item Determine the pmf of $S_3=\sum\limits_{k=1}^{3}X_k$. 
+                    \begin{solution}
+                        We begin by noting that $S_n$ is a discrete random
+                        variable as the sum of discrete random variables.
+                        Moreover, for any $n\in\mathbb{N}$, we
+                        have $-n\leq S_n\leq n$. Also, if $S_n=m$ where $-n\leq
+                        m\leq n$, then this means that there are a total of
+                        $m$-many occurances of a $1$ and $n-m$ many occurances
+                        of $-1$. There are $\binom{n}{m}$ ways in which $m$
+                        many 1s can occur in the sum, and to each of those ways
+                        corresponds a way in which $n-m$ many $-1$s can occur
+                        in the sum. Lastly, $m$ many $1$s occur with
+                        probability $p^m$ and $n-m$ many $-1$s occur with
+                        probability $(1-p)^{n-m}$. Therefore
+                        \begin{equation*}
+                            p(x)=\mathbb{P}(S_3=x)=\begin{cases}
+                                \binom{3}{x}p^x(1-p)^{3-x} &\text{if $0\leq
+                                x\leq 3$,} \\
+                                \binom{3}{3+x}p^{3+x}(1-p)^{-x} &\text{if
+                                $-3\leq x<0$, } \\
+                                0, &\text{otherwise.}
+                            \end{cases}
+                        \end{equation*}
+                    \end{solution}
+                \item Find the mean and variance of $S_n$, for each $n$. 
+                    \begin{solution}
+                        Let $n\in\mathbb{N}$. Then for any $1\leq k\leq n$, we
+                        have that 
+                        \begin{equation*}
+                            E[X_k]=\sum_{x}xp(x)=(1)p+(-1)(1-p)=2p-1.
+                        \end{equation*}
+                        And since each $X_k$ is
+                        independent
+                        \begin{align*}
+                            E[S_n] &= E[\sum_{k=1}^{n}X_k] \\
+                            &= \sum_{k=1}^{n}E[X_k] \\
+                            &=\sum_{k=1}^{n}2p-1 \\
+                            &=n(2p-1).
+                        \end{align*}
+                        \textbf{Warning:} Below I obtained two different
+                        answers based on two different approached and I am not
+                        sure which one is correct so I decided to include them
+                        both. \hfill\par\hfill\par
+                        \begin{enumerate}[(i)]
+                            \item 
+                        To calculate the variance, we start by computing
+                        $E[S_n^2]$. Letting $Y=g(S_n)$, where $g(X)=X^2$, then
+                        by LOTUS, we have that 
+                        \begin{align*}
+                            E[Y]&=E[S_n^2] \\
+                            &=\sum_{x=-n}^{n}g(x)p(x) \\
+                            &=\sum_{x=-n}^{-1}g(x)p(x)+\sum_{x=0}^{n}g(x)p(x) \\
+                            &=\sum_{x=-n}^{-1}x^2\binom{n}{n+x}p^{n+x}
+                            (1-p)^{-x}+\sum_{x=0}^{n}x^2\binom{n}{x}p^x(1-p)^{n-x}
+                            \\
+                            &=\sum_{x=1}^{n}x^2\binom{n}{n-x}p^{n-x}(1-p)^x
+                            +\sum_{x=0}^{n}x^2\binom{n}{x}p^x(1-p)^{n-x} \\
+                            &=n(p-1)(n(p-1)-p)+p((n-1)np+n) \\
+                            &=2n^2p^2-2n^2p-2np^2+2np+n^2.
+                        \end{align*}
+                        Thus the variance is 
+                        \begin{align*}
+                            Var(S_n)&=E[(S_n-\mu)^2] \\
+                            &=E[S_n^2]-\mu^2 \\
+                            &=2n^2p^2-2n^2p-2np^2+2np+n^2-(2np-n)^2 \\
+                            &=2np(1+n-p-np).
+                        \end{align*}
+                            \item Note that for any $1\leq k\leq n$, we have that
+                                \begin{equation*}
+                                    Var(X_k)=E[X_k^2]-\mu^2=2(1-p).
+                                \end{equation*} 
+                                Since all of the $X_k$ are independent, then we
+                                have that 
+                                \begin{equation*}
+                                    Var(S_n)=Var(\sum_{k=1}^{n}X_k)=\sum_{k=1}^{n}Var(X_k)=2n(1-p).
+                                \end{equation*}
+                        \end{enumerate}
+                    \end{solution}
+                \item Consider the symmetric case where $p=1/2=1-p$. Determine
+                    $Cov(S_n, S_m)$ for all $m, n\in\mathbb{N}$.
+                    \begin{solution}
+                        
+                    \end{solution}
+            \end{enumerate}
+        \item Let $X$ be a continuous r.v. with the following pdf: For fixed
+            $C>0$, let $f(x)=\frac{C}{x^{C+1}}$ for $x>1$ (and it is zero
+            otherwise).
+            \begin{enumerate}[(a)]
+                \item Verify that $f$ is a valid pdf for all $C>0$. Then,
+                    determine the cdf of $X$.
+                    \begin{solution}
+                        For any $x>1$, $x^{C+1}>1$ since $C>0$ and thus
+                        $f(x)>0$ for all $x>1$. The indefinite integral of
+                        $f(x)$ is 
+                        \begin{equation*}
+                            \int \frac{C}{x^{C+1}}dx=C\int
+                            x^{-C-1}dx=C(-\frac{1}{C}x^{-C})=-x^C.
+                        \end{equation*}
+                        Thus 
+                        \begin{equation*}
+                            \int_{1}^{\infty}\frac{C}{x^{C+1}}
+                            =-x^C\bigg|_{1}^{\infty}=\lim_{x\to\infty}-\frac{1}{x^C}+1=1.
+                        \end{equation*}
+                        This shows that $f(x)$ is a valid pdf. 
+                    \end{solution}
+                \item Compute the expected value of $X$. 
+                    \begin{solution}
+                        We start by computing the following indefinite
+                        integral:
+                        \begin{equation*}
+                            \int x\frac{C}{x^{C+1}}dx=C\int
+                            x^{-C}dx=\frac{C}{1-C}x^{1-C}.
+                        \end{equation*}
+                        Thus if $C>1$, then 
+                        \begin{equation*}
+                            E[X]=\int_{1}^{\infty}x\frac{C}{x^{C+1}}dx
+                            =\frac{C}{1-C}\bigg(
+                            \lim_{x\to\infty}\frac{x}{x^C}-1\bigg)=-\frac{C}{1-C}.
+                        \end{equation*}
+                        Otherwise, if $0<C<1$, then $E[X]=\infty$. 
+                    \end{solution}
+                \item Determine the median of $X$. 
+                    \begin{solution}
+                        To find the median, we need to find a value $m>0$ such
+                        that 
+                        \begin{equation*}
+                            \int_{1}^{m}\frac{C}{x^{C+1}}dx=\frac{1}{2}.
+                        \end{equation*}
+                        Using part (a), we can state this as 
+                        \begin{equation*}
+                            -x^{-C}\bigg|_{1}^{m}=\frac{1}{2}.
+                        \end{equation*}
+                        From this it follows that 
+                        \begin{equation*}
+                            -\frac{1}{m}+1=\frac{1}{2}\Rightarrow m=2.
+                        \end{equation*}
+                    \end{solution}
+                \item Determine the cdf of $Y=1/X$. 
+                    \begin{solution}
+                        We note that since $f(x)$ is strictly decreasing over
+                        $[1, \infty)$, then $y=g(x)=1/x$ is strictly increasing
+                        and thus continuous and has a well defined inverse.
+                        Additionally, since $f(x)$ has a range $(0, C)$, then
+                        $g(x)$ has a range $(\frac{1}{C}, \infty)$.  
+                        It is also differentiable over $(0, \infty)$, with
+                        derivative $g'(x)=-1/x^2$. For any $y\in(\frac{1}{C}, \infty)$,
+                        we have that $g^{-1}(y)=1/y$ and so
+                        \begin{align*}
+                            f_Y(y)=\frac{f_X(g^{-1}(y))}{g'(g^{-1}(y))} 
+                                =\frac{Cy^{C+1}}{-y^2}=-Cy^{C-1}.
+                        \end{align*}
+                        Thus the cdf of $Y$ is 
+                        \begin{equation*}
+                            F_Y(y)=\int_{0}^{y}-Ct^{C-1}dt.
+                        \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

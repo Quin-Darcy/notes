@@ -1,0 +1,153 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{/home/arbegla/figures/}{#1.pdf_tex}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+
+
+\begin{document}
+\title{Taylor's Theorem Notes}
+\author{Quin Darcy}
+\date{Feb, 3 2022}
+\maketitle
+\section{Needed Results}
+    \begin{theorem}[Mean value Theorem]
+        If $f$ is a continuous function on $[a, b]$ which is differentiable in
+        $(a, b)$, then there is a point $x\in(a, b)$ at which 
+        \begin{equation*}
+            f(b)-f(a)=(b-a)f'(x).
+        \end{equation*}
+    \end{theorem}
+\section{Two Variations of Taylor's Theorem}
+    \begin{theorem}[Rudin]
+        Suppose $f$ is a real function of $[a, b]$, $n$ is a positive integer,
+        $f^{(n-1)}$ is continuous on $[a, b]$, $f^{(n)}(t)$ exists for all
+        $t\in(a, b)$. Let $\alpha, \beta$ be distinct points of $[a, b]$, and
+        define
+        \begin{equation}
+            P(t)=\sum_{k=0}^{n-1}\frac{f^{(k)}(\alpha)}{k!}(t-\alpha)^k.
+        \end{equation}
+        Then there exists a point $x$ between $\alpha$ and $\beta$ such that 
+        \begin{equation}
+            f(\beta)=P(\beta)+\frac{f^{(n)}(x)}{n!}(\beta-\alpha)^n.
+        \end{equation}
+    \end{theorem}
+    \begin{proof}
+       Let $M$ be the number that satisfies
+       \begin{equation}
+           f(\beta)=P(\beta)+M(\beta-\alpha)^n.
+       \end{equation}
+       With this $M$ in hand, define 
+       \begin{equation}
+           g(t)=f(t)-P(t)-M(t-\alpha)^n\;\;\;\;(a\leq t\leq b).
+       \end{equation}
+       We have to show that $n!M=f^{(n)}(x)$ for some $x$ between $\alpha$ and
+       $\beta$. Now consider
+       \begin{align*}
+           g(t)&=f(t)-\big(f(\alpha)+f'(\alpha)(t-\alpha)+\frac{f''(\alpha)}{2!}(t-\alpha)^2+\cdots
+           +\frac{f^{(n-1)}(\alpha)}{(n-1)!}(t-\alpha)^{n-1}\big)-M(t-\alpha)^n
+           \\
+           &\Rightarrow
+           g'(t)=f'(t)-\big(f'(\alpha)+\cdots
+           +\frac{f^{(n-1)}(\alpha)}{(n-2)!}(t-\alpha)^{n-2}\big)-nM(t-\alpha)^{n-1}
+           \\
+           &\Rightarrow
+           g''(t)=f''(t)-\big(f''(\alpha)+\cdots
+           +\frac{f^{(n-1)}(\alpha)}{(n-3)!}(t-\alpha)^{n-3}\big)-n(n-1)M(t-\alpha)^{n-2}
+           \\
+           &\vdots \\
+           &\Rightarrow
+           g^{(n-1)}(t)=f^{(n-1)}(t)-\big(f^{(n-1)}(\alpha)\big)-n(n-1)\cdots(2)M(t-\alpha)
+           \\
+           &\Rightarrow g^{(n)}(t)=f^{(n)}(t)-n!M,
+       \end{align*}
+       For all $a<t<b$. Hence, the proof will be complete if we can show
+       $g^{(n)}(x)=0$ for some $x$ between $\alpha$ and $\beta$.\par\hspace{4mm} Note that
+       $P(\alpha)=f(\alpha)$ since all the other terms in the sum have
+       a $(t-\alpha)^k$ attached, which goes to zero when evaluated at
+       $\alpha$. Moreover, $P'(\alpha)=f'(\alpha)$ for the same reason, except
+       the first $f(\alpha)$ is elimiated by the derivative. Generally, we have
+       $P^{(k)}=f^{(k)}(\alpha)$, for each $k=0, 1, \dots,n-1$. Thus
+       \begin{equation*}
+           g(\alpha)=g'(\alpha)=\cdots=g^{(n-1)}(\alpha)=0
+       \end{equation*}
+       Also note that our choice of $M$ in (2) gives that 
+       \begin{equation*}
+           M =\frac{f(\beta)-P(\beta)}{(\beta-\alpha)^n}
+       \end{equation*}
+       which implies
+       \begin{align*}
+           g(\beta)&=f(\beta)-P(\beta)-\bigg(\frac{f(\beta)-P(\beta)}{(\beta-\alpha)^n}\bigg)
+           (\beta-\alpha)^n \\
+           &=f(\beta)-P(\beta)-f(\beta)+P(\beta) \\
+           &= 0. 
+       \end{align*}
+       Thus we have that $g$ is a continuous function on $[\alpha, \beta]$
+       which is differentiable in $(\alpha, \beta)$, and so by Theorem (MVT),
+       there exists $x_1\in(\alpha, \beta)$ such that
+       $g'(x_1)=(f(\beta)-f(\alpha))/(\beta-\alpha)=0$. Since $g'(x_1)=0$, then
+       we can conclude that $g''(x_2)=0$ for some $x_2\in(\alpha, x_1)$.
+       Continuing in this manner for $n$ steps, we arrive at some
+       $x_n\in(\alpha, x_{n-1})$ such that $g^{(n)}(x_n)=0$. And since
+       $x_n\in(\alpha, \beta)$, then we have shown what we needed. 
+    \end{proof}
+    \begin{theorem}[Bloch]
+        Let $[a, b]\subseteq\mathbb{R}$ be a non-degenerate (i.e., $(a, b), [a,
+        b], (a, b]$, etc.) closed bounded interval, let $c\in(a, b)$, let
+        $f:[a, b]\to\mathbb{R}$ be a function and let
+        $n\in\mathbb{N}\cup\{0\}$. Suppose that $f^{(k)}$ exists and is
+        continuous on $[a, b]$ for each $k\in\{0, \dots, n\}$, and that
+        $f^{(n+1)}$ exists on $(a, b)$. Let $x\in[a, b]$ then there is some
+        $p$ strictly between $x$ and $c$ (except that $p=c$ when $x=c$) such
+        that
+        \begin{equation*}
+            f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(c)}{k!}(x-c)^k+\frac{f^{(n+1)}(p)}{(n+1)!}(x-c)^{n+1}.
+        \end{equation*}
+    \end{theorem}
+    \begin{proof}
+        For $x=c$, the theorem holds trivially since everything else zeros out
+        leaving $f(c)=f(c)$.\par\hspace{4mm} Now suppose that $x\neq c$. Then
+        there is a unique $B\in\mathbb{R}$ such that the following equation
+        holds (simply solve for $B$):
+        \begin{equation*}
+            f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(c)}{k!}(x-c)^k+B(x-c)^{n+1}.
+        \end{equation*}
+        To prove the theorem, we will show that there is some $p$ strictly
+        between $x$ and $c$ such that 
+        \begin{equation}
+            B=\frac{f^{(n+1)}(p)}{(n+1)!}.
+        \end{equation}
+    \end{proof}
+\end{document}
