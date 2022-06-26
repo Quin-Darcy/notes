@@ -1,0 +1,241 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\begin{document}
+\title{Galois Theory}
+\author{Quin Darcy}
+\date{March 31, 2020}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+\section{Useful Results}
+    We will now weave together ideas related to extensions of fields, splitting fields, automorphisms of fields, and groups. Recall the following:
+        \begin{enumerate}
+            \item If $F$ is a field, $p(x)\in F[x]$ is irreducible, and $c$ is a root of $f(x)$, then $F[x]/(p(x))_i\cong F(c)$.
+            \item If $E$ is a field, then $(\text{Aut}(E),\circ)$ is a group. 
+            \item If $E/F$, $g(x)\in F[x]$ is irreducible over $F$, $\varphi$ is an automorphism on $E$, and $\varphi$ is the identity on $F$, and $c$ is a root of $g(x)$, then $\varphi(c)$ is a root of $g(x)$.
+            \item If $E/F$, $g(x)\in F[x]$ is irreducible over $F$, and $c$ and $d$ are each roots of $g(x)$, then there is an automorphism $\varphi$ of $E$ such that $\varphi(c)=d$, and $\varphi$ is the identity on $F$.
+        \end{enumerate}
+    \begin{theorem}[Dedekind]
+        If $K$ is a field, and $\alpha_1,\dots,\alpha_n$ are distinct automorphisms of $K$, then $\{\alpha_1,\dots,\alpha_n\}$ is linearly independent over $K$.
+    \end{theorem}
+        \begin{proof}
+            Assume there exists $a_1,\dots,a_n\in K$, not all zero, such that $\sum_{i=1}^na_i\alpha_i=0$. Them, by renumbering, we can find $a_1,\dots,a_k\in K-\{0\}$ such that $\sum_{i=1}^ka_i\alpha_i=0$, and, wlog, we may assume that $k$ is the least natural number for which an equation of this form holds. Note that $k\neq 1$ since if $a_1\alpha_1=0$, then $\alpha_1=0$ ($a_1\neq 0$ since $a_1\in K-\{0\}$), but $\alpha_1=0$ is not an automorphism.\par\hspace{4mm} By assumption, $\alpha_1,\dots,\alpha_k$ are distinct, thus there exists $c\in K$ such that $\alpha_1(c)\neq \alpha_k(c)$. We have that $\sum_{i=1}^ka_i\alpha_i=0$ and so for all $z\in K$, $\sum_{i=1}^ka_i\alpha_i(z)=0$, and $\sum_{i=1}^ka_i\alpha_i(cz)=0$. Now 
+                \begin{equation*}
+                    \alpha_k(c)\sum_{i=1}^ka_i\alpha_i(z)=0\quad\text{and}\quad\sum_{i=1}^ka_i\alpha_i(c)\alpha_i(z)=0.
+                \end{equation*}
+            Then subtracting these two sums yields
+                \begin{equation*}
+                    \sum_{i=1}^k(a_i\alpha_k(c)\alpha_i(z)-a_i\alpha_i(c)\alpha_i(z))=0.
+                \end{equation*}
+            Then
+                \begin{equation*}
+                    \sum_{i=1}^ka_i\alpha_i(z)(\alpha_k(c)-\alpha_i(c))=0.
+                \end{equation*}
+            Note that $(\alpha_k(c)-\alpha_i(c))$ is not 0 for every $i$ since $\alpha_1(c)\neq\alpha_k(c)$. Furthermore, note that when $i=k$, then we get back 0 and so we can write
+                \begin{equation*}
+                    \sum_{i=1}^{k-1}a_i\alpha_i(z)(\alpha_k(c)-\alpha_i(c))=0.
+                \end{equation*}
+            However, this contradicts the fact that $k$ is the least natural number for which an equation of this form holds.
+        \end{proof}
+    Below is two results that we will state without proof.
+        \begin{theorem}
+            Assume that $\varphi$ is an automorphism of a field $E$. The set $F_{\varphi}=\{a\in E\colon\varphi(a)=a\}$ is a subfield of $E$ called the \textbf{\textit{fixed field of}} $\varphi$. Additionally, if $S$ is a set of automorphisms of $E$, then $F_s=\{a\in E\colon\varphi(a)=a$ for all $\varphi\in S\}=$ the fixed field of $S$.
+        \end{theorem}
+    \begin{theorem}
+        If $E/F$, and $S$ is a finite group of automorphisms on $E$, then $[E\colon F_s]=\abs{S}$.
+    \end{theorem}
+    \begin{definition}
+        Assume $E/F$. The subgroup of $\text{Aut}(E)$ whose elements fix every element of $F$ is called the \textbf{\textit{Galois group}} of $E$ over $F$ and is denoted $\text{Gal}(E/F)$.
+    \end{definition}
+    \begin{example}
+        Find $\text{Gal}(\mathbb{Q}(\sqrt[3]{2},\omega)/\mathbb{Q}(\sqrt[3]{2}))$.
+    \end{example}
+        \begin{solution}
+            To begin, let us find all of the automorphisms of $\mathbb{Q}(\sqrt[3]{2},\omega)$. We have that $\sqrt[3]{2}$ is algebraic over $\mathbb{Q}$ since it is a root of $x^3-2$. Thus, $\mathbb{Q}(\sqrt[3]{2})\cong\mathbb{Q}[x]/(x^3-2)_i$. Now note that a basis for $\mathbb{Q}[x]/(x^3-2)_i$ is $\{(x^3-2)_i+1,(x^3-2)_i+x,(x^3-2)_i+x^2\}$. It follows from this that $[\mathbb{Q}(\sqrt[3]{2})\colon\mathbb{Q}]=3$. Additionally, a basis for this extension is $\{1,\sqrt[3]{2},\sqrt[3]{4}\}$. Similarly, $\omega$ is algebraic over $\mathbb{Q}$ since it is a root of $x^2+x+1$ and by the same reasoning as above, it follows that $[\mathbb{Q}(\omega)\colon\mathbb{Q}]=2$ and a basis for this extension is $\{1,\omega\}$. Thus, $[\mathbb{Q}(\sqrt[3]{2},\omega)\colon\mathbb{Q}]=6$ and a basis for this extension is $\{1,\sqrt[3]{2},\sqrt[3]{4},\omega,\omega\sqrt[3]{2},\omega\sqrt[3]{4}\}$. Now consider some $\alpha\in\mathbb{Q}(\sqrt[3]{2},\omega)$. Given our basis, it can be expressed as 
+                    \begin{equation*}
+                        \alpha=a+b\sqrt[3]{2}+c\sqrt[3]{4}+d\omega+e\omega\sqrt[3]{2}+f\omega\sqrt[3]{4},
+                    \end{equation*}
+                for $a,b,c,d,e,f\in\mathbb{Q}$. Now let $\sigma\colon\mathbb{Q}(\sqrt[3]{2},\omega)\rightarrow\mathbb{Q}(\sqrt[3]{2},\omega)$ be an automorphism. Since $\mathbb{Q}$ is a subfield of $\mathbb{Q}(\sqrt[3]{2},\omega)$ and $\sigma$ is an automorphism, then it follows that $\mathbb{Q}\cong\sigma(\mathbb{Q})$. However, by HW1, $\sigma$ can only be the identity map on $\mathbb{Q}$. In other words, $\sigma(q)=q$ for all $q\in\mathbb{Q}$. From this it follows that 
+                    \begin{equation*}
+                        \begin{split}
+                            \sigma(\alpha) &= \sigma(a+b\sqrt[3]{2}+c\sqrt[3]{4}+d\omega+e\omega\sqrt[3]{2}+f\omega\sqrt[3]{4})\\
+                            &=a+b\sigma(\sqrt[3]{2})+c\sigma(\sqrt[3]{4})+d\sigma(\omega)+e\sigma(\omega\sqrt[3]{2})+f\sigma(\omega\sqrt[2]{4}).
+                        \end{split}
+                    \end{equation*}
+                Thus, any such automorphism is uniquely determined by where it sends the basis elements. Now if we consider the polynomial $x^3-2=(x-\sqrt[3]{2})(x-\omega\sqrt[3]{2})(x-\omega^2\sqrt[3]{2})$, and let $\theta\colon \mathbb{Q}(\sqrt[3]{2},\omega)[x]\rightarrow\mathbb{Q}(\sqrt[3]{2},\omega)[x]$ be the isomorphism given on Exam 1, then given any root, call it $\alpha$, of $x^3-2$ must give that $\sigma(\alpha)$ is a root of $\theta(x^3-2)$. Similarly, each root, $\alpha$, of $x^2+x+1=(x-\omega)(x-\omega^2)$ must correspond to a root $\sigma(\alpha)$ of the same polynomial. With these restrictions, we can conclude that there are 6 possible automorphisms:
+                    \begin{align*}
+                        &\sigma_1:=\begin{cases} 
+                            \sqrt[3]{2}\mapsto\sqrt[3]{2}\\
+                            \omega\mapsto\omega
+                        \end{cases} && \sigma_2:=\begin{cases} 
+                            \sqrt[3]{2}\mapsto\omega\sqrt[3]{2}\\
+                            \omega\mapsto\omega
+                        \end{cases} && \sigma_3:=\begin{cases} 
+                            \sqrt[3]{2}\mapsto\omega^2\sqrt[3]{2}\\
+                            \omega\mapsto\omega
+                        \end{cases} \\
+                        &\sigma_4:=\begin{cases} 
+                            \sqrt[3]{2}\mapsto\sqrt[3]{2}\\
+                            \omega\mapsto\omega^2
+                        \end{cases} && \sigma_5:=\begin{cases} 
+                            \sqrt[3]{2}\mapsto\omega\sqrt[3]{2}\\
+                            \omega\mapsto\omega^2
+                        \end{cases} && \sigma_6 :=\begin{cases} 
+                            \sqrt[3]{2}\mapsto\omega^2\sqrt[3]{2}\\
+                            \omega\mapsto\omega^2.
+                        \end{cases}
+                    \end{align*}
+                Looking at this list, it is clear that both $\sigma_1,\sigma_4\in\text{Gal}(\mathbb{Q}(\sqrt[3]{2},\omega)/\mathbb{Q}(\sqrt[3]{2}))$. Moreover, every other automorphism maps $\sqrt[3]{2}$ to $\omega^i\sqrt[3]{2}$, for some $i\geq 1$ and thus does not fix this element. Therefore, $\text{Gal}(\mathbb{Q}(\sqrt[3]{2},\omega)/\mathbb{Q}(\sqrt[3]{2}))=\{\sigma_1,\sigma_4\}$.
+        \end{solution}
+    \begin{example}
+        Find $\text{Gal}(\mathbb{Q}(\sqrt[3]{2})/\mathbb{Q})$.
+    \end{example}
+        \begin{solution}
+            To begin, let us consider all the possible automorphisms of $\mathbb{Q}(\sqrt[3]{2})$. We know that if $\varphi$ is an automorphism, if $f(x)\in \mathbb{Q}[x]$ is irreducible and $c\in\mathbb{Q}(\sqrt[3]{2})$ is a root of $f(x)$, then $\varphi(c)$ must also be a root of $f(x)$. Consider the minimal polynomial of $\sqrt[3]{2}$ over $\mathbb{Q}$, $x^3-2$. Since $x^3-2=(x-\sqrt[3]{2})(x-\omega\sqrt[3]{2})(x-\omega^2\sqrt[3]{2})$, then the only root of this polynomial in $\mathbb{Q}(\sqrt[3]{2})$ is $\sqrt[3]{2}$, and so any automorphism must map $\sqrt[3]{2}$ to itself. Thus, the only automorphism of this field is the identity. Therefore, $\text{Gal}(\mathbb{Q}(\sqrt[3]{2})/\mathbb{Q})=\{id\}$.
+        \end{solution}
+    Assume that $E/K$ is finite, and that $H$ is a subgroup of $\text{Gal}(E/K)$. Then by Theorem 3, $[E\colon F_H]=\abs{H}$. Also, since $E/F_H/K$, then $[E\colon K]=[E\colon F_H][F_H\colon K]$. Thus, 
+        \begin{equation*}
+            [F_H\colon K]=\frac{[E\colon K]}{[E\colon F_H]}=\frac{[E\colon K]}{\abs{H}}.
+        \end{equation*}
+    Also, if $H=\text{Gal}(E/K)$, then $[E\colon K]=\abs{\text{Gal}(E/K)}[F_{G(E/K)}\colon K]$. Thus, $\abs{\text{Gal}(E/K)}\leq[E\colon K]$ and $\abs{\text{Gal}(E/K)}=[E\colon K]$ iff $F_{G(E/K)}=K$. More generally, if $S$ is any subset of $\text{Aut}(E)$, then $[E\colon F_S]\geq \abs{S}$.
+    \begin{definition}
+        $E/F$ is called a \textbf{\textit{normal extension}} iff every irreducible, $f(x)\in F[x]$ that has one root in $E$, splits in $E$. 
+    \end{definition}\newpage
+    
+\section{The Galois Group}
+    The Galois group of a finite extension $F\subseteq L$, $\text{Gal}(L/F)$ consists of all automorphisms of $L$ that are the identity on $F$. The basic structure of $\text{Gal}(L/F)$ is as follows.
+    \begin{prop}
+        $\text{Gal}(L/F)$ is a group under composition.
+    \end{prop}
+        \begin{proof}
+            First suppose that $\sigma,\tau\in\text{Gal}(L/F)$. Then $\sigma\tau$ is the composition $\sigma\circ\tau$, which is an automorphism since both $\sigma$ and $tau$ are automorphisms. Also, if $a\in F$, then $\sigma\circ\tau(a)=\sigma(\tau(a))=\sigma(a)=a$, since $\sigma$ and $\tau$ are the identity on $F$. Hence, composition gives an operation on $\text{Gal}(L/F)$, which is associative by standard properties of composition.\par\hspace{4mm} The identity map $1_L\colon L\rightarrow L$ is an isomorphism that is the identity on $F$, so that $1_L\in\text{Gal}(L/F)$. It is easily shown that $1_L\circ\sigma=\sigma\circ 1_L=\sigma$ for all $\sigma\in\text{Gal}(L/F)$ and so $1_L$ is the identity element of $\text{Gal}(L/F)$.\par\hspace{4mm} Finally, any $\sigma\in\text{Gal}(L/F)$ is an automorphism, which means that its inverse $\sigma^{-1}\colon L\rightarrow L$ is also an automorphism. Also, if $a\in F$, then $a=\sigma(a)$, which implies that $\sigma^{-1}(a)=\sigma^{-1}(\sigma(a))=a$. This shows that $\sigma^{-1}\in\text{Gal}(L/F)$ and completes the proof that $\text{Gal}(L/F)$ is a group under composition.
+        \end{proof}
+    Because of this proposition, we call $\text{Gal}(L/F)$ the \textit{Galois group} of $F\subseteq L$. In order to compute the Galois groups, we need to know how the elements of $\text{Gal}(L/F)$ behave. We begin with the following simple observation.
+    \begin{lemma}
+        Let $F\subseteq L$ be finite, and fix $\sigma\in\text{Gal}(L/F)$. Given $h\in F[x_1,\dots,x_n]$ and $\beta_1,\dots,\beta_n\in L$, then 
+            \begin{equation*}
+                \sigma\big(h(\beta_1,\dots,\beta_n)\big)=h\big(\sigma(\beta_1),\dots,\sigma(\beta_n)\big).
+            \end{equation*}
+        In particular, if $h\in F[x]$ and $\beta\in L$, then 
+            \begin{equation*}
+                \sigma\big(h(\beta)\big)=h\big(\sigma(\beta)\big).
+            \end{equation*}
+    \end{lemma}
+        \begin{proof}
+            This follows immediately because $\sigma$ preserves addition and multiplication and is the identity in the coefficients of $h$.
+        \end{proof}
+    This lemma has some nice consequences concerning the Galois group.
+    \begin{prop}
+        \textit{Let $F\subseteq L$ be a finite extension and let $\sigma\in\text{Gal}(L/F)$. Then:}
+            \begin{enumerate}
+                \item \textit{If $h\in F[x]$ is nonconstant polynomial with $\alpha\in L$ as a root, then $\sigma(\alpha)$ is another root of $h$ lying in $L$.}
+                \item \textit{If $L=(\alpha_1,\dots,\alpha_n)$, then $\sigma$ is uniquely determined by its values on $\alpha_1,\dots,\alpha_n$.}
+            \end{enumerate}
+    \end{prop}
+\end{document}

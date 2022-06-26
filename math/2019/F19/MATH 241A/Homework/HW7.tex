@@ -1,0 +1,251 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 241A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 12/3/19   \\
+{ \textbf{Instructor:}} \ Dr. VanValkenburgh \hspace{\fill} \textbf{Assignment:} Homework 7 \\ \hrule}
+
+\justifying
+
+\begin{enumerate}[leftmargin=*]
+    \item[2.] Find extremals for the following functionals:
+        \begin{enumerate}[label=(\alph*)]
+            \item $\int\limits_a^b\frac{(y')^2}{x^3}dx$.
+                \begin{solution}
+                    Here we have that $L=\frac{(y')^2}{x^3}$ and so 
+                        \begin{equation*}
+                            L_y=0;\quad\quad L_{y'}=\frac{2y'}{x^3}.
+                        \end{equation*}
+                    The Euler equation is 
+                        \begin{equation*}
+                            -\frac{d}{dx}\bigg(\frac{2y'}{x^3}\bigg)=0.
+                        \end{equation*}
+                    Integrating once we obtain
+                        \begin{equation*}
+                            \begin{split}
+                                &-2\int\frac{d}{dx}\bigg(\frac{y'}{x^3}\bigg)dx=\int 0\;dx \\
+                                &\Rightarrow \frac{-2y}{x^3}+C_1=C_2 \\
+                                &\Rightarrow y'=-\frac{C_2}{2}x^3.
+                            \end{split}
+                        \end{equation*}
+                    Integrating once more, we get 
+                        \begin{equation*}
+                            \begin{split}
+                                &\int y'\;dx=-\int\frac{C_2}{2}x^3\;dx \\
+                                &\Rightarrow y=-\frac{C_1}{8}x^4+C_2.
+                            \end{split}
+                        \end{equation*}
+                \end{solution}
+            \item $\int\limit_a^b(y^2+(y')^2+2ye^x)dx$.
+                \begin{solution}
+                    We have that $L=y^2+(y')^2+2ye^x$. Thus, $L_y=2y+2e^x$ and $L_{y'}=2y'$. Euler's equation is $2y+\frac{d}{dx}y'=-2e^x$. Solving this for $y$, we obtain $y(x)=c_2\sin{(\sqrt{2}x)}+c_1\cos{(\sqrt{2}x)}-\frac{2e^x}{3}$.
+                \end{solution}
+        \end{enumerate}
+    \item[8.] Describe the path of the light rays in the plane where the medium has index of refraction given by
+        \begin{enumerate}
+            \item $n=kx$.
+                \begin{solution}
+                    From this we have that $L=kx\sqrt{1+(y')^2}$. This gives $L_y=0$ and $L_{y'}=\frac{kxy'}{\sqrt{1+(y')^2}}$. Thus, the Euler equation is
+                        \begin{equation*}
+                            \frac{d}{dx}\bigg(\frac{kxy'}{\sqrt{1+(y')^2}}\bigg)=0.
+                        \end{equation*}
+                    Integrating once gives 
+                        \begin{equation*}
+                            \begin{split}
+                                &\int_{x_1}^{x_2}\frac{d}{dx}\bigg(\frac{kxy'}{\sqrt{1+(y')^2}}\bigg)dx =\int_{x_1}^{x_2}0\;dx \\
+                                &\Rightarrow \frac{kxy'}{\sqrt{1+(y')^2}}=C_1 \\
+                                &\Rightarrow kxy'=C_1\sqrt{1+(y')^2} \\
+                                &\Rightarrow (kx)^2(y')^2=C_2+C_2(y')^2 \\
+                                &\Rightarrow (kx)^2(y')^2-C_2(y')^2=C_2 \\
+                                &\Rightarrow y'=\sqrt{\frac{C_2}{(kx)^2-C_2}}.
+                            \end{split}
+                        \end{equation*}
+                    Thus, the path taken by the light is defined by 
+                        \begin{equation*}
+                            y(x)=\int_{x_1}^{x_2}\sqrt{\frac{C_2}{(kx)^2-C_2}}dx.
+                        \end{equation*}
+                \end{solution}
+            \item[(c)] $n=ky^{1/2}$.
+                \begin{solution}
+                    Here we have that $L=ky^{1/2}\sqrt{1+(y')^2}$. Thus, $L_y=\frac{1}{2}ky^{-1/2}\sqrt{1+(y')^2}$ and $L_{y'}=\frac{ky^{1/2}y'}{1+(y')^2}$. Thus, the Euler equation gives
+                        \begin{equation*}
+                            \begin{split}
+                                &\frac{1}{2}ky^{-1/2}\sqrt{1+(y')^2}-\frac{d}{dx}\bigg(\frac{ky^{1/2}y'}{\sqrt{1+(y')^2}}\bigg)=0 \\
+                                &\Rightarrow \frac{1}{2}k(1+(y')^2)-\frac{d}{dx}kyy'=0 \\
+                                &\Rightarrow \frac{1}{2}(y')^2-\frac{d}{dx}yy'=0 \\
+                                &\Rightarrow \frac{1}{2}\big(\frac{dy}{dx}\big)^2-\big(\frac{dy}{dx}\big)^2=0 \\
+                                &\Rightarrow \frac{dy}{dx}=0.
+                            \end{split}
+                        \end{equation*}
+                    Integrating both sides we obtain $y=x_2-x_1$ and so the path of the light is a constant.
+                \end{solution}
+        \end{enumerate}
+    \item[12.] A Lagrangian has the form
+        \begin{equation*}
+            L(x,y,y')=\int\limits_a^b\frac{a^2}{12}y'^4+ay'^2G(y)-G(y)^2,
+        \end{equation*}
+        where $G$ is a given differentiable function. Find Euler's equation and a first integral.
+            \begin{solution}
+                We have that 
+                    \begin{equation*}
+                        L_y=a(y')^2G_y(y)-2G(y)G_y(y);\quad L_{y'}=\frac{a^2}{3}(y')^3+2ay'G(y).
+                    \end{equation*}
+                Thus, the Euler equation is
+                    \begin{equation*}
+                        a(y')^2G_y(y)-2G(y)G_y(y)-\frac{d}{dx}\big(\frac{a^2}{3}(y')^3+2ay'G(y)\big)=0.
+                    \end{equation*}
+                A first integral is 
+                    \begin{equation*}
+                        \begin{split}
+                            L(y,y')-y'L_{y'}(y,y') &= \frac{a^2}{12}(y')^4+a(y')^2G(y)-G(y)^2-y'\big(\frac{a^2}{3}(y')^3+2ay'G(y)\big)
+                        \end{split}
+                    \end{equation*}
+            \end{solution}
+    \item[13.] Find the extremals of the functional
+        \begin{equation*}
+            J(y)=\int\limits_0^1(y^2+yy'+(y'-2)^2)dx
+        \end{equation*}
+        over the domain $A=\{y\in C^2[0,1]\colon y(0)=y(1)=0\}$. Show that $J$ does not assume a maximum value at these extremals. Explain why it does, or does not, follow that the extremals yield minimum values of $J$.
+            \begin{solution}
+                We have that 
+                    \begin{equation*}
+                        L_y=2y+y';\quad L_{y'}=y+2y'-4.
+                    \end{equation*}
+                The Euler equation gives
+                    \begin{equation*}
+                        \begin{split}
+                            &2y+y'-\frac{d}{dx}\big(y+2y'-4\big)=0 \\
+                            &\Rightarrow 2y+y'-y'+2y''=0 \\
+                            &\Rightarrow y+y''=0.
+                        \end{split}
+                    \end{equation*}
+                Solving for $y$, we get $y(x)=c_2\sin{x}+c_1\cos{x}$. Using the initial conditions, we get that $c_1=c_2=0$. Since this makes $y(x)=0$, then $y''$ is not greater then zero and so we can not conclude that it assumes any maximums over the given range. 
+            \end{solution}
+    \item[3.] Derive Hamilton's equations for the functional
+        \begin{equation*}
+            J(\theta)=\int\limits_{t_1}^{t_2}\bigg(\frac{m}{2}l^2\Dot{\theta}^2+mgl\cos{\theta}-mgl\bigg)dt,
+        \end{equation*}
+        representing the motion of a pendulum in a plane.
+        \begin{solution}
+            We have that
+                \begin{equation*}
+                    \begin{split}
+                        L(t,\theta,\Dot{\theta}) &= \frac{m}{2}l^2\Dot{\theta}^2+mgl\cos{\theta}-mgl \\
+                        L_{\Dot{\theta}}(t,\theta,\Dot{\theta})&=ml^2\Dot{\theta}
+                    \end{split}
+                \end{equation*}
+            Thus, $p=ml^2\Dot{\theta}$. Since $L_{\Dot{\theta}\Dot{\theta}}\neq 0$, then the implicit function theorem guarantees that $\Dot{\theta}$ can be solved for in terms of $t$, $\theta$, and $p$ to get
+                \begin{equation*}
+                    \Dot{\theta}=\phi(t,\theta,p)=\frac{p}{ml^2}.
+                \end{equation*}
+            The Hamiltonian is 
+                \begin{equation*}
+                    \begin{split}
+                        H(t,\theta,p)&=-\frac{m}{2}l^2\bigg(\frac{p}{ml^2}\bigg)^2-mgl\cos{\theta}+mgl \\
+                        &=\frac{p^2}{2ml^2}-mgl\cos{\theta}+mgl.
+                    \end{split}
+                \end{equation*}
+            Thus, Hamilton's equations are
+                \begin{equation*}
+                    \Dot{\theta}=\frac{\partial H}{\partial p}=\frac{p}{ml^2}\quad\text{and}\quad\Dot{p}=-\frac{\partial H}{\partial\theta}=mgl\sin{\theta}.
+                \end{equation*}
+        \end{solution}
+    \item[9.] Consider a simple plane pendulum with a bob of mass $m$ attached to a string of length $l$. After the pendulum is set in motion the string is shortened by a constant rate $dl/dt=-\alpha=$const. Formulate Hamilton's principle and determine the equation of motion. Compare the Hamiltonian to the total energy. Is energy conserved?
+        \begin{solution}
+            Given that we have mass $m$, initial length $l$, and the rate at which the length changes is $-\alpha$, then the kinetic energy is $\frac{1}{2}m((-\alpha t+l)^2\Dot{\theta}^2+\alpha^2)$ and the potential energy is $mgh=mg(l-(l-\alpha t)\cos{\theta})$. Thus, the equation of motion is $g\sin{\theta}+(-\alpha t+l)\Ddot{\theta}-2\slpha\theta=0$.
+        \end{solution}
+    \item[12.] A particle moving in one dimension in a constant external force field with frictional force proportional to its velocity has equation of motion
+        \begin{equation*}
+            \Ddot{y}+\frac{2}{t}\Dot{y}+y^5=0.
+        \end{equation*}
+    Find a Lagrangian $y(t,y,\Dot{y})$. 
+        \begin{solution} 
+            If we multiply both sides by $t^2$, then we get that $(t^2y')'+t^2y^5=0$. Thus, using the Euler equation we get that $L_y=-t^2y^5$ and $L_{y'}=t^2y'$. Hence, 
+                \begin{equation*}
+                    L=\frac{1}{2}t^2(y')^2-\frac{1}{6}t^2y^6+\phi(t).
+                \end{equation*}
+            
+        \end{solution}
+\end{enumerate}
+
+\end{document}

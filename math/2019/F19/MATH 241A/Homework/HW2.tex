@@ -1,0 +1,373 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 241A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/17/19   \\
+{ \textbf{Instructor:}} \ Dr. VanValkenburgh \hspace{\fill} \textbf{Assignment:} Homework 2 \\ \hrule}
+
+\justifying
+
+\begin{enumerate}[leftmargin=*]
+    \item[2.] Consider a process described by the function $u(t)=1+e^{-t/\varepsilon}$ on the interval $0\leq t\leq 1$, where $\varepsilon$ is a small number. Use Exercise 1 to determine a time scale. Is this time scale appropriate for the entire interval $[0,1]$? (Sketch a graph of $u(t)$ when $\varepsilon=0.05$.) Explain why two time scales might be required for a process described by $u(t)$.
+    
+    \begin{solution}
+        To find a time scale let us first find $M=\max\abs{u(t)}$. When $t=0$, $u(0)=2$, and when $t=1$, $u(t)\approx 1.36$, provided that $\varepsilon<1$. With this information, we will let $M=2$. Next, we must find $\max\abs{u'(t)}$. Given that 
+        
+        \begin{equation*}
+            \frac{d}{dt}(u(t))=-\frac{1}{\varepsilon}e^{-t/\varepsilon}, 
+        \end{equation*}
+        
+        we see that $u'(t)$ achieves its max value at $t=0$ yielding $u'(0)=-1/\varepsilon$. Thus, by Exercise 1, we have that our time scale $t_c=M/\max{u'(t)}=2\varepsilon$. Based on a graph of the function, this time scale seems appropriate up to about $t=0.3$, since beyond this point the graph is comparatively flat. Thus, two time scales might be necessary to address this behavior.
+    \end{solution}
+    
+    \item[3.] Consider the organism growth rate model 
+    
+    \begin{equation}
+        m'=ax^2-bx^3,
+    \end{equation}
+    
+    where $m$ is its biomass, $x$ is some characteristic length of the organism, $a$ is its biomass assimilation rate, and $b$ is its biomass use rate. Assume $m=\rho x^3$ and rewrite the model in terms of length. Determine the dimensions of the constants $a,b$, and $\rho$. Select time and length scales $\rho/b$ and $a/b$, respectively, and reduce the problem to dimensionless form. If $x(0)=0$, find the length $x$ at time $t$. Does this seem like a reasonable model?
+    
+    \begin{solution}
+        We will first write (1) in terms of the length $x$. To do this, note that we are given $m=\pho x^3$. Thus, $m'=3\rho x^2 x'$. Hence,
+        
+        \begin{equation}
+            (3\rho x^2) x'=ax^2-bx^3\Rightarrow x'=\frac{a}{3\rho}-\frac{b}{3\rho}x.
+        \end{equation}
+        
+        Based on Equation (1), the left side is in units of $MT^{-1}$. On the right side, $x$ has units $L$ and so to get the units on the right to match those on the left, $a$ would need to have units $MT^{-1}L^{-2}$ and $b$ would have to have units $MT^{-1}L^{-3}$. To determine the units of $\rho$, we look to Equation (2). The left side has units $LT^{-1}$ and so $\rho$ would need units $L^3M^{-1}$. To scale by the given terms, we let 
+    
+        \begin{equation*}
+            t=\frac{\rho}{b}s,\quad x=\frac{a}{b}u.
+        \end{equation*}
+    
+        Then using the chain rule, we get that 
+    
+        \begin{equation*}
+            \frac{d}{dt}=\frac{ds}{dt}\frac{d}{ds}=\frac{b}{\rho}\frac{d}{ds}.
+        \end{equation*}
+    
+        Thus, rewriting (2) we get
+        
+        \begin{equation*}
+            \frac{b}{\rho}\frac{d}{ds}(\frac{a}{b}u)=\frac{a}{3\rho}-\frac{b}{3\rho}(\frac{a}{b}u).
+        \end{equation*}
+        
+        Simplifying gives
+        
+        \begin{equation*}
+            \frac{du}{ds}=\frac{1}{3}-\frac{1}{3}u.
+        \end{equation*}
+        
+        Dividing both sides by $1/3-1/3u$, then integrating with respect to $s$ gives
+        
+        \begin{equation*}
+            \int\frac{\frac{du}{ds}}{\frac{1}{3}-\frac{1}{3}u}ds=\int 1 ds.
+        \end{equation*}
+        
+        Thus, 
+        
+        \begin{equation*}
+            u(s)=-e^{s/3}+1.
+        \end{equation*}
+        
+        This appears to be a good model.
+    \end{solution}
+    
+    \item[7.] A rocket blasts off from earth's surface. During the initial phase of flight, fuel is burned at the maximum possible rate $\alpha$, and the exhaust gas is expelled downward with velocity $\beta$ relative to the velocity of the rocket. The motion is governed by the following set of equations
+    
+    \begin{align*}
+        m'(t)=-\alpha,\quad m(0)&=M, \\
+        v'(t)=\frac{\alpha\beta}{m(t)}-\frac{g}{(1+x(t)/R)^2},\quad v(0)&=0,\\
+        x'(t)=v(t),\quad x(0)&=0.
+    \end{align*}
+    
+    Reformulate the problem in terms of dimensionless variables using appropriate scales for $m,x,v,$ and $t$.
+    
+    \begin{solution}
+        The most obvious choices for the dimensionless variables are
+        
+        \begin{equation*}
+            \hat{m}=m/M,\quad \hat{x}=x/R,\quad \hat{t}=t/T,\quad \hat{v}=v/V.
+        \end{equation*}
+        
+        Just as we did in class, we will wait to solve for $V$ and $T$. Using these variables, we see that 
+        
+        \begin{equation*}
+            \frac{d}{dt}=\frac{1}{T}\frac{d}{d\hat{t}}.
+        \end{equation*}
+        
+        Thus, the other equations become
+        
+        \begin{equation*}
+            \frac{d\hat{m}}{d\hat{t}}=-\frac{\alpha T}{M},\quad \frac{d\hat{v}}{d\hat{t}}=\frac{T}{V}\big(\frac{\alpha\beta}{M\hat{m}}-\frac{g}{(1+\hat{x})^2}\big),\quad \frac{d\hat{x}}{d\hat{t}}=\frac{TV}{R}\hat{v}.
+        \end{equation*}
+        
+        The last step is to determine our unknown scale $V$. For this, we look to the velocity equation when the gravitational term is negligible. Hence, manipulating $VT/R=\alpha\beta/MV$ yields $V=\sqrt{\alpha\beta R/M}$.
+    \end{solution}
+    
+    \item[8.] In the chemical reactor problem assume that the reaction is $\mathbf{C}+\mathbf{C}\rightarrow$ products, and the chemical reaction rate is $r=kc^2$, where $c=c(t)$ is the concentration and $k$ is the rate constant. What is the dimension of $k$? Define dimensionless variables and reformulate the problem in dimensionless form. Solve the dimensionless problem to determine the concentration.
+    
+    \begin{solution}
+        Looking at the given differential equation
+        
+        \begin{equation*}
+            \frac{d}{dt}(Vc(t))=qc_i-qc(t)-VR
+        \end{equation*}
+        
+        then dividing through by $V$, we get 
+        
+        \begin{equation*}
+            \frac{dc}{dt}=\frac{q}{V}c_i-\frac{q}{V}c-R.
+        \end{equation*}
+        
+        We are asked to assume $R=kc^2$ and from this determine the dimensions of $k$. Since the left side has dimensions $CT^{-1}$, then $k$ must have dimensions $C^{-1}T^{-1}$, where $C$ is denoting the dimensions of concentration. Note that since $V$ has dimensions $L^3$, then $q$ must have dimensions of $L^3T^{-1}$.\par\hspace{4mm} Letting $\hat{c}=c/c_i$ and $\hat{t}=t/(V/q)$, we get that 
+        
+        \begin{equation*}
+            \frac{d\hat{c}}{d\hat{t}}=-(1-\hat{c})-\frac{kVc_i}{q}\hat{c}^2.
+        \end{equation*}
+        
+        Solving this, we get 
+        
+        \begin{equation*}
+            \hat{c}(\hat{t})=1-\tan\bigg(\frac{kVc_i}{q}(a+\hat{t})\bigg).
+        \end{equation*}
+        
+        Using $\hat{c}(0)=c_0/c_i$, we get that 
+        
+        \begin{equation*}
+            a=\frac{q}{kVc_i}\tan^{-1}(1-\frac{c_0}{c_i}).
+        \end{equation*}
+    \end{solution}
+    
+    \item[10.] A ball of mass $m$ is tossed upward with initial velocity $V$. Assuming the force caused by air resistance is proportional to the square of the velocity of the ball and the gravitational field is constant, formulate an initial value problem for the height of the ball at any time $t$. Choose characteristic length and time scales and recast the problem in dimensionless form.
+    
+    \begin{solution}
+        Given that the air resistance is proportional to the square of the velocity and that the gravitational field is constant, we can use Newton's second law $F=ma$ to obtain
+        
+        \begin{equation*}
+            m\frac{d^2x}{dt^2}=-mg-\sigma\bigg(\frac{dx}{dt}\bigg)^2,
+        \end{equation*}
+        
+        where $x$ is the height of the ball and $\sigma$ is a proportionality constant. Additionally, we are assuming the initial height of the ball is zero and the initial velocity is $V$. Thus, the initial conditions can be stated as $x(0)=0$ and $x'(0)=V$. We will use the same characteristic scales for length and time as we used in class. So we have that 
+        
+        \begin{equation*}
+            \hat{x}=\frac{gx}{V^2},\quad \hat{t}=\frac{gt}{V}.
+        \end{equation*}
+        
+        Thus, 
+        
+        \begin{equation*}
+            \frac{d}{dt}=\frac{d\hat{t}}{dt}\frac{d}{\hat{t}}=\frac{g}{V}\frac{d}{d\hat{t}},
+        \end{equation*}
+        
+        and
+        
+        \begin{equation*}
+            \frac{d^2}{dt^2}=(\frac{d}{dt})(\frac{d}{dt})=\frac{g^2}{V^2}\frac{d^2}{d\hat{t}^2}.
+        \end{equation*}
+        
+        This means that 
+        
+        \begin{equation*}
+            m\frac{g^2}{V^2}\frac{d^2}{d\hat{t}^2}\big(\frac{V^2\hat{x}}{g}\big)=-mg-\sigma\bigg(\frac{g}{V}\frac{d}{d\hat{t}}\big(\frac{V^2\hat{x}}{g}\big)\bigg)^2.
+        \end{equation*}
+        
+        This simplifies to 
+        
+        \begin{equation*}
+            \frac{d^2\hat{x}}{d\hat{t}^2}=-1-\frac{\sigma V^2}{mg}\bigg(\frac{d\hat{x}}{d\hat{t}}\bigg)^2.
+        \end{equation*}
+        
+        Letting $\beta=\sigma V^2/mg$, we get
+        
+        \begin{equation*}
+            \hat{x}''=-1-\beta(\hat{x}')^2.
+        \end{equation*}
+    \end{solution}
+    
+    \item[15.] The initial value problem for the damped pendulum equation is
+    
+    \begin{align*}
+        \frac{d^2\theta}{dt^2}+k\frac{d\theta}{dt}+\frac{g}{l}\sin\theta&=0,\\
+        \theta(0)=\theta_0,\quad \theta'(0)&=\omega_0.
+    \end{align*}
+    
+    \begin{enumerate}[label=\alph*)]
+        \item Find three time scales and comment upon what process each involves.
+        \item Non-dimensionalize the model with a time scale appropriate to expecting damping to have a small contribution.
+        \item Non-dimensionalize the model with a time scale based on the fact that damping has an effect.
+    \end{enumerate}
+    
+    \begin{solution}\hfill
+        \begin{enumerate}[label=\alph*)]
+            \item The three ways you can derive units of time from the given quantities are $1/\omega$, $\sqrt{l/g}$, and $1/k$. The first involves the angular frequency, the second involves what effect $g$ has on the system, and the last is concerned with the damping constant.
+            
+            \item Let $\hat{t}=t/\sqrt{l/g}, \hat{ \theta}=\theta/\theta_0$, then we have that 
+            
+            \begin{equation*}
+                \frac{d}{dt}=\frac{1}{\sqrt{l/g}}\frac{d}{d\hat{t}}, \quad \frac{d^2}{d\hat{t}^2}=\frac{g}{l}\frac{d^2}{d\hat{t}^2}.
+            \end{equation*}
+            
+            Thus, letting 
+            
+            \begin{equation*}
+                a=\frac{l}{g}\frac{k}{\sqrt{l/g}}
+            \end{equation*}
+            
+            denote the resulting dimensionless quantity, then the dimensionless form of the equation becomes
+            
+            \begin{equation*}
+                \frac{d^2\hat{\theta}}{d\hat{t}^2}+a\frac{d\hat{\theta}}{d\hat{t}}+\frac{1}{\theta_0}\sin{(\theta_0\hat{\theta})}=0.
+            \end{equation*}
+            
+            \item Now if we let $\hat{t}=kt$ and $\hat{\omega}=\omega/\omega_0$, and let 
+            
+            \begin{equation*}
+                b=\frac{g}{k^2l}
+            \end{equation*}
+            
+            denote the resulting dimensionless quantity, then the dimensionless form of the equation becomes
+            
+            \begin{equation*}
+                \frac{d^2\hat{\theta}}{d\hat{t}^2}+\frac{d\hat{\theta}}{d\hat{t}}+\frac{b}{\theta_0}\sin{(\theta_0\hat{\theta})}=0.
+            \end{equation*}
+        \end{enumerate}
+    \end{solution}
+    
+    \item[16.] In a simple model of predation a fraction of the prey take refuge and are not subject to predation. If $H=H(t)$ is the number of prey, and $P=P(t)$ is the number of predators, the model takes the form 
+    
+    \begin{equation*}
+        \frac{dH}{dt}=rH-a(H-H_r)P,\quad \frac{dP}{dt}=-kp+b(H-H_r)P,
+    \end{equation*}
+    
+    where $r$ is the prey growth rate, $k$ is the predator mortality rate, $H_r$ is the number of prey in refuge (constant), and $a$ and $b$ are predation rates. Find dimensionless variables so that the model reduces to the dimensionless form 
+    
+    \begin{equation*}
+        h'=h-(h-1)p,\quad p'=-\alpha p+\beta(h-1)p,
+    \end{equation*}
+    
+    for appropriate choices of $\alpha$ and $\beta$.
+    
+    \begin{solution}
+        Letting $h=H/Hr$, $p=Pa/k$, and $\tau = tk$. We get that 
+        \begin{equation*}
+            \frac{d}{dt}=k\frac{d}{d\tau}.
+        \end{equation*}
+        
+        Thus, our first differential equation becomes 
+        
+        \begin{equation*}
+            \begin{split}
+                &k\frac{d}{d\tau}(H_rh)=r(H_rh)-a(H_rh-H_r)\frac{kP}{a} \\
+                &\Leftrightarrow \frac{dh}{d\tau}= \frac{r}{k}h-(h-1)p \\
+                &\Leftrightarrow h'=\frac{r}{k}-(h-1)p.
+            \end{split}
+        \end{equation*}
+        
+        Thus, if the growth rate of the prey is near the predator mortality rate, i.e. $r/k\approx 1$, then we get that 
+        
+        \begin{equation*}
+            h'=h-(h-1)p,
+        \end{equation*}
+        
+        as desired. Next, our second differential equation becomes
+        
+        \begin{equation*}
+            \begin{split}
+                &k\frac{d}{d\tau}(\frac{k}{a}p)=-kp+b(H_rh-H_r)\frac{k}{a}p \\
+                &\Leftrightarrow \frac{dp}{d\tau}=-\frac{a}{k}+\frac{H_rb}{k}(h-1)p.
+            \end{split}
+        \end{equation*}
+        
+        Thus, letting $\alpha=a/k$ and $\beta=H_rb/k$, we get 
+        
+        \begin{equation*}
+            p'=-\alpha p+\beta(h-1)p,
+        \end{equation*}
+        
+        as desired.
+    \end{solution}
+\end{enumerate}
+
+\end{document}

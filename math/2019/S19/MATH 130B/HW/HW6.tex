@@ -1,0 +1,176 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 130B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 4/4/19   \\
+{ \textbf{Instructor:}} \ Dr. Cummings \hspace{\fill} \textbf{Assignment:} Homework 6 \\ \hrule}
+
+\justifying
+
+% Document begins here
+
+\begin{enumerate}[leftmargin=*]
+
+    \item Explain each person's reasoning. Why do they get different answers? Who do you think is correct? Explain why their's is better than the other.
+    
+        \begin{solution}\hfill\par\vspace{4mm}\underline{\textsc{Morgan's Reasoning:}}
+            So it would appear that Morgan's reasoning was that if the total cost was $\$ 45$ and there were 3 passengers in the Uber, then she began by dividing the total cost by the number of passengers, resulting in an amount of $\$ 15$ per person. Next, she took into account the proportion of the total distance traveled that each person required to get to their respective houses. The total distance traveled was 30 miles. Since Morgan lived only 10 miles away from the pick-up destination, then of the 30 total miles traveled, she only required 10, which means she should only have to pay $1/3$ of the $\$ 15$. Thus, the total cost on her would amount to $1/3\cdot 15=\$ 5$.\par
+            
+            \hspace{4mm} Similarly, Joe was given an initial cost of $\$15$. However, because he lived 20 miles away from the pick-up destination, then he must at least pay $1/3$ of the $\$ 15$ since to travel 20 miles, one must travel 10 miles, which is $1/3$ of the 30 total miles. Since this only covers the cost of the first 10 miles of Joe's trip, there remains the cost of the remaining 10 miles. To address this, Morgan reasoned that once she was dropped off and had paid her share, then the rest of the trip was solely the concern of the remaining passengers. Thus, the 20 remaining miles can be thought of as a new total distance with respect to Joe and Mike. Hence, of the 20 total miles, Joe required only half of this distance and so to cover this, he must pay an additional $1/2$ of the $\$ 15$. Thus, Joe's total cost is $1/3\cdot 15+1/2\cdot 15=\$12.50$.\par
+            
+            \hspace{4mm} Lastly, the amount that Mike must pay, Morgan reasoned, is at least as much as Joe since Mike traveled the same 20 miles that Joe did, plus an additional 10 miles. Using the same reasoning as before, this remaining 10 miles can be though of as a new total distance with respect to Mike's trip. Thus, since mike traveled each mile of this total distance, then the proportion of the $\$ 15$ that he must pay is the full $\$15$. Hence, the total cost on Mike ought to be $1/3\cdot 15+1/2\cdot15+15=\$27.50$.\par\vspace{4mm}
+            
+            \underline{\textsc{Joe's Reasoning:}} It seems that Joe's argument relies on thinking of the cost of each trip individually and then dividing the resulting cost appropriately. So then Joe figured that if Morgan traveled 10 miles and the Uber driver charges $\$1.50$ per mile, then Morgan's theoretical cost is $10\cdot1.5=\$15$. Next, since Joe traveled a total distance of 20 miles, then his theoretical cost ought to be $20\cdot1.5=\$30$. Lastly, Mike, having traveled 30 miles, would acquire a theoretical cost of $30\cdot 1.5=\$45$. Thus, the total cost of each individual trip would amount to a total of $\$15+\$30+\$45=\$90$. Since the cost of the actual trip was only $\$45$, then Joe reasoned that each passenger should pay an amount equal to the their theoretical cost divided by the total theoretical cost multiplied by the actual cost. This proportion, Joe reasoned, is more fair since it disregards the number of passengers and uses only distance traveled and cost per mile. Thus, Morgan would have to pay $15/90\cdot 45=1/6\cdot 45=\$7.50$, Joe would pay $30/90\cdot45=2/6\cdot45=\$15$, and Mike would have to pay $45/90\cdot 45=3/6\cdot 45=\$22.50$.\par\vspace{4mm}
+            
+            \underline{\textsc{Final Thoughts:}} I believe Joe's reasoning to be more fair to each passenger. This is because had each person taken their trip individually, then they would have had to pay their theoretical cost and it seems more reasonable that the proportion of $\$45$ that each person must pay is dependent on the cost of the individual trips. In contrast, for Morgan to have divided the actual cost by the number of passengers initially was ill-advised, I believe. Doing this makes the argument unnecessarily sophisticated and requires that each person pay as much as the previous person which was an amount based on a ratio that changes each time someone is dropped off.
+        \end{solution}
+        
+    \item Prove that if $A$ and $B$ are nonempty sets and $A\subseteq B$, then $\sup(A)\leq\sup(B)$ and $\inf(B)\leq\inf(A)$.
+    
+        \begin{proof}
+            Let $x\in A$. Then by assumption $x\in B$. Thus, $x\leq\sup(B)$. It follows that for all $x\in A$, $x\leq\sup(B)$. Thus, $\sup(B)$ is an upper bound on $A$. However, since $\sup(A)$ is the least upper bound on $A$, then $\sup(A)\leq\sup(B)$. Similarly, let $x\in A$. Then $x\in B$. Thus, $\inf(B)\leq x$ and $\inf(B)$ is therefore a lower bound on $A$. However, since $\inf(A)$ is the greatest lower bound of $A$, then $\inf(B)\leq\inf(A)$.
+        \end{proof}
+        
+    \item Suppose that $A$ and $B$ are nonempty sets of real numbers such that for each $x\in A$ and $y\in B$ we have $x\leq y$. Prove that $\sup(A)\leq\inf(B)$.
+    
+        \begin{proof}
+            Let $x\in A$. Then for any $y\in B$, $x\leq y$ by assumption. It follows then that for any $y\in B$, $y$ is an upper on $A$. However, since $\sup(A)$ is the least upper bound on $A$, then for all $y\in B$, we have that $\sup(A)\leq y$. Thus, $\sup(A)$ is a lower bound on $B$. However, since $\inf(B)$ is the greatest lower bound on $B$, then $\sup(A)\leq\inf(B)$. 
+        \end{proof}
+        
+    \item Let $f\colon[0,2]\rightarrow\mathbb{R}$ be defined by $f(x)=x^2-x$, and let $P=\{0, 1, \frac{3}{2}, 2\}$. Compute $U(f, P)$ and $L(f, P)$ with respect to the partition $P$.
+    
+        \begin{solution}
+            We begin by calculating each $m_k$ and $M_k$, for $1\leq k\leq 3$.
+            
+            \begin{align*}
+                m_1 &=\inf\{x^2-2\colon x\in[0,1]\}=-\frac{1}{4} & M_1 &=\sup\{x^2-x\colon x\in[0,1]\}=0 \\
+                m_2 &=\inf\{x^2-2\colon x\in[1,\frac{3}{2}]\}=0 & M_2 &= \sup\{x^2-x\colon x\in[1,\frac{3}{2}]\}=\frac{3}{4} \\
+                m_3 &= \inf\{x^2-2\colon x\in[\frac{3}{2},2]\}=\frac{3}{4} & M_3 &= \sup\{x^2-x\colon x\in[\frac{3}{2},2]\}=2
+            \end{align*}
+            
+        \noindent It follows then that
+        
+        \newpage
+        
+        \begin{equation*}
+            \begin{split}
+                L(f,P) &= \sum\limits_{k=1}^{3} m_k(x_k-x_{k-1}) \\
+                &= m_1(1-0)+m_2\bigg(\frac{3}{2}-1\bigg)+m_3\bigg(2-\frac{3}{2}\bigg) \\
+                &=-\frac{1}{4}(0)+0\bigg(\frac{1}{2}\bigg)+\frac{3}{4}\bigg(\frac{1}{2}\bigg) \\
+                &= \frac{1}{8},
+            \end{split}
+        \end{equation*}
+        
+        \noindent and
+        
+        \begin{equation*}
+            \begin{split}
+                U(f,P) &= \sum\limits_{k=1}^{3}M_k(x_k-x_{k-1}) \\
+                &= M_1(1-0)+M_2\bigg(\frac{3}{2}-1\bigg)+M_3\bigg(2-\frac{3}{2}\bigg) \\
+                &= 0(1)+\frac{3}{4}\bigg(\frac{1}{2}\bigg)+2\bigg(\frac{1}{2}\bigg) \\
+                &= \frac{11}{8}.
+            \end{split}
+        \end{equation*}
+            
+        \end{solution}
+        
+    \newpage
+        
+    \item Consider the function $s\colon[0,2]\rightarrow\mathbb{R}$ given by
+    
+        \begin{equation*}
+            s(x) = \begin{cases} 1 &\quad\text{if}\quad x\in[0,1) \\
+            5 &\quad\text{if}\quad x=1 \\
+            2 &\quad\text{if}\quad x\in(1,2]
+            \end{cases}.
+        \end{equation*}
+        
+    \noindent Prove $s$ is integrable on $[0,2]$.
+    
+        \begin{proof}
+        
+        \end{proof}
+
+\end{enumerate}
+
+\end{document}

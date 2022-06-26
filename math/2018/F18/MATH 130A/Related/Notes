@@ -1,0 +1,420 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+\usepackage{relsize}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{polynom}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+ \setlist[description]{leftmargin=12.8mm,labelindent=4mm}
+ 
+\begin{document}
+
+\section{Metric Spaces and Convergence}
+
+\textbf{DEFINITION 1.1:} A \textbf{metric} on a set $X$ is a function
+
+\begin{equation*}
+    d\colon X\times X\rightarrow R
+\end{equation*}
+
+\noindent having the following properties:
+
+\begin{enumerate}
+    \item $d(x,y)\geq 0$ for all $x,y\in X$; equality holds if and only if $x=y$.
+    \item $d(x,y)=d(y,x)$ for all $x,y\in X$.
+    \item $d(x,y)+d(y,z)\geq d(x,z)$, for all $x,y,z\in X$.
+\end{enumerate}
+
+Given a metric $d$ on $X$, the number $d(x,y)$ is often called the \textbf{distance} between $x$ and $y$ in the metric $d$. Given $\epsilon>0$, the following set will be of importance later on.
+
+\begin{equation*}
+    B_d(x,\epsilon)=\{y\mid d(x,y)<\epsilon\}
+\end{equation*}
+
+\vspace{4mm}
+
+\noindent\textbf{DEFINITION 1.2:} If $d$ is a metric on the set $X$, then the collection of all $\epsilon$-balls $B_d(x,\epsilon)$, for $x\in X$ and $\epsilon>0$, is a basis for a topology on $X$, called the \textbf{metric topology} induced by $d$. Moreover, if for any two points $p,q\in X$, there is associated a $d(p,q)$, then $X$ is called a \textbf{metric space}.
+
+\vspace{4mm}
+
+\noindent\textbf{DEFINITION 1.3:} Let $X$ be a metric space, All points and sets below are understood to be elements and subsets of $X$.
+
+\begin{description}
+    \item (a) \textit{A \textbf{neighborhood} of $p$ is a set $N_r(p)$ consisting of all $q$ such that $d(p,q)<r$ for some $r>0$. The number $r$ is called the radius of $N_r(p)$.}
+    \item (b) \textit{A point $p$ is a \textbf{limit point} of the set $E$ if every neighborhood of $p$ contains a point $q\neq p$ such that $q\in E$.}
+    \item (c) \textit{If $p\in E$ and $p$ is not a limit point of $E$, then $p$ is called an \textbf{isolated point} of $E$.}
+    \item (d) \textit{$E$ is \textbf{closed} if every limit point of $E$ is a point of $E$.}
+    \item (e) \textit{A point $p$ is an \textbf{interior} point of $E$ if there is a neighborhood $N$ of $p$ such that $N\subset E$.}
+    \item (f) \textit{$E$ is \textbf{open} if every point of $E$ is an interior point of $E$.}
+    \item (g) \textit{The \textbf{complement} of $E$ (denoted $E^c$) is the set of all point $p\in X$ such that $p\notin E$.}
+    \item (h) \textit{$E$ is \textbf{perfect} if $E$ is closed and if every point of $E$ is a limit point of $E$.}
+    \item (i) \textit{$E$ is \textbf{bounded} if there is a real number $M$ and a point $q\in X$ such that $d(p,q)<M$ for all $p\in E$.}
+    \item (j) \textit{$E$ is \textbf{dense} in $X$ if every point of $X$ is a limit point of $E$, or a point of $E$ (or both).}
+\end{description}
+
+\vspace{4mm}
+
+\noindent\textbf{THEOREM 1.1:} \textit{Every neighborhood is an open set.}
+
+\vspace{4mm}\par
+
+\textbf{\textit{Proof.}} Let $p\in X$ and let $E=N_r(p)$ for some $r>0$. Then for each $q\in E$, we have, by Definition 1.3.(a), $d(p,q)<r$. Thus, by the properties of the real numbers, there exists some $h\in \mathbb{R}^+$ such that $d(p,q)=r-h$. Now consider all points $s\in X$ for which $d(q,s)<h$. Then $d(p,q)<r-d(q,s)$. Thus, $d(p,q)+d(q,s)<r$. By Definition 1.1.3, $d(p,s)\leq d(p,q)+d(q,s)$. Thus, $d(p,s)<r$. Thus, $s\in E$. Hence, any $s\in X$ such that $d(q,s)<h$ implies $s\in E$. Thus, $d_h(q)\subset E$. Thus, by Definition 1.3.(e), $q$ is an interior point of $E$. Therefore, $E$ is open. \square
+
+\vspace{4mm}
+
+\noindent\textbf{DEFINITION 1.4:} If $X$ is a metric space, $E\subset X$, and $E'$ denotes the set of all limit points of $E$ in $X$, then the \textbf{closure} of $E$ is the set $\overline{E}=E\cup E'$.
+
+\vspace{4mm}
+
+\noindent\textbf{THEOREM 1.2:} \textit{Let $E$ be a nonempty set of real numbers which is bounded above. Let $y=\sup(E)$. Then $y\in\overline{E}$.}
+
+\vspace{4mm}\par
+
+\textbf{\textit{Proof.}} Since $y=\sup(E)$, then, by definition, for all $p\in E$, $y\geq p$. Thus, $y\in E$ or $y\notin E$. If $y\in E$, then $y\in\overline{E}$, by definition. Assume $y\notin E$. Because $y=\sup(E)$, then for all $h>0$, there exists $x\in E$ such that $y-h<x<y$. Thus, for any $h>0$, there exists $x\in N_h(y)$ such that $x\in E$. Thus, every neighborhood of $y$ contains a point $x\neq y$ such that $x\in E$. Thus, $y$ is a limit point of $E$. Hence, $y\in E'$. Therefore, $y\in\overline{E}$. \square
+
+\vspace{4mm}
+
+\noindent\textbf{DEFINITION 1.5} By an \textbf{open cover} of a set $E$ in a metric space $X$, we mean a collection $\{G_{\alpha}\}$ of open subsets of $X$ such that $E\subset\bigcup_{\alpha}G_\alpha$.
+
+\vspace{4mm}
+
+\noindent\textbf{DEFINITION 1.6} A subset $K$ of a metric space $X$ is said to be \textbf{compact} if every open cover of $K$ contains a \textit{finite} subcover. More explicitly, the requirement is that if $\{G_{\alpha}\}$ is an open cover of $K$, then there are finitely many indices $\alpha_1,\cdots,\alpha_n$ such that 
+
+\vspace{2mm}
+
+\centerline{$k\subset G_{\alpha_1}\cup\dots\cup G_{\alpha_n}$.}
+
+\vspace{4mm}
+
+\noindent\textbf{THEOREM 1.3} \textit{If $\{I_n\}$ is a sequence of intervals in $\mathbb{R}^1$, such that $I_n\supset I_{n+1}$ $(n=1,2,3\dots)$, then $\bigcap\limits_{n=1}^{\infty}I_n$ is not empty.}
+
+\vspace{4mm}\par
+
+\textbf{\textit{Proof.}} If $I_n=[a_n,b_n]$, let $E$ be the set of all $a_n$. Then $E$ is nonempty and bounded above by $b_1$. Let $x=\sup(E)$. If $m$ and $n$ are positive integers, then 
+
+\vspace{2mm}
+
+\centerline{$a_n\leq a_{m+n}\leq b_{m+n}\leq b_m$,}
+
+\vspace{2mm}
+
+\noindent so that $x\leq b_m$ for each $m$. Since it is obvious that $a_m\leq x$ (because $x=\sup(E)$), then $a_m\leq x\leq b_m$, for all $m$. Thus, $x\in I_m$ for $m=1,2,3\dots$. \square
+
+\vspace{4mm}
+
+\noindent \textbf{DEFINITION 1.6:} A sequence $\{p_n\}$ in a metric space $X$ is said to \textit{converge} if there is a point $p\in X$ with the following property: For every $\epsilon>0$ there exists an integer $N$ such that $n\geq N$ implies that $d(p_n,p)<\epsilon$. In this case we also say that $\{p_n\}$ converges to $p$, or that $p$ is the limit of $\{p_n\}$, and we write
+
+\begin{equation*}
+    \lim\limits_{n\rightarrow\infty}p_n=p.
+\end{equation*}
+
+\vspace{4mm}
+
+\noindent If $\{p_n\}$ does not converge, then we say it \textit{diverges}. It should also be noted that the current definition of ``convergent sequence'' depends not only on $\{p_n\}$, but also on $X$.
+
+\vspace{4mm}
+
+\noindent\textbf{Theorem 1.4} \textit{Let $\{p_n\}$ be a sequence in a metric space $X$.}
+
+\vspace{2mm}
+
+\begin{description}
+    \item (a) $\{p_n\}$ \textit{converges to $p\in X$ if and only if every neighborhood of $p$ contains $p_n$ for all but finitely many $n$.}
+    \item (b) \textit{If $p\in X$, $p'\in X$, and if $\{p_n\}$ converges to $p$ and to $p'$, then $p=p'$.}
+    \item (c) \textit{If $\{p_n\}$ converges, then $\{p_n\}$ is bounded.}
+    \item (d) \textit{If $E\subset X$ and if $p$ is a limit point of $E$, then there is a sequence $\{p_n\}$ in $E$ such that $p=\lim\limits_{n\rightarrow\infty}p_n$.}
+
+\end{description}
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} (a) Suppose $\lim\limits_{n\rightarrow\infty}p_n=p$ and let $V$ be a neighborhood of $p$. For some $\epsilon>0$, the conditions $d(q,p)<\epsilon$ and $q\in X$, imply $q\in V$. Corresponding to this $\epsilon$, there exists $N$ such that $n\geq N$ implies $d(p_n,p)<\epsilon$. Thus, $n\geq N$ implies $p_n\in V$.\par
+Conversely, suppose every neighborhood of $p$ contains all but finitely many $p_n$. Fix $\epsilon>0$, and let $V$ be the set of all $q\in X$ such that $d(p,q)<\epsilon$. By assumption, there exists $N$ which corresponds to this $V$, such that $p_n\in V$ if $n\geq N$. Thus, $d(p_n,p)<\epsilon$ if $n\geq N$. Therefore, $\lim\limits_{n\rightarrow\infty}p_n=p$. \square
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} (b) Assume $p,p'\in X$ and assume $p_n\rightarrow p$ and assume $p_n\rightarrow p'$. Let $\epsilon'>0$ and let $\epsilon=\epsilon'/2$. Then there exists $N$ and $N'$ such that for all $n$, if $n\geq N$, then $d(p_n,p)<\epsilon$, and if $n\geq N'$, then $d(p_n,p')<\epsilon$. Now, with out loss of generality, suppose $N\geq N'$. Then since $n\geq N$, it follows that $n\geq N'$. Thus. $d(p_n,p)<\epsilon$ and $d(p_n,p')<\epsilon$. Thus,
+
+    \begin{equation*}
+        \begin{split}
+            d(p_n,p)+d(p_n,p')&<\epsilon+\epsilon \\
+            &< 2\epsilon \\
+            &< 2(\frac{\epsilon'}{2}) \\
+            &< \epsilon'.
+        \end{split}
+    \end{equation*}
+    
+\noindent Thus, by Definition 1.1.3, $d(p,p')<\epsilon'$, for all $\epsilon'>0$. Therefore, $d(p,p')=0$. Hence, $p=p'$. \square
+
+\newpage
+
+\textbf{\textit{Proof.}} (c) Assume $\{p_n\}$ converges to some $p\in X$. Then if we choose $\epsilon=1$, there exists some $N\in\mathbb{Z}$ such that if $n> N$, then $d(p_n,p)<1$. Now let
+
+\vspace{2mm}
+
+\centerline{$A=\{q_i\in X\mid \exists i(i\leq N\wedge q_i=d(p_i,p))\}\cup\{1\}$.}
+
+\vspace{2mm}
+
+\noindent Now let $r=\max(A)$. Then $r=1$ or $r=d(p_i,p)$, for some $i\leq N$. Now consider some $p_j\in\{p_n\}$. Then if $j>N$, we have $d(p_j,p)<1\leq r$. If $j\leq N$, then $d(p_j,p)\in A$ and $d(p_j,p)\leq r$ by definition. Thus, $p(p_i,p)\leq r$, for all $i=1,2,3, ...$. Therefore, $\{p_n\}$ is bounded. \square
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} (d) Assume $E\subset X$ and that $p$ is a limit point, $p$, of $E$. Then every neighborhood of $p$ contains a point $q\neq p$ such that $q\in E$. Thus, for each $n\in\mathbb{N}$, there is some $p_n\in E$ such that $d(p_n,p)<1/n$. Given $\epsilon>0$, choose $N$ such that $N\epsilon>1$, It follows that if $n>N$, then $1/n<1/N$. We can see that for any $n\in\mathbb{N}$, $d(p_n,p)<1/n<1/N$. And since $1/N<\epsilon$, then $d(p_n,p)<\epsilon$, for all $n\geq N$. Therefore, there exists a sequence $\{p_n\}\subset E$ which converges to $p$. \square
+
+\vspace{4mm}
+
+\noindent\textbf{Theorem 1.5} \textit{Suppose $\{s_n\}$ and $\{t_n\}$ are sequences, and $s_n\rightarrow s$ and $t_n\rightarrow t$. Then}
+
+\vspace{2mm}
+
+\begin{description}
+    \item (a) $\lim\limits_{n\rightarrow\infty}(s_n+t_n)=s+t$.
+    \item (b) $\lim\limits_{\n\rightarrow\infty} cs_n=cs$; $\lim\limits_{n\rightarrow\infty}(c+s_n)=c+s$,\textit{ for any number $c$}.
+    \item (c) $\lim\limits_{n\rightarrow\infty} s_nt_n=st$.
+    \item (d) $\lim\limits_{n\rightarrow\infty} \frac{1}{s_n}=\frac{1}{s}$, \textit{provided} $s_n\neq 0$ $(n=1,2,3,\dots)$.
+\end{description}
+
+\vspace{2mm}
+
+\textbf{\textit{Proof.}} (a) Given $\epsilon>0$, there exist integers $N_1,N_2$ such that 
+
+\begin{equation*}
+    \begin{split}
+        n\geq N_1&\rightarrow\abs{s_n-s}<\frac{\epsilon}{2}, \\
+        n\geq N_2&\rightarrow\abs{t_n-t}<\frac{\epsilon}{2}.
+    \end{split}
+\end{equation*}
+
+\vspace{2mm}
+
+\noindent Without loss of generality, assume $N_1\geq N_2$. Then if $n\geq N_1$, we have that $\abs{s_n-s}<\epsilon/2$ and $\abs{t_n-t}<\epsilon/2$. Thus,
+
+\begin{equation*}
+    \begin{split}
+        &\abs{s_n-s}+\abs{t_n-t}<\epsilon \\
+        &\Leftrightarrow\abs{(s_n-s)+(t_n-t)}\leq\abs{s_n-s}+\abs{t_n-t}<\epsilon \\
+        &\Leftrightarrow\abs{(s_n+t_n)-(s+t)}<\epsilon. \\
+        &\Leftrightarrow d(s_n+t_n,s+t)<\epsilon.
+    \end{split}
+\end{equation*}
+
+\vspace{4mm}
+
+\noindent Thus, for any $\epsilon>0$, there exists an integer $N$ such that for all $n\geq N$, $d(s_n+t_n,s+t)<\epsilon$. Therefore, $\lim\limits_{n\rightarrow\infty}(s_n+t_n)=s+t$. \square
+
+\newpage
+
+\textbf{\textit{Proof.}} (b)
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} (c) Consider the following product
+
+\begin{equation*}
+    \begin{split}
+        (a-b)(c-d)+b(c-d)+d(a-b)&=ac-ad-bc+bd+b(c-d)+d(a-b) \\
+        &= ac-ad-bc+bd+bc-bd+ad-bd\\
+        &= ac+(ad-ad)+(bc-bc)+(bd-bd)-bd\\
+        &= ac-bd.
+    \end{split}
+\end{equation*}
+
+\noindent We can use this fact and state $s_nt_n-st=(s_n-s)(t_n-t)+s(t_n-t)+t(s_n-s)$. Now given some $\epsilon>0$, there exists integers. TBC
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} (d)
+
+\vspace{6mm}
+
+\noindent\textbf{DEFINITION 1.7:} Given a sequence $\{p_n\}$, consider a sequence $\{n_k\}$ of positive integers, such that $n_1<n_2<n_3<\cdots$. Then the sequence $\{p_{n_i}\}$ is called a \textbf{subsequence} of $\{p_n\}$. If $\{p_{n_i}\}$ converges, then its limit is called a \textbf{subsequential limit} of $\{p_n\}$.
+
+\vspace{4mm}
+
+\noindent\textbf{Theorem 1.6} \textit{If $\{p_n\}$ is a sequence, then, for some $p$, $\lim\limits_{n\rightarrow\infty}p_n=p$ if and only if every subsequence of $\{p_n\}$ converges.}
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} Let $\{p_n\}$ be a sequence. Assume that for some $p$, $\lim\limits_{n\rightarrow\infty}p_n=p$. Now suppose $\{p_{n_i}\}$ is a subsequence of $\{p_n\}$. Let $\epsilon>0$. Then, by assumption, there exists an integer $N$ such that for all $n\geq N$, $d(p_n,p)<\epsilon$. Now consider any $i$ such that $n_i\geq N$, then $d(p_{n_i},p)<\epsilon$. Thus, for all $i$ such that $n_i\geq N$, $d(p_{n_i},p)<\epsilon$. Therefore, $\lim\limits_{i\rightarrow\infty}p_{n_i}=p$.\par
+Conversely, assume every subsequence $\{p_{n_i}\}$ of $\{p_n\}$, converges to a point $p$. Since every sequence is a subsequence of itself by definition, then it follows that $\{p_n\}$ must converge to $p$. \square
+
+\vspace{4mm}
+
+\noindent\textbf{Theorem 1.7} 
+
+\begin{description}
+    \item (a) \textit{If $\{p_n\}$ is a sequence in a compact metric space $X$, then some subsequence of $\{p_n\}$ converges to a point in $X$.}
+    \item (b) \textit{Every bounded sequence in $\mathbb{R}^k$ contains a convergent subsequence.}
+\end{description} 
+
+\vspace{2mm}
+
+\textbf{\textit{Proof.}} (a)
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} (b)
+
+\vspace{6mm}
+
+\noindent\textbf{DEFINITION 1.8:} A sequence $\{p_n\}$ in a metric space $X$ is said to be a \textbf{Cauchy sequence} if for every $\epsilon>0$, there is an integer $N$ such that $d(p_n,p_m)<\epsilon$ if $n\geq N$ and $m\geq N$.
+
+\newpage
+
+\noindent\textbf{DEFINITION 1.9:} Let $E$ be a nonempty subset of a metric space $X$, and let $S$ be the set of all real numbers of the form $d(p,q)$, with $p\in E$ and $q\in E$. Then the \textbf{diameter} of $E$ is defined as $\sup(S)$.\par
+
+\vspace{2mm}
+
+\noindent If $\{p_n\}$ is a sequence in $X$ and if $E_N$ consists of the points $p_N,p_{N+1},p_{N+2},\dots,$ it is clear that from the previous two definitions, that $\{p_n\}$ is a Cauchy sequence if and only if
+
+\vspace{2mm}
+
+\begin{equation*}
+    \lim\limits_{N\rightarrow\infty}\text{diam}(E_N)=0.
+\end{equation*}
+
+\vspace{4mm}
+
+\noindent\textbf{Theorem 1.8}
+
+\begin{description}
+    \item (a) \textit{In any metric space $X$, every convergent sequence is a Cauchy sequence.}
+    \item (b) \textit{If $X$ is a compact metric space and if $\{p_n\}$ is a Cauchy sequence in $X$, then $\{p_n\}$ converges to some point in $X$.}
+    \item (c) \textit{In $\mathbb{R}^k$, every Cauchy sequence converges.}
+\end{description}
+
+\vspace{2mm}
+
+\textbf{\textit{Proof.}} (a) Assume $X$ is a metric space and that $p_n\rightarrow p$. Then if $\epsilon>0$, there exists an integer $N$ such that for all $n$, if $n\geq N$, then $d(p_n,p)<\epsilon$. Hence, 
+
+\begin{equation*}
+    d(p_n,p_m)\leq d(p_n,p)+d(p,p_m)\leq 2\epsilon
+\end{equation*}
+
+\noindent as soon as $n\geq N$ and $m\geq N$. Thus, $\{p_n\}$ is a Cauchy sequence. \square
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} (b) Assume $X$ is a compact metric space and that $\{p_n\}$ is a Cauchy sequence in $X$. 
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} (c)
+
+\vspace{6mm}
+
+\noindent\textbf{DEFINITION 1.10:} A metric space in which every Cauchy sequence converges is said to be \textbf{complete}.
+
+\vspace{4mm}
+
+\noindent\textbf{DEFINITION 1.11:} A sequence $\{s_n\}$ of real numbers is said to be 
+
+\vspace{2mm}
+
+\begin{description}
+    \item (a) \textit{monotonically increasing if $s_n\leq s_{n+1}$ $(n=1,2,3,\dots)$;}
+    \item (b) \textit{monotonically decreasing if $s_n\geq s_{n+1}$ $(n=1,2,3,\dots)$.}
+\end{description}
+
+\noindent\textbf{Theorem 1.9} \textit{Suppose $\{s_n\}$ is monotonic. Then $\{s_n\}$ converges if and only if it is bounded.}
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} Suppose $\{s_n\}$ is monotonically increasing and assume $\{s_n\}$ converges to $s$. Then by Theorem 1.4(c), $\{s_n\}$ is bounded.\par
+Conversely, assume $\{s_n\}$ is bounded. Because the range of $\{s_n\}$ is a nonempty bounded subset of a complete metric space, then it possesses a least upper bound. Let $s=\sup(\{s_n\})$. Thus, because $s$ is \textit{the} least upper bound of $\{s_n\}$, then by the supremum analytical theorem, for all $\epsilon>0$, there exists an integer $N$ such that $s-\epsilon<s_N\leq s$. Since $s_n\leq s_{n+1}$ for all $n$, then for any $n\geq N$ it follows that $0\leq s_n-s<\epsilon$. Therefore, $s_n\rightarrow s$. \square
+
+\vspace{6mm}
+
+\noindent\textbf{Theorem 1.10}
+
+\begin{equation*}
+    \begin{split}
+        &\text{(a) } p>0\rightarrow\lim\limits_{n\rightarrow\infty}\frac{1}{n^p}=0.\hspace{10.2cm}\\
+        \\
+        &\text{(b) } p>0\rightarrow\lim\limits_{n\rightarrow\infty}\sqrt[n]{p}=1.\\
+        \\
+        &\text{(c) } \lim\limits_{n\rightarrow\infty}\sqrt[n]{n}=1. \\
+        \\
+        &\text{(d) } (p>0)\wedge(\alpha\in\mathbb{R})\rightarrow\lim\limits_{n\rightarrow\infty}\frac{n^\alpha}{(1+p)^n}=0. \\
+        \\
+        &\text{(e) } \abs{x}<1\rightarrow\lim\limits_{n\rightarrow\infty}x^n=0.
+    \end{split}
+\end{equation*}
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} (a)
+
+\newpage
+
+\section{Final Review}
+
+\vspace{2mm}
+
+\noindent Four of the following 22 items will be asked on the final. Keep 'em all in your noodle yah fuck.
+
+\vspace{4mm}
+
+\begin{enumerate}
+    \item  
+\end{enumerate}
+
+\end{document}

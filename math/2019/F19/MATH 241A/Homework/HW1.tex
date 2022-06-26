@@ -1,0 +1,288 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 241A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/5/19   \\
+{ \textbf{Instructor:}} \ Dr. VanValkenburgh \hspace{\fill} \textbf{Assignment:} Homework 1 \\ \hrule}
+
+\justifying
+
+% Document begins here
+
+\vspace{2mm}
+
+\boxed{Pg. 8}
+
+\begin{enumerate}[leftmargin=*]
+
+    \item A pendulum executing small vibrations has period $P$ and length $l$, and $m$ is the mass of the bob. Can $P$ depend only on $l$ and $m$? If we assume $P$ depends on $l$ and the acceleration $g$ due to gravity, then show that 
+    
+    \begin{equation*}
+        P=C\sqrt{l/g},
+    \end{equation*}
+    
+    \noindent where $C$ is a constant.
+    
+    \begin{solution}
+        The period $P$ cannot depend only on $m$ and $l$. This is because $P$ has units of seconds or time $T$ and time is a fundamental unit which can not be expressed as the product of powers of the two other fundamental units mass $M$ and length $L$.\par\hspace{4mm} Now assume $P$ depends on $l$ and $g$. Then we will assume a physical law of the form 
+        
+        \begin{equation*}
+            f(l,g,P)=0
+        \end{equation*}
+        
+        \noindent relating the three quantities we selected. Each of these quantities can be written in terms of the fundamental dimensions $L$ (length), and $T$ (time). If $\Pi$ is a dimensionless quantity that can be formed from $l,g$, and $P$, then 
+        
+        \begin{equation*}
+            \begin{split}
+                \Pi &= l^ag^bP^c \\
+                    &= (L)^a(LT^{-2})^b(T)^c \\
+                    &= L^{a+b}T^{-2b+c}.
+            \end{split}
+        \end{equation*}
+        
+        \hspace{4mm} Because $\Pi$ is dimensionless, the dimensions must cancel out and all the exponents must be be zero; we obtain the homogeneous system of equations 
+        
+        \begin{equation*}
+            a+b=0,\quad -2b+c=0.
+        \end{equation*}
+        
+        \hspace{4mm} Since we have three unknowns and two equations, this gives us one degree of freedom. Thus, letting $b=1/2$, we get that $c=1$ and $a=-1/2$. Hence, a dimensionless quantity $\Pi$ has the form 
+        
+        \begin{equation*}
+            \Pi=l^{-1/2}g^{1/2}P.
+        \end{equation*}
+        
+        Thus, 
+        
+        \begin{equation*}
+            l^{-1/2}g^{1/2}P=C,
+        \end{equation*}
+        
+        where $C$ is some constant. This means
+        
+        \begin{equation*}
+            P=Cl^{1/2}g^{-1/2}=C\sqrt{l/g}.
+        \end{equation*}
+        
+    \end{solution}
+    
+    \newpage
+    
+    \item[3.] In the blast wave problem take $C=1$ and use $\rho=1.25$ kg/m$^3$. Some of the radius (m) vs. time (milliseconds) data for the Trinity explosion is given in the following table:
+    
+    \begin{align*}
+        t& &0.10& &0.52& &1.08& &1.5& &1.93& &4.07& &15.0& &34.0 \\
+        r& &11.1& &28.2& &38.9& &44.4& &48.7& &64.3& &106.5& &145
+    \end{align*}
+    
+    \noindent Using these data, estimate the yield of the Trinity explosion in kilotons (1 kiloton equals 4.186(10)$^{12}$ joules.) Compare your answer the actual yield of approximately 21 kilotons.
+    
+    \begin{solution}
+        Taking equation (1.3) and resolving for $E$, letting $C=1$, and $\rho=1.25$, we obtain
+        
+        \begin{equation*}
+            E=\frac{r^5(1.25)}{t^2}.
+        \end{equation*}
+        
+        Next, we can plug in the data and we get 
+        
+        \begin{align*}
+            E(11.1,0.10)&=2.106\times 10^{12}J& &E(28.2, 0.52)=9.16\times 10^{12} J& \\
+            E(38.9,1.08)&=9.55\times10^{12}J& &E(44.4,1.5)=9.59\times10^{12}J& \\
+            E(48.7,1.93)&=9.19\times10^{12}J& &E(64.3,4.07)=8.29\times10^{12}J&\\
+            E(106.5,15.0)&=7.61\times10^{12}J& &E(145,34.0)=6.93\times10^{12}J&
+        \end{align*}
+        
+        Summing all of these values up, we get a total of 62.426$\times10^{12}J$. This is equivalent to 14.9 kilotons.
+    \end{solution}
+    
+    \vspace{2mm}
+    
+    \boxed{Pg.27-29}
+    
+    \item (Allometry) An ecologist postulated that there is a relationship among the mass $m$, density $\rho$, volume $V$, and surface area $S$ of certain animals. Discuss this conjecture in terms of dimensionless analysis. 
+    
+    \begin{solution}
+        If we assume that the conjecture is true, then we would look for a law of the form 
+        
+        \begin{equation*}
+            f(m,\rho,V,S)=0.
+        \end{equation*}
+        
+        Thus, we would want to find a dimensionless quantity $\Pi$ which can be formed from the dimensions mentioned above. Hence, we need 
+        
+        \begin{equation*}
+            \begin{split}
+                \Pi&=m^a\rho^bV^cS^d \\
+                &= (M)^a(ML^{-3})^b(L^3)^c(L^2)^d \\
+                &= M^{a+b}L^{-3b+3c+2d}.
+            \end{split}
+        \end{equation*}
+        
+        This gives us the two following homogeneous equations with four unknowns implying that there are two degrees of freedom.
+        
+        \begin{equation*}
+            a+b=0,\quad -3b+3c+2d=0.
+        \end{equation*}
+        
+        Letting $a=1$ and $c=1$, we get that $b=-1$ and $d=-3$. Thus, 
+        
+        \begin{equation*}
+            \frac{mV}{\rho S^3}=C.
+        \end{equation*}
+        
+        Having had two degrees of freedom can (might?) be interpreted as the fact that only two of the four quantities were needed to make a dimensionless quantity. 
+    \end{solution}
+    
+    \item[5.] A physical system is described by a law $f(E,P,A)=0$, where $E$, $P$, $A$ are energy, pressure, and area, respectively. Show that $P A^{3/2}/E=$const.
+    
+    \begin{solution}
+        Taking our law, we are looking for exponents such that 
+        
+        \begin{equation*}
+            \begin{split}
+                \Pi&=E^aP^bA^c \\
+                &= (ML^2T^{-2})^a(ML^{-1}T^{-2})^b(L^2)^c \\
+                &= M^{a+b}L^{2a-b+2c}T^{-2a-2b}.
+            \end{split}
+        \end{equation*}
+        
+        This gives us the following system of homogeneous linear equations
+        
+        \begin{equation*}
+            a+b=0,\quad 2a-b+2c=0,\quad -2a-2b=0.
+        \end{equation*}
+        
+        Since equations 1 and 3 are equivalent, this means that we have two equations and 3 unknowns. Thus, with one degree of freedom we can let $a=-1$ and we get that $b=1$ and $c=3/2$. Hence, 
+        
+        \begin{equation*}
+            E^aP^bA^c=\frac{PA^{3/2}}{E}=C
+        \end{equation*}
+        
+        as desired.
+        
+    \end{solution}
+    
+    \item[8.] (Mechanics) In an indentation experiment, a slab of metal of thickness $h$ is subjected to a constant pressure $P$ on its upper surface by a cylinder of radius $a$. The technician then measures the vertical displacement of $U$ of the indentation. The displacement also depends upon two material properties, Poisson's ratio $v$, which is dimensionless, and the Lam\'{e} constant $\mu$, which has dimensions $M/L^3T^2$, where $M$ is mass, $L$ is length, and $T$ is time. Determine a set of dimensionless variables and show that the functional form of $U$ is 
+    
+    \begin{equation*}
+        U=aG\bigg(\frac{P}{\mu a^2},\frac{h}{a},v\bigg).
+    \end{equation*}
+    
+    \begin{solution}
+        To start, note that the units of that of length $L$, and so we can show that the right side reduces to these same units. 
+        
+        \begin{equation*}
+            \begin{split}
+                aG\bigg(\frac{P}{\mu a^2},\frac{h}{a},v\bigg)&=(L)\bigg(\frac{ML^{-1}T^{-2}}{ML^{-3}T^{-2}(L^2)}\bigg)^a\bigg(\frac{L}{L}\bigg)^b(v) \\
+                &=(L)\bigg(\frac{L^3T^2}{L^4T^2}\bigg)^a(v) \\
+                &= (L)(L^{-1})^a(v) \\
+                &=L^{1-a}(v).
+            \end{split}
+        \end{equation*}
+        
+        Thus, with $a=0$, we get the right side reduced to some constant multiple of $L$.
+    \end{solution}
+    
+    \item[11.] (Mechanics) The problem is to determine the power $P$ that must be applied to keep a ship of length $l$ moving at a constant speed $V$. If it is the case, as seems reasonable, that $P$ depends on the density of water $\rho$, the acceleration due to gravity $g$, and the viscosity of water $\nu$ (in length-squared per time), as well as $l$ and $V$, then show that 
+    
+    \begin{equation*}
+        \frac{P}{\rho l^2V^3}=f(\text{Fr},\text{Re}),
+    \end{equation*}
+    
+    where Fr is the Froude number and Re is the Reynolds number defined by
+    
+    \begin{equation*}
+        \text{Fr}\equiv\frac{V}{\sqrt{lg}},\quad\text{Re}\equiv\frac{Vl}{\nu}.
+    \end{equation*}
+    
+    \begin{solution}
+        I have decided not to finish the remaining two question in light of the fact that I am very unsure if I have done any of this assignment correctly. I need to spend a lot more time with the book in order to fully understand what these questions are asking. Starting with question 8 when the the function $G$ was introduced and we had to show that $a$ multiplied by $G$ was equal to $U$, my uncertainty peaked at this point and continued through to question 13. I apologize for the abrupt ending Dr. VanValkenburgh! The next assignment will be complete and not break the fourth wall as this one just did.
+    \end{solution}
+    
+    \item[13.]
+    
+
+\end{enumerate}
+
+\end{document}

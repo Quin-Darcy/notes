@@ -1,0 +1,198 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+
+
+
+\begin{document}
+
+\title{Final Study Guide}
+\author{Quin Darcy}
+\date{May 15 2019}
+\affil{\small{California State University Sacramento}}
+\maketitle
+
+\section{Proofs To Know}
+
+\begin{enumerate}[leftmargin=*]
+    \item Using the definition of the functional limit prove that that
+    
+        \begin{equation*}
+            \lim_{x\rightarrow 1}\bigg(\frac{x^3}{x-1}-\frac{1}{x-1}\bigg)=3.
+        \end{equation*}
+        
+        \begin{proof}
+            We will begin by simplifying the given expression. Note that 
+            
+            \begin{equation*}
+                \frac{x^3}{x-1}-\frac{1}{x-1}=\frac{x^3-1}{x-1},
+            \end{equation*}
+            
+            \noindent and by synthetic division we find that 
+            
+            \begin{equation*}
+                x^3-1=(x-1)(x^2+x+1).
+            \end{equation*}
+            
+            \noindent Thus, 
+            
+            \begin{equation*}
+                \frac{x^3-1}{x-1}=\frac{(x-1)(x^2+x+1)}{x-1}=x^2+x+1.
+            \end{equation*}
+            
+            \noindent Now that we have simplified this expression, we can appeal to the functional limit definition. We need to show that for all $\varepsilon>0$, there exists $\delta>0$, such that for any $x$ satisfying $\abs{x-1}<\delta$, then $\abs{(x^2+x+1)-3}<\varepsilon$ is also satisfied. We can further simplify the consequent by noting that 
+            
+            \begin{equation*}
+                (x^2+x+1)-3=x^2+x-2=(x+2)(x-1).
+            \end{equation*}
+            
+            \noindent Now suppose $\delta\leq 1$. Then, if $\abs{x-1}<\delta$, it follows that $\abs{x-1}<1$. We can expand this to say that 
+            
+            \begin{equation*}
+                -1<x-1<1\Rightarrow2<x+2<4.
+            \end{equation*}
+            
+            Thus, $x+2$ can not exceed 4 if we assume $\abs{x-1}<1$. So if $(x+2)(x-1)<\varepsilon$, then we need $(x-1)<\varepsilon/4$. So then for our given $\varepsilon$, let $\delta=\min\{1,\varepsilon/4\}$. Next, suppose $\abs{x-1}<\delta$. Then we see that 
+            
+            \begin{equation*}
+                \begin{split}
+                    \abs{(x+2)(x-1)} &<\abs{(x+2)\cdot\delta} \\
+                    &<4\cdot\delta \\
+                    &=4\cdot\frac{\varepsilon}{4} \\
+                    &=\varepsilon.
+                \end{split}
+            \end{equation*}
+        \end{proof}
+        
+    \item Assume that $f\colon\mathbb{R}\rightarrow\mathbb{R}$ is continuous at $c$, and $f(c)>0$. Prove that there exists some $\delta>0$ such that $f(x)>0$ for all $x$ in the $\delta-$neighborhood of $c$.
+    
+        \begin{proof}
+            Let us take a closer look at all the assumptions we have. The first thing we assume is that $f$ is a function continuous at a point $c$. Recall that a function $f\colon I\subseteq\mathbb{R}\rightarrow\mathbb{R}$ is continuous at a point $c\in I$ if for every $\varepsilon>0$, there exists $\delta>0$, such that for any $x$ satisfying both $x\in I$ and $\abs{x-c}<\delta$, then $\abs{f(x)-f(c)}<\varepsilon$ is also satisfied.\hfill\par\hspace{4mm}The next premise we have is that at the point at which $f$ is continuous, we have that $f(c)>0$. From these two premises, we need to show that there exists some $\delta>0$ such that any $x$ inside the $\delta-$neighborhood of $c$ will yield $f(x)>0$. To get an intuition for this, let us consider the case where we assume the two premises, but we also assume that for all $\delta>0$, each $\delta-$neighborhood will contain some $x$ such that $f(x)\leq 0$.\hfill\par\hspace{4mm} To exploit this extra premise, let us suppose that we take $\varepsilon=f(c)$. Then since $f$ is continuous at $c$, there exists some $\delta_0>0$, such that for all $x$ satisfying $\abs{x-c}<\delta_0$, it follows that $\abs{f(x)-f(c)}<f(c)$. However, based on our additional premise, with respect to this particular $\delta_0$, there exists some $x_0$ in the $\delta_0-$neighborhood around $c$, such that $f(x_0)\leq 0$. Clearly, $x_0$ is an $x$ which satisfies $\abs{x_0-c}<\delta_0$. Thus, by our assumption that $f$ is $c$, from $\abs{x_0-c}<\delta_0$, it follows that $\abs{f(c)-f(x_0)}<f(c)$. However, recall $f(x_0)\leq 0$. This gives us two cases.
+            
+            \vspace{4mm}
+            
+            \noindent\textsc{Case 1:} $\big[f(x_0)=0\big]$ In this case, we have that
+            
+            \begin{equation*}
+                \abs{f(c)-f(x_0)}=\abs{f(c)}=f(c)<f(c).
+            \end{equation*}
+            
+            This is a contradiction.
+            
+            \vspace{2mm}
+            
+            \noindent\textsc{Case 2:} $\big[f(x_0)<0\big]$ Since $f(c)>0$, then $\abs{f(c)-f(x_0)}>f(c)$, by the property of real numbers. However, we also have that $\abs{f(c)-f(x_0)}<f(c)$. This is a contradiction. Therefore, there exists $\delta>0$ such that for any $x$ in the $\delta-$neighborhood of $c$, it follows that $f(x)>0$.
+            
+        \end{proof}
+    
+        
+        
+    \item Let $f$ and $g$ be continuous functions on $[a,b]$, and suppose that $f(a)<g(a)$ while $f(b)>g(b)$. Prove that $f(x)=g(x)$ for some $x\in[a,b]$.
+    
+    \begin{proof}
+        Let $h\colon\mathbb{R}\rightarrow\mathbb{R}$ be a function defined as $h(x)=f(x)-g(x)$. By the func-y limit laws, since both $f$ and $g$ are continuous, then $h$ is continuous. Moreover, note that 
+        
+        \begin{equation*}
+            \begin{split}
+                &h(a)=f(a)-g(a)<0,\\
+                &h(b)=f(b)-g(b)>0.
+            \end{split}
+        \end{equation*}
+        
+        \noindent Thus, $h(a)<0<h(b)$. By the Intermediate value theorem, there exists $x\in(a,b)$ such that $h(x)=0$. Therefore, 
+        
+        \begin{equation*}
+            f(x)-g(x)=0\Rightarrow f(x)=g(x).
+        \end{equation*}
+    \end{proof}
+    
+    \item Prove that $f(x)=\begin{cases} \frac{1}{2}x &\quad\text{if}\quad x\in\mathbb{Q} \\ x &\quad\text{if}\quad x\notin\mathbb{Q} \end{cases}$, is not differentiable at 0.
+    
+    \begin{proof}
+        Since both $\mathbb{Q}$ and $\mathbb{Q}^c$ are dense in $\mathbb{R}$ and $0\in\mathbb{R}$, then there exist sequences $(x_n)\subseteq\mathbb{Q}$ and $(y_n)\subseteq\mathbb{Q}^c$ such that 
+        
+        \begin{equation*}
+            \lim_{n\rightarrow\infty}x_n=0\quad\text{and}\quad\lim_{n\rightarrow\infty}y_n=0.
+        \end{equation*}
+        
+        \noindent Now consider the following limits
+        
+        \begin{equation*}
+            \begin{split}
+                &\lim_{n\rightarrow\infty}\frac{\frac{1}{2}x_n-\frac{1}{2}0}{x_n-0}=\lim_{n\rightarrow\infty}\frac{\frac{1}{2}x_n}{x_n}=\frac{1}{2},\\
+                &\lim_{n\rightarrow\infty}\frac{y_n-0}{y_n-0}=\lim_{n\rightarrow\infty}\frac{y_n}{y_n}=1.
+            \end{split}
+        \end{equation*}
+        
+        \noindent Thus, $\displaystyle{\lim_{n\rightarrow\infty}}f(x_n)\neq\displaystyle{\lim_{n\rightarrow\infty}}f(y_n)$. Thus, $f(x)$ is not continuous at 0 and therefore not differentiable at 0.
+    \end{proof}
+    
+    \newpage
+    
+    \item Consider the function $s\colon[0,2]\rightarrow\mathbb{R}$ given by 
+    
+    \begin{equation*}
+        s(x)=\begin{cases}1&\text{if}\quad x\in[0,1) \\ 5&\text{if}\quad x=1\\2&\text{if}\quad x\in(1,2]. \end{cases}
+    \end{equation*}
+    
+    \noindent Prove $s$ is integrable on $[0,2]$.
+    
+    \begin{proof}
+        Recall that a bounded function $f\colon[a,b]\rightarrow\mathbb{R}$ is integrable on $[a,b]$ if and only if for every $\varepsilon>0$, there exists a partition $P_{\varepsilon}$ on $[a,b]$ such that 
+        
+        \begin{equation*}
+            U(f,P_{\varepsilon})-L(f,P_{\varepsilon})<\varepsilon.
+        \end{equation*}
+        
+        \noindent Clearly, our function $s$ is bounded. Let $\varepsilon>0$ if we create our partition such that $P_{\varepsilon}=\{0,1-a\varepsilon,1,1+a\varepsilon,2\}$. Then 
+        
+        \begin{equation*}
+           a<\frac{1}{7}\rightarrow U(f,P_{\varepsilon})-L(f,P_{\varepsilon})<\varepsilon
+        \end{equation*}
+    \end{proof}
+    
+    \item 
+    
+\end{enumerate}
+
+\end{document}

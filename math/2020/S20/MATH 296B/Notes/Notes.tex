@@ -1,0 +1,492 @@
+\section{}
+\documentclass{article}
+
+%------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+%------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,pagebackref=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red, linkcolor=blue}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\textit{\oldproofname}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+
+\begin{document}
+
+\title{Notes for MATH 296B}
+\author{Quin Darcy}
+\date{Jan 23, 2020}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+\section{RSA Encryption Algorithm}
+
+    \begin{definition}\label{def:1.1}
+        The set of integers $\{r_1,r_2,\dots,r_s\}$ is called a \textbf{\textit{reduced residue system}} modulo $m$ if
+            \begin{enumerate}[label=(\roman*)]
+                \item $(r_i,m)=1$ for each $i$;
+                \item $r_i\not\equiv r_j(\text{mod }m)$ whenever $i\not= j$; and
+                \item for each integer $n$ relatively prime to $m$, there corresponds an $r_i$ such that $n\equiv r_i(\text{mod }m)$.
+            \end{enumerate}
+    \end{definition}
+    \begin{theorem}\label{thm:1.1}
+        If $s$ integers $r_1, \dots, r_s$ form a reduced residue system modulo $m$, then $s=\phi(m)$.
+    \end{theorem}
+        \begin{proof}
+            Let $t_1,\dots, t_{\phi(m)}$ denote the $\phi(m)$ positive integers not exceeding $m$ that are relatively prime to $m$. For each integer $n$ relatively prime to $m$, Euclid's division lemma guarantees the existence of integers $q,u$ such that 
+                \begin{equation*}
+                    n=qm+u\quad\text{and}\quad 0\leq u<m.
+                \end{equation*}
+            If $(u,m)=d$, then $d\mid u$ and $d\mid m$; thus $d\mid n$, and so $d\mid(n,m)$. However, since $n$ is relatively prime to $m$, then $(n,m)=1$; consequently, $d=1$, and we see that $u$ and $m$ are relatively prime. Hence, $u$ is one of the $t_i$. Since $\abs{t_i-t_j}\leq m-1$, no two of the $t_i$ are congruent modulo $m$; thus, the $t_i$ form a reduced residue system modulo $m$. Therefore, every $r_i$ is congruent to exactly one $t_i$; thus $s\leq\phi(m)$. Conversely, since the $r_i$ form a reduced residue system, each $t_i$ is congruent to precisely one of the $r_i$; thus, $\phi(m)\leq s$. Hence, $s=\phi(m)$.
+        \end{proof}\newpage
+    \begin{theorem}\label{thm:1.2}
+        If $(a,m)=1$, then 
+            \begin{equation*}
+                a^{\phi(m)}\equiv 1\text{ mod }m.
+            \end{equation*}
+    \end{theorem}
+        \begin{proof}
+            Let $r_1, r_2, \dots, r_{\phi(m)}$ be a reduced residue system modulo $m$. We note that $ar_1, \dots, ar_{\phi(m)}$ are all relatively prime to $m$; furthermore, they are all mutually incongruent, since $ar_i\equiv ar_j(\text{mod }m)$ implies that $r_i\equiv r_j(\text{mod } m)$, which, by the definition of reduced residue system, implies that $i=j$. We may thus pair each $ar_i$ with some $r_j$ such that $ar_i\equiv r_j(\text{mod }m)$, and we note that $r_j$ is uniquely defined for each $ar_i$. Note that each $r_j$ is paired with some $ar_i$, since there are $\phi(m)$ of the $r_j$ and $\phi(m)$ of the $ar_i$. Thus
+                \begin{equation*}
+                    r_1r_2\cdots r_{\phi(m)}\equiv ar_1ar_2\cdots ar_{\phi(m)}(\text{mod }m).
+                \end{equation*}
+            Hence, if $R=r_1r_2\cdots r_{\phi(m)}$, then 
+                \begin{equation*}
+                    R\equiv a^{\phi(m)}R(\text{mod }m).
+                \end{equation*}
+            Now $(R,m)=1$ because $R$ is a product of integers each of which are relatively prime to $m$. Thus
+                \begin{equation*}
+                    a^{\phi(m)}\equiv 1(\text{mod }m)
+                \end{equation*}
+            by the cancellation law.
+        \end{proof}
+    \begin{example}\label{ex:1.1}
+        Choose two large primes $p$ and $q$ and let $n=pq$ denote our modulus. Now select some integer $e$ such that $1<e<\phi(n)$ and $(e,\phi(n))=1$. By Bezout's identity, there exists $k,d\in\mathbb{Z}$ such that $k\phi(n)+de=1$. Thus,
+            \begin{equation*}
+                k\phi(n)+de\equiv de\equiv 1(\text{mod }\phi(n)).
+            \end{equation*}
+        Hence, $de\equiv 1(\text{mod }\phi(n))$. It follows from this that $\phi(n)\mid de-1$ and so for some $t\in\mathbb{Z}$, we have that $t\phi(n)=de-1$. Thus, $de=t\phi(n)+1$. Letting $M$ denote our message, we encrypt this message
+            \begin{equation*}
+                E\equiv M^e(\text{mod }n).
+            \end{equation*}
+        Then we simply decrypt by noting
+            \begin{equation*}
+                E^d\equiv (M^e)^d\equiv M^{de}\equiv M^{t\phi(n)+1}\equiv(M^{\phi(n)})^tM(\text{mod }n).
+            \end{equation*}
+        By \cref{thm:1.2}, $M^{\phi(n)}\equiv 1(\text{mod }n)$. Thus, 
+            \begin{equation*}
+                E^d\equiv (M^{\phi(n)})^tM\equiv 1^tM\equiv M(\text{mod }n).
+            \end{equation*}
+        Therefore, if $E\equiv M^e$ is our encrypted message, then $E^d\equiv M$ is our message decrypted.
+    \end{example}\newpage
+    \begin{prop}\label{prop:1.1}
+        If $a,b$ are integers and $(a,b)=1$, then $(a^n,b)=(a,b^n)=1$ for all $n\geq 1$.
+    \end{prop}
+        \begin{proof}
+            By induction on $n$. Suppose $(a,b)=1$. Then there exists $x,y\in\mathbb{Z}$ such that $ax+by=1$. Now observe
+                \begin{equation*}
+                    ax(1)+by=ax(ax+by)+by=a^2x^2+b(axy+y)=1
+                \end{equation*}
+            and thus $(a^2,b)=1$. A similar argument shows that $(a,b^2)=1$. Now assume that the statement holds for some $k\geq 2$. Then $(a^k,b)=1$ and so for some $w,z\in\mathbb{Z}$, we have that 
+                \begin{equation*}
+                    a^kx+by=1.
+                \end{equation*}
+            Then
+                \begin{equation*}
+                    a^kw(a^kx+by)+bz=a^{k+1}wx+b(a^kwy+z)=1.
+                \end{equation*}
+            Thus $(a^{k+1},b)=1$ and the statement holds for all $n\geq 1$.
+        \end{proof}
+\section{Primitive Roots}
+    \begin{example}\label{ex:2.1}
+        We know that $\phi(10)=4$, and we observe that $\{1,3,7,9\}$ is a reduced residue system modulo 10 (verify this). Since
+            \begin{align*}
+                3^1=3&\equiv3(\text{mod }10),  & 7^1=7&\equiv 7(\text{mod }10), \\
+                3^2=9&\equiv 9(\text{mod }10), & 7^2=49&\equiv9(\text{mod }10),\\
+                3^3=27&\equiv7(\text{mod }10), & 7^3=343&\equiv3(\text{mod }10), \\
+                3^4=81&\equiv1(\text{mod }10), & 7^4=2401&\equiv1(\text{mod }10),
+            \end{align*}
+        we see that each of $\{3,3^2,3^3,3^4\}$ and $\{7,7^2,7^3,7^4\}$ is a reduced residue system modulo 10.
+    \end{example}
+    In \cref{ex:2.1}, we see that $4=\phi(10)$ is the smallest positive integer $h$ for which $g^h\equiv 1(\text{mod }10)$, when $g=3$ or 7.
+    \begin{definition}\label{def:2.1}
+        If $h$ is the smallest positive integer such that 
+            \begin{equation*}
+                a^h\equiv1(\text{mod }m),
+            \end{equation*}
+        we say that $a$ \textbf{\textit{belongs to the exponent}} $h$ modulo $m$.
+    \end{definition}
+    \begin{theorem}\label{thm:2.1}
+        In order for 
+            \begin{equation*}
+                a^b\equiv 1(\text{mod }m)
+            \end{equation*}
+        for some integer $b$, it is necessary and sufficient that $(a,m)=1$.
+    \end{theorem}
+        \begin{proof}
+                Let $d=(a,m)$. Clearly, if $d\mid a$ and $d\mid m$, then $d\mid 1$ and therefore $d=1$. If, on the other hand, $(a,m)=1$, \cref{thm:1.2} asserts that 
+                    \begin{equation*}
+                        a^{\phi(m)}\equiv 1(\text{mod }m).
+                    \end{equation*}
+            \end{proof}
+    \begin{theorem}\label{thm:2.2}
+        If $a$ belongs to the exponent $h$ modulo $m$, and 
+            \begin{equation*}
+                a^s\equiv 1(\text{mod }m),
+            \end{equation*}
+        then $h\mid s$.
+    \end{theorem}
+        \begin{proof}
+            By Euclid's division lemma, there exists $q,r\in\mathbb{Z}$ with $0\leq r<h$ such that
+                \begin{equation*}
+                    s=qh+r.
+                \end{equation*}
+            Hence $1\equiv a^s\equiv a^{qh+r}\equiv(a^h)^qa^r\equiv a^r(\text{mod }m)$. Thus, $r=0$ since $h$ is the smallest positive exponent such that $a^h\equiv 1(\text{mod }m)$. Therefore $h\mid s$.
+        \end{proof}
+    \begin{definition}\label{def:2.2}
+        If $g$ is an integer belonging to the exponent $\phi(m)$ modulo $m$, then $g$ is called a \textbf{\textit{primitive root}} modulo $m$. 
+    \end{definition}
+    \begin{theorem}\label{thm:2.3}
+        If $g$ is a primitive root modulo $m$, then $g,g^2,\dots,g^{\phi(m)}$ are mutually incongruent and form a reduced residue system modulo $m$.
+    \end{theorem}
+        \begin{proof}
+            Suppose $1\leq s<r\leq\phi(m)$ and 
+                \begin{equation*}
+                    g^r\equiv g^s(\text{mod }m).
+                \end{equation*}
+            Then $m\mid g^r-g^s$, that is, $m\mid g^s(g^{r-s}-1)$. Since $(g,m)=1$, then by \cref{prop:1.1}, $(g^s,m)=1$ and so $m\mid g^{r-s}-1$. Consequently, $g^{r-s}\equiv 1(\text{mod }m)$. Thus, $r-s$ is a positive integer less that $\phi(m)$ such that 
+                \begin{equation*}
+                    g^{r-s}\equiv 1(\text{mod }m).
+                \end{equation*}
+            This contradicts the fact that $g$ belongs to the exponent $\phi(m)$, and the theorem is proven.
+        \end{proof}
+    \begin{example}\label{ex:2.2}
+        \cref{thm:2.1} and \cref{thm:2.3} enable us to show that there are no primitive roots modulo 8. Suppose that $g$ is a primitive root; then, since $\phi(8)=4$, $g$ must belong to the exponent 4 modulo 8. By \cref{thm:2.1}, we know that $(g,8)=1$; hence, $g$ must be congruent to one of $1,3,5,$ or 7 modulo 8. However, 
+            \begin{align*}
+                1^2&\equiv1(\text{mod }8) & 5^2&\equiv 1(\text{mod }8) \\
+                3^2&\equiv 1(\text{mod }8) & 7^2&\equiv 1(\text{mod }8).
+            \end{align*}
+        Therefore, $g$ cannot belong to the exponent 4 modulo 8, and consequently there are no primitive roots modulo 8. \newpage
+    \end{example}
+    \begin{theorem}\label{thm:2.4}
+        If $a$ belongs to the exponent $h$ modulo $m$ and $(k,h)=d$, then $a^k$ belongs to the exponent $h/d$ modulo $m$.
+    \end{theorem}
+        \begin{proof}
+            Suppose $a^k$ belongs to the exponent $j$ modulo $m$. Then 
+                \begin{equation*}
+                    a^{kj}\equiv 1(\text{mod }m).
+                \end{equation*}
+            Thus, by \cref{thm:2.2}, $h\mid kj$. Let $h_1=h/d$ and $k_1=k/d$; then 
+                \begin{equation*}
+                    h_1\mid k_1j.
+                \end{equation*}
+            Since $(h,k)=d$, it is true that $(h_1,k_1)=1$; from this we see that 
+                \begin{equation*}
+                    h_1\mid j.
+                \end{equation*}
+            On the other hand, 
+                \begin{equation*}
+                    a^{kh_1}=a^{h_1k_1d}=a^{hk_1}=(a^h)^{k_1}\equiv 1(\text{mod }m).
+                \end{equation*}
+            Thus, $j\mid h_1$. It follows that $j=h_1=h/d$.
+        \end{proof}
+    \begin{corollary}\label{cor:2.1}
+        If $g$ is a primitive root modulo $m$, then $g^r$ is a primitive root modulo $m$ if and only if $(r,\phi(m))=1$.
+    \end{corollary}
+        \begin{proof}
+            By definition, a primitive root is an integer that belongs to the exponent $\phi(m)$. By hypothesis, $g$ belongs to the exponent $\phi(m)$. Therefore, $g^r$ belongs to $\phi(m)/(r,\phi(m))$, and this number equals $\phi(m)$ if and only if $(r,\phi(m))=1$.
+        \end{proof}
+    \begin{theorem}\label{thm:2.5}
+        If there exist any primitive roots modulo $m$, there are exactly $\phi(\phi(m))$ mutually incongruent primitive roots. 
+    \end{theorem}
+        \begin{proof}
+            Let $g$ be a primitive root modulo $m$. Then $g,g^2,\dots,g^{\phi(m)}$ form a reduced residue system modulo $m$. By \ref{cor:2.1}, we know that $g^r$ is a primitive root if and only if $(r,\phi(m))=1$. However, by definition of the $\phi$-function, exactly $\phi(\phi(m))$ integers in the interval $[1.\phi(m)]$ are relatively prime to $\phi(m)$.
+        \end{proof}
+    \begin{theorem}\label{thm:2.6}
+        For each prime $p$, there exist primitive roots modulo $p$.
+    \end{theorem}
+        \begin{proof}
+            Consider the reduced residue system $1,2,\dots,p-1$ modulo $p$. Let $N(h)$ denote the number of these integers that belong to $h$ modulo $p$. Now we know that if $a$ belongs to $h$ modulo $p$, then $h\mid p-1$. We also know that every element of a reduced residue system belongs to some $h$ modulo $p$. Consequently,
+                \begin{equation*}
+                    p-1=\sum_{h\mid p-1}N(h).
+                \end{equation*}
+            We shall now show that $N(h)$ is either 0 or $\phi(h)$. If no integer belongs to $h$ modulo $p$, then clearly $N(h)=0$. If $a$ belongs to $h$ modulo $p$, we examine the equation
+                \begin{equation*}
+                    
+                \end{equation*}
+            TBC...
+        \end{proof}
+\section{The Structure of $U(\mathbb{Z}_n)$}
+    By the Chinese Remainder Theorem, we know that if $m=p_1^{a_1}\cdots p_l^{a_l}$, then $\mathbb{Z}_m\cong\mathbb{Z}_{p_1^{a_1}}\times\cdots\times\mathbb{Z}_{p_l^{a_l}}$. It follows from this that $U(\mathbb{Z}_m)\cong U(\mathbb{Z}_{p_1^{a_1}})\times\cdots\times U(\mathbb{Z}_{p_l^{a_l}})$.
+    \begin{lemma}\label{lem:3.1}
+        Let $f(x)\in K[x]$, $K$ a field. Suppose that $\text{deg}(f)=n$. Then $f$ has at most $n$ distinct roots.    
+    \end{lemma}
+        \begin{proof}
+            By induction on $n$. For $n=1$, the assertion is trivial. Assume that the lemma is true for polynomials of degree $n-1$. If $f(x)$ has no roots in $K$, then we are done. If $\alpha$ is a root, $f(x)=q(x)(x-\alpha)$ and $\text{deg}(q)=n-1$. If $\beta\neq\alpha$ is another root of $f(x)$, then $0=f(\beta)=(\beta-\alpha)q(\beta)$, which implies $q(\beta)=0$. Since by induction $q(x)$ has at most $n-1$ distinct roots, $f(x)$ has at most $n$ distinct roots.
+        \end{proof}
+    \begin{prop}\label{prop:3.1}
+        $x^{p-1}-1\equiv(x-1)(x-2)\cdots(x-p+1)(\text{mod }p)$.
+    \end{prop}
+        \begin{proof}
+            If $[a]$ denotes the residue class of an integer $a$ in $\mathbb{Z}_p$, an equivalent way of stating the proposition is $x^{p-1}-[1]=(x-[1])(x-[2])\cdots(x-[p+1])$ in $\mathbb{Z}_p$. Let $f(x)=(x^{p-1}-[1])-(x-[1])(x-[2])\cdots(x-[p+1])$, then $f(x)$ has degree less than $p-1$ (the leading terms cancel) and by \cref{thm:1.2}, $x^{\phi(p)}=x^{p-1}\equiv 1(\text{mod }p)$ and so 
+                \begin{equation*}
+                    x^{p-1}-1\equiv 1-1\equiv 0\equiv(x-1)(x-2)\cdots(x-p+1)(\text{mod }p).
+                \end{equation*}
+            Hence, $f(x)=[0]$ and is identically zero.
+        \end{proof}
+    \begin{corollary}\label{cor:3.1}
+        $(p-1)!\equiv -1(\text{mod }p)$.
+    \end{corollary}
+        \begin{proof}
+            Set $x=0$ in \cref{prop:3.1}.
+        \end{proof}
+    \begin{prop}\label{prop:3.2}
+        If $d\mid p-1$, then $x^d\equiv 1(\text{mod }p)$ has exactly $d$ many solutions.
+    \end{prop}
+        \begin{proof}
+            Let $dd'=p-1$. Then 
+                \begin{equation*}
+                    \frac{x^{p-1}-1}{x^d-1}=\frac{(x^d)^{d'}-1}{x^d-1}=(x^d)^{d'-1}+(x^d)^{d'-2}+\cdots+x^d+1=g(x).
+                \end{equation*}
+            Therefore
+                \begin{equation*}
+                    x^{p-1}-1=(x^d-1)g(x)
+                \end{equation*}
+            and
+                \begin{equation*}
+                    x^{p-1}-[1]=(x^d-[1])[g(x)].
+                \end{equation*}
+            If $x^d-[1]$ has less than $d$ roots, then by \cref{prop:3.1} the right-hand side would have less than $p-1$ roots. However, the left-hand side has the $p-1$ roots $[1],[2],\dots,[p-1]$. Thus, $x^d\equiv 1(\text{mod }p)$ has exactly $d$ solutions as asserted.
+        \end{proof}\newpage
+    \begin{theorem}\label{thm:3.1}
+        $U(\mathbb{Z}_p)$ is a cyclic group. 
+    \end{theorem}
+        \begin{proof}
+            For $d\mid p-1$ let $\psi(d)$ be the number of elements in $U(\mathbb{Z}_p)$ of order $d$. By \cref{prop:3.2} we see that the elements of $U(\mathbb{Z}_p)$ satisfying $x^d\equiv 1(\text{mod }p)$ form a group of order $d$. Thus $\sum_{c\mid d}\psi(c)=d$ ... T.B.C
+        \end{proof}
+    \begin{definition}\label{def:3.1}
+        An integer $a$ is called a \textbf{\textit{primitive root}} modulo $p$ if $[a]$ generates the group $U(\mathbb{Z}_p)$.
+    \end{definition}
+    \begin{theorem}\label{thm:3.2}
+        $2^l$ has primitive roots for $l=1$ or 2 but not for $l\geq 3$. If $l\geq 3$, then $\{(-1)^a5^b\mid a=0,1\text{ and }0\leq b\leq 2^{l-2}\}$ constitutes a reduced residue system modulo $2^l$. It follows that for $l\geq 3$, $U(\mathbb{Z}_2^l)$ is the direct product of two cyclic groups, one of order 2, the other of order $2^{l-2}$.
+    \end{theorem}
+        \begin{proof}
+        
+        \end{proof}
+    \begin{prop}\label{prop:3.3}
+        $n$ possesses primitive roots iff $n$ is of the form $2,4,p^a$, or $2p^a$, where $p$ is an odd prime.
+    \end{prop}
+        \begin{proof}
+        
+        \end{proof}
+    \begin{definition}\label{def:3.2}
+        If $m,n\in\mathbb{Z}^{+}$, $a\in\mathbb{Z}$, and $(a,m)=1$, then we say that $a$ is an $n$\textbf{th\textit{ power residue}} modulo $m$ is $x^n\equiv a(\text{mod }m)$ is solvable.
+    \end{definition}
+    \begin{prop}\label{prop:3.4}
+        If $m\in\mathbb{Z}^{+}$ possesses primitive roots and $(a,m)=1$, then $a$ is an $n$th power residue modulo $m$ iff $a^{\phi(m)/d}\equiv 1(\text{mod }m)$, where $d=(n,\phi(m))$. 
+    \end{prop}
+        \begin{proof}
+            
+        \end{proof}
+    \begin{prop}\label{prop:3.5}
+        If $p$ is an odd prime, $p\nmid a$, and $p\nmid n$, then if $x^n\equiv a(\text{mod }p)$ is solvable, so is $x^n\equiv a(\text{mod }p^e)$ for all $e\geq 1$. All these congruences have the same number of solutions.
+    \end{prop}
+        \begin{proof}
+        
+        \end{proof}
+    \begin{prop}\label{prop:3.6}
+        Let $2^l$ be the highest power of 2 dividing $n$. Suppose that $a$ is odd and that $x^n\equiv a(2^{2l+1})$ is solvable. Then $x^n\equiv a(\text{mod }2^e)$ is solvable for all $e\geq 2l+1$. Moreover, all these congruences have the same number of solutions. 
+    \end{prop}
+        \begin{proof}
+        
+        \end{proof}
+\section{Quadratic Residues}
+    Our first step is to develop a test for determining whether there exists an integer $x$ such that 
+        \begin{equation}
+            x^2\equiv a(\text{mod }p),
+        \end{equation}
+    where $p$ is a prime and $(a,p)=1$. If $p\nmid a$ and (1) has a solution, we shall say that $a$ is a quadratic residue modulo $p$. This gives us the following definition:
+    \begin{definition}\label{def:4.1}
+        Let $p$ be prime and $a$ be an integer such that $(a,p)=1$. Then if $p\nmid a$ and 
+            \begin{equation*}
+                x^2\equiv a(\text{mod }p)
+            \end{equation*}
+        has a solution, then $a$ is called a \textbf{\textit{quadratic residue}} modulo $p$.
+    \end{definition}
+    \begin{example}\label{ex:4.1}
+        Let $p=7$. Since $1,4,$ and $9$ are perfect squares not divisible by $7$, they are quadratic residues modulo $7$. Any integer congruent to one of these squares modulo $7$ is also a quadratic residue modulo 7; hence, $-6,2$, and $11$ are all quadratic residues modulo $7$.
+    \end{example}
+    \begin{theorem}\label{thm:4.1}
+        The number $a$ is a quadratic residue modulo $p$ if and only if
+            \begin{equation*}
+                a^{\frac{p-1}{2}}\equiv 1(\text{mod }p).
+            \end{equation*}
+    \end{theorem}
+        \begin{proof}
+            Suppose that $a$ is a quadratic residue modulo $p$. Let $X$ be any integer such that 
+                \begin{equation*}
+                    X^2\equiv a(\text{mod }p).
+                \end{equation*}
+            Since $p\nmid a$, we see that $p\nmid X$. Consequently,
+                \begin{equation*}
+                    a^{\frac{p-1}{2}}\equiv (X^2)^{\frac{p-1}{2}}\equiv X^{p-1}\equiv 1(\text{mod }p),
+                \end{equation*}
+            by \cref{thm:1.2}.\par\hspace{4mm} On the other hand, suppose that
+                \begin{equation*}
+                    a^{\frac{p-1}{2}}\equiv 1(\text{mod }p).
+                \end{equation*}
+            Let $g$ be a primitive root modulo $p$. Then there exists an integer $r$ such that
+                \begin{equation*}
+                    g^r\equiv a(\text{mod }p), 
+                \end{equation*}
+            and so 
+                \begin{equation*}
+                    g^{r(p-1)/2}\equiv a^{\frac{p-1}{2}}\equiv 1(\text{mod }p).
+                \end{equation*}
+            But, from \cref{thm:2.2}, we see that $p-1\mid r(p-1)/2$. Thus, $r/2$ must be an integer; that is $r=2s$, where $s$ is an integer. Hence, if $x=g^s$, then 
+                \begin{equation*}
+                    x^2=g^{2s}\equiv g^r\equiv a(\text{mod }p);
+                \end{equation*}
+            this establishes Euler's Criterion.
+        \end{proof}
+    \begin{corollary}\label{cor:4.1}
+        Let $g$ be a primitive root modulo $p$, and assume $(a,p)=1$. Let $r$ be any integer such that $g^r\equiv a(\text{mod }p)$. Then $r$ is even if and only if $a$ is a quadratic residue modulo $p$.
+    \end{corollary}
+    \begin{definition}\label{def:4.2}
+        If $p$ is an odd prime, then 
+            \begin{equation*}
+                \bigg(\frac{a}{p}\bigg)=\begin{cases} 1 & \text{if $a$ is a quadratic residue modulo $p$,} \\ 0 & \text{if } p\mid a, \\ -1 & \text{otherwise}.\end{cases}
+            \end{equation*}
+        The above is called the \textbf{\textit{Legendre symbol}}.
+    \end{definition}
+    \begin{theorem}\label{thm:4.2}
+        If $p$ is an odd prime and $(a,p)=1$ and $(b,p)=1$, then 
+            \begin{equation}
+                \bigg(\frac{a}{p}\bigg)=\bigg(\frac{b}{p}\bigg),\;\text{if}\; a\equiv b(\text{mod }p),
+            \end{equation}
+            \begin{equation}
+                \bigg(\frac{ab}{p}\bigg)=\bigg(\frac{a}{p}\bigg)\bigg(\frac{b}{p}\bigg),
+            \end{equation}
+            \begin{equation}
+                a^{\frac{p-1}{2}}\equiv\bigg(\frac{a}{p}\bigg)(\text{mod }p).
+            \end{equation}
+    \end{theorem}
+        \begin{proof}
+            Suppose that $a\equiv b (\text{mod }p)$. Then if $a$ is a quadratic residue modulo $p$, we have that $x^2\equiv b\equiv a(\text{mod }p)$ has a solution and so $b$ is a quadratic residue modulo $p$. Thus, 
+                \begin{equation*}
+                    \bigg(\frac{a}{p}\bigg)=\bigg(\frac{b}{p}\bigg)=1.
+                \end{equation*}
+            If $p\mid a$, then $a\equiv b\equiv 0(\text{mod }p)$ and so $p\mid b$. Thus, 
+                \begin{equation*}
+                    \bigg(\frac{a}{p}\bigg)=\bigg(\frac{b}{p}\bigg)=0. 
+                \end{equation*}
+            Finally, if neither the above are true for $a$, then this is also the case for $b$ and hence (2) follows.\par\hspace{4mm} 
+        \end{proof}\newpage
+    Assume that there exists $a\in\mathbb{Z}_{75}$, $a\not\equiv 1$, such that $a^3\equiv 1\pmod{75}$. Then 
+
+\end{document}

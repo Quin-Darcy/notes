@@ -1,0 +1,69 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 296C}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+\newenvironment{solution}
+{\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+{\end{proof}}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 296C}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 5/17/21   \\
+    { Instructor:}\ Dr. Krauel \hspace{\fill} Assignment:
+    Final Exam \\ \hrule}
+
+    \begin{enumerate}
+        \item Explain your work for everything done.
+        \begin{enumerate}[label=\textbf{\alph*}.]
+            \item Do one of the following:
+            \begin{enumerate}[label=(\Roman*)]
+                \item Construct a rank 2 root system with associated angle $\theta=3\pi/4$. Include a diagram of the roots, along with their labels.
+                \begin{solution}
+                    Taking $\alpha,\beta\in\Phi$ such that $3\pi/4$ is the angle between them, then since this is an obtuse angle, we have that $\alpha+\beta\in\Phi$. Additionally, we have that $-\alpha, -\beta, -\alpha-\beta\in\Phi$. The angle between $\alpha$ and $\alpha+\beta$ is $\pi/4$
+                \end{solution}
+            \end{enumerate}
+        \end{enumerate}
+    \end{enumerate}
+\end{document}

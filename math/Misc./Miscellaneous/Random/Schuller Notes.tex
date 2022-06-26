@@ -1,0 +1,252 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\newenvironment{twoproof}{\tabular{@{\stepproofc}c|l}}{\endtabular}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=10mm,labelindent=10mm}
+
+
+
+\begin{document}
+
+
+\section*{\centerline{ZFC Axioms}}
+
+\justifying
+
+\begin{flushleft}
+
+\underline{The $\in$-Relation}
+
+\vspace{4mm}
+
+Set theory is built on the postulate that there is a fundamental relation $\in$. Where a relation is a short term for a predicate of two variables. Aside from a two variable predicate, there will be no definition of $\in$, and furthermore, there will be no definition of what a set is. Instead, we will present 9 axioms that speak of $\in$ and sets. 
+
+\end{flushleft}
+
+
+
+\begin{flushleft}
+
+\underline{Overview of axioms}
+
+\end{flushleft}
+
+\vspace{4mm}
+
+Basis Existence Axioms\hspace{4mm} $\left\{ \begin{array}{rcl} E \\ E \end{array}\right$
+
+\vspace{2mm}
+
+Construction Axioms\hspace{8mm} $\left\{ \begin{array}{rcl} P \\ U \\ R \\ P \end{array}\right$
+
+\vspace{2mm}
+
+Further Existence Axioms $\left\{ \begin{array}{rcl} I \\ C \end{array}\right$
+
+\vspace{2mm}
+
+Non-existence Axiom\hspace{9.5mm} $\left\{ \begin{array}{rcl} F \end{array}\right$
+
+\vspace{12mm}
+
+\begin{flushleft}
+
+\underline{The $\in$-Relation (cont.)}
+
+\vspace{4mm}
+
+Using the $\in$-relation, we can immediately define\par
+
+
+\begin{description}
+
+    \item $  x\notin y \logeq\neg(x\in y)$.
+    
+    \item $ x\subseteq y\logeq \forall a(a\in x\Rightarrow a\in y)$.
+    
+    \item $ x=y\logeq x\subseteq y\wedge y\subseteq x$.
+
+\end{description}
+
+\end{flushleft}
+
+
+\begin{flushleft}
+
+\underline{Zermelo-Fraenkel Axioms of Set Theory}
+
+\end{flushleft}
+
+\textbf{(E) Axiom on $\in$-Relation} : $x\in y$ is a proposition if and only if $x$ and $y$ are both sets. To be precise:\par
+
+\vspace{4mm}
+
+\centerline{$\forall x\forall y[(x\in y)\veebar\neg(x\in y)]$.}
+
+\newpage
+
+\begin{flushleft}
+
+\underline{Counter Example}
+
+\vspace{4mm}
+
+Assume there is some $u$ that contains all sets that do not contain themselves as an element. To be precise\par
+
+\vspace{4mm}
+
+\centerline{$\exists u\forall z(z\in u\Leftrightarrow z\notin z)$.}
+
+\vspace{4mm}
+
+\underline{Question}: is $u$ a set?\par
+
+\vspace{4mm}
+
+If $u$ was a set, then one must be able to decide if $u\in u$ is true or false, since if $u$ was a set then $u\in u$ is a proposition and is thereby falsifiable.\par
+
+\vspace{4mm}
+
+Assume $u\in u$ is true. Then it is some particular $z$ such that $z\notin z$. Thus, $u\in u\Rightarrow u\notin u$. This is a contradiction.\par
+
+\vspace{4mm}
+
+Assume $u\in u$ is false. This is equivalent to $u\notin u$. If $u\notin u$, then $u\in u$ since $u$ contains all the sets that do not contain themselves. Thus, $u\notin u\Rightarrow u\in u$. This is a contradiction.\par
+
+\vspace{4mm}
+
+Thus, $u\in u$ is neither true nor false and hence, is not a proposition. Therefore, $u$ is not a set.\par
+
+\end{flushleft}
+
+\textbf{(E) Axiom on existence of an empty set: }There exists a set that contains no elements. To be precise:\par
+
+\vspace{4mm}
+
+\centerline{$\exists x\forall y(y\notin x)$.}
+
+
+\vspace{6mm}
+
+
+\textsc{Theorem: }There is only one empty set, call it $\varnothing$.\par
+
+\vspace{4mm}
+
+\textsc{Proof} (textbook): Assume $x$ and $x'$ are both empty sets. But then\par
+
+\vspace{4mm}
+
+\centerline{$\forall y[(y\in x)\Rightarrow (y\in x')]$ (ex falso quadlibert)}
+
+\vspace{4mm}
+
+Thus, by definition\par
+
+\vspace{4mm}
+
+\centerline{$x\subseteq x'$.}\par
+
+\vspace{4mm}
+
+Conversely,\par
+
+\vspace{4mm}
+
+\centerline{$\forall y[(y\in x')\Rightarrow (y\in x)]$.}
+
+\vspace{4mm}
+
+Hence,\par
+
+\vspace{4mm}
+
+\centerline{$x'\subseteq x$.}
+
+\vspace{4mm}
+
+Thus, $x\subseteq x'\wedge x'\subseteq x$. Therefore, $x=x'$\par
+
+\vspace{4mm}
+
+\newpage
+
+\textsc{proof} (formal):\par
+
+\vspace{4mm}
+
+
+\begin{center}
+\begin{tabular}{ c c }
+\hline
+ 1. $\forall y(y\notin x)$\hspace{41mm} &\hspace{10mm} Assumption \\ 
+ 2. $\forall y(y\notin x')$\hspace{40mm} &\hspace{10mm} Assumption \\  
+ 3. $\forall y(y\notin x)\Rightarrow\forall y(y\in x\Rightarrow y\in x')$ &\hspace{7mm} Tautology \\
+ 4. $\forall y(y\notin x)$\hspace{40mm} &\hspace{1mm} Given
+\end{tabular}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

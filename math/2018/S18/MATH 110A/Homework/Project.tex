@@ -1,0 +1,1342 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{commath}
+\usepackage{colonequals}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=10mm,labelindent=10mm}
+
+
+\begin{flushleft}
+Quin Darcy\linebreak 
+MATH 110A\linebreak	
+Prof. Krauel\linebreak
+4/25/18\linebreak
+\end{flushleft}
+
+
+\begin{document}
+
+
+\section*{\centerline{A Brief Walk Through Group Theory}}
+
+\justifying
+
+\textbf{\large{Groups}}\normalsize
+
+\vspace{4mm}
+
+    The intention of this paper is to use methods from group theory to try and redefine structures and objects found in most western music. We begin by reviewing the concept of a group. Let $G$ be a non-empty set, and let $\star\colon G\times G\rightarrow S$ be a binary operator, where $G\subseteq S$. We call $G$ a \textbf{group} with respect to $\star$ if the four following axioms are satisfied:\par
+    
+\begin{enumerate}
+
+    \item \textsc{Closure: }For all $a,b\in G$, $(a\star b)\in G$.
+    
+    \item \textsc{Associativity: }For all $a,b,c\in G$, $a\star(b\star c)=(a\star b)\star c$.
+    
+    \item \textsc{Identity: }There exists $e_G\in G$, such that for all $a\in G$, $a\star e_G=e_G\star a=a$.
+    
+    \item \textsc{Inverse: }For all $a\in G$, there exists $b\in G$, such that $a\star b=b\star a=e_G$.
+    
+\end{enumerate}
+
+    The most familiar example of a group are the integers, denoted $\mathbb{Z}$, with respect to addition. To see this, we will confirm that all four axioms are satisfied. Consider any two integers $a$ and $b$. If we add them together we get back another integer. Since we can do this \textit{for all} integers, we say that the set is \textit{closed}. We know from elementary school that associativity holds since in the expression $a+(b+c)$, this certainly equals $(a+b)+c$, and the placement of the parenthesis does not make a difference in this case. The identity element is the element that when added to any other integer, say $a$, it gives back $a$. This element would be the number $0$, since adding zero to any number does not change the number's value. Lastly, we have the inverse axiom which states that for each integer there is another integer that when we add the two together we get the $0$. In our example, this would be the negative of each number since for any integer $a$, we have $a+(-a)=0$. With all four axioms satisfied we can confidently say that the integers are a group with respect to addition.
+    
+\begin{flushleft}
+
+    \large{\textit{Examples of Groups}}
+
+\end{flushleft}
+
+\begin{enumerate}
+
+    \item The set of real numbers without the element 0, with the operation of real number multiplication, $(\mathbb{R}^{\ast}, \cdot)$.
+    
+    \item The set of all $nxn$ invertible matrices, with the operation of standard matrix multiplication and real entries: $(GL_n(\mathbb{R}), \cdot)$.
+    
+    \item The set of all bijective mappings from a set to itself, with the operation of composition of functions: $(S_n, \circ)$.
+    
+\end{enumerate}
+
+\newpage
+
+\begin{flushleft}
+    \textbf{\large{Subgroups}}\normalsize
+\end{flushleft}
+
+
+
+    The concept of a subgroups follows naturally from a group. Formally, a \textbf{subgroup} is defined as follows: Let $G$ be a group with respect to the operation $\star$ and let $H$ be a subset of $G$. Then $H$ is a subgroup of $G$ if and only if the following conditions are satisfied.\par
+    
+\begin{enumerate}
+
+    \item The identity $e_G$ of $G$ is in $H$. (Identity)
+    
+    \item If $h_1,h_2\in H$, then $h_1\star h_2\in H$. (Closure) 
+    
+    \item If $h\in H$, then $h^{-1}\in H$. (Inverse)
+    
+\end{enumerate}
+
+    This is all we need to know about subgroups for now, but the concept will be revisited later on.
+    
+
+\begin{flushleft}
+
+    \large{\textit{Examples of Subgroups}}
+
+\end{flushleft}
+
+\begin{enumerate}
+
+    \item The set of even integers with addition, $(2\mathbb{Z}, +)$ is a subgroup of $\mathbb{Z}, +)$.
+    
+    \item The set of all of all traceless, real entry, $nxn$ matrices with matrix addition, $(\mathfrak{sl}_n(\mathbb{R}), +)$ is a subgroup of $(\mathbb{M}_n(R), +)$.
+    
+\end{enumerate}
+
+
+\begin{flushleft}
+
+\vspace{1mm}
+    \textbf{\large{Equivalence Relations and Equivalence Classes}}\normalsize
+    
+\end{flushleft}
+
+    An \textbf{relation} $R$ on a set $S$ is a subset of the cartesian product $S\times S$, that is equipped with a condition for membership. This means that an element, say $(a,b)$, is a member of $R$ (denoted $aRb$, as in `$a$ relates to $b$') if and only if $a$ and $b$ evaluate to true within the context of a particular expression. An example of this might be written in the two following ways:\par
+    
+\vspace{4mm}
+
+        \centerline{$aRb$ if and only if $a-b=5$}
+        
+    
+\vspace{2mm}
+
+        \centerline{$(a,b)\in R$ if and only if $a-b=5$.}
+        
+\vspace{4mm}
+
+    We would then collect all of the ordered pairs from $S\times S$ whose components satisfy this relationship. Moreover, there is a special kind of relation called an equivalence relation that will be relevant to the material that follows.\par
+    
+    An \textbf{equivalence relation} on a set $S$, call it $R$, is a relation that satisfies the following three properties:\par
+    
+
+
+\begin{enumerate}
+
+    \item \textsc{Reflexive: }For all $a\in S$, $aRa$.
+    
+    \item \textsc{Symmetric: }For all $a,b\in S$, if $aRb$, then $bRa$.
+    
+    \item \textsc{Transitive: }For all $a,b,c\in S$, if $aRb$ and $bRc$, then $aRc$.
+    
+\end{enumerate}
+
+    An \textbf{equivalence class} for an element $a\in S$ is the set of all elements in $S$ that relate to $a$. Written more formally, we have $[a]_R=\{x\in S\mid aRx\}$. With the concept of equivalence classes and relations in hand, we can move on to a special type of equivalence relation.
+
+\begin{flushleft}
+
+    \textbf{\large{Congruence of Integers}}\normalsize
+    
+\end{flushleft}
+
+    There is an equivalence relation, called \textbf{congruence}, defined in terms of a particular operator called the \textbf{modulus operator}. It is defined as follows: Let $n$ be a positive integer, $n>1$. For integers $x$ and $y$, $x$ is congruent to $y$ modulo $n$ if and only if $x-y$ is a multiple of $n$. Or rather, if and only if there exists an integer $k$, such that $x-y=kn$. This is denoted $x\equiv y($mod $n)$.\par
+    
+    A brief example of how this operator works is to consider the integers modulo 3. This set has as its elements the equivalence classes $[0],[1]$ and $[2]$. This means that the numbers $1,2$ and $3$ are representatives of all the numbers that they share the relationship of congruence with, respectively. The number $7$, for instance, is congruent with the number $1$ modulo 3, since $3$ divides the difference of $7$ and $1$. On the basis of the congruence that exists between these two numbers, we can say that the two numbers are equivalent.
+    
+\vspace{2mm}
+
+\begin{flushleft}
+
+    \textbf{\large{The Integers Modulo 12}}\normalsize
+    
+\end{flushleft}
+
+
+    The integers modulo 12, denoted $\mathbb{Z}_{12}$, is a set containing, as its elements, the equivalence classes $[0]$ through $[11]$, with respect to the relation of congruence. So more precisely,\par
+    
+        \centerline{$\mathbb{Z}_{12}=\{[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]\}$.}
+        
+\vspace{2mm}
+
+    Now that we have this set in front of us, we wish to define an operation on it, such that it forms a group. For brevity's sake, we shall choose set addition. The group axioms can easily be checked. Equipped with a set and an operation, we can take a better look at how this group works by placing it within a structure called a \textbf{Cayley table}. It is almost identical to a multiplication table.\par
+    
+\vspace{8mm}
+
+\begin{table}[htb]
+\centering
+    \begin{tabular}{c|cccccccccccc}
+    
+    $+ & [0] & [1] & [2] & [3] & [4] & [5] & [6] & [7] & [8] & [9] & [10] & [11]$ \\
+    
+    \hline
+    
+    $[0] & [0] & [1] & [2] & [3] & [4] & [5] & [6] & [7] & [8] & [9] & [10] & [11]$ \\
+    $[1] & [1] & [2] & [3] & [4] & [5] & [6] & [7] & [8] & [9] & [10] & [11] & [0]$ \\
+    $[2] & [2] & [3] & [4] & [5] & [6] & [7] & [8] & [9] & [10] & [11] & [0] & [1]$ \\
+    $[3] & [3] & [4] & [5] & [6] & [7] & [8] & [9] & [10] & [11] & [0] & [1] & [2]$ \\
+    $[4] & [4] & [5] & [6] & [7] & [8] & [9] & [10] & [11] & [0] & [1] & [2] & [3]$ \\
+    $[5] & [5] & [6] & [7] & [8] & [9] & [10] & [11] & [0] & [1] & [2] & [3] & [4]$ \\
+    $[6] & [6] & [7] & [8] & [9] & [10] & [11] & [0] & [1] & [2] & [3] & [4] & [5]$ \\
+    $[7] & [7] & [8] & [9] & [10] & [11] & [0] & [1] & [2] & [3] & [4] & [5] & [6]$ \\
+    $[8] & [8] & [9] & [10] & [11] & [0] & [1] & [2] & [3] & [4] & [5] & [6] & [7]$ \\
+    $[9] & [9] & [10] & [11] & [0] & [1] & [2] & [3] & [4] & [5] & [6] & [7] & [8]$ \\
+    $[10] & [10] & [11] & [0] & [1] & [2] & [3] & [4] & [5] & [6] & [7] & [8] & [9]$ \\
+    $[11] & [11] & [0] & [1] & [2] & [3] & [4] & [5] & [6] & [7] & [8] & [9] & [10]$ \\
+
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\begin{flushleft}
+
+    \large{\textit{Remarks}}
+
+\end{flushleft}
+
+    Several things must now be highlighted about this group. Suppose we took some element at random and wanted to know what we would get if we continued to add this element to itself. Consider the element $[0]=\{m\in\mathbb{Z}\mid 0\equiv m($mod$12)\}$. Another way to express this set is as $[0]=\{m\in\mathbb{Z}\mid\exists k\in\mathbb{Z}\colon 0-m=12k\}$. Thus, this is the set of all integer multiples of 12. Now suppose we added this set to itself. The result would be the set $[0]+[0]=\{m+n\in\mathbb{Z}\mid m,n\in[0]\}=[0]$. Now suppose we took the element $[6]=\{m\in\mathbb{Z}\mid\exists k\in\mathbb{Z}\colon m=12k+6\}$. Now if we add this set to itself we obtain\par
+    
+\vspace{4mm}
+
+\centerline{$[6]+[6]=\{k\in\mathbb{Z}\mid\exists m\in\mathbb{Z}\colon k=12m+6\}+\{k'\in\mathbb{Z}\mid\exists n\in\mathbb{Z}\colon k'=12n+6\}$}
+\vspace{2mm}
+\centerline{$=\{(12m+6)+(12n+6)\in\mathbb{Z}\mid m,n\in\mathbb{Z}\}$}
+\vspace{2mm}
+\centerline{$=\{12(m+n+1)\in\mathbb{Z}\mid m,n\in\mathbb{Z}\}$}
+\vspace{2mm}
+\centerline{$=\{12s\in\mathbb{Z}\mid\ s\in\mathbb{Z}\}$}
+\vspace{2mm}
+\centerline{$=[0]$.}
+
+\vspace{4mm}
+    
+    So what we can see here is that by adding $[6]$ to itself, the sum alternates between $[0]$ and $[6]$. More generally, if we did this with every element in $\mathbb{Z}_{12}$, we would find that there are elements that in fact generate every element in the group through this process.\par
+    
+    Take, for example, the element [1]. Adding [1] to itself repeatedly would take us through every element in $\mathbb{Z}_{12}$, and having done this 12 times, we would arrive back at [0]. The fact that there exists an element (more than one actually) that \textit{generates} the entire group is the definition of what is called a \textbf{cyclic group}. To be precise, for any group $G$, if there exists $g\in G$, such that repeated application of the given operator, with $g$ functioning as both operands of the binary operator, generates every element of the group, then $G$ is said to be \textbf{cyclic}.\par
+    
+    General notation for an arbitrary group $G$ and the set that each element $g\in G$ generates is written as\par
+    
+\vspace{4mm}
+
+        \centerline{$\langle g\rangle=\{g^k\in G\mid k\in\mathbb{Z}\}$.}
+        
+\vspace{4mm}
+
+    And when the set generated by a single element is equal to the group itself, we write\par
+    
+\vspace{4mm}
+
+        \centerline{$\langle g\rangle=G$.}
+        
+\vspace{4mm}
+
+    The last bit of terminology to introduce is the notion of the order of a group and the order of an element. The \textbf{order} of a group $G$, written as $\abs{G}$ is defined as the number of elements in $G$. The \textbf{order} of an element $g\in G$ is defined as the smallest positive integer $n$ such that $g^n=e$, where $e$ is the identity element of $G$.
+
+\begin{flushleft}
+
+    \textbf{\large{Subgroups of $\mathbb{Z}_{12}$}}\normalsize
+
+\end{flushleft}
+
+    We will state something at this point without proof, for the proof will be provided later after the concept of cosets is covered. Our proposition is that since the order (number of elements) of $\mathbb{Z}_{12}$ is 12, then the order of its subgroups must divide this number. The divisors of 12 are 1, 2, 3, 4, 6, and 12. So we may determine what subgroups are of order 1 and order 12 quite easily. In fact, every group has what are called \textbf{trivial subgroups} and these include the group itself and the set that contains the identity element as its only element. We saw earlier that the set generated by $[0]$ was $\{[0]\}$ which is a set with one element that is the identity element of $\mathbb{Z}_{12}$. This set, as well as the set generated by $[1]$, which we saw was $\langle [1]\rangle=\mathbb{Z}_{12}$, are the trivial subgroups.\par
+    
+    We are now left with the task of determining what sets are generated by the remaining elements in $\mathbb{Z}_{12}$. After having calculated these generated sets, we will investigate them further to see if they have any interesting properties in relation to our group. Having determined the sets for the elements $[0]$ and $[1]$, we shall need only determine the sets for the elements $[2]$ through $[11]$, however we shall include the sets generated by $[0]$ and $[1]$ for consistency. The sets are as follows:\par
+    
+
+
+\begin{description}
+
+    \item $\langle [0]\rangle=\{[0]\}$
+    
+    \item $\langle [1]\rangle=\{[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]\}=\mathbb{Z}_{12}$
+
+    \item $\langle [2]\rangle=\{[0],[2],[4],[6],[8],[10]\}$
+    
+    \item $\langle [3]\rangle=\{[0],[3],[6],[9]\}$
+    
+    \item $\langle [4]\rangle=\{[0],[4],[8]\}$
+    
+    \item $\langle [5]\rangle=\{[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]\}=\mathbb{Z}_{12}$
+    
+    \item $\langle [6]\rangle=\{[0],[6]\}$
+    
+    \item $\langle [7]\rangle=\{[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]\}=\mathbb{Z}_{12}$
+    
+    \item $\langle [8]\rangle=\{[0],[4],[8]\}=\langle [4]\rangle$
+    
+    \item $\langle [9]\rangle=\{[0],[3],[6],[9]\}=\langle [3]\rangle$
+    
+    \item $\langle [10]\rangle=\{[0],[2],[4],[6],[8],[10]\}=\langle [2]\rangle$
+    
+    \item $\langle [11]\rangle=\{[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11]\}=\mathbb{Z}_{12}$.
+    
+\end{description}
+
+
+
+    We notice a lot of interesting things in this list. First thing is that there is more than one generator for this group. Another interesting thing to note is that all the elements that generate the group, have as a representative, a number which shares no common factors with 12. Recall that we were interested in the non-trivial subgroups, each of which are of order 2, 3, 4, and 6. From this point we can see that $\abs{\langle [6]\rangle}=2$, $\abs{\langle [4]\rangle}=3$, $\abs{\langle [3]\rangle}=4$, and $\abs{\langle [2]\rangle}=6$. Thus, we have discovered the subgroups in question.
+    
+    
+\begin{flushleft}
+
+        \large{\textit{Remarks}}\normalsize\par
+        
+\vspace{4mm}
+        This group will be the main object of our study later on. However, it is worth noting that $(\mathbb{Z}_{12},+)$ is the group that the standard 12-hour clock is based.
+
+\end{flushleft}
+
+ This means that every position that the hour hand on a clock can take, not only represents the current hour but, is an equivalence class containing an infinite number of distances, which are measured in hours from a fixed hour in time, that are all congruent to the fixed hour modulo 12.
+
+\begin{flushleft}
+
+    \textbf{\large{Cosets and Lagrange's Theorem}}\normalsize
+    
+\end{flushleft}
+
+    Let $G$ be any group, let $H$ be a subgroup of $G$, and $g\in G$. We define the left and right \textbf{cosets}, $gH$ and $Hg$, in the following way:\par
+    
+\vspace{4mm}
+
+        \centerline{$gH=\{gh\in G\mid h\in H\}$\hspace{5mm}and\hspace{5mm}$Hg=\{hg\in G\mid h\in H\}$.}
+        
+\vspace{4mm}
+
+    It would appear that cosets are nothing but weird sets. However, the first thing that should be noted is that we explicitly defined the left and right cosets individually. Meaning that they are not necessarily equal to each other. One question we might ask is if they are ever equal to each other and under what conditions does that happen? Before answering that let us explore these strange sets more to see if we can gain any further insight about what they are and what they do.\par
+    
+\begin{flushleft}
+
+    \large{\textit{Properties of Cosets}}
+
+\end{flushleft}
+    
+    The definition of the left and right coset required us to have both a subgroup and some particular element of our group $G$. Suppose we kept the subgroup fixed and we changed our element $g\in G$ to some $g'\in G$, such that $g\neq g'$. What relationship do the cosets $gH$ and $g'H$ have? Do they share any common elements? Let us suppose that they do share some element, call it $a$. Then, fully expanding the implications of this assumption, we get\par
+    
+\vspace{4mm}
+
+\hspace{2mm} $a\in (gH\bigcap g'H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (a\in gH)\wedge(a\in g'H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists h\in H\colon\exists h'\in H\colon[(a=gh)\wedge(a=g'h')]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (a=gh)\wedge(a=g'h')$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow gh=g'h'$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow gh(h^{-1})=g'h'(h^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g=g'h'(h^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow gH=(g'h'(h^{-1}))H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (g'h'(h^{-1}))H=\{(g'h'(h^{-1})\hat{h}\in G\mid \hat{h}\in H\}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (g'h'(h^{-1}))H=\{g'\tilde{h}\in G\mid \tilde{h}\in H\}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'H=\{g'\tilde{h}\in G\mid\tilde{h}\in H\}$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore$\hspace{3mm} $gH=g'H$.\par
+\newpage
+
+    Thus, we have shown that by assuming there exists some element in the intersection of $gH$ and $g'H$, the consequence is that $gH=g'H$. Therefore, the two cosets are either disjoint (shares no common elements) or they are equal to each other. Any familiarity with set theory would lead us to see that this property is half of the definition of a \textbf{partition}. A partition of a set is a collection of subsets that are mutually disjoint, and the union of all the subsets is equal to the set itself. With this in mind, let us see if we can prove the second half.\par
+    
+    In order to prove this claim sufficiently, let us clearly identify exactly what it is that we are claiming. By the second part of the definition of partition, we have that the union of ``all the subsets" equals the set itself. It seems that the subsets in this case are the cosets. Recall that we have chosen to `fix' the subgroup of $G$, so this means that we distinguish one coset from another by its representative element $g\in G$. Thus, the set of all the cosets, we are refer to as the \textbf{qouetient set}, which we will denote by $G/H$:\par
+    
+\vspace{4mm}
+
+        \centerline{$G/H=\{gH\subseteq\mid g\in G\}$.}
+        
+\vspace{4mm}
+
+    Now that we have an explicit way to refer to this set of subsets, we can state our claim as\par
+    
+\vspace{4mm}
+
+        \centerline{$\forall g\in G\colon$\large{$\bigcup$}\normalsize$gH=G$,}
+        
+\vspace{4mm}
+
+    Let us begin our proof. To show equality, we can choose to show that the sets on either side of the equals sign are subsets of one another. The proof would go as follows. Let $a$ be an element from the set on the left and it follows that\par
+    
+\vspace{8mm}
+
+\hspace{2mm} $a\in$\large{$\bigcup\limits_{g\in G}$}\normalsize$gH$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists \hat{g}\in G\colon[a\in \hat{g}H]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists\hat{g}\in G\colon\exists h\in H\colon[a=\hat{g}h]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow(\hat{g}\in G)\wedge(h\in H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow H\subseteq G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow(\hat{g}\in G)\wedge(h\in G)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow \hat{g}h\in G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow a\in G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\forall a\colon [a\in$\large{$\bigcup\limits_{g\in G}$}\normalsize$gH\Rightarrow a\in G]$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore\forall g\in G\colon$\large{$\bigcup$}\normalsize$gH\subseteq G$.\par
+
+\newpage
+
+\begin{flushleft}
+
+    Now let us prove it the other way:
+
+\end{flushleft}
+    
+
+
+\hspace{2mm} $a\in G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists \hat{g}\in G\colon\exists H\leqslant G\colon\exists h\in H\colon[a=\hat{g}h]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists \hat{g}\in G\colon\exists H\leqslant G\colon[\hat{g}H\subseteq G]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow a=\hat{g}h$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow a\in\hat{g}H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\hat{g}H\subseteq$\large{$\bigcup\limits_{g\in G}$}\normalsize$gH$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore \forall g\in G\colon a\in$\large{$\bigcup$}\normalsize$gH$.\par
+
+\vspace{4mm}
+
+    Now that we have proven each set is a subset set of the other, we can conclude\par
+    
+\vspace{4mm}
+
+        \centerline{$\forall g\in G\colon$\large{$\bigcup$}\normalsize$gH=G$.}
+        
+\vspace{4mm}
+
+    Therefore, if $G$ is any group and $H$ is a subgroup of $G$, then the set of all left (and right) cosets forms a partition on the group $G$.\par
+    
+    Although this is a very interesting result, there remains to be several questions about cosets that have yet to be answered. An example would be: If each coset is distinguished from any other by the chosen representative element $g\in G$, then how exactly do any two cosets compare in terms of their cardinality?\par
+    
+    Let $g,g'\in G$ and let $H\leqslant G$. We know that if $gH\bigcap g'H\neq\varnothing$, then $gH=g'H$ and it would follow that $\abs{gH}=\abs{g'H}$ by definition of equality of sets. If we assume $gH\bigcap g'H=\varnothing$, then how do the cardinalities of these sets compare? We know that the answer to this question is that they are either equal or they are not equal. Let us conjecture that they are equal so as to give ourselves an approach to either prove or disprove this conjecture. In order to prove that two sets have the same cardinality, we can show that there exists a bijective map between the two sets.\par
+    
+    Such a map, call it $\varphi$, must take us from $gH$ to $g'H$, and so we are looking to construct $\varphi\colon gH\rightarrow g'H$, such that $\varphi$ is:\par
+    
+\begin{enumerate}
+
+    \item \textsc{Well defined: }\par
+    
+\vspace{2mm}
+
+        \centerline{$\forall\hat{g}\in G\colon\forall\tilde{g}\in G\colon[((\hat{g}\in gH)\wedge(\tilde{g}\in gH)\wedge(\hat{g}=\tilde{g}))\Rightarrow(\varphi(\hat{g})=\varphi(\tilde{g}))]$.}
+        
+    \item \textsc{Injective: }\par
+    
+\vspace{2mm}
+
+        \centerline{$\forall\hat{g}\in G\colon\forall\tilde{g}\in G\colon[((\hat{g}\in gH)\wedge(\tilde{g}\in gH)\wedge(\varphi(\hat{g})=\varphi(\tilde{g})))\Rightarrow(\hat{g}=\tilde{g})]$.}
+        
+    \item \textsc{Surjective: }\par
+    
+\vspace{2mm}
+
+        \centerline{$\forall\tilde{g}\in G\colon\exists\hat{g}\in gH\colon[(\tilde{g}\in g'H)\Rightarrow(\varphi(\hat{g})=\tilde{g})]$.}
+    
+\end{enumerate}
+
+    Now that we know what we require from our map, let us see if we can prescribe $\varphi$ with a defnition that satisfies these requirements. Suppose we take some element $gh\in gH$ and we want to associate it with some element $g'h\in g'H$. How we can achieve this association is by letting $a\in G$ and observing\par
+    
+\newpage
+
+\hspace{2mm} $g'h=agh$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'h(h^{-1})=agh(h^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'=ag$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'(g^{-1})=ag(g^{-1})$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore a=g'g^{-1}$.\par
+\vspace{4mm}
+
+    We can now use this element $a\in G$ to associate each $gh\in gH$ with some $g'h\in g'H$. We have\par
+    
+\vspace{4mm}
+
+        \centerline{$\forall g\in G\colon\forall h\in H\colon\exists g'\in G\colon[\varphi(gh)=g'g^{-1}(gh)=g'h]$.}
+        
+\vspace{4mm}
+
+    Let us now see if the definition given is well defined. Let $gh_1,gh_2\in gH$. Assume $gh_1=gh_2$, then $h_1=h_2$. Thus,\par
+    
+\vspace{4mm}
+
+\hspace{2mm} $h_1=h_2$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\varphi(gh_1)=g'g^{-1}(gh_1)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'g^{-1}(gh_1)=g'g^{-1}(gh_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'g^{-1}(gh_2)=g'h_2$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'h_2=\varphi(gh_2)$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore\varphi(gh_1)=\varphi(gh_2)$.\par
+
+\begin{flushleft}
+
+    Therefore, $\varphi$ is well defined. To see if it is injective we shall consider the same arbitrary elements as above. Assume $\varphi(gh_1)=\varphi(gh_2)$. Then\par
+    
+\end{flushleft}
+
+\hspace{2mm} $\varphi(gh_1)=\varph(gh_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\varphi(gh_1)=g'h_1$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'h_1=g'h_2$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h_1=h_2$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore gh_1=gh_2$.\par
+
+\begin{flushleft}
+
+    Therefore, $\varphi$ is injective. Finally, let us see if $\varphi$ is surjective. Let $g'h\in g'H$, then \par
+    
+\end{flushleft}
+
+\hspace{2mm} $g'h\in g'H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'h=g'(e_G)h$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'(e_G)h=g'(g^{-1}g)h$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g'(g^{-1}g)h=\varphi(gh)$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore \varphi(gh)=g'h$.\par
+
+\begin{flushleft}
+
+    Therefore, $\varphi$ is surjective. We have shown that for some subset $H$ of $G$ and any $g,g'\in G$, there exists a bijective map $\varphi\colon gH\rightarrow g'H$. Therefore,\par
+
+\end{flushleft}
+
+\hspace{2mm}$\forall g\in G\colon\forall g'\in G\colon[$\hspace{1mm}$\abs{gH}=\abs{g'H}]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists g\in G\colon\forall g'\in G\colon[$\hspace{1mm}$\abs{gH}=\abs{g'H}]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow e_G\in G\colon\forall g'\in G\colon[$\hspace{1mm}$\abs{e_GH}=\abs{g'H}]$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore \forall H\leqslant G\colon\forall g'\in G\colon[$\hspace{1mm}$\abs{H}=\abs{g'H}]$.\par
+
+\vspace{4mm}
+
+\begin{flushleft}
+
+    \large{\textit{Lagrange's Theorem}}
+
+\end{flushleft}
+
+    The previous result tells us that for any subgroup of a group, the cardinality of the cosets formed from the subgroup are all equal to the cardinaility of the subgroup. This is very interesting when considering the fact that, for any subgroup of a group, the set of all cosets formed from that subgroup partition the group. We can imagine the group being `broken up into pieces, all of which have the same size'. So then are there any conditions for which a group cannot be broken up into \textit{smaller}, \textit{same size pieces}?\par
+    
+    We know that the answer to this cannot be as simple as: any group $G$ that has a subgroup $H$ can be partitioned by cosets. We know this since every group has at least two subgroups; $\{e_G\}$ and $G$. These two subgroups have cardinalities 1 and $\abs{G}$, respectively.\par
+    
+    
+    If we chose $\{e_G\}$ as our subgroup, then each coset must have a cardinality of 1, by our previous proof. These cosets must also partition the group $G$. It follows that partitioning a group into subsets, each of cardinality 1, gives you a set of the same order as $G$. Thus, we have $G/\{e_G\}=\{ge_G\subseteq G\mid g\in G\}$ and $\abs{G/\{e_G\}}=\abs{G}$. If we were to choose $G$ as our subgroup, then all of our cosets must have cardinality equal to $G$. However, since each coset is a subset of $G$, and every subset has, at most, as many elements as the larger set, then we have $G/G=\{gG\subseteq G\mid g\in G\}$ and $\abs{G/G}=1$.\par
+    
+    We will take a moment to introduce some new notation. The set of cosets formed by a particular subgroup of a group is referred to as the \textbf{quotient set}. The cardinality of the quotient set, is denoted as $[G$\hspace{1mm}$\colon H]$, and is called the \textbf{index} of $H$ in $G$. \par
+    
+    With our new notation, we highlight two curious things. We showed $[G$\hspace{1mm}$\colon G]=1$ and $[G$\hspace{1mm}$\colon\{e_G\}]=\abs{G}$. Written in a different way we have,\par
+    
+\vspace{4mm}
+
+        \centerline{$[G$\hspace{1mm}$\colon G]=$\Large{$\frac{\abs{G}}{\abs{G}}$\normalsize$=1$}\normalsize\hspace{5mm}and\hspace{5mm}$[G$\hspace{1mm}$\colon\{e_G\}]=$\Large{$\frac{\abs{G}}{\abs{\{e_G\}}}$\normalsize$=\abs{G}$}.}
+        
+\begin{flushleft}
+
+    We can also write them as
+
+\end{flushleft}
+
+        \centerline{$\abs{G}=\abs{G}[G$\hspace{1mm}$\colon G]$\hspace{5mm}and\hspace{5mm}$\abs{G}=\abs{\{e_G\}}[G$\hspace{1mm}$\colon \{e_G\}]$}
+        
+\vspace{4mm}
+
+    To interpret this, let us assume that our group $G$ has order $n$, and we have a subgroup $H$ of $G$, and it has order $m$. Then we have that the order of our group is an integer multiple of $m$ if and only if $m\mid n$. Thus, our group can be partitioned into smaller, same sized, cosets if and only if the order of the subgroup divides the order of the group. What we have outlined here is a famous theorem called \textbf{Lagrange's theorem}.
+    
+\newpage
+
+\begin{flushleft}
+
+\large{\textit {Further Remarks On Cosets}}\normalsize
+
+\end{flushleft}
+
+\begin{flushleft}
+
+    Although we mostly used notation for left cosets in the preceding section, every result proved applies to right cosets as well. In fact, a similar bijective proof can be used to show that for any left coset, it corresponds to a unique right coset. Furthermore, the quotient sets $G/H$ and $G\backslash H$, denoting the set of left and right cosets, respectively, have the same cardinality.
+    
+\end{flushleft}
+
+\begin{flushleft}
+
+    \large{\textbf{Normal Subgroups and The Quoetient Group}}
+
+\end{flushleft}
+
+    Despite the many things discovered this far, there are still questions that need to be answered. One that was posed earlier was the following: Given a group $G$, a subgroup $H$ of $G$, and $g\in G$, under what conditions is it true that $gH=Hg$? Expanding out each side of the equality yields\par
+    
+\vspace{4mm}
+
+        \centerline{$\{gh\in G\mid h\in H\}=\{h'g\in G\mid h\in H\}$.}
+        
+\vspace{4mm}
+
+    If these two sets are equal then that means we can take any $gh\in gH$ and $h'g\in Hg$, and it follows that\par
+    
+\vspace{4mm}
+
+\hspace{2mm} $gH=Hg$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\forall g\in G\colon[(gH\subseteq Hg)\wedge(Hg\subseteq gH)]$\par
+\vspace{2mm}
+\hspace{10mm} $\Leftrightarrow gH\subseteq Hg$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\forall h\in H\colon\exists h'\in H\colon[gh=h'g]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\forall h\in H\colon\exists h'\in H\colon[ h'=ghg^{-1}]$\par
+\vspace{2mm}
+\hspace{10mm} $\Leftrightarrow Hg\subseteq gH$\par
+\vspace{2mm}
+\hspace{10mm} $\Leftrightarrow\forall h'\in H\colon\exists h\in H\colon[gh=h'g]$\par
+\vspace{2mm}
+\hspace{10mm} $\Leftrightarrow\forall h'\in H\colon\exists h\in H\colon[h=g^{-1}h'g]$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore\forall h\in H\colon\forall h'\in H\colon\exists\hat{h}\in H\colon\exists\tilde{h}\in H\colon[(h=g^{-1}\hat{h}g)\wedge(h'=g\tilde{h}g^{-1})]$.
+
+\vspace{4mm}
+
+    The interpretation of this is that when given a left and right coset, $gH$ and $Hg$, the two sets are equal if each element $h\in H$ can be written in the form $h=g^{-1}h'g$, for some $h'\in H$. To explain further, suppose that we have a left and right coset, $gH$ and $Hg$. Now assume that $gH=Hg$. Then if we let $gh\in gH$ be some particular element in the left coset, then we know that there exists $h'\in H$, such that $h=g^{-1}h'g$. Thus, for our particular $gh\in gH$, we have $gh=g(g^{-1}h'g)=h'g\in Hg$. Now that we have a good understanding of what is required for a left and right coset to be equal, we introduce a new term.\par
+    
+    Let $G$ be a group and let $H$ be a subgroup of $G$. Then if for all $g\in G$, we have $gH=Hg$, $H$ is called a \textbf{normal subgroup}.
+    
+\newpage
+
+    This is certainly a very exciting structure to stumble upon and is worth further investigation. One question we might ask is: Are all groups that are commutative, normal? By \textbf{commutative}, we mean that if we have a group $G$ and we take $a,b\in G$, then $G$ is commutative if $ab=ba$, for all $a,b\in G$. The reason why we might ask this is because if we take a particular $gh\in gH$, and $G$ is commutative, then $gh=hg\in Hg$. Let us conjecture that the answer to this question is yes and attempt to prove or disprove this claim.\par
+    
+    Let $G$ be a commutative group, $H\leqslant G$, and $g\in G$. Then we have\par
+    
+\vspace{4mm}
+
+\hspace{2mm} $\forall g,g'\in G\colon[gg'=g'g]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow gh\in gH$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow gh=hg$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow hg\in Hg$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\forall gh\in gH\colon [gh\in Hg]$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore gH\subseteq Hg$.\par
+
+\begin{flushleft}
+
+    Proving it the other way we have
+
+\end{flushleft}
+
+\hspace{2mm} $\forall g,g'\in G\colon[gg'=g'g]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow hg\in Hg$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow hg=gh$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow gh\in gH$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\forall hg\in Hg\colon [hg\in gH]$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore Hg\subseteq gH$.\par
+
+\vspace{4mm}
+
+    Therefore, if $G$ is a commutative group, then $gH=Hg$ for all $g\in G$ and every subgroup $H$ is normal.\par
+    
+    Another question we might ask: Is there any difference between two quotient sets, one of which is made from a normal subgroup and the other made from a subgroup that is not normal? It is difficult to even conjecture about this particular question. Perhaps it is worth looking back at the quotient set and asking more questions so as to carve out a more directed path towards making such a conjecture. What we know about the quotient set is that it is a set consisting of cosets, as its elements. Well then as a set of elements, is it possible to define an operation on this set? Moreover, if we can do this, then under what conditions can we call this set a group? These questions seem entertaining at the least, and fruitful at best. So let us attempt to answer each.
+    
+\newpage
+
+    Let $G$ be a set and let $\star$ be a binary operator such that $(G,\star)$ is a group. Now suppose $H$ is a subgroup of $G$ and $G/H$ is the set of all left cosets. Then we have\par
+    
+\vspace{4mm}
+
+        \centerline{$G/H=\{gH\subseteq G\mid g\in G\}$\hspace{5mm}and\hspace{5mm}$gH=\{g\star h\in G\mid h\in G\}$.}
+        
+\vspace{4mm}
+
+    If we wish to define an operation on the qoutient set, what are our elements and what kind of element do we want as a result? We definitely want the cosets to function as the operands, but do we wish the result be another coset? This would have to be the case if we wanted our set to be closed with respect to the operator. Thus, we wish to define a binary operator $\diamond\colon G/H\times G/H\rightarrow G/H$, such that\par
+    
+\vspace{4mm}
+
+        \centerline{$\diamond(gH,g'H)=\hat{g}H$\hspace{3mm}or equivalently,\hspace{3mm}$gH\diamond g'H=\hat{g}H$.}
+        
+\vspace{4mm}
+
+    It is unclear how exactly this operator would achieve this. However, it would be very convenient if $gH\diamond g'H=(g\star g')H=\hat{g}H$. Is there anything wrong with what we have written? Let us suppose that this is how the operator works, and re-write every in terms of the sets they represent so we can look closer at what is going on. We have\par
+    
+\vspace{4mm}
+
+        \centerline{$gH\diamond g'H$}
+        
+\vspace{2mm}
+
+        \centerline{$=\{g\star h\in G\mid h\in H\}\diamond\{g'\star h'\in G\mid h'\in H\}$}
+        
+\vspace{2mm}
+
+        \centerline{$=\{((g\star h)\star(g'\star h'))\in G\mid h,h'\in H\}$}
+        
+\vspace{2mm}
+
+        \centerline{$=\{\hat{g}\star\hat{h}\in G\mid\hat{h}\in H\}$}
+        
+\vspace{2mm}
+
+        \centerline{$=\hat{g}H$.}
+        
+\vspace{4mm}
+
+    After seeing the previous expansion, the initial thought as to interpreting it is that $(g\star h)=\hat{g}$ and $(g'\star h')=\hat{h}$. There does not appear to be anything wrong with the first equality since both the $g,h\in G$ and $G$ is closed, thus $g\star h=\hat{g}\in G$. However, the second equality has an implicit assumption. Our thought is that $g'\star h'=\hat{h}$ and $\hat{h}\in H$. Thus, $g'\star h'\in H$. Since $H$ is a subgroup, it is closed with respect to $\star$ and if $g'\star h'\in H$, this would imply that \underline{both} $g'$ and $h'$ are elements of $H$. Therefore, our initial thought assumes that the coset $g'H$ has representative element $g'\in H$. This is a huge flaw since in order for our operator to work as we want it to, we are restricted in what cosets we can operate on. If we wish to form a group on $G/H$, we must be able to operate on all the elements.\par
+    
+    With all of this in mind, let us see if we can adjust our interpretation so that we can circumvent this flaw. What we know is that $g,g'\in G$ and $h,h'\in H$. Thus, it follows that $g\star g'\in G$ and $h\star h'\in H$. So if there was some way that we could take the expression $(g\star h)\star(g'\star h')$ and have it equal $(g\star g')\star(h\star h')$, then we could comfortably assign $g\star g'=\hat{g}$ and $h\star h'=\hat{h}$. Although this seems to resolve our original issue, it necessarily requires $G$ to be a commutative group. This is because if $(g\star h)\star(g'\star h')=(g\star g')\star(h\star h')$, then it must be the case that $hg'=g'h$.\par
+    
+    Requiring $G$ to be a commutative group is a strong condition and one that restricts the types of groups that that $\diamond$ can be defined on. If we look at our expression $(g\star h)\star(g'\star h')$, we see that through associativity we may write it as $g\star(h\star g')\star h'$.
+    
+\newpage
+    
+    Notice that $h\star g'\in Hg'$. We know that if $H$ is a normal subgroup, then there exists some $h^{\ast}\in H$ such that $h=g'\star h^{\ast}\star g'^{-1}$. Thus, we would be able to write $h\star g'=g'\star h^{\ast}$. Furthermore, we know that $h^{\ast}\star h'\in H$. Therefore, if $H$ is a normal subgroup, we have the following:\par
+    
+\vspace{4mm}
+        
+        \centerline{$gH\diamond g'H$}
+        
+\vspace{2mm}
+
+        \centerline{$=\{g\star h\in G\mid h\in H\}\diamond\{g'\star h'\in G\mid h'\in H\}$}
+        
+\vspace{2mm}
+
+        \centerline{$=\{((g\star h)\star(g'\star h'))\in G\mid h,h'\in H\}$}
+        
+\vspace{2mm}
+
+        \centerline{$=\{((g\star g')\star(h^{\ast}\star h'))\in G\mid h^{\ast},h'\in H\}$}
+        
+\vspace{2mm}
+
+        \centerline{$=\{\hat{g}\star\hat{h}\in G\mid \hat{h}\in H\}$}
+        
+\vspace{2mm}
+
+        \centerline{$=\hat{g}H$.}
+        
+\vspace{4mm}
+
+    Therefore, if $H$ is a normal subgroup then we have that $gH\diamond g'H=(g\star g')H$. Let us take a step further and attempt to prove that this operation is in fact closed in $G/H$. To avoid notation overload, we will drop the operators, but it should be clear from context what is meant.\par
+    
+    Let $G$ be a group, and $H$ be a normal subgroup with $g,g'\in G$. Then we have\par
+    
+\vspace{4mm}
+
+\hspace{2mm} $(gH\in G/H)\wedge(g'H\in G/H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow gHg'H=\{gh\in G\mid h\in H\}\{g'h'\in G\mid h'\in H\}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\{gh\in G\mid h\in H\}\{g'h'\in G\mid h'\in H\}=\{ghg'h'\in G\mid h,h'\in H\}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists h^{\ast}\in H\colon[\{ghg'h'\in G\mid h,h'\in H\}=\{gg'h^{\ast}h'\in G\mid h^{\ast},h'\in H\}]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists\hat{h}\in H\colon[\hat{h}=h^{\ast}h']$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\{ghg'h'\in G\mid h,h'\in H\}=\{gg'\hat{h}\in G\mid \hat{h}\in H\}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\{gg'\hat{h}\in G\mid\hat{h}\in H\}=(gg')H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (gg'\in G)\wedge((gg')H\subseteq G/H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (gg')H\in G/H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow gHg'H=(gg')H$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore gHg'H\in G/H$.\par
+
+\vspace{4mm}
+
+    Therefore, if $H$ is a normal subgroup then we have shown that the operation we defined on our cosets is closed. Now that we have shown closure, in order to prove that $G/H$ is a group we will need to show that our operator is associative, there exists an identity element, and each element has an inverse.
+    
+\newpage
+
+    Let $g_1H,g_2H,g_3H\in G/H$. Then we have the following\par
+    
+\vspace{4mm}
+
+\hspace{2mm} $g_1H,g_2H,g_3H\in G/H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (g_1Hg_2H)g_3H=((g_1g_2)H)g_3H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow ((g_1g_2)H)g_3H=(g_1g_2g_3)H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (g_1g_2g_3)H=g_1H((g_2g_3)H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g_1H((g_2g_3)H)=g_1H(g_2Hg_3H)$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore (g_1Hg_2H)g_3H=g_1H(g_2Hg_3H)$\par
+
+\vspace{4mm}
+
+    Therefore, our operation is associative. Now to prove that there exists an identity element, we must first find an element, which we will call $aH$ for right now, such that for every $gH\in G/H$, we have\par
+    
+\vspace{4mm}
+
+        \centerline{$gHaH=(ga)H=gH=(ag)H=aHgH$.}
+        
+\vspace{4mm}
+
+    Since our operation is ultimatley defined in terms of the represenative elements, then we are looking for a particular element $a\in G$, such that for all $g\in G$, we have $ag=ga=g$. This is the very definition of $e_G$. Thus, the identity element in $G/H$ is $e_GH$. The last thing that we need to show is that each element has an inverse. Using the same logic as before, as in recognizing the dependency that our operator's definition has on the representative elements, we realize that for every $gH\in G/H$, there exists $g^{-1}H\in G/H$ such that $gHg^{-1}H=(gg^{-1})H=e_GH$. Therefore, if $G$ is a group and $H$ is a normal subgroup of $G$, then the quotient set $G/H$ is a group. This group is called the \textbf{quotient group}.\par
+    
+    We have now answered the two questions posed earlier and can move on to discover more interesting things regarding groups.
+    
+\begin{flushleft}
+
+    \textbf{\large{Group Homomorphisms}}\normalsize
+
+\end{flushleft}
+
+    Earlier on we had used a proof technique that involved constructing a bijective map from one set to another. In this section we will explore another type of map that takes you from one group to another group in a special way. Let $(G,\cdot)$ and $(F,\circ)$ be groups. Then a map $\phi\colon G\rightarrow F$, such that\par
+    
+\vspace{4mm}
+    
+    \centerline{$\phi(g\cdot g')=\phi(g)\circ\phi(g')$,}
+    
+\vspace{4mm}
+
+    for all $g,g'\in G$ is called a \textbf{homomorphism}. The range of $\phi$ in $F$ is called the \textbf{homomorphic image}. If such a map exists between two groups, then the two groups are said to be \textbf{homomorphic}. We see that what this definition tells us is that if two group are related in this way then there exists a map that preserves the algebraic structure of them individually.
+    
+\newpage
+
+\begin{flushleft}
+
+    \textit{\large{Example}}
+
+\end{flushleft}
+
+    Let $G$ be a group and $g\in G$. Define a map $\phi\colon\mathbb{Z}\rightarrow G$ by $\phi(n)=g^n$. Then $\phi$ is a group homnomorphism, since\par
+    
+\vspace{4mm}
+
+        \centerline{$\phi(m+n)=g^{m+n}=g^mg^n=\phi(m)\phi(n)$.}
+        
+\vspace{4mm}
+
+    This homomorphism maps $\mathbb{Z}$ onto the cyclic subgroup of $G$ generated by $G$.* 
+    
+\begin{flushleft}
+    
+    \footnotesize *This example was taken directly from Abstract Algebra, theory and applications. Author: Thomas Judson. Example can be found on page 165.
+    
+\end{flushleft}
+
+\begin{flushleft}
+
+    \textit{\large{The Kernel of a Group Homomorphism}}
+
+\end{flushleft}
+
+    Up to this point we have seen that if given a set, one can always ask if an operation can be defined on the set and if the operation is closed on the set. With the idea of a homomorphism in mind, we can see that as far as sets, any group $G$ is closed with respect to the operation defined on it, by definition.\par
+    
+    Asking this of those subsets of $G$ which are able to be defined in terms of a map from $G$ to another group might yield a way to associate the subsets of $G$ to subsets of another group. In this way we might be able to say something about both groups and how they relate through such a map.
+    
+\vspace{4mm}
+
+    Let $(G,\cdot)$ and $(F,\circ)$ be groups. If $\phi\colon G\rightarrow F$ is a homomorphism, then we have the following definitions:\par
+    
+\begin{description}
+
+    \item \textbf{Domain: }dom($\phi$)$=\{g\in G\mid\exists f\in F\colon\phi(g)=f\}\subseteq G$.
+
+    \item \textbf{Image: }im($\phi$)$=\{f\in F\mid\exists g\in G\colon \phi(g)=f\}\subseteq F$.
+    
+    \item \textbf{Kernel: }ker($\phi$)$=\{g\in G\mid\phi(g)=e_F\}\subseteq$dom$(\phi)$.
+
+\end{description}
+
+    With these sets at our disposal, let us ask the same questions that we have asked before. Are these sets closed with respect to the operation on $G$? Despite there being three sets described above, there is one of particular interest. The kernel of a map is the set of all the elements of a group $G$ that get mapped to the identity element of a group $F$. Studying this set should be able to tell us how the identity of two groups relate and should also tell us something about how the inverses relate. Let us explore the implications of the following assumption: Assume that for some $g\in G$, $g\in$ker$(\phi)$, then we have\par
+    
+\newpage
+
+\hspace{2mm} $g\in$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g)=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g=g\cdot e_G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g)=\phi(g\cdot e_G)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow \phi(g\cdot e_G)=\phi(g)\circ\phi(e_G)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g)=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g)\circ\phi(e_G)=e_F\circ\phi(e_G)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow e_F\circ\phi(e_G)=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(e_G)=e_F$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore e_G\in$ker$(\phi)$.\par
+\vspace{4mm}
+
+    Therefore, we have shown that if the ker$(\phi)$ is not empty, then it must contain the identity element of $G$. The following is an immidiate consequence of this:\par
+    
+\vspace{4mm}
+
+\hspace{2mm} $g\in G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists g^{-1}\in G\colon[g\cdot g^{-1}=e_G]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g\cdot g^{-1})=\phi(g)\circ\phi(g^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g)\in F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists(\phi(g))^{-1}\in F\colon[(\phi(g))^{-1}\circ\pgi(g)=e_F]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow(\phi(g))^{-1}\circ\phi(g\cdot g^{-1})=(\phi(g))^{-1}\circ\phi(g)\circ\phi(g^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow(\phi(g))^{-1}\circ\phi(g\cdot g^{-1})=e_F\circ\phi(g^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g\cdot g^{-1}=e_G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow e_G\in$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(e_G)=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g\cdot g^{-1})=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow(\phi(g))^{-1}\circ\phi(g\cdot g^{-1})=(\phi(g))^{-1}\circ e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow(\phi(g))^{-1}\circ e_F=e_F\circ\phi(g^{-1})$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore(\phi(g))^{-1}=\phi(g^{-1})$.\par
+\vspace{4mm}
+    
+    We have just shown that for any $g\in G$, the following equality holds: $\phi(g^{-1})=(\phi(g))^{-1}$. This will prove to be an important equality in the next proof. There is a convenient way to prove a set is a subgroup. The way to do this is to assume some $a,b\in$ker$(\phi)$ and show $ab^{-1}\in$ker$(\phi)$. Let us see if we can achieve this.\par
+    
+\newpage
+
+\hspace{2mm} $a,b\in$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists f_a\in F\colon\exists f_b\in F\colon[(\phi(a)=f_a)\wedge(\phi(b)=f_b)]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow(\phi(a)=f_a)\wedge(\phi(b)=f_b)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(a)=\phi(b)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(b)\in F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists(\phi(b))^{-1}\in F\colon[\phi(b)\circ(\phi(b))^{-1}=e_F]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(a)\circ(\phi(b))^{-1})=\phi(b)\circ(\phi(b))^{-1}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(a)\circ(\phi(b))^{-1})=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow(\phi(b))^{-1}=\phi(b^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(a)\circ(\phi(b))^{-1}=\phi(a)\circ\phi(b^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(a)\circ\phi(b^{-1})=\phi(ab^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(a\cdot b^{-1})=e_F$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore a\cdot b^{-1}\in$ker$(\phi)$.\par
+\vspace{4mm}
+
+    Therefore, given a group homomorphism, the kernel of the homomorphism is a subgroup. Although this is a very abstract result, we should be quite comfortable in the company of abstraction at this point. Thus far, subgroups have proved to be very important structures and we have seen that normal subgroups play a significant role in the context of quotient sets. In light of this newly discovered subgroup, let us see if it is in fact normal. We will try to prove this by using a double inclusion proof. Let $\phi\colon G\rightarrow F$ be the same map as before and let $g\in G$, $h\in$ker$(\phi)$. Then
+    
+\vspace{4mm}
+
+\hspace{2mm} $g\cdot h\in g$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g\cdot h\in\{g\cdot h\in G\mid h\in$ker$(\phi)\}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g\cdot h)=\phi(g)\circ\phi(h)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h\in$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h)=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g)\circ\phi(h)=\phi(g)\circ e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g)\circ e_F=e_F\circ\phi(g)$\par
+\vspace{2mm} 
+\hspace{10mm} $\Rightarrow\exists\hat{h}\in$ker$(\phi)\colon[e_F\circ\phi(g)=\phi(\hat{h}\cdot g)]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\hat{h}\cdot g\in$ker$(\phi)g$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(g\cdot h)=e_F\circ\phi(g)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g\cdot h\in$ker$(\phi)g$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore g$ker$(\phi)\subseteq$ker$(\phi)g$.
+
+\newpage
+
+\begin{flushleft}
+
+    Proving it the other way yields
+
+\end{flushleft}
+
+\hspace{2mm} $h\cdot g\in$ker$(\phi)g$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h\cdot g\in\{h\cdot g\in G\mid h\in$ker$(\phi)\}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h\cdot g)=\phi(h)\circ\phi(g)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h\in$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h)=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h)\circ\phi(g)=e_F\circ\phi(g)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow e_F\circ\phi(g)=\phi(g)\circ e_F$\par
+\vspace{2mm} 
+\hspace{10mm} $\Rightarrow\exists\hat{h}\in$ker$(\phi)\colon[\phi(g)\circ e_F=\phi(g\cdot\hat{h})]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow g\cdot\hat{h}\in g$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h\cdot g)=\phi(g)\circ e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h\cdot g\in g$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore $ker$(\phi)g\subseteq g$ker$(\phi)$.
+
+\vspace{4mm}
+
+    Thus, for all $g\in G$, $g$ker$(\phi)=$ker$(\phi)g$. Therefore, the kernel of a group homomorphism is in fact a normal subgroup. This significant because given any two groups $G$ and $F$, and a homomorphic map $\phi$ between them we are able to construct a new group. Namely the quotient group $G/$ker$(\phi)$.
+    
+\begin{flushleft}
+    
+    \large{\textbf{Isomorphisms}}
+    
+\end{flushleft}
+
+    The concept of a homomorphism admits a way to relate one group to another group through a structure preserving map. For a such a map to exists between two groups means that they share a similar structure. However, there is a stronger way to relate two groups and that is through the concept of an isomorphism. An \textbf{isomorphism} is defined as a bijective group homomorphism. We have a pretty good understanding of homomorphisms so far and requiring that our map be bijective seems innocuous enough. However, there are significant consequences that come from two groups being isomorphic.\par
+    
+\vspace{4mm} 
+
+    The first implication follows directly from the map having to be bijective. A bijective map can be defined between two sets if and only if the sets are the same size. This means that if two groups are isomorphic, they must have the same cardinality. Another property of a bijective map is that its inverse is also bijective. Moreover, if $\phi$ is an isomorphism, then $\phi^{-1}$ is also an isomorphism. The implications mentioned are easy enough to check and we will assume them to be true without proof. What we will want to explore is how a isomorphism relates the subgroups of two groups.\par
+    
+\newpage
+
+    Let $(G,\cdot)$ and $(F,\circ)$ be groups. Let $\phi\colon G\rightarrow F$ be an isomorphism and assume that $H\leqslant G$. Then we have the following:
+    
+\vspace{4mm}
+
+\hspace{2mm} $f_1,f_2,b\in$Im$_{\phi}(H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists h_1\in H\colon\exists h_2\in H\colon[(\phi(h_1)=f_1)\wedge(\phi(h_2)=f_2)]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h_2)=f_2$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi^{-1}(\phi(h_2))=\phi^{-1}(f_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi^{-1}(f_2)=h_2$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h^{-1}_2\cdot\phi^{-1}(f_2)=h^{-1}_2\cdot h_2$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h^{-1}_2\cdot\phi^{-1}(f_2)=e_G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi^{-1}(f_2)\in H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists(\phi^{-1}(f_2))^{-1}\in H\colon[\phi^{-1}(f_2)\cdot(\phi^{-1}(f_2))^{-1}=e_G]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h^{-1}_2\cdot\phi^{-1}(f_2)=e_G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h^{-1}_2\cdot\phi^{-1}(f_2)\cdot(\phi^{-1}(f_2))^{-1}=e_G\cdot(\phi^{-1}(f_2))^{-1}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h^{-1}_2\cdot e_G=e_G\cdot(\phi^{-1}(f_2))^{-1}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h^{-1}_2=(\phi^{-1}(f_2))^{-1}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow(\phi^{-1}(f_2))^{-1}=\phi^{-1}(f^{-1}_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (h^{-1}_2\in H)\wedge(h^{-1}_2=\phi^{-1}(f^{-1}_2))$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi^{-1}(f^{-1}_2)\in H$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h^{-1}_2=\phi^{-1}(f^{-1}_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h^{-1}_2)=\phi(\phi^{-1}(f^{-1}_2))$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h^{-1}_2)=f^{-1}_2$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h^{-1}_2)\in$Im$_{\phi}(H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow f^{-1}_2\in$Im$_{\phi}(H)$\par
+\vspace{2mm} 
+\hspace{10mm}$\Rightarrow f_1\circ f^{-1}_2=\phi(h_1)\circ\phi(h^{-1}_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h_1)\circ\phi(h^{-1}_2)=\phi(h_1\cdot h^{-1}_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h_1\cdot h^{-1}_2)\in$Im$_{\phi}(H)$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore f_1\circ f^{-1}_2\in$Im${\phi}(H)$.\par
+\vspace{4mm}
+
+    Although that was a very long proof, we have just showed that, through an isomorphism, the image of a subgroup is a subgroup. Next, we will try to show that both subgroups have the same size. 
+
+\newpage
+
+    To show that the two subgroups are the same size, we will show that the map $\phi|_{H}\colon H\rightarrow$Im$_{\phi}(H)$ is a bijection. We will start with injectivity first:\par
+    
+\vspace{4mm}
+
+\hspace{2mm} $(f_1,f_2\in$Im$_{\phi}(H))\wedge(f_1=f_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow f_1,f_2\in$Im$_{\phi}(H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists h_1\in H\colon\exists h_2\in H\colon[(\phi(h_1)=f_1)\wedge(\phi(h_2)=f_2)]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow f_1=f_2$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h_1)=\phi(h_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h_1)\circ(\phi(h_2))^{-1}=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h_1)\circ(\phi(h_2))^{-1}=\phi(h_1)\circ\phi(h^{-1}_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h_1)\circ\phi(h^{-1}_2)=\phi(h_1\cdot h^{-1}_2)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h_1\cdot h^{-1}_2)=e_F$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi^{-1}(\phi(h_1\cdot h^{-1}_2))=\phi^{-1}(e_F)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h_1\cdot h^{-1}_2=\phi^{-1}(e_F)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow e_F\in$ker$(\phi^{-1})$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow \phi^{-1}(e_F)=e_G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow h_1\cdot h^{-1}_2=e_G$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore h_1=h_2$.\par
+
+\vspace{4mm}
+
+    The proof for surjectivity is as follows: Take any arbitrary element from the codomain, $f\in$Im$(\phi|_H)$. The fact that this element is in this set implies that there exists $h\in H$ such that $\phi(h)=f$. Therefore, $\phi|_H$ is surjective. The map being both injective and surjective implies it is a bijection and therefore $H$ and Im$_{\phi}(H)$ have the same cardinality. This is very profound. This means that an isomorphic map between two subgroups not only preserves the larger algebraic structure of the group, but it preserves the smaller substructures. Namely, the subgroups. One question we might ask is if it preserves the nature of the subgroups. As in the case for a cyclic subgroup.\par
+    
+\newpage
+
+    Let $\phi\colon G\rightarrow F$ be an isomorphic mapping from groups $(G,\cdot)$ and $(F,\circ)$. Assume $H$ is a cyclic subgroup of $G$, with generator $h\in G$. The Im$_{\phi}(H)$ is a cyclic subgroup of $F$, with generator $\phi(h)\in F$. The proof will consist of showing that for every element\hspace{8mm} $f\in$ Im$_{\phi}(H)$, there exists some integer $k\in\mathbb{Z}$ such that $(\phi(h))^k=f$.\par
+    
+\vspace{4mm}
+
+\hspace{2mm} $f\in$ Im$_{\phi}(H)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists h^k\in H\colon[\phi(h^k)=f]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h^k)=f$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h\cdot h^{k-1})=f$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h)\circ\phi(h^{k-1})=f$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\phi(h)\circ(\phi(h))^{k-1}=f$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore(\phi(h))^k=f$.\par
+\vspace{4mm}
+
+    We have shown that both $H$ and Im$_{\phi}(H)$ is of the same order by proving the isomorphism $\phi$ admits a bijecitve map between the two subgroups. The previous proof shows that the cyclic quality of $H$ is carried though by $\phi$. Thus, the images of cyclic subgroups, under an isomorphism, are cyclic subgroups.\par
+    
+
+
+
+\newpage
+
+\begin{flushleft}
+    
+    \large{\textbf{The 12 Intervals of Western Music}}
+    
+\end{flushleft}
+
+    We transition now to a brief review of music theory. There are 12 fundamental notes in most western music. These notes are as follow:\par
+    
+\vspace{4mm}
+
+        \centerline{C,  C$\sharp$, D,  D$\sharp$, E, F,  F$\sharp$, G,  G$\sharp$, A,  A$\sharp$, B}
+        
+\vspace{4mm}
+
+    written equivalently as\par
+    
+\vspace{4mm}
+
+        \centerline{C, D$\flat$, D, E$\flat$, E, F, G$\flat$, G, A$\flat$, A, B$\flat$, B.}
+        
+\vspace{4mm}
+
+    Each note corresponds to a particular frequency which is measured in hertz (Hz). Take for instance the frequency 440Hz, which is concert A. If this frequency value were to be doubled, you would get back the note A again, however it would be one \textbf{octave} up from the initial A. There is some form of equivalence that exists between the notes of music and the frequencies they represent.\par
+    
+    Luckily, music theorists were clever enough to invent a system in which the language of musical notes need not concern itself directly with frequency. This system can be understood by picturing a piano and instead of analyzing the note relationship through frequency, one can study the notes by `counting the keys' and classifying the relative distances between them. Every note has a particular distance away from every other note. The general term for a distance between any two notes is called an \textbf{interval}. This distance is measured in semi-tones. A \textbf{semi-tone} is the intervalic (number of keys between) distance between two neighbouring piano keys. There are 12 semi-tones that separate every note from its octave.\par
+    
+    If one note is held fixed, then every other note can be measured with respect to the fixed note. The fixed note is called the \textbf{tonic}. Each interval, with respect to the chosen tonic, is represented by the following terms. Below we will list the number of semi-tones on the left and the corresponding name of the interval on the right:\par
+    
+\vspace{4mm}
+    
+
+\begin{center}
+\begin{tabular}{ |p{2cm}||p{4.5cm}|p{2cm}|  }
+ \hline
+ Semi-tones & Interval Name & Symbol\\
+ \hline
+ 
+ \hspace{9mm}0  & Unison           & \hspace{7.5mm}\textsl{U}\\
+ \hspace{9mm}1  & Minor Second     & \hspace{7.5mm}\textsl{m}2\\
+ \hspace{9mm}2  & Major Second     & \hspace{7.5mm}\textsl{M}2\\
+ \hspace{9mm}3  & Minor Third      & \hspace{7.5mm}\textsl{m}3\\
+ \hspace{9mm}4  & Major Third      & \hspace{7.5mm}\textsl{M}3\\
+ \hspace{9mm}5  & Perfect Fourth   & \hspace{7.5mm}\textsl{P}4\\
+ \hspace{9mm}6  & Augmented Fourth & \hspace{7.5mm}\textsl{A}4\\
+ \hspace{9mm}7  & Perfect Fifth    & \hspace{7.5mm}\textsl{P}5\\
+ \hspace{9mm}8  & Minor Sixth      & \hspace{7.5mm}\textsl{m}6\\
+ \hspace{9mm}9  & Major Sixth      & \hspace{7.5mm}\textsl{M}6\\
+ \hspace{8mm}10 & Minor Seventh    & \hspace{7.5mm}\textsl{m}7\\
+ \hspace{8mm}11 & Major Seventh    & \hspace{7.5mm}\textsl{M}7\\
+ 
+ \hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+    There is a subtle detail in which needs to be clarified before continuing. In a typical number system, each number represents its own distance away from 0. To determine the distance between any two numbers, one can think of `fixing' one of the two numbers and treating it like the number 0 and then each number would have a certain distance away from it. The idea here is that such a distance can only be determined if a fixed point is chosen and since any number can act as a fixed point, the idea of distance becomes relative. This is exactly what occurs in music. However, unlike the integers, the set of musical notes has no note that is equivalent to the number 0, and one always has to first choose a note from which to measure everything else with respect to.\par
+    
+\vspace{4mm}
+    
+    So far we have the idea of notes and the idea of intervals. Once a tonic (or fixed point) has been chosen, then all the notes represent an interval away from the tonic, while at the same time, the idea of absolute distance is maintained. Suppose we choose to fix the note C. Then A$\sharp$ would be classified as the minor seventh relative to C. However, if we choose to fix the note E, then A$\sharp$ would be classified as an augmented fourth. The absolute distance between C and A$\sharp$ is still a minor seventh, but what changes is how the rest of the notes function in terms of how music is composed. In music there is a concept called a \textbf{key signature}. A key signature is a set of 7 notes that function harmonically. The majority of music is written in a particular key and it is this fact that produces the need for a relative distance.
+    
+\vspace{4mm}
+
+    Below we have chosen C to be our tonic. We will soon find out that the effect of this is essentially letting C represent our identity element. At the moment, however, we have a table that represents every note's intervalic distance from every other note.
+
+
+    
+\vspace{6mm}
+
+
+\begin{table}[htb]
+\centering
+    \begin{tabular}{c|cccccccccccc}
+    
+    $+$ & \textsl{U} & \textsl{m}2 & \textsl{M}2 & \textsl{m}3 & \textsl{M}3 & \textsl{P}4 & \textsl{A}4 & \textsl{P}5 & \textsl{m}6 & \textsl{M}6 & \textsl{m}7 & \textsl{M}7 \\
+    
+    \hline
+    
+    C & C & C$\sharp$ & D & D$\sharp$ & E & F & F$\sharp$ & G & G$\sharp$ & A & A$\sharp$ & B \\
+    C$\sharp$ & C$\sharp$ & D & D$\sharp$ & E & F & F$\sharp$ & G & G$\sharp$ & A & A$\sharp$ & B & C \\
+    D & D & D$\sharp$ & E & F & F$\sharp$ & G & G$\sharp$ & A & A$\sharp$ & B & C & C$\sharp$ \\
+    D$\sharp$ & D$\sharp$ & E & F & F$\sharp$ & G & G$\sharp$ & A & A$\sharp$ & B & C & C$\sharp$ & D \\
+    E & E & F & F$\sharp$ & G & G$\sharp$ & A & A$\sharp$ & B & C & C$\sharp$ & D & D$\sharp$ \\
+    F & F & F$\sharp$ & G & G$\sharp$ & A & A$\sharp$ & B & C & C$\sharp$ & D & D$\sharp$ & E \\
+    F$\sharp$ & F$\sharp$ & G & G$\sharp$ & A & A$\sharp$ & B & C & C$\sharp$ & D & D$\sharp$ & E & F \\
+    G & G & G$\sharp$ & A & A$\sharp$ & B & C & C$\sharp$ & D & D$\sharp$ & E & F & F$\sharp$ \\
+    G$\sharp$ & G$\sharp$ & A & A$\sharp$ & B & C & C$\sharp$ & D & D$\sharp$ & E & F & F$\sharp$ & G \\
+    A & A & A$\sharp$ & B & C & C$\sharp$ & D & D$\sharp$ & E & F & F$\sharp$ & G & G$\sharp$ \\
+    A$\sharp$ & A$\sharp$ & B & C & C$\sharp$ & D & D$\sharp$ & E & F & F$\sharp$ & G & G$\sharp$ & A \\
+    B & B & C & C$\sharp$ & D & D$\sharp$ & E & F & F$\sharp$ & G & G$\sharp$ & A & A$\sharp$ \\
+
+    \end{tabular}
+\end{table}
+
+\newpage
+
+    The table above should look very familiar. In fact, it is almost equivalent to $\mathbb{Z}_{12}$. By ``almost equivalent", we mean that it is indeed isommorphic to $\mathbb{Z}_{12}$. In particular, the group here is the set of notes, which all represent the integer interval distance from the chosen tonic. The operation is addition of notes (i.e., semi-tones). With this in mind, let us conclude by revisiting our subgroups of $\mathbb{Z}_{12}$ and see the notes for which these equivalence classes correspond to:\par
+    
+\vspace{4mm}
+
+\begin{description}
+
+    \item $\langle [C]\rangle=\{[C]\}$
+    
+    \item $\langle [C\sharp]\rangle=\{[C],[C\sharp],[D],[D\sharp],[E],[F],[F\sharp],[G],[G\sharp],[A],[A\sharp],[B]\}$
+
+    \item $\langle [D]\rangle=\{[C],[D],[E],[F\sharp],[G\sharp],[A\sharp]\}$
+    
+    \item $\langle [D\sharp]\rangle=\{[C],[D\sharp],[F\sharp],[A]\}$
+    
+    \item $\langle [E]\rangle=\{[C],[E],[G\sharp]\}$
+    
+    \item $\langle [F]\rangle=\{[C],[C\sharp],[D],[D\sharp],[E],[F],[F\sharp],[G],[G\sharp],[A],[A\sharp],[B]\}$
+    
+    \item $\langle [F\sharp]\rangle=\{[C],[F\sharp]\}$
+    
+    \item $\langle [G]\rangle=\{[C],[C\sharp],[D],[D\sharp],[E],[F],[F\sharp],[G],[G\sharp],[A],[A\sharp],[B]\}$
+    
+    \item $\langle [G\sharp]\rangle=\{[C],[E],[G\sharp]\}=\langle [E]\rangle$
+    
+    \item $\langle [A]\rangle=\{[C],[D\sharp],[F\sharp],[A]\}=\langle [D\sharp]\rangle$
+    
+    \item $\langle [A\sharp]\rangle=\{[C],[D],[E],[F\sharp],[G\sharp],[A\sharp]\}=\langle [D]\rangle$
+    
+    \item $\langle [B]\rangle=\{[C],[C\sharp],[D],[D\sharp],[E],[F],[F\sharp],[G],[G\sharp],[A],[A\sharp],[B]\}$.
+    
+\end{description}
+    
+
+
+\newpage
+
+\centerline{$\mathbb{AMIR}$}
+
+
+
+\end{document}

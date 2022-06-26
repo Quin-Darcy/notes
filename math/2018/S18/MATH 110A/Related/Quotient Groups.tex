@@ -1,0 +1,152 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+
+\setlist[description]{leftmargin=20mm,labelindent=20mm}
+
+\begin{document}
+
+\justifying
+
+\centerline{\Large{\textbf{Quotient Groups and Partitions}}}
+
+\vspace{15mm}
+
+\textbf{Definition.} Given a group $G$ and subgroup of $G$, $H$, a \it left coset \rm is defined as follows: given some particular element $g_1\in G$, we have\hfill
+
+\vspace{6mm}
+
+\centerline{$g_1 H=\{g_1 h\mid h\in H\}$.}\hfill
+
+\vspace{6mm}
+
+\textbf{Definition.} The \it quotient group \rm of $H$ in $G$, denoted $G/H$, is defined as the set of all left cosets, or as\hfill
+
+\vspace{6mm}
+
+\centerline{$G/H=\{gH\mid g\in G\}$.}\hfill
+
+\vspace{6mm}
+
+
+\textbf{Definition.} A \it partition \rm on $G$ is a set of subsets of $G$, say $A_\alpha, \alpha\in I$, such that\hfill
+
+\vspace{6mm}
+
+\begin{description}
+
+\item[(1)] $A_i\cap A_j=\varnothing$, $\forall i,j\in I$. 
+\item[(2)] \bigcup\limits_{\forall \alpha \in I} A_\alpha =G$.
+
+\end{description}
+
+\vspace{10mm}
+
+\it \textbf{Proposition:} \rm Let $G$ be a group and let $H$ be a subgroup of $G$. Then the quotient group, $G/H=\{gH\mid g\in G\}$, forms a partition on $G$.
+
+\vspace{10mm}
+
+\it \textbf{Proof.} \rm\textbf{(1)} To prove that this set forms a partition on $G$, we must show that both conditions of a partition hold. We begin by choosing any two arbitrary elements from $G/H$ and we must show that they are either mutually disjoint, or the same element.\hfill
+
+Let $g_1 H, g_2 H\in G/H$. Then we observe that the first condition of a partition reduces to the following statement: Either the intersection of these two sets are empty or it is not empty. This can be written as\hfill
+
+\vspace{10mm}
+
+\centerline{$[(g_1 H\cap g_2 H=\varnothing)]\vee [(g_1 H\cap g_2 H\neq \varnothing)]$.}
+
+\vspace{10mm}
+
+If we assume the proposition to the left of the disjunction, then we are done. If we assume what is to the right of the disjunction then we have the following implication:\hfill
+
+\vspace{10mm}
+
+\centerline{$(g_1 H\cap g_2 H\neq \varnothing) \Longrightarrow \exists a\in G\colon a\in (g_1 H\cap g_2 H)$.}
+
+\vspace{16mm}
+
+Having assumed the intersection of these two sets was not empty, we see that this implies there exists an element contained in the intersection. By the definition of intersection, we may write
+
+\vspace{10mm}
+
+\centerline{$a\in (g_1 H\cap g_2 H)\Longleftrightarrow (a\in g_1 H)\wedge (a\in g_2 H)$.}
+
+\vspace{10mm}
+
+Thus, with further expansion, the previous biconditional yields
+
+\vspace{8mm}
+
+\begin{description}
+\item[i.] $(a\in g_1 H)\Longleftrightarrow a\in \{g_1 h\mid h\in H\}\Longleftrightarrow \exists h_1 \in H\colon a=g_1 h_1$,
+\item[ii.] $(a\in g_2 H)\Longleftrightarrow a\in \{g_2 h\mid h\in H\}\Longleftrightarrow \exists h_2 \in H\colon a=g_2 h_2$.
+\end{description}
+
+\vspace{10mm}
+
+We now have two expressions that, by the properties of equality, allow us to write the following:\hfill
+
+\vspace{10mm}
+
+\centerline{$(a=g_1 h_1)\wedge (a=g_2 h_2)\Longleftrightarrow g_1 h_1=g_2 h_2$.}
+
+\vspace{10mm}
+
+At this point it is worth emphasizing the current goal. Having assumed the intersection of the two arbitrary cosets was non-empty, we must show that this implies the two cosets are the same set. Only by doing this can we sufficiently show that the first condition of the partition holds. We now use the fact that the set $H$ was assumed to be a subgroup, and thus $\forall h\in H\colon\exists h^{-1}\in H\colon hh^{-1}=e=h^{-1}h$. This property, guaranteed by the subgroup axioms, then allows us to write the following:\hfill
+
+\vspace{10mm}
+
+\centerline{$g_1 h_1=g_2 h_2\Longleftrightarrow g_1 h_1 (h_2^{-1})=g_2 h_2 (h_2^{-1})$,}\hfill
+
+\vspace{1mm}
+
+\centerline{$g_1 h_1 (h_2^{-1})=g_2 h_2 (h_2^{-1})\Longleftrightarrow g_1 (h_1 h_2^{-1})=g_2 (e)=g_2$,}\hfill
+
+\vspace{1mm}
+
+\centerline{$\therefore\hspace{3mm} g_2=g_1 (h_1 h_2^{-1})$.}
+
+\vspace{10mm}
+
+Since $H$ is a subgroup, we know that it is closed with respect to the given operation. Thus, for any two elements from $H$, their product is also in $H$. Considering this, it is clear that the product $(h_1 h_2^{-1})\in H$. For notation's sake, we may let $h_3=(h_1 h_2^{-1})$. Thus, we have $g_2=g_1 h_3$. Recall the definition of the set $g_1 H$.
+
+\vspace{10mm}
+
+\centerline{$g_1 H=\{g_1 h\mid h\in H\}\Longleftrightarrow a\in g_1 H:\Leftrightarrow \exists h'\in H\colon a=g_1 h'$.}
+
+\vspace{14mm}
+
+To put the previous definition into words, we see that for any object $a$ to be an element of the set $g_1 H$, there must exist a particular $h'\in H$, such that $a=g_1 h'$ is true. By definition then, $g_2\in g_1 H$ since $g_2=g_1 h_3$, where $h_3$ is some particular element of $H$. We now expand the implications of this.
+
+\vspace{10mm}
+
+\centerline{$g_2=g_1 h_3\Longrightarrow g_2 H=(g_1 h_3)H$}\hfill
+\vspace{1mm}
+\centerline{$=\{(g_1 h_3)h\mid h\in H\}=\{g_1(h_3 h)\mid h\in H\}$}\hfill
+\vspace{6mm}
+\centerline{$=\{g_1 h\mid h\in H\}=g_1 H$.}\hfill
+\vspace{6mm}
+\centerline{$\therefore\hspace{3mm} g_2 H=g_1 H$.}
+
+\vspace{10mm}
+
+Thus concludes the first part of the proof. In summary, we showed that by taking any two arbitrary elements from $G/H$, their intersection must either be empty or not empty. If the intersection is empty, then the two sets are mutually disjoint and we are done. If the two sets are not empty, then we showed that the two sets are equal. Thus, for any two elements taken from $G/H$, they are either mutually disjoint or they are the same element. Condition (1) of a partition is thereby satisfied.
+
+\vspace{10mm}
+
+\it\textbf{Proof.}\rm\textbf{(2)} 
+
+
+
+\end{document}
+
+

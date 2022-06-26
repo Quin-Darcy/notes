@@ -1,0 +1,126 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{commath}
+\usepackage{colonequals}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\newcolumntype{C}{>$c<$}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=10mm,labelindent=10mm}
+
+
+
+
+
+\begin{document}
+
+
+\section*{Discussion}
+
+
+The first group isomorphism theorem states that if $\phi\colon G\rightarrow F$ is a group homomorphism from groups $G$ to $F$, then $G/$ker$(\phi)\cong$ im$(\phi)$. The previous consequence leads us to see that, by definition:\par
+
+\vspace{4mm}
+
+Let $\phi\colon G\rightarrow F$ is a group homomorphism, then in order for $G/$ker$(\phi)\cong$ im$(\phi)$ to be true, there must exist a map, call it $\eta$, from $G/$ker$(\phi)$ to im$(\phi)$ such that this map is a bijective homomorphism. This means that $\par
+
+\vspace{4mm}
+
+1.\hspace{2mm} $G/$ker$(\phi)\cong$ im$(\phi)$\par
+\vspace{2mm}
+2.\hspace{3mm}$\logeq\exists\eta\in(G/$ker$(\phi)\times$ im$(\phi))\colon$\par
+\vspace{2mm}
+3.\hspace{10mm}$\forall g$ker$(\phi)\in G/$ker$(\phi)\colon$\par
+\vspace{2mm}
+4...............................$(g_1$ker$(\phi)\in G/$ker$(\phi))\wedge(g_2$ker$(\phi)\in G/$ker$(\phi))\colon$\par
+\vspace{2mm}
+5....................................... $[g_1$ker$(\phi)=g_2$ker$(\phi)]\Rightarrow[\eta(g_1$ker$(\phi))=\eta(g_2$ker$(\phi))]$\par 
+\vspace{2mm}
+6.........................................$[\eta(g_1$\ker$(\phi))=\eta(g_2$ker$(\phi)]\Rightarrow[g_1$ker$(\phi)=g_2$ker$(\phi)]$\par
+\vspace{2mm}
+7.........................................$[g$ker$(\phi)\in G/$ker$(\phi)]\Rightarrow[\exists f\in$ im$(\phi)\colon\phi(g$ker$(\phi)=f]$\par
+\vspace{2mm}
+8.........................................$[\eta(g_1$ker$(\phi)g_2$ker$(\phi))=\eta(g_1$ker$(\phi))\eta(g_1$ker$(\phi))]$
+
+\begin{flushleft}
+
+What the above tells us is that the two groups are isomorphic $G/$ker$(\phi)\cong$ im$(\phi)$ if and only if there exists a map $\eta\colon G/$ker$(\phi)\rightarrow$ im$(\phi)$ such that $\eta$ is a bijective homomorphism. Looking at the domain of of $\eta$, we notice that im$(\phi)\subseteq F$. Since we are given a map $\phi\colon G\rightarrow F$, that maps us to the domain of $\eta$, then we will need for there to be a map $\psi\colon G/$ker$(\phi)\rightarrow G$, such that $\phi\circ\psi\colon G/$ker$(\phi)\rightarrow F$ is a map equivalent to $\eta$.
+
+\end{flushleft}
+
+Let us consider some relation $\psi\in(G/$ker$(\phi)\times G)$. Suppose we choose to define this relation as follows:\par
+
+\vspace{4mm}
+
+1.\hspace{2mm}$(g$ker$(\phi),g)\in\psi\logeq$\par
+\vspace{2mm}
+2...............$\forall g$ker$(\phi),g'$ker$(\phi)\in G/$ker$(\phi)\colon$\par
+\vspace{2mm}
+3...............................$[(g$ker$(\phi)=g'$ker$(\phi))\Rightarrow(g=g')]$\par
+
+
+
+\vspace{4mm}
+
+Let us now try to prove line 3.\par
+
+\vspace{4mm}
+
+\hspace{2mm} $g$ker$(\phi)=g'$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow (gg'^{-1})$ker$(\phi)=(e_G)$ker$(\phi)$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow\exists\hat{g}\in$ker$(\phi)\colon[\hat{g}(gg'^{-1})\hat{g}^{-1}=e_G]$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow \hat{g}(gg'^{-1})\hat{g}^{-1}=e_G$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow \hat{g}(gg'^{-1})=\hat{g}$\par
+\vspace{2mm}
+\hspace{10mm} $\Rightarrow gg'^{-1}=e_G$\par
+\vspace{2mm}
+\hspace{2mm} $\therefore g=g'$\par
+
+\vspace{4mm}
+
+\textbf{THE ABOVE PROOF IS INCORRECT}
+
+
+
+
+
+
+\end{document}

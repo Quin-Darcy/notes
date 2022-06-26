@@ -1,0 +1,286 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+    \begin{center}
+	    \vspace{.4cm} {\textbf { \large MATH 210A}}
+    \end{center}
+    {\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/18/19   \\
+    { \textbf{Instructor:}} \ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 3 \\ \hrule}
+
+    \justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item\hfill
+            \begin{enumerate}[label=(\alph*)]
+                \item Assume that $N\triangleleft G$, and define $\varphi\colon G\times N\rightarrow N$ by $\varphi((g,n))=g\star n\star g^{-1}$. Prove that $\varphi$ is an action of $G$ on $N$.
+                    \begin{proof}
+                        We want to show that for all $h,g\in G$ and all $n\in N$ that 
+                        
+                        \begin{equation*}
+                            \varphi(h\star g,n)=\varphi(h,\varphi(g,n))\quad\text{and}\quad\varphi(e,n)=n.
+                        \end{equation*}
+                        
+                        Let $h,g\in G$ and let $n\in N$. Then
+                        
+                        \begin{equation*}
+                            \begin{split}
+                                \varphi(h\star g,n) &= (h\star g)\star n\star(h\star g)^{-1} \\
+                                &= (h\star g)\star n\star(g^{-1}\star h^{-1}) \\
+                                &= h\star (g\star n\star g^{-1})\star h^{-1} \\
+                                &= \varphi(h,g\star n\star g^{-1}) \\
+                                &= \varphi(h,\varphi(g,n)).
+                            \end{split}
+                        \end{equation*}
+                        
+                        Note that the fourth equality holds since $N$ is normal which means that for all $g\in G$ and $n\in N$, $g\star n\star g^{-1}\in N$ and so $(h,g\star n\star g^{-1})\in G\times N$. We have satisfied the first of the two equalities. Now consider
+                        
+                        \begin{equation*}
+                            \varphi(e,n)=e\star n\star e^{-1}=e\star n\star e= n.
+                        \end{equation*}
+                        
+                        Therefore, $\varphi$ is an action of $G$ on $N$.
+                    \end{proof}
+                    
+                \item Assume that $H\subseteq_g G$. Prove that $H\triangleleft G$ iff $H$ is a union of conjugacy classes.
+                    \begin{proof}
+                        Assume $H\triangleleft G$, and let 
+                        
+                        \begin{equation*}
+                            A=\bigcup_{h\in H}C(h),
+                        \end{equation*}
+                        
+                        where $C(h)$ denote the conjugacy class of $h\in H$. We want to show that $H\triangleleft G$ implies $H=A$. Let $m\in H$. Then for some $g\in G$, $m\in gHg^{-1}$ by Exercise 4, part (a). Thus, for some $h\in H$, $m=g\star h\star g^{-1}$. Thus, $m\in C(h)$. Since $C(h)\subseteq A$, then $m\in A$. Thus, $H\subseteq A$. Now let $a\in A$. Then for some $h\in H$, $a\in C(h)$. Thus, for some $g\in G$, $a=g\star h\star g^{-1}$. However, by Exercise 4, part (a), $g\star h\star g^{-1}\in H$ for all $g\in G$. Thus, $a\in H$. Hence, $A\subseteq H$. Therefore, $H=A$.\par\hspace{4mm} Assume $H$ is equal to a union of conjugacy classes. We want to show that for all $g\in G$, $gHg^{-1}=H$. Let $g\in G$ and let $m\in gHg^{-1}$. Then for some $h\in H$, $m=g\star h\star g^{-1}$. Thus, $m\in C(h)\subseteq H$ and hence, $m\in H$. Thus, $gHg^{-1}\subseteq H$. Now let $m\in H$. Then, for some $h\in H$, $m\in C(h)$. Thus, $m=g\star h\star  g^{-1}$, for some $g\in G$. Thus, $m\in gHg^{-1}$. Thus, $H\subseteq gHg^{-1}$. Therefore, for all $g\in G$, $gHg^{-1}=H$. Thus, $H\triangleleft G$.  
+                    \end{proof}
+            \end{enumerate}
+            
+        \item Assume that $H$ is a subgroup of $G$. Define $N(H)=\{g\in G\colon gHg^{-1}=H\}$.
+            \begin{enumerate}[label=\alph*)]
+                \item Prove that $N(H)$ is a subgroup of $G$.
+                    \begin{proof}
+                        To prove that $N(H)\subseteq_g G$, we will first show that $N(H)\neq \varnothing$. Since $eHe^{-1}=H$, then it follows that $e\in N(H)$ and thus $N(H)\neq\varnothing$. Next, we must show that for all $h,g\in G$, if $h,g\in N(H)$, then $h\star g^{-1}\in N(H)$. Let $h,g\in G$ and assume $h,g\in N(H)$. Then we have that $hHh^{-1}=H$ and $gHg^{-1}=H$. We want to show that $h\star g^{-1}\in N(H)$. Thus, we want to show that 
+                            
+                        \begin{equation*}
+                            (h\star g^{-1})H(h\star g^{-1})^{-1}=h\star(g^{-1}Hg)\star h^{-1}=H.
+                        \end{equation*}
+                            
+                        Note that since $gHg^{-1}=H$ and, by Homework 2, $gHg^{-1}=g^{-1}Hg$ (this holds since $g^{-1}\star h\star g=g\star h'\star g^{-1}$, provided $h=g\star(g\star h'\star g^{-1})\star g^{-1}\in H$). Thus, with $g^{-1}Hg=H$, then 
+                            
+                        \begin{equation*}
+                            h\star(g^{-1}Hg)\star h^{-1}=hHh^{-1}=H.
+                        \end{equation*}
+                            
+                        Thus, $h\star g^{-1}\in N(H)$. Therefore, $N(H)$ is a subgroup of $G$.
+                    \end{proof}
+                \item Prove that $H\triangleleft N(H)$.
+                    \begin{proof}
+                        To prove that $H\triangleleft N(H)$, we will show that for all $g\in N(H)$, $gHg^{-1}=H$. Let $g\in N(H)$. Then $gHg^{-1}=H$. Therefore, $H\triangleleft N(H)$.
+                    \end{proof}
+                \item Prove that if $M$ is a subgroup of $G$, and $H\triangleleft M$, then $M\subseteq N(H)$.
+                    \begin{proof}
+                        Assume $M\subseteq_g G$ and $H\triangleleft M$. Let $m\in M$, then since $H\triangleleft M$ it follows that $mHm^{-1}=H$. Since $M\subseteq G$, then we have that $m\in G$ and $mHm^{-1}=H$. Thus, $m\in N(H)$. Therefore, $M\subseteq N(H)$.
+                    \end{proof}
+            \end{enumerate}
+                
+        \item Prove, by induction, that for $n\geq 2$, $(a_1a_2\dots a_n)^{-1}=(a_na_{n-1}\dots a_2a_1)$.
+            \begin{proof}
+                Let $P(n):=(a_1a_2\dots a_n)^{-1}=(a_na_{n-1}\dots a_1)$. Then we want to show that for all $n\in\mathbb{N}$, $P(n)$ holds.\par\vspace{2mm}
+                
+                \underline{\textsc{Base case:}} Let $n=2$. Then we can write the 2-cycle as $(a_1a_2)$. Since this is a permutation, then we can also write it as a bijective map $\sigma\colon \{a_1,a_2\}\rightarrow\{a_1,a_2\}$, where $\sigma(a_1)=a_2$ and $\sigma(a_2)=a_1$. Since for each 2-cycle permutation, it is its own inverse, it follows that $\sigma(\sigma(a_1))=\sigma(a_2)=a_1$ and $\sigma(\sigma(a_2))=\sigma(a_1)=a_2$. Thus, denoting this in cycle notation, we have that $(a_1a_2)=(a_1a_2)^{-1}=(a_2a_1)$. Thus, $P(2)$ holds.\par\vspace{2mm}
+                
+                \underline{\textsc{Inductive step:}} Assume that for some $k\in\mathbb{N}$, where $k>2$, $P(k)$ holds. Then
+                
+                \begin{equation}
+                    (a_1a_2\dots a_k)^{-1}=(a_ka_{k-1}\dots a_1). 
+                \end{equation}
+                
+                By the result on pg. 9, any permutation can be written as the product of transpositions. Thus, 
+                
+                \begin{equation*}
+                    \begin{split}
+                        (a_1a_2\dots a_{k+1})^{-1} &= \big((a_1a_{k+1})\cdots(a_1a_2)\big)^{-1} \\
+                        &=(a_1a_2)^{-1}\cdots(a_1a_{k+1})^{-1} \\
+                        &=(a_2a_1)\cdots (a_{k+1}a_1) \\
+                        &=(a_{k+1}a_k\dots a_1).
+                    \end{split}
+                \end{equation*}
+                
+                Thus, $P(k+1)$ holds. Therefore, for all $n\in\mathbb{N}$, $P(n)$ holds.
+            \end{proof}
+            
+        \item[5.]\hfill
+            \begin{enumerate}[label=\alph*)]
+                \item Let $D$ be a subset of $S_n$ consisting of all of the odd permutations in $S_n$. Define $\theta\colon A_n\rightarrow D$ by $\theta(\sigma)=\sigma(12)$ (that is $\sigma\circ(12)$). Prove that $\theta$ is 1-1 and onto $D$.
+                    \begin{proof}
+                        Assume that for some $\sigma_1,\sigma_2\in A_n$, that $\theta(\sigma_1)=\theta(\sigma_2)$. Then it follows that $\sigma_1(12)=\sigma_2(12)$. Composing both sides with $(12)$, we get $\sigma_1=\sigma_2$. Thus, $\theta$ is 1-1.\par\hspace{4mm} Let $\delta\in D$. Then if we take $\sigma\in A_n$ such that $\sigma=\delta(12)$, we get that $\theta(\delta(12))=\delta$. Therefore, $\theta$ is onto.
+                    \end{proof}
+                    
+                \item Prove that $A_n\subseteq_g S_n$, and that $A_n\triangleleft S_n$.
+                    \begin{proof}
+                        Since the identity $(1)=(a_1a_2)(a_1a_2)$, for any $a_1,a_2\in\{1,\dots, n\}$ then it follows that $(1)$ is an even permutation and thus $(1)\in A_n$. Thus, $A_n\neq\varnothing$. By definition, $A_n$ contains all even permutations on $n$ letters, and thus $A_n\subseteq S_n$. Now we wish to show that for all $\sigma\circ\gamma^{-1}\in A_n$ whenever $\sigma,\gamma\in A_n$. Let $\sigma,\gamma\in A_n$. Then both $\sigma$ and $\gamma$ can be written as the product of an even number of transpositions. Thus, we may write 
+                        
+                        \begin{equation*}
+                            \sigma=(a_1a_{2m+1})\cdots(a_1a_2)\quad\text{and}\quad\gamma=(b_1b_{2k+1})\cdots(b_1b_2),
+                        \end{equation*}
+                        
+                        for $a_1,\dots,a_{2m+1},b_1,\dots b_{2k+1}\in\{1,\dots n\}$. So we have that $\sigma$ is the product of $2m$ transpositions and $\gamme$ is the product of $2k$ transpositions. By the result proven in Exercise 3, we have that 
+                        
+                        \begin{equation*}
+                            \gamma^{-1}=(b_2b_1)\cdots(b_{2k+1}b_1).
+                        \end{equation*}
+                        
+                        Note that the number of transpositions remains unchanged. Thus, 
+                        
+                        \begin{equation*}
+                            \sigma\circ\gamma^{-1}=(a_1a_{2m+1})\cdots(a_1a_2)(b_2b_1)\cdots(b_{2k+1}b_1)
+                        \end{equation*}
+                        
+                        is the product of $2m+2k=2(m+k)$ transpositions. Thus, $\sigma\circ\gamma^{-1}\in A_n$. Therefore, $A_n\subseteq_g S_n$.\par\hspace{4mm} To prove that $A_n\triangleleft S_n$, we will show that $[S_n\colon A_n]=2$ and appeal to Exercise 5 on Homework 2. By part (a) of Exercise 5, we showed that $\abs{A_n}=\abs{D}$, where $D$ is the set of all odd permutations. Since $S_n$ consists of all odd and even permutations, we have that $A_n\cap D=\varnothing$ and $A_n\cup D=S_n$. Thus, $\{A_n,D\}$ is a partition on $S_n$. Now let $\sigma\in S_n/A_n$, then either $\sigma\in A_n$ or $\sigma\in S_n-A_n=D$. Thus, $S_n/A_n=\{A_n,D\}$ which implies that $[S_n\colon A_n]=2$. Thus, $A_n\triangleleft S_n$.
+                    \end{proof}
+            \end{enumerate}
+        
+        \item[6.] In $S_5$, find $\abs{c\big((123)(45)\big)}$, and find $N\big((123)(45)\big)$.
+            \begin{solution}
+                On pg. 7 we proved that 
+                
+                \begin{equation*}
+                    \abs{c(s)}=\frac{\abs{G}}{\abs{N(s)}},
+                \end{equation*}
+                
+                where $G$ was a group and $s\in S$, for a set $S$. Thus, replacing these terms with the terms in our question, we get 
+                
+                \begin{equation*}
+                    \abs{c\big((123)(45)\big)}=\frac{\abs{S_5}}{\abs{N\big((123)(45)\big)}}.
+                \end{equation*}
+                
+                We know that $\abs{S_5}=5!=120$, so finding either $\abs{c\big((123)(45)\big)}$ or $\abs{N\big((123)(45)\big)}$ will give us the other.\par\hspace{4mm} Recall that 
+                
+                \begin{equation*}
+                    N\big((123)(45)\big)=\{\sigma\in S_5\colon \sigma\circ(123)(45)=(123)(45)\circ \sigma\}.
+                \end{equation*}
+                
+                Thus, we are looking for a $\sigma$ such that 
+                
+                \begin{equation*}
+                    \sigma\circ(123)(45)\circ\sigma^{-1}=(123)(45), 
+                \end{equation*}
+                
+                of which there are 6 since $o\big((123)(45)\big)=6$. Thus, 
+                
+                \begin{equation*}
+                    \abs{c\big((123)(45)\big)}=120/6=20\quad\text{and}\quad\abs{N\big((123)(45)\big)}=6.
+                \end{equation*}
+            \end{solution}
+            
+        \item Assume $H$ and $K$ are subgroups of $(G,\star)$, and that $N\triangleleft G$.
+            \begin{enumerate}[label=\alph*)]
+                \item Prove that $HK$ is a subgroup of $G$ iff $HK=KH$.
+                    \begin{proof}
+                        Assume that $HK\subseteq_g G$. Let $x\in HK$. Then since $HK$ is a subgroup, $x^{-1}\in HK$. Thus, there exists $h\in H$ and $k\in K$ such that $x^{-1}=h\star k$. Thus, $x=k^{-1}\star h^{-1}$, which is an element of $KH$. Thus, $x\in KH$. Hence, $HK\subseteq KH$. Let $x\in KH$. Then by the same reasoning as before, $x^{-1}\in KH$. Thus, there exists $k\in K$ and $h\in H$ such that $x^{-1}=k\star h$. Thus, $x=h^{-1}\star k^{-1}$, which is an element of $HK$. Thus, $x\in HK$. Hence, $KH\subseteq HK$. Therefore, $HK=KH$.\par\hspace{4mm} Assume that $HK=KH$. Let $x,y\in HK$. Then there exists $g,h\in H$ and $j,k\in K$ such that $x=g\star j$ and $y=h\star k$. Thus, 
+                        
+                        \begin{equation*}
+                            x\star y^{-1} =(g\star j)\star (k^{-1}\star h^{-1})=g\star (j\star k^{-1}\star h^{-1}).
+                        \end{equation*}
+                        
+                        Since $j\star k^{-1}\star h^{-1}\in KH$ and $KH=HK$, then there exists some $h'\in H$ and $k'\in K$ such that $j\star k^{-1}\star h^{-1}\star=h'\star k'$. Thus, 
+                        
+                        \begin{equation*}
+                            x\star y^{-1}=g\star h'\star k'.
+                        \end{equation*}
+                        
+                        We see that $g\star h'\in H$ and $k'\in K$. Thus, $g\star h'\star k'\in HK$. Thus, $x\star y^{-1}\in HK$. Therefore, $HK\subseteq_g G$.
+                    \end{proof}
+                    
+                \item Prove that $NH$ is a subgroup of $G$.
+                    \begin{proof}
+                        Let $x\in NH$. Then there exists $n\in N$ and $h\in H$ such that $x=n\star h$. Note that $n\star h\in Nh$, and since $N$ is normal, then $Nh=hN$. Thus, $n\star h\in hN$ which implies that there exists some $n'\in N$ such that $n\star h=h\star n'$, and this is an element of $HN$. Thus, $x\in HN$ and hence $NH\subseteq HN$. By the same argument, we can show $HN\subseteq NH$. Thus, $NH=HN$, and by (a), $NH$ is therefore a subgroup of $G$.
+                    \end{proof}
+            \end{enumerate}
+    \end{enumerate}
+
+\end{document}

@@ -1,0 +1,690 @@
+\section{}
+\documentclass[leqno]{article}
+%------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+%------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[colorlinks=true,pagebackref=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red, linkcolor=blue}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{biblatex}
+
+\addbibresource{Analysis.bib}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}[theorem]
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+
+\begin{document}
+\title{Analysis Notes}
+\author{Quin Darcy}
+\date{June, 1 2020}
+\maketitle
+    
+    \section{Ordered Sets}
+        \begin{definition}[Pg. 3]\label{def:1.1}
+            Let $S$ be a set. An \emph{order} on $S$ is a relation, denoted by $<$, with the following properties:
+                \begin{enumerate}[label=(\roman*)]
+                    \item If $x\in S$ and $y\in S$ then one and only one of the statements
+                        \begin{equation*}
+                            x<y,\quad x=y,\quad y<x
+                        \end{equation*}
+                    is true.
+                    \item If $x,y,z\in S$, if $x<y$ and $y<z$, then $x<z$. \cite{rud}
+                \end{enumerate}
+        \end{definition}
+        \begin{definition}[Pg. 3]\label{def:1.2}
+            An \emph{ordered set} is a set $S$ in which an order is defined. \cite{rud}
+        \end{definition}
+        \begin{definition}[Pg. 3]\label{def:1.3}
+            Suppose $S$ is an ordered set, and $E\subseteq S$. If there exists a $\beta\in S$ such that $x\leq\beta$ for every $x\in E$, we say that $E$ is \emph{bounded above} and call $\beta$ an \emph{upper bound} of $E$. \cite{rud}
+        \end{definition}
+        \begin{definition}[Pg. 4]\label{def:1.4}
+            Suppose $S$ is an ordered set, $E\subseteq S$, and $E$ is bounded above. Suppose there exists an $\alpha\in S$ with the following properties:
+                \begin{enumerate}[label=(\roman*)]
+                    \item $\alpha$ is an upper bound of $E$.
+                    \item If $\gamma<\alpha$ then $\gamma$ is not an upper bound of $E$.
+                \end{enumerate}
+            Then $\alpha$ is called the \emph{least upper bound} of $E$ or the \emph{supremum} of $E$, and we write
+                \begin{equation*}
+                    \alpha=\sup E.
+                \end{equation*}
+            The \emph{greatest lower bound}, or \emph{infimum}, of a set $E$ which is bounded below is defined in the same manner: The statement
+                \begin{equation*}
+                    \alpha=\inf E
+                \end{equation*}
+            means that $\alpha$ is a lower bound of $E$ and that no $\beta$ with $\beta>\alpha$ is a lower bound of $E$. \cite{rud}
+        \end{definition}
+        \begin{definition}[Pg. 27]\label{def:1.5}
+            An ordered set $A$ is said to have the \emph{least upper bound property} if every nonempty subset $A_0$ of $A$ that is bounded above has a least upper bound. Similarly, the set $A$ has the \emph{greatest lower bound property} if every nonempty subset $A_0$ of $A$ that is bounded below has a greatest lower bound. \cite{mun}
+        \end{definition}
+        \begin{theorem}[Pg. 5]\label{thm:1.1}
+            Suppose $S$ is an ordered set with the least-upper bound property, $B\subseteq S$, $B$ is nonempty, and $B$ is bounded below. Let $L$ be the set of all lower bounds of $B$. Then 
+                \begin{equation*}
+                    \alpha=\sup L
+                \end{equation*}
+            exists in $S$ and $\alpha=\inf B$. \par\hspace{4mm} In particular, $\inf B$ exists in $S$. \normalfont{\cite{rud}} 
+        \end{theorem}
+            \begin{proof}
+                Since $B$ is bounded below, then $L$, being the set of all lower bounds of $B$, is not empty. Furthermore, since $L$ consists of exactly those $y\in S$ which satisfy $y\leq x$ for all $x\in B$, then it follows from \cref{def:1.3} that every $x\in B$ is an \emph{upper bound} of $L$. Thus $L$ is bounded above. Our hypothesis; that $S$ is an \emph{ordered set} with the \emph{least-upper bound property} -- therefore implies that $L$ has a \emph{supremum} in $S$; call it $\alpha$.\par\hspace{4mm} If $\gamma<\alpha$, then $\gamma$ is not an upper bound of $L$ by \cref{def:1.4} and hence $\gamma\notin B$ since, as was stated, every element of $B$ is an upper bound of $L$. It follows that $\alpha\leq x$ for every $x\in B$, for if there were some $x'\in B$ such that $x' < \alpha$, then, by \cref{def:1.4}, $x'$ is not an upper bound of $L$ and so $x'\notin B$, which is a contradiction. Thus $\alpha\in L$.\par\hspace{4mm} If $\alpha <\beta$ then $\beta\notin L$ since $\alpha$ is an \emph{upper bound} of $L$.\par\hspace{4mm} We have shown that $\alpha\in L$ but $\beta\notin L$ if $\alpha <\beta$. In other words, $\alpha$ is a lower bound of $B$, but $\beta$ is not if $\alpha <\beta$. Thus $\alpha=\inf B$.
+            \end{proof}
+            
+    \section{Fields}
+        \begin{definition}[Pg. 5]\label{def:1.6}
+            A \emph{field} is a set $F$ with two operations called \emph{addition} and \emph{multiplication}, which satisfy the following field axioms (A), (M), (D):
+                \begin{enumerate}
+                    \item[\textbf{(A)}] \textbf{Axioms for addition} 
+                        \begin{enumerate}
+                            \item[(A1)] If $x\in F$ and $y\in F$, then their sum $x+y\in F$.
+                            \item[(A2)] Addition is commutative: $x+y=y+x$ for all $x,y\in F$.
+                            \item[(A3)] Addition is associative: $(x+y)+z=x+(y+z)$ for all $x,y,z\in F$.
+                            \item[(A4)] $F$ contains an element 0 such that $0+x=x$ for all $x\in F$.
+                            \item[(A5)] To every $x\in F$ corresponds an elements $-x\in F$ such that 
+                                \begin{equation*}
+                                    x+(-x)=0.
+                                \end{equation*}
+                        \end{enumerate}
+                    \item[\textbf{(M)}] \textbf{Axioms for multiplication}
+                        \begin{enumerate}
+                            \item[(M1)] If $x,y\in F$, then their product $xy\in F$.
+                            \item[(M2)] Multiplication is commutative: $xy=yx$ for all $x,y\in F$.
+                            \item[(M3)] Multiplication is associative: $(xy)z=x(yz)$ for all $x,y,z\in F$.
+                            \item[(M4)] $F$ contains an element $1\neq 0$ such that $1x=x$ for every $x\in F$.
+                            \item[(M5)] If $x\in F$ and $x\neq 0$ then there exists an element $1/x\in F$ such that 
+                                \begin{equation*}
+                                    x\cdot(1/x)=1.
+                                \end{equation*}
+                        \end{enumerate}
+                    \item[\textbf{(D)}] \textbf{The distributive law}
+                        \begin{equation*}
+                            x(y+z)=xy+xz
+                        \end{equation*}
+                        holds for all $x,y,z\in F$. \cite{rud}
+                \end{enumerate}
+        \end{definition}
+        The following four propositions will be stated without proof because the proofs are boring.
+        \begin{prop}[Pg. 6]\label{prop:2.1}
+            The axioms for addition imply the following statements.
+                \begin{enumerate}[label=(\alph*)]
+                    \item If $x+y=x+z$, then $y=z$.
+                    \item If $x+y=x$ then $y=0$.
+                    \item If $x+y=0$ then $y=-x$.
+                    \item $-(-x)=x$. \cite{rud}
+                \end{enumerate}
+        \end{prop}
+        \begin{prop}[Pg. 7]\label{prop:2.2}
+            The axioms for multiplication imply the following statements.
+                \begin{enumerate}[label=(\alph*)]
+                    \item If $x\neq 0$ and $xy=xz$ then $y=z$.
+                    \item If $x\neq 0$ and $xy=x$ then $y=1$.
+                    \item If $x\neq 0$ and $xy=1$ then $y=1/x$.
+                    \item If $x\neq 0$ then $1/(1/x)=x$. \cite{rud}
+                \end{enumerate}
+        \end{prop}
+        \begin{prop}[Pg. 7]\label{prop:2.3}
+            The field axioms imply the following statements, for any $x,y,z\in F$.
+                \begin{enumerate}[label=(\alph*)]
+                    \item $0x=0$.
+                    \item If $x\neq 0$ and $y\neq 0$ then $xy\neq 0$.
+                    \item $(-x)y=-(xy)=x(-y)$.
+                    \item $(-x)(-y)=xy$. \cite{rud}
+                \end{enumerate}
+        \end{prop}
+        \begin{prop}[Pg. 7]\label{prop:2.4}
+            An \emph{ordered field} is a \emph{field} $F$ which is also an \emph{ordered set}, such that
+                \begin{enumerate}[label=(\roman*)]
+                    \item $x+y<x+z$ is $x,y,z\in F$ and $y<z$,
+                    \item $xy>0$ if $x,y\in F$, $x>0$, and $y>0$. 
+                \end{enumerate}
+            If $x>0$, we call $x$ \emph{positive}; if $x<0$, $x$ is \emph{negative}. \cite{rud}
+        \end{prop}
+        \begin{prop}[Pg. 8]\label{prop:2.5}
+            The following statements are true in every ordered field.
+                \begin{enumerate}[label=(\alph*)]
+                    \item If $x>0$ then $-x<0$, and \emph{vice versa}.
+                    \item If $x>0$ and $y<z$ then $xy<xz$.
+                    \item If $x<0$ and $y<z$ then $xy<xz$.
+                    \item If $x\neq 0$ then $x^2>0$. In particular, $1>0$.
+                    \item If $0<x<y$ then $0<1/y<1/x$. \cite{rud}
+                \end{enumerate}
+        \end{prop}
+    \section{The Real Field}
+        \begin{theorem}[Pg. 8]\label{thm:3.1}
+            There exists an ordered field $\mathbb{R}$ which has the least upper-bound property. Moreover, $\mathbb{R}$ contains $\mathbb{Q}$ as a subfield. \normalfont{\cite{rud}}
+        \end{theorem}
+            \begin{proof}
+            
+            \end{proof}
+        \begin{theorem}[Pg. 9]\label{thm:3.2}
+            If $x,y\in\mathbb{R}$, and $x>0$, then there exists $n\in\mathbb{Z}^{+}$ such that 
+                \begin{equation*}
+                    nx>y.
+                \end{equation*} \normalfont{\cite{rud}}
+        \end{theorem}
+            \begin{proof}
+                Let $A=\{nx\in\mathbb{R}\mid n\in\mathbb{Z}^{+}\}$. For a contradiction, assume that for all $n\in\mathbb{Z}^{+}$, $nx\leq y$. Then $y$ is an upper bound of $A$. Moreover, we have that $A\subseteq\mathbb{R}$ and that $0=0x\in A$ and so $A\neq\varnothing$. By \cref{thm:3.1}, there exists $\alpha=\sup A$. Since $x>0$ then $\alpha-x<\alpha$ and so $\alpha-x$ is not an upper bound of $A$. Thus there exists $mx\in A$ such that $\alpha-x<mx$. Then $\alpha<(m+1)x\in A$. This implies that $\alpha$ is not an upper bound of $A$ which is a contradiction.
+            \end{proof}
+        \begin{lemma}[Pg. 30]\label{lem:3.2.1}
+            Let $x,y\in\mathbb{R}$. If $y-x>1$, then there exists $z\in\mathbb{Z}$ such that $x<z<y$. \normalfont{\cite{cum}}
+        \end{lemma}
+            \begin{proof}
+                First assume that $x,y\geq 0$ and $y-x>1$. Then consider the set 
+                    \begin{equation*}
+                        A=\{n\in\mathbb{Z}^{+}\colon n\leq x\}.
+                    \end{equation*}
+              Since $x\geq 0$ then $0\in A$ and so $A\neq \varnothing$. Further, since $A$ is a set of nonnegative integers which is bounded above, then $A$ is finite. Hence $A$ contains a greatest element, $\max(A)$. Call this the maximum $M$.\par\hspace{4mm} Let $z=M+1$ and note that since $M\in\mathbb{Z}^{+}$, then so is $z$. Moreover, since $z$ is larger then the largest element of $A$, $z$ is not in $A$, implying that $x<z$. Finally, 
+                \begin{equation*}
+                    M\leq x\quad\text{implies that}\quad z=M+1\leq x+1<y.
+                \end{equation*}
+            Thus $z<y$. In summary we have shown that $x<z<y$, as desired. \cite{cum}
+            \end{proof}
+        \begin{theorem}[Pg. 9; Proof, Pg. 31]\label{thm:3.3} 
+            If $x,y\in\mathbb{R}$, and $x<y$, then there exists a $p\in\mathbb{Q}$ such that $x<p<y$. \normalfont{\cite{rud}}
+        \end{theorem}
+            \begin{proof}
+                Let $x,y\in\mathbb{R}$ where $x<y$. We want to find some $p=\frac{m}{n}\in\mathbb{Q}$ such that $x<p<y$. Note that if $x<0<y$, then we are done since $0\in\mathbb{Q}$. Furthermore, if we can show that the theorem holds when $x$ and $y$ are both positive, then the theorem holds when $x$ and $y$ are both negative since
+                    \begin{equation*}
+                        0< x<\frac{m}{n}<y\quad\text{implies}\quad -y<-\frac{m}{n}<-x<0,
+                    \end{equation*}
+                and so we may assume $x$ and $y$ are both positive.\par\hspace{4mm} Since $ y-x\in\mathbb{R}$ and $y-x>0$, then by \cref{thm:3.2}, there exists $n\in\mathbb{Z}^{+}$ such that
+                    \begin{equation*}
+                        n(y-x)>1.
+                    \end{equation*}
+                By distributing we get $ny-nx>1$. Then by \cref{lem:3.2.1}, there exists $m\in\mathbb{Z}$ such that 
+                    \begin{equation*}
+                        nx<m<ny.
+                    \end{equation*}
+                That is
+                    \begin{equation*}
+                        x<\frac{m}{n}<y,
+                    \end{equation*}
+                which concludes the proof. \cite{cum}
+            \end{proof}
+        \begin{theorem}[Pg. 10]\label{thm:3.4}
+            For every real $x>0$ and every integer $n>0$ there is one and only one positive real $y$ such that $y^n=x$. \normalfont{\cite{rud}}
+        \end{theorem}
+            \begin{proof}
+                Fix some real $x>0$ and integer $n>0$. Now suppose $y_1,y_2$ are both positive reals. If $y_1<y_2$, then $y_1^n<y_2^n$ and so it can not be the case that $y_1^n=x$ and $y_2^n=x$. Hence, there is \emph{at most one} positive real number $y$ such that $y^n=x$.\par\hspace{4mm} What we want to do now is find a particular positive real number $y$ such that $y^n=x$. To do this we begin by defining
+                    \begin{equation*}
+                        E=\{t\in\mathbb{R}\mid t\geq 0, t^n<x\}.
+                    \end{equation*}
+                We claim that the least upper bound of $E$ is the particular $y$ we are in search of. To prove this we must first show that the least upper bound of $E$ \emph{exists}. \par\hspace{4mm} The existence of the least upper bound depends on three things: (i) $E$ must be shown to be contained within a larger set which has the least upper bound property; (ii) $E$ must be nonempty; (iii) $E$ must be bounded above.\par\hspace{4mm} We see that the construction of $E$ implies that $E\subseteq\mathbb{R}$ and since $\mathbb{R}$ has the least upper bound property, then (i) holds. To show (ii) consider $t=x/(1+x)$. Since $x>0$ then we can see that the denominator is strictly bigger than the numerator and so $0\leq t<1$. As such it follows that $t^n\leq t<x$. Thus $t\geq 0$ and $t^n<x$ which implies $t\in E$. Hence $E$ is nonempty and so (ii) holds. Finally, to show (iii) consider $t=x+1$. Then $1<t$ and $x<t$. Thus $x<t\leq t^n$ and so $t\notin E$. Moreover, for any $a\in E$ we have that $a^n<x<t^n$ and thus $a<t$. Hence $t=1+x$ is an upper bound of $E$. Having shown (i), (ii), and (iii), then \cref{thm:3.1} implies the existence of 
+                    \begin{equation*}
+                        y=\sup E.
+                    \end{equation*}
+                Recall that we are trying to show that $y=\sup E$ satisfies $y^n=x$. So to do this we will show that both $y^n<x$ and $y^n>x$ leads to a contradiction. Before making the arguments, consider the identity
+                    \begin{equation}
+                        b^n-a^n=(b-a)(b^{n-1}+b^{n-2}a+\cdots+a^{n-1})
+                    \end{equation}
+                where $0<a<b$. Since $0<a<b$, then we can see that for any $1\leq j\leq n$, $b^{j-1}>a^{j-1}$ and so $b^{n-j}b^{j-1}=b^{n-1}>b^{n-j}a^{j-1}$. Thus every term in the sum in (1) aside from $b^{n-1}$ is strictly less than $b^{n-1}$. Hence
+                    \begin{equation*}
+                        nb^{n-1}=(b^{n-1}+b^{n-1}+\cdots+b^{n-1})>(b^{n-1}+b^{n-2}a+\cdots+a^{n-1}).
+                    \end{equation*}
+                Therefore we obtain the inequality
+                    \begin{equation}
+                        b^n-a^n<(b-a)nb^{n-1}.
+                    \end{equation}
+                \par
+                With that in mind, the two arguments are as follows:
+                    \begin{enumerate}
+                        \item Assume $y^n<x$. Then $x-y^n>0$. Also note that since $y=\sup E$ then $y$ is an upper bound of $E$, and so for every $t\in E$, we have $0\leq t\leq y$. Thus $y\geq 0$. It follows then that $n(y+1)^{n-1}>0$. Thus
+                            \begin{equation*}
+                                \frac{x-y^n}{n(y+1)^{n-1}}>0.
+                            \end{equation*}
+                        Then by \cref{thm:3.3}, there exists $p\in\mathbb{Q}$ such that 
+                            \begin{equation*}
+                                0<p<\frac{x-y^n}{n(y+1)^{n-1}}.
+                            \end{equation*} 
+                        If $p>1$ then by the same result, there exists some $q\in\mathbb{Q}$ such that $0<q<1<p$. Similarly, if $p<1$ then there exists $q\in\mathbb{Q}$ such that $0<q<p<1$. Therefore there exists $0<h<1$ such that 
+                            \begin{equation*}
+                                h<\frac{x-y^n}{n(y+1)^{n-1}}.
+                            \end{equation*}
+                        Now let $a=y$ and $b=y+h$. Then from (2) it follows that
+                            \begin{equation}
+                                (y+h)^n-y^n<hn(y+h)^{n-1}<hn(y+1)^{n-1}=x-y^n.
+                            \end{equation}
+                        Adding $y^n$ on both sides of (3) we get that $(y+h)^n<x$ and so $y+h\in E$. However since $y<y+h$ then this contradicts the fact that $y$ is an upper bound of $E$. 
+                        \item Assume $y^n>x$. Let 
+                            \begin{equation*}
+                                k=\frac{y^n-x}{ny^{n-1}}=\frac{y}{n}-\frac{x}{ny^{n-1}}.
+                            \end{equation*}
+                        Then $0<k<y$. If $t\geq y-k$, then
+                            \begin{equation}
+                                y^n-t^n\leq y^n-(y-k)^n<kny^{n-1}=y^n-x.
+                            \end{equation}  
+                        Subtracting $y^n$ from both sides of (4) then multiplying through by -1, we obtain $t^n>(y-k)^n>x$ and so $t,y-k\notin E$. Thus $y-k$ is an upper bound of $E$. But $y-k<y$, which contradicts the fact that $y$ is the \emph{least} upper bound of $E$.
+                    \end{enumerate}
+                Thus both $y^n<x$ and $y^n>x$ lead to a contradiction. Therefore $y^n=x$.
+            \end{proof}
+        \begin{corollary}[Pg. 11]\label{cor:3.4.1}
+            If $a$ and $b$ are positive real numbers and $n$ is a positive integer, then 
+                \begin{equation*}
+                    (ab)^{1/n}=a^{1/n}b^{1/n}.
+                \end{equation*} \normalfont{\cite{rud}}
+        \end{corollary}
+            \begin{proof}
+                Let $\alpha=a^{1/n}$ and $\beta=b^{1/n}$. Then 
+                    \begin{equation*}
+                        ab=\alpha^n\beta^n=(\alpha\beta)^n
+                    \end{equation*}
+                since multiplication is commutative. The uniqueness assertion of \cref{thm:3.4} shows therefore that 
+                    \begin{equation*}
+                        (ab)^{1/n}=\alpha\beta=a^{1/n}b^{1/n}.
+                    \end{equation*} \cite{rud}
+            \end{proof}
+    \noindent{\textbf{Exercises For Section 3}}\par\noindent Unless the contrary is explicitly stated, all numbers in these exercises are understood to be real. [Pg. 21-23] \cite{rud}
+        \begin{enumerate}[leftmargin=*]
+            \item If $r$ is rational ($r\neq 0$) and $x$ is irrational, prove that $r+x$ and $rx$ are irrational.
+                \begin{solution}
+                    We are given that $r$ is rational and so for some integers $a,b$ we can write $r=a/b$. We will prove by contradiction that $r+x$ is irrational.\par\hspace{4mm} Assume $r+x$ is rational. Then for some relatively prime integers $m,n$, we can write
+                        \begin{equation*}
+                            r+x=\frac{m}{n}\quad\text{which implies}\quad x=\frac{m}{n}-\frac{a}{b}=\frac{mb-na}{nb}.
+                        \end{equation*}
+                    This means that $x$ is rational, which is a contradiction.\par\hspace{4mm} Assume that $rx$ is rational. Then for relatively prime integers, $m,n$ we can write
+                        \begin{equation*}
+                            rx=\frac{a}{b}x=\frac{m}{n}.
+                        \end{equation*}
+                    Thus 
+                        \begin{equation*}
+                            x=\frac{bm}{an}
+                        \end{equation*}
+                    which implies $x$ is rational. This is a contradiction. Hence, $r+x$ and $rx$ are both irrational, as desired.
+                \end{solution}
+            \item Prove that there is no rational number whose square is 12.
+                \begin{solution}
+                    For a contradiction, assume there exists relatively prime integers $a,b$ such that
+                        \begin{equation*}
+                            \bigg(\frac{a}{b}\bigg)^2=12.
+                        \end{equation*}
+                    Then we can write $a^2=12b^2$. Since 3 divides the right hand side, then 3 divides the left hand side. Then let $a^2=p_1^{a_1}\cdots p_k^{a_k}$ be the prime factorization of $a^2$. Since this is the prime factorization of an integer squared, then there must be an even number of each factor which implies $3^2$ must divide $a^2$ and $3$ divides $a$.\par\hspace{4mm} Having shown that $3^2$ divides the left hand side, then $3^2$ must also divide the right hand side. Seeing that $12=1\cdot3\cdot4$ then it follows that $3$ divides $b^2$. By the same argument, $3\mid b$. Hence, $a$ and $b$ have a common factor of 3 which contradicts $a$ and $b$ being relatively prime.
+                \end{solution}
+            \item[4.] Let $E$ be a nonempty subset of an ordered set; suppose $\alpha$ is a lower bound of $E$ and $\beta$ is an upper bound of $E$. Prove that $\alpha\leq\beta$.
+                \begin{solution}
+                    Since $\alpha$ is a lower bound of $E$, then by \cref{def:1.3}, for all $x\in E$, $\alpha\leq x$. Similarly, for all $x\in E$, $x\leq \beta$. Thus if we let $x\in E$ then we have
+                        \begin{equation*}
+                            \alpha\leq x\leq\beta\quad\text{which implies}\quad \alpha\leq\beta,
+                        \end{equation*}
+                    as desired.
+                \end{solution}
+            \item[5.] Let $A$ be a nonempty set of real numbers which is bounded below. Let $-A$ be the set of all numbers $-x$, where $x\in A$. Prove that 
+                \begin{equation*}
+                    \inf A=-\sup(-A).
+                \end{equation*}
+                \begin{solution}
+                    Since $A$ is a nonempty set of real numbers which is bounded below, then by \cref{thm:1.1} and \cref{thm:3.1}, $A$ has an infimum. Let $\beta=\inf A$. Since $\beta$ is a lower bound of $A$, then for all $x\in A$, $\beta\leq x$. From this it follows that $-x\leq -\beta$ for all $x\in A$. Hence, $-\beta$ is an upper bound of $-A$. Thus by \cref{thm:3.1}, $-A$ has a supremum. Let $\alpha=\sup(-A)$.\par\hspace{4mm} Since $\alpha$ is an upper bound of $-A$ then for all $x\in A$, $-x\leq \alpha$ and so $-\alpha\leq x$. Hence $-\alpha$ is a lower bound of $A$. Since $\beta$ is the \emph{greatest} lower bound, then it follows that $-\alpha\leq\beta$. We want to show that $-\alpha=\beta$ so for contradiction, assume that $-\alpha<\beta$. Then by \cref{thm:3.3}, there exists $p\in\mathbb{Q}$ such that $-\alpha<p<\beta$. Note that since $-\alpha<p$, then $-p<\alpha$ and so $-p$ is not an upper bound of $-A$. However, since $p<\beta$, then $-\beta<-p$. Then if $x\in A$ we have that $\beta\leq x$ and so $-x\leq -\beta<-p$. Hence, $-p$ is an upper bound of $-A$ which is a contradiction. Therefore $\beta=-\alpha$ and so
+                        \begin{equation*}
+                            \inf A=-\sup(-A),
+                        \end{equation*}
+                    as desired.
+                \end{solution}
+        \end{enumerate}
+    \section{Basic Topology}
+        \begin{definition}[Pg. 25]\label{def:4.1}
+            If there exists a 1-1 mapping of $A$ onto $B$, we say that $A$ and $B$ can be put in 1-1 \emph{correspondence}, or that $A$ and $B$ have the same \emph{cardinal number}, or, briefly, that $A$ and $B$ are \emph{equivalent}, and we write $A\sim B$. Furthermore, this relation is an equivalence relation. \cite{rud}
+        \end{definition}
+        \begin{definition}[Pg. 25]\label{def:4.2}
+            For any positive integer $n$, let $J_n$ be the set whose elements are the integers $1,2,\dots,n$; let $J$ be the set consisting of all the positive integers. For any set $A$, we say:
+                \begin{enumerate}[label=(\alph*)]
+                    \item $A$ is \emph{finite} if $A\sim J_n$ for some $n$.
+                    \item $A$ is \emph{infinite} if $A$ is not finite. 
+                    \item $A$ is \emph{countable} if $A\sim J$.
+                    \item $A$ is \emph{uncountable} if $A$ is neither finite nor countable.
+                    \item $A$ is \emph{at most countable} if $A$ is finite or countable. \cite{rud}
+                \end{enumerate}
+        \end{definition}
+        \begin{definition}[Pg. 26]\label{def:4.3}
+            By a \emph{sequence}, we mean a function $f$ defined on the set $J$ of all positive integers. If $f(n)=x_n$ for $n\in J$, it is customary to denote the sequence $f$ by the symbol $\{x_n\}$. The values of $f$, that is, the elements $x_n$, are called the \emph{terms} of the sequence. If $A$ is a set and if $x_n\in A$ for all $n\in J$, then $\{x_n\}$ is said to be a \emph{sequence in} $A$. \cite{rud}
+        \end{definition}
+        \begin{theorem}[Pg. 26]\label{thm:4.1}
+            Every infinite subset of a countable set $A$ is countable.
+        \end{theorem}
+            \begin{proof}
+                Suppose $E\subseteq A$ and that $E$ is infinite. Since $A$ is countable, we may arrange is elements into a sequence $\{x_n\}$ of distinct terms. Now construct another sequence $\{n_k\}$ as follows: Let $n_1$ be the smallest positive integer such that $x_{n_1}\in E$. Next, let $n_2$ be the smallest positive integer greater than $n_1$ such that $x_{n_2}\in E$. Continue doing this to get each term in the sequence.\par\hspace{4mm} Letting $f(k)=x_{n_k}$, where $k=1,2,\dots$, we obtain a 1-1 correspondence between $E$ and $J$. Thus by \cref{def:4.2}, $E$ is countable.
+            \end{proof}
+        \begin{theorem}[Pg. 29]\label{thm:4.2}
+            Let $\{E_n\}$, $n=1,2,3,\dots$ be a sequence of countable sets, and let
+                \begin{equation}
+                    S=\bigcup_{n=1}^{\infty}E_n.
+                \end{equation}
+            Then $S$ is countable \normalfont{\cite{rud}}
+        \end{theorem}
+            \begin{proof}
+                Let every set $E_n$ be arranged in a sequence $\{x_{nk}\}$, $k=1,2,3,\dots$, and consider the infinite array
+                    \begin{align*}
+                        x_{11} & &x_{12} & &x_{13} & &\cdots \\
+                        x_{21} & &x_{22} & &x_{23} & &\cdots \\
+                        x_{31} & &x_{32} & &x_{33} & &\cdots \\
+                        \vdots & &\vdots & &\vdots & &\cdots
+                    \end{align*}
+                in which the elements of $E_n$ form the $n$th row. The array contains all the elements of $S$. These elements can be arranged in a sequence
+                    \begin{equation}
+                        x_{11}; x_{21},x_{12}; x_{31},x_{22},x_{13};x_{41},x_{32},x_{23},x_{14};,\dots
+                    \end{equation}
+                If any two of the sets $E_n$ and $E_m$ have elements in common, there will appear more than once in (6). Hence there is a subset $T$ of the set of all positive integers such that $S\sim T$, which shows that $S$ is at most countable. Since $E_1\subseteq S$, and $E_1$ is infinite, $S$ is infinite, and thus countable.
+            \end{proof}
+        \section{Metric Spaces}
+            \begin{definition}[Pg. 30]\label{def:5.1}
+                A set $X$, whose elements we shall call \emph{points}, is said to be a \emph{metric space} if with any two points $p$ and $q$ of $X$ there is associated a real number $d(p,q)$, called the \emph{distance} from $p$ to $q$, such that 
+                    \begin{enumerate}[label=(\alph*)]
+                        \item(Positivity) $d(p,q)>0$ if $p\neq q$; $d(p,p)=0$;
+                        \item(Symmetry) $d(p,q)=d(q,p)$;
+                        \item(Triangle Inequality) $d(p,q)\leq d(p,r)+d(r,q)$, for any $r\in X$.
+                    \end{enumerate}
+                Any function with these three properties is called a \emph{distance function}, or a \emph{metric}. \cite{rud}
+            \end{definition}
+            \begin{definition}[Pg. 47]\label{def:5.2}
+                Assume that $(X,d_X)$ and $(Y,d_Y)$ are metric spaces. An \emph{isometry} between $(X,d_X)$ to $(Y,d_Y)$ is a bijection $i\colon X\rightarrow Y$ such that $d_X(x,y)=d_Y(i(x),i(y))$ for all $x,y\in X$. \cite{lin}
+            \end{definition}
+            \begin{definition}[Pg. 47]\label{def:5.3}
+                Assume that $(X,d_X)$ and $(Y,d_Y)$ are metric spaces. An \emph{embedding} of $(X,d_X)$ into $(Y,d_Y)$ is an injection $i\colon X\rightarrow Y$ such that $d_X(x,y)=d_Y(i(x),i(y))$ for all $x,y\in X$. \cite{lin}
+            \end{definition}
+            \begin{prop}[Pg. 47]\label{prop:5.1}
+                For all elements $x,y,z$ in a metric space $(X,d)$, we have 
+                    \begin{equation*}
+                        \abs{d(x,y)-d(x,z)}\leq d(y,z).
+                    \end{equation*} \cite{lin}
+            \end{prop}
+                \begin{proof}
+                    Since the absolute value is the largest of the two numbers $d(x,y)-d(x,z)$ and $d(x,z)-d(x,y)$, then it suffices to show that both the numbers are less than or equal to $d(y,z)$. By the Triangle Inequality
+                        \begin{equation*}
+                            d(x,y)\leq d(x,z)+d(z,y)
+                        \end{equation*}
+                    and hence $d(x,y)-d(x,z)\leq d(z,y)=d(y,z)$.\par Using the Triangle Inequality again, we obtain the other inequality. We have
+                        \begin{equation*}
+                            d(x,z)\leq d(x,y)+d(y,z)
+                        \end{equation*}
+                    and so $d(x,z)-d(x,y)\leq d(y,z)$, as desired.
+                \end{proof}
+            \begin{definition}[Pg. 31]\label{def:5.4}
+                By the \emph{segment} $(a,b)$ we mean the set of all real numbers $x$ such that $a<x<b$.\par By the \emph{interval} $[a,b]$ we mean the set of all real numbers $x$ such that $a\leq x\leq b$.\par If $\mathbf{x}\in\mathbb{R}^k$ and $r>0$, the \emph{open} (or \emph{closed}) \emph{ball} $B$ with center at $\mathbf{x}$ and radius $r$ is defined to be the set of all $\mathbf{y}\in\mathbb{R}^k$ such that $\abs{\mathbf{y}-\mathbf{x}}<r$ (or $\abs{\mathbf{y}-\mathbf{x}}\leq r$).\par We call a set $E\subseteq\mathbb{R}^k$ \emph{convex} if
+                    \begin{equation*}
+                        \lambda\mathbf{x}+(1-\lambda)\mathbf{y}\in E
+                    \end{equation*}
+                whenever $\mathbf{x},\mathbf{y}\in E$, and $0<\lambda<1$. \cite{rud}
+            \end{definition}
+            \begin{definition}[Pg. 32]\label{def:5.5}
+                Let $X$ be a metric space. All points and sets mentioned below are understood to be elements and subsets of $X$.
+                    \begin{enumerate}[label=(\alph*)]
+                        \item A \emph{neighborhood} of $p$ is a set $N_r(p)$ consisting of all $q$ such that $d(p,q)<r$, for some $r>0$. The number $r$ is called the \emph{radius} of $N_r(p)$.
+                        \item A point $p$ is a \emph{limit point} of the set $E$ if \emph{every} neighborhood of $p$ contains a point $q\neq p$ such that $q\in E$.
+                        \item If $p\in E$ and $p$ is not a limit point of $E$, then $p$ is called an \emph{isolated point} of $E$.
+                        \item $E$ is \emph{closed} if every limit point of $E$ is a point of $E$.
+                        \item A point $p$ is an \emph{interior} point of $E$ if there is a neighborhood $N$ of $p$ such that $N\subseteq E$.
+                        \item $E$ is \emph{open} if every point of $E$ is an interior point of $E$.
+                        \item The \emph{complement} of $E$ (denoted $E^c$) is the set of all points $p\in X$ such that $p\notin E$.
+                        \item $E$ is \emph{perfect} if $E$ is closed and if every point of $E$ is a limit point of $E$. 
+                        \item $E$ is \emph{bounded} if there is a real number $M$ and a point $p\in X$ such that $d(p,q)<M$ for all $q\in E$.
+                        \item $E$ is \emph{dense} in $X$ if every point of $X$ is a limit point of $E$, or a point of $E$ (or both). \cite{rud}
+                    \end{enumerate}
+            \end{definition}
+            \begin{theorem}[Pg. 32]\label{thm:5.1}
+                Every neighborhood is an open set. \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    Consider a neighborhood $E=N_r(p)$ and some $q\in E$. We want to show that there is a neighborhood $N_s(q)$ such that $N_s(q)\subseteq E$.\par Since $q\in E$, then $d(p,q)<r$ and so there exists a positive real number $h$ such that 
+                        \begin{equation*}
+                            d(p,q)=r-h.
+                        \end{equation*}
+                    Additionally, for all points $t\in N_s(q)$, where $s<h$, we have that 
+                        \begin{equation*}
+                            d(p,t)\leq d(p,q)+d(q,t)<r-h+h=r,
+                        \end{equation*}
+                    and so $t\in E$. Hence $N_s(q)\subseteq E$.
+                \end{proof}
+            \begin{theorem}[Pg. 32]\label{thm:5.2}
+                If $p$ is a limit point of a set $E$, then every neighborhood of $p$ contains infinitely many points of $E$. \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    Suppose there is a neighborhood $N$ of $p$ which contains only a finite number of points of $E$. Let $q_1,\dots,q_n$ be those points of $N\cap E$ which are distinct from $p$. Since $N\cap E$ is finite, then we can refer to the smallest element and so let
+                        \begin{equation*}
+                            r=\min_{1\leq m\leq n}d(p,q_m).
+                        \end{equation*}
+                    Moreover, since $\{d(p,q_1),\dots,d(p,q_n)\}$ is a finite set of positive real numbers, then $r>0$.\par The neighborhood $N_r(p)$ contains no point $q\in E$ such that $q\neq p$, because if it did, then the distance between $p$ and that point would be smaller than $r$, which would be a contradiction since $r$ is the minimum. Hence $p$ is not a limit point of $E$. This is a contradiction and establishes the theorem.
+                \end{proof}
+            \begin{corollary}[Pg. 33]\label{cor:5.2.1}
+                A finite point set has no limit points. \normalfont{\cite{rud}}
+            \end{corollary}
+            \begin{theorem}[Pg. 33]\label{thm:5.3}
+                Let $\{E_{\alpha}\}$ be a \normalfont{(}finite or infinite\normalfont{)} collection of sets $E_{\alpha}$. Then 
+                    \begin{equation}
+                        \bigg(\bigcup_{\alpha}E_{\alpha}\bigg)^c=\bigcap_{\alpha}\big(E_{\alpha}^c\big).
+                    \end{equation} \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    Let $A$ and $B$ be the left and right hand members of (7). If $x\in A$, then $x\not\in\bigcup_{\alpha}E_{\alpha}$, hence $x\notin E_{\alpha}$ for any $\alpha$, hence $x\in E_{\alpha}^c$, so that $x\in\bigcap_{\alpha}E_{\alpha}^c$. Thus $A\subseteq B$.\par Conversely, if $x\in B$, then $x\in E_{\alpha}^c$ for every $\alpha$, hence $x\notin E_{\alpha}$ for any $\alpha$, hence $x\notin\bigcap_{\alpha}E_{\alpha}$, hence $x\in\big(\bigcup_{\alpha}E_{\alpha}\big)^c$. Thus $B\subseteq A$. Therefore $A=B$.
+                \end{proof}\newpage
+            \begin{theorem}[Pg. 34]\label{thm:5.4}
+                A set $E$ is open if and only if its complement is closed. \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    First suppose $E^c$ is closed. Choose $x\in E$. Then $x\notin E^c$ and $x$ is not a limit point of $E^c$. Hence there exists a neighborhood $N$, centered at $x$, such that for all $q\in N$,  $q\notin E^c$, hence $E^c\cap N$ is empty. Thus $N\subseteq E$ and $x$ is an interior point of $E$. Therefore $E$ is open.\par\hspace{4mm} Now suppose $E$ is open. Let $x$ be a limit point of $E^c$. Then every neighborhood of $x$ contains a point in $E^c$ and so $x$ is not an interior point of $E$. Since $E$ is open then $x\in E^c$. Thus $E^c$ is closed.
+                \end{proof}
+            \begin{corollary}[Pg. 34]\label{cor:5.4.1}
+                A set $F$ is closed if and only if its complement is open.
+            \end{corollary}
+            \begin{theorem}[Pg. 34]\label{thm:5.5}\hfill\par
+                \begin{enumerate}[label=\normalfont{(\alph*)}]
+                    \item For any collection $\{G_{\alpha}\}$ of open sets, $\bigcup_{\alpha}G_{\alpha}$ is open.
+                    \item For any collection of $\{F_{\alpha}\}$ closed sets, $\bigcap_{\alpha} F_{\alpha}$ is closed.
+                    \item For any finite collection $G_1,\dots,G_n$ of open sets, $\bigcap_{i=1}^n G_i$ is open.
+                    \item For any finite collection $F_1,\dots, F_n$ of closed sets, $\bigcup_{i=1}^n F_i$ is closed. \normalfont{\cite{rud}}
+                \end{enumerate}
+            \end{theorem}
+                \begin{proof}
+                    Let $G=\bigcup_{\alpha} G_{\alpha}$. If $x\in G$, then $x\in G_{\alpha}$ for some $\alpha$. Since $G_{\alpha}$ is open, then $x$ is an interior point of $G_{\alpha}$ and thus $G$. Hence, $G$ is open and (a) is proven.\par\hspace{4mm} By \cref{thm:5.3}
+                        \begin{equation*}
+                            \bigg(\bigcap_{\alpha}F_{\alpha}\bigg)^c=\bigcup_{\alpha}\big(F_{\alpha}\big)^c.
+                        \end{equation*}
+                    Since each $F_{\alpha}$ is closed, then by \cref{cor:5.4.1}, each $F_{\alpha}^c$ is open and so by part (a), $\bigcup_{\alpha}(F_{\alpha})^c$ is open. Therefore, by the same \cref{cor:5.4.1}, $F$ is closed and (b) is proven.\par\hspace{4mm} Let $H=\bigcap_{i=1}^n G_i$. Let $x\in H$. Then $x\in G_i$, for all $i$. Further, since each $G_i$ is open, then $x$ is an interior point of each $G_i$. Thus, there exists a neighborhoods, $N_i$, about $x$, with radii $r_i$ such that $N_i\subseteq G_i$, for each $i=1,\dots,n$. Let 
+                        \begin{equation*}
+                            r=\min(r_1,\dots,r_n)
+                        \end{equation*}
+                    and let $N$ be the neighborhood about $x$ with radius $r$. Then $N\subseteq G_i$, for all $i$. Hence $N\subseteq H$. Therefore $H$ is open and (c) has been shown.\par\hspace{4mm} Finally, note that 
+                        \begin{equation*}
+                            \bigg(\bigcup_{i=1}^n F_i\bigg)^c=\bigcap_{i=1}^n\big(F_i\big)^c
+                        \end{equation*}
+                    and the right hand side is a finite intersection of open sets which, by part (c), is open and hence $\bigcup_{i=1}^n F_i$ is closed.
+                \end{proof}\newpage
+            \begin{definition}[Pg. 35]\label{def:5.6}
+                If $X$ is a metric space, if $E\subseteq X$, and if $E'$ denotes the set of all limit points of $E$ in $X$, then the \emph{closure} of $E$ is the set $\bar{E}=E\cup E'$. \cite{rud}
+            \end{definition}
+            \begin{theorem}[Pg. 35]\label{thm:5.6}
+                If $X$ is a metric space and $E\subseteq X$, then 
+                    \begin{enumerate}[label=\normalfont{(\alph*)}]
+                        \item $\bar{E}$ is closed,
+                        \item $E=\bar{E}$ if and only if $E$ is closed,
+                        \item $\bar{E}\subseteq F$ for every closed set $F\subseteq X$ such that $E\subseteq F$.
+                    \end{enumerate} \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    If $p\in X$ and $p\notin\bar{E}$, then $p$ is neither a point of $E$ nor a limit point of $E$. Hence $p$ has a neighborhood which does not intersect $E$. The complement of $\bar{E}$ is therefore open.\par\hspace{4mm} If $E=\bar{E}$, then (a) implies that $E$ is closed. If $E$ is closed, then $E'\subseteq E$ and so $E=\bar{E}$.\par\hspace{4mm} If $F$ is closed and $F\supseteq E$, then $F\supseteq F'$, hence $F\supseteq E'$ and so $F\supseteq\bar{E}$.
+                \end{proof}
+            \begin{theorem}[Pg. 35]\label{thm:5.7}
+                Let $E$ be a nonempty set of real numbers which is bounded above. Let $y=\sup E$. Then $y\in\bar{E}$. Hence $y\in E$ if $E$ is closed. \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    If $y\in E$, then $y\in\bar{E}$. Assume $y\notin E$. Then for every $h>0$, there exists $x\in E$ such that $y-h<x<y$. Otherwise, $y-h$ would be an upper bound of $E$. Thus $y$ is a limit point of $E$. Hence $y\in\bar{E}$. 
+                \end{proof}
+            \begin{definition}[Pg. 35]\label{def:5.7}
+                Suppose $E\subseteq Y\subseteq X$, where $X$ is a metric space. Then $E$ is \emph{open relative to} $Y$ if to each $p\in E$ there exists $r>0$ such that if $d(p,q)<r$ and $q\in Y$, then $q\in E$.
+            \end{definition}
+            \begin{theorem}[Pg. 36]\label{thm:5.8}
+                Suppose $Y\subseteq X$. A subset $E$ of $Y$ is open relative to $Y$ if and only if $E=Y\cap G$ for some open subset $G$ of $X$. \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    Suppose $E$ is open relative to $Y$. Then to each $p\in E$ there exists $r_p>0$ such that if $d(p,q)<r_p$ and $q\in Y$, then $q\in E$. Let $V_p$ be the set of all $q\in X$ such that $d(p,q)<r_p$, and define
+                        \begin{equation*}
+                            G=\bigcup_{p\in E}V_p.
+                        \end{equation*}
+                    Clearly, each $V_p$ is a neighborhood about $p$ and by \cref{thm:5.1} and \cref{thm:5.5}, $G$ is an open subset of $X$. Additionally, since $E\subseteq Y$ and $p\in V_p$ for all $p\in E$, then clearly $E\subseteq G$ and so $E\subseteq G\cap Y$.\par\hspace{4mm} By definition, it follows that $V_p\cap Y\subseteq E$ for every $p\in E$, so that $G\cap Y\subseteq E$. Thus $E=G\cap Y$.\par\hspace{4mm} Conversely, if $G$ is open in $X$ and $E=G\cap Y$, then every $p\in E$ has a neighborhood $V_p\subseteq G$. Then $V_p\cap Y\subseteq E$ and so $E$ is open relative to $Y$.
+                \end{proof}
+        \section{Compact Sets}
+            \begin{definition}[Pg. 36]\label{def:6.1}
+                By an \emph{open cover} of a set $E$ in a metric space $X$ we mean a collection $\{G_{\alpha}\}$ of open subsets of $X$ such that $E\subseteq\bigcup_{\alpha} G_{\alpha}$. \cite{rud}
+            \end{definition}
+            \begin{definition}[Pg. 36]\label{def:6.2}
+                A subset $K$ of a metric space $X$ is said to be \emph{compact} if every open cover of $K$ contains a \emph{finite} subcover.\par More explicitly, the requirement is that if $\{G_{\alpha}\}$ is an open cover of $K$, then there are finitely many indices $\alpha_1,\dots,\alpha_n$ such that 
+                    \begin{equation*}
+                        K\subseteq G_{\alpha_1}\cup\cdots\cup G_{\alpha_n}.
+                    \end{equation*}
+                \cite{rud}
+            \end{definition}
+            \begin{remark}
+                In the previous section we saw that if $E\subseteq Y\subseteq X$, then $E$ can be open relative to $Y$ without being open relative to $X$. Thus the property of being open depends on the space in which $E$ is embedded.\par\hspace{4mm} Compactness, however, behaves far better, as we shall now see.
+            \end{remark}
+            \begin{definition}[Pg. 36]\label{def:6.3}
+                A subset $K$ of a metric space $X$ is said to be \emph{compact relative to} $X$ if the requirements of \cref{def:6.2} are met. \cite{rud}
+            \end{definition}
+            \begin{theorem}[Pg. 37]\label{thm:6.1}
+                Suppose $K\subseteq Y\subseteq X$. Then $K$ is compact relative to $X$ if and only if $K$ is compact relative to $Y$. \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    Suppose $K$ is compact relative to $X$. Then we want to show that this implies $K$ is compact relative to $Y$. So we need to show that every open cover (collection of sets are open relative to $Y$) of $K$ admits a finite subcover which contains $K$.\par\hspace{4mm} Let $\{V_{\alpha}\}$ be a collection of sets, open relative to $Y$, such that $K\subseteq\bigcup_{\alpha}V_{\alpha}$. By \cref{thm:5.8}, there are sets $G_{\alpha}$, open relative to $X$, such that $V_{\alpha}=Y\cap G_{\alpha}$, for all $\alpha$; and since $K$ is compact relative to $X$, then by \cref{def:6.2} we have
+                        \begin{equation}
+                            K\subseteq G_{\alpha_1}\cup\cdots\cup G_{\alpha_n}
+                        \end{equation}
+                    for some choice of finitely many indices $\alpha_1,\dots,\alpha_n$. Now since $K\subseteq Y$, then (8) implies
+                        \begin{equation}
+                            \begin{split}
+                                K&\subseteq Y\cap(G_{\alpha_1}\cup\cdots\cup G_{\alpha_n}) \\
+                                &=(Y\cap G_{\alpha_1})\cup\cdots\cup(Y\cap G_{\alpha_n}) \\
+                                &= V_{\alpha_1}\cup\cdots\cup V_{\alpha_n}.
+                            \end{split}
+                        \end{equation}
+                    Hence, $K$ is contained in a finite subcover which proves $K$ is compact relative ti $Y$.\par\hspace{4mm} Conversely, suppose $K$ is compact relative to $Y$. We want to show that this implies $K$ is compact relative to $X$. Thus we need to show that given some collection of subsets $\{G_{\alpha}\}$, open relative to $X$, which cover $K$, that there is a finite subcollection whose union contains $K$. Let $\{G_{\alpha}\}$ be a collection of open subsets of $X$ which cover $K$ and let $V_{\alpha}=Y\cap G_{\alpha}$. Then since $K$ is compact relative to $Y$, (9) will hold for some choice $\alpha_1,\dots,\alpha_n$; and since $V_{\alpha}\subseteq G_{\alpha}$, then (9) implies (8). This completes the proof.
+                \end{proof}
+            \begin{remark}
+                By virtue of this theorem we are able, in many situations, to regard compact sets as metric spaces in their own right without paying attention to any embedding space. This gives rise to discussion of \emph{compact} metric spaces, whereas discussion of \emph{open} metric spaces or \emph{closed} metric spaces does not make sense. This is because every metric space is an open subset of itself, and a closed subset of itself.
+            \end{remark}
+            \begin{theorem}[Pg. 37]\label{thm:6.2}
+                Compact subsets of metric spaces are closed. \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    Let $K$ be a compact subset of a metric space $X$. We shall prove that the complement of $K$ is open.\par\hspace{4mm} Let $p\in K^c$ and $q\in K$. Then define $W_q$ to be a neighborhood around $q$ with radius less than $\frac{1}{2}d(p,q)$. Then the set $\{W_q\}$, where $q$ ranges over every element of $K$ is an open cover of $K$ since for any $t\in K$, there is some $W_t\in\{W_q\}$ such that $t\in W_t$ and so $t\in\bigcup_qW_q$. Hence $K\subseteq\bigcup_qW_q$. Moreover, since $K$ is compact, then there exists a finite number of points $q_1,\dots,q_n$ such that $W=W_{q_1}\cup\cdots\cup W_{q_n}$ and
+                        \begin{equation*}
+                            K\subseteq W.
+                        \end{equation*}
+                    Similarly, let $V_q$ be a neighborhood around $p$ with radius less than $\frac{1}{2}d(q,p)$. Then consider the set $\{V_{q_1},\dots,V_{q_n}\}$. This set denotes a sequence of concentric neighborhoods around $p$, each with radius $\frac{1}{2}d(p,q_i)$. If we take $V=V_{q_1}\cap\cdots\cap V_{q_n}$, then $V$ is the smallest of all the neighborhoods.\par\hspace{4mm} Now suppose there is some $s\in V\cap W$. Then if $r$ is the radius of $V$ we know that $d(p,s)<r<\frac{1}{2}d(p,q_i)$, for all $i$. In other words, $s$ is closer to $p$ than every point in each $W_{q_i}$. Hence $s\notin W$ which is a contradiction. Thus $V\cap W=\varnothing$ and so $V\subseteq K^c$. Therefore $p$ is an interior point of $K^c$ and so $K^c$ is open. Hence $K$ is closed.  
+                \end{proof}
+            \begin{theorem}[Pg. 37]\label{thm:6.3}
+                Closed subsets of compact sets are compact. \normalfont{\cite{rud}}
+            \end{theorem}
+                \begin{proof}
+                    Suppose $F\subseteq K\subseteq X$, $F$ is closed (relative to $X$), and $K$ is compact. Since we need to prove that $F$ is compact, then we will construct an open cover of $F$ and show that it contains a finite subcover.\par\hspace{4mm} Let $\{V_{\alpha}\}$ be an open cover of $F$. Now consider adjoining $F^c$ to $\{V_{\alpha}\}$, i.e., $\{V_{\alpha}\}\cup\{F^c\}$. In doing so we obtain an open cover of $K$, call it $\Omega$.\par\hspace{4mm} To see why $\Omega$ is an open cover of $K$, note that $\{V_{\alpha}\}$ covers all of $F$ which is contained within $K$, and $F^c$ is a set which contains all the elements of $K$ (more generally, elements of $X$) that are not in $F$. So by adjoining these two sets, the result is a collection which covers all of $F$ and covers everything else in $K$ which is not in $F$. Hence $\Omega$ is an open cover of $K$.\par\hspace{4mm} Since $K$ is compact, then there exists a finite subcollection $\Phi\subseteq\Omega$ which covers $K$, and hence, covers $F$. If $F^c$ is a member of $\Phi$, then we may remove it and still retain an open cover of $F$. Note that removing $F^c$ from $\Phi$ implies
+                        \begin{equation*}
+                            \Phi/\{F^c\}\subseteq\{V_{\alpha}\}
+                        \end{equation*}
+                    and so this is a finite subcollection of $\{V_{\alpha}\}$ which covers $F$. Thus $F$ is compact.
+                \end{proof}
+            \begin{corollary}[Pg. 38]\label{cor:6.3.1}
+                If $F$ is closed and $K$ is compact, then $F\cap K$ is compact. \normalfont{\cite{rud}}
+            \end{corollary}
+                \begin{proof}
+                    Since $K$ is a compact subset of a metric space, then by \cref{thm:6.2}, $K$ is closed. Additionally, $F$ is closed and by \cref{thm:5.5}(b), the intersection of closed sets is closed, hence $F\cap K$ is closed. Finally, since $F\cap K$ is a closed subset of $K$ and $K$ is compact, then by \cref{thm:6.3}, $F\cap K$ is compact. 
+                \end{proof}
+            \begin{theorem}[Pg. 38]\label{thm:6.4}
+                If $\{K_{\alpha}\}$ is a collection of subsets of a metric space $X$ such that the intersection of every finite subcollection of $\{K_{\alpha}\}$ is nonempty, then $\bigcap_{\alpha} K_{\alpha}$ is nonempty. \normalfont{\cite{rud}}
+            \end{theorem}
+    \newpage
+    \printbibliography
+ 
+\end{document} 

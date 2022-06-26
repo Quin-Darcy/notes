@@ -1,0 +1,221 @@
+\documentclass[12pt]{article}
+\usepackage[margin=0.97in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 130B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 03/14/19   \\
+{ \textbf{Instructor:}} \ Dr. Cummings \hspace{\fill} \textbf{Assignment:} Homework 5 \\ \hrule}
+
+\justifying
+
+% Document begins here
+
+\begin{enumerate}[leftmargin=*]
+
+    \item State the \textit{product}, \textit{quotient}, and \textit{chain rules}. 
+        \begin{theorem}
+            (The product rule). Let $I$ be an interval and let $f,g\colon I\rightarrow\mathbb{R}$ be differentiable at $c$. Then
+            \begin{equation*}
+                (fg)'(c)=f'(c)g(c)+f(c)g'(c).
+            \end{equation*}
+        \end{theorem}
+        \begin{theorem}
+            (The quotient rule). Let $I$ be an interval and let $f,g\colon I\rightarrow\mathbb{R}$ be differentiable at $c$. Then 
+            \begin{equation*}
+                \bigg(\frac{f}{g}\bigg)'(c)=\frac{f'(c)g(c)-f(c)g'(c)}{[g(c)]^2},
+            \end{equation*}
+            provided that $g(c)\neq 0$.
+        \end{theorem}
+        \begin{theorem}
+            (The chain rule). Let $I_1$ and $I_2$ be intervals and $g\colon I_1\rightarrow I_2$ and $f\colon I_2\rightarrow\mathbb{R}$. If $g$ is differentiable at $c\in I_1$ and $f$ is differentiable at $g(c)\in I_2$, then
+            \begin{equation*}
+                (f\circ g)'(c)=f'(g(c))\dot g'(c).
+            \end{equation*}
+            
+        \end{theorem}
+    
+    \item Prove the \tetit{quotient rule}.
+    
+    \begin{proof}
+        Let $f$ and $g$ be functions defined on an interval $I$, and assume both are differentiable at some point $c\in I$. Additionally, assume $g(c)\neq 0$. Then we have that
+        
+        \begin{equation*}
+            \begin{split}
+                \frac{d}{dx}\bigg(\frac{f(x)}{g(x)}\bigg)\Bigr|_c &= \lim_{x\rightarrow c} \frac{\frac{f(x)}{g(x)}-\frac{f(c)}{g(c)}}{x-c} \\
+                &= \lim_{x\rightarrow c}\frac{\frac{f(x)g(c)-f(c)g(x)}{g(x)g(c)}}{x-c} \\
+                &= \lim_{x\rightarrow c}\frac{f(x)g(c)-f(c)g(x)}{(g(x)g(c))(x-c)} \\
+                &= \lim_{x\rightarrow c}\frac{f(x)g(c)-f(c)g(c)+f(c)g(c)-f(c)g(x)}{(g(x)g(c))(x-c)} \\
+                &= \lim_{x\rightarrow c}\bigg(\frac{f(x)g(c)-f(c)g(c)}{g(x)g(c)(x-c)}-\frac{f(c)g(x)-f(c)g(c)}{g(x)g(c)(x-c)}\bigg) \\
+                &= \lim_{x\rightarrow c}\bigg[\bigg(\frac{f(x)-f(c)}{x-c}\bigg)\bigg(\frac{1}{g(x)}\bigg)-\bigg(\frac{f(c)}{g(x)g(c)}\bigg)\bigg(\frac{g(x)-g(c)}{x-c}\bigg)\bigg] \\
+                &= \bigg(\lim_{x\rightarrow c}\frac{f(x)-f(c)}{x-c}\bigg)\bigg(\lim_{x\rightarrow c}\frac{1}{g(x)}\bigg)-\bigg(\lim_{x\rightarrow c}\frac{f(c)}{g(x)g(c)}\bigg)\bigg(\lim_{x\rightarrow c}\frac{g(x)-g(c)}{x-c}\bigg) \\
+                &= f'(c)\bigg(\frac{1}{g(c)}\bigg)-\bigg(\frac{f(c)}{[g(c)]^2}\bigg)g'(c) \\
+                &= \frac{f'(c)g(c)-f(c)g'(c)}{[g(c)]^2}.
+            \end{split}
+        \end{equation*}
+    \end{proof}
+    
+    \item Is
+        \begin{equation*}
+            f(x)=
+            \begin{cases} 
+                \frac{1}{2}x & \quad\text{if}\quad x\in\mathbb{Q} \\
+                x & \quad\text{if}\quad x\notin\mathbb{Q} \\
+            \end{cases}
+        \end{equation*}
+        differentiable at 0?
+        
+        \begin{proof}
+            Since both $\mathbb{Q}$ and $\mathbb{Q}^c$ are dense in $\mathbb{R}$, then we can find sequences $(x_n)\subseteq\mathbb{Q}$ and $(y_n)\subseteq\mathbb{Q}^c$ such that $\lim x_n=0$ and $\lim y_n=0$. Moreover, both $\frac{1}{2}x$ and $x$ are continuous functions over all of $\mathbb{R}$. So then 
+            
+            \begin{equation*}
+                \lim_{n\rightarrow\infty}\frac{f(x_n)-f(0)}{x_n-0}=\lim_{n\rightarrow\infty}\frac{\frac{1}{2}x_n}{x_n}=\frac{1}{2},
+            \end{equation*}
+            
+            \noindent and
+            
+            \begin{equation*}
+                \lim_{n\rightarrow\infty}\frac{f(y_n)-f(0)}{y_n-0}=\lim_{n\rightarrow\infty}\frac{y_n}{y_n}=1.
+            \end{equation*}
+            
+            \noindent Thus, the limit does not exist and $f(x)$ is not differentiable at 0.
+        \end{proof}
+        
+    \item Use induction to prove $\frac{d}{dx}x^n=nx^{n-1}$ for all $n\in\mathbb{N}$.
+    
+    \begin{proof}
+        Let $n\in\mathbb{N}$, and define $P(n):=\frac{d}{dx}x^n=nx^{n-1}$.
+        
+        \begin{enumerate}[label=(\roman*)]
+            \item\textsc{Base Case:} Let $n=1$. Let $c$ be any arbitrary point in $\mathbb{R}$. Then 
+            
+            \begin{equation*}
+                \begin{split}
+                    P(1)=\frac{d}{dx}x\mid_c &= \lim_{x\rightarrow c}\frac{x-c}{x-c} \\
+                    &= \lim_{x\rightarrow c} 1 \\
+                    &= 1 \\
+                    &= 1\cdot x^0.
+                \end{split}
+            \end{equation*}
+            
+            \noindent Thus, $P(1)$ holds.
+            
+            \item\textsc{inductive step:} Assume $P(k)$ holds for some $k\in\mathbb{N}$, where $k>1$. Let $c$ be any arbitrary point in $\mathbb{R}$. Then assuming we have the product rule, 
+            
+            \begin{equation*}
+                \begin{split}
+                    P(k+1)=\frac{d}{dx}x^{k+1}\mid_c &= \frac{d}{dx}(x^k\cdot x) \\
+                    &= \bigg(\frac{d}{dx}x^k\mid_c\bigg)\cdot c+c^k\cdot\bigg(\frac{d}{dx}x\mid_c\bigg) \\
+                    &= (kc^{k-1})\cdot c+c^k\cdot(1) \\
+                    &= kc^k+c^k \\
+                    &= (k+1)c^k.
+                \end{split}
+            \end{equation*}
+            
+            \noindent Thus, $P(k+1)$ holds. Therefore, for all $n\in\mathbb{N}$, $P(n)$ holds.
+        \end{enumerate}
+    \end{proof}
+    
+    \newpage
+    
+    \item Assume that $I$ is an interval and $f\colon I\rightarrow\mathbb{R}$ is differentiable. Prove that if $f'$ is bounded, then $f$ is uniformly continuous.
+        
+    \begin{proof}
+        Denote $I=[a,b]$ as the interval over which $f$ is differentiable. Let $\varepsilon>0$, and let $\delta>0$ such that $M\delta<\varepsilon$, where $M\in\mathbb{R}$ is the real number that bounds $f'$. Now select $x,y\in (a,b)$ such that $\abs{y-x}<\delta_1$. Then because $f$ is differentiable over $I$, then it is continuous over $I$. Moreover, it is the case that $f$ is differentiable over $(x,y)$ since $(x,y)\subset I$. Thus, by the Mean Value Theorem, there exists $c\in(x,y)$ such that
+        
+        \begin{equation*}
+            f'(c)=\frac{f(y)-f(x)}{y-x}.
+        \end{equation*}
+        
+        \noindent However, since $f'$ is bounded, then it follows that
+        
+        \begin{equation*}
+            f'(c)=\frac{f(y)-f(x)}{y-x}\leq M,
+        \end{equation*}
+        
+        \noindent which implies that $f(y)-f(x)\leq(y-x)M$, which further implies $f(y)-f(x)<\delta_1 M<\varepsilon$. Thus, for all $\varepsilon>0$, there exists $\delta_1>0$ such that for all $x,y\in(a,b)$, if $\abs{y-x}<\delta_1$, then $\abs{f(y)-f(x)}<\varepsilon$. This means that $f$ is uniformly continuous over $(a,b)$.\par 
+        \hspace{8mm}To show that $f$ is uniformly continuous on $I$ we must address the endpoints of $I$, $a$ and $b$. Taking the same $\varepsilon>0$, we know there exists $\delta_2>0$ such that for all $x\in I$, if $\abs{x-a}<\delta_2$, then $\abs{f(x)-f(a)}<\varepsilon$. We know this because $f$ is continuous at $a$. So then assume $\delta_2<\delta_1$. Thus, if $\varepsilon>0$ is any value, then let $\delta_2<\delta_1$. It follows then that if $x,y\in[a,b)$ such that $\abs{y-x}<\delta_2$, then $\abs{f(y)-f(x)}<\varepsilon$. \par 
+        \hspace{8mm}By the same argument, we can find $\delta_3$ such that for any $x,y\in(a,b]$ such that $\abs{y-x}<\delta_3$, then $\abs{f(y)-f(x)}<\varepsilon$, for all $\varepsilon>0$. Finally, let $\varepsilon>0$, then let $\delta=\min\{\delta_2,\delta_3\}$, then for all $x,y\in I$, if $\abs{y-x}<\delta$, then $\abs{f(y)-f(x)}<\varepsilon$. Therefore, $f$ is uniformly continuous over $I$. 
+    \end{proof}
+              
+\end{enumerate}
+
+\end{document}

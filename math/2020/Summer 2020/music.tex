@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{example}
+\newtheorem{example}{Example}[section]
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+
+
+
+\begin{document}
+
+\section{A quick review of modular arithmetic}
+Below we will be referring to the \textit{integers modulo 4}, or the set $\mathbb{Z}_4$. To understand what this is just think of it containing the remainder of every integer after being divided by 4. For example, the number 5 gives remainder 1 after being divided by 4 since $5=1\cdot4+1$. Another example is 58. Think about how many times 4 goes into 58 (14 times since $4\cdot14=56$) and so the remainder is 2. This means that every integer is \textit{congruent} to either 0, 1, 2, 3, or 4. So we would write $5\equiv 1\pmod{4}$ and $58\equiv 2\pmod{4}$ to express ``5 is congruent to 1 mod 4'' and ``58 is congruent to 2 mod 4'', respectively. 
+
+\section{Voicings}
+Let $X$ be the root of a $X$ \textit{maj}7 chord. Then we can describe this chord as a sequence of four tones
+    \begin{equation*}
+        a_0=X,\;a_1=X+4,\;a_2=X+7,\;a_3=X+11,
+    \end{equation*}
+where what we are adding to $X$ is the number of semitones separating it from the next note in the chord. So if $X$ was the note $C$, then $x+7$ would refer to the note 7 semitones up from $C$ which is $G$. Keeping this in mind, then consider the chords produced by letting 
+    \begin{align*}
+        &LH:\;a_i,\; a_i+7,\; a_i+12 \\
+        &RH:\;a_{i+1},\; a_{i+2},\;a_{i+3},\;a_{i+4}
+    \end{align*}
+
+
+
+
+\end{document}

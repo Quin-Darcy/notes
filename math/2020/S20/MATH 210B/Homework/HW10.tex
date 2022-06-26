@@ -1,0 +1,640 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 4/22/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 10 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item[4.] For each of the following, construct the lattice of subgroups, of $G(E/F)$, and the corresponding lattice of subfields of $E$ over $F$. Identify all the normal extensions in the lattice of subfields, and identify which are conjugates of each other. For (b) and (c), express $G(E/F)$ as a permutation group.
+            \begin{enumerate}
+                \item $G(\mathbb{Q}(i,\sqrt[8]{2}))/\mathbb{Q}(i\sqrt{2}))$.
+                    \begin{solution}
+                        To begin we note that if $\zeta=\frac{\sqrt{2}}{2}+i\frac{\sqrt{2}}{2}$ denotes a primitive 8th root of unity, then 
+                            \begin{equation*}
+                                x^8-2=\prod_{k=0}^7(x-\zeta^k\sqrt[8]{2}).
+                            \end{equation*}
+                        And this is the minimal polynomial of $\sqrt[8]{2}$ over $\mathbb{Q}$. Additionally, we have that for any $\sigma\in\text{Aut}(\mathbb{Q}(i,\sqrt[8]{2}))$ it is defined by
+                            \begin{equation*}
+                                \sigma:=\begin{cases} \sqrt[8]{2}\mapsto\zeta^k\sqrt[8]{2} \\ i\mapsto (-1)^ji\end{cases},\quad\text{for }0\leq k\leq 7,\;0\leq j\leq 1.
+                            \end{equation*}
+                        We know from HW 9 that $[\mathbb{Q}(i,\sqrt[8]{2})\colon\mathbb{Q}]=[\mathbb{Q}(i,\sqrt[8]{2})\colon\mathbb{Q}(\sqrt[8]{2})][\mathbb{Q}(\sqrt[8]{2})\colon\mathbb{Q}]=2\cdot 8=16$. Additionally, since $\mathbb{Q}(i,\sqrt[8]{2})$ is the splitting field of $x^8-2$, then $\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}$ is normal. Since $\text{char}(\mathbb{Q})=0$, then the extension is also separable and therefore the extension is Galois. Moreover, since $\mathbb{Q}\subseteq\mathbb{Q}(i\sqrt{2})\subseteq\mathbb{Q}(i,\sqrt[8]{2})$, then $\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(i\sqrt{2})$ is Galois.\par\hspace{4mm} To determine the elements of $G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(i\sqrt{2}))$, we must find those $\sigma\in\text{Aut}(\mathbb{Q}(i,\sqrt[8]{2}))$ such that $\sigma(i\sqrt{2})=i\sqrt{2}$. Hence, we need
+                            \begin{equation*}
+                                \sigma(i\sqrt{2})=\sigma(i)\sigma(\sqrt{2})=(-1)^ji\sigma\big((\sqrt[8]{2})^4\big)=(-1)^ji\big(\zeta^k\sqrt[8]{2}\big)^4=(-1)^ji\zeta^{4k}\sqrt{2}
+                            \end{equation*}
+                        to equal $i\sqrt{2}$. Going through all possible values of $j$ and $k$, we find that the following automorphisms fix $i\sqrt{2}$.
+                            \begin{align*}
+                                \sigma_0&:=\begin{cases}\sqrt[8]{2}\mapsto\sqrt[8]{2} \\ i\mapsto i \end{cases} & \sigma_1&:=\begin{cases} \sqrt[8]{2}\mapsto\zeta^2\sqrt[8]{2} \\ i\mapsto i\end{cases} & \sigma_2&:=\begin{cases} \sqrt[8]{2}\mapsto-\sqrt[8]{2} \\
+                                i\mapsto i\end{cases} \\ \sigma_3&:=\begin{cases} \sqrt[8]{2}\mapsto-\zeta^2\sqrt[8]{2} \\ i\mapsto i \end{cases} & \sigma_4&:=\begin{cases} \sqrt[8]{2}\mapsto\zeta\sqrt[8]{2} \\ i\mapsto-i\end{cases} & \sigma_5&:=\begin{cases} \sqrt[8]{2}\mapsto\zeta^3\sqrt[8]{2} \\ i\mapsto-i\end{cases} \\ \sigma_6&:=\begin{cases} \sqrt[8]{2}\mapsto-\zeta\sqrt[8]{2} \\i\mapsto-i\end{cases} & \sigma_7&:=\begin{cases} \sqrt[8]{2}\mapsto -\zeta^3\sqrt[8]{2} \\ i\mapsto-i\end{cases}.
+                            \end{align*}
+                        Another fact to note is that since $\mathbb{Q}(i,\sqrt[8]{2})$ is the splitting field of $x^8-2$ over $\mathbb{Q}(i\sqrt{2})$, then by (8) of HW 8, $G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(i\sqrt{2}))$ is isomorphic to a subgroup of $S_8$. Namely,
+                            \begin{align*}
+                                \sigma_0&:=(1) & \sigma_1&:=(1526)(3748) & \sigma_2&:=(12)(34)(56)(78) \\
+                                \sigma_3&:=(1625)(3847) & \sigma_4&:=(1324)(5867) & \sigma_5&:=(1728)(3645) \\
+                                \sigma_6&:=(1423)(5768) & \sigma_7&:=(1827)(3546).
+                            \end{align*}
+                        And given that $\sigma_4\sigma_5=\sigma_1$ and $\sigma_5\sigma_4=\sigma_3$, then we can conclude that the Galois group is isomorphic to a nonabelian subgroup of $S_8$ of order 8. Furthermore, since $o(\sigma_2)=2$ and $\sigma_1^2=\sigma_4^2=\sigma_5^2=\sigma_2$, then we can conclude that the Galois group is isomorphic to the quaternion group $Q$. As such we can associate $\sigma_0\rightarrow 1$, $\sigma_2\rightarrow -1$, $\sigma_1\rightarrow i$, $\sigma_4\rightarrow j$, and $\sigma_5\rightarrow k$. By relabelling, it follows that 
+                            \begin{equation*}
+                                G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(i\sqrt{2}))=\{\sigma_0,\sigma_2,\sigma_1,-\sigma_1,\sigma_4,-\sigma_4,\sigma_5,-\sigma_5\}.
+                            \end{equation*}
+                        And so the lattice of subgroups of the Galois group is
+                            \begin{center}
+                                \begin{tikzpicture}[node distance=3.5cm]
+                                    \node (e) {$\{\sigma_0\}$};
+                                    \node (S2) [above of=e] {$\{\sigma_0,\sigma_2\}$};
+                                    \node (S4) [above of=S2] {$\{\sigma_0,\sigma_4,\sigma_2,-\sigma_4\}$};
+                                    \node (S1) [left of=S4] {$\{\sigma_0,\sigma_1,\sigma_2,-\sigma_1\}$};
+                                    \node (S5) [right of=S4] {$\{\sigma_0,\sigma_5,\sigma_2,-\sigma_5\}$};
+                                    \node (G) [above of=S4] {$G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(i\sqrt{2}))$};
+                                    \draw (e) -- (S2);
+                                    \draw (S2) -- (S1);
+                                    \draw (S2) -- (S4);
+                                    \draw (S2) -- (S5);
+                                    \draw (S1) -- (G);
+                                    \draw (S4) -- (G);
+                                    \draw (S5) -- (G);
+                                \end{tikzpicture}
+                            \end{center}
+                        Finally, to construct the lattice of subfields we must determine the fixed fields of: $\langle\sigma_0\rangle$, $\langle\sigma_2\rangle$, $\langle\sigma_1\rangle$, $\langle\sigma_4\rangle$, and $\langle\sigma_5\rangle$. To begin, it is clear that $F_{\langle\sigma_0\rangle}=\mathbb{Q}(i\sqrt{2})$. Then taking 
+                            \begin{equation*}
+                                \{1,\sqrt[8]{2},\sqrt[4]{2},\sqrt{2},i,i\sqrt[8]{2},i\sqrt[4]{2},i\sqrt{2}\}
+                            \end{equation*}
+                        as a basis for $\mathbb{Q}(i,\sqrt[8]{2})$ over $\mathbb{Q}(i\sqrt{2})$ then solving for when $\sigma_i(x)=x$ for $i=1,2,4,5$, we get that\newpage 
+                            \begin{align*}
+                                F_{\langle\sigma_2\rangle}&=\mathbb{Q}(i,\sqrt[4]{2}) &  F_{\langle\sigma_1\rangle}&=\mathbb{Q}(i,\sqrt{2}) \\ F_{\langle\sigma_4\rangle}&=\mathbb{Q}(\sqrt[4]{2}+i\sqrt[4]{2}) &  F_{\langle\sigma_5\rangle}&=\mathbb{Q}(\sqrt[4]{2}-i\sqrt[4]{2}) 
+                            \end{align*}
+                         Thus, the lattice of subfields is
+                            \begin{center}
+                                \begin{tikzpicture}[node distance=3.5cm]
+                                    \node (a) {$\mathbb{Q}(i\sqrt{2})$};
+                                    \node (b) [above of=a] {$\mathbb{Q}(\sqrt[4]{2}+i\sqrt[4]{2})$};
+                                    \node (c) [left of=b] {$\mathbb{Q}(i,\sqrt{2})$};
+                                    \node (d) [right of=b] {$\mathbb{Q}(\sqrt[4]{2}-i\sqrt[4]{2})$};
+                                    \node (e) [above of=b] {$\mathbb{Q}(i,\sqrt[4]{2})$};
+                                    \node (f) [above of=e] {$\mathbb{Q}(i,\sqrt[8]{2})$};
+                                    \draw (a) -- (c);
+                                    \draw (a) -- (b);
+                                    \draw (a) -- (d);
+                                    \draw (c) -- (e);
+                                    \draw (b) -- (e);
+                                    \draw (d) -- (e);
+                                    \draw (e) -- (f);
+                                \end{tikzpicture}
+                            \end{center}
+                        Now we must determine the normal extensions. Since $\langle\sigma_1\rangle$, $\langle \sigma_4\rangle$, and $\langle\sigma_5\rangle$ are all normal subgroups (because they all have index 2), then the extensions to which they correspond are normal. Lastly, we find that $\sigma_4(\langle\sigma_1\rangle)=\langle\sigma_5\rangle$, $-\sigma_5(\langle\sigma_1\rangle)=\langle\sigma_4\rangle$. And so since each of the subgroups are conjugate, then 
+                            \begin{equation*}
+                                \mathbb{Q}(i,\sqrt{2}),\quad\mathbb{Q}(\sqrt[4]{2}+i\sqrt[4]{2}),\quad\mathbb{Q}(\sqrt[4]{2}-i\sqrt[4]{2})
+                            \end{equation*}
+                        are all conjugate.
+                    \end{solution}
+                \item The Galois group of $(x^2-3)(x^3-5)$ over $\mathbb{Q}$.
+                    \begin{solution}
+                        To begin we first note that 
+                            \begin{equation*}
+                                (x^2-3)(x^3-5)=(x-\sqrt{3})(x+\sqrt{3})(x-\sqrt[3]{5})(x-\omega\sqrt[3]{5})(x-\omega^2\sqrt[3]{5}).
+                            \end{equation*}
+                        And so we need the splitting field for this polynomial. It must include each of these roots. Thus, $\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})$ is an extension that would admit each root. The degree of this extension over $\mathbb{Q}$ is
+                            \begin{equation*}
+                                [\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})\colon\mathbb{Q}(\sqrt{3},\sqrt[3]{5})][\mathbb{Q}(\sqrt{3},\sqrt[3]{5})\colon\mathbb{Q}(\sqrt[3]{5})][\mathbb{Q}(\sqrt[3]{5})\colon\mathbb{Q}]=2\cdot2\cdot3=12.
+                            \end{equation*}
+                        Moreover, this must be the splitting field since the minimal polynomials for $\omega, \sqrt{3},$ and $\sqrt[4]{5}$ all have degrees $2,2,$ and $3$, respectively, and none of the roots of the polynomials are common. Hence, $\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})/\mathbb{Q}$ is a Galois extension.\par\hspace{4mm} We know that any automorphism of this extension is defined by where it sends $\omega, \sqrt{3},\sqrt[3]{5}$. And so we have that for any automorphism $\sigma$ of the extension,
+                            \begin{equation*}
+                                \sigma(\omega)\in\{\omega,\omega^2\},\quad\sigma(\sqrt{3})\in\{\sqrt{3},-\sqrt{3}\},\quad\sigma(\sqrt[3]{5})\in\{\sqrt[3]{5},\omega\sqrt[3]{5},\omega^2\sqrt[3]{5}\}.
+                            \end{equation*}
+                        Thus, the elements of the Galois group are
+                            \begin{align*}
+                                \sigma_0&:=\begin{cases} \sqrt[3]{5}\mapsto\sqrt[3]{5} \\ \sqrt{3}\mapsto\sqrt{3} \\\omega\mapsto\omega\end{cases} & \sigma_1&:=\begin{cases} \sqrt[3]{5}\mapsto\omega\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega\end{cases} & \sigma_2&:=\begin{cases}\sqrt[3]{5}\mapsto\omega^2\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega \end{cases} \\ \sigma_3&:=\begin{cases} \sqrt[3]{5}\mapsto\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega\end{cases} & \sigma_4&:=\begin{cases} \sqrt[3]{5}\mapsto\omega\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega\end{cases} & \sigma_5&:=\begin{cases} \sqrt[3]{5}\mapsto\omega^2\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega\end{cases} \\ \sigma_6&:=\begin{cases} \sqrt[3]{5}\mapsto\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega^2\end{cases} & \sigma_7&:=\begin{cases} \sqrt[3]{5}\mapsto\omega\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega^2\end{cases} & \sigma_8&:=\begin{cases} \sqrt[3]{5}\mapsto\omega^2\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega^2\end{cases} \\ \sigma_9&:=\begin{cases} \sqrt[3]{5}\mapsto\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega^2\end{cases} & \sigma_{10}&:=\begin{cases}\sqrt[3]{5}\mapsto\omega\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega^2 \end{cases} & \sigma_{11}&:=\begin{cases} \sqrt[3]{5}\mapsto\omega^2\sqrt[3]{5} \\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega^2\end{cases}
+                            \end{align*}
+                        Before we associate each of these automorphisms with an element from $S_{5}$, let us note that from HW 9, we saw that $G(\mathbb{Q}(\omega,\sqrt[3]{2})/\mathbb{Q})\cong S_3$
+                        and so 
+                            \begin{equation*}
+                                S_3\cong G(\mathbb{Q}(\omega,\sqrt[3]{5})/\mathbb{Q})\subseteq G(\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})/\mathbb{Q}).
+                            \end{equation*}
+                        What this means is that
+                            \begin{equation*}
+                                G(\mathbb{Q}(\omega,\sqrt[3]{5})/\mathbb{Q})=\{\sigma_0,\sigma_1,\sigma_2,\sigma_6,\sigma_7,\sigma_8\}
+                            \end{equation*}
+                        Thus, the remaining 6 automorphisms in our list can be obtained by applying $\sigma_3$ to each of the 6 in the above set. Hence, we need only associate the 6 in the set with a permutation and $\sigma_3$ with a permutation and we can recover the rest.\par\hspace{4mm} Letting
+                            \begin{equation*}
+                                c_1=\sqrt[3]{5},c_2=\omega\sqrt[3]{5},c_3=\omega^2\sqrt[3]{5},c_4=\sqrt{3},c_5=-\sqrt{3},
+                            \end{equation*}
+                        then we have that 
+                            \begin{align*}
+                                \sigma_0&:=(1) & \sigma_1&:=(123) & \sigma_2&:=(132) \\
+                                \sigma_6&:=(23) & \sigma_7&:=(12) & \sigma_8&:=(13).
+                            \end{align*}
+                        And we also have that 
+                            \begin{equation*}
+                                \sigma_3:=(45).
+                            \end{equation*}
+                        Thus, the remaining 6 permutations are 
+                            \begin{align*}
+                                \sigma_0\sigma_3=\sigma_3&:=(45) & \sigma_1\sigma_3=\sigma_4&:=(123)(45) & \sigma_2\sigma_3=\sigma_5&:=(132)(45) \\
+                                \sigma_6\sigma_3=\sigma_9&:=(23)(45) & \sigma_7\sigma_3=\sigma_{10}&:=(12)(45) & \sigma_8\sigma_3=\sigma_{11}&:=(13)(45).
+                            \end{align*}
+                        Now we will determine all the subgroups of the Galois group. Since the order is 12, then we are looking for subgroups of order, 2,3,4,6. To help with this calculation, we will refer to the Cayley table below:
+                            \begin{table}[htp]
+                            \centering
+                                \begin{tabular}{|
+                                >{\columncolor[HTML]{C0C0C0}}l |l|l|l|l|l|l|l|l|l|l|l|l|}
+                                \hline
+                                    & \cellcolor[HTML]{C0C0C0}$\sigma_0$ & \cellcolor[HTML]{C0C0C0}$\sigma_1$ & \cellcolor[HTML]{C0C0C0}$\sigma_2$ & \cellcolor[HTML]{C0C0C0}$\sigma_3$ & \cellcolor[HTML]{C0C0C0}$\sigma_4$ & \cellcolor[HTML]{C0C0C0}$\sigma_5$ & \cellcolor[HTML]{C0C0C0}$\sigma_6$ & \cellcolor[HTML]{C0C0C0}$\sigma_7$ & \cellcolor[HTML]{C0C0C0}$\sigma_8$ & \cellcolor[HTML]{C0C0C0}$\sigma_9$ & \cellcolor[HTML]{C0C0C0}$\sigma_{10}$ & \cellcolor[HTML]{C0C0C0}$\sigma_{11}$ \\ \hline
+                                    $\sigma_0$ & $\sigma_0$ & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\sigma_4$ & $\sigma_5$ & $\sigma_6$ & $\sigma_7$ & $\sigma_8$ & $\sigma_9$ & $\sigma_{10}$ & $\sigma_{11}$ \\ \hline
+                                    $\sigma_1$ & $\sigma_1$ & $\sigma_2$ & $\sigma_0$ & $\sigma_4$ & $\sigma_5$ & $\sigma_3$ & $\sigma_7$ & $\sigma_8$ & $\sigma_6$ & $\sigma_{10}$ & $\sigma_{11}$ & $\sigma_9$ \\ \hline
+                                    $\sigma_2$ & $\sigma_2$ & $\sigma_0$ & $\sigma_1$ & $\sigma_5$ & $\sigma_3$ & $\sigma_4$ & $\sigma_8$ & $\sigma_6$ & $\sigma_7$ & $\sigma_{11}$ & $\sigma_9$ & $\sigma_{10}$ \\ \hline
+                                    $\sigma_3$ & $\sigma_3$ & $\sigma_4$ & $\sigma_5$ & $\sigma_0$ & $\sigma_1$ & $\sigma_2$ & $\sigma_9$ & $\sigma_{10}$ & $\sigma_{11}$ & $\sigma_6$ & $\sigma_7$ & $\sigma_8$ \\ \hline
+                                    $\sigma_4$ & $\sigma_4$ & $\sigma_5$ & $\sigma_3$ & $\sigma_1$ & $\sigma_2$ & $\sigma_0$ & $\sigma_{10}$ & $\sigma_{11}$ & $\sigma_9$ & $\sigma_7$ & $\sigma_8$ & $\sigma_6$ \\ \hline
+                                    $\sigma_5$ & $\sigma_5$ & $\sigma_3$ & $\sigma_4$ & $\sigma_2$ & $\sigma_0$ & $\sigma_1$ & $\sigma_{11}$ & $\sigma_9$ & $\sigma_{10}$ & $\sigma_8$ & $\sigma_6$ & $\sigma_7$ \\ \hline
+                                    $\sigma_6$ & $\sigma_6$ & $\sigma_8$ & $\sigma_7$ & $\sigma_9$ & $\sigma_{11}$ & $\sigma_{10}$ & $\sigma_0$ & $\sigma_2$ & $\sigma_1$ & $\sigma_3$ & $\sigma_5$ & $\sigma_4$ \\ \hline
+                                    $\sigma_7$ & $\sigma_7$ & $\sigma_6$ & $\sigma_8$ & $\sigma_{10}$ & $\sigma_9$ & $\sigma_{11}$ & $\sigma_1$ & $\sigma_0$ & $\sigma_2$ & $\sigma_4$ & $\sigma_3$ & $\sigma_5$ \\ \hline
+                                    $\sigma_8$ & $\sigma_8$ & $\sigma_7$ & $\sigma_6$ & $\sigma_{11}$ & $\sigma_{10}$ & $\sigma_9$ & $\sigma_2$ & $\sigma_1$ & $\sigma_0$ & $\sigma_5$ & $\sigma_4$ & $\sigma_3$ \\ \hline
+                                    $\sigma_9$ & $\sigma_9$ & $\sigma_{11}$ & $\sigma_{10}$ & $\sigma_6$ & $\sigma_8$ & $\sigma_7$ & $\sigma_3$ & $\sigma_5$ & $\sigma_4$ & $\sigma_0$ & $\sigma_2$ & $\sigma_1$ \\ \hline
+                                    $\sigma_{10}$ & $\sigma_{10}$ & $\sigma_9$ & $\sigma_{11}$ & $\sigma_7$ & $\sigma_6$ & $\sigma_8$ & $\sigma_4$ & $\sigma_3$ & $\sigma_5$ & $\sigma_1$ & $\sigma_0$ & $\sigma_2$ \\ \hline
+                                    $\sigma_{11}$ & $\sigma_{11}$ & $\sigma_{10}$ & $\sigma_9$ & $\sigma_8$ & $\sigma_7$ & $\sigma_6$ & $\sigma_5$ & $\sigma_4$ & $\sigma_3$ & $\sigma_2$ & $\sigma_1$ & $\sigma_0$ \\ \hline
+                                \end{tabular}
+                            \end{table}
+                            \begin{align*}
+                                \langle\sigma_0\rangle&=\{\sigma_0\} & \langle\sigma_1\rangle&=\{\sigma_0,\sigma_1,\sigma_2\} & \langle\sigma_2\rangle&=\langle\sigma_1\rangle \\
+                                \langle\sigma_3\rangle&=\{\sigma_0,\sigma_3\} & \langle\sigma_4\rangle&=\{\sigma_0,\sigma_4,\sigma_2,\sigma_3,\sigma_1,\sigma_5\} & \langle\sigma_5\rangle&=\langle\sigma_4\rangle \\
+                                \langle\sigma_6\rangle&=\{\sigma_0,\sigma_6\} & \langle\sigma_7\rangle&=\{\sigma_0,\sigma_7\} & \langle\sigma_8\rangle&=\{\sigma_0,\sigma_8\} \\
+                                \langle\sigma_9\rangle&=\{\sigma_0,\sigma_9\} & \langle\sigma_{10}\rangle&=\{\sigma_0,\sigma_{10}\} & \langle\sigma_{11}\rangle&=\{\sigma_0,\sigma_{11}\} \\
+                                \langle\sigma_1,\sigma_6\rangle&=\{\sigma_0,\sigma_1,\sigma_2,\sigma_6,\sigma_7,\sigma_8\} & \langle\sigma_1,\sigma_9\rangle&=\{\sigma_0,\sigma_1,\sigma_2,\sigma_9,\sigma_{10},\sigma_{11}\} & \langle\sigma_3,\sigma_6\rangle&=\{\sigma_0,\sigma_3,\sigma_6,\sigma_9\} \\ \langle\sigma_3,\sigma_7\rangle&=\{\sigma_0,\sigma_3,\sigma_7,\sigma_{10}\} & \langle\sigma_3,\sigma_8\rangle&=\{\sigma_0,\sigma_3,\sigma_8,\sigma_{11}\} 
+                            \end{align*}
+                        Based on these subgroups, we can construct the lattice of subgroups of the Galois group.\newpage
+                            \begin{center}
+                                \begin{tikzpicture}[node distance=1.3cm]
+                                    \node (s0) {$\color{blue}\langle\sigma_0\rangle$};
+                                    \node (s9) [above of=s0] {$\color{red}\langle\sigma_9\rangle$};
+                                    \node (s10) [right of=s9] {$\color{red}\langle\sigma_{10}\rangle$};
+                                    \node (s11) [right of=s10] {$\color{red}\langle\sigma_{11}\rangle$};
+                                    \node (x) [right of=s11] {};
+                                    \node (y) [right of=x] {};
+                                    \node (z) [right of=y] {};
+                                    \node (w) [right of=z] {};
+                                    \node (s1) [above of=w] {$\color{blue}\langle\sigma_1\rangle$};
+                                    \node (u) [left of=s9] {};
+                                    \node (s8) [left of=u] {$\color{red}\langle\sigma_8\rangle$};
+                                    \node (s7) [left of=s8] {$\color{red}\langle\sigma_7\rangle$};
+                                    \node (s6) [left of=s7] {$\color{red}\langle\sigma_6\rangle$};
+                                    \node (s) [left of=s6] {};
+                                    \node (s3) [left of=s] {$\color{blue}\langle\sigma_3\rangle$};
+                                    \node (t) [above of=s7] {};
+                                    \node (s3s8) [above of=t] {$\color{red}\langle\sigma_3,\sigma_8\rangle$};
+                                    \node (s3s7) [left of=s3s8] {$\color{red}\langle\sigma_3,\sigma_7\rangle$};
+                                    \node (s3s6) [left of=s3s7] {$\color{red}\langle\sigma_3,\sigma_6\rangle$};
+                                    \node (e) [above of=s9] {};
+                                    \node (f) [above of=e] {};
+                                    \node (s4) [above of=f] {$\color{blue}\langle\sigma_4\rangle$};
+                                    \node (a) [right of=s4] {};
+                                    \node (s1s6) [right of=a] {$\color{blue}\langle\sigma_1,\sigma_6\rangle$};
+                                    \node (b) [right of=s1s6] {};
+                                    \node (s1s9) [right of=b] {$\color{blue}\langle\sigma_1,\sigma_9\rangle$};
+                                    \node (g) [above of=s4] {$\color{blue}G(\mathbb{Q}(\omega,\sqrt{3},\sqrt[4]{5})/\mathbb{Q})$};
+                                    \draw (s0) -- (s9);
+                                    \draw (s0) -- (s6);
+                                    \draw (s0) -- (s3);
+                                    \draw (s0) -- (s1);
+                                    \draw (s0) -- (s7);
+                                    \draw (s0) -- (s10);
+                                    \draw (s0) -- (s8);
+                                    \draw (s0) -- (s11);
+                                    \draw (s9) -- (s3s6);
+                                    \draw (s6) -- (s3s6);
+                                    \draw (s3) -- (s3s6);
+                                    \draw (s3) -- (s3s7);
+                                    \draw (s3) -- (s3s8);
+                                    \draw (s7) -- (s3s7);
+                                    \draw (s10) -- (s3s7);
+                                    \draw (s8) -- (s3s8);
+                                    \draw (s11) -- (s3s8);
+                                    \draw (s3) -- (s4);
+                                    \draw (s1) -- (s4);
+                                    \draw (s6) -- (s1s6);
+                                    \draw (s1) -- (s1s6);
+                                    \draw (s7) -- (s1s6);
+                                    \draw (s8) -- (s1s6);
+                                    \draw (s9) -- (s1s9);
+                                    \draw (s1) -- (s1s9);
+                                    \draw (s10) -- (s1s9);
+                                    \draw (s11) -- (s1s9);
+                                    \draw (s4) -- (g);
+                                    \draw (s1s6) -- (g);
+                                    \draw (s1s9) -- (g);
+                                    \draw (s3s6) -- (g);
+                                    \draw (s3s7) -- (g);
+                                    \draw (s3s8) -- (g);
+                                \end{tikzpicture}
+                            \end{center}
+                            \begin{center}
+                                \resizebox{17cm}{7cm}{
+                                    \begin{tikzpicture}[node distance=2.25cm]
+                                        \node (s0) {$\color{blue}\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})$};
+                                        \node (s9) [below of=s0] {$\color{red}\mathbb{Q}(i,\sqrt[3]{5})$};
+                                        \node (s10) [right of=s9] {$\color{red}\mathbb{Q}(i,\omega\sqrt[3]{5})$};
+                                        \node (s11) [right of=s10] {$\color{red}\mathbb{Q}(i,\omega^2\sqrt[3]{5})$};
+                                        \node (x) [right of=s11] {};
+                                        \node (y) [right of=x] {};
+                                        \node (z) [right of=y] {};
+                                        \node (w) [right of=z] {};
+                                        \node (s1) [below of=w] {$\color{blue}\mathbb{Q}(\omega,\sqrt{3})$};
+                                        \node (u) [left of=s9] {};
+                                        \node (s8) [left of=u] {$\color{red}\mathbb{Q}(\sqrt{3},\omega^2\sqrt[3]{5})$};
+                                        \node (s7) [left of=s8] {$\color{red}\mathbb{Q}(\sqrt{3},\omega\sqrt[3]{5})$};
+                                        \node (s6) [left of=s7] {$\color{red}\mathbb{Q}(\sqrt{3},\sqrt[3]{5})$};
+                                        \node (s) [left of=s6] {};
+                                        \node (s3) [left of=s] {$\color{blue}\mathbb{Q}(\omega,\sqrt[3]{5})$};
+                                        \node (t) [below of=s7] {};
+                                        \node (s3s8) [below of=t] {$\color{red}\mathbb{Q}(\omega^2\sqrt[3]{5})$};
+                                        \node (s3s7) [left of=s3s8] {$\color{red}\mathbb{Q}(\omega\sqrt[3]{5})$};
+                                        \node (s3s6) [left of=s3s7] {$\color{red}\mathbb{Q}(\sqrt[3]{5})$};
+                                        \node (e) [below of=s9] {};
+                                        \node (f) [below of=e] {};
+                                        \node (s4) [below of=f] {$\color{blue}\mathbb{Q}(\omega)$};
+                                        \node (a) [right of=s4] {};
+                                        \node (s1s6) [right of=a] {$\color{blue}\mathbb{Q}(\sqrt{3})$};
+                                        \node (b) [right of=s1s6] {};
+                                        \node (s1s9) [right of=b] {$\color{blue}\mathbb{Q}(i)$};
+                                        \node (g) [below of=s4] {$\color{blue}\mathbb{Q}$};
+                                        \draw (s0) -- (s9);
+                                        \draw (s0) -- (s6);
+                                        \draw (s0) -- (s3);
+                                        \draw (s0) -- (s1);
+                                        \draw (s0) -- (s7);
+                                        \draw (s0) -- (s10);
+                                        \draw (s0) -- (s8);
+                                        \draw (s0) -- (s11);
+                                        \draw (s9) -- (s3s6);
+                                        \draw (s6) -- (s3s6);
+                                        \draw (s3) -- (s3s6);
+                                        \draw (s3) -- (s3s7);
+                                        \draw (s3) -- (s3s8);
+                                        \draw (s7) -- (s3s7);
+                                        \draw (s10) -- (s3s7);
+                                        \draw (s8) -- (s3s8);
+                                        \draw (s11) -- (s3s8);
+                                        \draw (s3) -- (s4);
+                                        \draw (s1) -- (s4);
+                                        \draw (s6) -- (s1s6);
+                                        \draw (s1) -- (s1s6);
+                                        \draw (s7) -- (s1s6);
+                                        \draw (s8) -- (s1s6);
+                                        \draw (s9) -- (s1s9);
+                                        \draw (s1) -- (s1s9);
+                                        \draw (s10) -- (s1s9);
+                                        \draw (s11) -- (s1s9);
+                                        \draw (s4) -- (g);
+                                        \draw (s1s6) -- (g);
+                                        \draw (s1s9) -- (g);
+                                        \draw (s3s6) -- (g);
+                                        \draw (s3s7) -- (g);
+                                        \draw (s3s8) -- (g);
+                                    \end{tikzpicture}
+                                }
+                            \end{center}\newpage
+                        The calculation of the first subgroup lattice went as follows:
+                            \begin{itemize}
+                                \item \textbf{Subsets:} With the given subgroups, we need to determine which are contained in the others. On the left will be the subgroup and on the right will be a list of all which it contains.
+                                    \begin{align*}
+                                        \langle\sigma_0\rangle&:\langle\sigma_0\rangle & \langle\sigma_3,\sigma_6\rangle&:\langle\sigma_0\rangle,\langle\sigma_3\rangle,\langle\sigma_6\rangle,\langle\sigma_9\rangle \\
+                                        \langle\sigma_3\rangle&:\langle\sigma_0\rangle & \langle\sigma_3,\sigma_7\rangle&: \langle\sigma_0\rangle,\langle\sigma_3\rangle,\langle\sigma_7\rangle,\langle\sigma_{10}\rangle \\
+                                        \langle\sigma_6\rangle&:\langle\sigma_0\rangle & \langle\sigma_3,\sigma_8\rangle&: \langle\sigma_0\rangle,\langle\sigma_3\rangle,\langle\sigma_8\rangle,\langle\sigma_{11}\rangle\\
+                                        \langle\sigma_7\rangle&:\langle\sigma_0\rangle & \langle\sigma_1\rangle&:\langle\sigma_0\rangle \\
+                                        \langle\sigma_8\rangle&:\langle\sigma_0\rangle & \langle\sigma_4\rangle&: \langle\sigma_0\rangle,\langle\sigma_1\rangle,\langle\sigma_3\rangle,\langle\sigma_1\rangle \\
+                                        \langle\sigma_9\rangle&:\langle\sigma_0\rangle & \langle\sigma_1,\sigma_6\rangle&:\langle\sigma_0\rangle,\langle\sigma_1\rangle,\langle\sigma_6\rangle,\langle\sigma_7\rangle,\langle\sigma_8\rangle\\
+                                        \langle\sigma_{10}\rangle&:\langle\sigma_0\rangle & \langle\sigma_1,\sigma_9\rangle&:\langle\sigma_0\rangle,\langle\sigma_1\rangle,\langle\sigma_9\rangle,\langle\sigma_{10}\rangle,\langle\sigma_{11}\rangle\\
+                                        \langle\sigma_{11}\rangle&:\langle\sigma_0\rangle
+                                    \end{align*}
+                                \item\textbf{Index}: On the left is the subgroup and on the right is its index in the groups which contain it, listed in increasing order.
+                                    \begin{align*}
+                                        \langle\sigma_3\rangle&:2,2,2,3,6 & \langle\sigma_1\rangle&:2,2,2,4\\
+                                        \langle\sigma_6\rangle&:2,2,2,3,6 & \langle\sigma_3,\sigma_6\rangle&:3\\
+                                        \langle\sigma_7\rangle&:2,2,2,3,6 & \langle\sigma_3,\sigma_7\rangle&:3\\
+                                        \langle\sigma_8\rangle&:2,2,2,3,6 & \langle\sigma_3,\sigma_8\rangle&:3\\
+                                        \langle\sigma_9\rangle&:2,2,2,3,6 & \langle\sigma_4\rangle&:2\\
+                                        \langle\sigma_{10}\rangle&:2,2,2,3,6 & \langle\sigma_1,\sigma_6\rangle&:2\\
+                                        \langle\sigma_{11}\rangle&:2,2,2,3,6 & \langle\sigma_1,\sigma_9\rangle&:2
+                                    \end{align*}
+                                \item\textbf{Normality}: In order for a subgroup $H$ of a group $G$ to be normal, it must be the case that for all $x\in G$, $xHx^{-1}=H$. Take for example $\sigma_1:(123)$. 
+                            \end{itemize}
+                    \end{solution}
+                \item The Galois group of $(x^2-2)(x^2-3)(x^2-5)$ over $\mathbb{Q}$.
+                    \begin{solution}
+                        The splitting field for this polynomial is $\mathbb{Q}(\sqrt{2},\sqrt{3},\sqrt{5})$. The automorphisms of this extension are 8 in total and are defined by 
+                            \begin{equation*}
+                                \sigma:=\begin{cases} \sqrt{2}\mapsto(-1)^i\sqrt{2} \\ \sqrt{3}\mapsto(-1)^j\sqrt{3} \\ \sqrt{5}\mapsto(-1)^k\sqrt{5} \end{cases},\quad\text{for }\; 0\leq i,j,k\leq 1
+                            \end{equation*}
+                        The Galois group is therefore isomorphic to $\mathbb{Z}_2\times\mathbb{Z}_2\times\mathbb{Z}_2$ and hence all of its subgroups are normal since the group is abelian. The automorphisms are 
+                            \begin{align*}
+                                \sigma_0&:=\begin{cases} \sqrt{2}\mapsto\sqrt{2}\\\sqrt{3}\mapsto\sqrt{3}\\\sqrt{5}\mapsto\sqrt{5} \end{cases} & \sigma_1&:=\begin{cases} \sqrt{2}\mapsto-\sqrt{2}\\\sqrt{3}\mapsto\sqrt{3}\\\sqrt{5}\mapsto\sqrt{5} \end{cases} & \sigma_2&:=\begin{cases}\sqrt{2}\mapsto\sqrt{2}\\\sqrt{3}\mapsto-\sqrt{3}\\\sqrt{5}\mapsto\sqrt{5} \end{cases} & \sigma_3&:=\begin{cases}\sqrt{2}\mapsto\sqrt{2}\\\sqrt{3}\mapsto\sqrt{3}\\\sqrt{5}\mapsto-\sqrt{5} \end{cases} \\
+                                \sigma_4&:=\begin{cases}\sqrt{2}\mapsto-\sqrt{2}\\\sqrt{3}\mapsto-\sqrt{3}\\\sqrt{5}\mapsto\sqrt{5} \end{cases} & \sigma_5&:=\begin{cases}\sqrt{2}\mapsto-\sqrt{2}\\\sqrt{3}\mapsto\sqrt{3}\\\sqrt{5}\mapsto-\sqrt{5} \end{cases} & \sigma_6&:=\begin{cases}\sqrt{2}\mapsto\sqrt{2}\\\sqrt{3}\mapsto-\sqrt{3}\\\sqrt{5}\mapsto-\sqrt{5} \end{cases} & \sigma_7&:=\begin{cases}\sqrt{2}\mapsto-\sqrt{2}\\\sqrt{3}\mapsto-\sqrt{3}\\\sqrt{5}\mapsto-\sqrt{5} \end{cases}
+                            \end{align*}
+                        The subgroups of the Galois group are
+                            \begin{align*}
+                                \langle\sigma_0\rangle&=\{\sigma_0\} & \langle\sigma_1\rangle&=\{\sigma_0,\sigma_1\} & \langle\sigma_2\rangle&=\{\sigma_0,\sigma_2\} & \langle\sigma_3\rangle&=\{\sigma_0,\sigma_3\} \\
+                                \langle\sigma_4\rangle&=\{\sigma_0,\sigma_4\} & \langle\sigma_5\rangle&=\{\sigma_0,\sigma_5\} & \langle\sigma_6\rangle&=\{\sigma_0,\sigma_6\} & \langle\sigma_7\rangle&=\{\sigma_0,\sigma_7\} \\
+                                \langle\sigma_1,\sigma_2\rangle&=\{\sigma_0,\sigma_1,\sigma_2,\sigma_4\} & \langle\sigma_1,\sigma_3\rangle&=\{\sigma_0,\sigma_1,\sigma_3,\sigma_5\} & \langle\sigma_1,\sigma_6\rangle&=\{\sigma_0,\sigma_1,\sigma_6,\sigma_7\} \\
+                                \langle\sigma_2,\sigma_3\rangle&=\{\sigma_0,\sigma_2,\sigma_3,\sigma_6\} & \langle\sigma_2,\sigma_5\rangle&=\{\sigma_0,\sigma_2,\sigma_5,\sigma_7\} & \langle\sigma_3,\sigma_4\rangle&=\{\sigma_0,\sigma_3,\sigma_4,\sigma_7\} \\
+                                \langle\sigma_4,\sigma_5\rangle&=\{\sigma_0,\sigma_4,\sigma_5,\sigma_6\}
+                            \end{align*}
+                        And the lattice of subgroups is
+                            \begin{center}
+                                \begin{tikzpicture}[node distance=2.3cm]
+                                    \node (s0) {$\langle\sigma_0\rangle$};
+                                    \node (s7) [above of=s0] {$\langle\sigma_7\rangle$};
+                                    \node (s3) [left of=s7] {$\langle\sigma_3\rangle$};
+                                    \node (s2) [left of=s3] {$\langle\sigma_2\rangle$};
+                                    \node (s1) [left of=s2] {$\langle\sigma_1\rangle$};
+                                    \node (s4) [right of=s7] {$\langle\sigma_4\rangle$};
+                                    \node (s5) [right of=s4] {$\langle\sigma_5\rangle$};
+                                    \node (s6) [right of=s5] {$\langle\sigma_6\rangle$};
+                                    \node (s1s2) [above of=s1] {$\langle\sigma_1,\sigma_2\rangle$};
+                                    \node (s1s3) [above of=s2] {$\langle\sigma_1,\sigma_3\rangle$};
+                                    \node (s2s3) [above of=s3] {$\langle\sigma_2,\sigma_3\rangle$};
+                                    \node (s1s6) [above of=s7] {$\langle\sigma_1,\sigma_6\rangle$};
+                                    \node (s2s5) [above of=s4] {$\langle\sigma_2,\sigma_5\rangle$};
+                                    \node (s3s4) [above of=s5] {$\langle\sigma_3,\sigma_4\rangle$}:
+                                    \node (s4s5) [above of=s6] {$\langle\sigma_4,\sigma_5\rangle$};
+                                    \node (g) [above of=s1s6] {$G(\mathbb{Q}(\sqrt{2},\sqrt{3},\sqrt{5})/\mathbb{Q})$};
+                                    \draw (s0) -- (s1);
+                                    \draw (s0) -- (s2);
+                                    \draw (s0) -- (s3);
+                                    \draw (s0) -- (s4);
+                                    \draw (s0) -- (s5);
+                                    \draw (s0) -- (s6);
+                                    \draw (s0) -- (s7);
+                                    \draw (s1) -- (s1s2);
+                                    \draw (s1) -- (s1s3);
+                                    \draw (s1) -- (s1s6);
+                                    \draw (s2) -- (s1s2);
+                                    \draw (s2) -- (s2s3);
+                                    \draw (s2) -- (s2s5);
+                                    \draw (s3) -- (s1s3);
+                                    \draw (s3) -- (s2s3);
+                                    \draw (s3) -- (s3s4);
+                                    \draw (s7) -- (s1s6);
+                                    \draw (s7) -- (s2s5);
+                                    \draw (s7) -- (s3s4);
+                                    \draw (s4) -- (s1s2);
+                                    \draw (s4) -- (s3s4);
+                                    \draw (s4) -- (s4s5);
+                                    \draw (s5) -- (s1s3);
+                                    \draw (s5) -- (s2s5);
+                                    \draw (s5) -- (s4s5);
+                                    \draw (s6) -- (s2s3); 
+                                    \draw (s6) -- (s1s6);
+                                    \draw (s6) -- (s4s5);
+                                    \draw (s1s2) -- (g);
+                                    \draw (s1s3) -- (g);
+                                    \draw (s2s3) -- (g);
+                                    \draw (s1s6) -- (g);
+                                    \draw (s2s5) -- (g);
+                                    \draw (s2s5) -- (g);
+                                    \draw (s3s4) -- (g);
+                                    \draw (s4s5) -- (g);
+                                \end{tikzpicture}
+                            \end{center}
+                        To determine the fixed fields of each subgroup we will look at what happens to the basis elements for a basis $\{1,\sqrt{2},\sqrt{3},\sqrt{5},\sqrt{6},\sqrt{10},\sqrt{15},\sqrt{30}\}$.
+                            \begin{table}[htp]
+                            \centering
+                                \begin{tabular}{|
+                                >{\columncolor[HTML]{C0C0C0}}l |l|l|l|l|l|l|l|l|}
+                                    \hline
+                                    & \cellcolor[HTML]{C0C0C0}$1$ & \cellcolor[HTML]{C0C0C0}$\sqrt{2}$ & \cellcolor[HTML]{C0C0C0}$\sqrt{3}$ & \cellcolor[HTML]{C0C0C0}$\sqrt{5}$ & \cellcolor[HTML]{C0C0C0}$\sqrt{6}$ & \cellcolor[HTML]{C0C0C0}$\sqrt{10}$ & \cellcolor[HTML]{C0C0C0}$\sqrt{15}$ & \cellcolor[HTML]{C0C0C0}$\sqrt{30}$ \\ \hline
+                                    $\sigma_0$ & $1$ & $\sqrt{2}$ & $\sqrt{3}$ & $\sqrt{5}$ & $\sqrt{6}$ & $\sqrt{10}$ & $\sqrt{15}$ & $\sqrt{30}$ \\ \hline
+                                    $\sigma_1$ & $1$ & \cellcolor[HTML]{96FFFB}$-\sqrt{2}$ & $\sqrt{3}$ & $\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{6}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{10}$ & $\sqrt{15}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{30}$ \\ \hline
+                                    $\sigma_2$ & $1$ & $\sqrt{2}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{3}$ & $\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{6}$ & $\sqrt{10}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{15}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{30}$ \\ \hline
+                                    $\sigma_3$ & $1$ & $\sqrt{2}$ & $\sqrt{3}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{5}$ & $\sqrt{6}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{10}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{15}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{30}$ \\ \hline
+                                    $\sigma_4$ & $1$ & \cellcolor[HTML]{96FFFB}$-\sqrt{2}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{3}$ & $\sqrt{5}$ & $\sqrt{6}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{10}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{15}$ & $\sqrt{30}$ \\ \hline
+                                    $\sigma_5$ & $1$ & \cellcolor[HTML]{96FFFB}$-\sqrt{2}$ & $\sqrt{3}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{6}$ & $\sqrt{10}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{15}$ & $\sqrt{30}$ \\ \hline
+                                    $\sigma_6$ & $1$ & $\sqrt{2}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{3}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{6}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{10}$ & $\sqrt{15}$ & $\sqrt{30}$ \\ \hline
+                                    $\sigma_7$ & $1$ & \cellcolor[HTML]{96FFFB}$-\sqrt{2}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{3}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{5}$ & $\sqrt{6}$ & $\sqrt{10}$ & $\sqrt{15}$ & \cellcolor[HTML]{96FFFB}$-\sqrt{30}$ \\ \hline
+                                \end{tabular}
+                            \end{table}
+                        Here, the blue cells denote a sign change.\par\hspace{4mm} We need to find when $\sigma(x)=x$ for each of these sigma. We have\newpage
+                            \begin{align*}
+                                \sigma_1:\; &a_0+a_1\sqrt{2}+a_2\sqrt{3}+a_3\sqrt{5}+a_4\sqrt{6}+a_5\sqrt{10}+a_6\sqrt{15}+a_7\sqrt{30} \\
+                                =&a_0-a_1\sqrt{2}+a_2\sqrt{3}+a_3\sqrt{5}-a_4\sqrt{6}-a_5\sqrt{10}+a_6\sqrt{15}-a_7\sqrt{30}
+                            \end{align*}
+                        This implies that $a_1=0,a_4=0,a_5=0,a_7=0$. And so 
+                            \begin{equation*}
+                                F_{\langle\sigma_1\rangle}=\{a_0+a_2\sqrt{3}+a_3\sqrt{5}+a_6\sqrt{15}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(\sqrt{3},\sqrt{5}).
+                            \end{equation*}
+                        Next we have
+                            \begin{align*}
+                                \sigma_2:\; &a_0+a_1\sqrt{2}+a_2\sqrt{3}+a_3\sqrt{5}+a_4\sqrt{6}+a_5\sqrt{10}+a_6\sqrt{15}+a_7\sqrt{30} \\
+                                =&a_0+a_1\sqrt{2}-a_2\sqrt{3}+a_3\sqrt{5}-a_4\sqrt{6}+a_5\sqrt{10}-a_6\sqrt{15}-a_7\sqrt{30}
+                            \end{align*}
+                        which gives $a_2=0,a_4=0,a_6=0,a_7=0$. Thus
+                            \begin{equation*}
+                                F_{\langle\sigma_2\rangle}=\{a_0+a_1\sqrt{2}+a_3\sqrt{5}+a_5\sqrt{10}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(\sqrt{2},\sqrt{5}).
+                            \end{equation*}
+                        Next we have
+                            \begin{align*}
+                                \sigma_3:\; &a_0+a_1\sqrt{2}+a_2\sqrt{3}+a_3\sqrt{5}+a_4\sqrt{6}+a_5\sqrt{10}+a_6\sqrt{15}+a_7\sqrt{30} \\
+                                =&a_0+a_1\sqrt{2}+a_2\sqrt{3}-a_3\sqrt{5}+a_4\sqrt{6}-a_5\sqrt{10}-a_6\sqrt{15}-a_7\sqrt{30}
+                            \end{align*}
+                        which gives $a_3=0,a_5=0,a_6=0,a_7=0$. Thus,
+                            \begin{equation*}
+                                F_{\langle\sigma_3\rangle}=\{a_0+a_1\sqrt{2}+a_2\sqrt{3}+a_4\sqrt{6}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(\sqrt{2},\sqrt{3}).
+                            \end{equation*}
+                        Next we have
+                            \begin{align*}
+                                \sigma_4:\; &a_0+a_1\sqrt{2}+a_2\sqrt{3}+a_3\sqrt{5}+a_4\sqrt{6}+a_5\sqrt{10}+a_6\sqrt{15}+a_7\sqrt{30} \\
+                                =&a_0-a_1\sqrt{2}-a_2\sqrt{3}+a_3\sqrt{5}+a_4\sqrt{6}-a_5\sqrt{10}-a_6\sqrt{15}+a_7\sqrt{30}
+                            \end{align*}
+                        which gives $a_1=0,a_2=0,a_5=0,a_6=0$. Thus,
+                            \begin{equation*}
+                                F_{\langle\sigma_4\rangle}=\{a_0+a_3\sqrt{5}+a_4\sqrt{6}+a_7\sqrt{30}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(\sqrt{5},\sqrt{6}).
+                            \end{equation*}
+                        Next we have
+                            \begin{align*}
+                                \sigma_5:\; &a_0+a_1\sqrt{2}+a_2\sqrt{3}+a_3\sqrt{5}+a_4\sqrt{6}+a_5\sqrt{10}+a_6\sqrt{15}+a_7\sqrt{30} \\
+                                =&a_0-a_1\sqrt{2}+a_2\sqrt{3}-a_3\sqrt{5}-a_4\sqrt{6}+a_5\sqrt{10}-a_6\sqrt{15}+a_7\sqrt{30}
+                            \end{align*}
+                        which gives $a_1=0,a_3=0,a_4=0,a_6=0$. Thus
+                            \begin{equation*}
+                                F_{\langle\sigma_5\rangle}=\{a_0+a_2\sqrt{3}+a_5\sqrt{10}+a_7\sqrt{30}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(\sqrt{3},\sqrt{10}).
+                            \end{equation*}
+                        Next we have
+                            \begin{align*}
+                                \sigma_6:\; &a_0+a_1\sqrt{2}+a_2\sqrt{3}+a_3\sqrt{5}+a_4\sqrt{6}+a_5\sqrt{10}+a_6\sqrt{15}+a_7\sqrt{30} \\
+                                =&a_0+a_1\sqrt{2}-a_2\sqrt{3}-a_3\sqrt{5}-a_4\sqrt{6}-a_5\sqrt{10}+a_6\sqrt{15}+a_7\sqrt{30}
+                            \end{align*}
+                        which gives $a_2=0,a_3=0,a_4=0,a_5=0$. Thus
+                            \begin{equation*}
+                                F_{\langle\sigma_6\rangle}=\{a_0+a_1\sqrt{2}+a_6\sqrt{15}+a_7\sqrt{30}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(\sqrt{2},\sqrt{15}).
+                            \end{equation*}\newpage
+                        Finally, we have
+                            \begin{align*}
+                                \sigma_7:\; &a_0+a_1\sqrt{2}+a_2\sqrt{3}+a_3\sqrt{5}+a_4\sqrt{6}+a_5\sqrt{10}+a_6\sqrt{15}+a_7\sqrt{30} \\
+                                =&a_0-a_1\sqrt{2}-a_2\sqrt{3}-a_3\sqrt{5}+a_4\sqrt{6}+a_5\sqrt{10}+a_6\sqrt{15}-a_7\sqrt{30}
+                            \end{align*}
+                        which gives $a_1=0,a_2=0,a_3=0,a_7=0$. Thus
+                            \begin{equation*}
+                                F_{\langle\sigma_7\rangle}=\{a_0+a_4\sqrt{6}+a_5\sqrt{10}+a_6\sqrt{15}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(\sqrt{6},\sqrt{10},\sqrt{15}).
+                            \end{equation*}
+                        To determine the fixed fields of those subgroups generated by 2 elements, we simply take the intersection of each individual fixed field corresponding to the elements in the subgroup. Hence
+                            \begin{equation*}
+                                \begin{split}
+                                    F_{\langle\sigma_1,\sigma_2\rangle}&=\mathbb{Q}(\sqrt{3},\sqrt{5})\cap\mathbb{Q}(\sqrt{2},\sqrt{5})=\mathbb{Q}(\sqrt{5}) \\
+                                    F_{\langle\sigma_1,\sigma_3\rangle}&=\mathbb{Q}(\sqrt{3},\sqrt{5})\cap\mathbb{Q}(\sqrt{2},\sqrt{3})=\mathbb{Q}(\sqrt{3}) \\
+                                    F_{\langle\sigma_2,\sigma_3\rangle}&=\mathbb{Q}(\sqrt{2},\sqrt{5})\cap\mathbb{Q}(\sqrt{2},\sqrt{3})=\mathbb{Q}(\sqrt{2}) \\
+                                    F_{\langle\sigma_1,\sigma_6\rangle}&=\mathbb{Q}(\sqrt{3},\sqrt{5})\cap\mathbb{Q}(\sqrt{2},\sqrt{15})=\mathbb{Q}(\sqrt{15}) \\
+                                    F_{\langle\sigma_2,\sigma_5\rangle}&=\mathb{Q}(\sqrt{2},\sqrt{5})\cap\mathbb{Q}(\sqrt{3},\sqrt{10})=\mathbb{Q}(\sqrt{10}) \\
+                                    F_{\langle\sigma_3,\sigma_4\rangle}&=\mathbb{Q}(\sqrt{2},\sqrt{3})\cap\mathbb{Q}(\sqrt{5},\sqrt{6})=\mathbb{Q}(\sqrt{6}) \\
+                                    F_{\langle\sigma_4,\sigma_5\rangle}&=\mathbb{Q}(\sqrt{5},\sqrt{6})\cap\mathbb{Q}(\sqrt{3},\sqrt{10})=\mathbb{Q}(\sqrt{30})
+                                \end{split}
+                            \end{equation*}
+                        And so the lattice of subfields is 
+                            \begin{center}\hspace{-3.5cm}
+                                \begin{tikzpicture}[node distance=2.6cm]
+                                    \node (s0) {$\mathbb{Q}$};
+                                    \node (s7) [above of=s0] {$\mathbb{Q}(\sqrt{6},\sqrt{10},\sqrt{15})$};
+                                    \node (s3) [left of=s7] {$\mathbb{Q}(\sqrt{2},\sqrt{3})$};
+                                    \node (s2) [left of=s3] {$\mathbb{Q}(\sqrt{2},\sqrt{5})$};
+                                    \node (s1) [left of=s2] {$\mathbb{Q}(\sqrt{3},\sqrt{5})$};
+                                    \node (s4) [right of=s7] {$\mathbb{Q}(\sqrt{5},\sqrt{6})$};
+                                    \node (s5) [right of=s4] {$\mathbb{Q}(\sqrt{3},\sqrt{10})$};
+                                    \node (s6) [right of=s5] {$\mathbb{Q}(\sqrt{2},\sqrt{15})$};
+                                    \node (s1s2) [above of=s1] {$\mathbb{Q}(\sqrt{5})$};
+                                    \node (s1s3) [above of=s2] {$\mathbb{Q}(\sqrt{3})$};
+                                    \node (s2s3) [above of=s3] {$\mathbb{Q}(\sqrt{2})$};
+                                    \node (s1s6) [above of=s7] {$\mathbb{Q}(\sqrt{15})$};
+                                    \node (s2s5) [above of=s4] {$\mathbb{Q}(\sqrt{10})$};
+                                    \node (s3s4) [above of=s5] {$\mathbb{Q}(\sqrt{6})$}:
+                                    \node (s4s5) [above of=s6] {$\mathbb{Q}(\sqrt{30})$};
+                                    \node (g) [above of=s1s6] {$\mathbb{Q}(\sqrt{2},\sqrt{3},\sqrt{5})$};
+                                    \draw (s0) -- (s1);
+                                    \draw (s0) -- (s2);
+                                    \draw (s0) -- (s3);
+                                    \draw (s0) -- (s4);
+                                    \draw (s0) -- (s5);
+                                    \draw (s0) -- (s6);
+                                    \draw (s0) -- (s7);
+                                    \draw (s1) -- (s1s2);
+                                    \draw (s1) -- (s1s3);
+                                    \draw (s1) -- (s1s6);
+                                    \draw (s2) -- (s1s2);
+                                    \draw (s2) -- (s2s3);
+                                    \draw (s2) -- (s2s5);
+                                    \draw (s3) -- (s1s3);
+                                    \draw (s3) -- (s2s3);
+                                    \draw (s3) -- (s3s4);
+                                    \draw (s7) -- (s1s6);
+                                    \draw (s7) -- (s2s5);
+                                    \draw (s7) -- (s3s4);
+                                    \draw (s4) -- (s1s2);
+                                    \draw (s4) -- (s3s4);
+                                    \draw (s4) -- (s4s5);
+                                    \draw (s5) -- (s1s3);
+                                    \draw (s5) -- (s2s5);
+                                    \draw (s5) -- (s4s5);
+                                    \draw (s6) -- (s2s3); 
+                                    \draw (s6) -- (s1s6);
+                                    \draw (s6) -- (s4s5);
+                                    \draw (s1s2) -- (g);
+                                    \draw (s1s3) -- (g);
+                                    \draw (s2s3) -- (g);
+                                    \draw (s1s6) -- (g);
+                                    \draw (s2s5) -- (g);
+                                    \draw (s2s5) -- (g);
+                                    \draw (s3s4) -- (g);
+                                    \draw (s4s5) -- (g);
+                                \end{tikzpicture}
+                            \end{center}
+                        Finally, since all of the subgroups of the Galois group are normal, then each subgroup is equal to all of its conjugates and thus each extension is equal to each of its conjugates.
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+
+\begin{document}
+
+\title{Determining Range of Standard Deviations}
+\author{Quin Darcy}
+\date{July 25, 2019}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+\section{The Setup}
+
+Let $N_1, N_2\in\mathbb{N}$ where $N_1,N_2>0$. Now we will select a number at random $k\in\{1,\dots, N_1\}$. Next, we will select $k$ numbers at random 
+
+\begin{equation*}
+    \begin{split}
+        n_1&\in\{1,\dots, N_2\} \\
+        n_2&\in\{1,\dots, N_2\} \\
+           &\;\;\vdots              \\
+        n_k&\in\{1,\dots,N_2\}.
+    \end{split}
+\end{equation*}
+
+Having selected our $k$ random numbers, we can calculate the arithmetic mean, call it $A$, simply by summing each of the numbers and dividing the result by $k$. Thus, 
+
+\begin{equation*}
+    A=\frac{1}{k}\sum_{i=1}^{k}n_i.
+\end{equation*}
+
+\noindent Now that we have our arithmetic mean, we can calculate the standard deviation $\sigma$ by the following formula
+
+\begin{equation*}
+    \sigma=\sqrt{\frac{1}{k}\sum_{i=1}^{k}(n_i-A)^2}.
+\end{equation*}
+
+\section{The Question}
+
+With the above setup in mind, an interesting question is whether or not we can determine a minimum and maximum value for $\sigma$ and if this range can be expressed explicitly in terms of $N_1$ and $N_2$.
+
+\newpage
+
+\section{Thoughts}
+
+Let's begin by first trying to determine the smallest value $\sigma$ can take on. Broadly speaking, $\sigma$ represents the average distance each $n_i$ has away from $A$. Thus, if $\sigma$ is small, then this means that the majority of our $k$ randomly selected numbers are very close to the arithmetic mean $A$. Clearly, if $n_1=n_2=\cdots=n_k$, then $A=n_1$ and $\sigma=0$.\par It appears that we have succeeded in finding the smallest value for $\sigma$, but will finding the largest value be just as easy? From our previous argument, it seems reasonable to assume that to achieve a large $\sigma$, it cannot be the case that $n_1=n_2=\cdots=n_k$. Before I ramble on too much, let us look at an interesting case.\par Suppose $N_1=10$ and $N_2=100$. Now let 
+
+\begin{equation*}
+    n_1=n_2=n_3=n_4=n_5=1 \quad\quad\text{and}\quad\quad n_6=n_7=n_8=n_9=n_{10}=100.
+\end{equation*}
+
+\noindent The arithmetic mean of these numbers is 
+
+\begin{equation*}
+    A=\frac{1}{10}\sum_{i=1}^{10}n_i=\frac{505}{10}=50.5.
+\end{equation*}
+
+\noindent This yields a standard deviation of 
+
+\begin{equation*}
+    \sigma=\sqrt{\frac{1}{10}\sum_{i=1}^{10}(n_i-50.5)^2}=49.5.
+\end{equation*}
+
+What this example illustrates is that if half of our 10 numbers were set equal to the lowest value, 1, and the other half were set equal to the highest value, 100, then the arithmetic mean $A$ would be centered between the highest and lowest values. Moreover, the average distance each $n_i$ has away from $A$ also appears centered. Now an abrupt theorem!
+
+\begin{theorem}
+    Let $N_1,N_2\in\mathbb{N}$. Given some $k\in\{1,\dots,N_1\}$, and letting $\alpha=\floor*{\frac{k}{2}}$, then if 
+    
+    \begin{equation*}
+        n_1=\cdots=n_{\alpha}=1\quad\quad\text{and}\quad\quad n_{\alpha+1}=\cdots=n_k=N_2,
+    \end{equation*}
+    
+    \noindent then $\sigma$ will take on the maximum value for the given $N_1,N_2$ and $k$.
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\end{document}

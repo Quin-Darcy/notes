@@ -1,0 +1,713 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+\usepackage{relsize}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{polynom}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+ \setlist[description]{leftmargin=4mm,labelindent=4mm}
+  
+ \begin{document}
+  
+ \begin{flushleft}
+  
+    Quin Darcy\par
+    Dr. Shannon\par
+    MATH 110B\par
+    11/2/18
+  
+ \end{flushleft}
+  
+ \centerline{Midterm}
+ 
+ \vspace{4mm}
+ 
+ \noindent\textsc{Section: }\par
+ 
+ \justifying
+ 
+ \vspace{1mm}
+ 
+ \hline
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{1.} Determine (with explanation) if $\mathbb{Z}\times\mathbb{Z}/((3,5))_i$ is an integral domain, and if it is a field.
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{Solution:} On HW6 we proved that given a commutative ring with identity $R$, and an ideal $P$ of $R$, $R/P$ is an integral domain iff $P$ is a prime ideal. We also have shown that $\mathbb{Z}\times\mathbb{Z}$ is a commutative ring with identity $(1,1)$. Thus, we must show that $((3,5))_i$ is a prime ideal of $\mathbb{Z}\times\mathbb{Z}$.\par We recall the definition of a prime ideal: $((3,5))_i$ is a prime ideal if, for all $(a,b),(c,d)\in\mathbb{Z}\times\mathbb{Z}$,\par 
+ 
+ \vspace{4mm}
+ 
+ \centerline{$(a,b)\cdot(c,d)\in((3,5))_i\rightarrow (a,b)\in((3,5))_i\vee(c,d)\in((3,5))_i$.}
+ 
+ \vspace{4mm}
+ 
+ This informs our next step. Assume, for some $(a,b),(c,d)\in\mathbb{Z}\times\mathbb{Z}$, $(a,b)\cdot(c,d)\in((3,5))_i$. Then, for some $(r,s)\in\mathbb{Z}\times\mathbb{Z}$, we have\par
+ 
+     \begin{equation*}
+        \begin{split}
+            (a,b)\cdot(c,d)& = (r,s)\cdot(3,5) \\
+            & \rightarrow(ac,bd) =  (3r,5s) \\
+            & \rightarrow (ac=3r)\wedge (bd=5s) \\
+            & \rightarrow (3\mid ac)\wedge (5\mid bd) \\
+            & \rightarrow [(3\mid a)\vee (3\mid c)]\wedge[(5\mid b)\vee(5\mid d)]. \\
+        \end{split}
+    \end{equation*}
+    
+\vspace{2mm}
+    
+\noindent From the last line we can see that if $a=6, b=4, c=2,$ and $d=10$, then $(6,4)\cdot(2,10)=(12,40)\in((3,5))_i$, but $(6,4)\notin((3,5))_i$ and $(2,10)\notin((3,5))_i$. Thus, $((3,5))_i$ is not a prime ideal since the condition must hold for all $(a,b),(c,d)\in\mathbb{Z}\times\mathbb{Z}$. Thus, $\mathbb{Z}\times\mathbb{Z}/((3,5))_i$ is not an integral domain.
+
+\vspace{6mm}
+
+\noindent\textbf{2.} Find (with explanation) the multiplicative inverse of $(3)_i\times(1)_i+(2,5)$.
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} To find the multiplicative inverse of $(3)_i\times(1)_i+(2,5)$, means we must find a particular coset $(3)_i\times(1)_i+(a,b)\in\mathbb{Z}\times\mathbb{Z}/((3)_i\times(1)_i)$ such that\par
+
+     \begin{equation*}
+        \begin{split}
+            ((3)_i\times(1)_i+(2,5))\odot((3)_i\times(1)_i+(a,b)) &= ((3)_i\times(1)_i+(2,5)\cdot(a,b)) \\
+            & = ((3)_i\times(1)_i+(2a,5b)) \\
+            & = ((3)_i\times(1)_i+(1,1)). \\
+        \end{split}
+    \end{equation*}
+    
+\newpage
+
+\par Thus, we must find $(a,b)\in\mathbb{Z}\times\mathbb{Z}$ such that $((3)_i\times(1)_i+(2a,5b))=((3)_i\times(1)_i+(1,1))$. By the properties of cosets, we have that $J+a=J+b$ iff $a-b\in J$, for any ideal $J$. Thus, we need to find $(a,b)\in\mathbb{Z}\times\mathbb{Z}$ such that $(2a,5b)-(1,1)\in((3)_i\times(1)_i)$. More concisely, $(2a-1,5b-1)\in((3)_i\times(1)_i)$.\par
+Taking $(2a-1,5b-1)\in((3)_i\times(1)_i)$, we have that for some $r\in\mathbb{Z}$, $2a-1=3r$. Thus, $2a=3r+1$. Letting $r=1$, we get $a=2$. Similarly, for some $s\in\mathbb{Z}$, we have $5b-1=s$. Thus, $5b=s+1$. Letting $s=9$, then $b=2$. Thus,  $((3)_i\times(1)_i+(2,2))$ is the multiplicative inverse of $((3)_i\times(1)_i+(2,5))$. 
+ 
+\vspace{6mm}
+
+\noindent\textbf{3.}\par
+
+\vspace{2mm}
+
+\textbf{(a)} Using De Moivre's Theorem, factor $x^6+729$ into a product of monic irreducible factors over $\mathbb{C}$.
+
+\vspace{4mm}
+
+\noindent\textbf{Solution: }We will first rewrite the polynomial as $x^6=-729$. Now let $z=r\cos{\theta}+ir\sin{\theta}$. We want $r^6(\cos{6\theta}+i\sin{6\theta})=-729$. Since $r^6>0$ and there is no imaginary component to $x^6$, then $r^6=729$ and $\cos{6\theta}=-1$. Thus, $r=3$ and the values of $\theta$ for which $\cos{6\theta}=-1$ are $\theta=\frac{\pi}{6},\frac{\pi}{2},\frac{5\pi}{6},\frac{7\pi}{6},\frac{3\pi}{2},\frac{11\pi}{6}$. Thus,\par
+
+\begin{align*} 
+z_1 &=  3(\cos{(\frac{\pi}{6})}+i\sin{(\frac{\pi}{6})}) = 3(\frac{\sqrt{3}}{2}+\frac{i}{2})=\frac{3(\sqrt{3}+i)}{2}, \\ 
+z_2 &=  3(\cos{(\frac{\pi}{2})}+i\sin{(\frac{\pi}{2})})=3i, \\
+z_3 &=  3(\cos{(\frac{5\pi}{6})}+i\sin{(\frac{5\pi}{6})})=3(-\frac{\sqrt{3}}{2}+\frac{i}{2})=\frac{3(i-\sqrt{3)}}{2}, \\
+z_4 &=  3(\cos{(\frac{7\pi}{6})}+i\sin{(\frac{7\pi}{6})})=3(-\frac{\sqrt{3}}{2}-\frac{i}{2})=\frac{-3(\sqrt{3}+i)}{2}, \\
+z_5 &= 3(\cos{(\frac{3\pi}{2})}+i\sin{(\frac{3\pi}{2})})=-3i, \\
+z_6 &= 3(\cos{(\frac{11\pi}{6})}+i\sin{(\frac{11\pi}{6})})=3(\frac{\sqrt{3}}{2}-\frac{i}{2})=\frac{3(\sqrt{3}-i)}{2}.
+\end{align*}
+
+\vspace{6mm}
+
+\noindent Therefore, $x^6+729$ written as the product of monic irreducible factors is\par
+
+\vspace{4mm}
+
+\centerline{$x^6+729=(x-\frac{3(\sqrt{3}+i)}{2})(x-3i)(x-\frac{3(i-\sqrt{3)}}{2})(x+\frac{3(\sqrt{3}+i)}{2})(x+3i)(x-\frac{3(\sqrt{3}-i)}{2})$}
+
+\vspace{4mm}
+
+\centerline{\[ = \mathlarger{\prod\limits_{k=1}^{6}} (x-z_k) \].}
+
+\vspace{6mm}\par
+
+\textbf{(b)} Let $g(x)=(x-3(\frac{\sqrt{3}}{2}+\frac{i}{2}))\cdot(x-3(\frac{\sqrt{3}}{2}-\frac{i}{2}))$. Find $g(x)$, and divide $x^4-9x^2+81$ by $g(x)$.
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} We will start by multiplying the two linear factors of $g(x)$
+
+\newpage
+ 
+     \begin{equation*}
+        \begin{split}
+            (x-3(\frac{\sqrt{3}}{2}+\frac{i}{2}))\cdot(x-3(\frac{\sqrt{3}}{2}-\frac{i}{2})) &= x^2-3\sqrt{3}x+9.
+        \end{split}
+    \end{equation*}
+    
+\vspace{4mm}
+
+\noindent Now that we have $g(x)$, we will divide the two polynomials
+
+\vspace{4mm}
+
+
+\[
+\begin{array}{m{3.5em}cccccc}
+&      &       &         & x^2   & +3\sqrt{3}x & +9\\
+\cline{3-7}
+\multicolumn{2}{l}{x^2-3\sqrt{3}x+9\big)}
+       & x^4  &  +0x^3          & -9x^2 & +0x         & +81 \\
+&      & x^4  &  -3\sqrt{3}x^3  & +9x^2 &             &  \\
+\cline{3-5}
+&    &  &  3\sqrt{3}x^3  &  -18x^2  &          &   \\
+&    &  &  3\sqrt{3}x^2  &  -27x^2  & +27\sqrt{3}x &  \\
+\cline{4-6}
+&    &    &   & 9x^2 &  -27\sqrt{3}x &   \\
+&    &    &   & 9x^2 &  -27\sqrt{3}x & +81\\
+\cline{5-7}
+&    &    &    &   &  & 0\\
+\end{array}
+\]
+
+ 
+\vspace{4mm}
+ 
+\noindent Thus, $x^4-9x^2+81=(x^2+3\sqrt{3}x+9)\cdot g(x)$.
+
+\vspace{8mm}\par
+
+\textbf{(c)} Write $h(x)=x^6+729$ as a product of irreducible polynomials over $F=\mathbb{Q},\mathbb{R},\mathbb{Z}_{13}$.
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} From part \textbf{(a)}, we see that each linear factor of $x^6+729$ has complex coefficients, so we cannot use any of them as the divisor to reduce the polynomial. Thus, we refer to part \textbf{(b)} which showed $x^2-3\sqrt{3}x+9$ was the product of two of the linear factors of $x^6+729$. Similarly, $x^2+3\sqrt{3}x+9$ was the product of two more linear factors of $x^6+729$. So finally, if we consider $(x-3i)(x+3i)=x^2+9$, then we can use these factors to reduce the polynomial over each field.
+
+\vspace{4mm}
+
+\noindent\underline{Over $\mathbb{Q}$}
+
+\vspace{2mm}
+
+\noindent Since we are factoring over the rationals, we cannot have any of the factors which include $\sqrt{3}$, thus we refer back to part $\textbf{(b)}$ and use instead $x^4-9x^2+81$. Thus,
+
+\vspace{2mm}
+
+\centerline{$x^6+729=(x^4-9x^2+81)(x^2+9)$.}
+
+\vspace{4mm}
+
+\noindent\underline{Over $\mathbb{R}$}
+
+\vspace{2mm}
+
+\noindent Here the coefficients are not restricted and we can further reduce the polynomial as the following
+
+\vspace{2mm}
+
+\centerline{$x^6+729=(x^2-3\sqrt{3}x+9)(x^2+3\sqrt{3}x+9)(x^2+9)$.}
+
+\vspace{4mm}
+
+\noindent\underline{Over $\mathbb{Z}_{13}$}
+
+\vspace{2mm}
+
+\noindent Here we use the answer we obtained from the factorization over $\mathbb{Q}$ and convert each coefficient to its corresponding value in $\mathbb{Z}_{13}$. Hence,
+
+\vspace{2mm}
+
+\centerline{$z^6+729=(x^4+4x^2+3)(x^2+9)$.}
+
+\newpage
+
+\noindent\textbf{4.} Define $\theta\colon\mathbb{Q}[X]\rightarrow\mathbb{R}$ by $\theta(f(X))=f(\sqrt[4]{7})$. By HW7, $\theta$ is a ring homomorphism. Find (with explanation) the image of $\theta$, and find Ker$\theta$. What can be concluded from the FHT?
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} We start by recalling the definition of the image of a map. We have the following:
+
+\vspace{2mm}
+
+\centerline{\[ im(\theta)=\{f(\sqrt[4]{7})\in\mathbb{R}\mid\exists f(X)\in\mathbb{Q}[X]\colon\theta(f(X))=f(\sqrt[4]{7})\} \].}
+
+\vspace{2mm}
+
+At the moment, this definition gives us little insight into what the image of $\theta$ actually contains. So then let us first consider some $f(X)\in\mathbb{Q}[X]$. By definition, we have
+
+     \begin{equation*}
+        \begin{split}
+            f(X) &= a_0 + a_1X + a_2X^2 + a_3X^3 +\cdots + a_nX^n \\
+        \end{split}
+    \end{equation*}
+    
+\centerline{\[ \mathlarger{\sum\limits_{k=0}^{n} a_k X^k} \],}
+
+\vspace{8mm}
+
+\noindent where $n$ is a non-negative integer and for each $k$, $a_k\in\mathbb{Q}$. So then, we can more clearly see what an element in the image looks like considering where $\theta$ maps $f(X)$ to. 
+
+     \begin{equation*}
+        \begin{split}
+            \theta(f(X)) &= \theta(\sum\limits_{k=0}^{n} a_k X^k) \\
+            &= \theta(a_0 + a_1X + a_2X^2 + a_3X^3 +\cdots + a_nX^n) \\
+            &= \theta(a_0) + \theta(a_1 X) + \theta(a_2 X^2) + \theta(a_3 X^3) +\cdots +\theta(a_n X^n) \\
+            &= a_0\theta(1) + a_1\theta(X) + a_2\theta(X^2) + a_3\theta(X^3) +\cdots +a_n\theta(X^n) \\
+            &= a_0(1) + a_1(\sqrt[4]{7}) + a_2(\sqrt[4]{7})^2 + a_3(\sqrt[4]{7})^3 +\cdots +a_n(\sqrt[4]{7})^n \\
+            &= a_0 + a_1\sqrt[4]{7}+a_2\sqrt[4]{7^2}+a_3\sqrt[4]{7^3}+\cdots+a_n\sqrt[4]{7^n} \\
+            &= \sum\limits_{k=0}^{n} a_k\sqrt[4]{7^k}.
+        \end{split}
+    \end{equation*}
+    
+\vspace{6mm}
+
+We can see that for any index $j$ that is a multiple of 4, say $j=4m$, then we have
+
+     \begin{equation*}
+        \begin{split}
+            \theta(a_j X^j) &= a_j\sqrt[4]{7^j} \\
+            &= a_j\sqrt[4]{7^{4m}} \\
+            &= a_j(7^{4m})^{\frac{1}{4}} \\
+            &= a_j 7^m.
+        \end{split}
+    \end{equation*}
+    
+\vspace{6mm}
+
+This is significant since this allows us to write the following
+
+\newpage
+
+     \begin{equation*}
+        \begin{split}
+            \sum\limits_{k=0}^{n} a_k\sqrt[4]{7^k} &= a_0 + a_1\sqrt[4]{7}+a_2\sqrt[4]{7^2}+a_3\sqrt[4]{7^3}+\cdots+a_n\sqrt[4]{7^n} \\
+            &= (a_0 7^0+a_1\sqrt[4]{7^1}+a_2\sqrt[4]{7^2}+a_3\sqrt[4]{7^3}) \\
+            &+ (a_4 7^1+a_5\sqrt[4]{7^5}+a_6\sqrt[4]{7^6}+a_7\sqrt[4]{7^7}) \\
+            &\hspace{32.5mm}\vdots \\
+            &+ (a_{4m} 7^m+a_{4m+1}\sqrt[4]{7^{4m+1}}+a_{4m+2}\sqrt[4]{7^{4m+2}}+a_{4m+3}\sqrt[4]{7^{4m+3}}) \\
+            &\hspace{32.5mm}\vdots 
+        \end{split}
+    \end{equation*}
+    
+\vspace{6mm}
+
+The significance of this representation is that each sum within the parenthesis is an element of $\mathbb{Q}[\sqrt[4]{7}]$. Furthermore, we know that $\mathbb{Q}[\sqrt[4]{7}]$ is a field and is thereby closed under addition. Thus, for any $f(X)\in\mathbb{Q}[X]$, $\theta(f(X))\in\mathbb{Q}[\sqrt[4]{7}]$. Therefore,
+
+\vspace{6mm}
+
+\centerline{\[ im(\theta)=\mathbb{Q}[\sqrt[4]{7}] \].}
+
+\vspace{4mm}
+
+\noindent Now that the image has been found, we want to determine what the kernel of this map is. We recall the definition of kernel as
+
+     \begin{equation*}
+        \begin{split}
+            $ker$(\theta) &= \{f(X)\in\mathbb{Q}[X]\mid\theta(f(X))=0\} \\
+            &= \{f(X)\in\mathbb{Q}[X]\mid f(\sqrt[4]{7})=0\} \\
+            &= \{\sum\limits_{k=0}^{n} a_k X^k\in\mathbb{Q}[X]\mid \sum\limits_{k=0}^{n} a_k(\sqrt[4]{7})^k=0\}.
+        \end{split}
+    \end{equation*}
+    
+\vspace{4mm}
+
+This tells us that we are looking for all of the polynomials in which, when evaluated at $\sqrt[4]{7}$, equal 0. To begin this search, let us first consider the following. An example of a polynomial that, when evaluated at $\sqrt[4]{7}$, is equal to zero is
+
+\vspace{4mm}
+
+\centerline{ $X - \sqrt[4]{7} = 0$.}
+
+\vspace{4mm}
+
+\noindent However, since $\sqrt[4]{7}\notin\mathbb{Q}$, then $X - \sqrt[4]{7}\notin\mathbb{Q}[X]$. Yet we can derive a polynomial from this one that has rational coefficients. Consider
+
+     \begin{equation*}
+        \begin{split}
+            X-\sqrt[4]{7}&=0 \\
+            &\Leftrightarrow X=\sqrt[4]{7} \\
+            &\Leftrightarrow X^4=(\sqrt[4]{7})^4 \\
+            &\Leftrightarrow X^4=7 \\
+            &\Leftrightarrow X^4-7=0.
+        \end{split}
+    \end{equation*}
+    
+\newpage
+
+What has been done here is the construction of a polynomial from $\mathbb{Q}[X]$ in which, when evaluated at $\sqrt[4]{7}$, is equal to zero. Or rather, $\theta(X^4-7)=0$. Thus, $X^4-7\in$ ker$(\theta)$. Furthermore, any polynomial for which $X^4-7$ is a factor would be in ker$(\theta)$. This can be seen by considering any other polynomial $h(X)\in\mathbb{Q}[X]$ and noting that 
+
+\vspace{4mm}
+
+\centerline{$\theta((X^4-7)h(X))=\theta(X^4-7)\cdot\theta(h(X))=0\cdot\theta(h(X))=0$.}
+
+\vspace{4mm}
+
+\noindent This leads us to the conclusion that the set $\{h(X)(X^4-7)\mid h(X)\in\mathbb{Q}[X]\}$ is in the kernel. This set is in fact the ideal generated by $(X^4-7)$ and is denoted $(X^4-7)_i$. Thus, 
+
+\vspace{4mm}
+
+\centerline{$(X^4-7)_i\subseteq$ ker$(\theta)$.}
+
+\vspace{4mm}
+
+\noindent Lastly, we recall two previous proofs: 1) a proof we did where it was shown that the kernel of a ring homomorphism is an ideal, and 2) if $F$ is a field, then every ideal in $F[X]$ is a principle ideal. Thus, since $\mathbb{Q}$ is a field, then ker$(\theta)$ is a principle ideal of $\mathbb{Q}[X]$. Hence, there exists some $p(X)\in\mathbb{Q}[X]$ such that 
+
+\vspace{4mm}
+
+\centerline{$(p(X))_i=$ ker$(\theta)$.}
+
+\vspace{4mm}
+
+Thus, since $(X^4-7)\in$ ker$(\theta)$, then $(X^4-7)\in(p(X))_i$. So it must be the case that $(X^4-7)=g(X)\cdot p(X)$, for some $g(X)\in\mathbb{Q}[X]$. However, $(X^4-7)$ is irreducible; hence, either $g(X)$ or $p(X)$ is a constant polynomial. If $p(X)$ is a constant, then ker$(\theta)=(p(X))_i=\mathbb{Q}[X]$. This is clearly not true, since (for example) $\theta(X+1)\neq 0$. Thus, $g(X)$ is a constant and this means $(X^4-7)=ap(X)$, for some $a\in\mathbb{Q}$. Thus, $p(X)\in(X^4-7)_i$. Therefore,
+
+\vspace{4mm}
+
+\centerline{ker$(\theta)=(X^4-7)_i$.}
+
+\vspace{4mm}
+
+\noindent We now recall the FHT, and see that is follows that
+
+\vspace{4mm}
+
+\centerline{$\mathbb{Q}[X]/(X^4-7)_i\cong\mathbb{Q}[\sqrt[4]{7}]$.}
+
+\vspace{6mm}
+
+\noindent\textbf{5.}
+
+\vspace{2mm}\par
+
+\textbf{(a)} Explain why $\mathbb{Z}_5[X]/(X^3+2X^2+2X+3)_i$ is a field.
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} We have shown in class that for any prime $p\in\mathbb{Z}^{+}$, $\mathbb{Z}_p$ is a field. This means that $\mathbb{Z}_5$ is a field. Additionally, on HW8 we proved that if $F$ is a field and $f(X)\in F[X]$ is irreducible, then $(f(X))_i$ is a maximal ideal. Lastly, on HW6 we proved that if $R$ is a commutative ring with identity and $M$ is a maximal ideal of $R$, then $R/M$ is a field.\par
+In summary, in order to prove $\mathbb{Z}_5[X]/(X^3+2X^2+2X+3)_i$ is a field, we must show that $(X^3+2X^2+2X+3)$ is irreducible over $\mathbb{Z}_5$. If this is true, then the ideal generated by that polynomial will be a maximal ideal. And if the ideal is maximal, then $\mathbb{Z}_5[X]/(X^3+2X^2+2X+3)_i$ is a field.\par
+To show this polynomial is irreducible, we must show that there does not exist any value $a\in\mathbb{Z}_5$ such that, when evaluated at $a$, is equal to zero. So then consider the following evaluation homomorphisms
+
+\newpage
+
+\centerline{$\theta_0\colon\mathbb{Z}_5[X]\rightarrow\mathbb{Z}_5$,  $f(X)\mapsto f(0)$}
+
+\vspace{2mm}
+
+\centerline{$\theta_1\colon\mathbb{Z}_5[X]\rightarrow\mathbb{Z}_5$,  $f(X)\mapsto f(1)$}
+
+\vspace{2mm}
+
+\centerline{$\theta_2\colon\mathbb{Z}_5[X]\rightarrow\mathbb{Z}_5$,  $f(X)\mapsto f(2)$}
+
+\vspace{2mm}
+
+\centerline{$\theta_3\colon\mathbb{Z}_5[X]\rightarrow\mathbb{Z}_5$,  $f(X)\mapsto f(3)$}
+
+\vspace{2mm}
+
+\centerline{$\theta_4\colon\mathbb{Z}_5[X]\rightarrow\mathbb{Z}_5$,  $f(X)\mapsto f(4)$}
+
+\vspace{4mm}
+
+To show that $X^3+2x^2+2X+3$ is irreducible is equivalent to showing that
+
+\vspace{4mm}
+
+\centerline{$(X^3+2X^2+2X+3)\notin\bigcup\limits_{i=0}^{4}$ker$(\theta_i)$.}
+
+\vspace{4mm}
+
+So then consider the following
+
+\vspace{4mm}
+
+\centerline{$\theta_0(X^3+X^2+2X+3)=3$}
+
+\vspace{2mm}
+
+\centerline{$\theta_1(X^3+2X^2+2X+3)=3$}
+
+\vspace{2mm}
+
+\centerline{$\theta_2(X^3+2X^2+2X+3)=3$}
+
+\vspace{2mm}
+
+\centerline{$\theta_3(X^3+2X^2+2X+3)=4$}
+
+\vspace{2mm}
+
+\centerline{$\theta_4(X^3+2X^2+2X+3)=2$}
+
+\vspace{4mm}
+
+Thus, since none of these map to zero we, we can conclude that the polynomial is in none of the kernels and is therefore irreducible. Thus, $\mathbb{Z}_5[X]/(X^3+2x^2+2X+3)_i$ is a field.
+
+\vspace{6mm}\par
+
+\textbf{(b)} Explain why $(X^3+2X^2+2X+3)_i+(X^2+3X+2)$ is a non-zero element of $\mathbb{Z}_5[X]/(X^3+2X^2+2X+3)_i$. And find (with explanation) the multiplicative inverse of $(X^3+2X^2+2X+3)_i+(X^2+3X+2)$ in $\mathbb{Z}_5[X]/(X^3+2X^2+2X+3)_i$, express the multiplicative inverse in the form $(X^3+2X^2+2X+3)_i+(aX^2+bX+c)$, and check that your answer is correct. 
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} In order for $(X^3+2X^2+2X+3)_i+(X^2+3X+2)$ to be a zero element, it must be the case that $(X^2+3X+2)\mid(X^3+2X^2+2X+3)$. So we will check if this is true.
+
+\vspace{4mm}
+
+\[
+\begin{array}{m{3.5em}ccccc}
+&       &         &    & X & +4\\
+\cline{3-6}
+\multicolumn{2}{l}{X^2+3X+2\big)}
+   &  X^3          & +2X^2 & +2X         & +3 \\
+&   &  X^3          & +3X^2 & +2X          &  \\
+\cline{3-5}
+&  &    &  -X^2  &                          &  \\
+&  &    &  -X^2  & -3X & -2 \\
+\cline{4-6}
+&    &   &  &  3X &   \\
+\end{array}
+\]
+
+\vspace{4mm}
+
+Thus, $X^3+2X^2+2X+3=(X+4)(X^2+3X+2)+(3X)$, which means $(X^2+3X+2)\notin(X^3+2X^2+2X+3)_i$. Thus, it is not a zero-element.
+
+\newpage
+
+\noindent We now must find the multiplicative inverse of $(X^3+2X^2+2X+3)_i+(X^2+3X+2)$. For convenience, we will let $J=(X^3+2X^2+2X+3)_i$, $f(X)=(X^3+2X^2+2X+3)$, and $g(X)=(X^2+3X+2)$. We have seen that  $f(X)=(X+4)g(X)+(3X)$. This will be the first step in using the euclidean algorithm to find a greatest common divisor between $f(X)$ and $g(X)$.\par
+Now we must divide $g(X)$ by $3X$.
+
+\vspace{4mm}
+
+\[
+\begin{array}{m{3.5em}cccc}
+&&& 2X & +1\\
+\cline{2-5}
+\multicolumn{2}{l}{\hspace{8mm}3X\big)}
+& X^2 & +3X  & +2 \\
+&            & X^2 &          &  \\
+\cline{3-5}
+&    &    &  3X                        & +2 \\
+&    &    & 3X &  \\
+\cline{4-5}
+&   &  &   & 2  \\
+\end{array}
+\]
+
+\vspace{4mm}
+
+This means $g(X)=(2X+1)(3X)+2$. So we have the following equalities
+
+     \begin{equation*}
+        \begin{split}
+            f(X)=(X+4)g(X)+(3X) &\Leftrightarrow 3X=f(X)-(X+4)g(X) \\
+            g(X)=(2X+1)(3X)+(2) &\Leftrightarrow 2=g(X)-(2X+1)(3X).
+        \end{split}
+    \end{equation*}
+    
+\vspace{4mm}
+
+This gives the following
+
+     \begin{equation*}
+        \begin{split}
+            2 &= g(X)-(2X+1)(3X) \\
+            &= g(X)-(2X+1)(f(X)-(X+4)g(X)) \\
+            &= g(X)-(2X+1)(f(X)-(X\cdot g(X)+4g(X))) \\
+            &= g(X)-(2X+1)(f(X)-X\cdot g(X)-4g(X)) \\
+            &= g(X)-(2X\cdot f(X)-2X^2\cdot g(X)+2X\cdot g(X)+f(X)-X\cdot g(X) -4g(X)) \\
+            &= g(X)-2X\cdot f(X)+2X^2\cdot g(X)-2X\cdot g(X)-f(X)+X\cdot g(X)+4g(X) \\
+            &= g(X)+4g(X)+X\cdot g(X)+3X\cdot g(X)+2X^2\cdot g(X)+4f(X)+3X\cdot f(X)\\
+            &= (1+4+X+3X+2X^2)g(X)+(4+3X)f(X) \\
+            &= (4X+2X^2)g(X)+(4+3X)f(X)
+        \end{split}
+    \end{equation*}
+    
+\vspace{4mm}
+
+Thus, $2=(4X+2X^2)g(X)+(4+3X)f(X)$. Multiplying both sides by $3$, we obtain
+
+     \begin{equation*}
+        \begin{split}
+            1 &= (2X+X^2)g(X)+(2+4X)f(X) \\
+            &\Leftrightarrow (2+4X)f(X)=1-(2X+X^2)g(X) \\
+        \end{split}
+    \end{equation*}
+    
+    
+\vspace{4mm}
+
+By the properties of cosets, we have that $I+a=I+b$ iff $a-b\in I$. Hence, we see that $1-(2X+X^2)g(X)\in J$. Thus, $J+(2X+X^2)g(X)=J+1$. We have therefore found the multiplicative inverse. We shall confirm this below.
+
+\newpage
+
+\noindent We have
+
+    \begin{equation*}
+        \begin{split}
+            (2X+X^2)g(X) &= (2X+X^2)(X^2+3X+2) \\
+            &= 2X^3+X^2+4X+X^4+3X^3+2X^2 \\
+            &= X^4+3X^2+4X.
+        \end{split}
+    \end{equation*}
+    
+\vspace{4mm}
+
+\noindent Thus,
+
+\vspace{4mm}
+
+\[
+\begin{array}{m{3.5em}cccccc}
+&      &       &         &    & X & +3\\
+\cline{3-7}
+\multicolumn{2}{l}{X^3+2X^2+2X+3\big)}
+       & X^4  &  +0X^3          & +3X^2 & +4X         & +0 \\
+&      & X^4  &  +2X^3  & +2X^2 &   +3X          &  \\
+\cline{3-6}
+&    &  &  3X^3 &  X^2  &  +X        &   \\
+&    &  &  3X^3 & +X^2  &  +X & +4 \\
+\cline{4-7}
+&    &    &   &  &   & 1  \\
+
+\end{array}
+\]
+
+\vspace{4mm}
+
+\noindent Hence, $(J+(X^2+3X+2))\odot(J+(X^2+2X))=J+1$, which means $J+(X^2+2X)$ is the multiplicative inverse of $J+(X^3+3X+2)$.
+
+\vspace{8mm}\par
+
+\textbf{(c)} Recall that if $F$ is a field, and $a,b\in F-\{0\}$, then the solution to $az=b$ is $z=ba^{-1}$. Let $F=\mathbb{Z}_5[X]/(X^3+2X^2+2X+3)_i$, and let $J=(X^3+2X^2+2X+3)_i$. Find $f(X)=aX^2+bX+c$ such that $(J+(X^2+3X+2))\odot(J+f(X))=J+(X^2+1)$.
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} In part \textbf{(b)}, we obtained the multiplicative inverse of $(J+(X^3+3X+2))$. Thus, we need to first confirm $X^2+1$ is a non-zero element. We can see this is true since $(X^2+1)\notin J$. So then we can solve for $f(X)$ by multiplying both sides by the inverse element found in the previous part. We have,
+
+    \begin{equation*}
+        \begin{split}
+            (J+(X^2+2X))\odot(J+(X^2+1)) &= (J+(X^2+2X))\odot(J+(X^2+3X+2))\odot(J+f(X)) \\
+            &= J+((X^2+2X)(X^2+1))=(J+1)\odot(J+f(X))\\
+            &= J+(X^4+X^2+2X^3+2X)=J+f(X) \\
+            &= J+(X^4+2X^3+X^2+2X)=J+f(X).
+        \end{split}
+    \end{equation*}
+    
+\vspace{4mm}
+
+\noindent Thus, $f(X)=X^4+2X^3+X^2+2X$. To confirm this is true, we will show that 
+
+\vspace{4mm}
+
+\centerline{$(X^2+3X+2)f(X)\equiv(X^2+1)(mod(X^3+2X^2+2X+3))$.}
+
+\newpage
+
+\noindent First, we have
+
+\begin{equation*}
+        \begin{split}
+            (X^2+3X+2)f(X) &= (X^2+3X+2)(X^4+2X^3+X^2+2X) \\
+            &= X^6+4X^4+4X^3+3X^2+4X.
+        \end{split}
+    \end{equation*}
+
+\vspace{4mm}
+
+\noindent Then
+
+\vspace{4mm}
+
+\[
+\begin{array}{m{3.5em}ccccccccc}
+& &     &    &      &       &    X^3     & +3X^2    & +X & +3 \\
+\cline{3-10}
+\multicolumn{2}{l}{X^3+2X^2+2X+3\big)}
+        &        &  X^6     &  +0X^5     & +4X^4  &  +4X^3 & +3X^2 & +4X  & +0 \\
+&&       &  X^6     &  +2X^5    & +2X^4  &  +3X^3  &  &             &  \\
+\cline{3-7}
+&&       &       &  3X^5  & +2X^4 &  +X^3 &    &          &   \\
+&&       &       &  3X^5  & +X^4 &  +X^3 & +4X^2  &   &  \\
+\cline{5-8}
+&&       &      &    &  X^4  &  +0X^3 & +4X^2 &   &   \\
+&&       &      &    &    X^4   &   +2X^3     &    +2X^2   & +3X  &   \\
+\cline{6-9}
+&&       &      &    &          &   3X^3 &    +2X^2  &    +X   &   \\
+&&     &      &     &      &    3X^3     &      +X^2   &    +X      &   +4 \\
+\cline{7-10}
+&&   &       &    &      &             &         X^2      &           & +1 \\
+
+\end{array}
+\]
+
+\vspace{4mm}
+
+\noindent This confirms that $f(X)=X^4+2X^3+X^2+2X$ is the function we sought after.
+
+\vspace{6mm}
+
+\noindent\textbf{6.} Using the approach of the ``an example'' handout about $\mathbb{Z}_3[X]/(X^2+1)_i$, and the handout about $\mathbb{Z}_5[X]/(X^2-1)_i$. Find (with explanation) a field $F$, such that the number of elements in $F$ is exactly 343.
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} Let $F=\mathbb{Z}_7$ and consider the set $\mathbb{Z}_7[X]$. Now let $p(X)\in\mathbb{Z}_7[X]$ be an irreducible polynomial over $\mathbb{Z}_7$, with deg$(p(X))=3$. Then $\mathbb{Z}_7[X]/(p(X))_i$ is a field. Let us define $p(X):=a_0+a_1X+a_2X^2+a_3X^3$, where $a_0,a_1,a_2,a_3\in\mathbb{Z}_7$.\par 
+So now let $f(X)\in\mathbb{Z}_5$. Then, by HW8, $p(X)\mid f(X)$ or $p(X)\nmid f(X)$. The former would imply that $(p(X))_i+f(X)=(p(X))_i$. The latter would imply that there exists $h(X)\in\mathbb{Z}_7$ with $\deg(h(X))<3$ such that $(p(X))_i+f(X)=(p(X))_i+h(X)$. We can see that for any such $f(X)\in\mathbb{Z}_7$, $h(X)=b_0+b_1X+b_2X^2$. Furthermore, because each coefficient $b_0,b_1,b_2\in\mathbb{Z}_7$, then by the multiplication principle, there are $7^3$ possible polynomials $h(X)$. Thus, in terms of cosets, the field $\mathbb{Z}_7/(p(X))_i$ would contain $7^3=343$ cosets.
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+\end{document}

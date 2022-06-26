@@ -1,0 +1,303 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+    \begin{center}
+	    \vspace{.4cm} {\textbf { \large MATH 210A}}
+    \end{center}
+    {\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/25/19   \\
+    { \textbf{Instructor:}} \ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 4 \\ \hrule}
+
+    \justifying
+    
+    \begin{enumerate}[leftmargin=*]
+        \item[2.] Assume that $G$ is a group, $N\triangleleft G$, every element of $N$ has finite order, and every element of $G/N$ has finite order. Prove that every element of $G$ has finite order.
+            \begin{proof}
+                Let $g\in G$. Then $g\in\bigcup G/N$, since $g\in Ng$. By assumption, $Ng$ has finite order. Thus, there exists some $n\in\mathbb{Z}^{+}$ such that $\big(Ng)^n=N$ (which is a valid expression since $N\triangleleft G$). However, since $\big(Ng)^n=Ng^n$, then $Ng^n=N$. Thus, $g^n\in N$ and since, by assumption, every element of $N$ has finite order, then there exists $m\in\mathbb{Z}^{+}$ such that $(g^n)^m=g^{nm}=e$. Thus, $g$ has finite order since $0\leq o(g)\leq mn$. Therefore, every element of $G$ has finite order.
+            \end{proof}
+            
+        \item[3.] Find the conjugacy class partition of $S_4$, and find all the normal subgroups of $S_4$.
+            \begin{solution}
+                We begin by providing a list of each element in the conjugacy class partition of $S_4$.
+                
+                \begin{equation*}
+                    \begin{split}
+                        c\big((1)\big) &= \{(1)\} \\
+                        c\big((34)\big) &= \{(34),(23),(24),(12),(13),(14)\}\\
+                        c\big((243)\big) &= \{(243),(234),(132),(142),(123),(143),(124),(134)\}\\
+                        c\big((1432)\big) &= \{(1432),(1342),(1423),(1243),(1234),(1324)\}\\
+                        c\big((12)(34)\big) &= \{(12)(34),(13)(24),(14)(23)\}.
+                    \end{split}
+                \end{equation*}
+                
+                To determine all of the normal subgroups of $S_4$, we consider two things: A set $H\subseteq G$ is a a subgroup of $G$ if $\abs{H}$ divides $\abs{G}$ and a subgroup is normal if it is the union of conjugacy classes. We have that the order of each of the conjugacy classes are $1,6,8,6,3$, respectively and since they are each disjoint, the order of the union of any collection of them is equal to the sum of the orders of each individual class. Thus, the sum must be a factor of $\abs{S_4}=24$. Hence, the order of these subgroups must be equal to $1,2,3,4,6,8,12$, or $24$. Additionally, each of the unions must contain $c\big((1)\big)$ since the identity is needed to satisfy group axioms. Thus, our options can be represented with orders on the left as 
+                
+                \begin{equation*}
+                    \begin{split}
+                        1&: c\big((1)\big) \\
+                        4&: c\big((1)\big)\cup c\big((12)(34)\big) \\
+                        12&: c\big((1)\big)\cup c\big((243)\big)\cup c\big((12)(34)\big) \\
+                        24&: c\big((1)\big)\cup c\big((34)\big)\cup c\big((243)\big)\cup c\big((1432)\big)\cup c\big((12)(34)\big).
+                    \end{split}
+                \end{equation*}
+                
+                We can see that $c\big((1)\big)$ and $c\big((1)\big)\cup c\big((34)\big)\cup c\big((243)\big)\cup c\big((1432)\big)\cup c\big((12)(34)\big)$ are trivial normal subgroups. Next, $c\big((1)\big)\cup c\big((12)(34)\big)$ also works since it is closed and the inverses are present (by properties of products of disjoint 2-cycles). Lastly, $c\big((1)\big)\cup c\big((243)\big)\cup c\big((12)(34)\big)$ is also a normal subgroup since it is equal to $A_4$ and $A_4\triangleleft S_4$. Thus, our 4 proposed candidates are all normal subgroups of $S_4$.
+            \end{solution}
+            
+        \item[4.] Recall from hw 2 that if $(G,\star)$ and $(H,\#)$ are groups, then $(G\times H, \blacklozenge)$ is a group.  Assume that $a\in G$, $b\in H$, $o(a)=m$, $o(b)=k$. Determine with proof, $o\big((a,b)\big)$.
+            \begin{proof}
+                From Homework 2 we know that for all $(a,b),(c,d)\in G\times H$, we have 
+                
+                \begin{equation*}
+                    (a,b)\blacklozenge(c,d)=(a\star c,b\# d).
+                \end{equation*}
+                
+                Additionally, we have assumed that $o(a)=m$ and $o(b)=k$. It follows that 
+                
+                \begin{equation*}
+                    \big((a,b)\big)^m=(a^m,b^m)=(e_G,b^m)
+                \end{equation*}
+                
+                and
+                
+                \begin{equation*}
+                    \big((a,b)\big)^k=(a^k,b^k)=(a^k,e_H).
+                \end{equation*}
+                
+                Thus, if we let $n=lcm(m,k)$, then it follows that $m\mid n$ and $k\mid n$. Hence, for some $q_1,q_2\in\mathbb{Z}$ $n=q_1m$ and $n=q_2k$
+                
+                \begin{equation*}
+                    \begin{split}
+                        \big((a,b)\big)^n &= (a^n,b^n) \\
+                        &= (a^{q_1m},b^{q_2k}) \\
+                        &= \big((a^m)^{q_1},(b^k)^{q_2}\big) \\
+                        &= (e_G^{q_1},e_H^{q_2}) \\
+                        &= (e_G,e_H). 
+                    \end{split}
+                \end{equation*}
+                
+                We can see that for any $t\in\mathbb{Z}$, if $0<t<n$ then  either $m\nmid t$ or $k\nmid t$ and thus $\big((a,b)\big)^t\neq (e_G,e_H)$. Thus, $n=lcm(m,k)$ is the smallest integer greater than zero for which $\big((a,b)\big)^n=(e_G,e_H)$. Therefore, $o\big((a,b)\big)=lcm(m,k)$.
+            \end{proof}
+            
+        \item[6.] Determine (and briefly justify your answer) if each of the following pairs of groups are isomorphic.
+            \begin{enumerate}[label=\alph*)]
+                \item $\mathbb{Z}_{36}$ and $\mathbb{Z}_9\times\mathbb{Z}_4$.
+                    \begin{solution}
+                        On question 5 we showed that if $(m,n)=1$ and $\theta\colon \mathbb{Z}_{mn}\rightarrow\mathbb{Z}_m\times\mathbb{Z}_n$ is a map defined by $\theta([a]_{mn})=([a]_m,[a]_n)$, then $\theta$ is an isomorphism. Thus, since we have that $(9,4)=1$, then using the same map $\theta$, it would follow that $\mathbb{Z}_{36}\cong\mathbb{Z}_{9}\times\mathbb{Z}_4$.
+                    \end{solution}
+                    
+                \item $\mathbb{Z}_{36}$ and $\mathbb{Z}_{2}\times\mathbb{Z}_{18}$.
+                    \begin{solution}
+                        Since $\mathbb{Z}_{36}\cong \mathbb{Z}_{4}\times\mathbb{Z}_9$ and $\mathbb{Z}_2\times\mathbb{Z}_{18}\cong\mathbb{Z}_2\times\mathbb{Z}_2\times\mathbb{Z}_9$, and since $\mathbb{Z}_4\not\cong\mathbb{Z}_2\times\mathbb{Z}_2$, then these two groups are not isomorphic.
+                    \end{solution}
+                    
+                \item $(\mathbb{Z},+)$ and $(\mathbb{Q},+)$.
+                    \begin{solution}
+                        Assume $\varphi\colon \mathbb{Q}\rightarrow\mathbb{Z}$ be an isomorphism. Then we have that for some $q\in\mathbb{Q}$, $\varphi(q)=1_{\mathbb{Z}}$. Additionally, we have 
+                        
+                        \begin{equation*}
+                            \begin{split}
+                                \varphi(q)=\varphi\big(\frac{q}{2}+\frac{q}{2}\big)=\varphi\big(\frac{q}{2}\big)+\varphi\big(\frac{q}{2}\big)=2\varphi\big(\frac{q}{2}\big)
+                            \end{split}
+                        \end{equation*}
+                        
+                        Letting $y=\varphi\big(\frac{q}{2}\big)$, then the above equation simplifies to $1_{\mathbb{Z}}=2y$, for some $y\in\mathbb{Z}$. However, there does not exist such an integer $y$. Thus, by contradiction there exists no isomorphisms between $\mathbb{Q}$ and $\mathbb{Z}$ and they are therefore not isomorphic. 
+                    \end{solution}
+                    
+                \item $\mathbb{Z}_8\times\mathbb{Z}_4$ and $\mathbb{Z}_{16}\times\mathbb{Z}_2$.
+                    \begin{solution}
+                        Since $(13,1)\in\mathbb{Z}_{16}\times\mathbb{Z}_2$, $o\big((13,1)\big)=208$ and there are no elements in $\mathbb{Z}_8\times\mathbb{Z}_4$ with order 208. Thus, we can conclude the two groups are not isomorphic.
+                    \end{solution}
+                    
+                \item $\mathbb{Z}_4\times\mathbb{Z}_6$ and $\mathbb{Z}_{12}\times\mathbbP{Z}_2$.
+                    \begin{solution}
+                        Since $\mathbb{Z}_{12}\cong\mathbb{Z}_4\times\mathbb{Z}_3$, then $\mathbb{Z}_{12}\times\mathbb{Z}_2\cong\mathbb{Z}_4\times\mathbb{Z}_3\times\mathbb{Z}_2\cong\mathbb{Z}_4\times\mathbb{Z}_6$. Thus, the two groups are isomorphic.
+                    \end{solution}
+                    
+                \item $\mathbb{Z}_2\times\mathbb{Z}_4$ and $D_8$.
+                    \begin{solution}
+                        Since $D_8$ is generated by an element with order 4 together with an element of order two, then based on this similarity, I will guess that these two groups are isomorphic.
+                    \end{solution}
+                    
+                \item $D_8$ and $Q$.
+                    \begin{solution}
+                        These two groups are not isomorphic since $D_8$ contains two elements of order 2, whereas $Q$ only contains one element of order 2.
+                    \end{solution}
+                    
+                \item $(\mathbb{Z},+)$ and the subgroup of $(\mathbb{Q}-\{0\},\bullet)$ generated by $3/5$.
+                    \begin{solution}
+                        Letting $f\colon\mathbb{Z}\rightarrow\mathbb{Q}-\{0\}$ be defined as $f(n)=(3/5)^n$, then it can be shown that $f$ is well defined, 1-1, onto, and that $f(m+n)=(3/5)^{m+n}=(3/5)^m\bullet(3/5)^n=f(m)\bullet f(n)$ and thus it is a homomorphism. Thus, the two groups are isomorphic.
+                    \end{solution}
+                
+                \item $A_4$ and $D_{12}$.
+                    \begin{solution}
+                        These two groups are not isomorphic since $A_4$ has 10 subgroups and $D_{12}$ has 16 subgroups.
+                    \end{solution}
+            \end{enumerate}
+        \item[7.] Assume that $G$ is a group, that $H$ and $N$ are normal subgroups of $G$, and $N\cap H=\{e\}$.
+            \begin{enumerate}[label=\alph*)]
+                \item Prove that $nh=hn$ for all $n\in N$ and all $h\in H$.
+                    \begin{proof}
+                        Let $n\in N$ and let $h\in H$. Then since $N$ is normal in $G$, then $hnh^{-1}\in N$. By closure of $N$, it follows that $(hnh^{-1})n^{-1}\in N$. Similarly, since $h\in H$, then $h^{-1}\in H$. Additionally, since $H$ is normal in $G$, then $nh^{-1}n^{-1}\in H$. By closure, it follows that $h(nh^{-1}n^{-1})\in H$. Thus, $hnh^{-1}n^{-1}\in N\cap H$. However, since $N\cap H=\{e\}$, then it follows that $hnh^{-1}n^{-1}=e$. Thus, $hn=nh$.
+                    \end{proof}
+                    
+                \item Prove that $N\times H\cong NH$.
+                    \begin{proof}
+                        Let $f\colon N\times H\rightarrow NH$ be defined by $f\big((n,h)\big)=nh$. We want to show that $f$ is an isomorphism. First we will show that $f$ is well defined. Let $(a,b)=(c,d)$. Then $f\big((a,b)\big)=ab$ and $f\big((c,d)\big)=cd$. Since $a=c$ and $b=d$, by assumption, then $ab=cd$. Thus, $f\big((a,b)\big)=f\big((c,d)\big)$. Thus, $f$ is a function.\par Now we will show that $f$ is a homomorphism. Let $(a,b),(c,d)\in N\times H$. Then $f\big((a,b)\odot(c,d)\big)=f\big((ac,bd)\big)=(ac)(bd)$. However, since $cb=bc$ by (a), then $(ac)(bd)=(ab)(cd)=f\big((a,b)\big)f\big((c,d)\big)$. Thus, $f$ is a homomorphism.\par\hspace{4mm}Now we will show that $f$ is onto. Let $nh\in NH$, then $f\big((n,h)\big)=nh$. Thus, $f$ is onto.\par\hspace{4mm} Assume $f\big((a,b)\big)=f\big((c,d)\big)$. Then $ab=cd$. Thus, $a=cdb^{-1}$ and since $cd=dc$, then $ab=cd$. Thus, $c=abd^{-1}$. Thus, 
+                        
+                        \begin{equation*}
+                            \begin{split}
+                                ac&=(cdb^{-1})(abd^{-1}) \\
+                                &=cd(b^{-1}a)bd^{-1} \\
+                                &=cd(ab^{-1})bd^{-1} \\
+                                &=cda(b^{-1}b)d^{-1} \\
+                                &=c(da)d^{-1} \\
+                                &=c(ad)d^{-1} \\
+                                &=ca(dd^{-1}) \\
+                                &=ca.
+                            \end{split}
+                        \end{equation*}
+                        
+                        A similar argument can be used to show that $bd=db$. Thus, $c\in N(a)$ and $d\in N(b)$. The thought was to go from here and some how get $c\in N\cap H$, thus $c=e$ which would imply $a=b=d=e$ and thus $(a,b)=(c,d)$.\par\hspace{4mm} Attempt 2: We will show that $\ker f=\{(e,e)\}$, which by pg.12 is equivalent to $f$ being 1-1. Let $(a,b)\in\{(e,e)\}$. Then $f\big((a,b)\big)=f\big((e,e)\big))=e$. Thus, $(a,b)\in\ker f$. Thus, $\{(e,e)\}\subseteq\ker f$. Now let $(a,b)\in\ker f$. Then we want to show that $(a,b)\in\ker f$. By assumption $f\big((a,b)\big)=ab=e$. Thus, $a=b^{-1}$... Unfortunately this attempt did not get nearly as close as the last.
+                    \end{proof}
+            \end{enumerate}
+            
+        \item[8.]\hfill\par 
+            \begin{enumerate}[label=\alph*)]
+                \item Define $\theta\colon\mathbb{Z}_m\rightarrow\mathbb{Z}_n$ by $\theta\big([a]_m\big)=[a]_n$. If $m=10$ and $n=5$, prove that $\theta$ is a homomorphism. If $m=5$ and $n=10$ show that $\theta$ is not a function. Find (with proof) a condition on $n$ and $m$ so that $\theta$ is a homomorphism, and in this case find $\ker\theta$. What can be concluded from the FHT?
+                    \begin{proof}
+                        Assume $m=10$ and $n=5$. Then we will first show $\theta$ is well defined. Let $[a]_{10}=[b]_{10}$. We want to show that this implies $[a]_5=[b]_5$. So since $[a]_{10}=[b]_{10}$, then $a\in [b]_{10}$. Thus, $a=b+10k$ for some $k\in\mathbb{Z}$. Thus, $\theta([a]_{10})=[a]_5$ and it follows that 
+                        
+                        \begin{equation*}
+                            \begin{split}
+                                [a]_5&=[b+10k]_5 \\
+                                &= [b]_5\oplus[10k]_5 \\
+                                &= [b]_5\oplus [0]_5 \\
+                                &= [b]_5.
+                            \end{split}
+                        \end{equation*}
+                        
+                        Hence, $\theta$ is well defined. Now we must show that $\theta$ is a homomorphism. Let $[a]_{10},[b]_{10}\in\mathbb{Z}_{10}$, then 
+                        
+                        \begin{equation*}
+                            \begin{split}
+                                \theta\big([a]_{10}\oplus[b]_{10}\big) &= \theta\big([a+b]_{10}\big) \\
+                                &=[a+b]_5 \\
+                                &= [a]_5\oplus[b]_5 \\
+                                &=\theta\big([a]_{10}\big)\oplus\theta\big([b]_{10}\big).
+                            \end{split}
+                        \end{equation*}
+                        
+                        Thus, $\theta$ is a homomorphism. Now let $m=5$ and $n=10$. Then we will attempt to show that $\theta$ is well defined. Assume $[a]_5=[b]_5$. Then $a\in[b]_5$ and thus there exists some $k\in\mathbb{Z}$ such that $a=b+5k$. Since $\theta([a]_5)=[a]_{10}$, then 
+                        
+                        \begin{equation*}
+                            \begin{split}
+                                [a]_{10} &= [b+5k]_{10} \\
+                                &= [b]_{10}\oplus[5k]_{10}.
+                            \end{split}
+                        \end{equation*}
+                        
+                        However, since $5k\not\equiv 0(\text{mod }10)$ for all $k$, then we cannot conclude $[a]_{10}=[b]_{10}$ and thus $\theta$ is not well defined. This motivates the following condition on $m$ and $n$. The map $\theta\colon\mathbb{Z}_m\rightarrow\mathbb{Z}_n$ is a homomorphism provided $n\mid m$. Suppose this condition holds, then let $[a]_m\in\ker\theta$. Then $\theta([a]_m)=[0]_n$. Thus, $a\equiv 0(\text{mod }n)$. Hence, $\ker\theta=\{[a]_m\in\mathbb{Z}_m\colon n\mid a\}$. Thus, by the FHT, if $n\mid m$, then $\mathbb{Z}_m/\ker\theta\cong\mathbb{Z}_n$.
+                    \end{proof}
+                    
+                \item Give the elements of $\mathbb{Z}_{12}/\langle[3]\rangle$, and using (a) find a group $G$, such that $G\cong\mathbb{Z}_{12}/\langle[3]\rangle$.
+                    \begin{solution}
+                        We have that $\mathbb{Z}_{12}=\{[0],[1],\dots,[11]\}$ and $\langle[3]\rangle=\{[0],[3],[6],[9]\}$. Thus, 
+                
+                        \begin{equation*}
+                            \begin{split}
+                                \mathbb{Z}_{12}/\langle[3]\rangle &= \{[0]\oplus\langle[3]\rangle,\dots,[11]\oplus\langle[3]\rangle\} \\
+                                &=\big\{\{[0],[3],[6],[9]\},\{[1],[4],[7],[10]\},\{[2],[5],[8],[11]\}\big\}.
+                            \end{split}
+                        \end{equation*}
+                        
+                        Based on part (a), we can see that since $3\mid 0$, $3\mid 3$, $3\mid 6$, and $3\mid 9$, then if $G=\mathbb{Z}_3$, then $G\cong\mathbb{Z}_{12}/\langle[3]\rangle$.
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

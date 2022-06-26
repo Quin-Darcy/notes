@@ -1,0 +1,377 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+ \setlist[description]{leftmargin=4mm,labelindent=4mm}
+  
+ \begin{document}
+  
+ \begin{flushleft}
+  
+    Quin Darcy\par
+    Dr. Shannon\par
+    MATH 110B\par
+    9/1/18
+  
+ \end{flushleft}
+  
+ \centerline{Homework: 1TH}
+ 
+ \vspace{4mm}
+ 
+ \noindent\textsc{Section: 1}\par
+ 
+ \justifying
+ 
+ \vspace{1mm}
+ 
+ \hline
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{1.}\par
+ 
+ \vspace{4mm}
+ 
+ \par\textbf{a)} 
+ 
+ \vspace{2mm}
+ 
+ \begin{addmargin}[2.8em]{2.8em}
+
+    Express $(1+i)^{10}$ in the form $a+bi$.
+
+    \vspace{4mm}
+
+    \noindent Let $a=1$ and $b=1$. Then $z=1+i$ and $\abs{z}=\sqrt{2}$. To convert $z$ to polar form, we note that $a=\abs{z}\cos{\theta}$ and $b=\abs{z}\sin{\theta}$. Thus, $\sqrt{2}\cos{\theta}=1$ and $\sqrt{2}\sin{\theta}=1$. This implies that $\theta=\frac{\pi}{4}$. Thus, $z=\sqrt{2}\cos{(\frac{\pi}{4})}+i\sqrt{2}\sin{(\frac{\pi}{4})}$. By De Moivre's Theorem, we obtain
+
+    \begin{equation*}
+        \begin{split}
+            (\sqrt{2}\cos{(\frac{\pi}{4})}+i\sqrt{2}\sin{(\frac{\pi}{4})})^{10}& =(\sqrt{2})^{10}[\cos{(10\frac{\pi}{4})}+i\sin{(10\frac{\pi}{4})}] \\
+            & =32[\cos{(\frac{5\pi}{2})}+i\sin{(\frac{5\pi}{2})}] \\
+            & =32(0+i) \\
+            & = 0+32i.
+        \end{split}
+    \end{equation*}
+    
+    \vspace{2mm}
+    
+    \noindent Express $(\sqrt{3}+i)^7$ in the form $a+bi$.
+    
+    \vspace{4mm}
+    
+    \noindent Let $a=\sqrt{3}$ and $b=i$. Then $z=\sqrt{3}+i$ and $\abs{z}=2$. To convert to $z$ to polar form, we use the identities $a=\abs{z}\cos{\theta}$ and $b=\abs{z}\sin{\theta}$. Thus, $\sqrt{3}=2\cos{\theta}$ and $1=2\sin{\theta}$. Solving for $\theta$ yields $\theta=\frac{\pi}{6}$. Thus, we now have $z=2\cos{(\frac{\pi}{6})}+2i\sin{(\frac{\pi}{6})}$. By De Moivre's Theorem, we obtain
+    
+    \begin{equation*}
+        \begin{split}
+            (2\cos{(\frac{\pi}{6})}+2i\sin{(\frac{\pi}{6})})^7& =2^7[\cos{(7\frac{\pi}{6})}+i\sin{(7\frac{\pi}{6})}] \\
+            & =128[\cos{(\frac{7\pi}{6})}+i\sin{(\frac{7\pi}{6})}] \\
+            & =128(-\frac{\sqrt{3}}{2}-\frac{i\sqrt{3}}{2}) \\
+            & =-64\sqrt{3}(1+i) \\
+            & =-64\sqrt{3}+(-64i\sqrt{3}).
+        \end{split}
+    \end{equation*}
+    
+    \vspace{2mm}
+    
+    \noindent Express $(-\sqrt{2}+\sqrt{2}i)^7$ is the form $a+bi$.
+    
+    \vspace{4mm}
+    
+    \noindent Let $a=-\sqrt{2}$ and $b=\sqrt{2}$. Then $z=\sqrt{2}+\sqrt{2}i$ and $\abs{z}=2$. To convert $z$\newpage\noindent to polar form, we will use the identities $a=\abs{z}\cos{\theta}$ and $b=\abs{z}\sin{\theta}$. Thus, we have $-\sqrt{2}=2\cos{\theta}$ and $\sqrt{2}=2\sin{\theta}$. Solving for $\theta$ gives $\theta=\frac{3\pi}{4}$. Thus, $z=2\cos{(\frac{3\pi}{4})}+2i\sin{(\frac{3\pi}{4})}$. By De Moivre's Theorem, we obtain
+    
+    \begin{equation*}
+        \begin{split}
+            (2\cos{(\frac{3\pi}{4})}+2i\sin{(\frac{3\pi}{4})})^7& =2^7[\cos{(7\frac{3\pi}{4})}+i\sin{(7\frac{3\pi}{4})}] \\
+            & =128[\cos{(\frac{21\pi}{4})}+i\sin{(\frac{21\pi}{4})}] \\
+            & =128(-\frac{\sqrt{2}}{2}-i\frac{\sqrt{2}}{2}) \\
+            & =-64\sqrt{2}-64i\sqrt{2}.
+        \end{split}
+    \end{equation*}
+
+\end{addmargin}
+
+\vspace{2mm}
+
+\par\textbf{b)} Find all the solutions of: $z^4=-16$, and express each solution in the form $a+bi$.
+
+\vspace{4mm}
+
+\begin{addmargin}[2.8em]{2.8em}
+
+    \noindent We wish to find the $r$ and $\theta$ in $z=r\cos{\theta}+ir\sin{\theta}$. By De Moivre's Theorem we have that $(r\cos{\theta}+ir\sin{\theta})^4=r^4(\cos{4\theta}+i\sin{4\theta})$. Thus, we have that $r^4(\cos{4\theta}+i\sin{4\theta})=-16$. Since $\sin{4\theta}$ and $\cos{4\theta}$ are on the unit circle, then we can conclude that $r^4=16$, which implies that $r=2$. This also means that $\cos{4\theta}+\sin{4\theta}=-1$. Since there is no imaginary term on the right side, then $\sin{4\theta}=0$ and $\cos{4\theta}=-1$. Note that $\cos$ is equal to $-1$ at odd multiples of $\pi$. Further, since we are multiplying $\theta$ by 4, then we can deduce that $\theta=\frac{\pi}{4},\frac{3\pi}{4},\frac{5\pi}{4},\frac{7\pi}{4}$. Therefore, by plugging each of these values in for $z=2\cos{\theta}+i2\sin{\theta}$, we obtain $z=\sqrt{2}+i\sqrt{2}, -\sqrt{2}+i\sqrt{2}, \sqrt{2}-i\sqrt{2}, -\sqrt{2}-i\sqrt{2}$.
+
+\end{addmargin}
+
+\vspace{4mm}
+
+\par\textbf{c)} If $e+gi$ is a root of $f(x)=ax^2+bx+c$, then $e-gi$ is also a root.
+
+\vspace{4mm}
+
+\begin{addmargin}[2.8em]{2.8em}
+
+    \noindent\textbf{Proof}
+    
+    \vspace{2mm}
+    
+    \noindent Assume $e+gi$ is a root of $f(x)=ax^2+bx+c$. By definition, $f(e+gi)=0$. This can be written as $f(e+gi)=a(e+gi)^2+b(e+gi)+c$. Now consider $f(e-gi)=a(e-gi)^2+b(e-gi)+c$. Thus, if we let $\overline{e+gi}=e-gi$ denote the conjugate, then we have $f(\overline{e+gi})=f(e-gi)$. However, by the properties of complex conjugates, the sum of the conjugates is equal to the conjugate of the sum, and it follows that $\overline{f(e+gi)}=\overline{a(e+gi)^2+b(e+gi)+c}=\overline{0}$. However, since $\overline{0}=0$, then $\overline{f(e+gi)}=0$. Thus, $f(\overline{e+gi})=0$. Hence, $f(e-gi)=0$. Therefore, $e-gi$ is a root of $f(x)$.\hspace{45mm}\blacksquare
+
+\end{addmargin}
+
+\vspace{6mm}
+
+\noindent\textbf{2.} In each of the following, determine if $(R,*,\#)$ is a ring.
+
+\vspace{4mm}
+
+\par\textbf{a)} $R$ is the set of all $2\times 2$ matrices with integer entries, and $*$,$\#$ are the usual matrix\par\hspace{4mm} addition and multiplication.
+
+\vspace{4mm}
+
+\begin{addmargin}[2.8em]{2.8em}
+
+    \noindent From 110A we know that the set $M_{2\times 2}(\mathbb{Z})$ is an abelian group with respect to addition, i.e., $\#$. Additionally, $M_{2\times 2}(\mathbb{Z})$ is closed and associative with respect to multiplication, i.e., $*$. Thus, in order for this set to be a ring, we must show that it adheres to the distributive properties. Further, in order for this set to be an commutative ring, we must show that multiplication is commutative. Finally, if this is a ring with identity, it must be shown that there exists a multiplicative identity.
+    
+    \vspace{4mm }
+    
+    \noindent Let $A,B,C\in M_{2\times 2}(\mathbb{Z})$. Then from linear algebra, we know $A\cdot(B+C)=A\cdot B+A\cdot C$ and $(A+B)\cdot C=A\cdot C+B\cdot C$. Thus, both distributive properties hold in this set. Therefore, $M_{2\times 2}(\mathbb{Z})$ is a ring with respect to addition and multiplication. However, since matrix addition is not commutative, $M_{2\times 2}(\mathbb{Z})$ is not a commutative ring. This ring does have a multiplicative identity, namely $\bigl( \begin{smallmatrix} 1&0\\ 0&1 \end{smallmatrix} \bigr)$. Thus, this is a ring with unity.
+
+\end{addmargin}
+
+\vspace{4mm}
+
+\par\textbf{b)} $R$ is the set of all functions $f\colon\mathbb{R}\rightarrow\mathbb{R}$. Define $*$ by $(f*g)(x)=f(x)+g(x)$, and\par\hspace{4.3mm} let $\#$ be $\circ$. 
+
+\vspace{4mm}
+
+\begin{addmargin}[2.8em]{2.8em}
+
+    Let $f$ and $g$ be functions and $x\in\mathbb{R}$. Then by definition, $f(x)\in\mathbb{R}$ and $g(x)\in\mathbb{R}$. Since $f,g$ and $x$ were arbitrary, then this result holds for all $f,g$ and $x$. Thus, The set is closed with respect to addition. Since each function will take on a value in the reals, all of the properties of addition will be satisfied since they are derived from the addition on the reals. However, to test if this set is a ring we must check the properties of composition.\par
+    Let $f,g$ and $h$ be functions and $x$ be a real number. Then consider $(f\circ g\circ h)(x)$. We want to show that this is closed. Since $(f\circ g\circ h)(x)=f(g(h(x)))$, and $h(x)\in\mathbb{R}$. Then $g(h(x))\in\mathbb{R}$. And finally, it follows that $f(g(h(x)))\in\mathbb{R}$. Thus, $f\circ g\circ h\colon\mathbb{R}\rightarrow\mathbb{R}$ and the set is closed with respect to composition. Now consider $((f\circ g)\circ h)(x)$. We have the following\par
+    
+    \begin{equation*}
+        \begin{split}
+            ((f\circ g)\circ h)(x) & = (f\circ g)(h(x)) \\
+            & =f(g(h(x))) \\
+            & =f((g\circ h))(x) \\
+            & =(f\circ (g\circ h))(x).
+        \end{split}
+    \end{equation*}
+    
+    \noindent Therefore, composition of functions is associative. Lastly, we will check if the distributive properties hold. Let $f,g$ and $h$ be functions and $x\in\mathbb{R}$. Then
+    
+    \begin{equation*}
+        \begin{split}
+            f\circ((g+h)(x)) & = f(g(x)+h(x)) \\
+            & = f(g(x))+f(h(x))
+        \end{split}
+    \end{equation*}
+    
+    \noindent and
+    
+    \begin{equation*}
+        \begin{split}
+            ((f+g)\circ h)(x) & = (f+g)(h(x)) \\
+            & = f(h(x))+g(h(x)).
+        \end{split}
+    \end{equation*}
+    
+    \noindent Therefore, composition of functions distributes over function addition. This means that the set is in fact a ring. If this set is a commutative ring, then $(f\circ g)(x)=(g\circ f)(x)$ must hold. However, since $f(x)$ and $g(x)$ could be distinct values, this means that the equality does not hold for all functions. Consider $f(x)=x^3$ and $g(x)=2x$.
+    
+    \begin{equation*}
+        \begin{split}
+            (f\circ g)(x) & = f(g(x)) \\
+            & = f(2x) \\
+            & = 8x^3
+        \end{split}
+    \end{equation*}
+    
+    \noindent and
+    
+    \begin{equation*}
+        \begin{split}
+            (g\circ f)(x) & = g(f(x)) \\ 
+            & = g(x^3) \\
+            & = 2x^3.
+        \end{split}
+    \end{equation*}
+    
+    \noindent Thus, by this counter example we can conclude that this set is not a commutative group.
+
+\end{addmargin}
+
+\vspace{4mm}
+
+\noindent\textbf{3.} Since we know that $(R\times S, +)$ is an abelian group and $\cdot$ is an associative operator on\par $R\times S$, then in order for this set to be a group we must prove the distributive laws\par hold. Let $(r_1,s_1),(r_2,s_2),(r_3,s_3)\in R\times S$. Then consider the following\par
+
+\begin{equation*}
+    \begin{split}
+        (r_1,s_1)\cdot((r_2,s_2)+(r_3,s_3)) & = (r_1,s_1)\cdot(r_2\Box r_3, s_2\star s_3) \\
+        & = (r_1\diamond(r_2\Box r_3), s_1\#(s_2\star s_3)) \\
+        & = (r_1\diamond r_2\Box r_1\diamond r_3, s_1\#s_2\star s_1\# s_3)
+    \end{split}
+\end{equation*}
+
+\par and
+
+\begin{equation*}
+    \begin{split}
+        ((r_1,s_1)+(r_2,s_2))\cdot(r_3,s_3) & = (r_1\Box r_2, s_1\star s_2)\cdot(r_3,s_3) \\
+        & = ((r_1\Box r_2)\diamond r_3, (s_1\star s_2)\# s_3) \\
+        & = (r_1\diamond r_3\Box r_2\diamond r_3, s_1\# s_3\star s_2\# s_3).
+    \end{split}
+\end{equation*}
+
+\par This suffices to show that the distributive laws hold and the set is therefore a ring.
+
+\vspace{4mm}
+
+\noindent\textbf{4.} Let $(R,+,\cdot)$ be a ring.
+
+\vspace{4mm}
+
+\par\textbf{a)} Let $P(n):=\forall m\forall r(m\in\mathbb{Z}^+\wedge r\in R\rightarrow r^m\cdot r^n=r^{m+n})$. Then $\forall n(n\in\mathbb{Z}^+\rightarrow P(n))$.
+
+\begin{addmargin}[2.8em]{2.8em}
+    
+    \vspace{4mm}
+    
+    \noindent\textbf{Proof} 
+    
+    \vspace{2mm}
+    
+    \noindent By definition, we know that for all $r\in R$ and all $k\in\mathbb{Z}^+$, $r^k\cdot r=r^{k+1}$. This will serve as the base case since this definition is equivalent to $P(1)$. Now assume $P(k)$ holds for some $1\leq k$. Then we have 
+    
+    \newpage
+    
+    \centerline{$P(k):=\forall m\forall r(m\in\mathbb{Z}^+\wedge r^m\cdot r^k=r^{m+k})$}
+    
+    \vspace{4mm}
+    
+    \noindent Now assume $m\in\mathbb{Z}^+$ and $r\in R$. Then $r^m\cdot r^k=r^{m+k}$. Thus,
+    
+    \begin{equation*}
+        \begin{split}
+            r^m\cdot r^{k+1}& =r^m\cdot(r^k\cdot r) \\
+            & =(r^m\cdot r^k)\cdot r \\
+            & =(r^{m+k})\cdot r \\
+            & =r^{(m+k)+1} \\
+            & =r^{m+(k+1)}. \\
+        \end{split}
+    \end{equation*}
+    
+    \noindent This is equivalent to $P(k+1)$. Therefore, since $P(1)$ holds by definition, then $P(n)$ holds for all $n\in\mathbb{Z}^+$.\hspace{76mm}\blacksquare
+    
+    \vspace{6mm}
+
+\end{addmargin}
+
+\par\textbf{b)} Let $P(n):=\forall m\forall r(m\in\mathbb{Z}^+\wedge r\in R\rightarrow(r^m)^n=r^{mn})$. Then $\forall n(n\in\mathbb{Z}^+\rightarrow P(n))$.
+
+\vspace{4mm}
+
+\begin{addmargin}[2.8em]{2.8em}
+
+    \noindent\textbf{Proof}
+    
+    \vspace{2mm}
+    
+    \noindent Since for any $m\in\mathbb{Z}^+$ and $r\in R$, $r^m\in R$ by closure. Thus, it follows that $(r^m)^1=r^m$. This statement is equivalent to $P(1)$ and has thereby satisfied the base case. Now assume for some $k\in\mathbb{Z}^+$ such that $1\leq k$, $P(k)$. Then for some $m\in\mathbb{Z}^+$ and $r\in R$, we have $(r^m)^k=r^{mk}$. Thus, 
+    
+    \begin{equation*}
+        \begin{split}
+            (r^m)^{k+1}& =(r^m)^k\cdot r^m \\
+            & =r^{mk}\cdot r^m \\
+            & =r^{mk+m} \\
+            & =r^{m(k+1)}. 
+        \end{split}
+    \end{equation*}
+    
+    \noindent Thus, $P(k+1)$ holds. Therefore, since $P(1)$ holds by definition, then $P(n)$ holds for all $n\in\mathbb{Z}^+$.\hspace{94mm}\blacksquare
+    
+    \vspace{6mm}
+    
+\end{addmargin}
+
+\par\textbf{c)} Let $P(n):=\forall r\forall s(r\in R\wedge s\in R\rightarrow (r\cdot s)^n=s^n\cdot r^n)$. Then $\forall n(n\in\mathbb{Z}^+\rightarrow P(n))$.
+
+\vspace{4mm}
+
+\begin{addmargin}[2.8em]{2.8em}
+
+    \noindent This claim requires our ring to be commutative with respect to multiplication. Since we did not assume as much, the claim is thereby false and this will be proven by counter example. Let $R=M_{2\times 2}(\mathbb{Z})$, $n=1$ and take
+    $\bigl( \begin{smallmatrix} a_1&a_2\\ a_3&a_4 \end{smallmatrix} \bigr),\bigl( \begin{smallmatrix} b_1&b_2\\ b_3&b_4 \end{smallmatrix} \bigr)\in M_{2\times 2}(\mathbb{Z})$. Then
+    
+    \begin{equation*}
+        \begin{split}
+            \Bigg(\left(\begin{array}{cc} a_1 & a_2 \\ a_3 & a_4 \end{array} \right )\cdot\left(\begin{array}{cc} b_1 & b_2 \\ b_3 & b_4 \end{array} \right )\Bigg)^1& =\left(\begin{array}{cc} a_1b_1+a_2b_3 & a_1b_2+a_2b_4 \\ a_3b_1+a_4b_3 & a_3b_2+a_4b_4 \end{array} \right ) \\
+            \Bigg(\left(\begin{array}{cc} b_1 & b_2 \\ b_3 & b_4 \end{array} \right )\cdot\left(\begin{array}{cc} a_1 & a_2 \\ a_3 & a_4 \end{array} \right )\Bigg)^1& =\left(\begin{array}{cc} b_1a_1+b_2a_3 & b_1a_2+b_2a_4 \\ b_3a_1+b_4a_3 & b_3a_2+b_4a_4 \end{array} \right )
+        \end{split}
+    \end{equation*}
+    
+    \newpage
+    
+    \noindent We can see that these two products are not equal and thereby fails $P(1)$. Therefore, it is not true that $\forall n(n\in\mathbb{Z}^+\rightarrow P(n))$.
+
+\end{addmargin}
+  
+\end{document}

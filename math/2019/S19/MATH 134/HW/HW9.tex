@@ -1,0 +1,209 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.2in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 134}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 4/9/19   \\
+{ \textbf{Instructor:}} \ Dr. Krauel \hspace{\fill} \textbf{Assignment:} Homework 9 \\ \hrule}
+
+\justifying
+
+% Document begins here
+
+    \begin{enumerate}[leftmargin=*]
+
+        \item[11.] By finding an antiderivative, evaluate the following integral where the path is any contour between the indicated limits of integration.
+        
+        \begin{equation*}
+            \int_{i}^{i/2}e^{\pi z}\;dz.
+        \end{equation*}
+        
+        \begin{solution}
+            Let $\gamma(t)=i-it/2$, where $0\leq t\leq 1$. Then
+            
+            \begin{equation*}
+                \int_{\gamma}e^{\pi z}\;dz = \frac{e^{\pi z}}{\pi}\bigg\rvert_{i}^{i/2}=\frac{e^{\frac{\pi i}{2}}}{\pi}-\frac{e^{\pi i}}{\pi}. 
+            \end{equation*}
+            
+        \end{solution}
+        
+        \item[14.] Apply Cauchy's Theorem to show that 
+        
+        \begin{equation*}
+            \int_{C}f(z)\dz = 0
+        \end{equation*}
+        
+        \noindent when the contour $C$ is the circle $\abs{z}=1$, in either direction, and when 
+        
+        \begin{align*}
+        (\text{a})\;f(z)=\frac{z^2}{z-3};\quad\quad\quad\quad (\text{c})\;f(z)=\frac{1}{z^2+2z+2};\quad\quad\quad\quad(\text{e})\;f(z)=\text{Log}(z+2).
+        \end{align*}
+    
+        \begin{solution}
+        \hfill\vspace{2mm}
+            \begin{enumerate}[label=(\alph*)]
+                \item We notice that $f$ has a singularity at $z=3$, however $3\notin C=\{z\in\mathbb{Z}\colon \abs{z}=1\}$ and so $f$ is holomorphic on $C$. Thus, by Corollary 3.18 of Cauchy's Theorem
+                
+                \begin{equation*}
+                    \int_{C}\frac{z^2}{z-3}\;dz=0.
+                \end{equation*}
+                
+                \item[(c)] If we factor the denominator, we see that $z^2+2z+2=\big(z-(-1+i)\big)\big(z-(-1-i)\big)$. Thus, the the singularities of this function occur at $z=-1+i$ and $z=-1-i$, which both happen to be points not in or on $C$. Hence, $f(z)$ is holomorphic in $C$ and by the corollary of Cauchy's theorem, it follows that 
+                
+                \begin{equation*}
+                    \int_{C}\frac{1}{z^2+2z+2}\;dz = 0.
+                \end{equation*}
+                
+                \item[(e)] Provided that $z>-2$, $f(z)$ has no problem points. However, there exists points $z>-2$ which still lie inside the contour $C$ and so $f(z)$ is not holomorphic in $C$. 
+            \end{enumerate}
+        \end{solution}
+        
+        \item[15.] Let $C$ denote the positively oriented boundary of the square whose sides lie along the lines $x\pm 2$ and $y=\pm 2$. Evaluate each of these integrals:
+        
+        \begin{align*}
+        (\text{a})\;\int_{C}\frac{e^{-z}}{z-(\pi i/2)}\;dz;\quad\quad\quad\quad (\text{c})\;\int_{C}\frac{z}{2z+1}\;dz.
+        \end{align*}
+        
+        \begin{solution}
+        \hfill\vspace{2mm}
+            \begin{enumerate}[label=(\alph*)]
+                \item We can see that $f(z)=e^{-z}$ is entire and thus holomorphic on $C$ and its interior, and $C\sim_{\mathbb{C}}0$. Therefore, since $\pi i/2$ is inside $C$, then we can use Cauchy's integral formula to find
+                
+                \begin{equation*}
+                    \begin{split}
+                        \int_{C}\frac{e^{-z}}{z-(\pi i/2)}\;dz &= 2\pi if(\pi i/2) \\
+                        &= 2\pi i\bigg(\frac{1}{e^{\pi i/2}}\bigg) \\
+                        &= 2\pi i\bigg(\frac{1}{\cos\big(\frac{\pi}{2}\big)+i\sin\big(\frac{\pi}{2}\big)}\bigg) \\
+                        &= 2\pi.
+                    \end{split}
+                \end{equation*}
+                
+                \item[(c)] Since $f(z)=z$ is entire and as we saw in part (a), we also have that $C\sim_{\mathbb{C}}0$. Additionally, $2z+1$ has a root at $z=-1/2$ which is inside $C$, thus by Cauchy's integral theorem
+                
+                \begin{equation*}
+                    \begin{split}
+                        \int_{C}\frac{z}{2z+1}\;dz &= 2\pi i f\bigg(-\frac{1}{2}\bigg) \\
+                        &= 2\pi i\bigg(-\frac{1}{2}\bigg) \\
+                        &=-\pi i.
+                    \end{split}
+                \end{equation*}
+            \end{enumerate}
+        \end{solution}
+        
+        \item[16.] Let $C$ be the circle $\abs{z}=3$, described in the positive sense. Show that if 
+        
+        \begin{equation*}
+            g(w)=\int_{C}\frac{2z^2-z-2}{z-w}\;dz\quad\quad(\;\abs{w}\neq 3),
+        \end{equation*}
+        
+        \noindent then $g(2)=8\pi i$. What is the value of $g(w)$ when $\abs{w}>3$?
+        
+        \newpage
+        
+        \begin{solution}
+            Note that $f(z)=2z^2-z-2$ is entire and $C\sim_{\mathbb{C}}0$. Thus, if $-3<\abs{w}<3$, then $w$ would be contained inside $C$ and we can use Cauchy's Integral Theorem to show
+        \end{solution}
+        
+        \begin{equation*}
+            \begin{split}
+                \int_{C}\frac{2z^2-z-2}{z-w}\;dz &= 2\pi if(w) \\
+                &= 2\pi i(2w^2-w-2).
+            \end{split}
+        \end{equation*}
+        
+        \noindent Thus,
+        
+        \begin{equation*}
+            \begin{split}
+                g(2) &= 2\pi if(2) \\
+                &= 2\pi i(2\cdot 2^2-2-2) \\
+                &=2\pi i(4) \\
+                &= 8\pi i.
+            \end{split}
+        \end{equation*}
+        
+        \noindent If $\abs{w}>3$, then we would be unable to apply Cauchy's Intergral Theorem and we could not arrive at an antiderivative for which we could evaluate at such a $w$.
+    
+    
+    \end{enumerate}
+
+\end{document}

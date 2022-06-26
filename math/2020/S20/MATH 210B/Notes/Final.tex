@@ -1,0 +1,337 @@
+\section{}
+\documentclass{article}
+
+%------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+%------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[colorlinks=true,pagebackref=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red, linkcolor=blue}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newcommand{\deg}[1]{\text{deg}(#1)}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\textit{\oldproofname}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\begin{document}
+\title{Study Guide for Final}
+\author{Quin Darcy}
+\date{May, 5 2020}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+\section{Results Needed for Exam 1}
+    \begin{prop}\label{prop:1.1}
+        Assume that $F$ is a field, $f(x)\in F[x]$, and that $a\in F$. Prove that $a$ is a root of $f(x)$ iff $(x-a)\mid f(x)$.
+    \end{prop}
+        \begin{proof}
+            Assume that $a$ is a root of $f(x)$. Then $f(a)=0$. Since $F$ is a field and $a\in F$, then $(x-a)\in F[x]$. By the Division Algorithm. there exists unique polynomials $q(x),r(x)\in F[x]$ such that $f(x)=q(x)(x-a)+r(x)$ and $r(x)=0$ or $\text{deg}(r(x))<\text{deg}((x-a))$. Since $\text{deg}((x-a))=1$, then $\text{deg}(r(x))=0$ in either case. Thus, $r(x)=c$ for some $c\in F$. By assumption, 
+                \begin{equation*}
+                    f(a)=q(a)(a-a)+c=c=0.
+                \end{equation*}
+            Hence, $c=0$ and it follows that $(x-a)\mid f(x)$.\par\hspace{4mm} Conversely, assume that $(x-a)\mid f(x)$. Then for some $g(x)\in F[x]$ we have that $f(x)=g(x)(x-a)$ and so $f(a)=g(a)(a-a)=0$. Therefore, $a$ is a root of $f(x)$.
+        \end{proof}
+    \begin{prop}\label{prop:1.2}
+        Suppose $F\subseteq L$ is an extension and $\alpha\in L$.
+            \begin{enumerate}[label=(\alph*)]
+                \item $\alpha$ is algebraic over $F$ iff $[F(\alpha)\colon F]<\infty$.
+                \item Let $\alpha$ be algebraic over $F$. If $n$ is the degree of the minimal polynomial of $\alpha$ over $F$, then $1,\alpha,\dots,\alpha^{n-1}$ forms a basis of $F(\alpha)$ over $F$. Thus $[F(\alpha)\colon F]=n$.
+            \end{enumerate}
+    \end{prop}
+        \begin{proof}
+            First suppose $\alpha$ is algebraic over $F$ with minimal polynomial $p$, where $n=\deg(p)$. We need to show that $1,\alpha,\dots,\alpha^{n-1}$ forms a basis of $F(\alpha)$ over $F$. Since $F(\alpha)=F[\alpha]$,every element of $F(\alpha)$ is of the form $g(\alpha)$ for some $g\in F[x]$. Dividing $g$ by $p$ gives
+                \begin{equation*}
+                    g=qp+a_0+a_1x+\cdots+a_{n-1}x^{n-1},
+                \end{equation*}
+            where $q\in F[x]$ and $a_0,\dots,a_{n-1}\in F$, and evaluating at $x=\alpha$ yields 
+                \begin{equation*}
+                    g(\alpha)=a_0+a_1\alpha+\cdots+a_{n-1}\alpha^{n-1},
+                \end{equation*}
+            since $p(\alpha)=0$. Thus $1,\alpha,\dots,\alpha^{n-1}$ spans $F(\alpha)$ over $F$. To show linear independence, suppose that 
+                \begin{equation*}
+                    0=a_0+a_1\alpha+\cdots+a_{n-1}\alpha^{n-1},
+                \end{equation*}
+            where $a_0,\dots,a_{n-1}\in F$. Then $\alpha$ is a root of $a_0+a_1x+\cdots+a_{n-1}x^{n-1}\in F[x]$. Since the minimal polynomial $p$ has degree $n$, then this must be the zero polynomial. Hence $a_i=0$ for all $i$, and linear independence is proven. Then $[F(\alpha)\colon F]=n$.\par\hspace{4mm}This proves part (b) of the proposition and one implication of part (a). It remains to consider the case when $[F(\alpha)\colon F]<\infty$. If we let $n=[F(\alpha)\colon F]$, then $F(\alpha)$ is an $n$ dimensional vector space over $F$. This implies that any collection of $n+1$ elements of $F(\alpha)$ is linearly dependent. In particular, $1,\alpha,\dots,\alpha^n$ are linearly dependent over $F$. Hence there are $a_0,\dots,a_n\in F$, not all zero, such that     \begin{equation*}
+                a_0+a_1\alpha+\cdots+a_n\alpha^n=0.
+            \end{equation*}
+            As in the previous paragraph, it follows that $\alpha$ is a root of 
+                \begin{equation*}
+                    a_0+a_1x+\cdots+a_nx^n\in F[x],
+                \end{equation*}
+            which is nonzero since the $a_i'$s are not all zero. Hence $\alpha$ is algebraic over $F$, and the proposition is proved.
+        \end{proof}
+    \begin{prop}\label{prop:1.3}
+        Assume that 
+    \end{prop}
+        \begin{proof}
+            
+        \end{proof}
+    \begin{prop}\label{prop:1.4}
+        Assume that $F$ is a field, that $p(x)\in F[x]$ is irreducible over $F[x]$, and that $\text{deg}(p(x))=n$. Let $I=(p(x))_i$. Every element of $F[x]/I$ can be written in the form $I+h(x)$ where $h(x)=0$ or $\text{deg}(h(x))<n$, and that this representation is unique.
+    \end{prop}
+        \begin{proof}
+            Let $I+h(x)\in F[x]/I$. If $\text{deg}(h(x))< n$, then we are done. Otherwise, if $\text{deg}(h(x))\geq n$, then by the division algorithm, there exists $q(x),r(x)\in F[x]/I$ such that $h(x)=q(x)p(x)+r(x)$, where $r(x)=0$ or $\text{deg}(r(x))<n$. If $r(x)=0$, then $h(x)\in I$ and $I+h(x)=I$. If $r(x)\neq 0$, then since $q(x)p(x)\in I$, then $I+h(x)=(I+q(x)p(x))+r(x)=I+r(x)$.\par\hspace{4mm} Now suppose $I+h(x)=I+f_1(x)=I+f_2(x)$ where $\text{deg}(f_1(x))<n$ and $\text{deg}(f_2(x))<n$. Then $I+(f_1(x)-f_2(x))=I$ and it follows that $p(x)\mid(f_1(x)-f_2(x))$. Thus, for some $q(x)\in F[x]$, we have $f_1(x)=q(x)p(x)+f_2(x)$. However, since $\text{deg}(f_1(x))<n$ and $\text{deg}(q(x)p(x)+f_2(x))\geq n$ for $q(x)\neq 0$, but this is impossible. Thus $q(x)=0$ and $f_1(x)=f_2(x)$. 
+        \end{proof}\newpage
+    \begin{prop}\label{prop:1.5}
+        Assume that $F$ is a field, that $p(x)\in F[x]$ is irreducible over $F[x]$, and that $\text{deg}(p(x))=n$. Then $\{I+1,I+x,\dots,I+x^{n-1}\}$ is a basis for $F[x]/I$ over $F$.
+    \end{prop}
+        \begin{proof}
+            By \cref{prop:1.4}, every element of $F[x]/I$ can be written as $I+h(x)$, where $h(x)=0$ or $\deg(h(x))<n$. If $h(x)=0$, then
+                \begin{equation*}
+                    I+h(x)=I\in\langle\{I+1,\dots,I+x^{n-1}\}\rangle.
+                \end{equation*}
+            If $h(x)=a_0+a_1x+\cdots+a_{n-1}x^{n-1}$, then 
+                \begin{equation*}
+                    \begin{split}
+                        I+h(x)&=I+a_0+\cdots+a_{n-1}x^{n-1} \\
+                        &=(I+a_0)+(I+a_1x)+\cdots+(I+a_{n-1}x^{n-1}) \\
+                        &=a_0(I+1)+a_1(I+x)+\cdots+a_{n-1}(I+x^{n-1}).
+                    \end{split}
+                \end{equation*}
+            Thus, $I+h(x)\in\langle\{I+1,\dots,I+x^{n-1}\}\rangle$. Therefore,
+                \begin{equation*}
+                    \langle\{I+1,\dots,I+x^{n-1}\}\rangle=F[x]/I.
+                \end{equation*}
+            Now suppose for some $a_0,\dots,a_{n-1}\in F$ that 
+                \begin{equation*}
+                    a_0(I+1)+\cdots+a_{n-1}(I+x^{n-1})=I.
+                \end{equation*}
+            Then $a_0+\cdots+a_{n-1}x^{n-1}\in I$ and so $p(x)\mid a_0+\cdots+a_{n-1}x^{n-1}$. But since $\deg(p(x))=n$, then $a_0+\cdots+a_{n-1}x^{n-1}$ must be the zero polynomial and thus $a_i=0$ for all $i$. Therefore, $\{I+1,\dots,I+x^{n-1}\}$ is linearly independent.
+        \end{proof}
+\section{Exam 1}
+
+\begin{enumerate}[leftmargin=*]
+    \item Determine if the following are always true (if always true, then prove it, and if not always true, then give a counter example).
+        \begin{enumerate}
+            \item Assume that $F$ is a field, $f(x)\in F[x]$, $a\in F$, and let $g(x)=f(x)-f(a)$. Then $(x-a)\mid g(x)$.
+                \begin{solution}
+                    Since $f(a)=f(a)-f(a)=0$, then $a$ is a root of $f(x)$ and so by \cref{prop:1.1}, $(x-a)\mid f(x)$.
+                \end{solution}
+            \item Assume $E/F$, $c\in E$, and $[F(c)\colon F]=n$, $n>1$. Then $\{c,c^2,\dots,c^n\}$ is a basis for $F(c)$ over $F$.
+                \begin{solution}
+                    By \cref{prop:1.2}, we know that $\{1,c,\dots,c^{n-1}\}$ is a basis for $F(c)$ over $F$. Since $n>1$, then $c\neq 0$. Thus, in $F(c)$, $C^{-1}$ exists. Now assume that $a_1c+\cdots+a_nc^n=0$. Then, in $F(c)$, we can write 
+                        \begin{equation*}
+                            (a_1c+\cdots+a_nc^n)c^{-1}=0c^{-1}=0,
+                        \end{equation*}
+                    and thus $a_1+\cdots+a_nc^{n-1}=0$. But $\{1,c,\dots,c^{n-1}\}$ is a basis for $F(c)$ over $F$ and so it is linearly independent. Thus $a_i=0$ for all $i$, and thus $\{c,\dots,c^n\}$ is linearly independent. Therefore, we have a set of $n$ linearly independent elements in an $n$ dimensional vector space and so it is a basis.
+                \end{solution}
+        \end{enumerate}
+    \item Assume that $E$ is a field, $F$ is a subfield of $E$, $g(x)\in F[x]$ is irreducible over $F$, $c,d\in E$, and $c$ and $d$ are each roots of $g(x)$ over $E$. Prove that $F(c)\cong F(d)$.
+        \begin{proof}
+            By (??), we know that if $p(x)$ and $q(x)$ are the minimal polynomials for $c$ and $d$, respectively, then
+                \begin{equation*}
+                    F(c)=F[c]\cong F[x]/(p(x))_i\quad\text{and}\quad F(d)=F[d]\cong F[x]/(q(x))_i.
+                \end{equation*}
+            Since $g(c)=0$, then $p(x)\mid g(x)$, but $g(x)$ is irreducible and so $(g(x))_i=(p(x))_i$. Similarly, $g(d)=0$ and so $q(x)\mid g(x)$. By the same reasoning, we have that $(g(x))_i=(q(x))_i$. Thus, $F(c)\cong F[x]/(g(x))_i$ and $F(d)\cong F[x]/(g(x))_i$. Therefore, $F(c)\cong F(d)$.
+        \end{proof}
+    \item Recall from HW 4 that $x^4+2x^2-1$ is irreducible over $\mathbb{Z}_3$. Find with explanation, a field of order 81, give a basis over $\mathbb{Z}_3$, and prove that every element of this field is a root of $x^{81}-x$.
+        \begin{proof}
+            Given that $x^4+2x^2-1$ is irreducible over $\mathbb{Z}_3$, then the ideal $I=(x^4+2x^2-1)_i$ is a maximal in $\mathbb{Z}_3[x]$ and so $\mathbb{Z}_3/I$ is a field. By \cref{prop:1.4}, every element of $\mathbb{Z}_3/I$ can be written as $I+h(x)$ where $h(x)=0$ or $\deg(h(x))<4$. Thus, every element of this field is of the form $I+(ax^3+bx^2+cx+d)$ where $a,b,c,d\in\mathbb{Z}_3$. Given that there are three elements in $\mathbb{Z}_3$, then there are $3^4=81$ elements in $\mathbb{Z}_3/I$. Additionally, by \cref{prop:1.5}, a basis for this field is $\{I+1,I+x,I+x^2,I+x^3\}$.\par\hspace{4mm} Lastly, let $F=\mathbb{Z}_3/I$. Then $F$ is a field, and so $(F-\{0\},\cdot)$ is a group. We have that  $\abs{F-\{0\}}=80$. If $a\in F-\{0\}$, then by Lagrange's Theorem, $o(a)\mid 80$. Thus $a^{80}=1$ and so $a^{81}=a$. Thus $a$ is a root of $x^{81}-x$ and since 0 is also a root, then every element of $F$ is a root.
+        \end{proof}
+    \item Find, with explanation, the minimal polynomial of $\sqrt{3}+\sqrt{5}$ over $\mathbb{Q}$. (Recall from HW 4 that $\mathbb{Q}(\sqrt{3},\sqrt{5})=\mathbb{Q}(\sqrt{3}+\sqrt{5})$)
+        \begin{proof}
+            Letting $x=\sqrt{3}+\sqrt{5}$, then $x^2=8+2\sqrt{15}$. Thus $(x^2-8)^2=60$ and so $x^4-16x^2+64=60$. Thus $x^4-16x^2+4=0$ is a polynomial with $\sqrt{3}+\sqrt{5}$ as a root. Since $\mathbb{Q}(\sqrt{3},\sqrt{5})=\mathbb{Q}(\sqrt{3}+\sqrt{5})$, then 
+                \begin{equation*}
+                    [\mathbb{Q}(\sqrt{3}+\sqrt{5}\colon\mathbb{Q}]=[\mathbb{Q}(\sqrt{3},\sqrt{5})\colon\mathbb{Q}]=4.
+                \end{equation*}
+            This implies that the minimal polynomial of $\sqrt{3}+\sqrt{5}$ is of degree 4. Since $x^4-16x^2+4$ is monic and of degree 4, then it is the minimal polynomial of $\sqrt{3}+\sqrt{5}$, as desired.
+        \end{proof}
+    \item\hfill\par 
+        \begin{enumerate}
+            \item Assume that $F$ and $K$ are fields, and that $\alpha\colon F\rightarrow K$ is an isomorphism. Define $\theta\colon F[x]\rightarrow K[x]$ by
+                \begin{equation*}
+                    \theta\left(\sum_{i=0}^na_ix^i\right)=\sum_{i=0}^n\alpha(a_i)x^i.
+                \end{equation*}
+            $\theta$ is an isomorphism (this is given). Prove that if $c\in F$ is a root of $f(x)\in F[x]$, then $\alpha(c)\in K$ is a root of $\theta(f(x))$.
+                \begin{proof}
+                    Assume that $c\in F$ is a root of $f(x)=\sum_{i=0}^na_ix^i$. Then 
+                        \begin{equation*}
+                            \begin{split}
+                                \theta(f(x))(\alpha(c)) &= \sum_{i=0}^n\alpha(a_i)\alpha(c)^i \\
+                                &= \sum_{i=0}^n\alpha(a_i)\alpha(c^i) \\
+                                &=\sum_{i=0}^n\alpha(a_ic^i) \\
+                                &=\alpha\big(\sum_{i=0}^na_ic^i\big) \\
+                                &= \alpha(f(c)) \\
+                                &= \alpha(0) \\
+                                &=0.
+                            \end{split}
+                        \end{equation*}
+                    Therefore, $\alpha(c)$ is a root of $\theta(f(x))$.
+                \end{proof}
+            \item Assume $c,d$ are irrational numbers, and that $c$ and $d$ are each algebraic over $\mathbb{Q}$. If $\mathbb{Q}(c)\cong\mathbb{Q}(d)$, and $c$ is a root of $g(x)\in\mathbb{Q}[x]$. Prove that there exists $b\in\mathbb{Q}(d)$ such that $b$ is a root of $g(x)$. Additionally, if $\mathbb{Q}(c)\cong\mathbb{Q}(d)$, must there exist a irreducible polynomial $h(x)\in\mathbb{Q}[x]$ such that both $c,d$ are roots of $h(x)$?
+                \begin{proof}
+                    Assume that $\mathbb{Q}(c)\cong\mathbb{Q}(d)$, where $\alpha\colon\mathbb{Q}(c)\rightarrow\mathbb{Q}(d)$ is an isomorphism. By (a), $\theta\colon\mathbb{Q}(c)[x]\rightarrow\mathbb{Q}(d)[x]$ is an isomorphism defined by 
+                        \begin{equation*}
+                            \theta\big(\sum_{i=0}^na_ix^i\big)=\sum_{i=0}^n\alpha(a_i)x^i.
+                        \end{equation*}
+                    Also, by (a), $\alpha(c)$ is a root of $\theta(g(x))$. By HW 1, $\alpha$ is the identity on $\mathbb{Q}$. Thus $\theta(g(x))=g(x)$ and $\alpha(c)\in\mathbb{Q}(d)$ is a root of $g(x)$.\par\hspace{4mm} Consider $\mathbb{Q}(1+\sqrt{2})=\mathbb{Q}(\sqrt{2})$, these fields are equal and therefore isomorphic. However, $\sqrt{2}$ is a root of $x^2-2$, but $1+\sqrt{2}$ is not. Furthermore, any polynomial which has $\sqrt{2}$ as a root must be a multiple of $x^2-2$.
+                \end{proof}
+        \end{enumerate}
+    \item Assume that $E/K/F$, and $c\in E$, $d\in E$.\hfill\par
+        \begin{enumerate}
+            \item Prove that if $c$ is algebraic over $F$, then $c$ is algebraic over $K$.
+                \begin{proof}
+                    Assuming $c\in E$ is algebraic over $F$, then for some $f(x)\in F[x]$ we have that $f(c)=0$. Since $F\subseteq K$, then $f(x)\in K[x]$ and so $c$ is algebraic over $K$.
+                \end{proof}
+            \item Assume that $p(x)$ is the minimal polynomial for $c$ over $K$, and that $q(x)$ is the minimal polynomial for $c$ over $F$. Prove that $p(x)$ is a factor of $q(x)$.
+                \begin{proof}
+                    Consider the map $\theta\colon K[x]\rightarrow K$, where $\theta(g(x))=g(c)$. On HW (?) we showed that this map is a homomorphism. Also, we have shown that $\ker\theta=\{g\in K[x]\mid g(c)=0\}$. Since $\ker\theta$ is a principle ideal of $K[x]$ and $q(x),p(x)\in\ker\theta$, then since $q(x)$ is irreducible over $F$ and $p(x)$ is irreducible over both $K$ and $F$, then $p(x)\mid q(x)$.
+                \end{proof}
+            \item If $d$ is algebraic over $K$, must it be true that $d$ is algebraic over $F$?
+                \begin{proof}
+                    No. For example, consider $\mathbb{R}/\mathbb{Q}$. We have that $\pi$ is algebraic over $\mathbb{R}$ since it is a root of $x-\pi\in\mathbb{R}[x]$, but $\pi$ is transcendental over $\mathbb{Q}$ and therefore not algebraic.
+                \end{proof}
+        \end{enumerate}
+\end{enumerate}
+
+\section{Overview}
+    \begin{prop}
+        Let $a$, $b$, and $u$ be elements of a commutative ring $R$ with identity.     \begin{enumerate}[label=(\roman*)]
+                \item $a\mid b$ iff $(b)\subseteq(a)$.
+                \item $a$ and $b$ are associates iff $(a)=(b)$.
+                \item $u$ is a unit iff $u\mid r$ for all $r\in R$.
+                \item $u$ is a unit iff $(u)=R$.
+                \item The relation ``$a$ is an associate of $b$'' is an equivalence relation on $R$.
+                \item If $a=br$ with $r\in R$ a unit, then $a$ and $b$ are associates. If $R$ is an integral domain, then the converse is true.
+            \end{enumerate}
+    \end{prop}
+        \begin{proof}
+        
+        \end{proof}
+    \begin{definition}
+        Let $R$ be a commutative ring with identity. An element $c\in R$ is \textbf{irreducible} provided that:
+            \begin{enumerate}[label=(\roman*)]
+                \item $c$ is a nonzero nonunit;
+                \item $c=ab\Rightarrow$ $a$ or $b$ is a unit.
+            \end{enumerate}
+        An element $p\in R$ is \textbf{prime} provided that:
+            \begin{enumerate}[label=(\roman*)]
+                \item $p$ is a nonzero nonunit;
+                \item $p\mid ab\Rightarrow$ $p\mid a$ or $p\mid b$.
+            \end{enumerate}
+    \end{definition}
+    \begin{prop}
+        Assume $K/E/F$, that $[K\colon E]=m$, and that $[E\colon F]=t$. Then $[K\colon F]=mt$ and if $\{v_1,\dots,v_m\}$ is a basis for $K$ over $E$ and $\{u_1,\dots,u_t\}$ is a basis for $E$ over $F$, then a basis for $K$ over $F$ is
+            \begin{equation*}
+                \{v_iu_j\mid 1\leq i\leq m,\; 1\leq j\leq t\}.
+            \end{equation*}
+    \end{prop}
+        \begin{proof}
+        
+        \end{proof}
+    \begin{prop}
+        If $f\in F[x]$, then $f$ is irreducible over $F$ if any one of the following holds:
+            \begin{enumerate}
+                \item Let $f=a_nx^n+\cdots+a_0\in\mathbb{Z}[x]$ have degree $n>0$. If there is a prime $p$ such that $p\nmid a_n$, $p\mid a_{n-1},\dots,p\mid a_0$ and $p^2\nmid a_0$, then $f$ is irreducible over $\mathbb{Q}$.
+                \item Let $p$ be a prime and $f\in\mathbb{Z}[x]$. Then let $\hat{f}=[f]_p$. If $\hat{f}$ is irreducible over $\mathbb{Z}_p$ and $\deg(f)=\deg(\hat{f})$, then $f$ is irreducible over $\mathbb{Q}$.
+            \end{enumerate}
+    \end{prop}
+\section{Finite Fields}
+    
+
+\end{document}

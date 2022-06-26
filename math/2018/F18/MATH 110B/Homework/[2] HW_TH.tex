@@ -1,0 +1,339 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+ \setlist[description]{leftmargin=4mm,labelindent=4mm}
+  
+ \begin{document}
+  
+ \begin{flushleft}
+  
+    Quin Darcy\par
+    Dr. Shannon\par
+    MATH 110B\par
+    9/7/18
+  
+ \end{flushleft}
+  
+ \centerline{Homework: 2TH}
+ 
+ \vspace{4mm}
+ 
+ \noindent\textsc{Section: 2}\par
+ 
+ \justifying
+ 
+ \vspace{1mm}
+ 
+ \hline
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{1.}\par
+ 
+ \vspace{4mm}
+ 
+ \par\textbf{a)} 
+ 
+ \vspace{2mm}
+ 
+ \begin{addmargin}[2.8em]{2.8em}
+
+    Express $(1-i\sqrt{3})^5$ in the form $a+bi$.
+
+    \vspace{4mm}
+
+    \noindent Let $a=1$ and $b=-\sqrt{3}$. Then $z=1-i\sqrt{3}$ and $\abs{z}=2$. Using the identity $a=\abs{z}\cos{\theta}$ and $b=\abs{z}\sin{\theta}$, we obtain $z=2\cos{(-\frac{\pi}{6})}+i2\sin{(-\frac{\pi}{6})}$. Thus by De Moivre's Theorem we have
+    
+    \begin{equation*}
+        \begin{split}
+            z^5& =(2\cos{(-\frac{\pi}{6})}+i2\sin{(-\frac{\pi}{6})})^5 \\
+            & =2^5(\cos{(-5\frac{\pi}{6})}+i\sin{(-5\frac{\pi}{6})}) \\
+            & =32(-\frac{1}{2}-i\frac{\sqrt{3}}{2}) \\
+            & =-16-i16\sqrt{3}.
+        \end{split}
+    \end{equation*}
+    
+    \vspace{4mm}
+    
+    \noindent Express $(-\sqrt{2}-i\sqrt{2})^6$ in the form $a+bi$.
+    
+    \vspace{4mm}
+    
+    \noindent Let $a=-\sqrt{2}$ and $b=-\sqrt{2}$. Then $z=-\sqrt{2}-i\sqrt{2}$ and $\abs{z}=2$. Then using the identity $a=\abs{z}\cos{\theta}$ and $b=\abs{z}\sin{\theta}$, we obtain $z=2\cos{(\frac{5\pi}{4})}+i2\sin{(\frac{5\pi}{4})}$. Thus, by De Moivre's Theorem we have
+    
+    \begin{equation*}
+        \begin{split}
+            z^6& =(2\cos{(\frac{5\pi}{4})}+i2\sin{(\frac{5\pi}{4})})^6 \\
+            & =2^6(\cos{(\frac{15\pi}{2})}+i\sin{(\frac{15\pi}{2})}) \\  
+            & =64(0-i) \\
+            & =-64i.
+        \end{split}
+    \end{equation*}
+    
+\end{addmargin}
+
+\par\textbf{b)} Find all the solutions to $z^6=-1$.
+
+\vspace{4mm}
+
+\begin{addmargin}[2.8em]{2.8em}
+
+    \noindent Let $z=r\cos{\theta}+ir\sin{\theta}$. We want $(r\cos{\theta}+ir\sin{\theta})^6=-1$, and by De Moivre's Theorem, this becomes $r^6(\cos{6\theta}+i\sin{6\theta})=-1$. Since $r^6>0$ and there is no imaginary component to $z^6$, we deduce that $r^6=1$ and $\cos{6\theta}=-1$. Additionally, $\cos{6\theta}=-1$ when $\theta=\frac{\pi}{6}, \frac{\pi}{2}, \frac{5\pi}{6}, \frac{7\pi}{6}, \frac{3\pi}{2}, \frac{11\pi}{6}$. Thus, for $z=\cos{\theta}+i\sin{\theta}$, the solutions are
+    
+    \begin{align*}
+        z_1 & = \frac{\sqrt{3}}{2}+i\frac{1}{2} 
+       & z_2 & = i 
+       & z_3 & = -\frac{\sqrt{3}}{2}+i\frac{1}{2} \\
+        z_4 & = -\frac{\sqrt{3}}{2}-i\frac{1}{2} 
+       & z_5 & = -i 
+       & z_6 & = \frac{\sqrt{3}}{2}-i\frac{1}{2}.
+    \end{align*}
+
+\end{addmargin}
+
+\noindent\textbf{3.}\par
+
+\textbf{a)}
+
+\vspace{4mm}
+
+
+
+\begin{addmargin}[2.8em]{2.8em}
+
+    \noindent Consider the ring $(\mathbb{Z}\times\mathbb{Z},+,\cdot)$. The additive identity of this ring is the element $(0,0)$. The zero-divisors of this ring are those elements $(a,a'),(b,b')\in\mathbb{Z}\times\mathbb{Z}/\{(0,0)\}$, such that
+
+    \vspace{2mm}
+
+    \centerline{$(a,a')\cdot(b,b')=(0,0)$.}
+
+    \vspace{2mm}
+
+    \noindent Thus, we want 
+
+    \vspace{2mm}
+
+    \centerline{$ab=0$ and $a'b'=0$.}
+
+    \vspace{2mm}
+
+    \noindent This would be all elements such that $b=0$ and $a'=0$. Thus, the zero-divisors of this ring are $(a,0)$ and $(0,b')$, where $a,b'\in\mathbb{Z}$.
+
+\end{addmargin}
+
+\vspace{4mm}
+
+\par\textbf{b)}
+
+\vspace{4mm}
+
+\begin{addmargin}[2.8em]{2.8em}
+
+    Let $(R\times S,+,\cdot)$ be a ring. Then it should be noted that $R$ or $S$ might contain zero-divisors. Thus, the the zero-divisors of this set is of the form $(0_R, g)$ and $(g',0_S)$ or $(x,y)$ for $x\in R$ and $y\in S$ and $x$ and $y$ are themselves zero-divisors.
+
+\end{addmargin}
+
+\vspace{6mm}
+
+\noindent\textbf{4.} Assume that $(\mathbb{R},+\cdot)$ is a ring and that $g\in R$. The smallest subring that contains $\frac{1}{2}$\par is $\mathbb{Q}$.
+
+\vspace{4mm}
+
+\begin{addmargin}[1.5em]{1.5em}
+
+    \noindent \textbf{\textit{Proof.}} Since $1\in\mathbb{Z}$ and $2\in\mathbb{Z}$, then $\frac{1}{2}\in\mathbb{Q}$ by definition. Now let $T\subseteq_{\big r} R$ such that $\frac{1}{2}\in T$. Assume $\frac{a}{b}\in\mathbb{Q}$, then since $\frac{1}{2}\in\mathbb{Q}$, by closure, $-\frac{1}{2}\in\mathbb{Q}$. Thus, $\frac{a}{b}-\frac{1}{2}\in\mathbb{Q}$. Let $\frac{a}{b}-\frac{1}{2}=\frac{p}{q}$, for some $p,q\in\mathbb{Z}$. Then $\frac{1}{2}=\frac{a}{b}-\frac{p}{q}$. Thus, $\frac{a}{b}-\frac{p}{q}\in\mathbb{Q}$. Further, by closure in $\mathbb{Q}$, $\frac{a}{b}\in\mathbb{Q}$. Therefore, $\mathbb{Q}\subseteq T$.\hspace{53mm}\square
+
+\end{addmargin}
+
+\vspace{6mm}
+
+\noindent\textbf{5.} Assume that $[m]\in\mathbb{Z}_n$, and $[m]\neq[0]$. Then $[m]$ is a zero divisor iff gcf$(m,n)\neq 1$.
+
+\vspace{4mm}
+
+\begin{addmargin}[1.5em]{1.5em}
+
+    \noindent\textbf{\textit{Proof.}} $(\Rightarrow)$ Assume $gcf(m,n)=1$. Let $[k]\in\mathbb{Z}_n$ such that $[k]\neq[0]$. Then $n\nmid m$ and $n\nmid k$. From MATH 108, we proved that this implies $n\nmid mk$. Thus, $n\notin[m]\cdot[k]$, which implies $[m]\cdot[k]\neq[0]$, for any $[m]$ and $[k]$ not equal to $[0]$.
+    
+    \vspace{4mm}
+    
+    \noindent\textbf{\textit{Proof.}} $(\Leftarrow)$ Assume $gcf(m,n)\neq 1$. Then there exists $s\in\mathbb{Z}$ such that $s\neq 0$ and $s| m$ and $s| n$. In MATH 108 we proved that this implies that $s| mn$. Thus, there exists some $k\in\mathbb{Z}$ such that $k\neq 0$ and $ks=mn$. Thus, $k=mn/s$. Now consider $[n/s]\in\mathbb{Z}_n$. It follows that $[m]\cdot[n/s]=[k]$, where $k$ was shown to be an integer multiple of $n$. Thus, $[k]=[0]$ which implies $[m]\cdot[n/s]=[0]$. Therefore, $[m]$ is a zero-divisor.\hspace{121.6mm}\square
+    
+
+\end{addmargin}
+
+\vspace{6mm}
+
+\newpage
+
+\noindent\textbf{6.} Let $\mathbb{Q}[\sqrt{3}]=\{a+b\sqrt{3}\colon a,b\in\mathbb{Q}\}$. Then $\mathbb{Q}[\sqrt{3}]$ is a subfield of $\mathbb{R}$. 
+
+\vspace{4mm}
+
+\begin{addmargin}[1.5em]{1.5em}
+
+    \noindent\textbf{\textit{Proof.}} To prove this we will show that $\mathbb{Q}[\sqrt{3}]$ is a subgroup with respect to addition, and all the non-zero elements form a subgroup with respect to multiplication.
+    
+    \noindent\textbf{i.} Let $a+b\sqrt{3}$ and $c+d\sqrt{3}$ be elements of $\mathbb{Q}[\sqrt{3}]$. Then consider $a+b\sqrt{3}-(c+d\sqrt{3})$. Simplification of this yields $(a-c)+(b-d)\sqrt{3}$. Since $\mathbb{Q}$ is closed with respect to addition, then $(a-c),(b-d)\in\mathbb{Q}$. Thus, $(a-c)+(b-d)\sqrt{3}\in\mathbb{Q}[\sqrt{3}]$. This demonstrates that if $a,b\in\mathbb{Q}[\sqrt{3}]$, then $a-b\in\mathbb{Q}[\sqrt{3}]$. Therefore, $\mathbb{Q}[\sqrt{3}]$ is a subgroup of $\mathbb{R}$ with respect to addition.
+    
+    \vspace{4mm}
+    
+    \noindent\textbf{ii.} Let $a+b\sqrt{3}$ and $c+d\sqrt{3}$ be elements of $\mathbb{Q}[\sqrt{3}]$, such that neither are equal to the zero of the set. Then consider what the inverse, if it exists, of $c+d\sqrt{3}$ would look like. We want to show that the inverse is in the set and the product of it with $a+b\sqrt{3}$ is also in the set. Let $\sigma$ represent the alleged inverse. Then solving for it yields
+    
+    \vspace{4mm}
+    
+    \centerline{$\sigma=\frac{c}{c^2-2d^2}+\frac{-d}{c^2-2d^2}\sqrt{3}$.}
+    
+    \vspace{4mm}
+    
+    \noindent Then consider the product
+    
+    \begin{equation*}
+        \begin{split}
+            (a+b\sqrt{3})(\frac{c}{c^2-3d^2}+\frac{-d}{c^2-3d^2}\sqrt{3}) &= (\frac{1}{c^2-3d^2})(a+b\sqrt{3})(c-d\sqrt{3}) \\
+            &= (\frac{1}{c^2-3d^2})(ac-ad\sqrt{3}+bc\sqrt{3}-3bd) \\
+            &= (\frac{1}{c^2-3d^2})((ac-3bd)+(bc-ad)\sqrt{3}) \\
+            &= \frac{ac-3bd}{c^2-3d^2}+\frac{bc-ad}{c^2-3d^2}\sqrt{3}.
+        \end{split}
+    \end{equation*}
+    
+    \noindent We can see that both terms are rational numbers, thus $(a+b\sqrt{3})\sigma\in\mathbb{Q}[\sqrt{3}]$. Thus, the non-zero elements form a subgroup with respect to multiplication. Therefore, $\mathbb{Q}[\sqrt{3}]$ is a subfield of $\mathbb{R}$.\hspace{100mm}\square
+
+\end{addmargin}
+
+\vspace{6mm}
+
+\noindent\textbf{7.} Assume $(R,+,\cdot)$ is an integral domain and $x\in R$. Then $x^2=x$ iff $x=0$ or $x=1$.
+
+\vspace{4mm}
+
+\begin{addmargin}[1.5em]{1.5em}
+
+    \noindent\textbf{\textit{Proof.}} $(\Rightarrow)$ Assume for some $x\in R$, that $x^2=x$. Then $x^2-x=0$. Thus, $x(x-1)=0$. Since $(R,+,\cdot)$ is an integral domain, then it does not contain any zero-divisors. Thus, $x(x-1)=0$ implies $x=0$ or $x=1$ since one of the terms must equal $0$, otherwise the set would contain a zero divisor.\hspace{44mm}\square
+    
+    \vspace{4mm}
+    
+\end{addmargin}
+
+\begin{addmargin}[1.5em]{1.5em}
+    
+    \textbf{\textit{Proof.}} $(\Leftarrow)$ Assume $x=0$, then $x^2=0\cdot 0=0=x$. Assume $x=1$. Then, since $1$ is the multiplicative identity, it follows that $1\cdot 1=1$. Thus, $x^2=x\cdot x=1=x$.\hspace{1mm}\square 
+
+\end{addmargin}
+
+\newpage
+
+\noindent\textbf{8.}\par
+
+\begin{addmargin}[1.5em]{1.5em}
+
+    \noindent\textbf{b)} Find the char$(\mathbb{Z}_8)$, char$(\mathbb{Z}_4\times\mathbb{Z}_6)$, and char$(\mathbb{Z}_m\times\mathbb{Z}_n)$.
+    
+    \vspace{4mm}
+    
+    char$(\mathbb{Z}_8)=8$\par
+    char$(\mathbb{Z}_4\times\mathbb{Z}_6)=lcm(4,6)=12$\par
+    char$(\mathbb{Z}_m\times\mathbb{Z}_n)=lcm(m,n)$
+    
+\end{addmargin}
+
+\vspace{4mm}
+
+\noindent\textbf{9.}
+
+\vspace{4mm}
+
+\begin{addmargin}[1.5em]{1.5em}
+
+    \noindent\textbf{a)} Let $C$ be a set of subrings of a ring $(R,+,\cdot)$. Then $\bigcap C$ is a subring of $R$.
+    
+    \vspace{4mm}
+    
+    \noindent\textbf{\textit{Proof.}} From MATH 110A, we know that the intersection of subgroups is itself a subgroup. Thus, $(R,+)$ is an abelian group. Furthermore, since associativity, commutativity, and the distributive property are all inherited from $R$ then we need only to show that multiplication is closed. Let $a,b\in\bigcap C$. Then $a$ and $b$ are in each subring of $R$. Thus, for any arbitrary subring $c\in C$, we have $a,b\in c$. Since $c$ is a subring, then $a\cdot b\in c$. Thus, $a\cdot b\in\bigcap C$.\hspace{60mm}\square
+    
+    \vspace{4mm}
+    
+    \textbf{b)} Assume each subring $c$ in $C$ from part (a) is an integral domain. Then $\bigcap C$ is\par an integral domain.
+    
+    \vspace{4mm}
+    
+\end{addmargin}
+
+\begin{addmargin}[1.5em]{1.5em}
+    
+    \textbf{\textit{Proof.}} By part $(a)$, we know that $\bigcap C$ is a subring. If each element is an integral domain, then the multiplicative identity is unique and thus it is easily shown that it is an element of the intersection of all the sets. What we then need to show is that $\bigcap C$ contains no zero divisors. Let $a,b\in\bigcap C$ and assume $a\neq 0$ and $b\neq 0$. Let $c\in C$ be any arbitrary element. Since $a$ and $b$ are in the intersection, then $a,b\in c$. Additionally, since $c$ is an integral domain, it follows that $a\cdot b\neq 0$. Thus, for any $c\in C$, $a\cdot b\neq 0$.\hspace{101mm}\square 
+    
+    \vspace{4mm}
+    
+\end{addmargin}
+
+\begin{addmargin}[1.5em]{1.5em}
+    
+    \textbf{c)} Assume each subring in $C$ is a field. Then $\bigcap C$ is a field.
+    
+    \vspace{4mm}
+    
+    \noindent\textbf{\textit{Proof.}} What we need to show is that each non-zero element in $\bigcap C$ has a multiplicative inverse also in $\bigcap C$. However, since part (a) showed that multiplication is closed in the intersection, then it follows that each non-zero element and its respective inverse is contained in $\bigcap C$.\hspace{75mm}\square 
+
+\end{addmargin}
+
+\end{document}

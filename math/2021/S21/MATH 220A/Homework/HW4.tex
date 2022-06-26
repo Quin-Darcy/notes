@@ -1,0 +1,129 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 220A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+\begin{document} \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 220A}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 4/4/21 \\
+    { Instructor:}\ Dr. Martins \hspace{\fill} Assignment:
+    Homework 4 \\ \hrule}
+
+    \begin{enumerate}
+        \item Prove that for functions $f:\mathbb{R}\to\mathbb{R}$, the $\varepsilon-\delta$ definition 
+        of continuity implies the open set definition.
+            \begin{proof}
+                Assume that $f:\mathbb{R}\to\mathbb{R}$ is continuous and let $V\subset\mathbb{R}$ 
+                be any open set in the range of $f$. Then we want to show that $f^{-1}(V)$ is open.
+                To do this we let $a\in f^{-1}(V)$ and show that $a$ is contained in a 
+                neighborhood which is contained in $f^{-1}(V)$. Since $f$ is continuous, then 
+                for any $\varepsilon>0$, there exists $\delta>0$ such that 
+                $f(x)\in(f(a)-\varepsilon,f(a)+\varepsilon)$ for all $x\in\mathbb{R}$ such that 
+                $\abs{x-a}<\delta$. Hence, $a\in(a-\delta, a+\delta)\subset f^{-1}(V)$. Therefore 
+                every point of $f^{-1}(V)$ is an interior point.
+            \end{proof}
+        \item[5.] Show that the subspace $(a,b)$ of $\mathbb{R}$ is homeomorphic with $(0,1)$ and 
+        the subspace $[a,b]$ is homeomorphic with $[0,1]$.
+            \begin{proof}
+                We begin by defining the following function $f:(a,b)\to(0,1)$:
+                \begin{equation*}
+                    f(x)=\frac{x-a}{b-a}.
+                \end{equation*}
+                We want to show that $f$ is a bijection, $f$ is continuous, and
+                $f^{-1}$ is continuous. We will first let $x_1, x_2\in(a, b)$
+                and assume that $f(x_1)=f(x_2)$. Then this implies that 
+                \begin{equation*}
+                    \frac{x_1-a}{b-a}=\frac{x_2-a}{b-a}\Rightarrow
+                    x_1-a=x_2-a\Rightarrow x_1=x_2.
+                \end{equation*}
+                Hence, $f$ is injective. Next, if $y\in (0, 1)$, then choosing
+                $x\in(a, b)$ such that $x=y(b-a)+a$, then we get that $f(x)=y$.
+                Hence, $f$ is surjective.\par\hspace{4mm} Having shown that $f$
+                is a bijection, we now want to show that $f$ and $f^{-1}$ are
+                both continuous over $(a, b)$ and $(0, 1)$, respectively. Let
+                $c\in (a, b)$ and let $\varepsilon>0$. Then for
+                $\delta=\varepsilon\abs{b-a}$, it follows that for all $x\in(a, b)$
+                \begin{equation*}
+                    \begin{split}
+                        \abs{x-c}<\delta&\Rightarrow
+                        \abs{x-c}<\varepsilon\abs{b-a} \\
+                        &\Rightarrow \frac{\abs{x-c}}{\abs{b-a}}<\varepsilon \\
+                        &\Rightarrow\bigabs{\frac{x-c}{b-a}}<\varepsilon \\
+                        &\Rightarrow\bigabs{\frac{x-a}{b-a}-\frac{c-a}{b-a}}<\varepsilon
+                        \\
+                        &\Rightarrow\abs{f(x)-f(c)}<\varepsilon.
+                    \end{split}
+                \end{equation*}
+                For all $c\in (a, b)$. This shows that $f$ is continuous. Now we need to show
+                that $f^{-1}(y)=y(b-a)+a$ is continuous at every $x\in (0,1)$. Letting
+                $\varepsilon>0$ and selecting the same
+                $\delta=\varepsilon/\abs{b-a}$ as before we find that for all
+                $y\in(0, 1)$ 
+                \begin{equation*}
+                    \begin{split}
+                        \abs{y-c} &<\delta \\
+                        &\Rightarrow \abs{y-c} < \frac{\varepsilon}{\abs{b-a}}
+                        \\
+                        &\Rightarrow \abs{y-c}\abs{b-a} <\varepsilon \\
+                        &\Rightarrow \abs{(y-c)(b-a)} <\varepsilon \\
+                        &\Rightarrow \abs{y(b-a)-c(b-a)} <\varepsilon \\
+                        &\Rightarrow \abs{y(b-a)+a-c(b-a)-a}< \varepsilon \\
+                        &\Rightarrow \abs{f^{-1}(y)-f^{-1}(c)}<\varepsilon.
+                    \end{split}
+                \end{equation*}
+                Therefore $(a, b)$ is homeomorphic to $(0, 1)$. Lastly, we note
+                that both $f$ and $f^{-1}$ are defined on the end points of
+                their respective intervals and that $f(a)=0$, $f(b)=1$,
+                $f^{-1}(0)=a$, and $f^{-1}(1)=b$. Hence, the given function,
+                $f$, also shows that $[a, b]$ and $[0, 1]$ are homeomorphic.
+            \end{proof}
+        \item[13.] Let $A\subset X$; let $f:A\to Y$ be continuous; let $Y$ be
+            Hausdorff. Show that if $f$ may be extended to a continuous
+            function $g:\overline{A}\to Y$, then $g$ is uniquely determined by
+            $f$.
+            \begin{proof}
+                
+            \end{proof}
+    \end{enumerate}
+\end{document}

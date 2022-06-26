@@ -1,0 +1,1173 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\newenvironment{twoproof}{\tabular{@{\stepproofc}c|l}}{\endtabular}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+
+\begin{document}
+
+\section{The Axioms}
+
+The following is a list of 10 axioms written in first-order predicate logic upon which the theory of sets is built. These axioms are written in first-order predicate logic.\par
+
+\vspace{6mm}
+
+\begin{description}
+    
+    \item\textbf{(A1) Empty Set Axiom: }\par\vspace{4mm}\centerline{$\exists x\forall y(y\notin x)$.}
+    
+    \item\textbf{(A2) Axiom of Infinity: }\par\vspace{4mm}\centerline{$\exists x(\varnothing\in x\wedge\forall u[u\in x\rightarrow\exists y(y\in x\wedge u\in y\wedge\forall v[v\in u\rightarrow v\in y])])$.}
+    
+    \item\textbf{(A3) Axiom of Extensionality: }\par\vspace{4mm}\centerline{$\forall x\forall y(\forall u[u\in x\leftrightarrow u\in y]\rightarrow x=y)$.}
+    
+    \item\textbf{(A4) Foundation Axiom: }\par\vspace{4mm}\centerline{$\forall x(x\neq\varnothing\rightarrow\exists y[y\in x\wedge\neg\exists u(u\in y\wedge u\in x)])$.}
+    
+    \item\textbf{(A5) Pairing Axiom: }\par\vspace{4mm}\centerline{$\forall x\forall y\exists z\forall u(u\in z\leftrightarrow u= x\vee u= y)$.}
+    
+    \item\textbf{(A6) Union Axiom: }\par\vspace{4mm}\centerline{$\forall x\exists y\forall u(u\in y\leftrightarrow\exists v[v\in x\wedge u\in v])$.}
+    
+    \item\textbf{(A7) Comprehension Axiom Schema: }\par\vspace{4mm}\centerline{$\forall x\exists y\forall u[u\in y\leftrightarrow u\in x\wedge\varphi(u)]$.}
+    
+    \item\textbf{(A8) Replacement Axiom Schema: }\par\vspace{4mm}\centerline{$\forall x[\forall u\forall v\forall w(u\in x\wedge R(u,v)\wedge R(u,w)\rightarrow v=w)$}\par\centerline{$\rightarrow\exists y\forall z(z\in y\leftrightarrow\exists t[t\in x\wedge R(t,z)])].$}
+    
+    \item\textbf{(A9) Power Set Axiom: }\par\vspace{4mm}\centerline{$\forall x\exists y\forall u(u\in y\leftrightarrow\forall v[v\in u\rightarrow v\in x])$.}
+    
+    \item\textbf{(A10) Axiom of Choice: }\par\vspace{4mm}\centerline{}
+    
+\end{description}
+
+
+
+\newpage
+
+\section{Axiom Intuitions}
+
+\noindent The following will be a discussion of each axiom which will consist of breaking down the predicate logic to see what the axioms say and what they do not say. The goal after this will be a comfortable understanding of each axiom, and with this understanding, confidence to be able to use them in proving future theorems.\par
+
+\begin{description}
+
+	\item\textbf{(A1) The Empty Set Axiom }\par
+This is certainly one of the most important axioms for two reasons: (1) On a philosophical level, its decreeing the existence of an object that is somewhat more `atomic' than any other set. Meaning, with respect to the $\in$-relation -- the one relation the theory of sets assumes at its start -- , the empty set has only one property: No other set from the class of all sets is an element of the empty set. This is a profoundly simple object that is defined by the notion of `nothingness' that exists in set theory. (2) The empty set serves as a very useful object in the analysis of complex predicates and its invocation is a highly reliable way to help decompose predicates into smaller, simpler sentences.\par
+ This can be seen clearly when, for any set $x$, we have the tautology $x=\varnothing\vee x\neq\varnothing$. Surely, for any two sets $x$ and $y$ one may always state $x=y\vee x\neq y$, however the difference is that \textit{both} $x$ and $y$ are arbitrary. This means that the only thing you know for sure is that they are sets. The tautology is not needed to determine this since considering any $x$ or $y$ alone would admit the same information. If $y=\varnothing$, then you know that one side of the disjunction carries with it an implication that entirely defines $x$. Namely, $x$ is the set containing no elements.
+ 
+ 
+    \item\textbf{(A2) Axiom of Infinity: }\par
+This axiom is one of the more difficult ones to fully understand what is being said. It is very important however, since it declares the existence of a set that has infinite elements. The majority of mathematics revolves around sets with infinite elements, so without this axiom, such objects would not be well defined and could not be understood to the extent that they are currently. The axiom is as follows:\par
+
+\vspace{4mm}
+
+\centerline{$\exists x(\varnothing\in x\wedge\forall u[u\in x\rightarrow\exists y(y\in x\wedge u\in y\wedge\forall v[v\in u\rightarrow v\in y])])$.}
+
+\vspace{4mm}
+
+To break this axiom down, we will go from left to right and attempt to phrase what is being said in as many ways as possible. So we first see that the axiom is stating the existence of a set that contains the empty set as an element. The reason for this inclusion of the empty set will become clear later. Next, we see that for each $u$ that is an element of $x$, this membership implies the existence of another element. This element $y$ whose existence is dependent upon some $u$ being an element of $x$, has the following three properties: (i) It is also a member of $x$. This is interesting since if there is even one $u\in x$, (which there always will be since we've required $\varnothing\in x$) then we immediately have that there is another element $y\in x$, which the membership of that $y\in x$ would then imply the existence of another element in $x$, and so on. Already we can see how an infinite set would be generated from this axiom.\par
+
+(ii) The second property of the elements $y\in x$ is that for each $u\in x$ that implied the existence of the corresponding $y\in x$, we have that $u\in y$. This means that we are doing more that just generating an infinite amount of elements, but each successive element $y$ placed into $x$ has, nested in it, the $u\in x$ which generated the $y\in x$. (iii) The third and final property of each $y\in x$ is that given some $u$, if this $u\in x$ then that implies there is another element $y\in x$ such that it not only contains $u$ as an element, but $u$ is \textit{also} a subset of this $y$. Hence, for each $u\in x$, there exists a corresponding $y\in x$, such that $u\in y\wedge u\subseteq y$.\par
+
+The last line is quite baffling at first glance. Given a set $u$, what set both contains it as an element and contains each element of the element of $u$. With some thought, the type of set that achieves this is the set $u\cup\{u\}$. Since $u\cup\{u\}=\{u,\{u\}\}$, we can see that both $u\in\{u,\{u\}\}$ is true as well as $u\subseteq\{u,\{u\}\}$. We will finish this axiom by providing an informal way to visualize how such an infinite set is generated:\par
+
+\vspace{4mm}
+
+\centerline{$\varnothing\in x\rightarrow\varnothing\cup\{\varnothing\}\in x\rightarrow\varnothing\cup\{\varnothing\}\cup\{\varnothing\cup\{\varnothing\}\}\in x\rightarrow\dots$}
+
+\vspace{4mm}
+
+Which is equivalent to\par
+
+\vspace{4mm}
+
+\centerline{$\varnothing\in x\rightarrow\{\varnothing\}\in x\rightarrow\{\varnothing,\{\varnothing\}\}\in x\rightarrow\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\}\in x\rightarrow\dots$}
+
+\item\textbf{(A3) Axiom of Extensionality: }
+
+\end{description}
+
+
+
+\newpage
+
+\noindent\large\textit{Remark}\normalsize\par
+
+\vspace{4mm}
+
+\noindent In light of completing the discussion on the axioms, it feels appropriate at this point is to make a note on notation. Specifically, the notation we refer to is known as `set-builder'. This way of defining sets is used very frequently in most branches of mathematics and thus it is worth taking what we have learned to justify and explain its meaning with respect to the axioms. Consider the following set\par
+
+\vspace{4mm}
+
+\centerline{$B=\{x\in\mathbb{Z}$\hspace{2mm}$|$\hspace{1mm} $\exists m\in\mathbb{Z}\colon x=2m\}$.}
+
+\vspace{4mm}
+
+\noindent We understand this set to be the collection of all even integers, however, how are we justified in calling this a set? The answer to this is that the Comprehension Axiom Schema is what permits us to write this. This is because what the axiom schema requires of a collection that is to be called a set is that the elements in which we are collecting must both come from a known set and satisfy some formula or `property'. We can see that the known set from which these elements are coming from are the integers (even though we have not yet constructed them), and the property that is being satisfied is that these integers must be divisible by 2.\par
+With the Comprehension Axiom Schema in mind, we can now define the set B more formally as\par
+
+\vspace{4mm}
+
+\centerline{$\forall x(x\in B\leftrightarrow x\in\mathbb{Z}\wedge\exists m[m\in\mathbb{Z}\wedge x=2m])$.}
+
+\vspace{4mm}
+
+\noindent In general, we now recognize the following equivalence. Given any set m, and property $\varphi(y)$, we have\par
+
+\vspace{4mm}
+
+\centerline{$x=\{y\in m\colon\varphi(y)\}\logeq\forall y(y\in x\leftrightarrow y\in m\wedge\varphi(y))$.}
+
+
+\newpage
+
+\section{Natural Numbers}
+
+\noindent In order to study mathematics itself, we need to first develop a system in which all of mathematics can be interpreted. In such a system, we should be able to precisely define mathematical concepts, like functions and relations; construct examples of the; and write statements about them using very precise language. However, in order to be a success, this system must have the ability to represent the most basic objects of mathematical study. Namely, it must be able to model numbers. Since we can construct models of \textbf{N, Z, Q, R,} and \textbf{C}, we also conclude that what we discovers about these analogs must also be true about the sets themselves.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 3.1}\par
+
+\vspace{4mm}
+
+For every set $a$, the \textbf{successor} of $a$ is the set $a^+=a\cup\{a\}$. If $a$ is the successor of $b$,\par then $b$ is the \textbf{predecessor} of $a$ and we write $b=a^-$.\par
+
+\vspace{4mm}
+
+\noindent For example, we have $\{3,5,7\}^+=\{3,5,7,\{3,5,7\}\}$ and $\varnothing^+=\{\varnothing\}$. For convenience, write $a^{++}$ for $(a^+)^+$, so $\varnothing^{++}=\{\varnothing,\{\varnothing\}\}$. Furthermore, since $\varnothing$ contains no elements, we have the following.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ THEOREM 3.1}\par
+
+\vspace{4mm}
+
+$\varnothing$ does not have a predecessor.\par
+
+\vspace{4mm}
+
+Although every set has a successor, we are primarily concerned with certain sets that have a particular property.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 3.2}\par
+
+\vspace{4mm}
+
+The set $A$ is \textbf{inductive} if $\varnothing\in A$ and $a^+\in A$ for all $a\in A$.\par
+
+\vspace{4mm}
+
+\noindent The definition implies that if $A$ is inductive, $A$ contains the sets\par
+
+\vspace{4mm}
+
+\centerline{$\varnothing, \{\varnothing\}, \{\varnothing,\{\varnothing\}\},\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\},\ldots$}
+
+\vspace{4mm}
+
+\noindent We see that Definition 3.2 does not guarantee the existence of an inductive set. However, the Axiom of Infinity guarantees the existence of such a set. With the existence of an inductive set guaranteed by the Axiom of Infinity, we use the Comprehension Axiom Schema to write the following\par
+
+\vspace{4mm}
+
+\centerline{$\forall x\exists y\forall u(u\in y\leftrightarrow u\in x\wedge x$\textit{ is inductive }$\wedge\forall w[w$\textit{ is inductive }$\rightarrow u\in w])$,}
+
+\vspace{4mm}
+
+\noindent where $w$\textit{ is inductive} can be written as\par
+
+\vspace{4mm}
+
+\centerline{$\varnothing\in w\wedge\forall a(a\in w\rightarrow a^+\in w)$.}
+
+\vspace{4mm}
+
+\noindent So what exactly does this say and how should we interpret this? Well, reading from left to right we have that given any inductive set $x$, there exists another set $y$ whose elements come from the set $x$ and the elements of $y$ are also elements of all other inductive sets $w$. So, we have that the set $y$ contains the elements that are common to every inductive set. This brings us to the following definition that was given by von Neumann in 1923.
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 3.3}\par
+
+\vspace{4mm}
+
+An elements that is a member of every inductive set is called a \textbf{natural number}.\par Let $\omega$ denote the set of natural numbers. That is,\par
+
+\vspace{4mm}
+
+\centerline{$\omega=\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\},\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\} ,\ldots\}$.}
+
+\vspace{4mm}
+
+\noindent We can see that by this assignment, we intend on having the elements of $\omega$ represent the elements in the set $\mathbb{N}$. We can see how this representation looks by considering the following list\par
+
+\vspace{4mm}
+
+\hspace{25mm}$0=\varnothing$
+
+\vspace{2mm}
+
+\hspace{25mm}$1=\{\varnothing\}$
+
+\vspace{2mm}
+
+\hspace{25mm}$2=\{\varnothing,\{\varnothing\}\}$
+
+\vspace{2mm}
+
+\hspace{25mm}$3=\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}$
+
+\vspace{2mm}
+
+\centerline{$4=\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\},\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\}$.}
+
+\vspace{2mm}
+
+\hspace{29.5mm}$\vdots$
+
+\vspace{4mm}
+
+\noindent It should be noted that each element of $\omega$ that corresponds to a given element of $\mathbb{N}$ is an arbitrary choice and future results we find out about $\omega$ are independent of this choice. However, since the choice is arbitrary, we may make these correspondences in a way that is intuitive. Namely, we can make the choice by `counting' the elements in the sets of $\omega$ and assigning the set that particular number. Now, with the previous list in mind, we may instead write the natural numbers as\par
+
+\vspace{4mm}
+
+\hspace{60.5mm}$0=\{\}$
+
+\vspace{2mm}
+
+\hspace{60.5mm}$1=\{0\}$
+
+\vspace{2mm}
+
+\hspace{60.5mm}$2=\{0,1\}$
+
+\vspace{2mm}
+
+\hspace{60.5mm}$3=\{0,1,2\}$
+
+\vspace{2mm}
+
+\centerline{$4=\{0,1,2,3\}$}
+
+\vspace{2mm}
+
+\hspace{65mm}$\vdots$
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ THEOREM 3.2}\par
+
+\vspace{4mm}
+
+$\omega$ is inductive.
+
+\vspace{4mm}
+
+\noindent\textbf{PROOF.}\par
+
+\vspace{4mm}
+
+We must show that $\varnothing\in\omega$ and for all $a\in\omega$, each implies that $a^+\in\omega$.
+
+\newpage
+
+\newgeometry{left=0.15in,bottom=0.1cm}
+
+\noindent Define $\sigma(x):=\varnothing\in x\wedge\forall v(v\in x\rightarrow v\cup\{v\}\in x)$.
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        1. & $\forall x\exists y\forall u(u\in y\leftrightarrow u\in x\wedge\sigma(x)\wedge\forall                         w[\sigma(w)\rightarrow u\in w])$ & A7\\
+        
+        2. & $\exists y\forall u(u\in y\leftrightarrow u\in x\wedge\sigma(x)\wedge\forall w[\sigma(w)\rightarrow u\in      w])$ & 1 UI\\
+        
+        3. & $\forall u(u\in\omega\leftrightarrow u\in x\wedge\sigma(x)\wedge\forall w[\sigma(w)\rightarrow u\in w])$      & 2 EI\\
+        
+        4. & $u\in\omega\leftrightarrow u\in x\wedge\sigma(x)\wedge\forall w(\sigma(w)\rightarrow u\in w)$ & 3 UI\\
+        
+        5. & $(u\in\omega\rightarrow u\in x\wedge\sigma(x)\wedge\forall w[\sigma(w)\rightarrow u\in                        w])\wedge(u\in x\wedge\sigma(x)\wedge\forall w[\sigma(w)\rightarrow u\in w]\rightarrow u\in\omega)$ & 4       Equiv\\
+        
+        6. & $(u\in x\wedge\sigma(x)\wedge\forall w[\sigma(w)\rightarrow u\in w]\rightarrow                                u\in\omega)\wedge(u\in\omega\rightarrow u\in x\wedge\sigma(x)\wedge\forall                                    w[\sigma(w)\rightarrow u\in w])$ & 5 Com\\
+        
+        7. & $u\in\omega\rightarrow u\in x\wedge\sigma(x)\wedge\forall w(\sigma(w)\rightarrow u\in w)$ & 5 Simp\\
+        
+        8. & $u\in x\wedge\sigma(x)\wedge\forall w(\sigma(w)\rightarrow u\in w)\rightarrow u\in\omega$ & 6 Simp\\
+        
+        9. & $\exists x(\varnothing\in x\wedge\forall u[u\in x\rightarrow\exists y(y\in x\wedge u\in y\wedge\forall        v[v\in u\rightarrow v\in y])$ & A2\\
+        
+        10.& $\varnothing\in\omega\wedge\forall u(u\in\omega\rightarrow\exists y[y\in\omega\wedge u\in y\wedge\forall      v(v\in u\rightarrow v\in y)])$ & 9 EI\\
+        
+        11.& $\varnothing\in\omega$ & 10 Simp\\
+        
+        12.& $u\in\omega$ & Assume\\
+        
+        13.& \hspace{10mm}$u\in x\wedge\sigma(x)\wedge\forall w(\sigma(w)\rightarrow u\in w)$ & 7,12 MP\\
+        
+        14.& \hspace{10mm}$\sigma(x)\wedge u\in x\wedge\forall w(\sigma(w)\rightarrow u\in w)$ & 13 Com\\
+        
+        15.& \hspace{10mm}$\sigma(x)$ & 14 Simp\\
+        
+        16.& \hspace{10mm}$\varnothing\in x\wedge\forall v(v\in x\rightarrow v\cup\{v\}\in x)$ & 15 Def\\
+        
+        17.& \hspace{10mm}$\forall v(v\in x\rightarrow v\cup\{v\}\in x)\wedge\varnothing\in x$ & 16 Com\\
+        
+        18.& \hspace{10mm}$\forall v(v\in x\rightarrow v\cup\{v\}\in x)$ & 17 Simp\\
+        
+        19.& \hspace{10mm}$u\in x\rightarrow u\cup\{u\}\in x$ & 18 UI\\
+        
+        20.& \hspace{10mm}$u\in x$ & 13 Simp\\
+        
+        21.& \hspace{10mm}$u\cup\{u\}\in x$ & 19,20 MP\\
+        
+        22.& \hspace{10mm}$\forall w(\sigma(w)\rightarrow u\in w)\wedge\sigma(x)\wedge u\in x$ & 14 Com\\
+        
+        23.& \hspace{10mm}$\forall w(\sigma(w)\rightarrow u\in w)$ & 22 Simp\\
+        
+        24.& \hspace{10mm}$\sigma(x)\rightarrow u\in x$ & 23 UI\\
+        
+        25.& \hspace{10mm}$u\in x$ & 15,24 MP\\
+        
+        26.& \hspace{10mm}$u\cup\{u\}\in x$ & 19,25 MP\\
+        
+        27.& \hspace{10mm}$\sigma(x)\rightarrow u\cup\{u\}\in x$ & 24,19 HS\\
+        
+        28.& \hspace{10mm}$\forall w(\sigma(w)\rightarrow u\cup\{u\}\in w)$ & 27 UG\\
+        
+        29.& \hspace{10mm}$u\cup\{u\}\in x\wedge\sigma(x)$ & 26,15 Conj\\
+        
+        30.& \hspace{10mm}$u\cup\{u\}\in x\wedge\sigma(x)\forall w(\sigma(w)\rightarrow u\cup\{u\}\in w)$ & 29,28          Conj\\
+        31.& \hspace{10mm}$u\cup\{u\}\in\omega$ & 8,30 MP\\
+        
+        32.& $u\in\omega\rightarrow u\cup\{u\}\in\omega$ & 12-31 DP\\
+        
+        33.& $\forall u(u\in\omega\rightarrow u\cup\{u\}\in\omega)$ & 32 UG\\
+        
+        34.& $\varnothing\in\omega\wedge\forall u(u\in\omega\rightarrow u\cup\{u\}\in\omega)$ & 11,33 Conj\\
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\restoregeometry
+
+\newpage
+
+\noindent The narrative of the proof on the previous page is as follows: The empty set is an element of $\omega$ by definition, so then take some $a\in\omega$ and consider some inductive set $A$. Since $a\in\omega$ and $\omega$ was defined to be the set of natural numbers, then $a$ is a natural number. Thus, $a\in A$ since a natural number is an element that is a member of every inductive set, including $A$. However, since $A$ is inductive, then we know $a^+\in A$. Since $A$ was any arbitrary inductive set, then $a^+\in A$ implies $a^+$ is a member of every inductive set. Thus, $a^+$ is a natural number. Therefore, $a^+\in\omega$.
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ THEOREM 3.3}\par
+
+\vspace{4mm}
+
+If $A$ is an inductive set and $A\subseteq\omega$, then $A=\omega$.
+
+\vspace{4mm}
+
+\noindent\textbf{PROOF.}\par
+
+\vspace{8mm}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        1. & $(\varnothing\in A\wedge\forall u[u\in A\rightarrow u\cup\{u\}\in A])\wedge\forall v(v\in A\rightarrow          v\in\omega)$ & Assume\\
+        
+        2. & $\forall v(v\in A\rightarrow v\in\omega)\wedge(\varnothing\in A\wedge\forall u[u\in A\rightarrow              u\cup\{u\}\in A])$ & 1 Com\\
+        
+        3. & $\forall v(v\in A\rightarrow v\in\omega)$ & 2 Simp\\
+        
+        4. & $\forall x\exists y\forall u(u\in y\leftrightarrow u\in x\wedge\sigma(x)\wedge\forall                         w[\sigma(w)\rightarrow u\in w])$ & A7\\
+        
+        5. & $\exists y\forall u(u\in y\leftrightarrow u\in x\wedge\sigma(x)\wedge\forall w[\sigma(w)\rightarrow u\in      w])$ & 4 UI\\
+        
+        6. & $\forall u(u\in\omega\leftrightarrow u\in x\wedge\sigma(x)\wedge\forall w[\sigma(w)\rightarrow u\in w])$      & 5 EI\\
+        
+        7. & $u\in\omega\leftrightarrow u\in x\wedge\sigma(x)\wedge\forall w(\sigma(w)\rightarrow u\in w)$ & 6 UI\\
+        
+        8. & $v\in\omega$ & Assume\\
+        
+        9. & \hspace{10mm}$v\in x\wedge\sigma(x)\wedge\forall w(\sigma(w)\rightarrow v\in w)$ & 7,8 MP\\
+        
+        10.& \hspace{10mm}$\forall w(\sigma(w)\rightarrow v\in w)\wedge v\in x\wedge\sigma(x)$ & 9 Com\\
+        
+        11.& \hspace{10mm}$\forall w(\sigma(w)\rightarrow v\in w)$ & 10 Simp\\
+        
+        12.& \hspace{10mm}$\sigma(A)\rightarrow v\in A$ & 11 UI\\
+        
+        13.& \hspace{10mm}$(\varnothing\wedge\forall u[u\in A\rightarrow u\cup\{u\}\in A])\rightarrow v\in A$ & 12         Def\\
+        
+        14.& \hspace{10mm}$\varnothing\in A\wedge\forall u(u\in A\rightarrow u\cup\{u\}\in A)$ & 1 Simp\\
+        
+        15.& \hspace{10mm}$v\in A$ & 13,14 MP\\
+        
+        16.& $v\in\omega\rightarrow v\in A$ & 8-15 DP\\
+        
+        17.& $\forall v(v\in\omega\rightarrow v\in A)$ & 16 UG\\
+        
+        18.& $\forall x\forall y(\forall u[u\in x\leftrightarrow u\in y]\rightarrow x=y)$ & A3\\
+        
+        19.& $\forall y(\forall u[u\in A\leftrightarrow u\in y]\rightarrow A=y)$ & 18 UI\\
+        
+        20.& $\forall u(u\in A\leftrightarrow u\in\omega)\rightarrow A=\omega$ & 19 UI\\
+        
+        21.& $v\in A\rightarrow v\in\omega$ & 3 UI\\
+        
+        22.& $(v\in A\rightarrow v\in\omega)\wedge(v\in\omega\rightarrow v\in A)$ & 21,16 Conj\\
+        
+        23.& $v\in A\leftrightarrow v\in\omega$ & 22 Equiv\\
+        
+        24.& $\forall v(v\in A\leftrightarrow v\in\omega)$ & 23 UG\\
+        
+        25.& $A=\omega$ & 20,24 MP\\    
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\newpage
+
+\noindent The idea behind the previous proof was that if $A$ is inductive and it is a subset of $\omega$, then we simply use the fact that every element in $\omega$ is a member of every inductive set, including $A$. Thus, we have that $A\subseteq\omega$ by assumption, and then we know that every member of $\omega$ must also be an element of $A$ since $A$ is an inductive set. Thus, $\omega\subseteq A$. Therefore, $A=\omega$.
+
+  
+
+\newpage
+
+\section{Order}
+
+\noindent In order to proceed in modeling $\mathbb{N}$, we must review the concept of partial orders and well-orders. These are types of relations, but instead of reflexivity, symmetry, and transitivity, these relations have different properties.
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 5.1}\par
+
+\vspace{4mm}
+
+Let $R$ be a relation on $A$.\par
+
+\vspace{4mm}
+
+\hspace{5mm} $R$ is \textbf{irreflexive} if $(a,a)\notin R$ for all $a\in A$.
+
+\vspace{4mm}
+
+\hspace{5mm} $R$ is \textbf{asymmetric} when for all $a,b\in A$, if $(a,b)\in R$, then $(b,a)\notin R$.
+
+\vspace{4mm}
+
+\hspace{5mm} $R$ is \textbf{antisymmetric} means for all $a,b\in A$, if $(a,b)\in R\wedge(b,a)\in R$, then $a=b$.
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 5.2}\par
+
+\vspace{4mm}
+
+If a relation $\preceq$ on a set $A$ is reflexive, antisymmetric, and transitive, $\preceq$ is a \textbf{partial}\par \textbf{order} on $A$. The ordered pair $(A,\preceq)$ is called a \textbf{partially ordered set} (or simply a\par \textbf{poset}). Furthermore, for all $a,b\in A$, the notation $a\prec b$ means $a\preceq b$ and $a\neq b$.\par
+
+\vspace{4mm}
+
+\noindent For example, $\leq$ and $=$ are partial orders on $\mathbb{R}$, but $<$ is not a partial order on $\mathbb{R}$ since it is not reflexive. In general, an equivalence relation is not a partial order. This is with the exception of $=$, where it is one of the few equivalence relations that are also partial orders.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ THEOREM 5.1 [Weak-Trichotomy Law]}\par
+
+\vspace{4mm}
+
+If $\preceq$ is a partial order on $A$, for all $a,b\in A$, at most one of the following are true:\par
+
+$a\prec b$, $b\prec a$, or $a=b$.\par
+
+\vspace{4mm}
+
+\noindent\textbf{PROOF.}\par
+
+Let $a,b\in A$. We have three cases to consider.\par
+
+\begin{itemize}
+    
+    \item Suppose $a\prec b$. This means $a\preceq b$ and $a\neq b$. If in addition $b\prec a$, by transitivity $a\prec a$, which is a contradiction.
+    
+    \item The case where $b\prec a$ precludes both $a\prec b$ and $a=b$ is proved in the first case.
+    
+    \item If $a=b$, then by definition of $\prec$ it is impossible for $a\prec b$ or $b\prec a$ to be true. \blacksquare
+    
+\end{itemize}
+
+\newpage
+
+\noindent\large\textbf{Bounds}\normalsize\par
+
+\vspace{4mm}
+
+\noindent Let $\preceq$ be a partial order on $A$ with elements $m$ and $m'$ such that $a\preceq m$ and $a\preceq m'$ for all $a\in A$. Then this implies $m\preceq m'$ and $m'\preceq m$ since the relation was assumed to hold for all $a\in A$, which includes both $m$ and $m'$. Thus, since this partial order is antisymmetric, we have that $m=m'$. The same conclusion follows from $m\preceq a$ and $m'\preceq a$ for all $a\in A$.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 5.3}\par
+
+\vspace{4mm}
+
+Let $(A,\preceq)$ be a poset and $m\in A$.\par
+
+\begin{itemize}
+    
+    \item $m$ is the \textbf{least element} of $A$ if $m\preceq a$ for all $a\in A$.
+    
+    \item $m$ is the \textbf{greatest element} of $A$ if $a\preceq m$ for all $a\in A$.
+    
+\end{itemize}
+
+\noindent\blacksquare\textbf{ DEFINITION 5.4}\par
+
+\vspace{4mm}
+
+Let $\preceq$ be a partial order on $A$ and $B\subseteq A$.
+
+\begin{itemize}
+    
+    \item $u\in A$ is an \textbf{upper bound} of $B$ if $b\preceq u$ for all $b\in B$. The element $u$ is the \textbf{least upper bound} of $B$ if it is an upper bound and for all upper bounds $u'$ of $B$, $u\preceq u'$.
+    
+    \item $l\in A$ is a \textbf{lower bound} of $B$ if $l\preceq b$ for all $b\in B$. The element $l$ is the \textbf{greatest lower bound} of $B$ if it is a lower bound and for all lower bounds $l'$ of $B$, $l'\preceq l$.
+    
+\end{itemize}
+
+\noindent\large\textbf{Comparable and Compatible Elements}\normalsize\par
+
+\vspace{4mm}
+
+\noindent We notice that there are certain elements that cannot be compared and that leads us to the following definitions.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 5.5}\par
+
+\vspace{4mm}
+
+Let $(A,\preceq)$ be a poset and $a,b\in A$. If $a\preceq b$ or $b\preceq a$, then $a$ and $b$ are \textbf{comparable}\par with respect to $\preceq$.
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 5.6}\par
+
+\vspace{4mm}
+
+Let $(A,\preceq)$ be a poset and $m\in A$.
+
+\begin{itemize}
+    
+    \item $m$ is a \textbf{minimal element} of $A$ if $a\nprec m$ for all $a\in A$.
+    
+    \item $m$ is a \textbf{maximal element} of $A$ if $m\nprec a$ for all $a\in A$.
+    
+\end{itemize}
+
+\noindent Using the definition of $\prec$, we can interpret this definition as equivalently stating that $m$ is a minimal element of $A$ if for all $a\in A$, either $a\npreceq m$ or $a=m$. Similarly, $m$ is a maximal element of $A$ if for all $a\in A$, either $m\npreceq a$ or $a=m$.\par
+
+\newpage
+
+\noindent\blacksquare\textbf{ DEFINITION 5.7}\par
+
+\vspace{4mm}
+
+A subset $C$ of the poset $(A,\preceq)$ is a \textbf{chain} with respect to $\preceq$ if $a$ is comparable to $b$\par for all $a,b\in C$.\par
+
+\vspace{4mm}
+
+When $\mathbb{Z}$ is partially ordered by $\leq$, the sets $\{0,1,2,3,\ldots\},\{\ldots,-3,-2,-1,0\},$ and $\{\ldots,-2,0,2,4,\ldots\}$ are chains. In $\mathcal{P}(\mathbb{Z})$, both\par
+
+\vspace{4mm}
+
+\centerline{$\{\{1,2\},\{1,2,3,4\},\{1,2,3,4,5,6\}\}$}
+
+\vspace{4mm}
+
+\noindent and\par
+
+\vspace{4mm}
+
+\centerline{$\{\varnothing,\{0\},\{0,1\},\{0,1,2\},\ldots\}$}
+
+\vspace{4mm}
+
+\noindent are chains with respect to $\subseteq$.
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 5.8}\par
+
+\vspace{4mm}
+
+The poset $(A,\preceq)$ is a \textbf{linearly ordered set} and $\preceq$ is a \textbf{linear order} is $A$ is a chain\par with respect to $\preceq$.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ THEOREM 5.2 [Trichotomy Law]}\par
+
+\vspace{4mm}
+
+If $\preceq$ is a linear order on $A$, for all $a,b\in A$, exactly one of the following are true:\par
+$a\prec b$, $b\prec a$, or $a=b$.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 5.9}\par
+
+\vspace{4mm}
+
+Let $(A,\preceq)$ be a poset. The elements $a,b\in A$ are \textbf{compatible} if there exists $c\in A$\par such that $c\preceq a$ and $c\preceq b$. If $a$ and $b$ are not compatible, they are \textbf{incompatible}\par and we write $a\bot b$.\par
+
+\vspace{4mm}
+
+\noindent\large\textbf{Well-Ordered Sets}\normalsize\par
+
+\vspace{4mm}
+
+\noindent Because of the nature of the natural numbers, every non-empty subset of $\mathbb{N}$ has a least element. We want to be able to identify those partial orders that have this property.\par
+
+\vspace{4mm}
+
+\newpage
+
+\section{Natural Numbers II}
+
+\noindent We need to explore and define many more properties which we will imbibe $\omega$ with so that $\omega$ is an accurate model for $\mathbb{N}$.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 5.1}\par
+
+\vspace{4mm}
+
+A set $A$ is called \textbf{transitive} if for all $a$ and $b$ we have the following conditional\par
+
+\vspace{4mm}
+
+\centerline{$b\in a\wedge a\in A\rightarrow b\in A$.}
+
+\vspace{4mm}
+
+This can be written more formally as\par
+
+\vspace{4mm}
+
+\centerline{$\forall A(A$\textit{ is transitive }$\leftrightarrow\forall a\forall b[b\in a\wedge a\in A\rightarrow b\in A])$.}
+
+\vspace{4mm}
+
+\noindent The thought behind this definition is that each element in a transitive set contains elements which are also in the transitive set.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ THEOREM 5.1}\par
+
+\begin{itemize}
+
+    \item Every natural number is transitive.
+    
+\end{itemize}
+
+\noindent\textbf{PROOF}\par
+
+\vspace{4mm}
+
+\noindent The proof of this claim will involve the creation of the following set\par
+
+\vspace{4mm}
+
+\centerline{$A=\{n\in\omega$\hspace{1mm}$ | $\hspace{1mm}$\forall a\forall b(b\in a\wedge a\in n\rightarrow b\in n)\}$.}
+
+\vspace{4mm}
+
+\noindent This is the set of all natural numbers that \textit{are} inductive. This set could very well be empty, but our goal is to show that this set, which is defined as a subset of $\omega$, is in fact equal to $\omega$. We will show this by proving that $A$ is inductive and referring to Theorem 3.3 which states that any inductive subset of $\omega$ is equal to $\omega$. Since $\omega$ is the set of \textit{all} natural numbers, then if we can show that the set of all inductive natural numbers is equal to the set of all natural numbers, then we will have shown that every natural number is inductive.\par
+
+ We will now further outline the mechanics of the following proof. It will rely on the set $A$ defined above, and three assumptions. Namely, we will consider some $n\in A$, assume that $a\in n\cup\{n\}$, and $b\in a$, for any $a$ and $b$. In order to show that $A$ is inductive we will need to show that by assuming $n\in A$, we get $n\cup\{n\}\in A$.\par
+
+Finally, we will do as we did a few sections ago and define $\varphi$ to stand for inductive and $\sigma$ to stand for transitive. So we have the following\par
+
+\begin{itemize}
+
+\item $\varphi(x):=\varnothing\in x\wedge \forall u(u\in x\rightarrow \bigcup\{u,\{u\}\}\in x)$
+
+\item $\sigma(x) := \forall a\forall b(b\in a\wedge a\in x\rightarrow b\in x)$
+
+\end{itemize}
+
+\newpage
+
+\newgeometry{left=0.15in,bottom=0.1cm}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        1. & $\forall x\exists y\forall u[u\in y\leftrightarrow u\in x\wedge \sigma(u)]$ & A7\\
+        
+        2. & $\exists y\forall u[u\in y\leftrightarrow u\in\omega\wedge\sigma(u)]$ & 1 UI\\
+        
+        3. & $\forall u[u\in A\leftrightarrow u\in\omega\wedge\sigma(u)]$ & 2 EI\\
+        
+        4. & $u\in A\leftrightarrow u\in\omega\wedge\sigma(u)$ & 3 UI\\
+        
+        5. & $(u\in A\rightarrow u\in\omega\wedge\sigma(u))\wedge(u\in\omega\wedge\sigma(u)\rightarrow u\in A)$ & 4 Equiv\\
+        
+        6. & $(u\in\omega\wedge\sigma(u)\rightarrow u\in A)\wedge(u\in A\rightarrow u\in\omega\wedge\sigma(u))$ & 5 Com\\
+        
+        7. & $u\in A\rightarrow u\in\omega\wedge\sigma(u)$ & 5 Simp\\
+        
+        8. & $u\in\omega\wedge\sigma(u)\rightarrow u\in A$ & 6 Simp\\
+        
+        9. & $\exists x\forall y(y\notin x)$ & A1\\
+        
+        10.& $\forall y(y\notin\varnothing)$ & 9 EI\\
+        
+        11.& $y\notin\varnothing$ & 10 UI\\
+        
+        12.& $v\in y\wedge y\in\varnothing$ & Assumption\\
+        
+        13.& \hspace{10mm}$y\in\varnothing\wedge v\in y$ & 12 Com\\
+        
+        14.& \hspace{10mm}$y\in\varnothing$ & 13 Simp\\
+        
+        15.& \hspace{10mm}$y\notin\varnothing\vee v\in\varnothing$ & 11 Add\\
+        
+        16.& \hspace{10mm}$v\in\varnothing$ & 14,15 DS\\
+        
+        17.& $v\in y\wedge y\in\varnothing\rightarrow v\in\varnothing$ & 12-16 DP\\
+        
+        18.& $\forall v(v\in y\wedge y\in\varnothing\rightarrow v\in\varnothing)$ & 17 UG\\
+        
+        19.& $\forall y\forall v(v\in y\wedge y\in\varnothing\rightarrow v\in\varnothing)$ & 18 UG\\
+        
+        20.& $\sigma(\varnothing)$ & 19 Sub\\
+        
+        21.& $\varnothing\in\omega$ & Def\\
+        
+        22.& $\varnothing\in\omega\wedge\sigma(\varnothing)$ & 21,22 Conj\\
+        
+        23.& $\varnothing\in A$ & 8,22 MP\\
+        
+        24.& $\forall x\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & A5\\
+        
+        25.& $\forall y\exists z\forall u(u\in z\leftrightarrow u=n\vee u=y)$ & 24 UI\\
+        
+        26.& $\exists z\forall u(u\in z\leftrightarrow u=n\vee u=\{n\})$ & 25 UI\\
+        
+        27.& $\forall u(u\in \{n,\{n\}\}\leftrightarrow u=n\vee u=\{n\})$ & 26 EI\\
+        
+        28.& $u\in\{n,\{n\}\}\leftrightarrow u=n\vee u=\{n\}$ & 27 UI\\
+        
+        29.& $(u\in\{n,\{n\}\}\rightarrow u=n\vee u=\{n\})\wedge(u=n\vee u=\{n\}\rightarrow u\in\{n,\{n\}\})$ & 28 Equiv\\
+        
+        30.& $u\in\{n,\{n\}\}\rightarrow u=n\vee u=\{n\}$ & 29 Simp\\
+        
+        31.& $\forall x\exists y\forall u(u\in y\leftrightarrow\exists v[v\in x\wedge u\in v])$ & A6\\
+        
+        32.& $\exists y\forall u(u\in y\leftrightarrow\exists v[v\in\{n,\{n\}\}\wedge u\in v])$ & 31 UI\\
+        
+        33.& $\forall u(u\in\bigcup\{n,\{n\}\}\leftrightarrow\exists v[v\in\{n,\{n\}\}\wedge u\in v])$ & 32 EI\\
+        
+        34.& $u\in\bigcup\{n,\{n\}\}\leftrightarrow\exists v[v\in\{n,\{n\}\}\wedge u\in v]$ & 33 UI\\
+        
+        35.& $(u\in\bigcup\{n,\{n\}\}\rightarrow\exists v[v\in\{n,\{n\}\}\wedge u\in v])\wedge(\exists v[v\in\{n,\{n\}\}\wedge u\in v]\rightarrow u\in\bigcup\{n,\{n\}\})$ & 34 Equiv\\
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\restoregeometry
+
+\newpage
+
+\newgeometry{left=0.15in,bottom=0.1cm}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        35.& $(u\in\bigcup\{n,\{n\}\}\rightarrow\exists v[v\in\{n,\{n\}\}\wedge u\in v])\wedge(\exists v[v\in\{n,\{n\}\}\wedge u\in v]\rightarrow u\in\bigcup\{n,\{n\}\})$ & 34 Equiv\\
+        
+        36.& $u\in\bigcup\{n,\{n\}\}\rightarrow\exists v[v\in\{n,\{n\}\}\wedge u\in v]$ & 35 Simp\\
+        
+        37.& $n\in A$ & Assumption\\
+        
+        38.& \hspace{10mm}$b\in a\wedge a\in\bigcup\{n,\{n\}\}$ & Assumption\\
+        
+        39.& \hspace{20mm}$a\in\bigcup\{n,\{n\}\}\wedge b\in a$ & 38 Com\\
+        
+        40.& \hspace{20mm}$a\in\bigcup\{n,\{n\}\}$ & 39 Simp\\
+        
+        41.& \hspace{20mm}$\exists v[v\in\{n,\{n\}\}\wedge a\in v]$ & 36,40 MP\\
+        
+        42.& \hspace{20mm}$v\in\{n,\{n\}\}\wedge a\in v$ & 41 EI\\
+        
+        43.& \hspace{20mm}$a\in v\wedge v\in\{n,\{n\}\}$ & 42 Com\\
+        
+        44.& \hspace{20mm}$v\in\{n,\{n\}\}$ & 42 Simp\\
+        
+        45.& \hspace{20mm}$v=n\vee v=\{n\}$ & 30,44 MP\\ 
+        
+        46.& \hspace{20mm}$v=n$ & Assumption\\
+        
+        47.& \hspace{30mm}$a\in v$ & 43 Simp\\
+        
+        48.& \hspace{30mm}$a\in n$ & 46,47 Sub\\
+        
+        49.& \hspace{30mm}$b\in a$ & 38 Simp\\
+        
+        50.& \hspace{30mm}$b\in a\wedge a\in n$ & 48,49 Conj\\
+        
+        51.& \hspace{30mm}$n\in\omega\wedge\sigma(n)$ & 7,37 MP\\
+        
+        52.& \hspace{30mm}$\sigma(n)\n\in\omega$ & 51 Com\\
+        
+        53.& \hspace{30mm}$\sigma(n)$ & 52 Simp\\
+        
+        54.& \hspace{30mm}$\forall a\forall b(b\in a\wedge a\in n\rightarrow b\in n)$ & 53 Def\\
+        
+        55.& \hspace{30mm}$\forall b(b\in a\wedge a\in n\rightarrow b\in n)$ & 54 UI\\
+        
+        56.& \hspace{30mm}$b\in a\wedge a\in n\rightarrow b\in n$ & 55 UI\\
+        
+        57.& \hspace{30mm}$b\in n$ & 50,56 MP\\
+        
+        58.& \hspace{20mm}$v=n\rightarrow b\in n$ & 46-57 DP\\
+        
+        59.& \hspace{20mm}$v=\{n\}$ & Assumption\\
+        
+        60.& \hspace{30mm}$a\in \{n\}$ & 47,59 Sub\\
+        
+        61.& \hspace{30mm}$\forall x\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee x=y)$ & A5\\
+        
+        62.& \hspace{30mm}$\forall y\exists z\forall u(u\in z\leftrightarrow u=n\vee u=y)$ & 61 UI\\
+        
+        63.& \hspace{30mm}$\exists z\forall u(u\in z\leftrightarrow u=n\vee u=n)$ & 62 UI\\
+        
+        64.& \hspace{30mm}$\forall u(u\in\{n\}\leftrightarrow u=n\vee u=n)$ & 63 EI\\
+        
+        65.& \hspace{30mm}$u\in\{n\}\leftrightarrow u=n\vee u=n$ & UI\\
+        
+        66.& \hspace{30mm}$(u\in\{n\}\rightarrow u=n\vee u=n)\wedge(u=n\vee u=n\rightarrow u\in\{n\})$ & 65 Equiv\\
+        
+        67.& \hspace{30mm}$u\in\{n\}\rightarrow u=n\vee u=n$ & 66 Simp\\
+        
+        68.& \hspace{30mm}$a=n\vee a=n$ & 67,60 MP\\
+        
+        69.& \hspace{30mm}$a=n$ & 68 Idem\\
+        
+        70.& \hspace{30mm}$b\in a$ & 38 Simp\\
+            
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\restoregeometry
+
+\newpage
+
+\newgeometry{left=0.08in,bottom=0.1cm}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        70.& \hspace{30mm}$b\in a$\hspace{128mm} & 38 Simp\\
+        
+        71.& \hspace{30mm}$b\in n$ & 69,70 Sub\\
+        
+        72.& \hspace{20mm}$v=\{n\}\rightarrow b\in n$ & 59-71 DP\\
+        
+        73.& \hspace{20mm}$(v=n\rightarrow b\in n)\wedge(v=\{n\}\rightarrow b\in n)$ & 58,72 Conj\\
+        
+        74.& \hspace{20mm}$(v\neq n\vee b\in n)\wedge(v\neq\{n\}\vee b\in n)$ & 73 Impl\\
+        
+        75.& \hspace{20mm}$(b\in n\vee v\neq n)\wedge(b\in n\vee v\neq\{n\})$ & 74 Com\\
+        
+        76.& \hspace{20mm}$b\in n\vee v\neq n\wedge v\neq\{n\}$ & 75 Dist\\
+        
+        77.& \hspace{20mm}$v\neq n\wedge v\neq\{n\}\vee b\in n$ & 76 Com\\
+        
+        78.& \hspace{20mm}$\neg(v=n\vee v=\{n\})\vee b\in n$ & 77 DeM\\
+        
+        79.& \hspace{20mm}$v=n\vee v=\{n\}\rightarrow b\in n$ & 78 Impl\\
+        
+        80.& \hspace{20mm}$v\in\{n,\{n\}\}\rightarrow b\in n$ & 44,79 HS\\
+        
+        81.& \hspace{20mm}$b\in n$ & 44,80 MP\\
+        
+        82.& \hspace{20mm}$(u=n\vee u=\{n\}\rightarrow u\in\{n,\{n\}\})\wedge(u\in\{n,\{n\}\})$ & 29 Com\\
+        
+        83.& \hspace{20mm}$u=n\vee u=\{n\}\rightarrow u\in \{n,\{n\}\}$ & 82 Simp\\
+        
+        84.& \hspace{20mm}$\forall u(u=n\vee u=\{n\}\rightarrow u\in\{n,\{n\}\})$ & 83 UG\\
+        
+        85.& \hspace{20mm}$n=n\vee n=\{n\}\rightarrow n\in\{n,\{n\}\}$ & 84 UI\\
+        
+        86.& \hspace{20mm}$n=n$ & E1\\
+        
+        87.& \hspace{20mm}$n\in\{n,\{n\}\}$ & 85,86 MP\\
+        
+        88.& \hspace{20mm}$n\in\{n,\{n\}\}\wedge b\in n$ & 87,81 Conj\\
+        
+        89.& \hspace{20mm}$\exists v[v\in\{n,\{n\}\}\wedge b\in v]$ & 88 EG\\
+        
+        90.& \hspace{20mm}$(\exists v[v\in\{n,\{n\}\}\wedge u\in v]\rightarrow u\in\bigcup\{n,\{n\}\})$ & 35 Simp\\
+        
+        91.& \hspace{20mm}$b\in\bigcup\{n,\{n\}\}$ & 89,90 MP\\
+        
+        92.& \hspace{10mm}$b\in a\wedge a\in\bigcup\{n,\{n\}\}\rightarrow b\in\bigcup\{n,\{n\}\}$ & 38-91 DP\\
+        
+        93.& \hspace{10mm}$\sigma(\bigcup\{n,\{n\}\})$ & 92 Def\\
+        
+        94.& \hspace{10mm}$n\in\omega\wedge\sigma(n)$ & 7,37 MP\\
+        
+        95.& \hspace{10mm}$n\in\omega$ & 94 Simp\\
+        
+        96.& \hspace{10mm}$\bigcup\{n,\{n\}\}\in\omega$ & 95 Th.3.2\\
+        
+        97.& \hspace{10mm}$\bigcup\{n,\{n\}\}\in\omega\wedge\sigma(\bigcup\{n,\{n\}\})$ & 96,93 Conj\\
+        
+        98.& \hspace{10mm}$\bigcup\{n,\{n\}\}\in A$ & 8,97 MP\\
+        
+        99.& $n\in A\rightarrow\bigcup\{n,\{n\}\}\in A$ & 37-98 DP\\
+        
+        100.&$\varnothing\in A\wedge n\in A\rightarrow\bigcup\{n,\{n\}\}\in A$ & 23,99 Conj\\
+        
+        101.&$\varnothing\in A\wedge\forall u(u\in A\rightarrow\bigcup\{u,\{u\}\}\in A)$ & 100 UG\\
+        
+        102.&$\varphi(A)$ & 101 Def\\
+        
+        103.&$u\in A$ & Assumption\\
+        
+        104.&\hspace{10mm}$u\in\omega\wedge\sigma(u)$ & 7,104 MP\\
+        
+        105.&\hspace{10mm}$u\in\omega$ & 104 Simp\\
+        
+        106.&$u\in A\rightarrow u\in\omega$ & 103-105 DP\\
+        
+        107.&$\forall u(u\in A\rightarrow u\in\omega)$ & 106 UG\\
+        
+        108.&$\varphi(A)\wedge\forall u(u\in A\rightarrow u\in\omega)$ & 102,107Conj\\
+        
+        109.&$A=\omega$ & 108 Th.3.3\\
+        
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\restoregeometry
+
+\newpage
+
+\noindent\blacksquare\textbf{ THEOREM 5.2}\par
+
+\vspace{4mm}
+
+$\omega$ is transitive.\par
+
+\vspace{4mm}
+
+\noindent As we know, in order for a set to be transitive, all the elements of each element in the set are themselves elements of the set. Thus, in order to prove this theorem we must show that if we take some element of $\omega$, say $a\in\omega$, and we take an element, say $b\in a$, then it must be the case that $b\in\omega$.\par
+
+\vspace{4mm}
+
+\newpage
+
+\newgeometry{left=0.2in,bottom=0.1cm}
+
+\noindent\textbf{PROOF}\par
+
+\vspace{4mm}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+         
+        1. & $\forall x\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & A5\\
+        
+        2. & $\forall y\exists z\forall u(u\in z\leftrightarrow u=a\vee u=y)$ & 1 UI\\
+        
+        3. & $\exists z\forall u(u\in z\leftrightarrow u=a\vee u=\{a\})$ & 2 UI\\
+        
+        4. & $\forall u(u\in\{a,\{a\}\}\leftrightarrow u=a\vee u=\{a\})$ & 3 EI\\
+        
+        5. & $u\in\{a,\{a\}\}\leftrightarrow u=a\vee u=\{a\}$ & 4 UI\\
+        
+        6. & $(u\in\{a,\{a\}\}\rightarrow u=a\vee u=\{a\})\wedge(u=a\vee u=\{a\}\rightarrow u\in\{a,\{a\}\})$ & 5 Equiv\\
+        
+        7. & $(u=a\vee u=\{a\}\rightarrow u\in\{a,\{a\}\})\wedge(u\in\{a,\{a\}\}\rightarrow u=a\vee u=\{a\})$ & 6 Com\\
+        
+        8. & $u\in\{a,\{a\}\}\rightarrow u=a\vee u=\{a\}$ & 6 Simp\\
+        
+        9. & $u=a\vee u=\{a\}\rightarrow u\in\{a,\{a\}\}$ & 7 Simp\\
+        
+        10.& $\forall x\exists y\forall u(u\in y\leftrightarrow\exists v[v\in x\wedge u\in v])$ & A6\\
+        
+        11.& $\exists y\forall u(u\in y\leftrightarrow\exists v[v\in\{a,\{a\}\}\wedge u\in a])$ & 10 UI\\
+        
+        12.& $\forall u(u\in\bigcup\{a,\{a\}\}\leftrightarrow\exists v[v\in\{a,\{a\}\}\wedge u\in v])$ & 11 EI\\
+        
+        13.& $u\in\bigcup\{a,\{a\}\}\leftrightarrow\exists v(v\in\{a,\{a\}\}\wedge u\in v)$ & 12 UI\\
+        
+        14.& $(u\in\bigcup\{a,\{a\}\}\rightarrow\exists v[v\in\{a,\{a\}\}\wedge u\in v)\wedge(\exists v[v\in\{a,\{a\}\}\wedge u\in v]\rightarrow u\in\bigcup\{a,\{a\}\})$ & 13 Equiv\\
+        
+        15.& $(\exists v[v\in\{a,\{a\}\}\wedge u\in v]\rightarrow u\in\bigcup\{a,\{a\}\})\wedge(u\in\bigcup\{a,\{a\}\}\rightarrow\exists v[v\in\{a,\{a\}\}\wedge u\in v])$ & 14 Com\\
+        
+        16.& $u\in\bigcup\{a,\{a\}\}\rightarrow\exists v(v\in\{a,\{a\}\}\wedge u\in v)$ & 14 Simp\\
+        
+        17.& $\exists v(v\in\{a,\{a\}\}\wedge u\in v)\rightarrow u\in\bigcup\{a,\{a\}\}$ & 15 Simp\\
+        
+        18.& $\exists z\forall u(u\in z\leftrightarrow u=a\vee u=a)$ & 2 UI\\
+        
+        19.& $\forall u(u\in\{a,a\}\leftrightarrow u=a\vee u=a)$ & 18 EI\\
+        
+        20.& $u\in\{a,a\}\leftrightarrow u=a\vee u=a$ & 19 UI\\
+        
+        21.& $(u\in\{a,a\}\rightarrow u=a\vee u=a)\wedge(u=a\vee u=a\rightarrow u\in\{a,a\})$ & 20 Equiv\\
+        
+        22.& $(u=a\vee u=a\rightarrow u\in\{a,a\})\wedge(u\in\{a,a\}\rightarrow u=a\vee u=a)$ & 21 Com\\
+        
+        23.& $u\in\{a,a\}\rightarrow u=a\vee u=a$ & 21 Simp\\
+        
+        24.& $u=a\vee u=a\rightarrow u\in\{a,a\}$ & 22 Simp\\
+        
+        25.& $u\in\{a,a\}$ & Assumption\\
+        
+        26.& \hspace{10mm}$u=a\vee u=a$ & 23,25 MP\\
+        
+        27.& \hspace{10mm}$u=a$ & 26 Idem\\
+        
+        28.& $u\in\{a,a\}\rightarrow u=a$ & 25-27 DP\\
+        
+        29.& $u=a$ & Assumption\\
+        
+        30.& \hspace{10mm}$u=a\vee u=a$ & 29 Add\\
+        
+        31.& \hspace{10mm}$u\in\{a,a\}$ & 24,30 MP\\
+        
+        32.& $u=a\rightarrow u\in\{a,a\}$ & 29-31 DP\\
+        
+        33.& $(u\in\{a,a\}\rightarrow u=a)\wedge(u=a\rightarrow u\in\{a,a\})$ & 28,32 Conj\\
+        
+        34.& $u\in\{a,a\}\leftrightarrow u=a$ & 33 Equiv\\
+        
+        35.& $\{a\}=\{a,a\}$ & Def\\
+        
+        36.& $u\in\{a\}\rightarrow u=a$ & 28,35 Sub\\
+        
+        37.& $u=a\rightarrow u\in\{a\}$ & 32,35 Sub\\
+            
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+
+\restoregeometry
+
+\newpage
+
+\newgeometry{left=0.1in,bottom=0.1cm}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        38.& $a\in\omega\wedge b\in a$\hspace{140mm} & Assumption\\
+        
+        39.& \hspace{10mm}$b\in a\wedge a\in\omega$ & 38 Com\\
+        
+        40.& \hspace{10mm}$a\in\omega$ & 38 Simp\\
+        
+        41.& \hspace{10mm}$b\in a$ & 39 Simp\\
+        
+        42.& \hspace{10mm}$\bigcup\{a,\{a\}\}\in\omega$ & 40 Th.3.2\\
+        
+        43.& \hspace{10mm}$n\in\bigcup\{a,\{a\}\}$ & Assumption\\
+        
+        44.& \hspace{20mm}$\exists v(v\in\{a,\{a\}\}\wedge n\in v)$ & 16,43 MP\\
+        
+        45.& \hspace{20mm}$v\in\{a,\{a\}\}\wedge n\in v$ & 44 EI\\
+        
+        46.& \hspace{20mm}$n\in v\wedge v\in\{a,\{a\}\}$ & 45 Com\\
+        
+        47.& \hspace{20mm}$v\in\{a,\{a\}\}$ & 45 Simp\\
+        
+        48.& \hspace{20mm}$n\in v$ & 46 Simp\\
+        
+        49.& \hspace{20mm}$v=a\vee v=\{a\}$ & 8,48 MP\\
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\restoregeometry
+
+
+\end{document}

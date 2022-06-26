@@ -1,0 +1,145 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 234A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 234A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/26/20   \\
+{ \textbf{Instructor:}}\ Dr. Bin Lu \hspace{\fill} \textbf{Assignment:} Homework 1 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item[28.] Compute each of the following derivatives:
+            \begin{enumerate}
+                \item $\frac{\partial}{\partial z}(4\overline{z}^2-z^3)$
+                    \begin{solution}
+                        Using the results on pg. 12 we find that
+                            \begin{equation*}
+                                \begin{split}
+                                    \frac{\partial}{\partial z}(4\overline{z}^2-z^3) &= 4\bigg(\frac{\partial^1}{\partial z^1}\bigg)\bigg(\frac{\partial^0}{\partial\overline{z}^0}\bigg)(\overline{z}^2)-\bigg(\frac{\partial^1}{\partial z^1}\bigg)\bigg(\frac{\partial^0}{\partial\overline{z}^0}\bigg)(z^3) \\
+                                    &= 4\frac{\partial}{\partial z}\overline{z}^2 \\
+                                    &= 8\overline{z}\frac{\partial\overline{z}}{\partial z}
+                                \end{split}
+                            \end{equation*}
+                    \end{solution}
+                \item $\frac{\partial}{\partial\overline{z}}(\overline{z}^2+z^2\overline{z}^3)$
+                    \begin{solution}
+                    
+                    \end{solution}
+                \item $\frac{\partial^3}{\partial x^2\partial y}(3z^2\overline{z}^4-2z^3\overline{z}+z^4-\overline{z}^5)$
+                    \begin{solution}
+                    
+                    \end{solution}
+                \item $\frac{\partial^5}{\partial\overline{z}^3\partial z^2}(\overline{z}^2-z\overline{z}+4z-6z^2)$
+                    \begin{solution}
+                    
+                    \end{solution}
+            \end{enumerate}
+        \item[29.] Compute each of the following derivatives:
+            \begin{enumerate}
+                \item $\frac{\partial}{\partial z}(x^2-y)$
+                    \begin{solution}
+                    
+                    \end{solution}
+                \item $\frac{\partial}{\partial\overline{z}}(x+y^2)$
+                    \begin{solution}
+                    
+                    \end{solution}
+                \item $\frac{\partial^4}{\partial z\partial\overline{z}^3}(xy^2)$
+                    \begin{solution}
+                    
+                    \end{solution}
+                \item $\frac{\partial^2}{\partial\overline{z}\partial z}(\overline{z}z^2-z^3\overline{z}+7z)$
+                    \begin{solution}
+                    
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,175 @@
+\section{}
+\documentclass[leqno]{article}
+%------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+%------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[colorlinks=true,pagebackref=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red, linkcolor=blue}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{biblatex}
+
+\addbibresource{Analysis.bib}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}[theorem]
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+
+\begin{document}
+\title{Finance Notes}
+\author{Quin Darcy}
+\date{Aug, 8 2020}
+\maketitle
+
+\section{Interest}
+    The initially deposited amount will be called the \textbf{principle amount} and will be denoted $P$. The annual interest rate will be denoted by the symbol $r$. The sum of the principle amount and any earned interest will be called the \textbf{capital} or \textbf{amount due}. The symbol $A$ will be used to denote the amount due. The relationship between $P$, $r$, and $A$ after a single year period is
+        \begin{equation}
+            A=P+Pr=P(1+r).
+        \end{equation}
+    In general, if the financial institution adds interest earned into the depositor's account, then after $t$ years, the capital $A$ will grow to
+        \begin{equation}
+            A=P(1+r)^t.
+        \end{equation}
+\section{Compound Interest}
+    Whenever interest is allowed to earn interest itself, an investment is said to earn \textbf{compound interest}. We will let $n$ denote the number of compounding periods per year. Now it is necessary to the of the interest rate per compounding period, $r/n$. Additionally, the elapsed time should be thought of as some number of compounding periods rather than years. Thus, with $n$ compounding periods per year, the number of compounding periods in $t$ years is $nt$. Therefore, the formula for compound interest is
+        \begin{equation}
+            A=P\left(1+\frac{r}{n}\right)^{nt}
+        \end{equation}
+\section{Present Value}
+    We wish to compare the value of a particular investment at the present time with the value of the investment at some point in the future. This is the comparison between the \textbf{present value} of an investment and the \textbf{future value} of the investment.\par The future value of  $t$ years from now of an invested amount $P$ subject to an annual interest rate $r$ compounded monthly is
+        \begin{equation}
+            A=P\left(1+\frac{r}{12}\right)^{12t}.
+        \end{equation}
+    By contrast the present value of $A$ in an environment of interest rate $r$ compounded monthly for $t$ many years is
+        \begin{equation}
+            P=A\left(1+\frac{r}{12}\right)^{-12t}.
+        \end{equation}
+    \begin{example}
+        Suppose an investor will receive payments at the end of the next six years in the amounts shown in the table below.
+            \begin{table}[htc]
+                \centering
+                \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                    Year    & 1   & 2   & 3   & 4   & 5   & 6   \\ \hline
+                    Payment & 465 & 233 & 632 & 365 & 334 & 248 \\ \hline
+                \end{tabular}
+            \end{table}\hfill\par
+        If the interest rate is 3.99\% compounded monthly, what is the present value of the investments? Assuming the first payment will arrive one year from now, the present value is the sum
+            \begin{equation*}
+                \begin{split}
+                    465&\left(1+\frac{0.0399}{12}\right)^{-12}+233\left(1+\frac{0.0399}{12}\right)^{-24}+632\left(1+\frac{0.0399}{12}\right)^{-36} \\ &+365\left(1+\frac{0.0399}{12}\right)^{-48}+334\left(1+\frac{0.0399}{12}\right)^{-60}+248\left(1+\frac{0.0399}{12}\right)^{-72} \\
+                    &=2003.01.
+                \end{split}
+            \end{equation*}
+    \end{example}
+    Loans are always made under the assumptions of a prevailing interest rate, and amount to be borrowed, and the lifespan of the loan, \textit{i.e.} the time the borrower has to repay the loan. 
+    \begin{example}
+        Suppose a person is 27 years old and plans to retire at 57. For the next 30 years they plan to invest a percentage of their salary into their 401(k) which earns interest at the rate of 9.6\% with compound period $n$. After retirement, the person plans on receiving a monthly payment of \$1,516 for 33 years. 
+    \end{example}
+    Let $P$ be the principle investment, $r$ be the nominal annual interest rate, $n$ be the number of compounding periods in 1 year, $i$ be the annual rate of inflation, and $s$ be the number of times a deposit $x$ is made in 1 year. Then letting $A_t$ denote the capital after $t$ many years, we get that
+        \begin{equation*}
+            \begin{split}
+                A_0&=P \\
+                A_1&=\frac{P}{(1+i)}\left(1+\frac{r}{n}\right)^n+x
+            \end{split}
+        \end{equation*}
+\end{document}

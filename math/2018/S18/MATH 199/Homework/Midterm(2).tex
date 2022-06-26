@@ -1,0 +1,380 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcolumntype{C}{>$c<$}
+\usepackage{stackengine}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=60mm,labelindent=60mm}
+
+
+\begin{flushleft}
+Quin Darcy\linebreak 
+MATH 199\linebreak	
+Prof. Schulte\linebreak
+4/21/18\linebreak
+\end{flushleft}
+
+
+\begin{document}
+
+
+\section*{\centerline{Differential Geometry Midterm 2}}
+
+\justifying
+
+\vspace{5mm}
+
+\begin{flushleft}
+
+    \textbf{Exercise 7.1.4}\par 
+    
+\vspace{4mm}
+    
+    What is the effect on the second fundamental form of a surface of applying an isometry of $\mathbb{R}^3$?\par
+    
+\vspace{4mm}
+
+    \textbf{Solution: }Let us assume we have a surface $S\subseteq\mathbb{R}^3$, and surface patch $\varphi\colon U\rightarrow V$, where $U\subseteq\mathbb{R}^2$ and $V\subseteq S$. Let the components of $\varphi$ be such that $\varphi(f_1(u,v),f_2(u,v))$. Next, let us suppose that $A$ is a 3x3 orthogonal matrix and $a\in\mathbb{R}^3$ is any arbitrary vector. Now define $\tilde{\varphi}=A\varphi+a$. This way, the matrix $A$ either reflects or rotates all the vectors $v\in$Im$(\varphi)$ and the addition of the constant vector $a$ performs a translation. $\tilde{\varphi}$ is then the application of an isometry to our surface patch. Differentiating $\tilde{\varphi}(u,v)$ with respect to each component yields:\par
+    
+\vspace{4mm}
+
+        \centerline{$\tilde{\varphi}_u=\frac{\partial\tilde{\varphi}}{\partial u}=A(\frac{\partial\varphi}{\partial f_1}\frac{\partial f_1}{\partial u}+\frac{\partial\varphi}{\partial f_2}\frac{\partial f_2}{\partial u}+\frac{\partial a}{\partial u})=A\varphi_u$,}
+        
+\vspace{2mm}
+
+        \centerline{$\tilde{\varphi}_v=\frac{\partial\tilde{\varphi}}{\partial v}=A(\frac{\partial\varphi}{\partial f_1}\frac{\partial f_1}{\partial v}+\frac{\partial\varphi}{\partial f_2}\frac{\partial f_2}{\partial v}+\frac{\partial a}{\partial u})=A\varphi_v$.}
+        
+\vspace{4mm}
+
+    Thus,\par
+    
+\vspace{4mm}
+
+        \centerline{$\tilde{\varphi}_u\times\tilde{\varphi}_v=\pm \varphi_u\times\varphi_v$.}
+        
+\vspace{4mm}
+
+    The sign is determined by what orientation the matrix places on the normal vector constructed from the cross product. Therefore, under an isometry we have $\tilde{L}=\pm L$, $\tilde{M}=\pm M$, and $\tilde{N}=\pm N$.
+
+\end{flushleft}
+
+
+
+\vspace{8mm}
+
+
+
+\begin{flushleft}
+
+    \textbf{Exercise 7.3.1}\par
+    
+\vspace{4mm}
+
+    Let $\gamma$ be a regular, but not necessarily unit-speed, curve on a surface. Prove that (with the usual notation) the normal and geodesic curvatures of $\gamma$ are\par
+    
+\vspace{4mm}
+
+        \centerline{$\kappa_n=\frac{\langle\langle\dot{\gamma}, \dot{\gamma}\rangle\rangle}{\langle\dot{\gamma}, \dot{\gamma}\rangle}$\normalsize\hspace{8mm}and\hspace{8mm}$\kappa_g=\frac{\ddot{\gamma}\cdot(\mathbf{N}\times\dot{\gamma})}{\langle\dot{\gamma},\dot{\gamma}\rangle^{3/2}}$.}
+        
+\vspace{4mm}
+
+    \textbf{Solution: }Let $\gamma(s(t))$ be our curve, where $s(t)$ is the arc-length. Let us now differentiate with respect to $t$:\par
+
+    
+
+\end{flushleft}
+
+\newpage
+
+\begin{flushleft}
+
+        \centerline{$\dot{\gamma}=\frac{\partial\gamma}{\partial s}\frac{ds}{dt}$}
+        
+\vspace{2mm}
+
+        \centerline{$\ddot{\gamma}=\frac{\partial^2 \gamma}{\partial t^2}=\frac{\partial\gamma}{\partial s}\frac{ds}{dt}\frac{ds}{dt}+\frac{\partial\gamma}{\partial s}\frac{d^2 s}{dt^2}$}
+        
+\vspace{4mm}
+
+    From here we can calculate the normal curvature\par
+    
+\vspace{4mm}
+
+        \centerline{$\kappa_n=\langle\langle\frac{\partial\gamma}{\partial s},\frac{\partial\gamma}{\partial s}\rangle\rangle=\frac{\langle\langle\dot{\gamma},\dot{\gamma}\rangle\rangle}{(\frac{ds}{dt})^2}=\frac{\langle\langle\dot{\gamma},\dot{\gamma}\rangle\rangle}{\langle\dot{\gamma},\dot{\gamma}\rangle}$.}
+        
+\vspace{4mm}
+
+    On page 166 we have that $\kappa_g=\ddot{\gamma}\cdot(\mathbf{N}\times\dot{\gamma})$, thus\par
+    
+\vspace{4mm}
+
+        \centerline{$\ddot{\gamma}\cdot(\mathbf{N}\times\dot{\gamma})=(\frac{ds}{dt})^3\frac{\partial^2\gamma}{\partial s^2}\cdot(\mathbf{N}\times\frac{\partial\gamma}{\partial s})=\langle\dot{\gamma},\dot{\gamma}\rangle^{ \frac{3}{2}\kappa_g}$.}
+
+\end{flushleft}
+
+
+
+\vspace{8mm}
+
+
+
+\begin{flushleft}
+
+    \textbf{Exercise 7.4.2}\par
+    
+\vspace{4mm}
+
+    Show that the parallel transport map $\Pi^{\mathbf{pq}}_{\gamma}\colon T_{\mathbf{p}}S\rightarrow T_{\mathbf{q}}S$ is invertible. What is its inverse?
+    
+\vspace{4mm}
+
+    \textbf{Solution: }Let $\gamma\colon[a,b]\rightarrow S$, such that $\gamma(a)=p$ and $\gamma(b)=q$. Suppose $v_0\in T_pS$ and $V$ is a vector field on Im$(\gamma)$ with $V_p=v_0$ and $\nabla_{\gamma'}V=0$, then $\Pi^{pq}_{\gamma}(v_0)=V_q$. Now let $\tilde{\gamma}(t)=\gamma(b-t)$. Thus, $\tilde{\gamma}(a)=\gamma(b)=q$ and $\tilde{\gamma}(b)=\gamma(a)=p$. Hence, $\nabla_{\tilde{\gamma}'}V=\nabla_{-\gamma'}V=-\nabla_{\gamma'}=0$ and $V_q=v_1$. Therefore, $\Pi^{qp}_{\tilde{\gamma}}(v_1)=v_0$.
+
+\end{flushleft}
+
+
+
+\vspace{8mm}
+
+
+
+\begin{flushleft}
+
+    \textbf{Exercise 8.1.1}\par
+    
+\vspace{4mm}
+
+    Show that the Gaussian and mean curvatures of the surface $z=f(x,y)$, where $f$ is a smooth function, are\par
+    
+\vspace{4mm}
+
+        \centerline{$K=$\Large{$\frac{f_{xx}f_{yy}-f^2_{xy}}{(1+f^2_x+f^2_y)^2}$}\normalsize ,\hspace{4mm}$H=$\Large{$\frac{(1+f^2_y)f_{xx}-2f_xf_yf_{xy}+(1+f^2_x)f_{yy}}{2(1+f^2_x+f^2_y)^{3/2}}$}.}
+        
+\vspace{4mm}
+
+    \textbf{Solution: }Let us first recall the definition of a normal vector field on a surface $S$. It is a function $N$ that assigns to each $p\in S$ a normal vector $N_p\in T_p\mathbb{R}^3$. If $N$ is a normal vector field on $S$ then at each point $p\in S$, we may write\par
+    
+\vspace{4mm}
+
+        \centerline{$N_p=\sum\limits_{i=1}^3 a^i(p)\frac{\partial}{\partial x^i}\big|_p$.}
+        
+\vspace{4mm}
+
+    We now note that each unit tangent vector $X_p$ to the surface $S$ at the point $p$ determines together with $N_p$, a plane that slices $S$ along a normal section. Let $\gamma(s)$ be the arc-length parametrization of this normal section with initial point $\gamma(0)=p$ and $\gamma'(0)=X_p$. Then we have that the normal curvature is defined as\par
+    
+\vspace{4mm}
+
+            \centerline{$\kappa(X_p)=\langle\gamma''(0), N_p\rangle$.}
+        
+    
+\end{flushleft}
+
+\newpage
+
+\begin{flushleft}
+
+    Since the set of all unit vectors in $T_pS$ is a circle, we can construct a map\par
+    
+\vspace{4mm}
+
+        \centerline{$\kappa\colon S^1\rightarrow\mathbb{R}$.}
+        
+\vspace{4mm}
+
+    The maximum and minimum values $\kappa_1, \kappa_2$ of the function $\kappa$ are the principal curvatures and their average is the mean curvature, and finally their product is the gaussian curvature.\par
+    With respect to our given surface $z=f(x,y)$ , we can let our surface patch be defined as $\varphi(x,y)=(x,y,f(x,y))$. Thus,\par
+    
+\vspace{4mm}
+
+        \centerline{$\varphi_x=\frac{\partial \varphi}{\partial x}=\frac{\partial \varphi}{\partial x}\frac{\partial x}{\partial x}+\frac{\partial\varphi}{\partial y}\frac{\partial y}{\partial x}+\frac{\partial\varphi}{\partial f}\frac{\partial f}{\partial x}=(1,0,f_x)$,}
+        
+\vspace{2mm}
+
+        \centerline{$\varphi_y=\frac{\partial \varphi}{\partial y}=\frac{\partial \varphi}{\partial x}\frac{\partial x}{\partial y}+\frac{\partial\varphi}{\partial y}\frac{\partial y}{\partial y}+\frac{\partial\varphi}{\partial f}\frac{\partial f}{\partial y}=(0,1,f_y)$,}
+        
+\vspace{2mm}
+
+        \centerline{$\varphi_{xx}=\frac{\partial}{\partial x}(\varphi_x)=(0,0,f_{xx})$,}
+        
+\vspace{2mm}
+
+        \centerline{$\varphi_{xy}=\frac{\partial}{\partial y}(\varphi_x)=(0,0,f_{xy})$,}
+        
+\vspace{2mm}
+
+        \centerline{$\varphi_{yy}=\frac{\partial}{\partial y}(\varphi_y)=(0,0,f_{yy})$.}
+        
+\vspace{4mm}
+
+    Thus,\par
+    
+\vspace{4mm}
+
+        \centerline{$E=\langle\varphi_x,\varphi_x\rangle=1+f^2_x$,}
+        
+\vspace{2mm}
+
+        \centerline{$F=\langle\varphi_x,\varphi_y\rangle=f_xf_y$,}
+        
+\vspace{2mm}
+
+        \centerline{$G=\langle\varphi_y,\varphi_y\rangle=1+f^2_y$,}
+        
+\vspace{2mm}
+
+        \centerline{$L=-\mathbf{N}_x\cdot\varphi_x=(1+f^2_x+f^2_y)^{-1/2}f_{xx}$}
+        
+\vspace{2mm}
+
+        \centerline{$M=\mathbf{N}_x\cdot\varphi_{y}=(1+f^2_x+f^2_y)^{-1/2}f_{xy}$,}
+        
+\vspace{2mm}
+
+        \centerline{$N=\mathbf{N}_y\cdot\varphi_y=(1+f^2_x+f^2_y)^{-1/2}f_{yy}$.}
+        
+\vspace{4mm}
+
+    Therefore,\par
+    
+\vspace{4mm}
+
+        \centerline{$H=\frac{LG-2MF+NE}{2(EG-F^2}$,\hspace{5mm}$K=\frac{LN-M^2}{EG-F^2}$.}
+
+
+\end{flushleft}
+
+
+
+\begin{flushleft}
+    \textbf{Exercise 8.1.10}
+    
+\vspace{4mm}
+
+    Let $\mathbf{w}(u,v)$ be a smooth tangent vector field on a surface patch $\sigma(u,v)$. This means that\par
+    
+\vspace{4mm}
+    
+        \centerline{$\mathbf{w}(u,v)=\alpha(u,v)\sigma_u+\beta(u,v)\sigma_v$}
+        
+\vspace{4mm}
+
+    where $\alpha$ and $\beta$ are smooth functions of $(u,v)$. Then, if $\gamma(t)=\sigma(u(t),v(t))$ is any curve on $\sigma$, $\mathbf{w}$ gives rise to the tangent vector field $\mathbf{w}|_{\gamma}(t)=\mathbf{w}(u(t),v(t))$ along $\gamma$. Let $\nabla_u\mathbf{w}$ be the covariant derivative of $\mathbf{w}|_{\gamma}$ along a parameter curve $v=$constant, and define $\nabla_v\mathbf{w}$ similarly. Show that\par
+    
+\vspace{4mm}
+
+        \centerline{$\nabla_v(\nabla_u\mathbf{w})-\nabla_u(\nabla_v\mathbf{w})=(\mathbf{w}_v\cdot\mathbf{N})\mathbf{N}_u-(\mathbf{w}_u\cdot\mathbf{N})\mathbf{N}_v$,}
+        
+\vspace{4mm}
+
+    where $\mathbf{N}$ is the unit normal of $\sigma$. Deduce that, if $\lambda(u,v)$ is a smooth function of $(u,v)$, then\par
+    
+\vspace{4mm}
+
+        \centerline{$\nabla_v(\nabla_u(\lambda\mathbf{w}))-\nabla_u(\nabla_v(\lambda\mathbf{w}))=\lambda(\nabla_v(\nabla_u\mathbf{w})-\nabla_u(\nabla_v\mathbf{w}))$.}
+        
+\vspace{4mm}
+
+    Use Proposition 8.1.2 to show that\par
+    
+\vspace{4mm}
+
+        \centerline{$\nabla_v(\nabla_u\sigma_u)-\nabla_u(\nabla_v\sigma_u)=K(-F\sigma_u+E\sigma_v)$,}
+        
+\vspace{4mm}
+
+    where\par
+    
+\vspace{4mm}
+
+        \centerline{$K=\frac{LN-M^2}{EG-F^2}$,}
+        
+\vspace{4mm}
+
+    and find a similar expression for $\nabla_v(\nabla_u\sigma_v)-\nabla_u(\nabla_v\sigma_v)$. Deduce that\par
+    
+\vspace{4mm}
+
+        \centerline{$\nabla_v(\nabla_u\mathbf{w})=\nabla_u(\nabla_v\mathbf{w})$}
+        
+\vspace{4mm}
+
+    for all tangent vector fields $\mathbf{w}$ if and only if $K=0$ everywhere on the surface.
+    
+\vspace{16mm}
+
+    \textbf{Solution: }In the first part of the question we are to prove the equality presented. So in spirit of the book's solution we shall prove the left side is equal to the right. The first term in the difference is the covariant derivative of $\mathbf{w}|_{\gamma}$ along a parameter curve $u=$constant of the covariant derivative of $\mathbf{w}|_{\gamma}$ along a parameter curve $v=$ constant. Thus we have\par
+    
+
+    
+\end{flushleft}
+
+
+\begin{flushleft}
+  
+        $\nabla_v(\nabla_u\mathbf{w})\par=\nabla_v(\mathbf{w}_u-(\mathbf{w}_u\cdot\mathbf{N})\mathbf{N})\par=\mathbf{w}_{uv}-(\mathbf{w}_{uv}\cdot\mathbf{N})\mathbf{N}-(\mathbf{w}_u\cdot\mathbf{N})\mathbf{N}-(\mathbf{w}_u\cdot\mathbf{N})\mathbf{N}_v-(\mathbf{w}_{uv}\cdot\mathbf{N})\mathbf{N}+(\mathbf{w}_{uv}\cdot\mathbf{N})\mathbf{N}+\par(\mathbf{w}_u\cdot(\mathbf{w}_u\cdot\mathbf{N}_v)\mathbf{N}+(\mathbf{w}_u\cdot\mathbf{N})(\mathbf{N}_v\cdot\mathbf{N})\mathbf{N}\par=\mathbf{w}_{uv}-(\mathbf{w}_{uv}\cdot\mathbf{N})\mathbf{N}-(\mathbf{w}_u\cdot\mathbf{N})\mathbf{N}_v$.
+        
+\vspace{4mm}
+
+    Thus, the value of $\nabla_u(\nabla_v\mathbf{w})$ is as follows\par
+    
+\vspace{4mm}
+
+        $\nabla_u(\nabla_v\mathbf{w})\par=\nabla_u(\mathbf{w}_v-(\mathbf{w}_v\cdot\mathbf{N})\mathbf{N})\par=\mathbf{w}_{vu}-(\mathbf{w}_{vu}\cdot\mathbf{N})\mathbf{N}-(\mathbf{w}_v\cdot\mathbf{N})\mathbf{N}-(\mathbf{w}_v\cdot\mathbf{N})\mathbf{N}_u-(\mathbf{w}_{vu}\cdot\mathbf{N})\mathbf{N}+(\mathbf{w}_{vu}\cdot\mathbf{N})\mathbf{N}+\par(\mathbf{w}_v\cdot(\mathbf{w}_v\cdot\mathbf{N}_u)\mathbf{N}+(\mathbf{w}_v\cdot\mathbf{N})(\mathbf{N}_u\cdot\mathbf{N})\mathbf{N}\par=\mathbf{w}_{vu}-(\mathbf{w}_{vu}\cdot\mathbf{N})\mathbf{N}-(\mathbf{w}_v\cdot\mathbf{N})\mathbf{N}_u$.
+        
+\vspace{4mm}
+
+    Hence,\par
+    
+\vspace{4mm}
+
+        \centerline{$\nabla_v(\nabla_u\mathbf{w})-\nabla_u(\nabla_v\mathbf{w})=(\mathbf{w}_{uv}-(\mathbf{w}_{uv}\cdot\mathbf{N})\mathbf{N}-(\mathbf{w}_u\cdot\mathbf{N})\mathbf{N}_v)$}
+        
+\vspace{2mm}
+
+        \centerline{$-(\mathbf{w}_{vu}-(\mathbf{w}_{vu}\cdot\mathbf{N})\mathbf{N}-(\mathbf{w}_v\cdot\mathbf{N})\mathbf{N}_u)$}
+        
+\vspace{2mm}
+
+        \centerline{$=(\mathbf{w}_v\cdot\mathbf{N})\mathbf{N}_u-(\mathbf{w}_u\cdot\mathbf{N})\mathbf{N}_v$.}
+        
+\vspace{4mm}
+
+    The second part of the question is concerned with some arbitrary function $\lambda(u,v)$ as it stands in the context of the term $\lambda(u,v)\mathbf{w}(u,v)=\lambda\mathbf{w}$. Thus, we have\par
+    
+\vspace{4mm}
+
+        \centerline{$\nabla_v(\nabla_u(\lambda\mathbf{w}))-\nabla_u(\nabla_v(\lambda\mathbf{w}))=(\frac{\partial}{\partial v}(\lambda\mathbf{w})\cdot\mathbf{N})\mathbf{N}_u-(\frac{\partial}{\partial u}(\lambda\mathbf{w})\cdot\mathbf{N})\mathbf{N}_v)$}
+        
+\vspace{2mm}
+
+        \centerline{$=\lambda[(\mathbf{w}_v\cdot\mathbf{N})\mathbf{N}_u-(\mathbf{w}_u\cdot\mathbf{N})\mathbf{N}_v]$.}
+    
+\end{flushleft}
+
+\end{document}

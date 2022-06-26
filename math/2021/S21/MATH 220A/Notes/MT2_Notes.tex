@@ -1,0 +1,77 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 220A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+\begin{document} \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 220A}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: NONE \\
+    { Instructor:}\ Dr. Martins \hspace{\fill} Assignment:
+    Midterm 2 Notes \\ \hrule}
+    \begin{enumerate}
+        \item Let $A, B$ and $A_{\alpha}$ denote subsets of a topological space $X$. Prove the following:
+        \begin{enumerate}
+            \item If $A\subset B$, then $\overline{A}\subset \overline{B}$.
+                \begin{proof}
+                    We have that $A\subset B$, and that $B\subset \overline{B}$. And so $A\subset\overline{B}$. This means that $\overline{B}$ is a closed set containing $A$. Since $\overline{A}$ is defined to be the intersection of all closed sets containing $A$, then it follows that $\overline{B}$ is in this intersection. Thus $\overline{A}\subset\overline{B}$.
+                \end{proof}
+            \item $\overline{A\cup B}=\overline{A}\cup\overline{B}$.
+                \begin{proof}
+                    Since $A\subset A\cup B$, then by (a), $\overline{A}\subset\overline{A\cup B}$. Similarly, with $B\subset A\cup B$, it follows that $\overline{B}\subset\overline{A\cup B}$. Therefore, $\overline{A}\cup\overline{B}\subset\overline{A\cup B}$. Now with $A\subset \overline{A}$, comes $A\subset\overline{A}\cup\overline{B}$. And with $B\subset\overline{B}$, comes $B\subset\overline{A}\cup\overline{B}$. Thus $A\cup B\subset\overline{A}\cup\overline{B}$. Hence, by (a), $\overline{A\cup B}\subset\overline{A}\cup\overline{B}$, since $\overline{A}\cup\overline{B}$ is a closed subset as a finite union of closed sets.
+                \end{proof}
+            \item $\bigcup_{\alpha\in J}\overline{A}_{\alpha}\subset\overline{\bigcup_{\alpha\in J}A_{\alpha}}$.
+                \begin{proof}
+                    Let $\alpha_0\in J$ be any fixed element. Then $A_{\alpha_0}\subset\bigcup_{\alpha\in J}A_{\alpha}$. Hence, by (a), $\overline{A}_{\alpha_0}\subset\overline{\bigcup_{\alpha\in J}A_{\alpha}}$. Since this choice of $\alpha_0$ was arbitrary, then the containment hold for all such $\alpha\in J$. Hence, $\bigcup_{\alpha\in J}\overline{A}_{\alpha}\subset\overline{\bigcup_{\alpha\in J}A_{\alpha\in J}}$.
+                \end{proof}
+        \end{enumerate}
+        \item Show that $X$ is Hausdorff if and only if the diagonal
+            \begin{equation*}
+                \Delta=\{(x,x)\in X\times X\mid x\in X\}
+            \end{equation*}
+            is closed in $X\times X$.
+            \begin{proof}
+                
+            \end{proof}
+    \end{enumerate}
+\end{document}

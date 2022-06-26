@@ -1,0 +1,201 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 1/29/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 1 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item[2.] Prove that 2 is irreducible in $\mathbb{Z}[\sqrt{10}]$.
+            \begin{proof}
+                Define $N\colon\mathbb{Z}[\sqrt{10}]\rightarrow\mathbb{Z}$ by $N(a+b\sqrt{10})=(a+b\sqrt{10})(a-b\sqrt{10})$. Suppose $2=(a+b\sqrt{10})(c+d\sqrt{10})$ for some $a,b,c,d\in\mathbb{Z}$. Evaluating this we get that
+                    \begin{equation*}
+                        \begin{split}
+                            N(2) &= 4 \\
+                            &= N\big((a+b\sqrt{10})(c+d\sqrt{10})\big) \\
+                            &=N\big((a+b\sqrt{10})\big)N\big((c+d\sqrt{10})\big) \\
+                            &=(a^2-10b^2)(c^2-10d^2).
+                        \end{split}
+                    \end{equation*}
+                This yields two cases:\vspace{2mm}
+                    \begin{enumerate}[label=(\roman*)]
+                        \item $a^2-10b^2=4$ and $c^2-10d^2=1$. The solutions to these two equations are $a=\pm 2$, $b=0$, $c=\pm 1$, and $d=0$. Thus, $2=a\cdot c=2\cdot 1$, or $2=a\cdot c=(-2)\cdot(-1)$. Both of these solutions imply 2 is irreducible. 
+                        
+                        \item $a^2-10b^2=2$ and $c^2-10d^2=2$. Let $a=10q+r$ where $0<r<10$, then $a^2-10b^2=100q^2+20qr+r^2-10b^2=10(10q^2+2qr-b^2)+r^2=2$. Letting $x=10q^2+2qr-b^2$, we have that $2-r^2=10x$ which has no solutions for all $r=1,2,\dots,9$. Similarly, we get the same result for $10x=-2-r^2$. Thus, there are no solutions in this case.
+                    \end{enumerate}
+                    \vspace{2mm}   
+                Thus, 2 is irreducible in $\mathbb{Z}[\sqrt{10}]$.
+            \end{proof}
+            
+        \item[3.] Assume that $F$ and $E$ are fields, and that $\varphi\colon F\rightarrow E$ is a ring homomorphism. 
+            \begin{enumerate}[label=(\alph*)]
+                \item If there exists $a\in F-\{0\}$ such that $\varphi(a)=0$, then determine, with explanation, what can be concluded about $\varphi$.
+                    \begin{solution}
+                        Since $\varphi(a)=0$ and $a\neq 0$ by assumption, then $\ker\varphi\neq\{0\}$ and so $\varphi$ is not 1-1. Additionally, we have that for all $b\in F$, $\varphi(ab)=\varphi(a)\varphi(b)=0\varphi(b)=0$. Thus, $\varphi\big((a)_i\big)=0$. Lastly, since $F$ is a field and $a\neq 0$, then $(a)_i=F$ and so $\varphi(F)=0$. Thus, $F=\ker\varphi$ and by the Fundamental Isomorphism Theorem, im$(\varphi)\cong\{0\}$.
+                    \end{solution}
+                    
+                \item If there does not exist $a\in F-\{0\}$ such that $\varphi(a)=0$, then determine, with explanation, what can be concluded about $\varphi$, and prove that $\varphi(1_F)=1_E$. 
+                    \begin{solution}
+                        If there does not exist $a\in F-\{0_F\}$ such that $\varphi(a)=0_E$, then $\ker\varphi=\{0\}$ and $\varphi$ is 1-1. Additionally, we have that $\varphi(1_F)=\varphi(1_F\cdot 1_F)=\varphi(1_F)\cdot\varphi(1_F)=\big(\varphi(1_F)\big)^2$. Thus, $\big(\varphi(1_F)\big)^2-\varphi(1_F)=0_E$. Since $E$ is a field (and so it is an integral domain), then by cancellation we have that $\varphi(1_F)=0$ or $\varphi(1_F)=1_E$. However, since $\ker\varphi=\{0_F\}$, then $\varphi(1_F)\neq 0_E$ and thus $\varphi(1_F)=1_E$. Finally, by the Fundamental Isomorphism Theorem, we have that im$(\varphi)\cong F/\{0\}\cong F$. Thus, there is an isomorphic copy of $F$ in $E$.
+                    \end{solution}
+            \end{enumerate}
+            
+        \item[8.] Assume that $V$ is a vector space over $F$, that $v\in V$ and $a\in F$. Prove the following
+            \begin{enumerate}[label=(\alph*)]
+                \item $0v=0$.
+                    \begin{proof}
+                        Since $0v=(0+0)v=0v+0v$, then subtracting $0v$ from both sides we obtain $0=0v$.
+                    \end{proof}
+                    
+                \item $(-a)v=-(av)$.
+                    \begin{proof}
+                        We have that
+                            \begin{equation*}
+                                \begin{split}
+                                    (-a)v &= (-a)v+0 \\
+                                    &= (-a)v+\big(av-(av)\big) \\
+                                    &= \big((-a)v+av\big)-(av) \\
+                                    &= \big((-a)+a\big)v-(av) \\
+                                    &= 0v-(av) \\
+                                    &= 0-(av) \\
+                                    &= -(av).
+                                \end{split}
+                            \end{equation*}
+                    \end{proof}
+            \end{enumerate}
+        \item[9.] Assume that $\theta\colon\mathbb{Q}\rightarrow\mathbb{R}$ is a ring homomorphism, and that $\theta(\mathbb{Q})\neq 0$. Find, with explanation, the range of $\theta$, and what can be concluded about $\theta$.
+            \begin{solution}
+                Since both $\mathbb{Q}$ and $\mathbb{R}$ are fields, then by problem 3, part (b), we can conclude that $\theta$ is 1-1, $\theta(1)=1$, and the range of $\theta$ is isomorphic to $\mathbb{Q}$. Since $\mathbb{Q}\subseteq\mathbb{R}$, then $\theta$ is the identity map.
+            \end{solution}
+        
+        \item[10.] Assume that $V$ is a vector space over $F$, and that $\{v_1,\dots,v_k\}$ is a linearly dependent subset of $V$, and $v_1\neq 0$. Prove that there exists $i$, $1<i\leq k$, such that $v_i\in\langle\{v_1,\dots,v_{i-1}\}\rangle$.
+            \begin{proof}
+                By the definition of linear independence, there exists $v_1,\dots,v_i\in\{v_1,\dots,v_k\}$ and there exists $a_1,\dots,a_i\in F$, not all zero, such that $a_1v_1+\cdots+a_iv_i=0$. Thus, $v_i=-\frac{a_1}{a_i}v_1-\cdots-\frac{a_{i-1}}{a_i}v_{i-1}\in\langle\{v_1,\dots,v_{i-1}\}\rangle$.
+            \end{proof}
+            
+        \item[11.] Prove that if $w\in\langle v_1,\dots,v_k\rangle$, then $\langle v_1,\dots,v_k\rangle=\langle w,v_1,\dots, v_k\rangle$.
+            \begin{proof}
+                Let $x\in\langle v_1,\dots,v_k\rangle$, then taking $b=0$ we can write
+                    \begin{equation*}
+                        x=bw+\sum\limits_{i=1}^kc_iv_i,
+                    \end{equation*}
+                for $c_1,\dots,c_k\in F$. Thus, $x\in\langle w,v_1\dots,v_k\rangle$. Hence, $\langle v_1,\dots,v_k\rangle\subseteq\langle w,v_1,\dots,v_k\rangle$. Now let $x\in\langle w,v_1,\dots,v_k\rangle$. Then for some $b,c_1,\dots, c_k\in F$, we have that
+                    \begin{equation*}
+                        x=bw+\sum\limits_{i=1}^k c_iv_i.
+                    \end{equation*}
+                However, since $w\in\langle v_1,\dots,v_k\rangle$, then for some $a_1,\dots,a_k\in F$, $w=\sum\limits_{i=1}^k a_iv_i$, thus,
+                    \begin{equation*}
+                        x=\sum\limits_{i=1}^ka_iv_i+\sum\limits_{i=1}^kc_iv_i=\sum\limits_{i=1}^k(a_i+c_i)v_i.
+                    \end{equation*}
+                Thus, $x\in\langle v_1,\dots,v_k\rangle$. This means that, $\langle w,v_1,\dots,v_k\rangle\subseteq\langle v_1,\dots, v_k\rangle$. Therefore, $\langle v_1,\dots,v_k\rangle=\langle w,v_1,\dots,v_k\rangle$.
+            \end{proof}
+            
+        \item[12.] Assume that $\{v_1,\dots,v_n\}$ is a basis for $V$ over $F$, that $v\in V$, and that there exists $a_1,\dots,a_n\in F$, and $b_1,\dots,b_n\in F$ such that 
+            \begin{equation*}
+                v=\sum\limits_{i=1}^n a_iv_i=\sum\limits_{i=1}^nb_iv_i.
+            \end{equation*}
+        Prove that for all $i$, $a_i=b_i$.
+            \begin{proof}
+                By assumption, we have that 
+                    \begin{equation*}
+                        \sum\limits_{i=1}^na_iv_i-\sum\limits_{i=1}^nb_iv_i=\sum\limits_{i=1}^n(a_i-b_i)v_i=0.
+                    \end{equation*}
+                Since $\{v_1,\dots,v_n\}$ is a basis, then this set is linearly independent. Thus, $a_i-b_i=0$ for all $i$. Therefore, $a_i=b_i$ for all $i$.
+            \end{proof}
+            
+        \item[13.] Prove that if $p$ is prime, then each element of $\mathbb{Z}_p$ is a root of $x^p-x$.
+            \begin{proof}
+                Letting $x^p-x=0$, we can factor out an $x$ to obtain $x(x^{p-1}-1)=0$. In MATH 210A, we proved that $\mathbb{Z}_p$ is a field for any prime $p$, thus we are allowed the cancellation property. Hence, $x=0$ or $x^{p-1}-1=0$. The latter is equivalent to $x^{p-1}\equiv 1(\text{mod }p)$. Since $p$ is prime, then for all $x=1,2,\dots, p-1$, the congruence is satisfied. Therefore, all elements of $\mathbb{Z}_p$ are roots of $x^p-x$. 
+            \end{proof}
+    \end{enumerate}
+    
+\end{document}

@@ -1,0 +1,479 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\newenvironment{twoproof}{\tabular{@{\stepproofc}c|l}}{\endtabular}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+
+\begin{document}
+
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        1. & $\forall x\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & A5\\
+        2. & $\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & 1 UI\\
+        3. & $\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & 2 UI\\
+        4. & $\forall u(u\in\{x,y\}\leftrightarrow u=x\vee u=y)$ & 3 EI\\
+        5. & $u\in\{x,y\}\leftrightarrow u=x\vee u=y$ & 4 UI\\
+        6. & $\forall x\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & A5\\
+        7. & $\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & 6 UI\\
+        8. & $\exists z\forall u(u\in z\leftrightarrow u=x\vee u=x)$ & 7 UI\\
+        9. & $\forall u(u\in \{x,x\}\leftrightarrow u=x\vee u=x)$ & 8 EI\\
+        10.& $u\in\{x,x\}\leftrightarrow u=x\vee u=x$ & 9 UI\\
+        11.& $\forall x\forall y(\forall u[u\in x\leftrightarrow u\in y]\rightarrow x=y)$ &       A2\\
+        12.& $\forall y(\forall u[u\in\{x,x\}\leftrightarrow u\in y]\rightarrow \{x,x\}=y)$ &      11 UI\\
+        13.& $\forall u(u\in\{x,x\}\leftrightarrow u\in\{x\})\rightarrow\{x,x\}=\{x\}$ & 12       UI\\
+        14.& $(u\in\{x,x\}\leftrightarrow u\in\{x\})\rightarrow\{x,x\}=\{x\}$ & 13 UI\\
+        15.& To be continued &\\
+         
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\noindent A5: Pair Set Axiom\par
+\noindent A2: Axiom of Extensionality
+
+\newpage
+
+\textbf{Theorem: }\textit{Let $\mathcal{F}$ be a family of sets. Then by the subset axiom, there exists a set $C$}\par\textit{such that}\par
+
+\vspace{4mm}
+
+\centerline{$x\in C\leftrightarrow x\in\bigcup\mathcal{F}\wedge\forall c(c\in\mathcal{F}\rightarrow x\in c)$.}\par
+
+\vspace{4mm}
+
+\textbf{Proof.}
+
+\newgeometry{left=0.5in,bottom=0.1cm}
+
+
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        1. & $\forall x\exists y\forall u(u\in y\leftrightarrow\exists v[v\in x\wedge u\in v])$ & A6\\
+        2. & $\exists y\forall u(u\in y\leftrightarrow\exists v[v\in\mathcal{F}\wedge u\in v])$ & 1 UI\\
+        3. & $\forall u(u\in\bigcup\mathcal{F}\leftrightarrow\exists v[v\in\mathcal{F}\wedge u\in v])$ & 2 EI\\
+        4. & $u\in\bigcup\mathcal{F}\leftrightarrow\exists v(v\in\mathcal{F}\wedge u\in v)$ & 3 UI\\
+        5. & $(u\in\bigcup\mathcal{F}\rightarrow\exists v[v\in\mathcal{F}\wedge u\in v])\wedge(\exists               v[v\in\mathcal{F}\wedge u\in v]\rightarrow u\in\bigcup\mathcal{F})$ & 4 Equiv\\
+        6. & $u\in\bigcup\mathcal{F}\rightarrow\exists v(v\in\mathcal{F}\wedge u\in v)$ & 5 Simp\\
+        7. & $(\exists v[v\in\mathcal{F}\wedge u\in v]\rightarrow u\in\bigcup\mathcal{F})\wedge(u\in\bigcup\mathcal{F}\rightarrow\exists v[v\in\mathcal{F}\wedge u\in v])$      & 5 Com\\
+        8. & $\exists v(v\in\mathcal{F}\wedge u\in v)\rightarrow u\in\bigcup\mathcal{F}$ & 7 Simp\\
+        9. & $\forall x\exists y\forall u[u\in y\leftrightarrow u\in x\wedge p(u)]$ & A7\\
+        10.& $\exists y\forall u[u\in y\leftrightarrow u\in\bigcup\mathcal{F}\wedge p(u)]$ & 9 UI\\
+        11.& $\forall u[u\in C\leftrightarrow u\in\bigcup\mathcal{F}\wedge p(u)]$ & 10 EI\\
+        12.& $x\in C\leftrightarrow x\in\bigcup\mathcal{F}\wedge\forall c(c\in\mathcal{F}\rightarrow x\in c)$ &      11 UI\\
+        13.& $(x\in C\rightarrow x\in\bigcup\mathcal{F}\wedge\forall c[c\in\mathcal{F}\rightarrow x\in               c])\wedge(x\in\bigcup\mathcal{F}\wedge\forall c[c\in\mathcal{F}\rightarrow x\in c]\rightarrow x\in      C)$ &  12 Equiv\\
+        14.& $x\in C\rightarrow x\in\bigcup\mathcal{F}\wedge\forall c(c\in\mathcal{F}\rightarrow x\in c)$ & 13       Simp\\
+        15.& $(x\in\bigcup\mathcal{F}\wedge\forall c[c\in\mathcal{F}\rightarrow x\in c]\rightarrow x\in              C)\wedge(x\in C\rightarrow x\in\bigcup\mathcal{F}\wedge\forall c[c\in\mathcal{F}\rightarrow x\in        c])$ & 13 Com\\
+        16.& $x\in\bigcup\mathcal{F}\wedge\forall c(c\in\mathcal{F}\rightarrow x\in c)\rightarrow x\in C$ & 15       Simp\\
+        17.& $x\in C$ & Assumption\\
+        18.& \hspace{10mm}$x\in\bigcup\mathcal{F}\wedge\forall c(c\in\mathcal{F}\rightarrow x\in c)$ & 16,17         MP\\
+        19.& \hspace{10mm}$x\in\bigcup\mathcal{F}$ & 18 Simp\\
+        20.& \hspace{10mm}$\exists v(v\in\mathcal{F}\wedge x\in v)$ & 6,19 MP\\
+        21.& \hspace{10mm}$\hat{v}\in\mathcal{F}\wedge x\in\hat{v}$ & 20 EI\\
+        22.& \hspace{10mm}$\forall c(c\in\mathcal{F}\rightarrow x\in c)\wedge x\in\bigcup\mathcal{F}$ & 18 Com\\
+        23.& \hspace{10mm}$\forall c(c\in\mathcal{F}\rightarrow x\in c)$ & 22 Simp\\
+        24.& \hspace{10mm}$\hat{v}\in\mathcal{F}\rightarrow x\in\hat{v}$ & 23 EI\\
+        25.& \hspace{10mm}$\hat{v}\notin\mathcal{F}\vee x\in\hat{v}$ & 24 Impl\\
+        26.& \hspace{10mm}$\hat{v}\in\mathcal{F}\wedge x\in\hat{v}\wedge\hat{v}\notin\mathcal{F}\vee                 x\in\hat{v}$ & 21,25 Conj\\
+        27.& \hspace{10mm}$(\hat{v}\in\mathcal{F}\wedge x\in\hat{v})\wedge(\hat{v}\notin\mathcal{F}\vee                x\in\hat{v})$ & 26 Assoc\\
+        28.& \hspace{10mm}$(\hat{v}\in\mathcal{F}\wedge                                                              x\in\hat{v}\wedge\hat{v}\notin\mathcal{F})\vee(\hat{v}\in\mathcal{F}\wedge x\in\hat{v}\wedge            x\in\hat{v})$ & 27 Distr\\
+        29.& \hspace{10mm}$(\hat{v}\in\mathcal{F}\wedge\hat{v}\notin\mathcal{F}\wedge                                x\in\hat{v})\vee(\hat{v}\in\mathcal{F}\wedge x\in\hat{v}\wedge x\in\hat{v})$ & 28 Com\\
+        30.& \hspace{10mm}$([\hat{v}\in\mathcal{F}\wedge\hat{v}\notin\mathcal{F}]\wedge                              x\in\hat{v})\vee(\hat{v}\in\mathcal{F}\wedge x\in\hat{v}\wedge x\in\hat{v})$ & 29 Assoc\\
+        31.& \hspace{10mm}$\hat{v}\in\mathcal{F}\wedge x\in\hat{v}\wedge x\in\hat{v}$ & 30 DS\\
+        32.& \hspace{10mm}$\hat{v}\in\mathcal{F}\wedge(x\in\hat{v}\wedge x\in\hat{v})$ & 31 Assoc\\
+        33.& \hspace{10mm}$(x\in\hat{v}\wedge x\in\hat{v})\wedge\hat{v}\in\mathcal{F}$ & 32 Com\\
+        34.& \hspace{10mm}$x\in\hat{v}\wedge x\in\hat{v}$ & 33 Simp\\
+        35.& \hspace{10mm}$x\in\hat{v}$ & 34 Idem\\
+        36.& \hspace{10mm}$\hat{v}\in\mathcal{F}$ & 32 Simp\\
+        37.& \hspace{10mm}$\hat{v}\in\mathcal{F}\wedge x\in\hat{v}$ & 36,35 Conj\\
+        38.& \hspace{10mm}$\exists v(v\in\mathcal{F}\wedge x\in v)$ & 37 EG\\
+        39.& \hspace{10mm}$x\in\bigcup\mathcal{F}$ & 8,38 MP\\
+        40.& $x\in C\rightarrow x\in\bigcup\mathcal{F}$ & 7-39 DP\\
+        
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\newpage
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        1. & $\forall x\exists y\forall u(u\in y\leftrightarrow\exists v[v\in x\wedge u\in v])$ & A6\\
+        2. & $\exists y\forall u(u\in y\leftrightarrow\exists v[v\in x\wedge u\in v])$ & 1 UI\\
+        3. & $\forall u(u\in\bigcup x\leftrightarrow\exists v[v\in x\wedge u\in v])$ & 2 EI\\
+        4. & $u\in\bigcup x\leftrightarrow\exists v(v\in x\wedge u\in v)$ & 3 UI\\
+        5. & $(u\in\bigcup x\rightarrow\exists v[v\in x\wedge u\in v])\wedge(\exists v[v\in x\wedge u\in             v]\rightarrow u\in\bigcup x)$ & 4 Equiv\\
+        6. & $(\exists v[v\in x\wedge u\in v]\rightarrow u\in\bigcup x)\wedge(u\in\bigcup x\rightarrow\exists        v[v\in x\wedge u\in v)$ & 5 Com\\
+        7. & $u\in\bigcup x\rightarrow\exists v(v\in x\wedge u\in v)$ & 5 Simp\\
+        8. & $\exists v(v\in x\wedge u\in v)\rightarrow u\in\bigcup x$ & 6 Simp\\
+        9. & $\forall x\exists y\forall u(u\in y\leftrightarrow\forall v[v\in x\wedge u\in v])$ & Assumption\\
+        10.& \hspace{10mm}$\exists y\forall u(u\in y\leftrightarrow\forall v[v\in x\wedge u\in v])$ & 9 UI\\
+        11.& \hspace{10mm}$\forall u(u\in\alpha\leftrightarrow\forall v[v\in x\wedge u\in v])$ & 10 EI\\
+        12.& \hspace{10mm}$e\in\alpha\leftrightarrow\forall v(v\in x\wedge e\in v)$ & 11 UI\\
+        13.& \hspace{10mm}$(e\in\alpha\rightarrow\forall v[v\in x\wedge a\in v])\wedge(\forall v[v\in x\wedge        e\in v]\rightarrow e\in\alpha)$ & 12 Equiv\\
+        14.& \hspace{10mm}$(\forall v[v\in x\wedge e\in v]\rightarrow                                                e\in\alpha)\wedge(e\in\alpha\rightarrow\forall v[v\in x\wedge e\in v])$ & 13 Com\\
+        15.& \hspace{10mm}$e\in\alpha\rightarrow\forall v(v\in x\wedge e\in v)$ & 13 Simp\\
+        16.& \hspace{10mm}$\forall v(v\in x\wedge e\in v)\rightarrow e\in\alpha$ & 14 Simp\\
+        17.& \hspace{10mm}$e\in\alpha$ & Assumption\\
+        18.& \hspace{20mm}$\forall v(v\in x\wedge e\in v)$ & 15,17 MP\\
+        19.& \hspace{20mm}$v\in x\wedge e\in v$ & 18 UI\\
+        20.& \hspace{20mm}$\exists v(v\in x\wedge e\in v)$ & 19 EG\\
+        21.& \hspace{20mm}$e\in\bigcup x$ & 8,20 MP\\
+        22.& \hspace{20mm}$v\in x$ & 19 Simp\\
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\restoregeometry
+
+\noindent\textbf{Theorem: }\textit{For any set $x$, if the intersection $\bigcap x$ exists, then $\bigcap x\in\mathcal{P}(\bigcup x)$.}
+
+\vspace{4mm}
+
+\noindent\textbf{Proof.}
+
+
+\begin{table}[h!]
+	\begin{center}
+		\begin{tabular}{ l l  l }
+		\hline
+		
+		1. & $\forall x\exists y\forall u(u\in y\leftrightarrow\exists v[v\in x\wedge u\in v])$ & A6\\
+         	2. & $\exists y\forall u(u\in y\leftrightarrow\exists v[v\in x\wedge u\in v])$ & 1 UI\\
+		3. & $\forall u(u\in\bigcup x\leftrightarrow\exists v[v\in x\wedge u\in v])$ & 2 EI\\
+		4. & $u\in\bigcup x\leftrightarrow\exists v(v\in x\wedge u\in v)$ & 3 UI\\
+		5. & $(u\in\bigcup x\rightarrow\exists v[v\in x\wedge u\in v])\wedge(\exists v[v\in x\wedge u\in v]\rightarrow u\in\bigcup 		          x)$ & 5 Equiv\\
+		6. & $u\in\bigcup x\rightarrow\exists v(v\in x\wedge u\in v)$ & 5 Simp\\
+		7. & $(\exists v[v\in x\wedge u\in v]\rightarrow u\in\bigcup x)\wedge(u\in\bigcup x\rightarrow\exists v[v\in x\wedge u\in     		         v])$ & 5 Com\\
+		8. & $\exists v(v\in x\wedge u\in v)\rightarrow u\in\bigcup x$ & 7 Simp\\
+		9. & $\forall x\exists y\forall u(u\in y\leftrightarrow\forall v[v\in u\rightarrow v\in x])$ & A9\\
+		10.&$\exists y\forall u(u\in y\leftrightarrow\forall v[v\in u\rightarrow v\in\bigcup x)$ & 9 UI\\
+		11.&$\forall u(u\in\mathcal{P}(\bigcup x)\leftrightarrow\forall v[v\in u\rightarrow v\in\bigcup x])$ & 10 EI\\
+		12.&$a\in\mathcal{P}(\bigcup x)\leftrightarrow\forall v(v\in a\rightarrow v\in\bigcup x)$ & 11 UI\\
+		13.&$a\in\mathcal{P}(\bigcup x)\leftrightarrow(v\in a\rightarrow v\in\bigcup x)$ & 12 UI\\
+		14.&$(a\in\mathcal{P}(\bigcup x)\rightarrow[v\in a\rightarrow v\in\bigcup x])\wedge([v\in a\rightarrow v\in\bigcup x]				\rightarrow a\in\mathcal{P}(\bigcup x))$ & 13 Equiv\\
+		15.&$([v\in a\rightarrow v\in\bigcup x]\rightarrow a\in\mathcal{P}(\bigcup x))\wedge(a\in\mathcal{P}(\bigcup x)					\rightarrow[v\in a\rightarrow v\in\bigcup x])$ & 14 Com\\
+		16.&$(v\in a\rightarrow v\in\bigcup x)\rightarrow a\in\mathcal{P}(\bigcup x)$ & 15 Simp\\
+		17.&$\exists n\forall m(m\in n\leftrightarrow\forall k[k\in x\wedge m\in k])$ & Assumption\\
+		18.&\hspace{10mm}$\forall m(m\in\bigcap x\leftrightarrow\forall k[k\in x\wedge m\in k])$ & 17 EI\\
+		19.&\hspace{10mm}$m\in\bigcap x\leftrightarrow\forall k(k\in x\wedge m\in k)$ & 18 UI\\
+		20.&\hspace{10mm}$m\in\bigcap x\leftrightarrow(k\in x\wedge m\in k)$ & 19 UI\\
+		21.&\hspace{10mm}$(m\in\bigcap x\rightarrow[k\in x\wedge m\in k])\wedge([k\in x\wedge m\in k]\rightarrow 					m\in\bigcap x)$ & 20 Equiv\\
+		22.&\hspace{10mm}$m\in\bigcap x\rightarrow(k\in x\wedge m\in k)$ & 21 Simp\\
+		23.&\hspace{10mm}$m\in\bigcap x$ & Assumption\\
+		24.&\hspace{20mm}$k\in x\wedge m\in k$ & 22 MP\\
+		25.&\hspace{20mm}$\exists k(k\in x\wedge m\in k)$ & 24 EG\\
+		26.&\hspace{20mm}$m\in\bigcup x$ & 8,25 MP\\
+		27.&\hspace{10mm}$m\in\bigcap x\rightarrow m\in\bigcup x$ & 23-26 DP\\
+		28.&\hspace{10mm}$\bigcap x\in\mathcal{P}(\bigcup x)$ & 16,27 MP\\
+		29.&\hspace{10mm}$\bigcap x\in\mathcal{P}(\bigcup x)\vee\neg\forall m(m\in\bigcap x\leftrightarrow\forall k[k\in 				x\wedge m\in k])$ & 28 Add\\
+		30.&\hspace{10mm}$\neg\forall m(m\in\bigcap x\leftrightarrow\forall k[k\in x\wedge m\in k])\vee\bigcap x\in\mathcal{P}			(\bigcup x)$ & 29 Com\\
+		31.&\hspace{10mm}$\forall m(m\in\bigcap x\leftrightarrow\forall k[k\in x\wedge m\in k])\rightarrow\bigcap 						x\in\mathcal{P}(\bigcup x)$ & 30 Impl\\
+		32.&\hspace{10mm}$\exists n\forall m(m\in n\leftrightarrow\forall k[k\in x\wedge m\in k])\rightarrow n\in\mathcal{P}				(\bigcup x)$ & 31 EG\\
+		33.&\hspace{10mm}$n\in\mathcal{P}(\bigcup x)$ & 17,32 MP\\
+		34.&$\exists n\forall m(m\in n\leftrightarrow\forall k[k\in x\wedge m\in k])\rightarrow n\in\mathcal{P}(\bigcup x)$ & 				17-33 DP\\
+		35.&$\forall x(\exists n\forall m[m\in n\leftrightarrow\forall k(k\in x\wedge m\in k)]\rightarrow n\in\mathcal{P}(\bigcup x))			$ & 35 UG\\
+			
+		\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\newpage
+
+\noindent Let $x=\{A_1,A_2,A_3\}$. Then we understand the intersection of $x$ as follows. For any set $a$,\par
+
+\vspace{4mm}
+
+\centerline{$a\in\bigcup x\Leftrightarrow (a\in A_1)\wedge a\in(A_2)\wedge(a\in A_3)$.}
+
+\vspace{4mm}
+
+\noindent Now suppose we take the infinity axiom, which tells us that there exists a set $x$ that contains the empty set, such that for each set $u$ from the class of all sets, if $u$ is an element of $x$, then there exists a set $y$ for which $u$ is both an element and subset of. Thus, for any $u\in x$ we must have some $y\in u$, such that $y=\bigcup\{u,\{u\}\}$.
+
+
+
+
+\newpage
+
+\noindent\textbf{Theorem: }\textit{If $x$ is a set, then $\bigcap x$ is a set.}
+
+\vspace{4mm}
+
+\noindent\textbf{Attempt: }\par 
+
+\vspace{4mm}
+
+\noindent We recall that in the intuitive notion of the intersection of a set $x$, we have that for each element $u\in \bigcap x$, there must exists some $w$ that is equal to $u$, which has the property of existing as an element of all the elements $v$ in $x$. In the language of first-order predicate logic, if $x$ is a set then, this can be expressed as\par
+
+\vspace{4mm}
+
+\centerline{$\forall u(u\in\bigcap x\leftrightarrow \exists w\forall v[v\in x\wedge w\in v\wedge u=w])$.}
+
+\vspace{4mm}
+
+\noindent The thinking behind the following approach is that if we have a set $x$ then by (A6). we know there exists a set, denoted $\bigcup x$, whose elements are precisely the elements of the elements of $x$. We also know that by (A9), if $x$ is any set, then there exists a set, denoted $\mathcal{P}(x)$, such that each one of its elements is a subset of $x$ and is in fact the set of \textit{all} subsets of $x$.\par
+
+Since (A6) assures us that $\bigcup x$ is a set, then it is an arbitrary choice from the \textit{class} of all sets for which the quantifier $\forall x$, in (A9), is `defined' to be `taking' sets from. Thus, by (A9), there exists a set $\mathcal{P}(\bigcup x$) whose elements are precisely the subsets of $\bigcup x$. The hypothesis is that if the intersection of a set $x$ is an element of $\mathcal{P}(\bigcup x)$, then it is a subset of $\bigcup x$ and is therefore a set.  To carry out this proof, we need to prove a few useful theorems first.\par
+
+\vspace{4mm}
+
+\newpage
+
+\noindent\textbf{Theorem 1: }$\forall x\forall y(x\neq\varnothing\wedge\exists u[u\in x\wedge u\notin y]\rightarrow x\neq y)$.
+
+\vspace{4mm}
+
+\noindent\textbf{Proof. }
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+            \hline
+            1. & $\forall x\forall y(\forall u[u\in x\leftrightarrow u\in y]\rightarrow x=y)$ & A3\\
+            2. & $\forall y(\forall u[u\in x\leftrightarrow u\in y]\rightarrow x=y)$ & 1 UI\\
+            3. & $\forall u(u\in x\leftrightarrow u\in y)\rightarrow x=y$ & 2 UI\\
+            4. & $(u\in x\leftrightarrow u\in y)\rightarrow x=y$ & 3 UI\\
+            5. & $(u\in x\rightarrow u\notin y)\wedge(u\notin x\rightarrow u\in y)\rightarrow x=y$ & 4 Equiv\\
+            6. & $(u\notin x\vee u\notin y)\wedge(u\in x\vee u\in y)\rightarrow x=y$ & 5 Impl\\
+            7. & $([u\notin x\vee u\notin y]\wedge u\in x)\vee([u\notin x\vee u\notin y]\wedge u\in y)\rightarrow x=y$ & 6 Distr\\
+            8. & $(u\in x\wedge[u\notin x\vee u\notin y])\vee(u\in y\wedge[u\notin x\vee u\notin y])\rightarrow x=y$ & 7 Com\\
+            9. & $([u\in x\wedge u\notin x]\vee[u\in x\wedge u\notin y]\vee[u\in y\wedge u\notin x]\vee[u\in y\wedge u\notin y])\rightarrow x=y$ & 9 Distr\\
+            10.& $([u\in x\wedge u\notin x]\vee[u\in y\wedge u\notin y]\vee[u\in x\wedge u\notin y]\vee[u\in y\wedge u\notin x])\rightarrow x=y$ & 10 Com\\
+            11.& $([(u\in x\wedge u\notin x)\vee(u\in y\wedge u\notin y)]\vee[u\in x\wedge u\notin y\vee u\notin x\vee u\in y]\rightarrow x=y$ & 11 Assoc\\
+            12.& $(u\in x\wedge u\notin y\vee u\notin x\wedge u\in y)\rightarrow x=y$ & 11 DS\\
+            13.& $x\neq y\rightarrow\neg(u\in x\wedge u\notin y\vee u\notin x\wedge u\in y)$ & 12 Contra\\
+            14.& $x\neq y\rightarrow(u\notin x\vee u\in y\wedge u\in x\vee u\notin y)$ & 13 DeM\\
+            15.& $x\neq y\rightarrow(u\in x\wedge u\notin x\vee u\in x\wedge u\notin y\vee u\in y\wedge u\notin y\vee u\in y\wedge u\notin x)$ & 14 Distr\\
+            16.& $x\neq y\rightarrow(u\in x\wedge u\notin y\vee u\notin x\wedge u\in y)$ & 15 DS\\
+            17.& I have failed. & \\
+            
+            
+             \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+
+\noindent\textbf{Theorem 2: }$x\neq\varnothing\rightarrow\bigcup x\neq\varnothing$\par
+
+\newpage
+
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{l l l}
+      \hline
+      1. & $x\neq\varnothing$ & Given\\
+      2. & $\exists y\forall u(u\in y\leftrightarrow \exists v[v\in x\wedge u\in v])$  & 1 A6\\
+      3. & $\forall u(u\in\bigcup x\leftrightarrow\exists v[v\in x\wedge u\in v])$ & 2 EI\\
+      4. & $u\in\bigcup x\leftrightarrow\exists v[v\in x\wedge u\in v]$ & 3 UI\\
+      5. & $(u\in\bigcup x\rightarrow\exists v[v\in x\wedge u\in v])\wedge(\exists v[v\in x\wedge u\in v]\rightarrow u\in\bigcup x)$& 4 Equiv\\
+      6. & $(\exists v[v\in x\wedge u\in v]\rightarrow u\in\bigcup x)\wedge(u\in\bigcup x\rightarrow\exists v[v\in x\wedge u\in v])$ & 5 Com\\
+      7. & $\exists v[v\in x\wedge u\in v]\rightarrow u\in\bigcup x$ & 6 Simp\\
+      8. & $u\notin\bigcup x$ & Assumption\\ 
+      9. & \hspace{10mm}$\neg\exists v(v\in x\wedge u\in v)$ & 7,8 MT\\
+      10.& \hspace{10mm}$\forall v\neg(v\in x\wedge u\in v)$ & 9 QN\\
+      11.& \hspace{10mm}$\forall v(v\notin x\vee u\notin v)$ & 10 DeM\\ 
+      12.& \hspace{10mm}$v\notin x\vee u\notin v$ & 11 UI\\
+      13.& \hspace{10mm}$v\notin x$ & Assumption\\
+      14.& \hspace{20mm}$\exists x\forall y(y\notin x)$ & A1\\
+      15.& \hspace{20mm}$\forall y(y\notin\varnothing)$ & 14 EI\\
+      16.& \hspace{20mm}$v\notin\varnothing$ & 15 UI\\
+      17.& \hspace{20mm}$v\notin x\vee v\in\varnothing$ & 13 Add\\
+      18.& \hspace{20mm}$v\in x\rightarrow v\in\varnothing$ & 17 Impl\\
+      19.& \hspace{20mm}$v\notin\varnothing\vee v\in x$ & 18 Add\\
+      20.& \hspace{20mm}$v\in\varnothing\rightarrow v\in x$ & 19 Impl\\
+      21.& \hspace{20mm}$(v\in x\rightarrow v\in\varnothing)\wedge(v\in\varnothing\rightarrow v\in x)$ & 18,20 Conj\\
+      22.& \hspace{20mm}$v\in x\leftrightarrow v\in\varnothing$ & 21 Equiv\\
+      23.& \hspace{20mm}$\forall v(v\in x\leftrightarrow v\in\varnothing)$ & 22 UG\\
+      24.& \hspace{20mm}$x=\varnothing$ & 23 A3\\
+      25.& \hspace{20mm}$x\neq\varnothing\wedge x=\varnothing$ & 1,24 Conj\\
+      26.& \hspace{10mm}$\neg(v\notin x)$ & 13-25 IP\\
+      27.& \hspace{10mm}$u\notin v$ & 26,12 DS\\
+      28.& \hspace{10mm}$\exists x\forall y(y\notin x)$ & A1\\
+      29.& \hspace{10mm}$\forall y(y\notin\varnothing)$ & 28 EI\\
+      30.& \hspace{10mm}$u\notin\varnothing$ & 29 UI\\
+      31.& \hspace{10mm}$u\notin v\vee u\in\varnothing$ & 27 Add\\
+      32.& \hspace{10mm}$u\in v\rightarrow u\in\varnothing$ & 31 Impl\\
+      33.& \hspace{10mm}$u\notin\varnothing\vee u\in v$ & 30 Add\\
+      34.& \hspace{10mm}$u\in\varnothing\rightarrow u\in v$ & 33 Impl\\
+      35.& \hspace{10mm}$(u\in v\rightarrow u\in\varnothing)\wedge(u\in\varnothing\rightarrow u\in v)$ & 32,34 Conj\\
+      36.& \hspace{10mm}$u\in v\leftrightarrow u\in\varnothing$ & 35 Equiv\\
+      37.& \hspace{10mm}$\forall u(u\in v\leftrightarrow u\in\varnothing)$ & 36 UG\\
+      38.& \hspace{10mm}$v=\varnothing$ & 37 A6\\
+      39.& \hspace{10mm}$v\in x$ & 26 DN\\
+      40.& $u\notin\bigcup x\rightarrow x\neq\varnothing$ & 8-38 DP\\
+     
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\newpage
+
+\noindent In order to begin to discuss binary relations and functions, we first must develop a clear understanding of what an ordered pair is in the language of ZFC. Consider the ordered pairs $(a, b)$ and $(c, d)$. We know from experience that $(a,b)=(c,d)\Leftrightarrow a=c\wedge b=d$. Since the only objects in set theory are sets then we must find some type of set that models this behavior. A first guess might be $\{a,b\}$ but we know from extensionality that $\{a,b\}=\{b,a\}$ and so this set is not ordered in the way we need and is not what we are looking for.\par
+
+\vspace{4mm}
+
+\noindent Consider instead the following definition:\par
+
+\vspace{4mm}
+
+\centerline{$(a,b):=\{\{a\},\{a,b\}\}$.}
+
+\vspace{4mm}
+
+\noindent Let us check to see if this definition satisfies the property we need.
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        1. & $\forall x\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & A5\\
+        2. & $\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & 1 UI\\
+        3. & $\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & 2 UI\\
+        4. & $\forall u(u\in\{x,y\}\leftrightarrow u=x\vee u=y)$ & 3 EI\\
+        5. & $u\in\{x,y\}\leftrightarrow u=x\vee u=y$ & 4 UI\\
+        6. & $\forall x\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & A5\\
+        7. & $\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & 6 UI\\
+        8. & $\exists z\forall u(u\in z\leftrightarrow u=x\vee u=x)$ & 7 UI\\
+        9. & $\forall u(u\in \{x,x\}\leftrightarrow u=x\vee u=x)$ & 8 EI\\
+        10.& $u\in\{x,x\}\leftrightarrow u=x\vee u=x$ & 9 UI\\
+        11.& $\forall x\forall y(\forall u[u\in x\leftrightarrow u\in y]\rightarrow x=y)$ &       A2\\
+        12.& $\forall y(\forall u[u\in\{x,x\}\leftrightarrow u\in y]\rightarrow \{x,x\}=y)$ &      11 UI\\
+        13.& $\forall u(u\in\{x,x\}\leftrightarrow u\in\{x\})\rightarrow\{x,x\}=\{x\}$ & 12       UI\\
+        14.& $(u\in\{x,x\}\leftrightarrow u\in\{x\})\rightarrow\{x,x\}=\{x\}$ & 13 UI\\
+        15.& To be continued &\\
+         
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\newpage
+
+\noindent\textbf{Theorem: }\textit{If $x$ and $y$ are sets, then $\{\{x\},\{x,y\}\}$ is a set.}
+
+\vspace{4mm}
+
+\noindent\textbf{Proof.}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+
+         1. & $\forall x\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & A5\\
+         2. & $\forall y\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & 1 UI\\
+         3. & $\exists z\forall u(u\in z\leftrightarrow u=x\vee u=y)$ & 2 UI\\
+         4. & $\forall u(u\in\{x,y\}\leftrightarrow u=x\vee u=y)$ & 3 EI\\
+         5. & $u\in\{x,y\}\leftrightarrow u=x\vee u=y$ & 4 UI\\
+         6. & $(u\in\{x,y\}\rightarrow u=x\vee u=y)\wedge(u=x\vee u=y\rightarrow                  u\in\{x,y\})$ & 5 Equiv\\
+         7. & $(u=x\vee u=y\rightarrow u\in\{x,y\})\wedge(u\in\{x,y\}\rightarrow u=x\vee          u=y)$ & 6 Com\\
+         8. & $u\in\{x,y\}\rightarrow u=x\vee u=y$ & 6 Simp\\
+         9. & $u=x\vee u=y\rightarrow u\in\{x,y\}$ & 7 Simp\\
+         10.& $\exists z\forall u(u\in z\leftrightarrow u=x\vee u=x)$ & 2 UI\\
+         
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\newpage
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        1. & $\{\{x\},\{x,y\}\}=\{\{u\},\{u,v\}\}$ & Assumption\\
+
+        
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\end{document}
+
+
+
+
+
+
+
+
+In Michael O'Leary's book A First Course in Mathematical Logic and Set theory he derives the intersection of a set from the Subset Axiom (Axiom Schema of Separation) and gives the following definition:
+
+"Let $\mathcal{F}$ be a set. By a subset axiom, there exists a $C$ such that
+
+$x\in C\leftrightarrow x\in\bigcup\mathcal{F}\wedge\forall c(c\in\mathcal{F}\rightarrow x\in c)$"
+
+My question is about the conditional $\forall c(c\in\mathcal{F}\rightarrow x\in c)$. When read aloud this definition makes sense, however stating $\forall c(c\in\mathcal{F}\wedge x\in c)$ also makes sense. What would $C$ contain if the implication was exchanged for a conjunction?

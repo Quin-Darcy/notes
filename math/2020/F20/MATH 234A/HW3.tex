@@ -1,0 +1,342 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 234A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 234A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 10/24/20   \\
+{ \textbf{Instructor:}}\ Dr. Bin Lu \hspace{\fill} \textbf{Assignment:} Homework 3 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item Let $f$ be holomorphic on an open set $U$ which is the interior of a disc or rectangle. Let $\gamma\colon[0,1]\rightarrow U$ be a $C^1$ curve satisfying $\gamma(0)=\gamma(1)$. Prove that 
+            \begin{equation*}
+                \oint_{\gamma}f(z)dz = 0.
+            \end{equation*}
+            \begin{proof}
+                By Theorem 1.5.3, $f$ has a primitive $F\colon U\rightarrow\mathbb{C}$. Thus 
+                    \begin{equation*}
+                        \oint_{\gamma}f(z)dz=\oint_{\gamma}\frac{\partial F}{\partial z}(z)dz=F(\gamma(1))-F(\gamma(0)).
+                    \end{equation*}
+                Since $\gamma(1)=\gamma(0)$, then $F(\gamma(1))-F(\gamma(0))=0$.
+            \end{proof}
+        \item Let $f$ be holomorphic on an open set $U$ which is the interior of a disc or a rectangle. Let $p,q\in U$. Let $\gamma_j\colon[a,b]\rightarrow U$, $j=1,2,$ be $C^1$ curves such that $\gamma_j(a)=p$, $\gamma_j(b)=q$, $j=1,2$. Show that 
+            \begin{equation*}
+                \oint_{\gamma_1}fdz=\oint_{\gamma_2}fdz.
+            \end{equation*}
+            \begin{proof}
+                Since $f$ is holomorphic on $U$, there exists a holomorphic function $F\colon U\rightarrow\mathbb{C}$ such that $\frac{\partial F}{\partial z}\equiv f$ on $U$. Moreover since $F$ is holomorphic on $U$ then 
+                    \begin{equation*}
+                        \oint_{\gamma_1}fdz=\oint_{\gamma_1}\frac{\partial F}{\partial z}dz =F(\gamma_1(b))-F(\gamma_1(a))=F(q)-F(p)
+                    \end{equation*}
+                and 
+                    \begin{equation*}
+                        \oint_{\gamma_2}fdz=\oint_{\gamma_2}\frac{\partial F}{\partial z}dz =F(\gamma_2(b))-F(\gamma_2(a))=F(q)-F(p).
+                    \end{equation*}
+                Hence
+                    \begin{equation*}
+                        \oint_{\gamma_1}fdz=F(q)-F(p)=\oint_{\gamma_2}fdz.
+                    \end{equation*}
+            \end{proof}
+        \item Let $U\subseteq\mathbb{C}$ be an open disc with center 0. Let $f$ be holomorphic on $U$. If $z\in U$, then define $\gamma_z$ to be the path 
+            \begin{equation*}
+                \gamma_z(t)=tz,\quad 0\leq t\leq 1.
+            \end{equation*}
+        Define 
+        \begin{equation*}
+            F(z)=\oint_{\gamma_z}f(\zeta)d\zeta.
+        \end{equation*}
+        Prove that $F$ is a holomorphic antiderivative for $f$.
+            \begin{proof}
+                Since $f$ is holomorphic on $U$ then there exists a holomorphic function $H\colon U\rightarrow\mathbb{C}$ such that $\frac{\partial H}{\partial z}\equiv f$ on $U$. Thus 
+                    \begin{equation*}
+                        F(z)=\oint_{\gamma_z}f(\zeta)d\zeta=\oint_{\gamma_z}\frac{\partial H}{\partial\zeta}d\zeta=H(\gamma_z(1))-H(\gamma_z(0))=H(z)-H(0).
+                    \end{equation*}
+                Since $H(0)$ is a constant, then let $C=-H(0)$. Thus $F(z)=H(z)+C$. Now note that 
+                    \begin{equation*}
+                        \frac{\partial F}{\partial\overline{z}}=\frac{\partial}{\partial\overline{z}}(H+C)=\frac{\partial H}{\partial\overline{z}}=0
+                    \end{equation*}
+                where the last equality holds since $H$ is holomorphic. Thus $F$ is holomorphic. Finally, observe that
+                    \begin{equation*}
+                        \frac{\partial F}{\partial z}=\frac{\partial H}{\partial z}=f
+                    \end{equation*}    
+                and so $F$ is an antiderivative of $f$.
+            \end{proof}
+        \item Compute the following complex line integrals.\hfill\par 
+            \begin{enumerate}
+                \item \( \displaystyle \oint_{\gamma}\frac{1}{z}dz \) where $\gamma$ is the unit circle with counter-clockwise orientation.
+                    \begin{solution}
+                        Let $\gamma_1(t)=e^{it}$ where $-\pi/2\leq y\leq\pi/2$ and $\gamma_2(t)=e^{it}$ with $\pi/2\leq t\leq3\pi/2$. Then clearly $\gamma=\gamma_1+\gamma_2$. Then 
+                            \begin{equation*}
+                                \oint_{\gamma_1}\frac{1}{z}dz=\text{Log}(z)\bigg|_{-i}^{i}=\text{Log}(i)-\text{Log}(-i)=(\ln 1+i\frac{\pi}{2})-(\ln 1-i\frac{\pi}{2})=i\pi.
+                            \end{equation*}    
+                        Similarly, 
+                            \begin{equation*}
+                                \oint_{\gamma_2}\frac{1}{z}dz=\text{Log}(z)\bigg|_{i}^{-i}=\text{Log}(-i)-\text{Log}(i)=(\ln 1+i\frac{\pi}{2})-(\ln 1+\frac{\pi}{2})=i\pi.
+                            \end{equation*}
+                        Thus
+                            \begin{equation*}
+                                \oint_{\gamma}\frac{1}{z}dz=\oint_{\gamma_1}\frac{1}{z}dz+\oint_{\gamma_2}\frac{1}{z}dz=2\pi i
+                            \end{equation*}
+                    \end{solution}
+                \item \( \displaystyle\oint_{\gamma}\overline{z}+z^2\overline{z}dz \) where $\gamma$ is the unit square [side 2, center (0,0)] with clockwise orientation.
+                    \begin{solution}
+                        Letting $C_1=-1-i+t$, $C_2=1-i+ti$, $C_3=1+i-t$, $C_4=-1+i-it$ with $0\leq t\leq 2$, then 
+                            \begin{equation*}
+                                \begin{split}
+                                    \oint_{\gamma}\overline{z}+z^2\overline{z}dz &= \int_{C_1}\overline{z}+z^2\overline{z}dz+\oint_{C_2}\overline{z}+z^2\overline{z}dz+\oint_{C_3}\overline{z}+z^2\overline{z}dz+\oint_{C_2}\overline{z}+z^2\overline{z}dz \\
+                                    &= 
+                                \end{split}
+                            \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+        \item Evaluate $\oint_{\gamma}z^jdz$ for every integer value of $j$, where $\gamma$ is a circle with counterclockwise orientation and whose interior contains 0.
+            \begin{solution}
+                Letting $\gamma(\theta)=e^{i\theta}$ where $0\leq\theta\leq 2\pi$, then $\gamma'(\theta)=ie^{i\theta}$. Then we have that for all $j\geq 0$, $z^j$ is continuous everywhere. Whereas for $j<0$, $z^j$ is continuous everywhere but 0. Thus
+                    \begin{equation*}
+                        \oint_{\gamma}z^jdz=\int_{0}^{2\pi}ie^{i(j+1)\theta}d\theta=\frac{e^{i(j+1)\theta}}{j+1}\bigg|_{0}^{2\pi}.
+                    \end{equation*}
+                The final expression then equals 0 for all $j\neq 0$.
+            \end{solution}
+        \item[7.] Derive a formula for the partial sums $S_N$ of this geometric series $\sum_{j=0}^{\infty}\alpha^j$, where $\alpha$ is a fixed complex number not equal to 1. In case $\abs{\alpha}<1$ derive a formula for the sum of the full series.
+            \begin{solution}
+                If $S=1+z+\cdots+z^j$, then 
+                    \begin{equation*}
+                        S-\alpha S=(1+\alpha+\cdots+\alpha^j)-(\alpha+\alpha^2+\cdots+\alpha^{j+1})=1-\alpha^{j+1}
+                    \end{equation*}
+                and thus 
+                    \begin{equation*}
+                        S=\frac{1-\alpha^{j+1}}{1-\alpha}.
+                    \end{equation*}
+                So then if $\abs{\alpha}>1$, then the partial sum $S_N$ can be written as
+                    \begin{equation*}
+                        S_N(\alpha)=\frac{1-\alpha^N}{1-\alpha}.
+                    \end{equation*}
+                If $\abs{\alpha}<1$, then we note that $\lim_{j\rightarrow\infty}\alpha^j=0$ and so in the case that $\abs{\alpha}<1$, we have that 
+                    \begin{equation*}
+                        \sum_{j=0}^{\infty}\alpha^j=\frac{1}{1-\alpha}.
+                    \end{equation*}
+            \end{solution}
+        \item[18.] Compute each of the following complex line integrals.
+            \begin{enumerate}
+                \item \( \displaystyle\oint_{\gamma}\frac{\zeta^2}{\zeta-1}d\zeta \) where $\gamma$ describes the circle of radius 3 with center 0 and counterclockwise orientation;
+                    \begin{solution}
+                        Let $\gamma(\theta)=3e^{i\theta}$ with $\theta\in[0,2\pi]$, then $\gamma'(\theta)=3ie^{i\theta}$. Additionally, we can write
+                            \begin{equation*}
+                                \frac{\zeta^2}{\zeta-1}=\frac{\zeta^2-1+1}{\zeta-1}=\frac{(\zeta-1)(\zeta+1)+1}{\zeta-1}=\zeta+1+\frac{1}{\zeta-1}.
+                            \end{equation*}
+                        We also note that with $\theta\in(0,2\pi)$, $\frac{1}{\zeta-1}$ has an antiderivative of $\log(\zeta-1)$.
+                            \begin{equation*}
+                                \begin{split}
+                                    \oint_{\gamma}\frac{\zeta^2}{\zeta-1}d\zeta &= \oint_{\gamma}\zeta+1d\zeta+\oint_{\gamma}\frac{1}{\zeta-1}d\zeta \\
+                                    &=\int_{0}^{2\pi}9ie^{2i\theta}+3ie^{i\theta}d\theta+\int_{\varepsilon}^{2\pi-\varepsilon}\frac{3ie^{i\theta}}{3e^{i\theta}-1}d\theta \\
+                                    &=\frac{9}{2}e^{2i\theta}\bigg|_{0}^{2\pi}+\log(3e^{i\theta})\bigg|_{\varepsilon}^{2\pi-\varepsilon} \\
+                                    &= \lim_{\varepsilon\rightarrow 0}(\log(3e^{i(2\pi-\varepsilon)})-\log(3e^{i\varepsilon})) \\
+                                    &= 2\pi i.
+                                \end{split}
+                            \end{equation*}
+                    \end{solution}\newpage
+                \item \( \displaystyle \oint_{\gamma}\frac{\zeta}{(\zeta+4)(\zeta-1+i)}d\zeta \) where $\gamma$ describes the circle of radius 1 with center 0 and counterclockwise orientation.
+                    \begin{solution}
+                        We note that the function within the integrand has two singularities, at $\zeta=-4$ and $\zeta=1-i$. Both of these fall outside of the contour and so $f$ is holomorphic on and in the closed path. Therefore, by Cauchy's Theorem 
+                            \begin{equation*}
+                                \oint_{\gamma}\frac{\zeta}{(\zeta+4)(\zeta-1+i)}d\zeta = 0.
+                            \end{equation*}
+                    \end{solution}
+                \item \( \displaystyle\oint_{\gamma}\frac{1}{\zeta+2}d\zeta \) where $\gamma$ is a circle with radius 5 centered at 0 with clockwise orientation.
+                    \begin{solution}
+                        Let $\gamma(\theta)=5e^{i\theta}$, with $\theta\in[0,2\pi]$. Then we get that
+                            \begin{equation*}
+                                \oint_{\gamma}\frac{1}{\zeta+2}d\zeta=\int_{2\pi}^{0}\frac{5ie^{i\theta}}{5e^{i\theta}+2}d\theta=\log(5e^{i\theta}+2)\bigg|_{2\pi}^{0}=-\log(\frac{7}{7})=-2\pi i.
+                            \end{equation*}
+                    \end{solution}
+                \item \( \displaystyle\oint_{\gamma}\zeta(\zeta+4)d\zeta \) where $\gamma$ is the circle of radius 2 and center 0 with clockwise orientation.
+                    \begin{solution}
+                        Letting $\gamma(\theta)=2e^{i\theta}$ with $2\pi\leq\theta\leq 0$, then we get
+                            \begin{equation*}
+                                \begin{split}
+                                    \oint_{\gamma}\zeta(\zeta+4)d\zeta&=\int_{2\pi}^{0}(4e^{2i\theta}+4e^{i\theta})2ie^{i\theta}d\theta \\
+                                    &=\int_{2\pi}^{0}8ie^{3i\theta}+8ie^{2i\theta}d\theta \\
+                                    &= \frac{8}{3}e^{3i\theta}+4e^{2i\theta}\bigg|_{2\pi}^{0} \\
+                                    &= (\frac{8}{3}+4)-(\frac{8}{3}+4) \\
+                                    &= 0.
+                                \end{split}
+                            \end{equation*}
+                    \end{solution}
+                \item \( \displaystyle \oint_{\gamma}\overline{\zeta}d\zeta \) where $\gamma$ is the circle of radius 1 and center 0 with counterclockwise orientation.
+                    \begin{solution}
+                        Letting $\gamma(\theta)=e^{i\theta}$ with $0\leq\theta\leq 2\pi$, then 
+                            \begin{equation*}
+                                \begin{split}
+                                    \oint_{\gamma}\overline{\zeta}d\zeta&=\int_{0}^{2\pi}e^{-i\theta}\cdot ie^{i\theta}d\theta \\
+                                    &=\int_{0}^{2\pi} id\theta \\
+                                    &= i\theta\bigg|_{0}^{2\pi} \\
+                                    &= 2\pi i.
+                                \end{split}
+                            \end{equation*}
+                    \end{solution}\newpage
+                \item \( \displaystyle \oint_{\gamma}\frac{\zeta(\zeta+3)}{(\zeta+i)(\zeta-8)}d\zeta \) where $\gamma$ is the circle with center $2+i$ and radius 3 with clockwise orientation.
+                    \begin{solution}
+                        We begin by noting that we have two singularities: at $\zeta=-i$ and $\zeta=8$. However, $\gamma$ is only enclosing one of them, namely $\zeta=-i$. Thus we will let $f(\zeta)=\zeta(\zeta+3)/(\zeta-8)$. Then by Cauchy's Integral Formula we have that 
+                            \begin{equation*}
+                                2\pi if(-i)=\oint_{\gamma}\frac{\frac{\zeta(\zeta+3)}{\zeta-8}}{\zeta-(-i)}d\zeta=\frac{-1-3i}{-8-i}=-2\pi i\bigg(\frac{11}{65}+\frac{23}{65}i\bigg).
+                            \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+        \item[19.] Suppose that $U\subseteq\mathbb{C}$ is an open set. Let $F\in C^0(U)$. Suppose that for every $\overline{D}(z,r)\subseteq U$ and $\gamma$ the curve surrounding the disc and all $w\in D(z,r)$ it holds that 
+            \begin{equation*}
+                F(w)=\frac{1}{2\pi i}\oint_{\gamma}\frac{F(\zeta)}{\zeta-w}d\zeta.
+            \end{equation*}
+            Prove that $F$ is holomorphic.
+                \begin{proof}
+                    To prove that $F(w)$ is holomorphic, we need to show that $\partial F/\partial\overline{w}=0$. Differentiating the formula we get that 
+                        \begin{equation*}
+                            \frac{\partial}{\partial\overline{w}}F(w)=\frac{1}{2\pi i}\oint_{\gamma}\frac{\partial}{\partial\overline{w}}\bigg(\frac{F(\zeta)}{\zeta-w}\bigg)d\zeta=\frac{1}{2\pi i}\oint_{\gamma}0d\zeta=0.
+                        \end{equation*}
+                    Therefore $F$ is holomorphic.
+                \end{proof}
+        \item[21.] Let $f$ be a continuous function on $\{z\colon \abs{z}=1\}$. Define, with $\gamma=$ the unit circle traversed counterclockwise, 
+            \begin{align*}
+                F(z)&=\begin{cases} f(z) & \text{if}\quad \abs{z}=1 \\ \displaystyle\frac{1}{2\pi i}\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}d\zeta  &\text{if}\quad\abs{z}<1. \end{cases}
+            \end{align*}
+            Is $F$ continuous on $\overline{D}(0,1)$?
+            \begin{solution}
+                Let $z_0\in\overline{D}(0,1)$. Then if $\abs{z_0}=1$, $F(z_0)=f(z_0)$ which is continuous at that point by definition. If $\abs{z_0}<1$, then we need to show that for all $\varepsilon>0$, there exists $\delta>0$ such that if $\abs{z-z_0}<\delta$, then 
+                    \begin{equation*}
+                        \abs{F(z)-F(z_0)}<\varepsilon.
+                    \end{equation*}
+                However, for $z_0=1$, we can find some $\delta>0$ such that if $\abs{z-z_0}<\delta$, then not all $z$ satisfy $\abs{f(z)-f(z_0)}<\varepsilon$, for some $\varepsilon>0$ and thus $\abs{F(z)-F(z_0)}>\varepsilon$ for some $\abs{z-z_0}<\delta$ and therefore $F(z)$ is not continuous.
+            \end{solution}
+        \item[25.] 
+            \begin{enumerate}
+                \item Let $\gamma$ be the boundary curve of the unit disc, equipped with counterclockwise orientation. Give an example of a $C^1$ function $f$ on a neighborhood $\overline{D}(0,1)$ such that
+                    \begin{equation*}
+                        \oint_{\gamma}f(\zeta)d\zeta = 0,
+                    \end{equation*}
+                but such that $f$ is not holomorphic on any open set,
+                    \begin{solution}
+                        Let $f(\zeta)=\abs{\zeta}$. Then if $\gamma(t)=e^{it}$ for $0\leq t\leq 2\pi$, then 
+                            \begin{equation*}
+                                \oint_{\gamma}f(\zeta)d\zeta =\int_{0}^{2\pi}\abs{e^{it}}ie^{it}dt = i\int_{0}^{2\pi}e^{it}dt = 0.
+                            \end{equation*}
+                        However since $f(\zeta)=\abs{z}=\sqrt{x^2+y^2}$, then 
+                            \begin{equation*}
+                                \frac{\partial v}{\partial x}=0;\quad \frac{\partial u}{\partial y}=\frac{y}{\sqrt{x^2+y^2}};\quad\frac{\partial v}{\partial y}=0;\quad \frac{\partial u}{\partial x}=\frac{x}{\sqrt{x^2+y^2}}.
+                            \end{equation*}
+                        Therefore, for $\abs{z}>0$ the Cauchy-Riemann equations are not satisfied and $f$ is not holomorphic.
+                    \end{solution}
+                \item Suppose that $f$ is a continuous function on the disc $D(0,1)$ and satisfies 
+                    \begin{equation*}
+                        \oint_{\partial D(0,r)}f(\zeta)d\zeta =0
+                    \end{equation*}
+                for all $0<r<1$. Must $f$ be holomorphic on $D(0,1)$.
+                    \begin{solution}
+                        No. The example given in (a) with $f(\zeta)=\abs{\zeta}$ is continuous everywhere but it is not holomorphic on $D(0,1)$.
+                    \end{solution}
+            \end{enumerate}
+        \item[27.] Let $\gamma$ be the curve describing the boundary of the unit box with counterclockwise. Calculate explicitly that 
+            \begin{equation*}
+                \oint_{\gamma}z^kdz=0
+            \end{equation*}
+        if $k$ is an integer unequal to -1.
+            \begin{solution}
+                Letting $C_1(t)=-1-i+t$, $C_2(t)=1-i+ti$, $C_3(t)=1+i-t$, $C_4(t)=-1+i-it$ with $0\leq t\leq 2$, then $C_1'(t)=1,C_2'(t)=i,C_3'(t)=-1,C_4'(t)=-i$. Thus 
+                    \begin{equation*}
+                        \begin{split}
+                            \oint_{\gamma}z^kdz&=\oint_{C_1}z^kdz+\oint_{C_2}z^kdz+\oint_{C_3}z^kdz+\oint_{C_4}z^kdz \\
+                            &=\int_{0}^{2}(-1-i+t)^kdt+\int_{0}^{2}(i+1-t)^kdt+\int_{0}^{2}(-1-i+t)^kdt+\int_{0}^{2}(i+1-t)^kdt \\
+                            &= 2\int_{0}^{2}(-1+t-i)^kdt+2\int_{0}^{2}(1-t+i)^kdt \\
+                            &= 2\frac{(1-i)^{k+1}-(-1-i)^{k+1}}{k+1}+2\frac{(1+i)^{k+1}-(-1+i)^{k+1}}{k+1} \\ 
+                            &=2\bigg(\frac{(1-i)^{k+1}-(-1-i)^{k+1}+(1+i)^{k+1}-(-1+i)^{k+1}}{k+1}\bigg).
+                        \end{split}
+                    \end{equation*}
+            \end{solution}
+    \end{enumerate}
+\end{document}

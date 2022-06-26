@@ -1,0 +1,249 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 296B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 4/28/20   \\
+{ \textbf{Instructor:}}\ Dr. Pigno \hspace{\fill} \textbf{Assignment:} Homework 6 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item[2.] Prove that if $(n,k)=1$, then $n\mid\binom{n}{k}$.
+            \begin{proof}
+                Assume that $(n,k)=1$. Then 
+                    \[
+                        \binom{n}{k}=\frac{n!}{k!(n-k)!}.
+                    \]
+                Additionally, since $(n,k)=1$, then there is no cancellation that occurs with $\frac{n!}{k!}$. Moreover, since $(n-k)!=(n-k)(n-k-1)\cdots2\cdot1$, then 
+                    \begin{equation*}
+                        \begin{split}
+                            \binom{n}{k}&=\frac{n!}{k!(n-k)!}\\&=\frac{n\cdot(n-1)\cdots(n-k)(n-k-1)\cdots2\cdot1}{k!(n-k)(n-k-1)\cdots2\cdot1}\\&=\frac{n\cdot(n-1)\cdots(n-k+1)}{k!}. 
+                        \end{split}
+                    \end{equation*}
+                Since $n\mid n(n-1)\cdots(n-k+1)$, then $n\mid\binom{n}{k}$.
+            \end{proof}
+        \item[3.]\hfill\par
+            \begin{enumerate}
+                \item Prove that $\sigma(p^e)\geq p^e(1+\frac{1}{p})$.
+                    \begin{proof}
+                        Given that $\sigma(n)$ denotes the sum of the positive divisors of $n$, then we have that for $p^e$, then divisors are:
+                            \begin{equation*}
+                                1, p, p^2,\dots, p^e,
+                            \end{equation*}
+                        and so
+                            \begin{equation*}
+                                \sigma(p^e)=1+p+p^2+\cdots+p^e=p^e(\frac{1}{p^e}+\frac{1}{p^{e-1}}+\cdots+\frac{1}{p}+1).
+                            \end{equation*}
+                        Thus, since
+                            \begin{equation*}
+                                (1+\frac{1}{p})\leq (1+\frac{1}{p}+\cdots+\frac{1}{p^{e-1}}+\frac{1}{p^e})
+                            \end{equation*}
+                        then $\sigma(p^e)\geq p^e(1+\frac{1}{p})$.
+                    \end{proof}
+                \item Prove that for any $n\in\mathbb{N}$
+                    \begin{equation*}
+                        \phi(n)+\sigma(n)\geq 2n.
+                    \end{equation*}
+                    \begin{proof}
+                        Let $n\in\mathbb{N}$ with $n=p_1^{e_1}\cdots p_s^{e_s}$. Then 
+                            \begin{equation*}
+                                \begin{split}
+                                    \phi(n)&=n\prod_{i=1}^s\left(1-\frac{1}{p_i}\right)=n\prod_{i=1}^s\left(\frac{p_i-1}{p_i}\right).
+                                \end{split}
+                            \end{equation*}
+                        And 
+                            \begin{equation*}
+                                \sigma(n)=\prod_{i=1}^s\left(\frac{p_i^{e_i+1}-1}{p_i-1}\right)
+                            \end{equation*}
+                        Dividing both functions by $n$, we obtain
+                            \begin{equation*}
+                                \frac{\phi(n)}{n}=\prod_{i=1}^s\left(\frac{p_i-1}{p_i}\right)\quad,\frac{\sigma(n)}{n}=\prod_{i=1}^s\left(\frac{p_i-\frac{1}{p_i^{e_i}}}{p_i-1}\right).
+                            \end{equation*}
+                        It follows that the latter formula satisfies
+                            \begin{equation*}
+                                \prod_{i=1}^s\left(\frac{p_i-\frac{1}{p_i^{e_i}}}{p_i-1}\right)\geq \prod_{i=1}^s\left(\frac{p_i+1}{p_i}\right).
+                            \end{equation*}
+                        Thus,
+                            \begin{equation*}
+                                \frac{\phi(n)}{n}+\frac{\sigma(n)}{n}\geq\prod_{i=1}^s\left(\frac{p_i-1}{p_i}\right)+\prod_{i=1}^s\left(\frac{p_i+1}{p_i}\right).
+                            \end{equation*}
+                        We can also see that for all $n\geq 1$, $(p-1)^n+(p+1)^n=2p^np^{n-1}\cdots p$ since all the terms in between cancel out. And so 
+                            \begin{equation*}
+                                \prod_{i=1}^s\left(\frac{p_i-1}{p_i}\right)+\prod_{i=1}^s\left(\frac{p_i+1}{p_i}\right)=2\prod_{i=1}^s\frac{p_i}{p_i}=2.
+                            \end{equation*}
+                        Finally, multiplying through by $n$, we obtain $\phi(n)+\sigma(n)\geq 2n$.
+                    \end{proof}
+            \end{enumerate}
+        \item[5.] Show that $\sigma(n)=\sum_{d\mid n}\phi(n)\tau(\frac{n}{d})$.
+            \begin{proof}
+                In class we showed that if $f$ and $g$ are multiplicative functions, then so is 
+                    \begin{equation*}
+                        \sum_{d\mid n}f(d)g(\frac{n}{d}).
+                    \end{equation*}
+                So since $\phi(n)$ and $\tau(n)$ are both multiplicative, then 
+                    \begin{equation*}
+                        F(n)=\sum_{d\mid n}\phi(d)\tau(\frac{n}{d})
+                    \end{equation*}
+                is multiplicative. Now let $n=p_1^{e_1}\cdots p_r^{e_r}$. Then we have that 
+                    \begin{equation*}
+                        \sigma(n)=\sigma(p_1^{e_1}\cdots p_r^{e_r})=\sigma(p_1^{e_1})\cdots\sigma(p_r^{e_r})=\prod_{i=1}^r\left(\frac{p_i^{e_i+1}-1}{p_i-1}\right).
+                    \end{equation*}
+                Next, we evaluate $F(n)$. Doing this we find that \newpage
+                    \begin{equation*}
+                        \begin{split}
+                            F(n)&=F(p_1^{e_1}\cdots p_r^{e_r}) \\
+                            &= F(p_1^{e_1})\cdots F(p_r^{e_r}) \\
+                            &= \left(\sum_{d\mid p_1^{e_1}}\phi(d)\tau\left(\frac{p_1^{e_1}}{d}\right)\right)\cdots\left(\sum_{d\mid p_r^{e_r}}\phi(d)\tau\left(\frac{p_r^{e_r}}{d}\right)\right) \\
+                            &=\prod_{i=1}^r\left(\sum_{d\mid p_i^{e_i}}\phi(d)\tau\left(\frac{p_i^{e_i}}{d}\right)\right).
+                        \end{split}
+                    \end{equation*}
+                Noting that for any $i$, the divisors of $p_i^{e_i}$ are simply $1,p_i,p_i^2,\dots,p_i^{e_i}$, then we can rewrite the last equality as
+                    \begin{equation*}
+                        \prod_{i=1}^r\left(\sum_{j=0}^{e_i}\phi(p_i^j)\tau\left(\frac{p_i^{e_i}}{p_i^j}\right)\right)=\prod_{i=1}^r\left(\sum_{j=0}^{e_i}\phi(p_i^j)\tau(p_i^{e_i-j})\right).
+                    \end{equation*}
+                We can further simplify by noting that for each $i$ and each $j$ we have
+                    \begin{equation*}
+                        \phi(p_i^j)=p_i^j-p_i^{j-1}\quad\text{and}\quad\tau(p_i^{e_i-j})=e_i-j+1.
+                    \end{equation*}
+                It then follows that for all $i$
+                    \begin{equation*}
+                        \sum_{j=0}^{e_i}\left((p_i^j-p_i^{j-1})(e_i-j+1)\right)=\frac{p_i^{e+1}-1}{p_i-1}
+                    \end{equation*}
+                and so
+                    \begin{equation*}
+                        \sum_{d\mid n}\phi(d)\tau(\frac{n}{d})=F(n)=\prod_{i=1}^r\left(\frac{p_i^{e_i+1}-1}{p_i-1}\right)=\sigma(n).
+                    \end{equation*}
+            \end{proof}
+        \item[6.] Let $\Omega(n)$ denote the number of prime factors of $n$ counted with multiplicity. Let $\lambda(n)=(-1)^{\Omega(n)}$. Show that $\lambda$ is totally multiplicative and 
+            \begin{equation*}
+                \sum_{d\mid n}\lambda(d)=\begin{cases} 1, & \text{if $n$ is a square} \\ 0, & \text{otherwise} \end{cases}.
+            \end{equation*}
+            \begin{proof}
+                To begin we note that $\Omega(p)=1$, $\Omega(p^a)=a$. Now let
+                    \begin{equation*}
+                        n=ab=(p_1^{e_1}\cdots p_r^{e_r})(q_1^{m_1}\cdots q_s^{m_s}).
+                    \end{equation*}
+                Then 
+                    \begin{equation*}
+                        \begin{split}
+                            \Omega(n) &= \Omega(ab) \\
+                            &= \Omega(p_1^{e_1}\cdots p_r^{e_r}q_1^{m_1}\cdots q_s^{m_s}) \\
+                            &= e_1+\cdots+ e_r+ m_1+\cdots +m_s.
+                        \end{split}
+                    \end{equation*}
+                It follows that
+                    \begin{equation*}
+                        \begin{split}
+                            \lambda(n)&=\lambda(ab) \\
+                            &=(-1)^{\Omega(ab)} \\
+                            &=(-1)^{\Omega(p_1^{e_1}\cdots p_r^{e_r}q_1^{m_1}\cdots q_s^{m_s})} \\
+                            &=(-1)^{e_1+\cdots e_r+m_1+\cdots+m_s} \\
+                            &=(-1)^{e_1+\cdots+e_r}(-1)^{m_1+\cdots+m_s} \\
+                            &=(-1)^{\Omega(p_1^{e_1}\cdots p_r^{e_r})}(-1)^{\Omega(q_1^{m_1}\cdots q_s^{m_s})} \\
+                            &=(-1)^{\Omega(a)}(-1)^{\Omega(b)} \\
+                            &=\lambda(a)\lambda(b).
+                        \end{split}
+                    \end{equation*}
+                Thus, $\lambda$ is totally multiplicative. Letting
+                    \begin{equation*}
+                        F(n)=\sum_{d\mid n}\lambda(d)
+                    \end{equation*}
+                then from results proven in class, we know $F(n)$ is multiplicative. Thus if we assume $n$ is a square, then $n=\sqrt{n}\sqrt{n}$ and
+                    \begin{equation*}
+                        F(n)=F(\sqrt{n}\sqrt{n})=F(\sqrt{n})F(\sqrt{n})=\sum_{d\mid \sqrt{n}}\lambda(d)\sum_{d\mid \sqrt{n}}\lambda(d)=\left(\sum_{d\mid \sqrt{n}}\lambda(d)\right)^2.
+                    \end{equation*}
+                And this is where I am stuck $\dots$ Not sure if I can further simplify and say
+                    \begin{equation*}
+                        F(n)=\sum_{d\mid\sqrt{n}}\lambda(d^2);
+                    \end{equation*}
+                which, if $d=p_1^{e_1}\cdots p_w^{e_w}$, then $d^2$ would place a factor of $2$ on each exponent and so $\lambda(d^2)=1$? But that would mean $F(n)>1$ which is not what we want. Sorry the homework is not only late, but also not even complete! I am going to turn it in now, but keep working on this problem.
+            \end{proof}
+    \end{enumerate}
+\end{document}

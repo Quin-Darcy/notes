@@ -1,0 +1,171 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 296B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 5/4/20   \\
+{ \textbf{Instructor:}}\ Dr. Pigno \hspace{\fill} \textbf{Assignment:} Exam 2 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item Let $q=4^n+1$. Prove $q$ is prime if and only if $3^{\frac{q-1}{2}}\equiv-1\pmod{q}$.
+            \begin{proof}
+                Assume that $q$ is prime. Then it follows that 
+                    \begin{equation}
+                        3^{\frac{q-1}{2}}\equiv\left(\frac{3}{q}\right)\pmod{q}.
+                    \end{equation}
+                Since $3\equiv 3\pmod{4}$, then $3$ is a quadratic residue mod $q$ \emph{iff} $q\equiv\pm b^2\pmod{12}$, where $b$ is an odd integer relatively prime to $3$. Hence, $b=1,5,7,11$. Since $1^2,5^2,7^2,$ and $11^2$ are all congruent to 1 mod $12$, then 3 is a quadratic residue of primes congruent to $\pm 1\pmod{12}$ and a quadratic nonresidue of primes congruent to $\pm 5\pmod{12}$.\par\hspace{4mm} If $q\equiv 1\pmod{12}$, then this implies that $12\mid 4^n$ which is not possible since $3\mid 12$, but $3\nmid 4^n$. If $q\equiv-1\pmod{12}$, then $12\mid 4^n+2=2(2^{2n-1}+1)$ and so for some $k\in\mathbb{Z}$, we have that $2(2^{2n-1}+1)=12k$. Dividing both sides by 2, we obtain $2^{2n-1}+1=6k=2(3k)$. This is impossible as the left hand side is odd while the right hand side is even.\par\hspace{4mm} It follows then that $q\equiv\pm 5\pmod{12}$ and so $3$ is a quadratic nonresidue modulo $q$. Hence, $\big(\frac{3}{q}\big)=-1$ and then Equation (1) becomes
+                    \begin{equation*}
+                        3^{\frac{q-1}{2}}\equiv-1\pmod{q}
+                    \end{equation*}
+                as desired.\par\hspace{4mm} Conversely, assume that 
+                    \begin{equation*}
+                        3^{\frac{q-1}{2}}\equiv-1\pmod{q}.
+                    \end{equation*}
+                Then consider ord$_q(3)$. If it is greater than 0, then it must divide $\phi(q)$. By our assumption, we can see that 
+                    \begin{equation*}
+                        3^{q-1}\equiv 1\pmod{q}
+                    \end{equation*}
+                and so $\text{ord}_q(3)\mid q-1=4^n$. Thus, $\text{ord}_q(3)=2^{k}$, for some $k\in\mathbb{Z}$. By the quotient remainder theorem, there exists $a,b\in\mathbb{Z}$ such that $q-1=\phi(q)a+b$ where $0\leq b<\phi(q)$. Then $q=\phi(q)a+b+1$ and so
+                    \begin{equation*}
+                        3^q=3^{q-1}3=3=3^{\phi(q)a+b+1}=3^{b+1},
+                    \end{equation*}
+                which only holds if $b=0$. Thus, $\phi(q)\mid q-1$ and this only holds if $q$ is a prime?
+            \end{proof}
+        \item Let $p=4k+1$ be prime.
+            \begin{enumerate}
+                \item Assume $u$ is the smallest positive quadratic nonresidue mod $p$. Show that $p=qu+r$ where $0<q<p$ and $r$ is a quadratic residue mod $p$.
+                    \begin{proof}
+                        By the quotient remainder theorem, we can write $p=qu+r$, where $0\leq r<u$. It then suffices to show that $r$ is a quadratic residue modulo $p$. Since $u$ is the \emph{smallest} positive quadratic residue modulo $p$, then any positive number smaller than $u$ is a quadratic residue, i.e., $1,2,\dots,u-1$ and since $0\leq r<u$, then $r$ is a quadratic residue.  
+                    \end{proof}
+                \item Use that $qu+r\equiv0\pmod{p}$ to show that $u\leq\sqrt{p-1}$.
+                    \begin{proof}
+                        Assume $u>\sqrt{p-1}$. Then $u^{\frac{p-1}{2}}>(\sqrt{p-1})^{\frac{p-1}{2}}=(p-1)^k$. Further simplification yields
+                            \begin{equation*}
+                                (p-1)^k=(p-1)(p^{k-1}+p^{k-2}+\cdots+1)=(p-1)(0+0+\cdots+1)=p-1.
+                            \end{equation*}
+                        Hence, $u^{\frac{p-1}{2}}>p-1$ and so $u^{p-1}>(p-1)^2$. By Fermat's little theorem, $u^{p-1}=1$ and further, we have that $(p-1)^2=p^2-2p+1=1$. Thus, $u^{p-1}=1>(p-1)^2=1$ and so $1>1$. This is a contradiction. Therefore, $u\leq\sqrt{p-1}$.
+                    \end{proof}
+            \end{enumerate}
+        \item Prove that 
+                \begin{equation*}
+                    \frac{n}{\phi(n)}=\sum_{d\mid n}\frac{\mu^2(d)}{\phi(n)}.
+                \end{equation*}
+                \begin{proof}
+                    Let $n=p_1^{e_1}\cdots p_k^{e_k}$ be the prime decomposition of $n$. Then the left hand side becomes
+                        \begin{equation*}
+                            \begin{split}
+                                \frac{p_1^{e_1}\cdots p_k^{e_k}}{\phi(p_1^{e_1}\cdots p_k^{e_k})}&=\frac{p_1^{e_1}\cdots p_k^{e_k}}{(p_1^{e_1}\cdots p_k^{e_k})\prod\limits_{i=1}^k\left(1-\frac{1}{p_i}\right)} \\
+                                &=\frac{1}{\prod\limits_{i=1}^k\left(1-\frac{1}{p_i}\right)} \\
+                                &=\frac{1}{\left(1-\frac{1}{p_1}\right)\cdots\left(1-\frac{1}{p_k}\right)} \\
+                                &=\frac{1}{\left(\frac{p_1-1}{p_1}\right)\cdots\left(\frac{p_k-1}{p_k}\right)} \\
+                                &=\frac{p_1\cdots p_k}{(p_1-1)\cdots(p_k-1)} \\
+                                &=\prod\limits_{i=1}^k\left(\frac{p_i}{p_i-1}\right) \\
+                                &=\prod\limits_{i=1}^k\left(1+\frac{1}{p_i-1}\right) \\
+                                &=\prod\limits_{i=1}^k\left(\frac{1}{1-\frac{1}{p_i}}\right).
+                            \end{split}
+                        \end{equation*}
+                    Next, we have that the right hand side is
+                        \begin{equation*}
+                            \begin{split}
+                                \sum_{d\mid n}\frac{\mu^2(d)}{\phi(d)}&=1+\frac{1}{\phi(p_1)}+\frac{1}{\phi(p_2)}+\cdots+\frac{1}{\phi(p_1\cdots p_k)}+\cdots \\
+                                &=1+\frac{1}{p_1-1}+\frac{1}{p_2-1}+\cdots+\frac{1}{(p_1-1)(p_2-1)\cdots(p_k-1)+\cdots} \\
+                                &= \left(1+\frac{1}{p_1-1}\right)\left(1+\frac{1}{p_2-1}\right)\cdots\left(1+\frac{1}{p_k-1}\right) \\
+                                &=\prod_{i=1}^k\left(1+\frac{1}{p_i-1}\right) \\
+                                &=\prod_{i=1}^k\left(\frac{1}{1-\frac{1}{p_i}}\right).
+                            \end{split}
+                        \end{equation*}
+                    Thus, 
+                        \begin{equation*}
+                            \frac{n}{\phi(n)}=\sum_{d\mid n}\frac{\mu^2(d)}{\phi(d)}.
+                        \end{equation*}
+                \end{proof}
+    \end{enumerate}
+\end{document}

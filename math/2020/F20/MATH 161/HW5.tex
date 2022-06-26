@@ -1,0 +1,164 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 161}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 161}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 10/13/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 5 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item[4.] Prove the following wffs are logically valid.\hfill\par
+            \begin{enumerate}
+                \item $\exists x\forall yR(x,y)\rightarrow\forall y\exists xR(x,y)$.
+                    \begin{proof}
+                        We want to show that the given wff is true in all interpretations. Let $\mathcal{I}$ be any interpretation and let $v$ be any valuation in $\mathcal{I}$.\par\hspace{4mm} If $v$ satisfies $\exists x\forall y R(x,y)$, then for some $\hat{a}\in A$ $v[x|\hat{a}]$ satisfies $\forall yR(x,y)$. Thus for all $b\in A$, $v[x|\hat{a},y|b]$ satisfies $R(x,y)$. Now let $b\in A$, then $v[y|b]$ satisfies $\exists x R(x,y)$ since there exists $a\in A$, namely $a=\hat{a}$, such that $v[x|\hat{a},y|b]$ satisfies $R(x,y)$. Hence $v$ satisfies $\forall y\exists x R(x,y)$. Therefore if $v$ satisfies $\exists x\forall y R(x,y)$ then $v$ satisfies $\forall y\exists x R(x,y)$. Thus by problem 5.(b) of HW4, $v$ satisfies $\exists x\forall y R(x,y)\rightarrow\forall y\exists x R(x,y)$ and so the wff is logically valid.
+                    \end{proof}
+                \item $\forall x(\varphi\rightarrow\gamma)\rightarrow(\forall x\varphi\rightarrow\forall x\gamma)$
+                    \begin{proof}
+                        Let $\mathcal{I}$ be any interpretation and let $v$ be any valuation in $\mathcal{I}$. Assume $v$ satisfies $\forall x(\varphi\rightarrow\gamma)$. Then there exists $a\in A$ such that $v[x|a]$ satisfies $\varphi\rightarrow\gamma$. Then either $v[x|a]$ satisfies $\sim\varphi$ or $v[x|a]$ satisfies $\gamma$. If the former, then there exists $a\in A$ such that $v[x|a]$ satisfies $\sim \varphi$ and thus $v$ satisfies $\exists x(\sim\varphi)$. Thus $v$ satisfies $\sim(\forall x\varphi)$. Thus $v$ satisfies $\sim(\forall x\varphi)$ or $v$ satisfies $\forall x\gamma$. Therefore $v$ satisfies $\forall x\varphi\rightarrow\forall x\gamma$. The result also holds if the latter were true, that $v[x|a]$ satisfies $\gamma$.\par\hspace{4mm} Hence if $v$ satisfies $\forall x(\varphi\rightarrow\gamma)$, then $v$ satisfies $\forall x\varphi\rightarrow\forall x\gamma$ and by problem 5.(b) on HW4 $v$ satisfies $\forall x(\varphi\rightarrow\gamma)\rightarrow(\forall x\varphi\rightarrow\forall x\gamma)$. Thus the wff is logically valid.
+                    \end{proof}
+            \end{enumerate}
+        \item[5.] Prove the following wffs are not logically valid.\hfill\par 
+            \begin{enumerate}
+                \item $\forall x\exists y R(x,y)\rightarrow\exists y\forall x R(x,y)$
+                    \begin{proof}
+                        Let $\mathcal{I}$ be any interpretation such that $A=\mathbb{N}$ and let $R(x,y):=x<y$. Then for any $n\in\mathbb{N}$ it follows that $v[x|n]$ satisfies $\exists y(x<y)$ since this is true for $y=n+1$. Assume $v$ satisfies $\exists y\forall x(x<y)$. Then for some $n\in\mathbb{N}$ $v[y|n]$ satisfies $\forall x(x<y)$ which implies $\mathbb{N}$ contains a greatest element which is false. Thus $v$ does not satisfy $\exists y\forall x(x<y)$. Therefore $v$ does not satisfy the wff and hence it is not logically valid.
+                    \end{proof}
+                \item $\exists x(\varphi\land\gamma)\leftrightarrow(\exists x\varphi\land\exists\gamma)$
+                    \begin{proof}
+                        Let $\mathcal{I}$ be any interpretation such that $A=\mathbb{N}$. Let $\varphi:=``x \text{ is an even number''}$ and $\gamma:= ``x \text{ is an odd number''}$. Then for any valuation $v$ in $\mathcal{I}$, $v$ satisfies $\exists x\varphi\land\exists x\gamma$ by properties of $\mathbb{N}$. However $v$ does not satisfy $\exists x(\varphi\land\gamma)$ since there is no natural number that is both even and odd. Therefore the wff is not logically valid.  
+                    \end{proof}
+            \end{enumerate}
+        \item[7.] Indicate why each line below is a line of a proof in $K$, and explain how from this proof it follows that $\{\forall x\varphi,\sim\gamma\}\vdash_K\forall x\sim(\varphi\rightarrow\gamma)$.
+            \begin{proof}
+                \begin{align*}
+                    &(1) \quad\forall x\varphi &&\text{axiom} \\
+                    &(2) \quad\sim\gamma && \text{axiom} \\
+                    &(3) \quad\forall x\varphi\rightarrow\varphi && \text{A4} \\
+                    &(4) \quad\varphi && \text{MP on (1) and (3)} \\
+                    &(5) \quad\varphi\rightarrow(\sim\gamma\rightarrow(\varphi\land\sim\gamma)) && \text{A2} \\
+                    &(6) \quad\sim\gamma\rightarrow(\varphi\land\sim\gamma) && \text{MP on (4) and (5)} \\
+                    &(7) \quad\varphi\land\sim\gamma && \text{MP on (2) and (6)} \\
+                    &(8) \quad(\varphi\land\sim\gamma)\rightarrow\sim(\varphi\rightarrow\gamma) && \text{?} \\
+                    &(9) \quad\sim(\varphi\rightarrow\gamma) && \text{MP on (7) and (8)} \\
+                    &(10)\quad\forall x\sim(\varphi\rightarrow\gamma) && \text{GEN on (9)}
+                \end{align*}
+                This proof shows that $\vdash_K\forall x\varphi\rightarrow(\sim\gamma\rightarrow(\forall x\sim(\varphi\rightarrow\gamma)))$ and thus by two applications of the Deduction Theorem, it follows that $\{\forall x\varphi,\sim\gamma\}\vdash_K\forall x\sim(\varphi\rightarrow\gamma)$.
+            \end{proof}
+        \item[8.] If we have only the constant symbol $0^*$, the relation symbol, $R$, and the function symbols, $f$, $g$, answer the following:
+            \begin{enumerate}
+                \item Using $0^*$ and $f$, what term will be interpreted as 1? as 2? as 3? as $n$?
+                    \begin{solution}
+                        Letting $\circ$ denote function composition, we can write
+                            \begin{align*}
+                                &1 = f(0^*)=f^1(0^*) \\
+                                &2 = (f\circ f)(0^*)=f^2(0^*) \\
+                                &3 = (f\circ f^2)(0^*)=(f\circ(f\circ f))(0^*)=(f\circ f\circ f)(0^*)=f^3(0^*) \\
+                                &n = (f\circ f^{n-1})(0^*)=(f\circ(f\circ\cdots\circ f))(0^*)=(f\circ\cdots\circ f)(0^*)=f^n(0^*).
+                            \end{align*}
+                    \end{solution}
+                \item What wff could be interpreted as asserting that $y$ is divisible by $x$?
+                    \begin{solution}
+                        The following wff asserts that $y$ is divisible by $x$: $\exists m(y=g(m,x))$.
+                    \end{solution}
+                \item What wff can be interpreted as asserting that $z$ is prime?
+                    \begin{solution}
+                        The following wff asserts that $z$ is prime: 
+                            \begin{equation*}
+                                \forall x\forall m(z = g(m,x)\rightarrow((x=1\land m=z)\lor (x=z\land m=1)).
+                            \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

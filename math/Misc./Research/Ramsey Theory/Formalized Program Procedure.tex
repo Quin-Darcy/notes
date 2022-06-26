@@ -1,0 +1,271 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+
+
+
+
+\begin{document}
+
+\title{Formalized Program Procedure}
+
+\date{25 March 2019}
+\affil{\small{California State University Sacramento}}
+\maketitle
+
+\section{Introduction}
+
+Given $n, k, m, r\in\mathbb{N}$, let there are $s$ many $k$-length $m$-pseudo progressions in $[n]$. We want are interested in the following question: If we take the numbers 1 through $n$ and color them randomly with $r$ many colors, is it true that for every possible way we can do this there exists at least one of the $s$ many $k$-length $m$-pseudo progressions in the coloring, such that it is monochromatic? In an attempt to answer this, a program was written to render the question yes or no, and the following is an outline of the procedure that the program performs. \par 
+
+\section{The Set Up and Intuition}
+
+The idea behind the procedure relies heavily on having explicit access to all $s$ pseudo progressions. This alone makes it currently unable to be entirely generalizable since only with a previous program, can the explicit progressions be obtained. Now that the starting point is clear, what we hope to do is take each of the $s$ $k$-length $m$-pseudo progressions from $[n]$ and determine how many of the possible $r^n$ colorings of $[n]$ contain a monochromatic version of it. \par 
+Intuitively, if we have a length $k$ progression which is all one color, then the number of terms in $[n]$ whose color is variable is $n-k$. Of these $n-k$ terms, we can color each any one of the $r$ possible colors. Thus, it stands to reason that each monochromatic pseudo progression should appear $r(n-k)^r$ many times. However, it turns out that this is an upper bound and  is generally not equal to the number of colorings which contain a monochromatic pseudo progression. To see why this is let us look at an example.
+
+\begin{example}
+    Let $n=5$, $k=3$, $m=1$, and $r=2$. Let us also suppose the colors are red and blue. There happens to be 4 length 3 arithmetic progressions in $[5]$, and these are 123, 135, 234, and 345. Now how many of the $2^5=32$ possible colorings contain a monochromatically red version of 123? Well since 123 is fixed at red, then that means 4 can be either red or blue, and 5 can be either red or blue. Thus, there should be $2^2=4$ such colorings. Similarly, there should be 4 colorings which contain a monochromatically red 135, 234, and 345.
+    
+    \begin{figure}
+        
+        \includegraphics{"1PR".png}
+        \caption{3 Coloring of 3-length Arithmetic Progressions}
+        \label{fig:my_label}
+    \end{figure}
+    
+    We would then assume that there are 16 such colorings which satisfy our criteria. However, Figure 1 shows that this is in fact an over count. The coloring where all the numbers are red is counted 3 more times than needed, and there is actually only 11 colorings which satisfy our criteria.\par 
+    Hopefully this small example demonstrates that we will need to take more care in answering the initial question. Below we will describe a possible solution.
+\end{example}
+
+\subsection{The Set Up}
+Let $A$ be an $s\times k$ matrix, where $A_{ij}$ denotes the $j$\textit{th} term of the $i$\textit{th} progression, for $1\leq i\leq s$ and $1\leq j\leq k$. Let $P=\{p_1,\dots,p_n\}$ be the set containing the first $n$ prime numbers, with $p_{i-1}<p_i$ for $1<i\leq n$. Now define the following $r^n\times n$ matrix $\alpha$, where
+
+\begin{equation*}
+    \alpha_{ij} = \floor*{\frac{i-1}{r^{j-1}}}-r\floor*{\frac{\floor*{\frac{i-1}{r^{j-1}}}}{r}}.
+\end{equation*}
+
+\noindent Now let $B=\{b_1, \dots, b_{r^n}\}$ be a set where for each $1\leq i\leq r^n$, 
+
+\begin{equation*}
+    b_i=\prod\limits_{j=1}^{n}p_j^{\alpha_{ij}}.
+\end{equation*}
+
+\noindent We have constructed $B$ to be the set which contains all the possible composite number representations of the colorings of $[n]$. We want to see what subset of this set represents colorings that contain monochromatic $k$-length $m$-pseudo progressions.
+
+\newpage
+
+\noindent What we hope to achieve with the objects defined above is a mathematically formal way to describe the procedure that the computer program runs. This way, we can analyze its results in a more rigorous way. \par 
+To explain what these objects are intended to do let us first look at the matrix $A$. This matrix contains, as its rows, each of the $s$ many $k$-length $m$-pseudo progressions. Why we want this in a matrix will be explained in a moment.\par 
+The second object defined was the list of the first $n$ prime numbers. We will use these numbers to encode the every possible coloring of the numbers 1 through $n$, with $r$ many colors. After the colorings get encoded, the result will be the set $B$ which is essentially a list of $r^n$ composite numbers, each representing a unique coloring. Of this set, the numbers which represent the coloring that contain monochromatic versions of our $s$ pseudo progressions will be a subset of $B$. \par 
+The advantage of placing these things in matrices and sets is it is computationally simple to extract the information we need, and once the information is contained in sets, then all we must do is compare cardinalities. An example will start on the next page.
+
+\newpage
+
+\begin{example}
+    Let us revis our first example where $n=5$, $k=3$, $m=1$, and $r=2$. We will first construct the matrix $\alpha$. We have that
+    
+    \begin{equation*} \alpha =
+        \begin{bmatrix} 0&0&0&0&0 \\ 1&0&0&0&0 \\ 0&1&0&0&0 \\ 1&1&0&0&0 \\ 0&0&1&0&0 \\ 1&0&1&0&0 \\ 0&1&1&0&0 \\ 1&1&1&0&0 \\ 0&0&0&1&0  \\ 1&0&0&1&0 \\ 0&1&0&1&0 \\ 1&1&0&1&0 \\ 0&0&1&1&0 \\ 1&0&1&1&0 \\ 0&1&1&1&0 \\ 1&1&1&1&0 \\ 0&0&0&0&1 \\ 1&0&0&0&1 \\ 0&1&0&0&1 \\ 1&1&0&0&1 \\ 0&0&1&0&1 \\ 1&0&1&0&1 \\ 0&1&1&0&1 \\ 1&1&1&0&1 \\ 0&0&0&1&1 \\ 1&0&0&1&1 \\ 0&1&0&1&1 \\ 1&1&0&1&1 \\ 0&0&1&1&1 \\ 1&0&1&1&1 \\ 0&1&1&1&1 \\ 1&1&1&1&1\\\end{bmatrix}
+    \end{equation*}
+    
+    \noindent Now that we have $\alpha$, we can determine $B$. We do this in the following way. Each row of $\alpha$ will be the exponents on the list of $n$ primes contained in $P$. For instance, $\alpha_{4j}=(1,1,0,0,0)$ and so $b_4=2^1\cdot3^1\cdot5^0\cdot7^0\cdot11^0=6$. Thus, performing this calculation for each row yields the following list.
+    
+    \newpage
+    
+    \begin{align*}
+            b_1 & = 1  &b_2 &=  2 &b_3 &=  3 &b_4 &=  6 \\ 
+            b_5 &= 5 &b_6 &=  10 &b_7 &=  15 &b_8 &= 30 \\ 
+            b_9 &= 7  &b_{10} &=  14 &b_{11} &=  21 &b_{12} &=  42 \\
+            b_{13} &=  35 &b_{14} &=  70 &b_{15} &=  105 &b_{16} &=  210 \\ 
+            b_{17} &=  11 &b_{18} &=  22 &b_{19} &=  33 &b_{20} &=  66 \\ 
+            b_{21} &=  55 &b_{22} &=  110 &b_{23} &=  165 &b_{24} &=  330 \\ 
+            b_{25} &=  77 &b_{26} &=  154 &b_{27} &=  231 &b_{28} &=  462 \\ 
+            b_{29} &=  385 &b_{30} &=  770 &b_{31} &=  1155 &b_{32} &=  2310 
+    \end{align*}
+    
+
+    
+    \noindent Whew! Alright, now we have the list of numbers which represents all possible colorings. What we want to do at this point is see how many of these numbers represents a coloring which contains a monochromatic length 3 arithmetic progression. Lucky for us, there are only 4 such progressions. Thus, the matrix $A$ (mentioned in the begining) is
+    
+    \begin{equation*}
+        A=\begin{bmatrix} 1 & 2 & 3 \\ 1  & 3 & 5 \\ 2 & 3 & 4 \\ 3 & 4 & 5 \\ \end{bmatrix}.
+    \end{equation*}
+    
+     Since $r=2$, lets take the colors to be red and blue. Additionally, let $red$ be denoted by 0 and blue be denoted by 1. Then we want to look at all the colorings which contain a red row from $A$ and all the colorings which contain a blue row from $A$. So in order to determine which colorings these are, consider the first row of $A$ for example. If we want to determine all the colorings which contain a red 123, then we simply calculate all the numbers of the form 
+    
+    \begin{equation}
+        2^0\cdot3^0\cdot5^0\cdot7^g\cdot 11^h, \quad \text{where}\quad 0\leq g\leq 1\quad\text{and}\quad 0\leq h\leq 1.
+    \end{equation}
+    
+    \noindent Similarly, all the colorings which contain a blue 123 would be all the numbers of the form
+    
+    \begin{equation}
+        2^1\cdot3^1\cdot5^1\cdot7^g\cdot11^h, \quad \text{where}\quad 0\leq g\leq 1\quad\text{and}\quad 0\leq h\leq 1.
+    \end{equation}
+    
+    \noindent Now the question is how exactly to determine which numbers from $B$ satisfy these two conditions. Well one way we can determine the numbers in $B$ which satisfy the first condition is to collect all the numbers which are not divisible by $2$ or 3 or 5. More precisely, this would be the following set
+    
+    \begin{equation*}
+        C_1=\{b\in B\colon 2\nmid b\wedge 3\nmid b\wedge 5\nmid b\}. 
+    \end{equation*}
+    
+    \noindent More concisely, we can define the set as
+    
+    \begin{equation*}
+        C_1 = \{b\in B\colon \bigwedge\limits_{j=1}^{3}p_{A_{1j}}\nmid b\}. 
+    \end{equation*}
+    
+    \newpage In a similar way we can define the set of numbers which satisfies (2) as 
+    
+    \begin{equation*}
+        C_2 = \{b\in B\colon \big(\prod\limits_{j=1}^3 p_{A_{1j}}\big)\mid b\}.
+    \end{equation*}
+    
+    \noindent This means that to each row (i.e., $k$-length $m$-pseudo) in $A$, we can associate it with two sets. Thus, for $1\leq u\leq 4$ we have 
+    
+    \begin{equation*}
+        C_{u1}=\{b\in B\colon \bigwedge\limits_{j=1}^3 p_{A_{uj}}\nmid b\}\quad\text{and}\quad C_{u2}=\{b\in B\colon\big(\prod\limits_{j=1}^{3} p_{A_{uj}}\big)\mid b\}.
+    \end{equation*}
+    
+    \noindent Alright, so now that we have explicit definitions for each set, let us list out their elements! We have 
+    
+    \begin{align*}
+        C_{11} &= \{1, 7, 11, 77\} &C_{12} &= \{30, 210, 330, 2310\} \\
+        C_{21} &= \{1, 3, 7, 21\} &C_{22} &=\{110, 220, 770, 2310\} \\
+        C_{31} &= \{1, 2, 11, 22\} &C_{32} &=\{105, 210, 1155, 2310\} \\
+        C_{41} &= \{1, 2, 3, 6\} &C_{42} &=\{385, 770, 1155, 2310\}.
+    \end{align*}
+    
+    The final step is to take the union of all of these sets to obtain all the \textit{unique} numbers that represent colorings which contain monochromatic 3-length arithmetic progressions. Doing this we obtain 
+    
+    \begin{equation*}
+        C = \bigcup\limits_{u=1}^4\bigg(\bigcup\limits_{v=1}^2 C_{uv}\bigg)
+    \end{equation*}
+    \begin{equation*}
+        = \{1,2,3,6,7,11,21,22,30,77,105,110,210,330,385,770,1155,2310\}.
+    \end{equation*}
+    
+    \noindent Ah hah! How interesting ... $\abs{C}=18$ whereas $\abs{B}=32$. From this we hope to conclude that there are 14 colorings which \textit{do not} contain a monochromatic 3-length arithmetic progression. Let us take a look at these colorings and see if we can verify this. The numbers corresponding to these counter colorings are (next page)
+    
+    \newpage
+    
+    \begin{equation*}
+        \begin{bmatrix} \underline{C} \\ 5 \\ 10 \\ 14 \\ 15 \\ 33 \\ 35 \\ 42 \\ 55 \\ 66 \\ 70 \\ 154 \\ 165 \\ 231 \\ 462 \end{bmatrix}\rightarrow \begin{bmatrix} \underline{1} & \underline{2} & \underline{3} & \underline{4} & \underline{5} \\ R & R & B & R & R \\ B & R & B & R & R \\ B & R & R & B & R \\ R & B & B & R & R \\ R & B & R & R & B \\ R & R & B & B & R \\ B & B & R & B & R \\ R & R & B & R & B \\ B & B & R & R & B \\ B & R & B & B & R \\ B & R & R & B & B \\ R & B & B & R & B \\ R & B & R & B & B \\ B & B & R & B & B  \end{bmatrix}
+    \end{equation*}
+    
+\end{example}
+    
+\subsection{Generalization of The Method}
+    
+Now that we have seen a fully worked through example of this procedure, let us try to generalize what we did. As before, let $n,k,m,r\in\mathbb{N}$ and let $\alpha$ be a $r^n\times n$ matrix, where 
+    
+\begin{equation*}
+    \alpha_{ij} = \floor*{\frac{i-1}{r^{j-1}}}-r\floor*{\frac{\floor*{\frac{i-1}{r^{j-1}}}}{r}}
+\end{equation*}
+    
+\noindent Next, let $P=\{p_1,p_2,\dots,p_n\}$ be the set containing the first $n$ prime numbers where $p_{i-1}<p_i$ for $1<i\leq n$. From here we will construct the set $B$ as follows: for each element $b_i\in B$, it will be equal to the composite number obtained by taking the product of the first $n$ primes from the set $P$, where each prime is raised to a power corresponding to an entry in the $\alpha$ matrix. So $b_7$ for instance would be set equal to 
+    
+\begin{equation*}
+    b_7 = \prod\limits_{j=1}^n p_j^{\alpha_{7j}} = 2^{\alpha_{71}}\cdot 3^{\alpha_{72}}\cdot\cdots\cdot p_n^{\alpha_{7n}}.
+\end{equation*}
+    
+\noindent And so for each $1\leq i \leq r^n$, let 
+    
+\begin{equation*}
+    b_i = \prod\limits_{j=1}^n p_j^{\alpha_{ij}}.
+\end{equation*}
+    
+\noindent Next we assume that there are $s$ many $k$-length $m$-pseudo progressions in $[n]$. Additionally, we will let $A$ be a $s\times k$ matrix where $A_{ij}$ will denote the $j$th term of the $i$th progression. Now to each one of these $s$ progressions, we need to make $r$ many sets of the following types.
+    
+\newpage
+    
+\noindent The first type will be defined as 
+    
+\begin{equation*}
+    C_{u1} = \{b\in B\colon \bigwedge\limits_{j=1}^k p_{A_{uj}}\nmid b\}, \quad\text{where}\quad 1\leq u\leq s.
+\end{equation*}
+    
+\noindent Type two will be of the form 
+    
+\begin{equation*}
+    C_{uv} = \{b\in B\colon\big(\prod\limits_{j=1}^k p_{A_{uj}}^{v-1}\big)\mid b\}, \quad\text{where}\quad 1\leq u\leq s\quad, 2\leq v\leq r.
+\end{equation*}
+    
+\noindent Next, we define $C$ as the union of all these sets and obtain
+    
+\begin{equation*}
+    C=\bigcup\limits_{u=1}^s\bigg(\bigcup\limits_{v=1}^r C_{uv}\bigg).
+\end{equation*}
+    
+\noindent Finally, if $\abs{C}=\abs{B}$, then this implies that all possible colorings of $[n]$ contains a monochromatic $k$-length $m$-pseudo progression. Otherwise, there are $\abs{B}-\abs{C}$ many coloring which do not and the numbers in the set $B\backslash C$ represent all the colorings of $[n]$ which do not contain a monochromatic $k$-length $m$-pseudo progression. Additionally, for every $b\in B\backslash C$, it can be factored in to a product of primes raised to a sequence of powers, in which that sequence is some row of the $\alpha$ matrix. Thus, by the full prime factorization of each such $b\in B\backslash C$, we can recover the exact counter colorings which do not contain the monochromatic pseudo progressions. 
+
+\section{Algorithm for Producing Counter Colorings}
+
+Where we left off at the end of the last section was with an indication that we \textit{could} recover the counter colorings by means of factorization, but here we want to see what that would actually look like and what type of algorithm would be needed to do it.\par  Let's consider some element from the set $b\in B\backslash C$ from the previous section. From how $B$ was constructed, we know that there exists some $1\leq i\leq r^n$ for which 
+
+\begin{equation*}
+    b =\prod\limits_{j=1}^{n} p_j^{\alpha_{ij}}, \quad\text{where}\quad p_j\in P\quad\text{for}\quad 1\leq j\leq n.
+\end{equation*}
+
+\noindent So then in simple terms, all we must do is determine the factors of $b$ and from there we would know which row of the $\alpha$ matrix this corresponds to. Finally, knowing that 0 corresponds to red, 1 corresponds to blue, 2 corresponds to yellow, etc., we can reconstruct the coloring represented by $b$ by taking the particular row of $\alpha$ and for each number $1\leq g\leq r$ in the $j$th column, replace it with the column index endowed with the color represented by $g$. 
+
+\newpage
+
+\subsection{A More Useful Reformulization of The C Sets}
+
+The point of this paper was to provide a mathematically based explanation of the program's procedure. However, the largest difference between this paper and what the program \textit{actually} does is exemplified in the definition of the $C$ set. Specifically, the family of sets
+
+\begin{equation*}
+    C_{u1}=\{b\in B\colon \bigwedge_{j=1}^{k}p_{A_{uj}}\nmid b\},
+\end{equation*}
+
+
+\noindent where $1\leq u\leq s$. Although this is logically correct in so far as it correctly defines what we are collecting, but in practice this is an almost purely theoretical type of set which is very hard to actually compute. This brings us to the intent behind this section. Namely, to reformulate the definition of this set in a way that makes it easier to compute, both on paper and in the program.
+
+\begin{discussion}
+    To begin, let us first review what $C_{u1}$ is supposed to denote. Recall that of the $r$ many colors we have to `paint' our numbers $\{1, \dots, n\}$ with, we associate one of these colors with the number 0. This means that when we encode each of our colorings as a unique product of powers of primes, a subset of these composite numbers will represent those colorings which contain a monochromatic version of our $k$-length $m$-pseudo progressions, colored in the color associated with 0.\par  In other words, if we let red be the color associated with 0, and let $a_1\dots a_k$ be an arbitrary $k$-length $m$-pseudo progression, then the numbers $b\in B$ for which none of the numbers $p_{a_1}, \dots, p_{a_k}\in P$ are factors, are precisely those colorings which contain a monochromatically red version of $a_1\dots a_k$. So then really, if we hope to achieve a more useful reformulization of $C_{u1}$, then it appears we must find equivalent ways of stating the condition regarding the non-divisibility of $b$ by the factors $p_{a_1},\dots,p_{a_k}$.
+\end{discussion}
+
+
+
+
+\end{document}

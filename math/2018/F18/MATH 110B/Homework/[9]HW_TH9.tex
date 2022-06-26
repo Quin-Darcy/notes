@@ -1,0 +1,223 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+\usepackage{relsize}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{polynom}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+\setlist[description]{leftmargin=4mm,labelindent=4mm}
+  
+\begin{document}
+  
+\begin{flushleft}
+  
+    Quin Darcy\par
+    Dr. Shannon\par
+    MATH 110B\par
+    11/11/18
+  
+\end{flushleft}
+  
+\centerline{Homework 9}
+ 
+\vspace{4mm}
+ 
+\noindent\textsc{Section: }\par
+ 
+\justifying
+ 
+\vspace{1mm}
+ 
+\hline
+ 
+\vspace{4mm}
+
+\noindent\textbf{3.} Recall from class (and HW7) $\omega=-\frac{1}{2}+i\frac{\sqrt{3}}{2}$, $\omega^2=-\frac{1}{2}-i\frac{\sqrt{3}}{2}$, and $\omega^3=1$. Find $[\mathbb{Q}(\omega\sqrt[3]{2})\colon\mathbb{Q}]$.
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} In class we showed that if $c$ is algebraic over $F$, then the monic irreducible polynomial $p(X)\in F[X]$ that has $c$ as a root is called the minimal polynomial of $c$ over $F$. Additionally, it was shown $[F(c)\colon F]=\deg(p(X))$. Thus, we must find the minimal polynomial of $\omega\sqrt[3]{2}$ over $\mathbb{Q}$.\par
+We can see that $(\omega\sqrt[3]{2})^3=(1)(2)=2$, and this tells us that our polynomial must be of degree 3. Thus, if we let $p(X)=X^3-2$, then $p(\omega\sqrt[3]{2})=0$. Thus, $p(X)$ is the minimal polynomial of $\omega\sqrt[3]{2}$ over $\mathbb{Q}$ and we then have
+
+\vspace{2mm}
+
+\centerline{$[\mathbb{Q}(\omega\sqrt[3]{2})\colon\mathbb{Q}]=\deg(p(X))=3$.}
+
+\vspace{4mm}
+
+\noindent\textbf{4.} Determine (with explanation) if the following pairs of rings are isomorphic.
+
+\vspace{4mm}\par
+
+\textbf{(a)} $\mathbb{Q}(\pi)$, $\mathbb{Q}(\pi\sqrt{2})$.
+
+\vspace{4mm}\par
+
+\textbf{Solution:} Because both $\pi$ and $\pi\sqrt{2}$ are transcendental over $\mathbb{Q}$, then there are no polynomials in $\mathbb{Q}[X]$ for which $\pi$ or $\pi\sqrt{2}$ is a root. Thus, by the theorem on p.2 of the Extension Fields handout, we have $\mathbb{Q}(\pi)\cong\mathbb{Q}(X)$ and $\mathbb{Q}(\pi\sqrt{2})\cong\mathbb{Q}(X)$. Thus, $\mathbb{Q}(\pi)\cong\mathbb{Q}(\pi\sqrt{2})$.
+
+\vspace{4mm}\par
+
+\textbf{(b)} $\mathbb{Q}[\sqrt{3}]$, $\mathbb{Q}[X]/(g(X))_i$, where $g(X)=X^3-2X^2-3X+6$.
+
+\vspace{4mm}\par
+
+\textbf{Solution:} Although $\sqrt{3}$ is a root of $g(X)$, and so FHT would tell us the two rings are isomorphic; however, $g(X)$ is not irreducible since $g(X)=X^3-2X^2-3X+6=(X^2-3)(X-2)$. The implications of this is that we know from class $\mathbb{Q}[\sqrt{3}]$ is a field. But since $g(X)$ is not irreducible, then $(g(X))_i$ is not maximal, and so $\mathbb{Q}[X]/(g(X))_i$ is not a field. Thus, the two rings cannot be isomorphic.
+
+\vspace{4mm}\par
+
+\textbf{(c)} $\mathbb{Q}(\sqrt{7})$, $\mathbb{Q}(\sqrt{5})$.
+
+\vspace{4mm}\par
+
+\textbf{Solution:} Since $\sqrt{7}$ is a root of $X^2-7$ and $\sqrt{5}$ is a root of $X^2-5$, then by p.2 of the Field Extensions handout, we have $\mathbb{Q}(\sqrt{7})\cong\mathbb{Q}[\sqrt{7}]$, and $\mathbb{Q}(\sqrt{5})\cong\mathbb{Q}[\sqrt{5}]$. Thus, from HW4, we know $\mathbb{Q}[\sqrt{7}]\ncong\mathbb{Q}[\sqrt{5}]$. Thus, $\mathbb{Q}(\sqrt{7})\ncong\mathbb{Q}(\sqrt{5})$.
+
+\vspace{4mm}
+
+\noindent\textbf{5.} Recall $e\in\mathbb{R}$ is the base of the natural logarithm. Give the form of each element of $\mathbb{Q}(e)$, and give (with explanation) a field that is isomorphic to $\mathbb{Q}(e)$.
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} The form of each element in $\mathbb{Q}(e)$ can be derived by looking at the set itself. We have that 
+
+\vspace{2mm}
+
+\centerline{$ \mathbb{Q}(e)=\{\frac{a_0+a_1e+a_2e^2+\cdots+a_ne^n}{b_0+b_1e^1+b_2e^2+\cdots+b_me^m}\mid a_i,b_j\in\mathbb{Q}\wedge\exists b_k\neq 0\} $.}
+
+\vspace{2mm}
+
+\noindent So for any given $u\in\mathbb{Q}(e)$, we have that 
+
+\vspace{2mm}
+
+\centerline{$ u=(\sum\limits_{i=0}^{n} a_ie^i)(\sum\limits_{j=0}^{m} b_je^j)^{-1} $.}
+
+\vspace{2mm}
+
+\noindent Since $e$ is transcendental over $\mathbb{Q}$, then $\mathbb{Q}(e)\cong\mathbb{Q}(X)$. Thus, in problem 4.(a) we saw that $\mathbb{Q}(\pi)\cong\mathbb{Q}(X)$. Thus, $\mathbb{Q}(e)\cong\mathbb{Q}(\pi)$. 
+
+\vspace{4mm}
+
+\noindent\textbf{6.}
+
+\vspace{4mm}\par
+
+\textbf{(a)} Assume that $E$ is a field, $F$ is a subfield of $E$, $g(X)\in F[X]$ is irreducible over $F[X]$, $c,d\in E$, and $c$ and $d$ are each roots of $g(X)$ over $E[X]$. Explain why $F(c)\cong F(d)$.
+
+\vspace{4mm}\par
+
+\textbf{Solution:} Since $g(X)$ is assumed to be irreducible and it has both $c$ and $d$ as a root, then $F[X]/(g(X))_i\cong F(c)$ and $F[X]/(g(X))_i\cong F(d)$. Thus, $F(c)\cong F(d)$.
+
+\vspace{4mm}\par
+
+\textbf{(b)} Explain why $\mathbb{Q}(\omega\sqrt[3]{2})\cong\mathbb{Q}(\sqrt[3]{2})$.
+
+\vspace{4mm}\par
+
+\textbf{Solution:} Consider the polynomial $X^3-2$. It is an irreducible polynomial in $\mathbb{Q}[X]$ and because $(\omega\sqrt[3]{2})^3=(\sqrt[3]{2})^3=2$, then both $\omega\sqrt[3]{2}$, $\sqrt[3]{2}$ are roots to $X^3-2$. Thus, $\mathbb{Q}[X]/(X^3-2)_i\cong\mathbb{Q}(\omega\sqrt[3]{2})$ and $\mathbb{Q}[X]/(X^3-2)_i\cong\mathbb{Q}(\sqrt[3]{2})$. Therefore, $\mathbb{Q}(\omega\sqrt[3]{2})\cong\mathbb{Q}(\sqrt[3]{2})$.
+
+\vspace{4mm}\par
+
+\textbf{(c)} Determine (with explanation) whether or not $\mathbb{Q}(\omega\sqrt[3]{2})=\mathbb{Q}(\sqrt[3]{2})$.
+
+\vspace{4mm}\par
+
+\textbf{Solution:} These two sets are not equal. This is because the element $\omega\sqrt[3]{2}\in\mathbb{Q}(\omega\sqrt[3]{2})$, thus $(-\frac{\sqrt[3]{2}}{2}+i\frac{\sqrt[3]{2}\sqrt{3}}{2})\in\mathbb{Q}(\omega\sqrt[3]{2})$, which is an element with an imaginary component. Since $\mathbb{Q}(\sqrt[3]{2})$ has no elements with imaginary components, then the two sets cannot be equal.
+
+\vspace{6mm}
+
+\noindent\textbf{7.}
+
+\vspace{4mm}\par
+
+\textbf{(a)} Find $[\mathbb{Q}(\sqrt{2},\sqrt{3})\colon\mathbb{Q}(\sqrt{3})]$, and find $[\mathbb{Q}(\sqrt{2},\sqrt{3})\colon\mathbb{Q}]$ by using the result on the bottom of p.2 of the Vector Spaces handout (and explain your answers).
+
+\vspace{4mm}\par
+
+\textbf{Solution:} To find $[\mathbb{Q}(\sqrt{2},\sqrt{3})\colon\mathbb{Q}(\sqrt{3})]$ we can look at a basis for $\mathbb{Q}(\sqrt{2},\sqrt{3})$ over $\mathbb{Q}(\sqrt{3})$
+
+\vspace{4mm}\par
+
+\textbf{(b)} Find $[\mathbb{Q}(\sqrt[4]{3}, i\sqrt{3}, \sqrt{3})\colon\mathbb{Q}]$, and explain your answer.
+
+\vspace{4mm}\par
+
+\textbf{Solution:}
+
+\vspace{6mm}
+
+\noindent\textbf{8.} Find the minimal polynomial of $4-\sqrt{2}$ over $\mathbb{Q}$ (and show your work).
+
+\vspace{4mm}
+
+\noindent\textbf{Solution:} Let $b=4-\sqrt{2}$. Then $4-b=\sqrt{2}$. Thus, $(4-b)^2=(\sqrt{2})^2$. Thus, $16-8b+b^2=2$. And so $b$ is a root $X^2-8X+14$. We can see that $X^2-8X+14$ is irreducible over $\mathbb{Q}$ since
+
+\begin{equation*}
+        \begin{split}
+            X &= \frac{8\pm\sqrt{64-56}}{2} \\
+            &= \frac{8\pm 2\sqrt{2}}{2} \\
+            &= 4\pm\sqrt{2}.
+        \end{split}
+    \end{equation*}
+    
+\vspace{4mm}
+
+\noindent Thus, since $X^2-8X+14$ is a monic and irreducible polynomial over $\mathbb{Q}$, whose roots include $4+\sqrt{2}$, then it is the minimal polynomial for $4+\sqrt{2}$. 
+ 
+\end{document}

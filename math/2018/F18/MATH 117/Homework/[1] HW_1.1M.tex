@@ -1,0 +1,322 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\newenvironment{twoproof}{\tabular{@{\stepproofc}c|l}}{\endtabular}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\begin{document}
+
+Quin Darcy\par
+MATH 117\par
+Dr.Ebrahimzadeh\par
+8/27/18\par
+
+\vspace{4mm}
+
+\centerline{\textbf{Quiz \#0}}
+
+\vspace{4mm}
+
+\begin{enumerate}
+    \item Let $V=\{f\colon\mathbb{R}\rightarrow\mathbb{R}\hspace{1mm}|\hspace{1mm}f(\pi)=0\}$. Prove $V$ is a vector space where $F=\mathbb{R}$ and vector addition and scalar multiplication are standard.\par
+    
+    \vspace{4mm}
+    
+    \underline{Solution}\par
+
+    \vspace{4mm}
+    
+    \textbf{Closure: }Let $f,g\in V$. Then $f(\pi)=0$ and $g(\pi)=0$. Thus, $f(\pi)+g(\pi)= 0 + 0 = 0$. Therefore, for all $f,g\in V$, we have $f+g\in V$ and $V$ is thereby closed under vector addition.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS1) }Let $f,g\in V$ and $\alpha\in\mathbb{R}$. Then since $f(\alpha)\in\mathbb{R}$ and $g(\alpha)\in\mathbb{R}$, by the properties of the reals it follows that\par
+    
+    \vspace{2mm}
+    
+    \centerline{$f(\alpha)+g(\alpha)=g(\alpha)+f(\alpha)$.}
+    
+    \vspace{2mm}
+    
+    Therefore, vector addition is commutative in $V$.
+    
+    \vspace{4mm}
+
+    \textbf{(VS2) }Let $f,g,h\in V$ and let $\alpha\in\mathbb{R}$. Then since $f(\alpha)\in\mathbb{R}$, $g(\alpha)\in\mathbb{R},$ and $h(\alpha)\in\mathbb{R}$ it follows that for any such $\alpha$ we have\par
+    
+    \vspace{2mm}
+    
+    \centerline{$f(\alpha)+(g(\alpha)+h(\alpha))=(f(\alpha)+g(\alpha))+h(\alpha)$.}
+    
+    \vspace{2mm}
+    
+    This follows from the properties of the real numbers and the associativity of addition therein.\par
+    
+    \vspace{4mm}
+    
+    \textbf{(VS3) }Consider the map $f\colon\mathbb{R}\rightarrow\mathbb{R}$, such that $f(\alpha)=0\cdot\alpha$, for all $\alpha\in\mathbb{R}$. Then if $\alpha=\pi$, we have $f(\pi)=0\cdot\pi=0$. Thus, $f\in V$. Now let $g\in V$ and $\beta\in\mathbb{R}$. It follows that\par
+    
+    \vspace{2mm}
+    
+    \centerline{$f(\beta)+g(\beta)=0\cdot\beta+g(\beta)=0+g(\beta)=g(\beta)+0$.}
+    
+    \vspace{2mm}
+    
+    Therefore, since there exists $f\in V$, such that $f+g=0+g=g+0$ for any $g\in V$, then $f$ is necessarily the identity element of $V$ with respect to vector addition.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS4) }Let $f\in V$. Then it follows that $f(\pi)=0$. Now if we multiply both sides of this expression by $-1$ we obtain $-f(\pi)=0$. Thus, for any $f\in V$ we have a corresponding $-f\in V$ which, for any $\alpha\in\mathbb{R}$, has the following property\par
+    
+    \vspace{2mm}
+    
+    \centerline{$f(\alpha)+(-f(\alpha))=0$.}
+    
+    \vspace{2mm}
+    
+    Therefore, for each vector in $V$, its additive inverse also exists in $V$.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS5) }Let $1\in\mathbb{R}$ be the standard multiplicative identity of the real numbers, let $f\in V$, and $\alpha\in\mathbb{R}$. Then since $f(\alpha)\in\mathbb{R}$, it follows that $1\cdot f(\alpha)=f(\alpha)$. Since $\alpha$ and $f$ were arbitrary, this result applies to all $f\in V$ and $\alpha\in\mathbb{R}$. Therefore, $1\cdot f=f$ for all $f\in V$.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS6) }Let $f\in V$ and $\alpha,\beta,\gamma\in\mathbb{R}$. Then since $f(\gamma)\in\mathbb{R}$, we have, by the property of multiplicative associativity in the reals, that\par
+    
+    \vspace{2mm}
+    
+    \centerline{$(\alpha\beta)f(\gamma)=\alpha(\beta f(\gamma))$.}
+    
+    \vspace{2mm}
+    
+    Since this applies to all $\gamma\in\mathbb{R}$, it follows that $(\alpha\beta)f=\alpha(\beta f)$.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS7) }Let $\alpha\in\mathbb{R}$ and $f,g\in V$. Then since for any $\beta\in\mathbb{R}$, we have, by the distributive properties of the reals, that\par
+    
+    \vspace{2mm}
+    
+    \centerline{$\alpha(f(\beta)+g(\beta))=\alpha f(\beta)+\alpha g(\beta)$.}
+    
+    \vspace{2mm}
+    
+    Since $\beta$ was arbitrary, this result applies to all $\beta\in\mathbb{R}$. Therefore, for any $\alpha\in\mathbb{R}$ and $f,g\in V$, we have $\alpha(f+g)=\alpha f+\alpha g$.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS8) }Let $\alpha,\beta\in\mathbb{R}$ and $f\in V$. Then for any $\gamma\in\mathbb{R}$, we inherit the distributive properties of the reals, whereby\par
+    
+    \vspace{2mm}
+    
+    \centerline{$(\alpha+\beta)f(\gamma)=\alpha f(\gamma)+\beta f(\gamma)$.}
+    
+    \vspace{2mm}
+    
+    Since this result applies to all $\gamma\in\mathbb{R}$, it follows that $(\alpha+\beta)f=\alpha f+\beta f$.
+    
+    \vspace{2mm}
+    
+    \item Let $V=\{f\colon\mathbb{R}\rightarrow\mathbb{R}\hspace{1mm}|\hspace{1mm}f(0)=\pi\}$. Addition and scalar multiplication are standard. Prove that $V$ is a vector space. Additionally, with proof, show which of the axioms fail if any do fail.
+    
+    \vspace{4mm}
+    
+    \underline{Solution}\par
+    
+    \vspace{4mm}
+    
+    \textbf{Closure: }Let $f,g\in V$. Then $f(0)=\pi$ and $g(0)=\pi$. Thus, $f(0)+g(0)=\pi+\pi=2\pi$. Hence, $(f+g)(0)\neq\pi$. Therefore, $f+g\notin V$ and is not closed under vector addition.
+    
+    \vspace{4mm}
+    
+    \textbf{Closure (scalar): }Let $f\in V$ and $a\in\mathbb{R}$. Then $f(0)=\pi$ and $af(0)=a\pi$. Thus, for any $a\in\mathbb{R}$ such that $a\neq 1$ and $f\in V$, we have $af\notin V$.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS1) }Let $f,g\in V$. Then since for any $a\in\mathbb{R}$, $f(a)\in\mathbb{R}$ and $g(a)\in\mathbb{R}$. Thus, by the commutative property of the reals with respect to addition, we have\par
+    
+    \vspace{2mm}
+    
+    \centerline{$f(a)+g(a)=g(a)+f(a)$.}
+    
+    \vspace{2mm}
+    
+    Therefore, for all $f,g\in V$ $f+g=g+f$.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS2) }Let $f,g,h\in V$ and let $a\in\mathbb{R}$. Then since $f(a)\in\mathbb{R}$, $g(a)\in\mathbb{R},$ and $h(a)\in\mathbb{R}$ it follows that for any such $a$ we have\par
+    
+    \vspace{2mm}
+    
+    \centerline{$f(a)+(g(a)+h(a))=(f(a)+g(a))+h(a)$.}
+    
+    \vspace{2mm}
+    
+    This follows from the properties of the real numbers and the associativity of addition therein.\par
+    
+    \vspace{4mm}
+    
+    \textbf{(VS3) }Suppose there exists $f\in V$ such that for all $g\in V$, $f+g=g$. Then it follows that for all $a\in\mathbb{R}$, $f(a)+g(a)=g(a)$. Since each element of $V$ maps into the reals, $V$ inherits the cancellation properties of the reals. Thus, $f(a)=g(a)-g(a)=0$. However, if for all $a\in\mathbb{R}$ we have $f(a)=0$, then $f\notin V$. This is a contradiction. Therefore, $V$ contains no additive identity.\par
+    
+    \vspace{4mm}
+    
+    \textbf{(VS4) }Let $f\in V$. Since for all $a\in\mathbb{R}$, we have that $f(a)\in\mathbb{R}$. Thus, we inherit the existence of additive inverses from the reals. However, since vector addition was proven not to be closed, this is a moot result.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS5) }Let $1\in\mathbb{R}$ be the standard multiplicative identity of the real numbers, let $f\in V$, and $\a\in\mathbb{R}$. Then since $f(a)\in\mathbb{R}$, it follows that $1\cdot f(a)=f(a)$. Since $a$ and $f$ were arbitrary, this result applies to all $f\in V$ and $a\in\mathbb{R}$. Therefore, $1\cdot f=f$ for all $f\in V$.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS6) }Let $f\in V$ and $a,b,c\in\mathbb{R}$. Then since $f(c)\in\mathbb{R}$, we have, by the property of multiplicative associativity in the reals, that\par
+    
+    \vspace{2mm}
+    
+    \centerline{$(ab)f(c)=a(b f(c))$.}
+    
+    \vspace{2mm}
+    
+    Since this applies to all $c\in\mathbb{R}$, it follows that $(ab)f=a(b f)$.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS7) }Let $a\in\mathbb{R}$ and $f,g\in V$. Then since for any $b\in\mathbb{R}$, we have, by the distributive properties of the reals, that\par
+    
+    \vspace{2mm}
+    
+    \centerline{$a(f(b)+g(b))=a f(b)+a g(b)$.}
+    
+    \vspace{2mm}
+    
+    Since $b$ was arbitrary, this result applies to all $b\in\mathbb{R}$. Therefore, for any $a\in\mathbb{R}$ and $f,g\in V$, we have $a(f+g)=a f+a g$.
+    
+    \vspace{4mm}
+    
+    \textbf{(VS8) }Let $a,b\in\mathbb{R}$ and $f\in V$. Then for any $c\in\mathbb{R}$, we inherit the distributive properties of the reals, whereby\par
+    
+    \vspace{2mm}
+    
+    \centerline{$(a+b)f(c)=a f(c)+b f(c)$.}
+    
+    \vspace{2mm}
+    
+    Since this result applies to all $c\in\mathbb{R}$, it follows that $(a+b)f=a f+b f$.
+    
+    \vspace{4mm}
+    
+    \item Give context and define each of the following\par
+    
+    \vspace{4mm}
+    
+    \textbf{Subspace: }A subspace $S$ of a vector space $V$ is a subset of $V$ in which vector addition is closed within $S$, as well as scalar multiplication. This can be written more formally as\par
+    
+    \vspace{2mm}
+    
+    \centerline{$\forall a\forall b\forall u\forall v(a\in F\wedge b\in F\wedge u\in S\wedge v\in S\rightarrow au+bv\in S)$.}
+    
+    \vspace{2mm}
+    
+    This notation can be interpreted as stating that $S$ is closed under linear combinations.\par
+    
+    \vspace{4mm}
+    
+    \textbf{Linear Independence: }Let $V$ be a vector space. A nonempty set $S$ of vectors in $V$ is linearly independent if the only linear combination that is equal to 0 is the trivial solution, or the combination in which all coefficients are equal to 0.
+    
+    \vspace{4mm}
+    
+    \textbf{Basis: }Let $V$ be a vector space. A nonempty set of vectors from $V$ is a basis for $V$ if $S$ is linearly independent and the set of all linear combinations made from the vectors in $S$ is equal to $V$.
+    
+    \vspace{4mm}
+    
+    \item Let $M=\Big\{\left( \begin{array}{cc} a & 3b\\ b & a-b\end{array}\right)| a,b\in\mathbb{R}\Big\}$. Prove $M$ is a subspace of $M_{2,2}$ and give a basis with proof.
+    
+    \vspace{4mm}
+    
+    Assume $v\in M$. Then there exists $a,b\in\mathbb{R}$ such that\par
+    
+    \vspace{4mm}
+    
+    \centerline{$v=\left( \begin{array}{cc} a & 3b\\ b & a-b\end{array}\right)$.}
+    
+    \vspace{4mm}
+    
+    Since the real numbers are closed under multiplication and addition, we know that $a$, $b$, $3b$, and $a-b$ must all be real numbers. Thus, $v\in M_{2,2}$ by definition.
+    
+    \hspace{4mm}Let $u,v\in M$. Now consider the sum of these two vectors,\par
+    
+    \vspace{4mm}
+    
+\centerline{$u+v=\left( \begin{array}{cc} a & 3b\\ b & a-b\end{array}\right)+\left( \begin{array}{cc} \hat{a} & 3\hat{b}\\ \hat{b} & \hat{a}-\hat{b}\end{array}\right)=\left( \begin{array}{cc} a+\hat{a} & 3(b+\hat{b})\\ b+\hat{b} & (a+\hat{a})-(b+\hat{b})\end{array}\right)$.}
+
+
+    \vspace{4mm}
+    
+    Since $a+\hat{a}$, $b+\hat{b}$, and $b+\hat{b}$ are all real numbers, then it follows that $u+v\in M$ and is therefore closed under vector addition.\par
+    \hspace{4mm}Let $v\in M$ and $n\in\mathbb{R}$. Then consider the product of $n$ and $v$\par
+    
+    \vspace{4mm}
+    
+    \centerline{$nv=n\left( \begin{array}{cc} a & 3b\\ b & a-b\end{array}\right)=\left( \begin{array}{cc} na & 3nb\\ bn & an-bn\end{array}\right)$.}
+    
+    \vspace{4mm}
+    
+    Since this product resulted in the multiplication of each of its entries by the real number $n$, then we know that these products are themselves real numbers. Hence, $nv\in M$. Therefore, $M$ is closed under scalar multiplication and is thereby a subspace of $M_{2,2}$.
+    
+    
+\end{enumerate}
+
+
+
+
+
+\end{document}

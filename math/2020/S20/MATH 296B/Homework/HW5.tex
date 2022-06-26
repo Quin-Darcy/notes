@@ -1,0 +1,184 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 296B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 4/17/20   \\
+{ \textbf{Instructor:}}\ Dr. Pigno \hspace{\fill} \textbf{Assignment:} Homework 5 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item[2.] Use quadratic reciprocity to determine $\big(\frac{5}{p}\big)$. In particular, note how its value depends only on $p$ mod 20.
+            \begin{solution}
+                Assuming $p$ is an odd prime, then by the Law of Quadratic Reciprocity
+                    \begin{equation*}
+                        \bigg(\frac{p}{5}\bigg)\bigg(\frac{5}{p}\bigg)=(-1)^{((p-1)/2)((5-1)/2)}=(-1)^{p-1}=1.
+                    \end{equation*}
+                Since the product of two quadratic residues is a residue and the product of two nonresidues is a residue, then we have two cases: the first being $\big(\frac{p}{5}\big)=1$, which implies $p\equiv 1(\text{mod }5)$ or $p\equiv 4(\text{mod }5)$ and the second case being $\big(\frac{p}{5}\big)=-1$, which implies $p\equiv 2(\text{mod }5)$ or $p\equiv 3(\text{mod }5)$.
+            \end{solution}
+        \item[3.] Evaluate\par
+            \begin{enumerate}
+                \item $\big(\frac{47}{61}\big)$
+                    \begin{solution}
+                        Since $61\equiv 1(\text{mod }4)$, then $\big(\frac{47}{61}\big)=\big(\frac{61}{47}\big)=\big(\frac{14}{47}\big)=\big(\frac{2}{47}\big)\big(\frac{7}{47}\big)$. To simplify $\big(\frac{2}{47}\big)$ we will appeal to the fact that
+                            \begin{equation*}
+                                \bigg(\frac{2}{p}\bigg)=
+                                \begin{cases}
+                                    1 &\text{if }p\equiv\pm 1(\text{mod }8) \\
+                                    -1 &\text{if }p\equiv\pm 3(\text{mod }8),
+                                \end{cases}
+                            \end{equation*}
+                        which, since $47\equiv 7\equiv -1(\text{mod }8)$, implies that $\big(\frac{2}{47}\big)=1$. To simplify $\big(\frac{7}{47}\big)$ we can use the fact that for odd primes $p,q$,
+                            \begin{equation*}
+                                \bigg(\frac{p}{q}\bigg)=\bigg(\frac{q}{p}\bigg)(-1)^{((p-1)/2)((q-1)/2)}.
+                            \end{equation*}
+                        Thus,
+                            \begin{equation*}
+                                \bigg(\frac{7}{47}\bigg)=\bigg(\frac{47}{7}\bigg)(-1)^{69}=-\bigg(\frac{47}{7}\bigg)=\bigg(\frac{-1}{7}\bigg)\bigg(\frac{47}{7}\bigg)=\bigg(\frac{-1}{7}\bigg)\bigg(\frac{5}{7}\bigg).
+                            \end{equation*}
+                        Now we can use the fact that 
+                            \begin{equation*}
+                                \bigg(\frac{-1}{p}\bigg)=(-1)^{(p-1)/2}
+                            \end{equation*}
+                        to tell us that $\big(\frac{-1}{7}\big)=(-1)^3=-1$. Finally, the only quadratic residues modulo 7 are 1 and 6 and so 5 is and so 5 is a quadratic nonresidue, as such $\big(\frac{5}{7}\big)=-1$. Therefore, 
+                            \begin{equation*}
+                                \bigg(\frac{47}{61}\bigg)=\bigg(\frac{2}{47}\bigg)\bigg(\frac{7}{47}\bigg)=(1)(-1)(-1)=1.
+                            \end{equation*}
+                    \end{solution}\newpage
+                \item $\big(\frac{137}{401}\big)$
+                    \begin{solution}
+                        Since $401\equiv 1(\text{mod }4)$, then by Quadratic Reciprocity, 
+                            \begin{equation*}
+                                \bigg(\frac{137}{401}\bigg)=\bigg(\frac{401}{137}\bigg)=\bigg(\frac{127}{137}\bigg).
+                            \end{equation*}
+                        We may reduce again since $137\equiv 1(\text{mod }4)$ and so
+                            \begin{equation*}
+                                \bigg(\frac{127}{137}\bigg)=\bigg(\frac{137}{127}\bigg)=\bigg(\frac{10}{127}\bigg)=\bigg(\frac{2}{127}\bigg)\bigg(\frac{5}{127}\bigg).
+                            \end{equation*}
+                        Since $127\equiv -1(\text{mod }8)$, then $\big(\frac{2}{127}\big)=1$. Now note that $5\equiv 1(\text{mod }4)$ and so 
+                            \begin{equation*}
+                                \bigg(\frac{5}{127}\bigg)=\bigg(\frac{127}{5}\bigg)=\bigg(\frac{2}{5}\bigg).
+                            \end{equation*}
+                        The squares modulo 5 are 1 and 4 and so since 2 is not a quadratic residue, then, $\big(\frac{2}{5}\big)=-1$. Therefore, 
+                            \begin{equation*}
+                                \bigg(\frac{137}{401}\bigg)=\bigg(\frac{2}{127}\bigg)\bigg(\frac{5}{127}\bigg)=(1)(-1)=-1.
+                            \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+        \item[4.] Determine all integers that can be expressed as the difference of two squares.
+            \begin{solution}
+                Let $n\in\mathbb{Z}$. Then consider the following 2 cases:
+                    \begin{enumerate}[label=(\roman*)]
+                        \item $n\equiv 0(\text{mod }4)$. In this case $n=4k$ for some $k\in\mathbb{Z}$ and we can see that $(k+1)^2-(k-1)^2=k^2+2k+1-k^2+2k-1=4k=n$. Thus, if $n$ is a multiple of 4, it can be expressed as a difference if squares.
+                        \item $n$ is odd. In this case, $n=2k+1$ for some $k\in\mathbb{Z}$ and now note that for consecutive integers, $(n-1)/2$ and $(n+1)/2$, we have that 
+                            \begin{equation*}
+                                \big(\frac{n+1}{2}\big)^2-\big(\frac{n-1}{2}\big)^2=\frac{n^2+2n+1}{4}-\frac{n^2-2n-1}{4}=\frac{4n}{4}=n.
+                            \end{equation*}
+                        Thus, if $n$ is odd it can be written as the difference of consecutive squares.
+                    \end{enumerate}
+                To summarize, if $n$ is a difference of squares, say $a^2-b^2$, then if both $a$ and $b$ are even, $4\mid n$. If $a$ is even and $b$ is odd, then $n$ is odd. If both $a$ and $b$ are odd, then $4\mid n$. Thus, the only integers that can be expressed as a difference of squares are either odd or divisible by 4.
+            \end{solution}
+        \item[5.] Let $n=650$. Find all the distinct ways to write $n$ as the sum of two squares by solving $n=\omega\overline{\omega}$, where $\omega\in\mathbb{Z}[i]$. By distinct we mean up to order and unit multiples.
+            \begin{solution}
+                First we will factor $650=2\cdot5^2\cdot13$. Then since $2=(1+i)(1-i)$, $5=(2+i)(2-i)$, and $13=(3+2i)(3-2i)$, then we have that 
+                    \begin{equation*}
+                        650=(1+i)(1-i)\big((2+i)(2-i)\big)^2(3+2i)(3-2i).
+                    \end{equation*}
+                Before writing all the possible values for $\omega$, note that since $650=2\cdot5^2\cdot13$, where $5\equiv 13\equiv 1(\text{mod 4})$, then $R(650)=4\tau(5^2\cdot13)=4\cdot6=24$. So we should expect 24 different values for $\omega$. They are as follows:\newpage
+                    \begin{align*}
+                        \omega_1&=(1+i)(2+i)^2(3+2i) & \omega_2&=(1+i)(2+i)^2(3-2i) \\ \omega_3&=(1+i)(2-i)^2(3+2i) & \omega_4&=(1+i)(2-i)^2(3-2i) \\ \omega_5&=(1-i)(2+i)^2(3+2i) & \omega_6&=(1-i)(2+i)^2(3-2i) \\ \omega_7&=(1-i)(2-i)^2(3+2i) & \omega_8&=(1-i)(2-i)^2(3-2i) \\ \omega_9&=(1+i)(2+i)(2-i)(3+2i) & \omega_{10}&=(1+i)(2+i)(2-i)(3-2i) \\ \omega_{11}&=(1-i)(2+i)(2-i)(3+2i) & \omega_{12}&=(1-i)(2+i)(2-i)(3-2i) \\
+                        \omega_{13}&=(1+i)(1-i)(2+i)(3+2i) & \omega_{14}&=(1+i)(1-i)(2+i)(3-2i) \\
+                        \omega_{15}&=(1+i)(1-i)(2-i)(3+2i) & \omega_{16}&=(1+i)(1-i)(2-i)(3-2i) \\
+                        \omega_{17}&=(1+i)(2+i)(3+2i)(3-2i) & \omega_{18}&=(1+i)(2-i)(3+2i)(3-2i) \\ \omega_{19}&=(1-i)(2+i)(3+2i)(3-2i) & \omega_{20}&=(1-i)(2-i)(3+2i)(3-2i) \\ \omega_{21}&=(1+i)(1-i)(2+i)^2 & \omega_{22}&=(1+i)(1-i)(2-i)^2 \\ \omega_{23}&=(2+i)^2(3+2i)(3-2i) & \omega_{24}&=(2-i)^2(3+2i)(3-2i).
+                    \end{align*}
+            \end{solution}
+            
+    \end{enumerate}
+\end{document}

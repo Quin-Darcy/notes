@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{enumitem}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{/home/arbegla/figures/}{#1.pdf_tex}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+    %\begin{figure}[htp!]
+    %    \centering
+    %      \incfig{S5}
+    %      \caption{Group Action}
+    %      \label{fig:action}
+    %  \end{figure}\
+
+\begin{document}
+\title{Abbreviation Ratio}
+\author{Helpdesk}
+\date{Oct 28, 2021}
+\maketitle
+    \section{Preliminary Definitions}
+        \begin{definition}
+            A \textbf{word} is a finite collection of characters. 
+        \end{definition}
+        \begin{definition}
+            Given a word $w$, we define its \textbf{length}, $l(w)$ as the number of characters in $w$. Thus $l(w)\in\mathbb{N}$
+        \end{definition}
+        \begin{definition}
+            Given a word $w$, we define its \textbf{leader character}, $lc(w)$ as the first character that appears in the word. 
+        \end{definition}
+        \begin{definition}
+            $\mathbb{W}$ is defined as the set which contains all words. 
+        \end{definition}
+        \begin{exmp}
+            Let $\mathfrak{g}=\mathbb{R}^3$ and define $[\cdot,
+            \cdot]:\mathbb{R}^3\times\mathbb{R}^3\to\mathbb{R}^3$ by
+                \begin{equation*}
+                    (\mathbf{u},
+                    \mathbf{v})\mapsto\norm{\mathbf{u}}\norm{\mathbf{v}}\sin\theta\cdot\mathbf{n},
+                \end{equation*}
+            where $\theta$ is the angle between $\mathbf{u}$ and $\mathbf{v}$
+            and $\mathbf{n}$ is the unit vector perpendicular to the plane
+            containing $\mathbf{u}$ and $\mathbf{v}$. Since for any plane,
+            there are two vectors perpendicular to it, the ``right-hand rule"
+            is used to make the selection. 
+        \end{exmp}
+        \begin{definition}
+            Given a Lie Algebra $\mathfrak{g}$ and a subspace, $\mathfrak{h}$,
+            of $\mathfrak{g}$, then $\mathfrak{h}$ is called
+            a \textbf{subalgebra} of $\mathfrak{g}$ if for all $h_1,
+            h_2\in\mathfrak{h}$, we have that $[h_1, h_2]\in\mathfrak{h}$.
+        \end{definition}
+        \begin{definition}
+            Given a Lie Algebra $\mathfrak{g}$ and a subalgebra, $\mathfrak{h}$
+            of $\mathfrak{g}$, we say that $\mathfrak{h}$ is an \textbf{ideal}
+            of $\mathfrak{g}$ if for all $u\in\mathfrak{g}$ and for all
+            $h\in\mathfrak{h}$, we have $[u, h]\in\mathfrak{h}$.
+        \end{definition}
+        \begin{definition}
+            The \textbf{center} of a Lie Algebra is the set consisting of all
+            the elements $u\in \mathfrak{g}$ such that for all $v\in
+            \mathfrak{g}$, $[u, v]=0$.
+        \end{definition}
+    \section{Simple, Solvable, and Nilpotent Lie Algebras}
+        Now that we know what a Lie Algebra is, we will explore some different
+        types of Lie Algebras.
+        \begin{definition}
+            Given a Lie Algebra $\mathfrak{g}$, if the only ideals of
+            $\mathfrak{g}$ are trivial (meaning $\{0\}$ and $\mathfrak{g}$
+            itself), then $\mathfrak{g}$ is called \textbf{irreducible}.
+        \end{definition}
+        \begin{definition}
+            If $\mathfrak{g}$ is an irreducible Lie Algebra such that the
+            dimension of $\mathfrak{g}$ is greater than or equal to 2, then
+            $\mathfrak{g}$  is called \textbf{simple}.
+        \end{definition}
+\end{document}

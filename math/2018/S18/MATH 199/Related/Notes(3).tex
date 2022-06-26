@@ -1,0 +1,169 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcolumntype{C}{>$c<$}
+\usepackage{stackengine}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=60mm,labelindent=60mm}
+
+
+
+\begin{document}
+
+
+\section*{\centerline{More Notes}}
+
+\justifying
+
+\vspace{5mm}
+
+\begin{flushleft}
+
+    \large{\textbf{Coordinates}}\normalsize\par
+    
+\vspace{4mm}
+    
+    In the usual presentation of $\mathbb{R}^n$ we write points as $n$-tuples $(x^1, ... , x^n)$. The individual numbers $x^i$ are called the \textbf{coordinates} of the point. We are so accustomed to this presentation that we do not think too much about it. There is, however, a hidden conceptual confusion because the presentation conflates two different ideas, namely the points ad their coordinates. The difficulty is resolved by thinking of the coordinates as \textbf{coordinate functions} that assign the coordinates to the point. According to this point of view, $x^i$ is a \textit{function} from $\mathbb{R}^n$ to $\mathbb{R}$ that sends the point $a=(a_1, ..., a_n)$ to the number $a_i$. Equivalently, we write\par
+    
+\vspace{4mm}
+    
+        \centerline{$x^i(a)=a_i$.}
+    
+\vspace{4mm}
+
+    This seems perfectly fine. The problem comes when we want to express a point of $\mathbb{R}^n$ as $x=(x^1, ..., x^n)$, for then we have the somewhat strange looking equation\par
+    
+\vspace{4mm}
+
+        \centerline{$x^i(x)=x^i$.}
+    
+\vspace{4mm}
+
+    In this equation, the $x^i$ on the left is a function from $\mathbb{R}^n$ to $\mathbb{R}$, while the $x^i$ on the left is just a number, namely the $i$th coordinate of the point $x=(x^1, ..., x^n)$. You must decide from context which meaning of $x^i$ is intended. 
+    
+\end{flushleft}
+
+    Part of the reason why this problem is so pernicious is that we generally describe points in terms of their coordinates. For example, the canonical presentation of the unit 2-sphere $S^2$ defines it to be the subset of $\mathbb{R}^3$ given by $\{x\in\mathbb{R}^3\colon (x^1)^2+(x^2)^2+(x^3)^2=1\}$. How else would you define it? Almost every definition relies on coordinates.\par
+    
+\begin{flushleft}
+
+    This gives rise to a related problem, one which leads eventually to the idea of a manifold. The description of the 2-sphere given above uses too many coordinates. The 2-sphere $S^2$ is two dimensional, and our intuition says that a two-dimensional object ought to be describable in terms of two coordinates, not three. But it turns out there is no single coordinate system of two coordinates that will do the job.
+
+\end{flushleft}
+
+\newpage
+
+\begin{flushleft}
+    \large{\textbf{Linear Maps}}\normalsize\par
+
+\vspace{4mm}
+
+    Let $V$ and $W$ be vector spaces. A map $T\colon V\rightarrow W$ is \textbf{linear} (or a \textbf{homomorphism}) if, for $v_1,v_2\in V$ and $a_1,a_2\in\mathbb{F}$,\par
+    
+\vspace{4mm}
+
+        \centerline{$T(a_1v_1+a_2v_2)=a_1Tv_1+a_2Tv_2$.}
+        
+\vspace{4mm}
+
+    
+
+\end{flushleft}
+
+\newpage
+
+\begin{flushleft}
+
+    \large{\textbf{The Tangent Space}}\normalsize\par
+
+\vspace{4mm}
+
+    To motivate what follows, let us return to Euclidean space for a moment. Let $\psi\colon\mathbb{R}^3\rightarrow\mathbb{R}$ be a scalar field on $\mathbb{R}^3$ and let $\gamma\colon I\rightarrow\mathbb{R}^3$ be a parametrized curve given by $t\mapsto(\gamma^1(t),\gamma^2(t),\gamma^3(t))=(x^1(t),x^2(t),x^3(t))$. Then\par
+    
+\vspace{4mm}
+
+        \centerline{$\frac{d}{dt}\psi(\gamma(t))=\frac{\partial\psi}{\partial x}\frac{dx}{dt}+\frac{\partial\psi}{\partial y}\frac{dy}{dt}+\frac{\partial\psi}{\partial z}\frac{dz}{dt}=\frac{d\gamma}{dt}\cdot\nabla\psi$,}
+    
+\vspace{4mm}
+
+    where $\nabla$ is the gradient operator $(\partial/\partial x,\partial/\partial y,\partial/\partial z)$ and $d\gamma/dt$ is the tangent vector to the curve. The above equation is the directional derivative of $\psi$ in the direction of $d\gamma/dt$. It tells us how $\psi$ changes as we move along the curve. It should be clear that $\psi$ is arbitrary and we may remove it from both sides of our above equation and get\par
+    
+\vspace{4mm}
+
+        \centerline{$\frac{d}{dt}=\frac{d\gamma}{dt}\cdot\nabla$.}        
+
+\end{flushleft}
+
+    This should give us a clue as to how the idea of a tangent vector can be generalized from Euclidean space to a general manifold. We cannot situate arrow or straight lines in a manifold since, generally, a manifold is not a vector space. We can, however, retain the essence of a tangent vector as something that tells you how a function changes as you move in that direction. So instead of $d\gamma/dt$, which lives in Euclidean space, we now view $d/dt$ itself as the tangent vector to the curve. This perspective can be a bit confusing at first. Rest assured that $\gamma$ is still there since $d/dt$ makes no sense as a tangent vector in the absence of a curve.\par
+    
+\vspace{4mm}
+
+\begin{flushleft}
+
+    As a simple illustration of the utility of this perspective, consider the transformation in $\mathbb{R}^2$ between Cartesian coordinates and polar coordinates:\par
+    
+\vspace{4mm}
+
+        \centerline{$x=r\cos{\theta}$,}
+        
+\vspace{2mm}
+
+        \centerline{$y=r\sin{\theta}$.}
+        
+\vspace{4mm}
+
+    Now consider the effect of the gradient operator, we see that the vector $\partial/\partial x$ points in the direction of increase in the $x$ direction, and this is true for $y$ as well. We set the length of each vector to unity and therefore write\par
+    
+\vspace{4mm}
+
+        \centerline{$e_x=\frac{\partial}{\partial x}$\hspace{4mm}and\hspace{4mm} $e_y=\frac{\partial}{\partial y}$}
+        
+\vspace{4mm}
+
+    for the usual orthonormal basis of $\mathbb{R}^2$.\par
+    
+\vspace{4mm}
+
+    Computing the above expression we get:\par
+    
+\vspace{4mm}
+
+        \centerline{$\frac{\partial}{\partial r}=\frac{\partial x}{\partial r}\frac{\partial}{\partial x}+\frac{\partial y}{\partial r}\frac{\partial}{\partial y}=\hspace{8.5mm}\cos\theta\frac{\partial}{\partial x}+\sin\theta\frac{\partial}{\partial y}$,}
+        
+\vspace{2mm}
+
+        \centerline{$\frac{\partial}{\partial \theta}=\frac{\partial x}{\partial \theta}\frac{\partial}{\partial x}+\frac{\partial y}{\partial \theta}\frac{\partial}{\partial y}=-r\sin\theta\frac{\partial}{\partial x}+r\cos\theta\frac{\partial}{\partial y}$.}        
+    
+    
+    
+\end{flushleft}
+
+
+
+\end{document}

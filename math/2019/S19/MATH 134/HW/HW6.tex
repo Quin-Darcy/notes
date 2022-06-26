@@ -1,0 +1,122 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+\usepackage{relsize}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{polynom}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+\setlist[description]{leftmargin=6mm,labelindent=8mm, rightmargin=6mm}
+  
+\begin{document}
+  
+\begin{flushleft}
+  
+    Quin Darcy\par
+    Dr. Krauel\par
+    MATH 134\par
+    03/05/19
+  
+\end{flushleft}
+  
+\centerline{\boxed{\text{Homework 6}}}
+ 
+\vspace{4mm}
+ 
+\noindent\textsc{Section: }\par
+ 
+\justifying
+ 
+\vspace{1mm}
+ 
+\hline
+ 
+\vspace{6mm}
+
+\noindent\textbf{2.21} Show that
+
+\begin{enumerate}[label=(\alph*)]
+    \item Log$(-ei)=1-\frac{\pi}{2}i$;
+    \item Log$(1-i)=\frac{1}{2}\ln2-\frac{\pi}{4}i.$
+\end{enumerate}
+
+\textbf{Solutions:}\par
+\vspace{2mm}
+\begin{enumerate}[label=(\alph*)]
+    \item Log$(-ei)=\ln\abs{-ei}+i$Arg$(-ei)=\lne+i$Arg$(-ei)=1-\frac{\pi}{2}i$.
+    \item Log$(1-i)=\ln\abs{1-i}+i$Arg$(1-i)=\ln(\sqrt{1^2+(-i)^2})+itan^{-1}(-1)=\frac{1}{2}\ln2-\frac{\pi}{4}i$.
+\end{enumerate}
+
+\vspace{2mm}
+
+\noindent\textbf{2.22} Suppose that the point $z=x+iy$ lies in the horizontal strip $\alpha<y<\alph+2\pi$. Show that when the branch $\log z=\ln r+i\theta$, $(r>0,\alpha<\theta<\alpha+2\pi)$ of the logarithmic function, then $\log(e^z)=z$.
+
+\par\vspace{4mm}
+\textbf{Solution:} Given a region $R$, we know that any continuous function Log$\colon R\rightarrow\mathbb{C}$ that satisfies $\exp(\text{Log}(z))=z$ is a branch of the logorithm on $R$. So then if we take $\alpha\in\mathbb{R}$ and let $z\in\{y\in\mathbb{R}\colon \alpha<y<\alpha+2\pi\}$, and let $\log z=\ln r+i\theta$, where $r>0$ and $\alpha<\theta<\alpha+2\pi$, be a branch of the logarithm on the region $
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,193 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 161}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 161}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 10/22/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 6 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item\hfill\par 
+            \begin{enumerate}
+                \item Prove that $\exists xR(x,y)\rightarrow\exists xR(x,x)$ is not a theorem of $K$.
+                    \begin{proof}
+                        To show this is not a theorem of $K$, we will show that it is not logically valid. Let $\mathcal{I}$ be an interpretation such that $A=\mathbb{Z}$ and that $R(x,y):=x<y$, and let $v$ be any valuation in $\mathcal{I}$. Assume that $v$ satisfies $\exists xR(x,y)$. Then by GEN, $v$ satisfies $\forall y\exists x R(x,y)$. Thus for any $n\in\mathbb{Z}$, $v[y\mid n]$ satisfies $\exists xR(x,y)$. Thus for some $m\in\mathbb{Z}$, $v[x\mid m,y\mid n]$ satisfies $R(x,y)$. Let $n=2$, then for $m=1$, we have that $1<2$. However, since $1<1$ is false, then $v$ does not satisfy $\exists R(x,x)$. Hence $v$ does not satisfy $\exists xR(x,y)\rightarrow\exists xR(x,x)$. Therefore the wff is not logically valid and thus it is not a theorem of $K$.
+                    \end{proof}
+                \item Identify the errors in the following proof and explanation.
+                    \begin{align*}
+                        &(1) \quad\exists xR(x,y) &&\text{additional axiom} \\
+                        &(2) \quad\forall y\exists xR(x,y) && \text{GEN of (1)} \\
+                        &(3) \quad\forall y\exists xR(x,y)\rightarrow\exists xR(x,x) && \text{A4/A5} \\
+                        &(4) \quad\exists xR(x,x) && \text{} \\
+                    \end{align*}
+                    Therefore $\{\exists xR(x,y)\}\vdash_K\exists xR(x,x)$ and thus by the Deduction Theorem, $\vdash_K\exists xR(x,y)\rightarrow\exists xR(x,x)$.
+                    \begin{solution}
+                        Line (3) is an improper use of A4 since $y$ occurs free in $\exists xR(x,y)$, and A5 is improperly used since $x$ is bounded, then $x$ is not free for $y$ in $\exists xR(x,y)$. Line (4) requires MP on (2) and (3). Finally, we have an improper use of the Deduction Theorem since GEN is used on a free variable in line (3).
+                    \end{solution}
+            \end{enumerate}
+        \item\hfill\par 
+            \begin{enumerate}
+                \item Prove that $\varphi\rightarrow\forall x\varphi$ is not a theorem of $K$.
+                    \begin{proof}
+                        Assume that $\varphi\rightarrow\forall x\varphi$ is a theorem of $K$. Then let $\mathcal{I}$ be an interpretation such that $A=\mathbb{N}$ and define $\varphi:=\forall y(x\leq y)$. Then by assumption, for any valuation $v$, $v$ satisfies $\varphi\rightarrow\forall x\varphi$ and thus if $v$ satisfies $\varphi$, then $v$ satisfies $\forall y(x\leq y)$. Thus for any $b\in A$, $v[y\mid b]$ satisfies $x\leq y$. Then by assumption, $v$ satisfies $\forall x\varphi$ and thus $v$ satisfies $\forall x\forall y(x\leq y)$. Thus any $a\in A$, $v[x\mid a]$ satisfies $\forall y(x\leq y)$. Thus for any $b\in A$, $v[x\mid a,y\mid b]$ satisfies $x\leq y$. However, if $a=4$ and $b=3$, then $v[x\mid a,y\mid b]$ does not satisfy $x\leq y$. Therefore $v$ does not satisfy $\forall x\forall y(x\leq y)$ and thus $v$ does not satisfy $\forall x\varphi$ which is a contradiction. Thus the given wff is not a theorem of $K$.
+                    \end{proof}
+                \item Why doesn't (a) contradict GEN is a rule of inference for $K$?
+                    \begin{solution}
+                        No contradiction occurs because under GEN we need for the antecedent to be logically valid, whereas that is not required in the above statement. Furthermore, without stipulating conditions regarding free variables, then one can construct counter-examples as was done in part (a).
+                    \end{solution}
+            \end{enumerate}
+        \item Indicate why each line below is a line of a proof in $K$, and explain how from this proof it can be shown that $\vdash_K\forall x(\varphi\rightarrow\theta)\rightarrow(\exists x\varphi\rightarrow\exists x\theta)$.
+            \begin{solution}
+                \begin{align*}
+                    &(1) \quad\forall x(\varphi\rightarrow\theta) &&\text{additional axiom} \\
+                    &(2) \quad\forall x\sim\theta && \text{additional axiom} \\
+                    &(3) \quad\forall x(\varphi\rightarrow\theta)\rightarrow(\varphi\rightarrow\theta) && \text{A4} \\
+                    &(4) \quad\varphi\rightarrow\theta && \text{MP on (1) and (3)} \\
+                    &(5) \quad(\varphi\rightarrow\theta)\rightarrow(\sim\theta\rightarrow\sim\varphi) && \text{A3} \\
+                    &(6) \quad\sim\theta\rightarrow\sim\varphi && \text{MP on (4) and (5)} \\
+                    &(7) \quad\forall x\sim\theta\rightarrow\sim\theta && \text{A4} \\
+                    &(8) \quad\sim\theta && \text{MP on (2) and (7)} \\
+                    &(9) \quad\sim\varphi && \text{MP on (8) and (6)} \\
+                    &(10) \quad\forall x\sim\varphi && \text{GEN on (9)} \\
+                \end{align*}
+                Thus we have shown that 
+                    \begin{equation*}
+                        \{\forall x(\varphi\rightarrow\theta),\forall x\sim\theta\}\vdash_K\forall x\sim\varphi
+                    \end{equation*}
+                and since the only instance of GEN was on $\sim\varphi$ which contains no free variables, then by the Deduction Theorem it follows that $\{\forall x(\varphi\rightarrow\theta)\}\vdash_K\forall x\sim\theta\rightarrow\forall x\sim\varphi$. Additionally, by A3 we can state
+                    \begin{equation*}
+                        \{\forall x(\varphi\rightarrow\theta)\}\vdash_K(\forall x\sim\theta\rightarrow\forall x\sim\varphi)\rightarrow(\exists x\varphi\rightarrow\exists x\theta).
+                    \end{equation*}
+                By MP (this feels very incorrect to use MP like this) on the two last theorems, it follows that
+                    \begin{equation*}
+                        \{\forall x(\varphi\rightarrow\theta)\}\vdash_K\exists x\varphi\rightarrow\exists x\theta.
+                    \end{equation*}
+                Then by the Deduction Theorem we obtain
+                    \begin{equation*}
+                        \vdash_K\forall x(\varphi\rightarrow\theta)\rightarrow(\exists x\varphi\rightarrow\exists x\theta).
+                    \end{equation*}
+            \end{solution}
+        \item Prove that $\vdash_K(\varphi\rightarrow\forall x\theta)\rightarrow\forall x(\varphi\rightarrow\theta)$, if $x$ does not occur free in $\varphi$.
+            \begin{proof}
+                Let $\Gamma=\{\varphi\rightarrow\forall\theta\}$.
+                    \begin{align*}
+                        &(1) \quad\varphi\rightarrow\forall x\theta &&\text{additional axiom} \\
+                        &(2) \quad\forall x\theta\rightarrow\theta && \text{A4/A5} \\
+                        &(3) \quad\varphi\rightarrow\theta && \text{HS on (1) and (2)} \\
+                        &(4) \quad\forall x(\varphi\rightarrow\theta) && \text{GEN on (3)} \\
+                    \end{align*}
+                Since our use of GEN was not on a free variable, for $x$ does not occur free in $\varphi$ nor in $\forall x\theta$, then by the Deduction Theorem $\vdash_K(\varphi\rightarrow\forall x\theta)\rightarrow\forall x(\varphi\rightarrow\theta)$.
+            \end{proof}
+        \item Indicate why each line below is a line of a proof in $K$, and explain how from this proof it can be shown that $\vdash_K\sim\forall x\varphi\rightarrow\exists x\sim\varphi$.
+            \begin{solution}
+                \begin{align*}
+                    &(1) \quad\forall x\sim\sim\varphi &&\text{additional axiom} \\
+                    &(2) \quad\forall x\sim\sim\varphi\rightarrow\sim\sim\varphi && \text{A4} \\
+                    &(3) \quad\sim\sim\varphi && \text{MP on (1) and (2)} \\
+                    &(4) \quad\sim\sim\varphi\rightarrow\varphi && \text{Instance of tautology} \\
+                    &(5) \quad\varphi && \text{MP on (3) and (4)} \\
+                    &(6) \quad\forall x\varphi && \text{GEN on (5)}
+                \end{align*}
+                Then from the Deduction Theorem it follows that $\vdash_K\forall x\sim\sim\varphi\rightarrow\forall x\varphi$. Since A3 is an axiom, then we can state $\vdash_K(\forall x\sim\sim\varphi\rightarrow\forall x\varphi)\rightarrow(\sim\forall x\varphi\rightarrow\sim\forall x\sim\sim\varphi)$ and by applying MP on both these theorem, we obtain $\vdash_K\sim\forall x\varphi\rightarrow\sim\forall x\sim\sim\varphi$. Finally, by properties of negation we get that $\vdash_K\sim\forall x\varphi\rightarrow\exists x\sim\varphi$.
+            \end{solution}
+        \item[8.] Let $pr(x)$ be a wff that denotes ``$x$ is prime''. Find a wff that represents ``$x$ is the $n$th prime''.
+            \begin{solution}
+                \begin{equation*}
+                    \begin{split}
+                        pr(x)\land\exists y_1\cdots\exists y_{n-1}[&pr(y_1)\land\cdots\land pr(y_{n-1}) \\&\land R(y_1,y_2)\land\cdots\land R(y_{n-2},y_{n-1})\land R(y_{n-1},x)\\ &\forall z(pr(z)]\land R(z,x)\rightarrow z=y_1\lor\cdots\lor z=y_{n-1})]
+                    \end{split}
+                \end{equation*}
+            \end{solution}
+    \end{enumerate}
+\end{document}

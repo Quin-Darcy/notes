@@ -1,0 +1,559 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 234A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 234A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/10/20   \\
+{ \textbf{Instructor:}}\ Dr. Bin Lu \hspace{\fill} \textbf{Assignment:} Homework 1 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item Write each of the following as complex numbers in the standard form $x+iy$:
+            \begin{enumerate}
+                \item $\frac{1}{i}$
+                    \begin{solution}
+                        We can obtain the standard form by multiplying the numerator and denominator by the conjugate of $i$. 
+                            \begin{equation*}
+                                \frac{1}{i}=\frac{1}{i}\cdot\frac{-i}{-i}=-i
+                            \end{equation*}
+                        Hence, $x=0$ and $y=-1$.
+                    \end{solution}
+                \item $\frac{4+i}{6-3i}$
+                    \begin{solution}
+                        We have that
+                            \begin{equation*}
+                                \frac{4+i}{6-3i}=\frac{4+i}{6-3i}\cdot\frac{6+3i}{6+3i}=\frac{7}{15}+\frac{2}{5}i.
+                            \end{equation*}
+                    \end{solution}
+                \item $\big(\frac{i-1}{2i+6}\big)^3$
+                    \begin{solution}
+                        \begin{equation*}
+                            \begin{split}
+                                \bigg(\frac{-1+i}{6+2i}\bigg)^3&=\bigg(\frac{-1+i}{6+2i}\cdot\frac{6-2i}{6-2i}\bigg)^3 \\
+                                &=\big(-\frac{1}{10}+\frac{1}{5}i\big)^3 \\
+                                &=\sum_{k=0}^3\binom{3}{k}\big(-\frac{1}{10}\big)^{3-k}\big(\frac{1}{5}i\big)^k \\
+                                &=-\frac{1}{1000}+\frac{1}{100}i.
+                            \end{split}
+                        \end{equation*}
+                    \end{solution}
+                \item $(2i-4)^2$
+                    \begin{solution}
+                        \begin{equation*}
+                            \begin{split}
+                                (-4+2i)^2 &= 12-16i
+                            \end{split}
+                        \end{equation*}
+                    \end{solution}
+                \item $i^{4n+3}$, $n\in\mathbb{Z}$
+                    \begin{solution}
+                        Note that $i^4=1$ and $i^3=-i$. Thus,
+                            \begin{equation*}
+                                i^{4n+3}=(i^4)^ni^3=1^n(-i)=-i
+                            \end{equation*}
+                    \end{solution}\newpage
+                \item $\bigg(\frac{1}{2}-\frac{\sqrt{3}}{2}i\bigg)^6$
+                    \begin{solution}
+                        \begin{equation*}
+                            \begin{split}
+                                \bigg(\frac{1}{2}-\frac{\sqrt{3}}{2}i\bigg)^6&=\big(e^{-i\pi/3}\big)^6\\
+                                &=e^{-2\pi i} \\
+                                &=\cos(-2\pi)+i\sin(-2\pi) \\
+                                &= 1.
+                            \end{split}
+                        \end{equation*}
+                    \end{solution}
+                \item $\bigg(\frac{\sqrt{2}}{2}+\frac{\sqrt{2}}{2}i\bigg)^8$
+                    \begin{solution}
+                        \begin{equation*}
+                            \begin{split}
+                                \bigg(\frac{\sqrt{2}}{2}+\frac{\sqrt{2}}{2}i\bigg)^8&=\big(e^{i\pi/4}\big)^8\\
+                                &=e^{2\pi} \\
+                                &=\cos(2\pi)+i\sin(2\pi)\\
+                                &= 1.
+                            \end{split}
+                        \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+        \item Find the real and imaginary parts of
+            \begin{enumerate}
+                \item $(i+1)^2\cdot(i-1)$
+                    \begin{solution}
+                        \begin{equation*}
+                            \begin{split}
+                                (i+1)^2(i-1)=2i(i-1)=-2-2i
+                            \end{split}
+                        \end{equation*}
+                        Hence, Re$((i+1)^2(i-1))=-2$, and Im$((i+1)^2(i-1))=0$.
+                    \end{solution}
+                \item $\frac{i+1}{i-1}$
+                    \begin{solution}
+                        \begin{equation*}
+                            \frac{1+i}{-1+i}=\frac{1+i}{-1+i}\cdot\frac{-1-i}{-1-i}=\frac{-2i}{2}=-i.
+                        \end{equation*}
+                        Hence, Re$(\frac{i+1}{i-1})=0$, and Im$(\frac{i+1}{i-1})=-1$.
+                    \end{solution}
+                \item $\frac{i^2}{i^3-4i+6}$
+                    \begin{solution}
+                        \begin{equation*}
+                            \frac{i^2}{i^3-4i+6}=\frac{-1}{6-5i}=\frac{-1}{6-5i}\cdot\frac{6+5i}{6+5i}=\frac{-6-5i}{61}.
+                        \end{equation*}
+                        Hence, Re$(\frac{i^2}{i^3-4i+6})=-\frac{6}{61}$, and Im$(\frac{i^2}{i^3-4i+6})=-\frac{5}{61}$.
+                    \end{solution}\newpage
+                \item $\frac{z}{z^2+1}$
+                    \begin{solution}
+                        Let $z=x+iy$. Then
+                        \begin{equation*}
+                            \begin{split}
+                                \frac{z}{z^2+1}&=\frac{x+iy}{(x^2+y^2+1)+2ixy} \\
+                                &=\frac{x+iy}{(x^2+y^2+1)+2ixy}\cdot\frac{(x^2+y^2+1)-2ixy}{(x^2+y^2+1)-2ixy} \\
+                                &=\frac{x^3+xy^2+x-2ix^2y+ix^2y+iy^3+iy+2xy^2}{(x^2+y^2+1)^2+2x^2y^2} \\
+                                &=\frac{x^3+(3y^2+1)x+(-x^2y+y+y^3)i}{(x^2+y^2+1)^2+2x^2y^2}.
+                            \end{split}
+                        \end{equation*}
+                        Hence,
+                            \begin{equation*}
+                                \text{Re}\bigg(\frac{z}{z^2+1}\bigg)=\frac{x^3+(3y^2+1)x}{(x^2+y^2+1)^2+2x^2y^2}, \quad\text{Im}\bigg(\frac{z}{z^2+1}\bigg)=\frac{(-x^2y+y+y^3)}{(x^2+y^2+1)^2+2x^2y^2}
+                            \end{equation*}
+                    \end{solution}
+                \item $\frac{z^2}{z-1}$
+                    \begin{solution}
+                        Let $z=x+iy$. Then $z^2=x^2+2ixy+y^2$ and $\overline{z+1}=\overline{(x+1)+iy}=(x+1)-iy$. Thus,
+                            \begin{equation*}
+                                \begin{split}
+                                    \frac{z^2}{z+1}&=\frac{z^2}{z+1}\cdot\frac{\overline{z+1}}{\overline{z+1}} \\
+                                    &= \frac{(x^2+y^2)+2ixy}{(x+1)+iy}\cdot\frac{(x+1)-iy}{(x+1)-iy} \\
+                                    &=\frac{((x^2+y^2)(x+1)+2xy^2)+i(-(x^2+y^2)y+2(x+1)xy)}{(x+1)^2+y^2}.
+                                \end{split}
+                            \end{equation*}
+                            Hence,
+                                \begin{equation*}
+                                    \text{Re}\bigg(\frac{z^2}{z+1}\bigg)=\frac{(x^2+y^2)(x+1)+2xy^2}{(x+1)^2+y^2},\quad\text{Im}\bigg(\frac{z^2}{z+1}\bigg)=\frac{-(x^2+y^2)y+2(x+1)xy}{(x+1)^2+y^2}.
+                                \end{equation*}
+                    \end{solution}
+                \item $z^4+2z+6$
+                    \begin{solution}
+                        Letting $z=x+iy$, then 
+                            \begin{equation*}
+                                z^4=(x+iy)^4=x^4+4ix^3y-6x^2y^2-4ixy^3+y^4
+                            \end{equation*}
+                        and so 
+                            \begin{equation*}
+                                \begin{split}
+                                    z^4+2z+6&=x^4+4ix^3y-6x^2y^2-4ixy^3+y^4+2x+2iy+6 \\
+                                    &=(x^4-6x^2y^2+2x+y^4+6)+i(4x^3y-4xy^3+2y).
+                                \end{split}
+                            \end{equation*}
+                        Thus, Re$(z^4+2z+6)=x^4-6x^2y^2+2x+y^4+6$ and Im$(z^4+2z+6)=4x^3y-4xy^3+2y$.
+                    \end{solution}
+            \end{enumerate}\newpage
+        \item Find the modulus of
+            \begin{enumerate}
+                \item $(2-i)^2(4+6i)$
+                    \begin{solution}
+                        \begin{equation*}
+                            (2-i)^2(4+6i)=(3-4i)(4+6i)=36+2i.
+                        \end{equation*}
+                        Hence, the modulus is $\sqrt{36^2+2^2}=\sqrt{1300}=10\sqrt{13}$.
+                    \end{solution}
+                \item $\frac{3-i}{(6+2i)^3}$
+                    \begin{solution}
+                        First note that $(6+2i)^3=144+208i$ and so
+                            \begin{equation*}
+                                \frac{3-i}{(6+2i)^3}=\frac{3-i}{144+208i}\cdot\frac{144-208i}{144-208i}=\frac{244-668i}{64000}
+                            \end{equation*}
+                        and so the modulus is
+                            \begin{equation*}
+                                \sqrt{\bigg(\frac{244}{64000}\bigg)^2+\bigg(\frac{668}{64000}\bigg)^2}=\sqrt{\bigg(\frac{61}{16000}\bigg)^2+\bigg(\frac{167}{16000}\bigg)^2}=\frac{\sqrt{31610}}{16000}.
+                            \end{equation*}
+                    \end{solution}
+                \item $(\sqrt{3}+i)\cdot(\sqrt{3}-i)$
+                    \begin{solution}
+                        \begin{equation*}
+                            (\sqrt{3}+i)(\sqrt{3}-i)=4
+                        \end{equation*}
+                        Hence, the modulus is $\sqrt{4^2}=4$.
+                    \end{solution}
+                \item $\frac{i+2}{i-2}$
+                    \begin{solution}
+                        \begin{equation*}
+                            \frac{2+i}{-2+i}=\frac{2+i}{-2+i}\frac{-2-i}{-2-i}=\frac{-3-4i}{\sqrt{5}}.
+                        \end{equation*}
+                        Thus the modulus is 
+                            \begin{equation*}
+                                \sqrt{\bigg(\frac{3}{\sqrt{5}}\bigg)^2+\bigg(\frac{4}{\sqrt{5}}\bigg)^2}=\sqrt{5}
+                            \end{equation*}
+                    \end{solution}
+                    \item $(1+i)(2+i)(3+i)$
+                        \begin{solution}
+                            \begin{equation*}
+                                (1+i)(2+i)(3+i)=(1+2i)(3+i)=1+7i.
+                            \end{equation*}
+                            Thus the modulus is $\sqrt{1^2+7^2}=\sqrt{50}=5\sqrt{2}$.
+                        \end{solution}\newpage
+                    \item Prove that for any complex numbers $z$ and $w$, 
+                        \begin{equation*}
+                            \begin{split}
+                                &\abs{z+w}^2=\abs{z}^2+\abs{w}^2+2\text{Re}(z\cdot\overline{w}), \\
+                                &\abs{z+w}^2+\abs{z-w}^2=2\abs{z}^2+2\abs{w}^2.
+                            \end{split}
+                        \end{equation*}
+                        \begin{proof}
+                            Let $z=x+iy$ and $w=a+ib$. Then 
+                                \begin{equation*}
+                                    \begin{split}
+                                        \abs{z+w}^2&=\abs{(x+a)+i(y+b)}^2 \\
+                                        &=(x+a)^2+(y+b)^2\\
+                                        &=(x^2+y^2)+(a^2+b^2)+2(xa+yb) \\
+                                        &=\abs{z}^2+\abs{w}^2+2\text{Re}(z\cdot\overline{w}).
+                                    \end{split}
+                                \end{equation*}
+                            Additionally,
+                                \begin{equation*}
+                                    \begin{split}
+                                        \abs{z-w}^2&=\abs{(x-a)+i(y-b)}^2 \\
+                                        &=(x-a)^2+(y-b)^2 \\
+                                        &= (x^2+y^2)+(a^2+b^2)-2(xa+yb) \\
+                                        &=\abs{z}^2+\abs{w}^2-2\text{Re}(xa+yb).
+                                    \end{split}
+                                \end{equation*}
+                            Hence, 
+                                \begin{equation*}
+                                    \abs{z+w}^2+\abs{z-w}^2=2\abs{z}^2+2\abs{w}^2
+                                \end{equation*}
+                            as desired.
+                        \end{proof}
+            \end{enumerate}
+        \item[6.]
+            Prove that 
+                \begin{equation*}
+                    1-\abs{\frac{z-w}{1-z\overline{w}}}^2=\frac{(1-\abs{z}^2)(1-\abs{w}^2)}{\abs{1-\overline{z}w}^2}
+                \end{equation*}
+            provided that $\overline{z}\cdot w\neq 1$.
+                \begin{proof}
+                    Let $z,w\in\mathbb{C}$ such that $z=x+iy$ and $w=a+ib$. Then 
+                        \begin{equation*}
+                            \begin{split}
+                                1-\abs{\frac{z-w}{1-z\overline{w}}}^2&=1-\abs{\frac{(x-a)+i(y-b)}{1-(xa+yb)-i(ya-xb)}}^2 \\
+                                &=1-\abs{\frac{(x-a)+i(y-b)}{1-(xa+yb)-i(ya-xb)}\cdot\frac{(1-xa-yb)+i(ya-xb)}{(1-xa-yb)+i(ya-xb)}}^2 \\
+                                &= \frac{(1-(x^2+y^2))(1-(a^2+b^2))}{(1-xa-yb)^2+(ya-xb)^2} \\
+                                &=\frac{(1-\abs{z}^2)(1-\abs{w}^2)}{\abs{1-\overline{z}w}^2}
+                            \end{split}
+                        \end{equation*}
+                \end{proof}\newpage
+        \item[7.] Let $p(z)=a_0+a_1z+\cdots+a_nz^n$ have real coefficients: $a_j\in\mathbb{R}$, for $0\leq j\leq n$. Prove that if $z_0$ satisfies $p(z_0)=0$, then also $p(\overline{z_0})=0$. Give a counterexample to this assertion in the case $a_0,\dots,a_n$ are not all real.
+            \begin{proof}
+                Let $z_0\in\mathbb{C}$ such that $p(z_0)=0$. Note that
+                    \begin{equation*}
+                        p(z_0)=a_0+a_1z_0+\cdots+a_nz_0^n=\sum_{i=0}^n a_iz_0^i.
+                    \end{equation*}
+                Since $\overline{z+w}=\overline{z}+\overline{w}$, it can be shown that
+                    \begin{equation*}
+                        \overline{\sum_{i=0}^na_iz_0^i}=\sum_{i=0}^n\overline{a_iz_0^i},
+                    \end{equation*}
+                and since $a_i\in\mathbb{R}$, then $\overline{a_iz_0^i}=a_i\overline{z_0^i}$. Additionally, since $\overline{z\cdot w}=\overline{z}\cdot\overline{w}$, then it follows that $a_i\overline{z_0^i}=a_i\overline{z_0}^i$. Thus
+                    \begin{equation*}
+                        \overline{p(z_0)}=\overline{\sum_{i=0}^na_iz_0^i}=\sum_{i=0}^na_i\overline{z_0}^i=p(\overline{z_0})=\overline{0}=0.
+                    \end{equation*}
+                If for some $0\leq i\leq n$, $a_i\notin\mathbb{R}$, then $\overline{a_i}=a_i$ would not necessarily hold which implies the equalities above would not necessarily hold.
+            \end{proof}
+        \item[9.] 
+            Prove that the function
+                \begin{equation*}
+                    \phi(z)=i\frac{1-z}{1+z}
+                \end{equation*}
+            maps the set $D=\{z\in\mathbb{C}\colon\abs{z}<1\}$ 1-1 onto the set $U=\{z\in\mathbb{C}\colon\text{Im}(z)>0\}$.
+                \begin{proof}
+                    Let $z\in D$. We first want to show that $\phi(z)\in U$. Letting $z=x+iy$ we get that 
+                        \begin{equation*}
+                            \begin{split}
+                                \phi(z)&=i\frac{1-x-iy}{1+x+iy} \\
+                                &= \frac{y+i(1-x)}{(x+1)+iy} \\
+                                &= \frac{y+i(1-x)}{(x+1)+iy}\cdot\frac{(x+1)-iy}{(x+1)-iy} \\
+                                &= \frac{2y+i(-x^2+1-y^2)}{(x^2+1+y^2)+2x}.
+                            \end{split}
+                        \end{equation*}
+                    Since $z\in D$, then $\sqrt{x^2+y^2}<1$ and so $x^2+y^2<1$, from which it follows that $-x^2-y^2>-1$. Thus, $-x^2+1-y^2>0$. Additionally, we have that $x^2+1+y^2+2x\geq1$. Hence, 
+                        \begin{equation*}
+                            \text{Im}(z)=\frac{-x^2+1-y^2}{(x^2+1+y^2)+2x}>0.
+                        \end{equation*}
+                    This implies $\phi(z)\in U$. Now assume $\phi(z_1)=\phi(z_2)$ for some $z_1,z_2\in D$. Then
+                        \begin{equation*}
+                            \begin{split}
+                                i\frac{1-z_1}{1+z_1}&=i\frac{1-z_2}{1+z_2} \\
+                                &\rightarrow (1-z_1)(1+z_2)=(1+z_1)(1-z_2) \\
+                                &\rightarrow z_2=z_1.
+                            \end{split}
+                        \end{equation*}
+                    Therefore, $\phi$ is 1-1.\par\hspace{4mm} Let $w=x+iy\in U$. Then for $z=a+ib\in D$ with 
+                        \begin{equation*}
+                            a=\frac{2y}{x^2+2x+1+y^2},\quad\text{and}\quad b=\frac{-x^2+1-y^2}{x^2+2x+1+y^2},
+                        \end{equation*}
+                    it follows that $\phi(z)=w$. Furthermore, since $a, b\in\mathbb{R}$ with $\sqrt{a^2+b^2}<1$, then such a $z$ will always exist. Therefore, $\phi$ is onto.
+                \end{proof}
+        \item[10.] Let $U=\{z\in\mathbb{C}\colon\text{Im}(z)>0\}$. Let 
+            \begin{equation*}
+                \psi(z)=\frac{\alpha z+\beta}{\gamma z+\delta},
+            \end{equation*}
+        where $\alpha,\beta,\gamma,\delta\in\mathbb{R}$ and $\alpha\delta-\beta\gamma>0$. Prove that $\psi\colon U\rightarrow U$ is 1-1 and onto. Conversely, prove that if 
+            \begin{equation*}
+                u(z)=\frac{az+b}{cz+d}
+            \end{equation*}
+        with $a,b,c,d\in\mathbb{C}$ and $u\colon U\rightarrow U$ 1-1 and onto, then $a,b,c,d\in\mathbb{R}$ and $ad-bc>0$.
+            \begin{proof}
+                Letting $z=x+iy$, then 
+                    \begin{equation*}
+                        \begin{split}
+                            \psi(x+iy)&=\frac{(\alpha x+\beta)+i\alpha y}{(\gamma x+\delta)+i\gamma y}\cdot\frac{(\gamma x+\delta)-i\gamma y}{(\gamma x+\delta)-i\gamma y} \\
+                            &=\frac{(\alpha\gamma(x^2+y^2)+(\alpha\delta+\delta\gamma)x+\beta\gamma)+i(\alpha\delta-\beta\gamma)y}{(\gamma x+\delta)^2+\gamma^2y^2}.
+                        \end{split}
+                    \end{equation*}
+                Since $\alpha\delta-\beta\gamma>0$ and $y>0$, then 
+                    \begin{equation*}
+                        \frac{(\alpha\delta-\beta\gamma)y}{(\gamma x+\delta)^2+\gamma^2+y^2}>0
+                    \end{equation*}
+                and so $\psi(z)\in U$. If $\psi(z)=\psi(w)$ for some $z,w\in U$, then 
+                    \begin{equation*}
+                        \begin{split}
+                            \frac{\alpha z+\beta}{\gamma z+\delta} &= \frac{\alpha w+\beta}{\gamma w+\delta} \\
+                            &\rightarrow (\alpha z+\beta)(\gamma w+\delta)=(\alpha w+\beta)(\gamma z+\delta) \\
+                            &\rightarrow\alpha\gamma zw+\alpha\delta z+\beta\gamma w+\beta\delta=\alpha\gamma zw+\alpha\delta w+\beta\gamma z+\beta\delta \\
+                            &\rightarrow (\alpha\delta-\beta\gamma)z=(\alpha\delta-\beta\gamma)w \\
+                            &\rightarrow z=w.
+                        \end{split}
+                    \end{equation*}
+                Hence, $\psi$ is 1-1. Next, if $w=x+iy\in U$, then for $z=a+ib$ such that
+                    \begin{equation*}
+                        a=\frac{\alpha\gamma(x^2+y^2)+(\alpha\delta+\delta\gamma)x+\beta\gamma}{(\gamma x+\delta)^2+\gamma^2+y^2},\quad b=\frac{(\alpha\delta-\beta\gamma)y}{(\gamma x+\delta)^2+\gamma^2+y^2}
+                    \end{equation*}
+                it follows that $\psi(z)=w$ and thus $\psi$ is onto.\par\hspace{4mm} Now assume that $u$ is 1-1 and onto. If $a,b,c,d\not\in\mathbb{R}$ then the inequality
+                    \begin{equation*}
+                        \frac{(ad-bc)y}{(cx+d)^2+c^2+y^2}
+                    \end{equation*}
+                does not hold for all $z=x+iy\in U$ and hence $u$ would not be onto which is a contradiction. Thus, $a,b,c,d\in \mathbb{R}$.
+            \end{proof}
+        \item[13.] Convert each of the following complex numbers to polar form. Give \textit{all possible} polar forms of each number.
+            \begin{enumerate}
+                \item $\sqrt{3}+i$
+                    \begin{solution}
+                        $\sqrt{3}+i=2\cos(\theta)+2i\sin(\theta)$ implies that $\theta=\arccos{(\sqrt{3}/2)}=2n\pi+\pi/6$ for $n\in\mathbb{Z}$. Thus,
+                            \begin{equation*}
+                                \sqrt{3}+i=2e^{i\big(\frac{12n+1}{6}\big)\pi}
+                            \end{equation*}
+                    \end{solution}
+                \item $\sqrt{3}-i$
+                    \begin{solution}
+                        By the same reasoning from above we get that
+                            \begin{equation*}
+                                \sqrt{3}-i=2e^{i\big(\frac{12n-1}{6}\big)\pi}
+                            \end{equation*}
+                    \end{solution}
+                \item $-6+6i$
+                    \begin{solution}
+                        $-6+6i=6\sqrt{2}(\cos(\theta)+i\sin(\theta))$ implies $-\sqrt{2}/2+i\sqrt{2}/2=\cos(\theta)+i\sin(\theta)$ and so $\theta=(8n+3)\pi/4$. Hence
+                            \begin{equation*}
+                                -6+6i=6\sqrt{2}e^{i\big(\frac{8n+3}{4}\big)\pi}, \quad n\in\mathbb{Z}.
+                            \end{equation*}
+                    \end{solution}
+                \item $4-8i$
+                    \begin{solution}
+                        $4-8i=4\sqrt{5}(\cos(\theta)+i\sin(\theta))$ implies $\sqrt{5}/5-2i\sqrt{5}/5=\cos(\theta)+i\sin(\theta)$. Letting $a=\arcsin{(2\sqrt{5}/5)}$, then 
+                            \begin{equation*}
+                                4-8i=4\sqrt{5}e^{i(a+2n\pi)},\quad n\in\mathbb{Z}.
+                            \end{equation*}
+                    \end{solution}
+                \item $2i$
+                    \begin{solution}
+                        $2i=2(\cos(\theta)+i\sin(\theta))$ implies $\cos(\theta)=0$ and $\sin(\theta)=1$. Thus, $\theta=(4n+1)\pi/2$. Hence,
+                            \begin{equation*}
+                                2i=2e^{i\big(\frac{4n+1}{2}\big)\pi},\quad n\in\mathbb{Z}.
+                            \end{equation*}
+                    \end{solution}
+                \item $-3i$
+                    \begin{solution}
+                        $-3i=3(\cos(\theta)+i\sin(\theta))$ implies that $\cos(\theta)=0$ and $\sin(\theta)=-1$. Thus, 
+                            \begin{equation*}
+                                -3i=3e^{i\big(\frac{4n+3}{2}\big)\pi},\quad n\in\mathbb{Z}.
+                            \end{equation*}
+                    \end{solution}
+                \item $-1$
+                    \begin{solution}
+                        Here we have that $\cos(\theta)=-1$ and so 
+                            \begin{equation*}
+                                -1=e^{i(2n+1)\pi}, \quad n\in\mathbb{Z}.
+                            \end{equation*}
+                    \end{solution}
+                \item $-8+\pi i$
+                    \begin{solution}
+                        $-8+\pi i=\sqrt{64+\pi^2}(\cos(\theta)+i\sin(\theta))$ implies that 
+                            \begin{equation*}
+                                a=\theta=\arcsin\bigg(\frac{\pi}{\sqrt{64+\pi^2}}\bigg)
+                            \end{equation*}
+                        and so
+                            \begin{equation*}
+                                -8+\pi i=\sqrt{64+\pi^2}e^{i(a+2n\pi)},\quad n\in\mathbb{Z}.
+                            \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+        \item[14.] Each of the following complex numbers is in polar form. Convert it to the rectangular form $z=x+iy$:
+            \begin{enumerate}
+                \item $3e^{i\pi}$
+                    \begin{solution}
+                        $3e^{i\pi}=3(\cos(\pi)+i\sin(\pi))=-3$.
+                    \end{solution}
+                \item $4e^{i\pi/4}$
+                    \begin{solution}
+                        $4e^{i\pi/4}=4(\cos(\pi/4)+i\sin(\pi/4))=2\sqrt{2}+2i\sqrt{2}$.
+                    \end{solution}
+                \item $4e^{i27\pi/4}$
+                    \begin{solution}
+                        $4e^{i27\pi/4)}=4(\cos(27\pi/4)+i\sin(27\pi/4))=4(0-i)=-4i$.
+                    \end{solution}
+                \item $6e^{i10\pi/3}$
+                    \begin{solution}
+                        $6e^{i10\pi/3}=6(\cos(10\pi/3)+i\sin(10\pi/3))=-3-3i\sqrt{3}$.
+                    \end{solution}
+                \item $e^{i\pi/12}$
+                    \begin{solution}
+                        $e^{i\pi/12}=\cos(\pi/12)+i\sin(\pi/12)=\frac{1+\sqrt{3}}{2\sqrt{2}}+i\frac{\sqrt{3}-1}{2\sqrt{2}}$.
+                    \end{solution}
+                \item $e^{-i3\pi/8}$
+                    \begin{solution}
+                        $e^{-i3\pi/8}=\cos(-3\pi/8)+i\sin(-3\pi/8)=\frac{\sqrt{2-\sqrt{2}}}{2}-\frac{i}{2}\sqrt{2-\sqrt{2}}$
+                    \end{solution}
+                \item $7e^{-i\pi/6}$
+                    \begin{solution}
+                        $7e^{-i\pi/6}=7(\cos(-\pi/6)+\sin(-\pi/6))=7\sqrt{3}/2-7i/2$.
+                    \end{solution}
+                \item $4e^{-i20\pi/6}$
+                    \begin{solution}
+                        $4e^{-i20\pi/6}=4(\cos(-20\pi/6)+i\sin(-20\pi/6)=-2+2i\sqrt{3}$.
+                    \end{solution}
+            \end{enumerate}\newpage
+        \item[20.] Use Euler's formula to prove DeMoivre's formula. Use this last identity to derive formulas for $\cos{\theta/2}$ and $\sin{\theta/2}$.
+            \begin{proof}
+                Euler's formula tells us that $e^{i\theta}=\cos\theta+i\sin\theta$. Thus
+                    \begin{equation*}
+                        \big(e^{i\theta}\big)^n=e^{i(n\theta)}=\cos{n\theta}+i\sin{n\theta}.
+                    \end{equation*}
+                Then we have that 
+                    \begin{equation*}
+                        \begin{split}
+                            \big(e^{i\theta/2}\big)^2&=(\cos\theta/2+i\sin\theta/2)^2 \\
+                            &=\cos^2\theta/2+2i\cos\theta/2\cdot\sin\theta/2-\sin^2\theta/2 \\
+                            &= \cos^2\theta/2+2i\sin\theta-1+\cos^2\theta/2 \\
+                            &= 2\cos^2\theta/2 +2i\sin\theta -1.
+                        \end{split}
+                    \end{equation*}
+                Hence, 
+                    \begin{equation*}
+                        \sqrt{\frac{\cos\theta+1}{2}}=\cos\theta/2.
+                    \end{equation*}
+                Similarly, 
+                    \begin{equation*}
+                        \sin\theta/2=\sqrt{\frac{1-\cos\theta}{2}}.
+                    \end{equation*}
+            \end{proof}
+        \item[21.] Find all the roots of $z^2+z+1=0$ and write the roots in polar form.
+            \begin{solution}
+                \begin{equation*}
+                    z=\frac{-1\pm\sqrt{1-4}}{2}=\frac{-1\pm i\sqrt{3}}{2}=-\frac{1}{2}\pm i\frac{\sqrt{3}}{2}=e^{i\big(\frac{12n+5}{6}\big)\pi}, \quad n\in\mathbb{Z}.
+                \end{equation*}
+            \end{solution}
+        \item[24.] Prove that if $z$ is a nonzero complex number and $k$ is an integer exceeding 1, then the sum of the $k$th roots of $z$ is zero.
+            \begin{proof}
+                Let $\omega^i$ for $0\leq i<k$ be the $k$ many roots of $z^k-1=0$. Then we have that 
+                    \begin{equation*}
+                        1+\omega+\omega^2+\cdots+\omega^{k-1}=\frac{\omega^k-1}{\omega-1},
+                    \end{equation*}
+                and since $\omega^k=1$, then the numerator in the equation above is 0. Hence, the sum of the $k$th roots of $z$ is 0.
+            \end{proof}
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,633 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+\usepackage{relsize}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{polynom}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+ \setlist[description]{leftmargin=12.8mm,labelindent=4mm}
+ 
+ \begin{document}
+ 
+ \section{Subspaces And Bases}
+ 
+ \noindent\textbf{Theorem 1} \textit{Suppose $V$ is a vector space over a field $\mathbb{F}$. Let $U=\{\mathbf{x}_i\}_{i=1}^r$ be a linearly independent set of vectors from $V$. Now let $\{\mathbf{y}_j\}_{j=1}^s$ be a set of vectors from $V$ and denote $W=\text{span}(\{\mathbf{y}_j\}_{j=1}^s)$. Then if $U\subseteq W$, then $r\leq s$.}
+ 
+ \vspace{4mm}
+ 
+ \textbf{\textit{Proof 1.}} Define $W\equiv V$. Then we are assuming that the set $\{\mathbf{y}_j\}_{j=1}^s$ spans $V$. By assumption, $U\subseteq W$. It follows that for each $\mathbf{x}_m\in U$, then $\mathbf{x}_m\in W$. Then for $\mathbf{x}_1$, for instance, there exists scalars $c_1,\dots c_s\in\mathbb{F}$ such that
+ 
+ \begin{equation}
+     \mathbf{x}_1=\sum\limits_{j=1}^s c_j\mathbf{y}_j.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent Not all of these scalars can be 0. Suppose they did all equal 0. Then $\mathbf{x}_1=0$. This means that we can find a linear combination of vectors from $U$ such that $\mathbf{x}_1=\sum_{i=2}^{r}c_i\mathbf{x}_i$. Namely, $\mathbf{x}_1=\sum_{i=2}^{r}0\mathbf{x}_i$. This would mean $U$ is not a linearly independent set, and thus contradict our assumption. Thus, not all the scalars in (1) can be 0. Now from (1), suppose $c_k\neq 0$. Then solving (1) for $\mathbf{y}_k$, we obtain 
+ 
+ \begin{equation}
+     \mathbf{y}_k=-\frac{1}{c_k}\mathbf{x}_1-\sum\limits_{j=1}^{k-1}\frac{c_j}{c_k}\mathbf{y}_j-\sum\limits_{j=k+1}^s\frac{c_j}{c_k}\mathbf{y}_j.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent This can be simplified by noting the expression on the right is just a linear combination of the vectors involved. Thus, (2) is equivalent to
+ 
+ \begin{equation*}
+     \mathbf{y}_k\in\text{span}\bigg( \mathbf{x}_1, \overbrace{\hbox{\mathbf{y}_1, \dots, \mathbf{y}_{k-1},\mathbf{y}_{k+1},\dots, \mathbf{y}_s}}^{\hbox{s-1 vectors}}\bigg ).
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Now let
+ 
+ \begin{equation}
+     \{\mathbf{z}_1,\dots,\mathbf{z}_{s-1}\}=\{\mathbf{y}_1,\dots,\mathbf{y}_{k-1},\mathbf{y}_{k+1},\dots, \mathbf{y}_s\}.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent Then it follows that $\text{span}(\mathbf{x}_1,\mathbf{z}_1,\dots, \mathbf{z}_{s-1})=V$. This can be seen by noting that we first assumed that $W=V$. Meaning, the span of the set $\{\mathbf{y}_1,\dots, \mathbf{y}_s\}$ was equal to $V$. Then we took a vector $\mathbf{x}_1\in U$ and wrote it as a linear combination in terms of the vectors $\mathbf{y}_j$, see (1). After doing this, we solved for $\mathbf{y}_k$ and re-expressed it as a linear combination of $\mathbf{x}_1$ and the remaining vectors $\{\mathbf{y}_1,\dots,\mathbf{y}_{k-1},\mathbf{y}_{k+1},\dots, \mathbf{y}_s\}$, see (2). To illustrate this further, suppose $\mathbf{v}\in V$. Then since $W=V$ by assumption, there exists scalars $c_1,\dots, c_s\in\mathbb{F}$ such that
+ 
+ \begin{equation}
+     \mathbf{v}=c_1\mathbf{y}_1+\cdots+c_s\mathbf{y}_s.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent Now we will replace the $k^{\text{th}}$ vector in (4) with (2).
+ 
+ \newpage
+ 
+ \noindent By doing this we obtain
+ 
+ \begin{equation}
+     \mathbf{v}=c_1\mathbf{y}_1+\cdots+c_k\bigg(-\frac{1}{c_k}\mathbf{x}_1-\sum\limits_{j=1}^{k-1}\frac{c_j}{c_k}\mathbf{y}_j-\sum\limits_{j=k+1}^s\frac{c_j}{c_k}\mathbf{y}_j\bigg)+\cdots+c_s\mathbf{y}_s.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent Despite how awful this looks, we can clearly see that the arbitrary vector $\mathbf{v}\in V$ that we chose is written as a linear combination of the vectors in the set $\{\mathbf{x}_1,\mathbf{y}_1,\dots,\mathbf{y}_{k-1},\mathbf{y}_{k+1},\dots, \mathbf{y}_s\}$. Now using our relabeling we defined in (3), we can say that for any $\mathbf{v}\in V$,
+ 
+ \begin{equation*}
+     \mathbf{v}=\sum\limits_{i=1}^{s-1}c_i\mathbf{z}_i+c_s\mathbf{y}_k\rightarrow \mathbf{v}\in\text{span}(\mathbf{x}_1,\mathbf{z}_1,\dots,\mathbf{z}_{s-1}).
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Therefore, $\text{span}(\mathbf{x}_1,\mathbf{z}_1,\dots,\mathbf{z}_{s-1})=V$. We can think of this result as having taken our set $\{\mathbf{y}_1,\dots, \mathbf{y}_s\}$ and replacing $\mathbf{y}_k$ with $\mathbf{x}_1$ and yielding a set which still spans $V$.\par
+ Now suppose $r>s$ and that $\text{span}(\mathbf{x}_1,\dots,\mathbf{x}_l,\mathbf{z}_1\dots,\mathbf{z}_p)=V$, where the vectors, $\mathbf{z}_1,\dots,\mathbf{z}_p$ are taken from the set $\{\mathbf{y}_1,\dots,\mathbf{y}_s\}$ and $l+p=s$. We have already done this for $l=1$. Now since $r>s$ it follows that $l\leq s<r$ and so $l+1\leq r$. Thus, $\mathbf{x}_{l+1}$ is not a vector in the list $\{\mathbf{x}_1,\dots,\mathbf{x}_l\}$. Since $\text{span}(\mathbf{x}_1,\dots,\mathbf{x}_l,\mathbf{z}_1\dots,\mathbf{z}_p\}=V$, then there exists scalars $c_i,d_j\in\mathbb{F}$ such that
+ 
+ \begin{equation}
+     \mathbf{x}_{l+1}=\sum\limits_{i=1}^lc_i\mathbf{x}_i+\sum\limits_{j=1}^pd_j\mathbf{z}_j.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent Not all the $d_j$ can equal zero because if this were so, it would follow that $\{\mathbf{x}_1,\dots,\mathbf{x}_r\}$ would be a linearly dependent set because one of the vectors would equal a linear combination of the others. Thus, (6) can be solved for one of the $\mathbf{z}_j$, say $\mathbf{z}_k$, in terms of $\mathbf{x}_{l+1}$ and the other $\mathbf{z}_j$ and just as the above argument, replace $\mathbf{z}_k$ with $\mathbf{x}_{l+1}$ to obtain
+ 
+ \begin{equation*}
+     \text{span}\bigg(\mathbf{x},\dots,\mathbf{x}_l,\mathbf{x}_{l+1},\overbrace{\hbox{ \mathbf{z}_1, \dots, \mathbf{z}_{k-1},\mathbf{z}_{k+1},\dots, \mathbf{z}_p}}^{\hbox{p-1 vectors}}\bigg )=V.
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Repeat this process and you will eventually obtain
+ 
+ \begin{equation}
+     \text{span}(\texbf{x}_1,\dots,\textbf{x}_s)=V.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent But then $\mathbf{x}_r\in\text{span}(\mathbf{x}_1,\dots,\mathbf{x}_s)$ contrary to the assumption that $\{\mathbf{x}_1,\dots,\mathbf{x}_r\}$ is linearly independent. Therefore, $r\leq s$ as claimed. \blacksquare
+ 
+ \vspace{4mm}
+ 
+ \newpage
+ 
+ \textbf{\textit{Proof 2.}} Since $\{\mathbf{y}_1,\dots,\mathbf{y}_s\}$ spans $V$, then for any $\mathbf{x}_k\in U$, there exists scalars $a_1^k,\dots,a_s^k\in\mathbb{F}$ such that
+ 
+ \begin{equation*}
+     \mathbf{x}_k=\sum\limits_{j=1}^sa_{jk}\mathbf{y}_j.
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent This motivates the following construction. For each $\mathbf{x}_i\in U$, let $[\mathbf{x}_i]_W$ be an $s-$tuple which consists of the scalars that are multiplied by the vectors $\mathbf{y}_j$ to form the linear combination of $\mathbf{x}_i$. Thus,
+ 
+ \begin{equation*}
+     \begin{split}
+         \mathbf{x}_1 &=\sum\limits_{j=1}^sa_j^1\mathbf{y}_j\rightarrow [\mathbf{x}_1]_W=(a_{11}, a_{21},\dots, a_{s1}) \\
+         \mathbf{x}_2 &=\sum\limits_{j=1}^sa_j^2\mathbf{y}_j\rightarrow [\mathbf{x}_2]_W=(a_{12},a_{22},\dots,a_{s2}) \\
+         &\hspace{35mm}\vdots\\
+         \mathbf{x}_r &=\sum\limits_{j=1}^sa_j^r\mathbf{y}_j\rightarrow[\mathbf{x}_r]_W=(a_{1r},a_{2r},\dots,a_{sr}).
+     \end{split}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent We can see from this construction that if $r>s$, then the matrix $A=(a_{jk})$ would have more columns than rows.
+ 
+ \begin{equation*} A = 
+     \begin{bmatrix} ([\mathbf{x}_1]_W)^T & ([\mathbf{x}_2]_W)^T & \cdots & ([\mathbf{x}_r]_W)^T \end{bmatrix}.
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent This implies one of these columns is a linear combination of the others. Thus, exist scalars $c_1,\dots, c_r\in\mathbb{F}$, not all zero, such that 
+ 
+ \begin{equation*}
+     \begin{bmatrix} ([\mathbf{x}_1]_W)^T & ([\mathbf{x}_2]_W)^T & \cdots & ([\mathbf{x}_r]_W)^T \end{bmatrix} \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_r \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent I have to move on. To be continued.
+ 
+ \newpage
+ 
+ \section{Quiz 2'}
+ 
+ \noindent\textbf{1.} $V$ is a vector space and $L'\subset L\subset V$.
+ 
+ \vspace{2mm}\par
+ 
+ \textbf{i)} If $L$ is linearly independent, must $L'$ be linearly independent?
+ 
+ \vspace{4mm}
+ 
+ \textbf{Solution: } Yes. Assume $L$ is linearly independent and assume $L'$ is linearly dependent. The first assumption implies for all linear combinations made from vectors in $L$, the only one which is equal to $0_V$ is the one where all the coefficients are $0$. The second assumption implies that there exists a linear combination of the vectors in $L'$ that has a non-trivial solution equal to $0_V$. However, since $L'\subset L$, then this same non-trival solution exists in $L$. Thus, $L$ is linearly dependent. This is a contradiction. Therefore, $L'$ is linearly independent.
+ 
+ \vspace{4mm}\par
+ 
+ \textbf{ii)} If $L$ is linearly dependent and if $\abs{L'}=\abs{L}-1=3$, must $L'$ be linearly independent?
+ 
+ \vspace{4mm}
+ 
+ \textbf{Solution:} No. Let $V=\mathbb{R}^3$, $L=\{(1,0),(2,0),(4,0), (16,0)\}$. Then any subset of $L$ containing $3$ elements will, by construction, be linearly dependent. 
+ 
+ \section{The Matrix Of A Linear Transformation}
+ \noindent\textbf{Definition:}\textit{ The matrix of a linear transformation $L\in\mathcal{L}(V,W)$ with respect to the ordered basis $\beta=\{v_1,\dots,v_n\}$ for $V$ and $\gamma=\{w_1,\dots,w_m\}$ for $W$ is defined to be $[L]_{\beta}^{\gamma}$, where $[L]_{ij}=d_{ij}$. Thus, this matrix is defined by $L=\sum_{i,j}[L]_{ij}w_iv_i$.}
+ 
+ \vspace{2mm}
+ 
+ If $V$ is an $n$ dimensional vector space and $\beta=\{v_1,\dots,v_n\}$ is a basis for $V$, there exists a linear map
+ 
+ \begin{equation*}
+     q_{\beta}\colon \mathbb{F}^n\rightarrow V
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent defined as
+ 
+ \begin{equation*}
+     q_{\beta}(\mathbf{a})\equiv\sum\limits_{i=1}^na_iv_i,
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent where
+ 
+ \begin{equation*}
+     \mathbf{a}=\begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix} = \sum\limits_{i=1}^na_i\mathbf{e}_i,
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent for $\mathbf{e}_i$ the standard basis vectors for $\mathbb{F}^n$ consisting of $(0, \cdots, 1, \cdots, 0)^T$, where the 1 is in the $i^{\text{th}}$ position and the other entries are 0.\par
+ It is clear that the map $q$ is bijective and linear. For $v\in V$, $q^{-1}_{\beta}(v)$ is a vector in $\mathbb{F}^n$ called the component vector of $v$ with respect to the basis $\beta$.
+ 
+ \newpage
+ 
+ \noindent\textbf{Proposition:} \textit{The matrix of a linear transformation with respect to ordered basis $\beta$,$\gamma$ as described above is characterized by the requirement that multiplication of the components of $v$ by $[L]_{\beta}^{\gamma}$ gives the components of $L(v)$.}
+ 
+ \vspace{2mm}
+ 
+ \textbf{\textit{Proof.}} Let $v\in V$. Then $v\in\text{span}(\beta)$ and there exists scalars $c_1,\cdots,c_n\in\mathbb{F}$ such that 
+ 
+ \begin{equation*}
+     v=\sum\limits_{i=1}^nc_iv_i.
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Thus, since $L\colon V\rightarrow W$, then
+ 
+ \begin{equation*}
+     L(v)=L\bigg(\sum\limits_{i=1}^nc_iv_i\bigg)=\sum\limits_{i=1}^nc_iL(v_i)=\sum\limits_{i=1}^n\sum\limits_{j=1}^m[L]_{ji}c_iw_j=\sum\limits_{j=1}^m\sum\limits_{i=1}^n[L]_{ji}c_iw_j.
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent so the $j^{\text{th}}$ component of $L(v)$ is $\sum_{i=1}^n[L]_{ji}c_i$, the $j^{\text{th}}$ component of the matrix times the component vector of $v$.
+ 
+ \vspace{2mm}
+ 
+ \noindent\textbf{Example 1:} Let $L\colon\mathbb{R}^3\rightarrow\mathbb{R}^3$. Also, suppose $L(-5,0,0)=(10,0,0)$, $L(0,1,0)=(0,4,0)$, and that $L(1,1,1)=(3,3,3)$. Additionally, let $\gamma$ be the standard basis for $\mathbb{R}^3$.
+ 
+ \vspace{2mm}
+ 
+ \textbf{i)} Find $[L]_{\beta}^{\gamma}$.
+ 
+ \vspace{2mm}
+ 
+ \textbf{Solution:} It is easily checked that $\beta=\{\overbrace{\hbox{(-5,0,0)}}^{\hbox{$v_1$}}, \overbrace{\hbox{(0,1,0)}}^{\hbox{$v_2$}}, \overbrace{\hbox{(1,1,1)}}^{\hbox{$v_3$}}\}$ is a basis for $\mathbb{R}^3$. What we were given can be restated as
+ 
+ \begin{equation*}
+     \begin{split}
+         L(v_1) &= 10\mathbf{e}_1+0\mathbf{e}_2+0\mathbf{e}_3=\sum\limits_{i=1}^3[L]_{i1}\mathbf{e}_i \\
+         L(v_2) &= 0\mathbf{e}_1+4\mathbf{e}_2+0\mathbf{e}_3 = \sum\limits_{i=1}^3[L]_{i2}\mathbf{e}_i \\
+         L(v_3) &= 3\mathbf{e}_1+3\mathbf{e}_2+3\mathbf{e}_3 = \sum\limits_{i=1}^3[L]_{i3}\mathbf{e}_i
+     \end{split}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Thus,
+ 
+ \begin{equation*}
+     [L]_{\beta}^{\gamma}=\begin{bmatrix} [L]_{11} & [L]_{12} & [L]_{13} \\ [L]_{21} & [L]_{22} & [L]_{23} \\ [L]_{31} & [L]_{32} & [L]_{33} \end{bmatrix} = \begin{bmatrix} 10 & 0 & 3 \\ 0 & 4 & 3 \\ 0 & 0 & 3 \end{bmatrix}.
+ \end{equation*}
+ 
+ \vspace{4mm}
+ 
+ \textbf{ii)} Find $L(x,y,z)$.
+ 
+ \vspace{4mm} 
+ 
+ \textbf{Solution:} We must find an explicit formula which represents the elements in the range of the transformation. We start with the following
+ 
+ \newpage
+ 
+ \noindent Since $(x,y,z)\in\mathbb{R}^3$, then it can be written as a linear combination of the vectors in $\beta$. Thus, $(x,y,z)=\sum_{i=1}^3c_iv_i$. Hence,
+ 
+ \begin{equation*}
+     \begin{split}
+         (x,y,z) &= c_1(-5,0,0)+c_2(0,1,0)+c_3(1,1,1) \\
+         &= (-5c_1+c_3, c_2+c_3, c_3)
+     \end{split}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent This implies that $c_3=z$, $c_2=y-z$, and $c_1=\frac{-x+z}{5}$. Thus, 
+ 
+ \begin{equation*}
+    \begin{split}
+        L(x,y,z) &= L\bigg(\sum\limits_{i=1}^3c_iv_i\bigg)=L\bigg((\frac{-x+z}{5})(-5,0,0)+(y-z)(0,1,0)+z(1,1,1)\bigg) \\ &= (\frac{-x+z}{5})L(-5,0,0)+(y-z)L(0,1,0)+zL(1,1,1) \\
+        &= (\frac{-x+z}{5})(10,0,0)+(y-z)(0,4,0)+z(3,3,3) \\
+        &= (-2x+2z,0,0)+(0,4y-4z,0)+(3z,3z,3z) \\
+        &= (-2x+5z, 4y-z, 3z).
+     \end{split}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \textbf{iii)} Find $[L]_{\beta}^{\beta}$.
+ 
+ \vspace{4mm}
+ 
+ \textbf{Solution:} This can be solved by noting the following
+ 
+ \begin{equation*}
+     [L]_{\beta}^{\beta}=\begin{bmatrix} [L(v_1)]_{\beta} & [L(v_2)]_{\beta} & [L(v_3)]_{\beta} \end{bmatrix}.
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Thus, 
+ 
+ \begin{equation*}
+    \begin{split}
+        &[L(v_1)]_{\beta}= [(10,0,0)]_{\beta} =\bigg(\sum\limits_{i=1}^3c_{i1}v_i\bigg)^T = (-5c_{11}+c_{31},c_{21}+c_{31},c_{31})^T \\
+        &[L(v_2)]_{\beta}=[(0,4,0)]_{\beta}=\bigg(\sum\limits_{i=1}^3c_{i2}v_i\bigg)^T =(-5c_{12}+c_{32},c_{22}+c_{32},c_{32})^T\\
+        &[L(v_3)]_{\beta}=[(3,3,3)]_{\beta}=\bigg(\sum\limits_{i=1}^3c_{i3}v_i\bigg)^T =(-5c_{13}+c_{33},c_{23}+c_{33},c_{33})^T.
+     \end{split}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Solving for the system of equations, we obtain
+ 
+ \begin{equation*}
+    \begin{split}
+        [L(v_1)]_{\beta}&=(-2,0,0) \\
+        [L(v_2)]_{\beta}&=(0,4,0) \\
+        [L(v_3)]_{\beta}&=(0,0,3).
+    \end{split}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Therefore,
+ 
+ \newpage
+ 
+ \begin{equation*}
+     [L]_{\beta}^{\beta}=\begin{bmatrix} -2 & 0 & 0 \\ 0 & 4 & 0 \\ 0 & 0 & 3 \end{bmatrix}.
+ \end{equation*}
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{Example 2.} Find a linear transformation $T\colon\mathbb{R}^3\rightarrow\mathbb{R}^3$ such that $T(1,1,1)=(2,3,4)$, and $\dim(\ker(T))=1$.
+ 
+ \vspace{2mm}
+ 
+ \textbf{Solution:} In order to satisfy the second condition we must ensure that $\dim(\text{im}(T))=2$ since, by the dimension theorem,
+ 
+ \begin{equation*}
+    \dim(\ker(T))+\dim(\text{im}(T))=3. 
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Thus, we let $T(0,1,0)=(0,0,1)$. To ensure this vector is indeed linearly independent with $(2,3,4)$, let
+ 
+ \begin{equation*}
+    \begin{split}
+        &c_1(2,3,4)+c_2(0,0,1) = (0,0,0) \\
+        &\rightarrow (2c_1,3c_1,4c_1+c_2)=(0,0,0) \\
+        &\rightarrow (2c_1=0)\wedge(3c_1=0)\wedge(4c_1+c_2=0) \\
+        &\rightarrow (c_1=0)\wedge(c_2=0).
+    \end{split}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Thus, $\text{im}(T)=\{(2,3,4),(0,0,1)\}$ is indeed linearly independent. Now we will let $T(-5,0,0)=(0,0,0)$ to assure that the nullity of the transformation is 1. We will now find the matrix for this transformation. Similar to the last problem, we can see that 
+ 
+ \begin{equation*}
+     [T]_{\beta}^{\gamma}=\begin{bmatrix} 0 & 0 & 2 \\ 0 & 0 & 3 \\ 0 & 1 & 4 \end{bmatrix}.
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Now we will find $T(x,y,z)$. Since we used the same basis $\beta$ as the last problem, we know 
+ 
+ \begin{equation*}
+    \begin{split}
+     (x,y,z) &= c_1(-5,0,0)+c_2(0,1,0)+c_3(1,1,1) \\
+         &= (-5c_1+c_3, c_2+c_3, c_3).
+    \end{split}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Thus,
+ 
+ \begin{equation*}
+     \begin{split}
+         T(x,y,z) &= T\bigg(\sum\limits_{i=1}^3c_iv_i\bigg)=T\bigg((\frac{-x+z}{5})(-5,0,0)+(y-z)(0,1,0)+z(1,1,1)\bigg) \\ &= (\frac{-x+z}{5})T(-5,0,0)+(y-z)T(0,1,0)+zT(1,1,1) \\
+        &= (\frac{-x+z}{5})(0,0,0)+(y-z)(0,0,1)+z(2,3,4) \\
+        &= (2z,3z,y+3z).
+     \end{split}
+ \end{equation*}
+ 
+ \newpage
+ 
+ \noindent Thus, $\text{im}(T)=\{(s,s,s)+(0,0,t)\mid s,t\in\mathbb{R}\}$. The image is clearly two dimensional and thus, the nullity is of dimension 1, as desired.
+ 
+ \vspace{8mm}
+ 
+ \hline
+ \vspace{4mm}
+ 
+ \centerline{\boxed{\text{Comments About Linear Transformations}}}
+ 
+ \vspace{4mm}
+ 
+ \hline
+ 
+ \vspace{4mm}
+ 
+ \noindent The following will be a map based description of a linear transformation $L\in\mathcal{L}(V,W)$.
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{Part 1:} Suppose we are given a linear operator $L\in\mathcal{L}(V,W)$. Assume $\beta=\{v_1,\dots,v_n\}$ is a basis for $V$, and $\gamma=\{w_1,\dots,w_m\}$ is a basis for $W$. We know that there exists two bijective maps
+ 
+ \begin{equation}
+     q_{\beta}\colon\mathbb{F}^n\rightarrow V\text{\hspace{5mm}and\hspace{5mm}}q_{\gamma}\colon\mathbb{F}^m\rightarrow W.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent These maps will be used, along with the matrix of the linear transformation, to move the vectors from $V$ into $W$.
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{Part 2:} We wish to take the vectors of $V$, which are expressed in terms of the basis $\beta$, and map them, and then take the corresponding images and express those in terms of the basis $\gamma$. To do this, we will first consider the image of each vector from $\beta$.\par
+ We know, by definition, that for any $v_j\in\beta$, $L(v_j)\in W$. Since $\gamma$ is a basis for $W$, then there exists scalars $d_{1j},\dots,d_{mj}\in\mathbb{F}$ such that
+ 
+ \begin{equation}
+     L(v_j)=\sum\limits_{i=1}^md_{ij}w_i.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent Let us now look at the matrix of the transformation. For our given transformation $L$, the corresponding matrix $[L]_{\beta}^{\gamma}$ has scalar entries and therefore only acts on vectors with scalar entries. More specifically, $[L]_{\beta}^{\gamma}\colon\mathbb{F}^n\rightarrow\mathbb{F}^m$. This informs the next step.
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{Part 3:} Since we know the domain and codomain of our matrix, we will try to make sense of it in terms of $V$ and $W$. We know from (8) that we can take our vectors $v\in V$ and map them to a unique coordinate representation in $\mathbb{F}^n$, and similarly for $w\in W$. Now let us consider what exactly the matrix is doing. We will start with a small case to see what the general case is.\par
+ Let $V$ be a 3 dimensional vector space with basis $\beta=\{v_1,v_2,v_3\}$, and let $W$ be a 2 dimensional vector space with basis $\gamma=\{w_1,w_2\}$. What must the entries of our matrix be in order for it to do what we need it to do? Let us begin by calling our matrix $A$ and filling it with unknowns.
+ 
+ \begin{equation*}
+     A=\begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{bmatrix}.
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent We need this matrix to take the coordinate representation of a vector $v\in V$,  with respect to $\beta$, from $\mathbb{F}^n$ and have the resulting product be the coordinate representation of a vector $w\in W$, with respect to $\gamma$.
+ 
+ \newpage
+ 
+ \noindent Thus, let $u\in V$, and suppose 
+ 
+ \begin{equation*}
+     u=\sum_{j=1}^3c_jv_j=c_1v_1+c_2v_2+c_3v_3.
+ \end{equation*}
+ 
+ \noindent Then 
+ 
+ \begin{equation*}
+     q_{\beta}^{-1}(u)=\begin{bmatrix} c_1 \\ c_2 \\ c_3 \end{bmatrix}\in\mathbb{F}^3.
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent Thus, we need
+ 
+ \begin{equation}
+    \begin{split}
+         A(q_{\beta}^{-1}(u)) &= \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{bmatrix}\begin{bmatrix} c_1 \\ c_2 \\ c_3 \end{bmatrix}=\begin{bmatrix} a_{11}c_1+a_{12}c_2+a_{13}c_3 \\ a_{21}c_1+a_{22}c_2+a_{23}c_3 \end{bmatrix}\in\mathbb{F}^2.
+     \end{split}
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent The coordinate vector at the end of (10) must satisfy the following
+ 
+ \begin{equation}
+     \begin{bmatrix} a_{11}c_1+a_{12}c_2+a_{13}c_3 \\ a_{21}c_1+a_{22}c_2+a_{23}c_3 \end{bmatrix} = \begin{bmatrix} d_1 \\ d_2 \end{bmatrix} = q_{\gamma}(L(u)).
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent Although this is informative, it yields a gnarly system of equations in which we do not have enough information to solve for each $a_{ij}$. So then consider what the coordinate representation of each vector in $\beta$ would be. Observe
+ 
+ \begin{equation*}
+    \begin{split}
+        v_1=1v_1+0v_2+0v_3 &\Rightarrow q_{\beta}^{-1}(v_1)=\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \\
+        v_2=0v_1+1v_2+0v_3 &\Rightarrow q_{\beta}^{-1}(v_2)=\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \\
+        v_3=0v_1+0v_2+1v_3 &\Rightarrow q_{\beta}^{-1}(v_3)=\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}.
+    \end{split}
+ \end{equation*}
+ 
+ \vspace{8mm}
+ 
+ \noindent All those zeros looks promising in terms of calculations! Now let us revisit (10) and perform the same calculation with each basis vector.
+ 
+ \newpage
+ 
+ \begin{equation}
+    \begin{split}
+        &A(q_{\beta}^{-1}(v_1))=\begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{bmatrix}\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}=\begin{bmatrix} a_{11} \\ a_{21} \end{bmatrix}, \\
+        &A(q_{\beta}^{-1}(v_2))=\begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{bmatrix}\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}=\begin{bmatrix} a_{12} \\ a_{22} 
+        \end{bmatrix}, \\
+        &A(q_{\beta}^{-1}(v_3))=\begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{bmatrix}\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}=\begin{bmatrix} a_{13} \\ a_{23} \end{bmatrix}.
+    \end{split}
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent Now we will restate (11) with this new information. We have
+ 
+ \begin{equation*}
+    \begin{split}
+         &A(q_{\beta}^{-1}(v_1))=\begin{bmatrix} a_{11} \\ a_{21} \end{bmatrix} = \begin{bmatrix} d_{11} \\ d_{21} \end{bmatrix} = q_{\gamma}(L(v_1)), \\
+         &A(q_{\beta}^{-1}(v_2))=\begin{bmatrix} a_{12} \\ a_{22} \end{bmatrix} = \begin{bmatrix} d_{12} \\ d_{22} \end{bmatrix} = q_{\gamma}(L(v_2)), \\
+         &A(q_{\beta}^{-1}(v_3))=\begin{bmatrix} a_{13} \\ a_{23} \end{bmatrix} = \begin{bmatrix} d_{13} \\ d_{23} \end{bmatrix} = q_{\gamma}(L(v_3)). \\
+     \end{split}
+ \end{equation*}
+ 
+ \vspace{2mm}
+ 
+ \noindent So much for our gnarly system of equations! We have just solved for every entry of $A$ in one go. Thus, 
+ 
+ \begin{equation*}
+     A=\begin{bmatrix} d_{11} & d_{12} & d_{13} \\ d_{21} & d_{22} & d_{23} \end{bmatrix}.
+ \end{equation*}
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{Recap:} We were given a linear transformation $L\in\mathcal{L}(V,W)$. $V$ had a basis $\beta=\{v_1,v_2,v_3\}$, and $W$ had a basis $\gamma=\{w_1,w_2\}$. We wanted to solve for the entries of the matrix of this transformation. We found that the columns of the matrix were equal to the coordinate representation of the image, under the transformation, of the basis vectors of $\beta$, with respect to $\gamma$. This means that if $v_k\in \beta$, then $L(v_k)\in W$, by definition. Since $\gamma$ is basis for $W$, then there exists a unique linear combination of vectors from $\gamma$ such that 
+ 
+ \begin{equation}
+     L(v_k)=\sum_{i=1}^2d_{ik}w_i\Rightarrow q_{\gamma}(L(v_k))=\begin{bmatrix} d_{1k} \\ d_{2k}\end{bmatrix}.
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent So (13) represents the $k^{\text{th}}$ column of $A$. We can now generalize.
+ 
+ \newpage
+ 
+ \noindent\textbf{Generalization:} Given a linear transformation $L\in\mathcal{L}(V,W)$, where $\beta=\{v_1,\dots,v_n\}$ is a basis for $V$, and $\gamma=\{w_1,\dots,w_m\}$ is a basis for $W$. Then the matrix of this representation can be given by
+ 
+ \begin{equation*}
+     [L]_{\beta}^{\gamma} = \left.\left[ 
+                  \vphantom{\begin{array}{c}1\\1\\1\end{array}}
+                  \smash{\underbrace{
+                      \begin{array}{ccc}
+                             \uparrow & & \uparrow \\
+                             q_{\gamma}(L(v_1)) & \cdots & q_{\gamma}(L(v_n)) \\
+                             \downarrow & & \downarrow \\
+                      \end{array}
+                      }_{n\text{ columns}}}
+              \right]\right\}
+              \,m\text{ rows}.
+ \end{equation*}
+ 
+ \vspace{6mm}
+ 
+ \noindent Thus, for any vector $u\in V$, we can understand $L(u)$ in the following way
+ 
+ \begin{equation}
+     L(u)=q_{\gamma}\bigg([L]_{\beta}^{\gamma}\big(q_{\beta}^{-1}(u)\big)\bigg)\in W,
+ \end{equation}
+ 
+ \vspace{2mm}
+ 
+ \noindent or more informally
+ 
+ \begin{equation*}
+     L\colon V\xrightarrow{q_{\beta}^{-1}}\mathbb{F}^n\xrightarrow{[L]_{\beta}^{\gamma}}\mathbb{F}^m\xrightarrow{q_{\gamma}}W.
+ \end{equation*}
+ 
+ \newpage
+ 
+ \section{Jordan Connonical Forms}
+ 
+ 
+ 
+ \end{document}

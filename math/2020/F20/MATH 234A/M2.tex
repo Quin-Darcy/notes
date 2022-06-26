@@ -1,0 +1,208 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 234A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{\{ #1 \}}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 234A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 11/25/20   \\
+{ \textbf{Instructor:}}\ Dr. Bin Lu \hspace{\fill} \textbf{Assignment:} Midterm 2 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item
+            \begin{enumerate}
+                \item Find the radius of convergence $r$ of the series•
+                    \begin{equation*}
+                        \sum_{n=1}^{\infty}\frac{z^n}{n^2}.
+                    \end{equation*}
+                    \begin{proof}
+                        By the ratio test we find that•
+                            \begin{equation*}
+                                \lim_{n\rightarrow\infty}\frac{\abs{a_n}}{\abs{a_{n+1}}}=\lim_{n\rightarrow\infty}\frac{\frac{1}{n^2}}{\frac{1}{(n+1)^2}}=\lim_{n\rightarrow\infty}\frac{n^2+2n+1}{n^2}=1.
+                            \end{equation*}
+                        Thus the radius of convergence $r=1$.
+                    \end{proof}
+                \item Show the series converges uniformly on $D(0,s)$ with $0<s<r$.
+                    \begin{proof}
+                        Since the radius of convergence $r=1$, then by
+                        Proposition 3.2.9, if $0<s<r$, $\sum z^n/n^2$
+                        converges uniformly on $\overline{D}(0,s)$ and since
+                        $D(0,s)\subseteq\overline{D}(0,s)$, then $\sum
+                        z^n/n^2$ converges uniformly on $D(0,s)$.
+                    \end{proof}
+                \item Does the series converge uniformly on $\overline{D}(0,r)$?
+                    \begin{proof}
+                        Yes. Since for any $\abs{z}=1$, we have that
+                        $\abs{z^n/n^2}=1/n^2$ and since $\sum1/n^2$ converges,
+                        so does $\sum\abs{z^n/n^2}$. Thus the series converges
+                        absolutely on the boundary and thus the series
+                        converges uniformly on $\overline{D}(r,0)$.
+                    \end{proof}
+                \item What is the radius of convergence $r_1$ of the derivative of the series? Does it converge uniformly on $\overline{D}(0, r_1)$?
+                    \begin{proof}
+                        We have that if $f(z)=\sum z^n/n^2$, then by Lemma
+                        3.2.10,•
+                            \begin{equation*}
+                                f'(z)=\sum_{n=2}^{\infty}\frac{z^{n}}{n}.
+                            \end{equation*}
+                        By the ratio test, we get that $r_1=1$. Letting
+                        $\{a_n\}=\{1/n\}$ denote a sequence of real numbers, and
+                        $\{b_n\}=\{z^{n}\}$ denote a sequence of complex numbers,
+                        then $a_n$ is monotone decreasing with limit 0. And•
+                            \begin{equation*}
+                                \bigabs{\sum_{n=1}^Nz^n}=\bigabs{\frac{z-z^{N+1}}{1-z}}\leq\frac{2}{\abs{1-z}}
+                            \end{equation*}
+                            for all $N\in\mathbb{N}$. Thus by Dirichlet's test, $\sum a_nb_n=\sum z^n/n$ converges for
+                        all $\abs{z}=1$ except $z=1$. Therefore the derivative
+                        does not converge uniformly on $\overline{D}(r_1,0)$.
+                    \end{proof}
+            \end{enumerate}
+        \item Suppose that \( \displaystyle
+            \sum_{n=-\infty}^{\infty}a_j(z-P)^j \) converges at two points.
+            \begin{enumerate}
+                \item Prove that there are unique $r_1,r_2\geq 0$ (possibly
+                    $\infty$) such that the series converges absolutely for
+                    all $z$ with $r_1<\abs{z-P}<r_2$.
+                        \begin{proof}
+                            Let $z_1, z_2$ denote the points that that the
+                            series converges to. If $z_1\neq z_2$, then
+                            either $\abs{z_1-P}<\abs{z_2-P}$, or vice
+                            versa. WLOG, assume that
+                            $\abs{z_1-P}<\abs{z_2-P}$. Then given that the
+                            series converges at both these points, this
+                            implies that
+                            $\sum_{n=-\infty}^{\infty}a_k(z_1-P)^k$ and
+                            $\sum_{n=-\infty}^{\infty}a_k(z_2-P)^k$ both
+                            converge. Moreover, we have that the same two
+                            sums converge while $n\rightarrow+\infty$. And
+                            thus for every $z$ such that
+                            $\abs{z-P}<\abs{z_1-P}$ and every $z$ such
+                            that $\abs{z-P}<\abs{z_2-P}$ the series
+                            B
+                            converges. Thus for any $z$ such that
+                            $\abs{z_1-P}<\abs{z-P}<\abs{z_2-P}$, the series
+                            converges. Thus, letting $r_1=\abs{z_1-P}$ and
+                            $r_2=\abs{z_2-P}$, then•
+                        \end{proof}
+                    \item Prove that if $r_1<r'_1\leq r'_2<r_2$, then the
+                        series converges uniformly and absolutely for all $z$
+                        with $r'_1\leq\abs{z-P}\leq r'_2$.
+                        \begin{proof}
+
+                        \end{proof}
+            \end{enumerate}
+        \item[3.] Prove a version of l'Hopital's Rule for holomorphic functions. If•
+            \begin{equation*}
+                \lim_{z\rightarrow P}\frac{f(z)}{f(z)}
+            \end{equation*}
+            is an indeterminate expression for $f$ and $g$ holomorphic near $P$, then the limit may be evaluated by•
+            \begin{equation*}
+                \lim_{z\rightarrow P}\frac{\partial f/\partial z}{\partial
+                g/\partial z}.
+            \end{equation*}
+            Formulate a precise result and prove it.
+            B
+        \item Test
+    \end{enumerate}
+\end{document}
+

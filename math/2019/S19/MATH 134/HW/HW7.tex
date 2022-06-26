@@ -1,0 +1,227 @@
+\documentclass[12pt]{article}
+\usepackage[margin=0.95in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{solution}
+ % {\begin{proof}[Solution]}
+ % {\end{proof}}
+ 
+ \makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=6mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          % the following line is not needed with amsart, but might be with other classes
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=6mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 134}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 03/14/19   \\
+{ \textbf{Instructor:}} \ Dr. Krauel \hspace{\fill} \textbf{Assignment:} Homework 7 \\ \hrule}
+
+\justifying
+
+% This is where document starts 
+
+\begin{enumerate}[leftmargin=*]
+\setcounter{enumi}{23}
+
+    \item Find all the values of $z$ such that
+        \begin{center}
+            \begin{mylist}
+                \item $e^z=-2$; \item $e^z=1+\sqrt{3}i$.
+            \end{mylist}
+        \end{center}
+        
+        \begin{solution}\hfill
+            \begin{enumerate}[label=(\alph*), rightmargin=10mm]
+                \item By expressing $-2$ in it's polar form we get that $-2=e^xe^{i(\pi+2n\pi)}$. This means that $e^x=2$ and $y=\pi+2n\pi$. Thus, $x=\ln(2)$ and all the values of $z$ for which $e^z=-2$ are
+                
+                \begin{equation*}
+                    z=\ln(2)+i(\pi+2n\pi)
+                \end{equation*}
+                
+                \noindent for $n\in\mathbb{Z}$.
+                
+                \item Doing the same thing as before, let us write $1+\sqrt{3}i$ in polar form. We get that $1+\sqrt{3}i=2e^{i(\pi/3+2n\pi)}$. Thus, $e^x=2$ and $y=\pi/3+2n\pi$. Since $x=\ln(2)$ then we can express all the values $z$ for which $e^z=1+\sqrt{3}i$ in the following form
+                
+                \begin{equation*}
+                    z=\ln(2)+i(\frac{\pi}{3}+2n\pi),
+                \end{equation*}
+                
+                \noindent for $n\in\mathbb{Z}$.
+            \end{enumerate}
+        \end{solution}
+        
+    \item Show that if Re$(z_1)>0$ and Re$(z_2)>0$, then 
+        \begin{equation*}
+            \text{Log}(z_1z_2)=\text{Log}(z_1)+\text{Log}(z_2).
+        \end{equation*}
+        
+        \begin{proof}
+            Let $D=\{z\in\mathbb{C}\colon\text{Re}(z)>0\}$ be the set of all complex numbers whose real part is strictly greater than 0. Then for any $z\in D$, it follows that $\abs{\text{Arg}(z)}<\pi/2$. Thus, if $z_1,z_2\in D$, then because the multiplication of complex numbers results in the addition of their arguments, then we have that $\abs{\text{Arg}(z_1z_2)}=\abs{\text{Arg}(z_1)+\text{Arg}(z_2)}<\pi$. These means that there is only one instance of each argument, and Log$(z_1z_2)$ is single valued for  $z_1,z_2\in D$. Completing the computation, we get 
+            
+            \begin{equation*}
+                \begin{split}
+                    z_1z_2 &= \abs{z_1}e^{i\text{Arg}(z_1)}\abs{z_2}e^{i\text{Arg}(z_2)} \\
+                    &= \abs{z_1z_2}e^{i(\text{Arg}(z_1)+\text{Arg}(z_2))}.
+                \end{split}
+            \end{equation*}
+            
+            \noindent Taking the Log of both sides of this equality we obtain
+            
+            \begin{equation*}
+                \begin{split}
+                    \text{Log}(z_1z_2) &= \text{Log}(\abs{z_1z_2}e^{i(\text{Arg}(z_1)+\text{Arg}(z_2))}) \\
+                    &= \ln\abs{z_1z_2}+i(\text{Arg}(z_1)+\text{Arg}(z_2)) \\
+                    &= \ln\abs{z_1}+\ln\abs{z_2}+i\text{Arg}(z_1)+i\text{Arg}(z_2) \\
+                    &= (\ln\abs{z_1}+i\text{Arg}(z_1))+(\ln\abs{z_2}+\text{Arg}(z_2)) \\
+                    &= \text{Log}(z_1)+\text{Log}(z_2).
+                \end{split}
+            \end{equation*}
+        \end{proof}
+        
+    \item Show that, for any two nonzero complex numbers $z_1$ and $z_2$,
+        \begin{equation*}
+            \text{Log}(z_1z_2)=\text{Log}(z_1)+\text{Log}(z_2)+2N\pi i,
+        \end{equation*}
+        where $N$ has one of the values $0,\pm1$. (Compare with previous exercise.)
+        
+        \begin{proof}
+            Unlike in the previous problem, there is no restriction on the complex numbers we are evaluating, besides that they are nonzero. So similar to before, we find that for any $z\in\mathbb{C}$ such that $\abs{z}\neq 0$, it follows that $\pi<\text{Arg}(z)\leq\pi$, by definition. Thus, given $z_1,z_2\in\mathbb{C}$ where $\abs{z_1}\neq 0$ and $\abs{z_2}\neq 0$, then $\abs{\text{Arg}(z_1z_2)}\leq 2\pi$ and $\abs{\text{Arg}(z_1)+\text{Arg}(z_2)}\leq 2\pi$. Thus, for all $z_1,z_2\in\mathbb{C}$
+            
+            \begin{equation*}
+                \text{Log}(z_1z_2)=\text{Log}(z_1)+\text{Log}(z_2)+2N\pi i,
+            \end{equation*}
+            
+            \noindent for $N=0,\pm 1$.
+        \end{proof}
+        
+    \item Show that
+        \begin{enumerate}[label=(\alph*)]
+        
+            \item the set of values of $\log(i^{1/2})$ is
+                \begin{equation*}
+                    \big(n+\frac{1}{4}\big)\pi i\qquad (n=0,\pm1,\pm2,\dots)
+                \end{equation*}
+                and that the same is true for $1/2\log(i)$;
+                
+                \begin{solution}
+                    By rewriting $z=i^{1/2}$ as $z^2=i$, then $\abs{z}^2(\cos(2\theta)+i\sin(2\theta))=i$. Thus, $\abs{z}=1$ and $\theta=\pi/4+n\pi$ for $n\in\mathbb{Z}$. This gives us the two following complex numbers
+                    
+                    \begin{equation*}
+                        z_1=e^{\frac{i\pi}{4}}\quad\text{and}\quad z_2=e^{i(\frac{\pi}{4}+\pi)}.
+                    \end{equation*}
+                    
+                    \noindent Thus, 
+                    
+                    \begin{equation*}
+                        \begin{split}
+                            \log(z_1) &= \ln\abs{z_1}+i\arg(z_1) \\
+                            &= \ln(1)+i(\pi/4+n\pi) \\
+                            &= (n+\frac{1}{4})\pi i,
+                        \end{split}
+                    \end{equation*}
+                    
+                    \noindent for $n\in\mathbb{Z}$. Similarly, for $z_2$. Now since $\log(i)=(\pi/2+2n\pi)i$, for $n\in\mathbb{Z}$, then $1/2\log(i)=(\pi/4+n\pi)i=(n+1/4)\pi i$, for $n\in\mathbb{Z}$. Thus, as sets, $\log(i^{1/2})=1/2\log(i)$, as desired.
+                    
+                    
+                \end{solution}
+                
+                \newpage
+                
+            \item the set of values of $\log(i^2)$ is not the same as $2\log(i)$.
+            
+            \begin{solution}
+                Since $i^2=-1$ by definition, then it should be the case that $\log(i^2)=\log(-1)$. Thus, the latter set is 
+                
+                \begin{equation*}
+                    \begin{split}
+                        \log(-1) &= \ln(1)+i\arg(-1) \\
+                        &= i(\pi+2n\pi)  \\
+                        &= (1+2n)\pi i,
+                    \end{split}
+                \end{equation*}
+                
+                \noindent for $n\in\mathbb{Z}$. However, $2\log(i)=2(\pi/2+2n\pi)=(1+4n)\pi i$, for $n\in\mathbb{Z}$. Therefore, $\log(i^2)$ and $2\log(i)$ do not yield the same set.
+            \end{solution}
+        \end{enumerate}
+        
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

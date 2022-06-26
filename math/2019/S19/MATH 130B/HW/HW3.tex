@@ -1,0 +1,160 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+\usepackage{relsize}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{polynom}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+\setlist[description]{leftmargin=6mm,labelindent=4mm, rightmargin=6mm}
+  
+\begin{document}
+  
+\begin{flushleft}
+  
+    Quin Darcy\par
+    Dr. Cummings\par
+    MATH 130B\par
+    2/8/19
+  
+\end{flushleft}
+  
+\centerline{\boxed{\text{Homework 3}}}
+ 
+\vspace{4mm}
+ 
+\noindent\textsc{Section: }\par
+ 
+\justifying
+ 
+\vspace{1mm}
+ 
+\hline
+ 
+\vspace{6mm}
+
+\noindent\textbf{1.} State the \textit{Extreme Value Theorem}.
+
+\begin{description}
+    \item(\textit{Extreme Value Theorem}) A continuous function on a compact set attains its supremum and infimum. 
+\end{description}
+
+\vspace{2mm}
+
+\noindent\textbf{2.} In the below, by ``finite open interval'' we mean an interval $(a,b)$ where $a,b\in\mathbb{R}$ and $a<b$. And by ``finite closed interval'' we mean an interval $[a,b]$ where $a,b\in\mathbb{R}$ and $a<b$.
+
+\begin{description}
+    \item(a) Let $f\colon A\rightarrow B$ be a continuous function where $f(A)=B$. Is it possible for $A$ to be a finite open interval while $B$ is a finite closed interval? Either provide an example showing it is possible, or prove that it is not possible.
+    
+    \begin{description}
+        \item\textbf{Solution: }Let $f(x)=\sin{(x)}$ and set the domain of $f$ to be the set $A=(-2\pi,2\pi)$. Then $f(A)=[-1,1]$.
+    \end{description}
+    
+    \item(b) Let $f\colon A\rightarrow B$ be a continuous function where $f(A)=B$. Is it possible for $A$ to be a finite closed interval while $B$ is a finite open interval? Either provide an example showing it is possible, or prove that it is not possible.
+    
+    \begin{description}
+        \item\textbf{Solution: } It is not possible. We will prove this by showing that compact sets map to compact sets under a continuous function.
+    \end{description}
+    
+    
+    
+    \begin{description}
+        \item\textit{\textbf{Proof. }} Let $A=[a_1,a_2]$ for $a_1,a_2\in\mathbb{R}$. It follows from trichotomy that either $a_1<a_2$, $a_1=a_2$, or $a_1>a_2$. Without loss of generallity, suppose $a_1<a_2$. Thus, because $A$ is closed, then $a_2$ is the maximum of the set and the set is therefore bounded. By Heine-Borel, $A$ is thereby compact. Now assume $f\colon A\rightarrow B$ is a continuous and surjective function, and let $(y_n)$ denote any arbitrary sequence in $B$. We now construct a new sequence in the following way
+        
+        \begin{equation*}
+            (x_n) = \{x\in\mathbb{R}\colon \exists y[ y\in(y_n)\wedge f(x)=y]\}.
+        \end{equation*}
+        
+        \vspace{2mm}
+        
+        \item By construction, $(x_n)$ is a sequence in $A$. Since $A$ is compact, then $(x_n)$ has a convergent subsequence $(x_{n_k})$ whose limit, call it $x_0$, is also in $A$. We want to show that $(y_n)$ has a convergent subsequence, namely $(f(x_{n_k}))$ whose limit is an element of $B$. To begin, note that since $x_0\in A$, then the continuity of $f$ assures us that $f(x_0)\in B$. Thus, we need to show that for any $\varepsilon>0$, there exists some $N>0$ such that for all $k\geq N$, $\abs{f(x_{n_k})-f(x_0)}<\varepsilon$. 
+        
+        \newpage
+        
+        \item Since $f$ is continuous, then it follows that for all $\varepsilon>0$, there exists a $\delta>0$ such that for any $x\in A$, if $\abs{x-x_0}<\delta$, then $\abs{f(x)-f(x_0)}<\varepsilon$. Thus, we select $N$ such that any $k\geq N$ implies $\abs{x_{n_k}-x_0}<\delta$ which is possible because $(x_{n_k})$ is a convergent sequence. Thus, for all $k\geq N$, it follows that $\abs{f(x_{n_k})-f(x_0)}<\varepsilon$.This means that for the arbitrary sequence $(y_n)$, it has a convergent subsequence. Therefore, $B$ is compact and necessarily closed. $\square$
+    \end{description}
+    
+\end{description}
+
+\vspace{2mm}
+
+\noindent\textbf{3.} Let $f$ and $g$ be continuous functions on $[a,b]$, and suppose that $f(a)<g(a)$ while $f(b)>g(b)$. Prove that $f(x)=g(x)$ for some $x\in[a,b]$.
+
+\begin{description}
+    \item\textit{\textbf{Proof.}} By the Intermediate Value theorem, we know that for any continuous function $h$ on an interval $[a,b]$, if $h(a)<\alpha<h(b)$, then there exists some $c\in(a,b)$ for which $f(c)=\alpha$. For the values $f(a)$, $f(b)$, $g(a)$, and $g(b)$, let us suppose, WLOG, $f(a)\leq f(b)$, and $g(a)\leq g(b)$. Then it follows that
+    
+    \begin{equation*}
+        f(a)<g(a)\leq g(b)<f(b).
+    \end{equation*}
+    
+\end{description}
+\begin{description}
+    
+    \item Now let $g(a)<\alpha<g(b)$, then by IVT, there exists $c\in(a,b)$ such that $g(c)=\alpha$. However, this implies $f(a)<g(c)<f(b)$. Thus, by IVT, there exists some $d\in(a,b)$ such that $f(d)=g(c)$. Since both $c$ and $d$ are between $a$ and $b$, both $f$ and $g$ are continuous, and $f(d)=g(c)$, then $c=d$. Thus, there exists some $x\in[a,b]$ such that $f(x)=g(x)$.\hspace{85mm} $\square$
+\end{description}
+
+\vspace{2mm}
+
+\noindent\textbf{4.} Let $f\colon[0,1]\rightarrow\mathbb{R}$ be continuous with $f(0)=f(1)$. Show that there must exist $x,y\in[0,1]$ which are a distance of 1/2 apart (i.e. $\abs{x-y}=1/2$) for which $f(x)=f(y)$.
+
+\begin{description}
+    \item\textit{\textbf{Proof.}} Since $f$ is continuous, we know that $f(1/2)$ is defined. Moreover, we know that either $f(1/2)=f(0)=f(1)$, or $f(1/2)\neq f(0)=f(1)$. If the former is true, then $x=0$ and $y=1/2$ would suffice. Otherwise, we can assume $f(1/2)>f(0)=f(1)$ without loss of generality. Additionally, since $f$ is a continuous function over a compact set, then the Extreme Value Theorem states that $f$ attains both its minimum and supremum. Denote the either one of the extrema of $f$ as $f(c)$. It follows that $f(c)=f(1/2)$ or $f(c)\neq f(1/2)$. If the former is true, then we can find for any $\varepsilon>0$ 
+\end{description}
+
+\end{document}

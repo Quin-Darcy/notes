@@ -1,0 +1,199 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+\usepackage{relsize}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{polynom}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+\setlist[description]{leftmargin=6mm,labelindent=4mm}
+  
+\begin{document}
+  
+\begin{flushleft}
+  
+    Quin Darcy\par
+    Dr. Cummings\par
+    MATH 130B\par
+    1/25/19
+  
+\end{flushleft}
+  
+\centerline{\boxed{\text{Homework 1}}}
+ 
+\vspace{4mm}
+ 
+\noindent\textsc{Section: }\par
+ 
+\justifying
+ 
+\vspace{1mm}
+ 
+\hline
+ 
+\vspace{6mm}
+
+\noindent\textbf{1. } Use the definition of the functional limit to prove that $\lim\limits_{x\rightarrow -2}(4x+3)=-5$.
+
+\begin{description} \justifying
+
+    \item\textit{\textbf{Scratch Work.} } Let $\varepsilon > 0$. We need to show that from this arbitrary choice of $\varepsilon$, the existence of a $\delta>0$ follows, such that for any $x\in I-\{-5\}$ where $\abs{x-(-2)}<\delta$ and $I\subseteq\mathbb{R}$, it is implied that $\abs{(4x+3)-(-5)}<\varepsilon$.\par
+    We begin by working backwards. We want to conclude that $\abs{(4x+3)-(-5)}<\varepsilon$, which is the same as $\abs{4x+8}<\varepsilon$, which is equivalent to $4\abs{x+2}<\varepsilon$, which in turn is the same as $\abs{x+2}<\mathlarger{\frac{\varepsilon}{4}}$. This shows us that $\delta = \mathlarger{\frac{\varepsilon}{4}}$ ought to work, though we will be certain when it is used in the actual proof.
+    
+    \item\textit{\textbf{Proof.} } Let $\varepsilon>0$. Let $\delta=\mathlarger{\frac{\varepsilon}{4}}$. Suppose that $x\in\mathbb{R}-\{-2\}$ and $\abs{x+2}<\delta$. Then
+    
+    \begin{equation*}
+        \abs{(4x+3)-(-5)}=\abs{4x+8}=4\abs{x+2}<4\delta=4(\mathlarger{\frac{\varepsilon}{4}})=\varepsilon.   
+    \end{equation*}
+    
+    \hspace{144mm}\square
+    
+\end{description}
+
+\noindent\textbf{2. } Use the definition of the functional limit to prove that $\lim\limits_{x\rightarrow 1}\bigg(\mathlarger{\frac{x^3}{x-1}}-\mathlarger{\frac{1}{x-1}}\bigg)=3$.
+
+\begin{description} \justifying
+
+    \item\textit{\textbf{Scratch Work.} } Let $\varepsilon>0$. We must show that for any such $\varepsilon$, there exists $\delta>0$ such that $x\in I-\{1\}$ and $\abs{x-1}<\delta$, and that this implies
+    
+    \begin{equation}
+        \abs{\bigg(\frac{x^3}{x-1}-\frac{1}{x-1}\bigg)-3}<\varepsilon.
+    \end{equation} 
+    
+    \item Since we wish to have (1) as our conclusion, we will begin by simplifying (1).
+    
+    \begin{equation}
+        \begin{split}
+            &\abs{\bigg(\frac{x^3}{x-1}-\frac{1}{x-1}\bigg)-3} 
+             =\abs{\frac{x^3-1-3(x-1)}{x-1}} = \abs{\frac{x^3-3x+2}{x-1}} \\
+            &=\abs{\frac{(x-1)(x^2+x-2)}{x-1}} = \abs{x^2+x-2} = \abs{(x+2)(x-1)} \\
+            &=\abs{x+2}\cdot\abs{x-1}\rightarrow\abs{x-1}<\frac{\varepsilon}{\abs{x+2}}. 
+        \end{split}
+    \end{equation}
+    
+    \par Although the last line of (2) gives us a nice expression, we cannot set $\delta=\mathlarger{\frac{\varepsilon}{\abs{x+2}}}$ because $\delta$ would be a number whereas ``$x$'' would not have a fixed value at this point in the proof. Instead, suppose that $\abs{x-1}<1$. Then $-1<x-1<1$, which implies $2<x+2<4$. Thus, $2<\abs{x+2}<4$. We now choose $\delta=\min\{\frac{\varepsilon}{4},1\}$.
+    
+    \item\textit{\textbf{Proof.}} Let $\varepsilon>0$. Let $\delta=\min\{\frac{\varepsilon}{4},1\}$. Suppose that $x\in\mathbb{R}-\{1\}$ and $\abs{x-1}<\delta$. Then $\abs{x-1}<1$, which implies that $-1<x-1<1$, and therefore $0<x<2$, and hence $2<x+2<4$, and we conclude that $2<\abs{x+2}<4$. Then
+    
+    \begin{equation*}
+        \abs{\bigg(\frac{x^3}{x-1}-\frac{1}{x-1}\bigg)-3} = \abs{x^2+x-2} = \abs{x+2}\cdot\abs{x-1}<4\cdot\delta\leq 4\cdot\frac{\varepsilon}{4}=\varepsilon.
+    \end{equation*}
+    
+    \hspace{144mm}\square
+    
+\end{description}
+
+\noindent\textbf{3. } Define what it means for $f$ to be \textit{continuous at a point} $c$, and what it means for $f$ to be \textit{continuous}.
+
+\begin{description}
+
+    \item\textbf{Definition.} Let $A\subseteq\mathbb{R}$ be a set, and let $f\colon A\rightarrow\mathbb{R}$ be a function.
+    
+    \begin{enumerate}
+    
+        \item Let $c\in A$. The function $f$ is \textbf{continuous at} $c$ if for each $\varepsilon>0$, there is some $\delta>0$ such that $x\in A$ and $\abs{x-c}<\delta$ imply $\abs{f(x)-f(c)}<\varepsilon$.
+        \item The function $f$ is \textbf{continuous} if it is continuous at every number in $A$.
+        
+    \end{enumerate}
+    
+\end{description}
+
+\noindent\textbf{4. } Let $f\colon(0,\infty)\rightarrow\mathbb{R}$, $f(x)=\sqrt{x}$. Prove that $f$ is continuous.
+
+\begin{description}
+
+    \item\textit{\textbf{Scratch Work.} } Let $c\in(0,\infty)$. We want it to be the case that $\abs{\sqrt{x}-\sqrt{c}}<\varepsilon$, for any $\varepsilon>0$. This means that we must find some $\delta>0$ such that if $\abs{x-c}<\delta$, then $\abs{\sqrt{x}-\sqrt{c}}$. Note that $\abs{x-c}=\abs{\sqrt{x}-\sqrt{c}}\cdot\abs{\sqrt{x}+\sqrt{c}}$. Thus, if we need $\abs{x-c}<\delta$, then we can instead write $\abs{\sqrt{x}-\sqrt{c}}\cdot\abs{\sqrt{x}+\sqrt{c}}<\delta$, from which it follows that
+    
+    \begin{equation*}
+        \abs{\sqrt{x}-\sqrt{c}}<\frac{\delta}{\abs{\sqrt{x}+\sqrt{c}}}.
+    \end{equation*}
+    
+    Next we note that since $x,c\in(0,\infty)$, then neither of them can be equal to 0. Thus, $\abs{\sqrt{x}+\sqrt{c}}\geq\abs{\sqrt{c}}$, which implies $\mathlarger{\frac{1}{\abs{\sqrt{x}+\sqrt{c}}}\leq\frac{1}{\abs{\sqrt{c}}}}$ and so $\abs{\sqrt{x}-\sqrt{c}}<\mathlarger{\frac{\delta}{\abs{\sqrt{c}}}}$. Therefore, we can conclude $\delta=\varepsilon\sqrt{c}$.
+    
+    \item\textit{\textbf{Proof.} } Let $\varepsilon>0$. Let $c\in(0,\infty)$. Let $\delta=\varepsilon\sqrt{c}$ and $\abs{x-c}<\delta$. Then it follows that 
+    
+    \begin{equation*}
+        \abs{\sqrt{x}-\sqrt{c}}\cdot\abs{\sqrt{x}+\sqrt{c}}<\delta\Rightarrow\abs{\sqrt{x}-\sqrt{c}}<\frac{\delta}{\abs{\sqrt{x}+\sqrt{c}}}\leq\frac{\delta}{\abs{\sqrt{c}}}=\varepsilon.
+    \end{equation*}
+    
+    \hspace{150mm}\square  
+    
+\end{description}
+
+\newpage
+
+\noindent\textbf{5. } Define
+
+\begin{equation*}
+    f(x)=\left\{\begin{array}{rcl}1 & \text{if }x\geq 0 \\ -1 & \text{if }x<0.\end{array}\right.
+\end{equation*}
+
+\vspace{2mm}
+
+Prove $f$ is discontinuous at $c=0$.
+
+\begin{description}
+
+    \item\textit{\textbf{Proof.}} For a contradiction, assume $f(x)$ \textit{is} continuous at $c=0$. Then we have that for all $\varepsilon>0$, there exists some $\delta>0$ such that whenever it is the case that $x\in\mathbb{R}$ and $\abs{x-c}<\delta$, then $\abs{f(x)-f(c)}<\varepsilon$. Now suppose that $\varepsilon=1$. Since $1>0$, then we are guaranteed some $\delta>0$ such that for any $x\in\mathbb{R}$, where $\abs{x}<\delta$, we have $\abs{f(x)-1}<1$. Now suppose we choose some $x\in\mathbb{R}$ such that $\abs{x}<\delta$ and $x<0$. Such an $x$ is mapped to -1 by definition of $f$. Thus, since we assumed $\abs{x}<\delta$, then $\abs{f(x)-1}<1$, which is equivalent to $\abs{-1-1}=\abs{2}<1$. This is a contradiction, and therefore $f(x)$ is not continuous at $c=0$.\hspace{114mm}\square
+    
+    
+    
+\end{description}
+
+\end{document}

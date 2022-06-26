@@ -1,0 +1,135 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 296B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 5/18/20   \\
+{ \textbf{Instructor:}}\ Dr. Pigno \hspace{\fill} \textbf{Assignment:} Final Exam \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item Find the order of $7$ is $\mathbb{Z}_{2^n}$ as follows:
+            \begin{enumerate}
+                \item Explain why $\text{ord}_{2^n}(7)=2^t$.
+                \item Prove that for $k\geq 1$ we have $7^{2^k}=1+d_k2^{k+3}$ for some odd $d_k\in\mathbb{N}$.
+                \item Conclude that $\text{ord}_{2^n}(7)=2^{n-3}$ for $n\geq 4$.
+            \end{enumerate}
+            \begin{solution}
+                Immediately, because of the 2 under graduate and 2 graduate algebra courses I have taken, I associate the concept of order with a group. However, this prompts one to ask if the operation on said group is addition or multiplication. In this case we are asking for the multiplicative order of 7. Hence, we need to shift our attention to the group of elements from $\mathbb{Z}_{2^n}$ which are relatively prime to $2^n$. We know that this subgroup has order $\phi(2^n)=2^n-2^{n-1}$. Additionally, because of Euler's generalization of Fermat's little theorem, we have that $7^{\phi(2^n)}\equiv 1\pmod{2^n}$. Thus, whatever the order of 7 is, it must divide $2^n-2^{n-1}=2^{n-1}(2-1)=2^{n-1}$. Hence, the order of 7 is a power of 2.\par\hspace{4mm} To answer the remaining 2 parts, one might consider trying the cases for $k=1$ and $k=2$ in order to get a sense of what's happening. Many times throughout this semester, especially when working in $\mathbb{Z}_n$, the questions on the homework were very dissimilar to those you would see in an algebra class, but could still be informed by algebraic concepts. That is what made the class so enjoyable. It was an entirely new area, but there were doorways to familiar concepts that you could move in and out of. 
+            \end{solution}
+        \item Let $p$ be an odd prime and let $a$ be a primitive root modulo $p^j$ for any $j>1$. That is 
+            \begin{equation*}
+                a^{\phi(p^j)}=1+k_jp^j
+            \end{equation*}
+        where $(k_j,p)=1$. Prove that
+            \begin{equation*}
+                k_j\equiv k_{j-1}\pmod{p^{j-1}}.
+            \end{equation*}
+            \begin{solution}
+                I recall wanting to do this problem, but at the time I had consecutive graveyard shifts at work and found the subscripts in the problem slightly intimidating. Looking at it now, with a better understanding of primitive roots, we can at least say that if $a$ is a primitive root, then it generates $(\mathbb{Z}_{p^j})^*$. In other words, $a$ has order $\phi(p^j)$.\par\hspace{4mm} Additionally, since $a$ is a primitive root and $(k_j.p)=1$, then for some $1\leq k< \phi(p^j)$, $a^k=k_j$. So what would be relevant to the solution of this problem is recognizing that $a^{\phi(p^j)}-a^kp^j=a^k(a^{\phi(p^j)-k}-1)=1$ and since $\phi(p^j)=p^j-p^{j-1}$, then we can construct a new congruence modulo $p^{j-1}$. Ultimately, I am still struggling to get an intuitive sense for this problem and feel the problem lies at the relationship of $p^j$ and $p^{j-1}$ in the context of them being moduli.  
+            \end{solution}
+        \item \begin{enumerate}
+            \item Prove that $\sigma(p^e)\geq p^e(1+\frac{1}{p})$.
+            \item Prove that for any $n$
+                \begin{equation*}
+                    \phi(n)+\sigma(n)\geq 2n.
+                \end{equation*}
+            And determine when the equality holds.
+        \end{enumerate}
+            \begin{solution}
+                To answer both of these we need to remind ourselves of the definition of both $\sigma$ and $\phi$. We have that $\sigma(p^e)$ is the sum pf the positive divisors of $p^e$. We also have the fact that 
+                    \begin{equation*}
+                        \sigma(p^e)=\frac{p^{e+1}-1}{p-1}=p^e+p^{e-1}+\cdots+1.
+                    \end{equation*}
+                And since $p^e(1+\frac{1}{p})=p^e+p^{e-1}$. Thus, the inequality follows. This is a rare instance of a problem of this type working out so nicely. I believe this is due in part to the fact we are working only with one arithmetic function and we are evaluating the power of a single prime, which almost always renders these types of functions far more manageable.\par\hspace{4mm} Finally, to answer the last part, we ought to expand each function, simplify by finding a formula which represents $\phi(n)+\sigma(n)$. Doing this we see that the equality holds provided $n$ itself is prime or $n=1$. \par\hspace{4mm} The last note is that the arithmetic function section was possibly the most challenging section since it requires a lot of comfort in manipulating sums and products. However, it was not lost how powerful these functions were as probes into the composition of the integers. So for that reason, I feel regretful that I did not allow myself enough time to become a competent user of these tools. 
+            \end{solution}
+    \end{enumerate}
+
+\end{document}

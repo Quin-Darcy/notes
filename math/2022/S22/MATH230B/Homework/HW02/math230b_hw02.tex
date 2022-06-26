@@ -1,0 +1,263 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 230B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newenvironment{solution}
+{\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+{\end{proof}}
+\newenvironment{psmall}{\left(\begin{smallmatrix}}{\end{smallmatrix}\right)}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 230B}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 02/18/2022   \\
+    { Instructor:}\ Dr. Ricciotti \hspace{\fill} Assignment:
+    Homework 02 \\ \hrule}
+
+    \begin{enumerate}
+        \item Let $f:[0, 1]\to\mathbb{R}$ be defined as 
+            \begin{equation*}
+                f(x)=\begin{cases}\frac{1}{n}&\text{if $x=\frac{1}{n}$ where
+                    $n\in\mathbb{N}$} \\
+                0 &\text{otherwise}\end{cases}.
+            \end{equation*}
+            Determine (with proof) whether $f\in\mathcal{R}[a, b]$ if so,
+            compute $\int_{0}^{1}f$.
+            \begin{solution}
+                Let $\varepsilon>0$ and choose a partition $P=\{x_0, \dots,
+                x_n\}$ such that the mesh $||P||<\varepsilon/n$. Since the
+                irriationals are dense in $\mathbb{R}$, then for any $\Delta
+                x_i$, there exists an irrational number $r$ such that
+                $x_{i-1}<r<x_i$ and $f(r)=0$. This implies that $m_i=0$ for all
+                $i\in\{1, \dots, n\}$ and so $L(f, P)=0$. Hence
+                \begin{align}
+                    U(f, P)-L(f, P) &= U(f, P) \\
+                    &= \sum_{i=1}^{n}M_i\Delta x_i \\
+                    &\leq \sum_{i=1}^{n}\Delta x_i \\
+                    &< \sum_{i=1}^{n}\frac{\varepsilon}{n} \\
+                    &= \varepsilon.
+                \end{align}
+                Note that the inequality from (2) to (3) holds since (3)
+                represents the case where $M_i=1$ for all $i$, which in general
+                is not true (consider $x_{i-1}=3/4$ and $x_i=5/6$, there is no
+                $n\in\mathbb{N}$ such that $3/4\leq 1/n\leq 5/6$ and thus
+                $M_i=0$). Therefore by Theorem 6.6, $f\in\mathcal{R}[0,
+                1]$.\par\hspace{4mm} To compute $\int_{0}^{1}f$, we first note
+                that the integrability of $f$ implies that
+                \begin{equation*}
+                    \sup\{L(f, P)|\;P\in\mathcal{P}([0,
+                        1])=\int_{0}^{1}f=\inf\{U(f, P)|\;P\in\mathcal{P}([0,
+                        1])\}.
+                \end{equation*} 
+                So computing $\sup\{L(f, P)|\; P\in\mathcal{P}([0, 1])\}$ is
+                sufficient. As was noted earlier, for any partition $P$, $L(f,
+                P)=0$ since the irrationals are dense in $\mathbb{R}$. This
+                means the set has 0 as its only element. Thus the set is closed
+                and bounded and so it attains its $\sup$ which is 0. Therefore
+                \begin{equation*}
+                    \int_{0}^{1}f = 0.
+                \end{equation*}
+            \end{solution}
+        \item Let $f$ and $g$ be boundeds function on $[a, b]$. Assume that
+            $f\in\mathcal{R}[a, b]$ and $f(x)=g(x)$ for all $x\in [a,
+            b]\backslash F$, where $F$ is a finite subset of $[a, b]$. Prove
+            that
+            \begin{equation*}
+                g\in\mathcal{R}[a,
+                b]\;\;\;\text{and}\;\;\;\int_{a}^{b}f=\int_{a}^{b}g.
+            \end{equation*}
+            Does the same conclusion hold if $F$ is not finite? Give a proof or
+            counterexample. 
+            \begin{proof}
+                Assume that $F=\{s\}$ contains only one element. Let
+                $\varepsilon>0$, then since $f\in\mathcal{R}[a, b]$, there
+                exists a partition $P=\{x_0, \dots, x_n\}$ such that 
+                \begin{equation*}
+                    U(f,P)-L(f, P)<\frac{\varepsilon}{2}. 
+                \end{equation*}
+                Moreover, because $F\subset[a, b]$,
+                then for some $i\in\{1, \dots, n\}$, we have that $x_{i-1}\leq
+                s\leq x_i$. Now select $p, r\in[a, b]$ such that $x_{i-1}\leq
+                p\leq s\leq r\leq x_i$ and $K|r-q|<\varepsilon/2$, where
+                $K=\max\{|\inf f(x)-g(s)|, |\sup f(x)-g(s)|\}$ for $p\leq x\leq
+                r$. Now
+                define $P^*=P\cup\{p, r\}$. Then $P^*$ is a refinement of $P$
+                and thus 
+                \begin{equation*}
+                    U(f, P^*)-L(f, P^*)<\frac{\varepsilon}{2}.
+                \end{equation*}
+                Now we consider the following 3 cases:
+                \begin{enumerate}[(i)]
+                    \item $\inf f(x)\leq g(s)\leq \sup f(x)$ for $p\leq x\leq
+                        r$. This implies that $\inf f(x)=\inf g(x)$ and $\sup
+                        f(x)=\sup g(x)$ for $p\leq x\leq r$ and thus $L(f,
+                        P^*)=L(g, P^*)$ and $U(f, P^*)=U(g, P^*)$. Thus $U(g,
+                        P^*)-L(g, P^*)<\varepsilon/2<\varepsilon$.
+                    \item $g(s)<\inf f(x)$ for $p\leq x\leq r$. This implies
+                        that $\inf g(x)<\inf f(x)$ for $p\leq x\leq r$. Thus
+                        $L(g, P^*)<L(f, P^*)$ and $U(g, P^*)=U(f, P^*)$. Note
+                        that 
+                        \begin{align*}
+                            L(f, P^*)-L(g, P^*) &= (\inf f(x)-g(s))(r-q) \\
+                            &\leq K(r-p) \\
+                            &<\varepsilon/2 \\
+                            &\Rightarrow L(g, P^*)< L(f, P^*)-\varepsilon/2.
+                        \end{align*}
+                        With this we have 
+                        \begin{align*}
+                            U(g, P^*)-L(g, P^*) &= U(f, P^*)-L(g, P^*) \\
+                            &< U(f, P^*)-L(f, P^*)+\frac{\varepsilon}{2} \\
+                            &<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
+                        \end{align*}
+                    \item $\sup f(x)<g(s)$ for $p\leq x\leq r$. This case is
+                        shown with a similar argument to part (ii), the only
+                        difference is that we use the fact that $U(g, P^*)-U(f,
+                        P^*)<\varepsilon/2$. 
+                \end{enumerate}
+                This shows that for all $\varepsilon>0$, there exists
+                a partition $P$ such that $U(g, P)-L(g, P)<\varepsilon$. Thus
+                $g\in\mathcal{R}[a, b]$. Since $g$ is integrable on $[a, b]$,
+                then 
+                \begin{align*}
+                    \int_{a}^{b}g &=\int_{a}^{s}g+\int_{s}^{b}g \\
+                    &=\int_{a}^{s}f+\int_{s}^{b}f \\
+                    &=\int_{a}^{b}f.
+                \end{align*}
+                The above argument can then be repeated to show
+                that it holds for $|F|=n$ for all
+                $n\in\mathbb{N}$.\par\hspace{4mm} Finally, let
+                \begin{equation*}
+                    f(x)=1\;\;\;\text{and}\;\;\;g(x)=\begin{cases}
+                        1&\text{if $x\in[0, 1]\cap\mathbb{Q}$} \\
+                        0&\text{if $x\in[0, 1]\cap\mathbb{I}$}.
+                    \end{cases}
+                \end{equation*}
+                Clearly $f$ is integrable and both $f$ and $g$ are bounded.
+                Also $f(x)=g(x)$ for all $x\in[0, 1]\backslash([0,
+                1]\cap\mathbb{I})$. Since $g$ is not integrable, then the
+                result does not hold. 
+            \end{proof}
+        \item Let $f:[a, b]\to\mathbb{R}$ be an increasing function. Prove that
+            $f\in\mathcal{R}[a, b]$.
+            \begin{proof}
+                Let $\varepsilon>0$. Since $f$ is increasing then either 
+                $f(a)=f(b)$, in which case $f$ is constant and 
+                therefore integrable, or $f(a)<f(b)$.
+                Supposing the latter case, let $P=\{x_0, \dots, x_n\}$ such
+                that for some $\delta<\varepsilon/(f(b)-f(a))$, 
+                $\Delta x_i=\delta$
+                all $i\in\{1, \dots, n\}$. Then because $f$ is increasing, it
+                follows that $m_i=\inf f(x)=f(x_{i-1})$ and $M_i=\sup
+                f(x)=f(x_i)$ for $x_{i-1}\leq x\leq x_i$. Hence,
+                \begin{align*}
+                    U(f, P)-L(f, P) &= \sum_{i=1}^{n}M_i\Delta
+                    x_i-\sum_{i=1}^{n}m_i\Delta x_i \\
+                    &=\sum_{i=1}^{n}(M_i-m_i)\Delta x_i \\
+                    &=\sum_{i=1}^{n}(f(x_i)-f(x_{i-1}))\delta \\
+                    &=\delta(f(b)-f(a)) \\
+                    &<\frac{\varepsilon}{f(b)-f(a)}(f(b)-f(a))=\varepsilon.
+                \end{align*}
+                Therefore $f\in\mathcal{R}[a, b]$. 
+            \end{proof}
+        \item Let $f\in C[a, b]$ satisfy
+            \begin{equation*}
+                \int_{a}^{x}f=\int_{x}^bf\;\;\;\text{for all $x\in[a, b]$.}
+            \end{equation*}
+            Prove that $f(x)=0$ for all $x\in[a, b]$. 
+            \begin{proof}
+                Since $f$ is continuous on $[a, b]$. Then by part 1 of
+                the Fundamental Theorem of Calucus, $I_f'(x)=f(x)$ for all
+                $x\in[a, b]$. It then follows from part 2 of FHT that $I_f(x)$
+                is an antiderivative of $f$ over $[a, b]$ and thus over $[a,
+                y]$ and $[y, b]$ for any $y\in[a, b]$. Moreover, 
+                \begin{equation*}
+                    \int_{a}^y
+                    f=I_f(y)-I_f(a)\;\;\text{and}\;\;\int_{y}^b=I_f(b)-I_f(y).
+                \end{equation*}
+                Combining this with our assumption of equality, we get that 
+                \begin{equation*}
+                    I_f(y)-I_f(a)=I_f(b)-I_f(y)\Rightarrow
+                    I_f(y)=\frac{I_f(b)+I_f(a)}{2}.
+                \end{equation*}
+                The right-hand side being a constant gives 
+                \begin{equation*}
+                    I_f'(y)=0=f(y)
+                \end{equation*}
+                for all $y\in [a, b]$. Therefore $f(x)=0$ for all $x\in[a, b]$.
+            \end{proof}
+        \item Let $f, g\in C[a, b]$ with $g(x)\geq 0$ for all $x\in[a, b]$.
+            Prove that there exists $c\in[a, b]$ such that 
+            \begin{equation*}
+                \int_{a}^{b}fg=f(c)\int_{a}^{b}g.
+            \end{equation*}
+            Does the same conclusion hold if $g$ is not assumed to be
+            nonnegative? Give a proof or a counterexample.
+            \begin{proof}
+                Let $m=\inf f(x)$ and $M=\sup f(x)$ for $x\in[a, b]$. Then
+                since $f$ is continuous and $[a, b]$ is closed, then $m=\min
+                f(x)=f(a^*)$ and $M=\max f(x)=f(b^*)$ for $x\in[a, b]$ and
+                $a^*, b^*\in[a, b]$. Thus $m\leq f(x)\leq
+                M$ for all $x\in[a, b]$. Moreover, since $g(x)\geq 0$ for all
+                $x\in[a, b]$, then 
+                \begin{equation*}
+                    mg(x)\leq f(x)g(x)\leq Mg(x)\;\;\text{for all $x\in[a, b]$}
+                \end{equation*}
+                and by monotonicity we get that
+                \begin{equation}
+                    m\int_{a}^bg\leq\int_{a}^bfg\leq M\int_{a}^bg.
+                \end{equation}
+                Assuming $\int_{a}^b g>0$, then from (6) it follows that 
+                \begin{equation}
+                    f(a^*)=m\leq\frac{\int_{a}^bfg}{\int_{a}^bg}\leq M=f(b^*).
+                \end{equation}
+                Now consider the integral function $I_f(x)=\int_{a}^x f$. Since
+                $f$ is continuous on $[a, b]$, then by part 1 of FHT,
+                $I_f'(x)=f(x)$ for all $x\in [a, b]$. From 7 and Theorem 5.12
+                (Rudin) it follows that there exists some $c\in(a^*, b^*)$ such
+                that 
+                \begin{equation*}
+                     I_f'(c)=f(c)=\frac{\int_{a}^bfg}{\int_a^b g}\Rightarrow
+                    \int_{a}^bfg=f(c)\int_{a}^b g.
+                \end{equation*}
+                If $\int_a^b g=0$, then since $g(x)\geq 0$ and since $g$ is
+                continuous on $[a, b]$, then $g(x)=0$ for all $[a, b]$. This
+                implies that $f(x)g(x)=0$ for all $x\in[a, b]$. Hence
+                \begin{equation*}
+                    \int_{a}^bfg = \int_a^b 0=0\Rightarrow
+                    \int_a^bfg=f(c)\int_a^b g=f(c)\int_a^b0=0.
+                \end{equation*}
+                Which holds for any $c\in[a, b]$.
+                For a counter example let $a=0.5$, $b=1.5$, $f(x)=x$, and
+                $g(x)=\log x$. Then we have that
+                \begin{equation*}
+                    \int_{a}^bfg=\int_{0.5}^{1.5}x\log x\approx 0.0427916
+                \end{equation*}
+                and 
+                \begin{equation*}
+                    \int_{a}^b g=\int_{0.5}^{1.5}\log x\approx -0.0452287.
+                \end{equation*}
+                Seeing as the range of $f$ is $[0.5, 0.5]$ which is all
+                positive values, then it is clear
+                that there does not exist any $c\in[0.5, 1.5]$ such that 
+                \begin{equation*}
+                    \int_{a}^bfg=f(c)\int_{a}^b g.
+                \end{equation*}
+            \end{proof}
+    \end{enumerate}
+\end{document}

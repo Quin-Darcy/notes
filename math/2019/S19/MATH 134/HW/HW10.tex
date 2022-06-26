@@ -1,0 +1,205 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.2in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 134}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 4/25/19   \\
+{ \textbf{Instructor:}} \ Dr. Krauel \hspace{\fill} \textbf{Assignment:} Homework 10 \\ \hrule}
+
+\justifying
+
+% Document begins here
+
+    \begin{enumerate}[leftmargin=*]
+        \item Consider the function $f(z)=z^3+z^2+z+1$.
+            \begin{enumerate}[label=(\alph*)]
+                \item Find the Taylor series for $f(z)$ about $z_0=2$.
+                \item Expand the Taylor series found in part (a) and write it in the form               \begin{equation*}
+                        c_3z^3+c_2z^2+c_1z+c_0,
+                    \end{equation*} 
+                \noindent for constants $c_0,c_1,c_2,c_3\in\mathbb{C}$.
+            \end{enumerate}
+            
+            \begin{solution}\hfill\par
+                \begin{enumerate}[label=(\alph*), leftmargin=9mm]
+                    \item Since $f$ is a polynomial, we know that it is entire and can be sure that $f^{(k)}(z)$ exists for all $k\in\mathbb{Z}$. To begin, we will calculate the first few derivatives of $f$, then evaluate them at $z_0$.
+                    
+                    \begin{align*}
+                        f^{(0)}(z) &= z^3+z^2 + z + 1  &f^{(0)}(2) &= 15 &\frac{f^{(0)}(2)}{0!} &= 15\\
+                        f^{(1)}(z) &= 3z^2 + 2z + 1 &f^{(1)}(2) &= 17 &\frac{f^{(1)}(2)}{1!} &= 17\\
+                        f^{(2)}(z) &= 6z + 2 &f^{(2)}(2) &= 14 &\frac{f^{(2)}(2)}{2!} &= 7\\
+                        f^{(3)}(z) &= 6 &f^{(3)}(2) &= 6 &\frac{f^{(3)}(2)}{3!} &= 1.
+                    \end{align*}
+                    
+                    \noindent Thus, the Taylor series for $f(z)$ about $z_0=2$ is
+                    
+                    \begin{equation*}
+                        15+17(z-2)+7(z-2)^2+(z-2)^3.
+                    \end{equation*}
+                    
+                    \item Expanding out the polynomial we obtained in (a) we get
+                    
+                    \begin{equation*}
+                        \begin{split}
+                            &15+17(z-2)+7(z^2-4z+4)+(z^3-6z^2+12z-8) \\
+                            &= 15 + 17z-34+7z^2-28z+28+z^3-6z^2+12z-8 \\
+                            &= z^3+z^2+z+1.
+                        \end{split}
+                    \end{equation*}
+                    
+                    \noindent Thus, our constants $c_0,c_1,c_2,c_3\in\mathbb{C}$ are $c_0=c_1=c_2=c_3=1$. So we have obtained our original function $f$.
+                \end{enumerate}
+            \end{solution}
+        
+        \item Obtain the Taylor series 
+        
+            \begin{equation*}
+                e^z=\sum_{n=0}^{\infty}\frac{(z-1)^n}{n!},\quad\quad(\;\abs{z-1}<\infty\;)
+            \end{equation*}
+        
+            \noindent for the function $f(z)=e^z$ by
+            
+            \begin{enumerate}[label=(\alph*)]
+                \item using $f^{(n)}(1)$ $(n=0,1,2,\dots)$; and
+                \item writing $e^z=e^{z-1}e$ and then using the identity $e^{z-1}=\sum_{n=0}^{\infty}\frac{1}{n!}(z-1)^n$.
+            \end{enumerate}
+            
+            \begin{solution}\hfill\par
+                \begin{enumerate}[label=(\alph*),leftmargin=9mm]
+                    \item Since $f^{(n)}=e^z$ for all $n\in\mathbb{N}$, then for all $n\in\mathbb{N}$ we have $f^{(n)}(1)=e$. Thus, the Taylor series for $f(z)=e^z$ about $z_0=1$ is
+                    
+                    \begin{equation*}
+                        \sum_{n=0}^{\infty}\frac{f^{(n)}(1)}{n!}(z-1)^n = e\sum_{n=0}^{\infty}\frac{(z-1)^n}{n!}.
+                    \end{equation*}
+                    \item Using the given identity
+                    
+                    \begin{equation}
+                        e^{z-1}=\sum_{n=0}^{\infty}\frac{(z-1)^n}{n!}
+                    \end{equation}
+                    
+                    \noindent and the result from part (a), we find that by multiplying both sides of (1) by $e$, we obtain
+                    
+                    \begin{equation*}
+                        e\cdot e^{z-1} = e^z=e\sum_{n=0}^{\infty}\frac{(z-1)^n}{n!}, 
+                    \end{equation*}
+                    
+                    \noindent which is the, by part (a), the Taylor series of $f(z)=e^z$ about the point $z_0=1$.
+                \end{enumerate}            
+            \end{solution}
+            
+        \item Without using derivatives, find the Maclaurin series expansion of the function 
+        
+            \begin{equation*}
+                f(z)=\frac{z}{z^4+9}=\frac{1}{z}\cdot\frac{1}{1+(z^4/9)}.
+            \end{equation*}
+            
+            \begin{solution} We begin by using the identity 
+            
+            \begin{equation*}
+                \sum_{n=0}^{\infty} z^n=\frac{1}{1-z}.
+            \end{equation*}
+            
+            \noindent This identity holds whenever $\abs{z}<1$. So we will first re-write the right side of our given product as
+            
+            \begin{equation*}
+                \frac{1}{z}\cdot\frac{1}{1+(z^4/9)}=\frac{1}{z}\cdot\frac{1}{1-(-z^4/9)}.
+            \end{equation*}
+            
+            \noindent Thus, we have that
+            
+            \begin{equation*}
+                \begin{split}
+                    \frac{1}{z}\cdot\frac{1}{1+(z^4/9)} &=\frac{1}{z}\sum_{n=0}^{\infty}(-\frac{z^4}{9})^n \\
+                    &= \frac{1}{z}\sum_{n=0}^{\infty}(-1)^n(\frac{z^4}{9})^n\\
+                    &= \sum_{n=0}^{\infty}(-\frac{1}{9})^nz^{4n-1}.
+                \end{split}
+            \end{equation*}
+                
+            \end{solution}
+            
+            
+        
+    \end{enumerate}
+    
+    
+    
+\end{document}

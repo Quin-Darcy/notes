@@ -1,0 +1,214 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 161}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 161}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/10/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 1 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item Determine, with explanation, if $\varphi\rightarrow(\gamma\rightarrow\varphi)$ is a tautology.
+            \begin{solution}
+                We will show that the given sentence is a tautology via a truth table.
+                    \begin{landscape}
+                        \begin{table}[htp]
+                            \centering
+                            \begin{tabular}{c|c|c|c|c}
+                                \cline{1-4}
+                                \multicolumn{1}{|l|}{$\varphi$} & $\gamma$ & $\gamma\rightarrow\varphi$ & $\varphi\rightarrow(\gamma\rightarrow\varphi)$ &  \\ \cline{1-4}
+                                \multicolumn{1}{|l|}{$T$} & $T$ & $T$ & $T$ &  \\ \cline{1-4}
+                                \multicolumn{1}{|l|}{$T$} & $F$ & $T$ & $T$ &  \\ \cline{1-4}
+                                \multicolumn{1}{|l|}{$F$} & $T$ & $F$ & $T$ &  \\ \cline{1-4}
+                                \multicolumn{1}{|l|}{$F$} & $F$ & $T$ & $T$ &  \\ \cline{1-4}
+                            \end{tabular}
+                        \end{table}
+                    \end{landscape}\hfill\par
+                Each cell in the right most column containing all true values indicates the given sentence is a tautology.
+            \end{solution}
+        \item Using induction, prove that for all positive integers, $n\geq 2$,
+            \begin{equation}
+                \sim(\varphi_1\land\varphi_2\land\cdots\land\varphi_n)=\sim\varphi_1\lor\sim\varphi_2\lor\cdots\lor\sim\varphi_n.
+            \end{equation}
+            \begin{proof}
+                By PMI. Let $P(n):=\sim(\varphi_1\land\varphi_2\land\cdots\land\varphi_n)=\sim\varphi_1\lor\sim\varphi_2\lor\cdots\lor\sim\varphi_n$. Our base case is for $n=2$. We want to show the equality of (1) holds when $n=2$ and will do so via truth table.
+                    \begin{landscape}
+                        \begin{table}[htp]
+                            \centering
+                            \begin{tabular}{c|c|c|c|c|c|c|}
+                                \cline{1-7}
+                                \multicolumn{1}{|l|}{$\varphi_1$} & $\varphi_2$ & $\sim\varphi_1$ & $\sim\varphi_2$ & $\varphi_1\land\varphi_2$ & $\sim(\varphi_1\land\varphi_2)$ & $\sim\varphi_1\lor\sim\varphi_2$   \\ \cline{1-7}
+                                \multicolumn{1}{|c|}{$T$} & $T$ & $F$ & $F$ & $T$ & $F$ & $F$  \\ \cline{1-7}
+                                \multicolumn{1}{|c|}{$T$} & $F$ & $F$ & $T$ & $F$ & $T$ & $T$  \\ \cline{1-7}
+                                \multicolumn{1}{|c|}{$F$} & $T$ & $T$ & $F$ & $F$ & $T$ & $T$  \\ \cline{1-7}
+                                \multicolumn{1}{|c|}{$F$} & $F$ & $T$ & $T$ & $F$ & $T$ & $T$  \\ \cline{1-7}
+                            \end{tabular}
+                        \end{table}
+                    \end{landscape}\hfill\par
+                Seeing that columns 6 and 7 in the above table are equal, this proves the $P(2)$ holds.\par\hspace{4mm} Now assume $P(k)$ holds for some $k>2$. Consider
+                    \begin{equation*}
+                        \begin{split}
+                            \sim(\varphi_1\land\cdots\land\varphi_k\land\varphi_{k+1}) &\equiv \sim\big((\varphi_1\land\cdots\land\varphi_k)\land\varphi_{k+1}\big) \\
+                            &\equiv \sim(\alpha\land\varphi_{k+1}) \\
+                            &\equiv (\sim\alpha)\lor(\sim\varphi_{k+1}) \\
+                            &\equiv\sim(\varphi_1\land\cdots\land\varphi_k)\lor(\sim\varphi_{k+1}) \\
+                            &\equiv (\sim\varphi_1)\lor\cdots\lor(\sim\varphi_k)\lor(\sim\varphi_{k+1}).
+                        \end{split}
+                    \end{equation*}
+                Thus $P(k+1)$ is true. Therefore, $P(n)$ is true for all $n\geq 2$.
+            \end{proof}\newpage
+        \item[5.] For each of the following wffs, find (and show your process) logically equivalent wffs that contain only the logical symbols $\sim$, and $\lor$.
+            \begin{enumerate}
+                \item $p\rightarrow(q\rightarrow r)$.
+                    \begin{solution}
+                        We claim $p\rightarrow(q\rightarrow r)\equiv (\sim p)\lor\big((\sim q)\lor r\big)$. To show this, consider the following truth table:
+                            \begin{landscape}
+                                \begin{table}[htp]
+                                    \centering
+                                    \begin{tabular}{c|c|c|c|c|}
+                                        \cline{1-5}
+                                        \multicolumn{1}{|l|}{$p$} & $q$ & $\sim p$ & $\sim p\lor q$ & $p\rightarrow q$  \\ \cline{1-5}
+                                        \multicolumn{1}{|c|}{$T$} & $T$ & $F$ & $T$ & $T$ \\ \cline{1-5}
+                                        \multicolumn{1}{|c|}{$T$} & $F$ & $F$ & $F$ & $F$ \\ \cline{1-5}
+                                        \multicolumn{1}{|c|}{$F$} & $T$ & $T$ & $T$ & $T$ \\ \cline{1-5}
+                                        \multicolumn{1}{|c|}{$F$} & $F$ & $T$ & $T$ & $T$ \\ \cline{1-5}
+                                    \end{tabular}
+                                \end{table}
+                            \end{landscape}\hfill\par
+                        Hence, $p\rightarrow q\equiv \sim p\lor q$. Thus, 
+                            \begin{equation*}
+                                p\rightarrow(q\rightarrow r)\equiv (\sim p)\lor(q\rightarrow r)\equiv (\sim p)\lor\big((\sim q)\lor r\big),
+                            \end{equation*}
+                        as desired.
+                    \end{solution}
+                \item $p\leftrightarrow q$.
+                    \begin{solution}
+                        We begin by noting $p\leftrightarrow q\equiv (p\rightarrow q)\land(q\rightarrow p)$. Second, by part (a), it follows that 
+                            \begin{equation*}
+                                \begin{split}
+                                    (p\rightarrow q)\land(q\rightarrow p)&\equiv\big((\sim p)\lor q\big)\land\big((\sim q)\lor p\big) \\
+                                    &\equiv \big[\big((\sim p)\lor q\big)\land(\sim q)\big]\lor \big[\big((\sim p)\lor q\big)\land p\big] \\
+                                    &\equiv\big[(\sim p\land \sim q)\lor (q\land \sim q)\big]\lor\big[(\sim p\land p)\lor(q\land p)\big] \\
+                                    &\equiv (\sim p\land \sim q)\lor (q\land p) *\\
+                                    &\equiv \sim(p\lor q)\lor(\sim q\lor\sim p).
+                                \end{split}
+                            \end{equation*}
+                        Note that $*$ holds since the statement above it contained $(q\land \sim q)$ and $(p\land \sim p)$, which are both contradictions, and each were connected to their respective sentences by a disjunction; thus there removal results in an equivalent statement (since $T \equiv T\lor F$ and $F\equiv F\lor F$).
+                    \end{solution}
+            \end{enumerate}\newpage
+        \item[6.] Write $(p\rightarrow(q\rightarrow r))\land((p\rightarrow q)\rightarrow r)$ in disjunctive normal form.
+            \begin{solution}
+                Following the suggested instructions in problem (6), the resulting truth table is
+                    \begin{table}[htp]
+                        \centering
+                        \resizebox{\textwidth}{!}{%
+                        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+                            \hline
+                            $p$ & $q$ & $r$ & $q\rightarrow r$ & $p\rightarrow q$ & $p\rightarrow(q\rightarrow r)$ & $(p\rightarrow q)\rightarrow r$ & $(p\rightarrow(q\rightarrow r))\land((p\rightarrow q)\rightarrow r)$ &  \\ \hline
+                            $T$ & $T$ & $T$ & $T$ & $T$ & $T$ & $T$ & $T$ & $p\land q\land r$ \\ \hline
+                            $T$ & $T$ & $F$ & $F$ & $T$ & $F$ & $F$ & $F$ &  \\ \hline
+                            $T$ & $F$ & $T$ & $T$ & $F$ & $T$ & $T$ & $T$ & $p\land\sim q\land r$ \\ \hline
+                            $T$ & $F$ & $F$ & $T$ & $F$ & $F$ & $T$ & $F$ &  \\ \hline
+                            $F$ & $T$ & $T$ & $T$ & $T$ & $T$ & $T$ & $T$ & $\sim p\land q\land r$ \\ \hline
+                            $F$ & $T$ & $F$ & $F$ & $T$ & $T$ & $F$ & $F$ &  \\ \hline
+                            $F$ & $F$ & $T$ & $T$ & $T$ & $T$ & $T$ & $T$ & $\sim p\land \sim q\land r$ \\ \hline
+                            $F$ & $F$ & $F$ & $T$ & $T$ & $T$ & $F$ & $F$ &  \\ \hline
+                        \end{tabular}%
+                        }
+                    \end{table}\hfill\par 
+                From this table it follows that
+                    \begin{equation*}
+                        (p\rightarrow(q\rightarrow r))\land((p\rightarrow q)\rightarrow r)\equiv (p\land q\land r)\lor(p\land\sim q\land r)\lor(\sim p\land\sim q\land r).
+                    \end{equation*}
+            \end{solution}
+    \end{enumerate}
+\end{document}

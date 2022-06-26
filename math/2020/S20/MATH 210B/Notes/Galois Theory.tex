@@ -1,0 +1,1345 @@
+\section{}
+\documentclass[leqno]{article}
+
+%------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+%------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[colorlinks=true,pagebackref=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red, linkcolor=blue}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+
+\newcommand{\deg}[1]{\text{deg}(#1)}
+\newcommand{\g}[1]{\text{Gal}(#1)}
+
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{customthm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\textit{\oldproofname}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\begin{document}
+\title{A Brief Look At Galois Theory (for Reid-O)}
+\author{Quin Darcy}
+\date{April, 4 2020}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+    \begin{definition}[Pg. 75]\label{def:1}
+        Given $\alpha_1,\dots,\alpha_n\in L$, we define
+            \begin{equation*}
+                F[\alpha_1,\dots,\alpha_n]=\{h(\alpha_1,\dots,\alpha_n)\mid h\in F[x_1,\dots,x_n]\}.
+            \end{equation*}
+        Hence, $F[\alpha_1,\dots,\alpha_n]$ consists of all polynomial expressions in $L$ that can be formed using $\alpha_1,\dots,\alpha_n$ with coefficients on $F$. Then let 
+            \begin{equation*}
+                F(\alpha_1,\dots,\alpha_n)=\bigg\{\frac{\alpha}{\beta}\mid \alpha,\beta\in F[\alpha_1,\dots,\alpha_n],\beta\neq 0\bigg\}.
+            \end{equation*}
+        Thus, $F(\alpha_1,\dots,\alpha_n)$ is the set of all rational expressions in the $\alpha_i$ with coefficients in $F$.
+    \end{definition}
+    \begin{definition}[Pg. 73]\label{def:2}
+        Let $L$ be an extension of $F$, and let $\alpha\in L$. Then $\alpha$ is \textbf{\textit{algebraic}} over $F$ if there is a nonconstant polynomial $f\in F[x]$ such that $f(\alpha)=0$.
+    \end{definition}
+    \begin{lemma}[Pg. 76]\label{lem:1}
+        $F(\alpha_1,\dots,\alpha_n)$ is the smallest subfield of the field $L$ containing $F$ and $\alpha_1,\dots,\alpha_n$.
+    \end{lemma}
+    \begin{lemma}[Pg. 74]\label{lem:2}
+        If $\alpha\in L$ is algebraic over $F$, then there is a unique nonconstant monic polynomial $p\in F[x]$ with the following two properties:
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item $\alpha$ is a root of $p$, i.e., $p(\alpha)=0$.
+                \item If $f\in F[x]$ is any polynomial with $\alpha$ as a root, then $f$ is a multiple of $p$.
+            \end{enumerate}
+    \end{lemma}
+    \begin{definition}[Pg. 74]\label{def:3}
+        Let $\alpha\in L$. If $\alpha$ is algebraic over $F$, then the polynomial $p$ of \cref{lem:2} is called the \textbf{\textit{minimal polynomial}} of $\alpha$ over $F$.
+    \end{definition}
+    \begin{customthm}{A}[Pg. 514]\label{thm:A}
+        Let $\varphi\colon R\rightarrow S$ be a ring homomorphism. Then there is a unique ring homomorphism $\overline{\varphi}\colon R/\ker(\varphi)\cong\text{Im}(\varphi)$ such that $\overline{\varphi}(r+\ker(\varphi))=\varphi(r)$ for all $r\in R$.
+    \end{customthm}
+    \begin{lemma}[Pg. 77]\label{lem:3}
+        Assume that $F\subseteq L$ is a field extension, and let $\alpha\in L$ be algebraic over $F$ with minimal polynomial $p\in F[x]$. Then there is a unique ring isomorphism
+            \begin{equation*}
+                F[\alpha]\cong F[x]/\langle p\rangle
+            \end{equation*}
+        that is the identity on $F$ and maps $\alpha$ to the coset $x+\langle p\rangle$.
+    \end{lemma}
+        \begin{proof}
+            Consider the ring homomorphism $\varphi\colon F[x]\rightarrow L$ that sends $h(x)\in F[x]$ to $h(\alpha)\in L$. By definition, the image of $\varphi$ is $F[\alpha]$. As for the kernel, we claim that $\ker(\varphi)=\langle p\rangle$. To prove this, first note that $g\in F[x]$ implies that 
+                \begin{equation*}
+                    \varphi(gp)=\varphi(g)\varphi(p)=g(\alpha)p(\alpha)=g(\alpha)0=0.
+                \end{equation*}
+            This shows that $\langle p\rangle\subseteq\ker(\varphi)$. This is because
+                \begin{equation*}
+                    \ker(\varphi)=\{h\in F[x]\mid \varphi(h)=0\}=\{h\in F[x]\mid h(\alpha)=0\}.
+                \end{equation*}
+            And so the kernel is collecting all polynomials for which $\alpha$ is a root. To prove the other inclusion, let $f\in\ker(\varphi)$. Then $f(\alpha)=0$ and by part (b) of \cref{lem:2}, it follows that $p\mid f$. Thus, for some $g\in F[x]$, we have $f=gp\in\langle p\rangle$. Hence, $\ker(\varphi)\subseteq\langle p\rangle$ and so $\ker(\varphi)=\langle p\rangle$.\par\hspace{4mm} Since we know the image and the kernel of $\varphi$, then by \cref{thm:A}, we get that
+                \begin{equation*}
+                    F[x]/\langle p\rangle\cong F[\alpha].
+                \end{equation*}
+            Recall that we defined $\varphi\colon F[x]\rightarrow L$ by taking $h(x)\in F[x]$ and then $\varphi(h(x))=h(\alpha)$. So the above isomorphism is given by
+                \begin{equation*}
+                    \overline{\varphi}\colon F[x]/\langle p\rangle\rightarrow F[\alpha]
+                \end{equation*}
+            where
+                \begin{equation*}
+                    \overline{\varphi}(h(x)+\langle p\rangle)=\varphi(h(x))=h(\alpha)
+                \end{equation*}
+            for all $h(x)\in F[x]$.\par\hspace{4mm} From this we can see that $\overline{\varphi}$ is the identity on $F$ as claimed, since for any $a\in F$, we have that $a\in F[x]$ and so
+                \begin{equation*}
+                    \overline{\varphi}(a+\langle p\rangle)=\varphi(a)=a.
+                \end{equation*}
+            The inverse of $\overline{\varphi}$ maps $a+b\alpha\in F[\alpha]$ to $h(x)\in F[x]$ where $h(\alpha)=a+b\alpha$. Finally, uniqueness follows since a ring homomorphism defined on $F[\alpha]$ is uniquely determined by its values on $F$ and $\alpha$.
+        \end{proof}
+    \begin{lemma}\label{lem:4}
+        Let $F\subseteq L$ be a field extension, then if $f\in F[x]$ is irreducible over $F$, then 
+            \begin{equation*}
+                F[x]/\langle f\rangle
+            \end{equation*}
+        is a field.
+    \end{lemma}
+    \begin{lemma}[Pg. 78]\label{lem:5}
+        Assume that $F\subseteq L$ is a field extension, and let $\alpha\in L$. Then $\alpha$ is algebraic over $F$ if and only if $F[\alpha]=F(\alpha)$.
+    \end{lemma}
+    \begin{remark}
+        Note that 
+            \begin{equation*}
+                F[\alpha]=\{a+b\alpha\mid a,b\in F\},
+            \end{equation*}
+        and 
+            \begin{equation*}
+                F(\alpha)=\{\frac{u}{v}\mid u,v\in F[\alpha], v\neq 0\}.
+            \end{equation*}
+    \end{remark}
+    \begin{lemma}[Pg. 78]\label{lem:6}
+        Let $F\subseteq L$ be a field extension, and let $\alpha_1,\dots,\alpha_n\in L$ be algebraic over $F$. Then 
+            \begin{equation*}
+                F[\alpha_1,\dots,\alpha_n]=F(\alpha_1,\dots,\alpha_n).
+            \end{equation*}
+    \end{lemma}
+    \begin{definition}[Pg. 89]\label{def:4}
+        Let $F\subseteq L$ be a field extension.
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item $L$ is a \textbf{\textit{finite extension}} of $F$ if $L$ is a finite-dimensional vector space over $F$.
+                \item The \textbf{\textit{degree}} of $L$ over $F$, denoted $[L\colon F]$ is the dimension of $L$ as a vector space over $F$.
+            \end{enumerate}
+    \end{definition}
+    \begin{lemma}[Pg. 89]\label{lem:7}
+        An extension $F\subseteq L$ has degree $[L\colon F]=1$ if and only if $F=L$.
+    \end{lemma}
+    \begin{lemma}[Pg. 89]\label{lem:8}
+        Suppose that $F\subseteq L$ is an extension and $\alpha\in L$.
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item $\alpha$ is algebraic over $F$ if and only if $[F(\alpha)\colon F]<\infty$.
+                \item Let $\alpha$ be algebraic over $F$. If $n$ is the degree of the minimal polynomial of $\alpha$ over $F$, then $1,\alpha,\dots,\alpha^{n-1}$ forms a basis of $F(\alpha)$ over $F$. Thus, $[F(\alpha)\colon F]=n$.
+            \end{enumerate}
+    \end{lemma}
+    \begin{theorem}[Pg. 91]\label{thm:1}
+        Suppose that we have fields $F\subseteq K\subseteq L$.
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item If $[K\colon F]=\infty$ or $[L\colon K]=\infty$, then $[L\colon F]=\infty$.
+                \item If $[K\colon F]<\infty$ and $[L\colon K]<\infty$, then $[L\colon F]=[L\colon K][K\colon F]$.
+            \end{enumerate}
+    \end{theorem}
+    \begin{definition}[Pg. 94]\label{def:5}
+        A field extension $F\subseteq L$ is \textbf{\textit{algebraic}} if every element $L$ is algebraic over $F$.
+    \end{definition}\newpage
+    \begin{lemma}[Pg. 95]\label{lem:9}
+        Let $F\subseteq L$ be a finite extension. Then:
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item $F\subseteq L$ is algebraic.
+                \item If $\alpha\in L$, then the degree of the minimal polynomial of $\alpha$ over $F$ divides $[L\colon F]$.
+            \end{enumerate}
+    \end{lemma}
+    \begin{theorem}[Pg. 95]\label{thm:2}
+        Let $F\subseteq L$ be a field extension. Then $[L\colon F]<\infty$ if and only if there are $\alpha_1,\dots,\alpha_m\in L$ such that each $\alpha_i$ is algebraic over $F$ and $L=F(\alpha_1,\dots,\alpha_m)$.
+    \end{theorem}
+    \begin{definition}[Pg. 101]\label{def:6}
+        Let $f\in F[x]$ have degree $n>0$. Then the extension $F\subseteq L$ is a \textbf{\textit{splitting field}} of $f$ over $F$ if 
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item $f=c(x-\alpha_1)\cdots(x-\alpha_n)$, where $c\in F$ and $\alpha_i\in L$.
+                \item $L=F(\alpha_1,\dots,\alpha_n)$.
+            \end{enumerate}
+    \end{definition}
+    \begin{example}\label{ex:1}
+        A splitting field of $x^2+1$ over $\mathbb{Q}$ is $\mathbb{Q}(i)$.
+    \end{example}
+    Since the roots of a nonconstant polynomial $f\in F[x]$ are algebraic over $F$, it follows from \cref{thm:2} that a splitting field of $f$ over $F$ is always a finite extension.
+    \begin{theorem}[Pg. 102]\label{thm:3}
+        Let $f\in F[x]$ be a polynomial of degree $n>0$, and let $L$ be a splitting field of $f$ over $F$. Then $[L\colon F]\leq n!$.
+    \end{theorem}
+    \begin{theorem}[Pg. 103]\label{thm:4}
+        Given two fields, $F_1, F_2$ and $f_1\in F_1[x]$ and $\varphi\colon F_1\cong F_2$, there is an isomorphism $\overline{\varphi}\colon L_1\cong L_2$ such that $\varphi=\overline{\varphi}\mid_{F_1}$, where $L_1$ and $L_2$ are the splitting fields of $f_1$ and $\varphi(f_1)$, respectively.
+    \end{theorem}
+    \begin{corollary}[Pg. 105]\label{cor:1}
+        If $L_1$ and $L_2$ are splitting fields of $f\in F[x]$, then there is an isomorphism $L_1\cong L_2$ that is the identity on $F$.
+    \end{corollary}
+    \begin{prop}[Pg. 105]\label{prop:1}
+        \textit{Let $L$ be a splitting field of a polynomial in $F[x]$, and suppose that $h\in F[x]$ is irreducible and has roots $\alpha,\beta\in L$. Then there is a field isomorphism $\sigma\colon L\rightarrow L$ that is the identity on $F$ and takes $\alpha$ to $\beta$.}
+    \end{prop}
+    \begin{prop}[Pg. 107]\label{prop:2}
+        \textit{Let $L$ be the splitting field of $f\in F[x]$, and let $g\in F[x]$ be irreducible. If $g$ has one root in $L$, then $g$ splits completely over $L$.}
+    \end{prop}
+    \begin{definition}[Pg. 108]\label{def:7}
+        An algebraic extension $F\subseteq L$ is \textbf{\textit{normal}} if every irreducible polynomial in $F[x]$ that has a root in $L$ splits completely over $L$.
+    \end{definition}
+    \begin{theorem}[Pg. 108]\label{thm:5}
+        Suppose that $F\subseteq L$. Then $L$ is the splitting field of some $f\in F[x]$ if and only if the extension $F\subseteq L$ is normal and finite.
+    \end{theorem}
+    \begin{corollary}[Pg. 109]\label{cor:2}
+        Let $F\subseteq L$ be an algebraic extension. Then $F\subseteq L$ is normal if and only if for every $\alpha\in L$, the minimal polynomial of $\alpha$ over $F$ splits completely over $L$.
+    \end{corollary}
+    \begin{definition}[Pg. 109]\label{def:8}
+        A polynomial $f\in F[x]$ is \textbf{\textit{separable}} if it is nonconstant and its roots in a splitting field are all distinct.
+    \end{definition}
+    \begin{definition}[Pg. 111]\label{def:9}
+        Let $F\subseteq L$ be an algebraic extension. Then:
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item $\alpha\in L$ is \textbf{\textit{separable}} over $F$ if its minimal polynomial over $F$ is separable.
+                \item $F\subseteq L$ is a \textbf{\textit{separable extension}} if every $\alpha\in L$ is separable over $F$.
+            \end{enumerate}
+    \end{definition}
+    \begin{lemma}[Pg. 111]\label{lem:10}
+        A nonconstant polynomial $f\in F[x]$ is separable if and only if $f$ is the product of irreducible polynomials, each of which is separable and no two of which are multiples of each other. 
+    \end{lemma}
+    \begin{prop}[Pg. 110]\label{prop:3}
+        \textit{If $f\in F[x]$ is monic and nonconstant, then $f$ and $f'$ are relatively prime in $F[x]$ if and only if $f$ is separable.}
+    \end{prop}
+        \begin{proof}
+            Let $\alpha_1,\dots,\alpha_n$ be the roots of $f$ in some splitting field. For a given $i$ write 
+                \begin{equation*}
+                    f(x)=(x-\alpha_i)h_i(x),\quad h_i(x)=\prod_{j\neq i}(x-\alpha_j).
+                \end{equation*}
+            Differentiating, we obtain $f'(x)=(x-\alpha_i)h_i'(x)+h_i(x)$ by the product rule, and then evaluating at $\alpha_i$ gives
+                \begin{equation}
+                    f'(\alpha_i)=h_i(\alpha_i)=\prod_{j\neq i}(x-\alpha_j).
+                \end{equation}
+            Now assume $\gcd(f,f')\neq 0$. Then $f$ and $f'$ share a common factor $g$ with positive degree. Since $g\mid f$, we must have $g(\alpha_i)=0$ for some $i$, and then $g\mid f'$ implies that $f'(\alpha_i)=0$. Hence $0=f'(\alpha_i)=\prod_{j\neq i}(x-\alpha_j)$, so that $\alpha_i=\alpha_j$ for some $j\neq i$. Thus the roots of $f$ are not distinct and $f$ is not separable.\par\hspace{4mm} Conversely, if $\gcd(f,f')=1$, then $Af+Bf'=1$ for some $A,B\in F[x]$. Evaluating this at $\alpha_i$ gives $1=Bf'(\alpha_i)$, so that $f'(\alpha_i)\neq 0$. By (1), this implies that $\prod_{j\neq i}(x-\alpha_j)$ is nonzero for all $i$. Hence $\alpha_1,\dots,\alpha_n$ are distinct and so $f$ is separable.
+        \end{proof}
+    \begin{lemma}[Pg. 111]\label{lem:11}
+        Let $f\in F[x]$ be an irreducible polynomial of degree $n$. Then $f$ is separable if wither of the following conditions is satisfied:
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item $F$ has characteristic 0, or
+                \item $F$ has characteristic $p>0$, where $p\nmid n$.
+            \end{enumerate}
+    \end{lemma}
+        \begin{proof}
+            Let $f=a_0x^n+\cdots+a_{n-1}x+a_n$, where $n>0$ and $a_0\neq 0$. Then $f'=na_0x^{n-1}+\cdots+a_{n-1}$. Condition (a) or (b) implies that $n\neq0$ in $F$, so that $a_0\neq 0$ implies that $na_0\neq0$. Hence $f'$ is nonzero and has degree $n-1$.\par\hspace{4mm} Since $f$ is irreducible, its only divisors (up to constant multiples) are 1 and $f$. In particular, $g=\gcd(f,f')$ must be 1 or $f$. But $g\mid f'$ and $f'\neq 0$ imply $\deg(g)\leq\deg(f')=n-1$. Hence $g$ cannot be a multiple of $f$, so that $\gcd(f,f')=g=1$. By \cref{prop:3} $f$ is separable. 
+        \end{proof}
+    \begin{lemma}[Pg. 118]\label{lem:12}
+        A polynomial $f\in F[x]$ is separable if and only if $f$ and $f'$ have no common roots in any extension of $F$.
+    \end{lemma}
+    \begin{theorem}[Pg. 119]\label{thm:6}
+        Let $F\subseteq L=F(\alpha_1,\dots,\alpha_n)$ be a finite extension, where each $\alpha_i$ is separable over $F$. Then there is $\alpha\in L$ separable over $F$such that $L=F(\alpha)$. Furthermore, if $F$ is infinite, then $\alpha$ can be chosen to be of the form 
+            \begin{equation*}
+                \alpha=t_1\alpha_1+\cdots+t_n\alpha_n
+            \end{equation*}
+        where $t_1,\dots,t_n\in F$.
+    \end{theorem}
+\section{The Galois Group}
+    The Galois group of a finite extension $F\subseteq L$, $\text{Gal}(L/F)$ consists of all automorphisms of $L$ that are the identity on $F$. The basic structure of $\text{Gal}(L/F)$ is as follows.
+    \begin{prop}[Pg. 125]\label{prop:4}
+        \textit{$\text{Gal}(L/F)$ is a group under composition.}
+    \end{prop}
+        \begin{proof}
+            First suppose that $\sigma,\tau\in\text{Gal}(L/F)$. Then $\sigma\tau$ is the composition $\sigma\circ\tau$, which is an automorphism since both $\sigma$ and $tau$ are automorphisms. Also, if $a\in F$, then $\sigma\circ\tau(a)=\sigma(\tau(a))=\sigma(a)=a$, since $\sigma$ and $\tau$ are the identity on $F$. Hence, composition gives an operation on $\text{Gal}(L/F)$, which is associative by standard properties of composition.\par\hspace{4mm} The identity map $1_L\colon L\rightarrow L$ is an isomorphism that is the identity on $F$, so that $1_L\in\text{Gal}(L/F)$. It is easily shown that $1_L\circ\sigma=\sigma\circ 1_L=\sigma$ for all $\sigma\in\text{Gal}(L/F)$ and so $1_L$ is the identity element of $\text{Gal}(L/F)$.\par\hspace{4mm} Finally, any $\sigma\in\text{Gal}(L/F)$ is an automorphism, which means that its inverse $\sigma^{-1}\colon L\rightarrow L$ is also an automorphism. Also, if $a\in F$, then $a=\sigma(a)$, which implies that $\sigma^{-1}(a)=\sigma^{-1}(\sigma(a))=a$. This shows that $\sigma^{-1}\in\text{Gal}(L/F)$ and completes the proof that $\text{Gal}(L/F)$ is a group under composition.
+        \end{proof}
+    Because of this proposition, we call $\text{Gal}(L/F)$ the \textit{Galois group} of $F\subseteq L$. In order to compute the Galois groups, we need to know how the elements of $\text{Gal}(L/F)$ behave. We begin with the following simple observation.
+    \begin{lemma}[Pg. 126]\label{lem:13}
+        Let $F\subseteq L$ be finite, and fix $\sigma\in\text{Gal}(L/F)$. Given $h\in F[x_1,\dots,x_n]$ and $\beta_1,\dots,\beta_n\in L$, then 
+            \begin{equation*}
+                \sigma\big(h(\beta_1,\dots,\beta_n)\big)=h\big(\sigma(\beta_1),\dots,\sigma(\beta_n)\big).
+            \end{equation*}
+        In particular, if $h\in F[x]$ and $\beta\in L$, then 
+            \begin{equation*}
+                \sigma\big(h(\beta)\big)=h\big(\sigma(\beta)\big).
+            \end{equation*}
+    \end{lemma}
+        \begin{proof}
+            This follows immediately because $\sigma$ preserves addition and multiplication and is the identity in the coefficients of $h$.
+        \end{proof}
+    This lemma has some nice consequences concerning the Galois group.
+    \begin{prop}[Pg. 126]\label{prop:5}
+        \textit{Let $F\subseteq L$ be a finite extension and let $\sigma\in\text{Gal}(L/F)$. Then:}
+            \begin{enumerate}
+                \item \textit{If $h\in F[x]$ is nonconstant polynomial with $\alpha\in L$ as a root, then $\sigma(\alpha)$ is another root of $h$ lying in $L$.}
+                \item \textit{If $L=(\alpha_1,\dots,\alpha_n)$, then $\sigma$ is uniquely determined by its values on $\alpha_1,\dots,\alpha_n$.}
+            \end{enumerate}
+    \end{prop}
+        \begin{proof}
+            By \cref{lem:13}, $h\in F[x]$ and $0=h(\alpha)$ imply that
+                \begin{equation*}
+                    0=\sigma(0)=\sigma\big(h(\alpha)\big)=h\big(\sigma(\alpha)\big),
+                \end{equation*}
+            which shows that $\sigma(\alpha)\in L$ is also a root of $h$. Hence, part 1. has been shown.\par\hspace{4mm} Turning to part 2., note that by \cref{lem:6}, $L=F[\alpha_1,\dots,\alpha_n]$, since $L=F(\alpha_1,\dots,\alpha_n)$ is a finite extension of $F$. Hence any $\beta\in L$ can be written 
+                \begin{equation*}
+                    \beta=h(\alpha_1,\dots,\alpha_n)
+                \end{equation*}
+            for some polynomial $h\in F[x_1,\dots, x_n]$. By \cref{lem:13}, 
+                \begin{equation*}
+                    \sigma(\beta)=\sigma\big(h(\alpha_1,\dots,\alpha_n)\big)=h\big(\sigma(\alpha_1),\dots,\sigma(\alpha_n)\big).
+                \end{equation*}
+            It follows that $\sigma\colon L\rightarrow L$ is uniquely determined by $\sigma(\alpha_1),\dots,\sigma(\alpha_n)$.
+        \end{proof}
+    \begin{definition}[Pg. 128]\label{def:10}
+        Let $f\in F[x]$. The \textbf{\textit{Galois group of}} $f$ \textbf{\textit{over}} $F$ is $\text{Gal}(L/F)$, where $L$ is a splitting field of $f$ over $F$.
+    \end{definition}
+    \begin{theorem}[Pg. 130]\label{thm:7}
+        If $L$ is the splitting field of a separable polynomial in $F[x]$, then the Galois group of $F\subseteq L$ has order $\abs{\text{Gal}(L/F)}=[L\colon F]$.
+    \end{theorem}
+        \begin{proof}
+            Our hypothesis implies that $L=F(\alpha_1,\dots,\alpha_n)$, where $\alpha_1,\dots,\alpha_n$ are the roots of a separable polynomial $f\in F[x]$. Then each $\alpha_i$ is separable over $F$ since by \cref{lem:2} the minimal polynomial of any $\alpha_i$ divides $f$ and since $f$ splits over $L$ into distinct factors, then so does the minimal polynomial of $\alpha_i$. By \cref{thm:6}, we can find $\beta\in L$ separable over $F$ such that $L=F(\beta)$. Let $h\in F[x]$ be the minimal polynomial of $\beta$. Note that $h$ is separable since $\beta$ is separable.\par\hspace{4mm} Since $L=F(\beta)$, \cref{lem:8} implies that $[L\colon F]=m$, where $m=\text{deg}(h)$. To prove the theorem, we need to show that $\text{Gal}(L/F)$ has $m$ elements. We will use the following ideas:
+                \begin{itemize}
+                    \item \textbf{Normality} (\cref{def:7}): If an irreducible polynomial has one root in a splitting field, then all of its roots lie in the splitting field.
+                    \item \textbf{Separability} (\cref{def:8}): Separability means that a polynomial has distinct roots in its splitting field.
+                    \item \textbf{Isomorphisms} (\cref{prop:1}):  If two elements in a splitting field $L$ are roots of the same irreducible polynomial over $F$, then there is an automorphism of $L$ that is the identity on $F$ and takes one root to the other. 
+                \end{itemize}
+            The above polynomial $h\in F[x]$ is separable and has a root $\beta\in L$. Since $L$ is a splitting field over $F$, then the bullets for normality and separability imply that $h$ has distinct roots $\beta=\beta_1,\dots,\beta_m$, $m=\text{deg}(h)$, all of which lie in $L$. Now fix one of those roots, say $\beta_i$. Then $\beta$ and $\beta_i$ are roots of the irreducible polynomial $h$. Since $L$ is a splitting field over $F$, the bullet for isomorphism implies that there is an automorphism $\sigma_i$ of $L$ such that $\sigma_i(\beta)=\beta_i$ and $\sigma_i$ is the identity on $F$.\par\hspace{4mm} It follows that $\sigma_1,\dots,\sigma_m\in\text{Gal}(L/F)$. Note that $\sigma_i\neq\sigma_j$ for $i\neq j$, since $\sigma_i(\beta)=\beta_i\neq\beta_j=\sigma_j(\beta)$. Thus, $\text{Gal}(L/F)$ has at least $m$ distinct elements. But given \textit{any} $\sigma\in\text{Gal}(L/F)$, \cref{prop:4} and $L=F(\beta)$ imply that $\sigma$ is uniquely determined by $\sigma(\beta)\in\{\beta_1,\dots,\beta_m\}$. It follows that $\sigma=\sigma_i$ for some $i$. This completes the proof of the theorem.
+        \end{proof} 
+    \begin{example}\label{ex:2}
+        Consider $\mathbb{Q}\subseteq L=\mathbb{Q}(\sqrt{2},\sqrt{3})$. Then since $x^2-2,x^2-3\in\mathbb{Q}[x]$ are nonconstant polynomials and $L=\mathbb{Q}(\sqrt{2},\sqrt{3})$, \cref{prop:4} implies that $\sigma\in\text{Gal}(L/\mathbb{Q})$ is determined uniquely by
+            \begin{equation*}
+                \sigma(\sqrt{2})=\pm\sqrt{2},\quad\sigma(\sqrt{3})=\pm\sqrt{3}.
+            \end{equation*}
+        This gives the inequality $\abs{\text{Gal}(L/\mathbb{Q})}\leq 4$. However, since $x^2-2$ is the minimal polynomial for $\sqrt{2}$ over $\mathbb{Q}$ and $x^2-3$ is the minimal polynomial of $\sqrt{3}$ over $\mathbb{Q}(\sqrt{2})$, then by \cref{lem:8}, $1,\sqrt{2}$ forms a basis for $\mathbb{Q}(\sqrt{2})$ over $\mathbb{Q}$ and $1,\sqrt{3}$ forms a basis for $\mathbb{Q}(\sqrt{2},\sqrt{3})$ over $\mathbb{Q}(\sqrt{2})$, then by \cref{thm:1},
+            \begin{equation*}
+                [\mathbb{Q}(\sqrt{2},\sqrt{3})\colon\mathbb{Q}]=[\mathbb{Q}(\sqrt{2},\sqrt{3})\colon\mathbb{Q}(\sqrt{2})][\mathbb{Q}(\sqrt{2})\colon\mathbb{Q}]=2\cdot2=4.
+            \end{equation*}
+        Thus, all of the above sign combinations must occur. In particular, we can find $\sigma,\tau\in\text{Gal}(L/\mathbb{Q})$ such that 
+            \begin{align*}
+                \sigma(\sqrt{2})&=\sqrt{2}, & \sigma(\sqrt{3})&=-\sqrt{3} \\
+                \tau(\sqrt{2})&=-\sqrt{2},& \tau(\sqrt{3})&=\sqrt{3}.
+            \end{align*}
+        And so $\text{Gal}(L/\mathbb{Q})=\{1_L,\sigma,\tau,\sigma\tau\}$.
+    \end{example}
+\section{Permutations Of The Roots}
+    Assume that $L$ is the splitting field of a separable polynomial $f\in F[x]$. Our goal is to interpret $\text{Gal}(L/F)$ in terms of permutations of roots of $f$.\par\hspace{4mm} Let $\text{deg}(f)=n$. Then in $L[x]$ we can write $f$ as the product
+        \begin{equation*}
+            f=c(x-\alpha_1)\cdots(x-\alpha_n),
+        \end{equation*}
+    where $c\neq 0$ and $\alpha_1,\dots,\alpha_n\in L$ are distinct. In this situation we get a map
+        \begin{equation}
+            \text{Gal}(L/F)\longrightarrow S_n
+        \end{equation}
+    as follows. Given $\sigma\in \text{Gal}(L/F)$, \cref{prop:4} implies that $\sigma(\alpha_i)$ is a root of $f$, so $\sigma(\alpha_i)=\alpha_{\tau(i)}$ for some $\tau(i)\in\{1,\dots,n\}$. Note that $\tau(i)$ is uniquely determined, since $\alpha_1,\dots,\alpha_n$ are distinct. Also, 
+        \begin{equation*}
+            \tau\colon \{1,\dots,n\}\longrightarrow\{1,\dots,n\}
+        \end{equation*}
+    is one-to-one since if $\tau(i)=\tau(j)$, then 
+        \begin{equation*}
+            \sigma(\alpha_i)=\alph_{\tau(i)}=\alpha_{\tau(j)}=\sigma(\alpha_j)
+        \end{equation*}
+    which implies $\alpha_i=\alpha_j$ (since $\sigma$ is one-to-one) and so $i=j$. It follows that $\tau$ is a permutation, that is, $\tau\in S_n$. This defined the map (1).
+    \begin{prop}[Pg. 133]\label{prop:6}
+        \textit{The map $\text{Gal}(L/F)\rightarrow S_n$ described in (1) is a one-to-one group homomorphism. }
+    \end{prop}
+        \begin{proof}
+            Suppose $\sigma_1,\sigma_2\in\text{Gal}(L/F)$ correspond to $\tau_1,\tau_2\in S_n$ via (1). This means that $\sigma_1(\alpha_i)=\alpha_{\tau_1(i)}$ and similarly for $\sigma_2$ and $\tau_2$. Then 
+                \begin{equation*}
+                    \sigma_1\circ\sigma_2(\alpha_i)=\sigma_1(\sigma_2(\alpha_i))=\sigma_1(\alpha_{\tau_2(i)})=\alpha_{\tau_1(\tau_2(i))}=\sigma_1_{\tau_1\tau_2(i)}.
+                \end{equation*}
+            This shows that $\sigma_1\circ\sigma_2$ corresponds to $\tau_1\tau_2$, so that (1) is a group homomorphism. It remains to be shown that (1) is one-to-one. This follows immediately from \cref{prop:4} since $L=F(\alpha_1,\dots,\alpha_n)$ and so $\sigma$ is uniquely determined by its values on $\alpha_1,\dots,\alpha_n$.
+        \end{proof}
+    \cref{prop:6} shows that for the splitting field of a separable polynomial of degree $n$, we can regard the Galois group as a subgroup of $S_n$. By Lagrange's Theorem, it follows that $\abs{\text{Gal}(L/F)}$ divides $n!$.
+    \begin{corollary}[Pg. 133]\label{cor:3}
+        If $L$ is the splitting of a separable polynomial $f\in F[x]$, then $[L\colon F]$ divides $n!$, where $\text{deg}(f)=n$.
+    \end{corollary}
+    \begin{example}\label{ex:3}
+        We know that the splitting field of $(x^2-2)(x^2-3)$ over $\mathbb{Q}$ is $L=\mathbb{Q}(\sqrt{2},\sqrt{3})$. \cref{ex:2} shows that $\text{Gal}(L/\mathbb{Q})=\{1_L,\sigma,\tau,\sigma\tau\}$, where $\sigma$ and $\tau$ satisfy
+            \begin{equation*}
+                \sigma(\sqrt{2})=\sqrt{2},\;\sigma(\sqrt{3})=-\sqrt{3}\quad\text{and}\quad\tau(\sqrt{2})=-\sqrt{2},\;\tau(\sqrt{3})=\sqrt{3}.
+            \end{equation*}
+        Let $\alpha_1=\sqrt{2},\alpha_2=-\sqrt{2},\alpha_3=\sqrt{3}$, and $\alpha_4=-\sqrt{3}$. Then $\text{Gal}(L/\mathbb{Q})$ is isomorphic to s subgroup of $S_3$ by \cref{prop:5}. The automorphism clearly fixes $\alpha_1$ and $\alpha_2$ and interchanges $\alpha_3,\alpha_4$. It follows that $\sigma\mapsto (34)\in S_4$. One similarly shows that $\tau\mapsto (12)$ so that $\sigma\tau\mapsto(12)(34)$. Hence, $\text{Gal}(L/\mathbb{Q})\cong\{e,(12),(34),(12)(34)\}\subseteq S_4$.
+    \end{example}
+    \begin{example}\label{ex:4}
+        Consider the extension $\mathbb{Q}\subseteq L=\mathbb{Q}(\omega,\sqrt[3]{2})$, $\omega=e^{2\pi i/3}$. Note that $x^3-2=(x-\sqrt[3]{2})(x-\omega\sqrt[3]{2})(x-\omega^2\sqrt[3]{2})$ and so $L$ is the splitting field for $x^3-2$ over $\mathbb{Q}$. Thus, by \cref{prop:5}, the map $\text{Gal}(L/\mathbb{Q})\rightarrow S_3$ is a one-to-one group homomorphism. Additionally, $x^2+x+1=(x-\omega)(x-\omega^2)$ and so neither of these roots are real. Thus, $x^2+x+1$ is the minimal polynomial of $\omega$ over $\mathbb{Q}(\sqrt[3]{2})$. Hence, by \cref{thm:1}, $[L\colon\mathbb{Q}]=6$. Thus, $\text{Gal}(L/\mathbb{Q})\cong S_3$. Moreover, by \cref{prop:4}, for any $\sigma\in\text{Gal}(L/\mathbb{Q})$, it is uniquely determined by what its values are on $\omega$ and $\sqrt[3]{2}$. Specifically, we have that
+            \begin{equation*}
+                \sigma(\omega)\in\{\omega,\omega^2\}\quad\text{and}\quad\sigma(\sqrt[3]{2})\in\{\sqrt[3]{2},\omega\sqrt[3]{2},\omega^2\sqrt[3]{2}\}.
+            \end{equation*}
+        Thus, there are $\sigma,\tau\in\text{Gal}(L/\mathbb{Q})$ such that 
+            \begin{equation*}
+                \sigma(\sqrt[3]{2})=\omega\sqrt[3]{2}, \sigma(\omega)=\omega\quad\text{and}\quad\tau(\sqrt[3]{2})=\sqrt[3]{2},\tau(\omega)=\omega^2.
+            \end{equation*}
+        Letting $\alpha_1=\sqrt[3]{2},\alpha_2=\omega\sqrt[3]{2}$, and $\alpha_3=\omega^2\sqrt[3]{2}$ it follows that $\sigma\mapsto (123)$, $\tau\mapsto(23)$, $\sigma\tau\mapsto(12)$, $\sigma^2\mapsto(132)$, and $\sigma^2\tau\mapsto(13)$. Hence, $\text{Gal}(L/\mathbb{Q})=\{1_L,\sigma,\tau,\sigma\tau,\sigma^2,\sigma^2\tau\}\cong\{(1),(123),(23),(12),(132),(13)\}=S_3$.
+    \end{example}
+    \begin{definition}[Pg. 147]\label{def:11}
+        Suppose we have a finite extension $F\subseteq L$ with Galois group $\text{Gal}(L/F)$. Given a subgroup $H\subseteq \text{Gal}(L/F)$, we call
+            \begin{equation*}
+                F_H=\{\alpha\in L\mid \sigma(\alpha)=\alpha\text{ for all }\sigma\in H\}
+            \end{equation*}
+        the \textbf{\textit{fixed field of}} $H$.
+    \end{definition}
+    \begin{prop}\label{prop:7}
+        \textit{The fixed field $F_H$ in \cref{def:11} is a subfield of $L$ containing $F$.}
+    \end{prop}
+        \begin{proof}
+            Since for any $\sigma\in\text{Gal}(L/F)$, $\sigma(1)=1$, then $1\in F_H$ and $F_H\neq\varnothing$. Suppose $a,b\in F_H$ and $\sigma\in H$. Then $\sigma(a-b)=\sigma(a)-\sigma(b)=a-b$. Then $a-b\in F_H$. Similarly, $\sigma(ab^{-1})=\sigma(a)\sigma(b^{-1})=ab^{-1}$ and so $ab^{-1}\in F_H$. Thus, $F_H$ is a subfield of $L$. Finally, let $a\in F$, then for all $\sigma\in H$, $\sigma(a)=a$ and so $a\in L_H$. Hence, $F\subseteq F_H$. 
+        \end{proof}
+    \begin{theorem}[Pg. 147]\label{thm:8}
+        Let $F\subseteq L$ be a finite extension. Then the following are equivalent:
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item $L$ is the splitting field of a separable polynomial in $F[x]$.
+                \item $F$ is the fixed field of $\text{Gal}(L/F)$ acting on $L$.
+                \item $F\subseteq L$ is a normal separable extension.
+            \end{enumerate}
+    \end{theorem}
+        \begin{proof}
+            (a) $\Rightarrow$ (b): Let $K$ be the fixed field of $\text{Gal}(L/F)$. By \cref{prop:6}, $K$ is a subfield of $L$ which contains $F$ and so $F\subseteq K\subseteq L$. We want to show that $K=F$. Note that since $L$ is the splitting field of a separable polynomial $f\in F[x]$ over $F$, the same is true over the larger field $K$ since $f$ also lie in $K[x]$. By \cref{thm:7} it follows that
+                \begin{equation*}
+                    [L\colon F]=\abs{\text{Gal}(L/F)}\quad\text{and}\quad[L\colon K]=\abs{\text{Gal}(L/K)}.
+                \end{equation*}
+            Next observe that $\text{Gal}(L/K)\subseteq\text{Gal}(L/F)$, since if an automorphism of $L$ is the identity on $K$, then it is also the identity on the smaller field $F$. The reverse inclusion also holds, since every $\sigma\in\text{Gal}(L/F)$ is the identity on $K$, for $K$ is the fixed field of $\text{Gal}(L/F)$. It follows that $\text{Gal}(L/K)=\text{Gal}(L/F)$. Combining this with the above equations, we see that 
+                \begin{equation*}
+                    [L\colon F]=[L\colon K].
+                \end{equation*}
+            Since $[L\colon F]=[L\colon K][K\colon F]$, we have $[K\colon F]=1$ and so by \cref{lem:7}, $K=F$.\par\hspace{4mm}(b) $\Rightarrow$ (c): Now suppose that $F$ is the fixed field of $\text{Gal}(L/F)$ and $\alpha\in L$. We will find the minimal polynomial of $\alpha$ over $F$ using a construction due to Lagrange. Let $\alpha_1,\alpha_2,\dots,\alpha_r$ be the distinct elements of $L$ obtained by applying the elements of $\text{Gal}(L/F)$ to $\alpha$. Then consider the polynomial
+                \begin{equation}
+                    h(x)=\prod_{i=1}^r(x-\alpha_i)\in L[x].
+                \end{equation}
+            We claim that $h\in F[x]$ and that $h$ is irreducible over $F$.\par\hspace{4mm} We first show that $\sigma\in\text{Gal}(L/F)$ permutes the $\alpha_i$. By definition, $\alpha_i=\tau(\alpha)$ for some $\tau\in\text{Gal}(L/F)$. Then $\sigma(\alpha_i)=\sigma(\tau(\alpha))=(\sigma\tau)(\alpha)$, which is $\alpha_j$ for some $j$. Thus $\sigma$ maps $\{\alpha_1,\dots,\alpha_r\}$ to itself, which gives a permutation, since $\sigma$ is one-to-one.\par\hspace{4mm} Since $\sigma$ permutes the $\alpha_i$, it also permutes the factors $x-\alpha_i$ of $h$. This shows that the coefficients of $h$ are fixed by $\text{Gal}(L/F)$ and hence lie in the fixed field, which is $F$ by assumption. Hence $h\in F[x]$, as claimed.\par\hspace{4mm} Next let $g\in F[x]$ be the irreducible factor of $h$ that vanishes at $\alpha$. Then \cref{prop:4} shows that $\sigma(\alpha)$ is also a root of $g$ for all $\sigma\in\text{Gal}(L/F)$. Since the $\alpha_i$ are all distinct elements of $L$ obtained in this way, (2) shows that $h\mid g$. It follows that $h$ is irreducible over $F$, since $g$ is an irreducible factor of $h$.\par\hspace{4mm} We conclude that $h\in F[x]$ is the minimal polynomial of $\alpha$ over $F$, since $h$ is irreducible over $F$ and has $\alpha$ as a root. The above formula shows that $h$ is separable and splits completely over $L$. Hence:
+                \begin{itemize}
+                    \item \textbf{Normality}: If $f\in F[x]$ is irreducible and has a root $\alpha\in L$, then $f$ is the polynomial defined in (2) (up to a constant factor). Thus $f$ splits completely over $L$, which proves normality.
+                    \item \textbf{Separability}: If $\alpha\in L$, then its minimal polynomial is the polynomial $h$. Then $\alpha$ is separable over $F$ because $h$ is, and separability follows.
+                \end{itemize}
+            This shows that $F\subseteq L$ is normal and separable, as claimed.\par\hspace{4mm} (c) $\Rightarrow$ (a): Finally, suppose that $F\subseteq L$ is normal and separable. We can write $L=F(\alpha_1,\dots,\alpha_n)$, where the minimal polynomial $p_i$ of $\alpha_i$ over $F$ is separable. Let $q_1,\dots,q_r$ be the distinct elements of the set $\{p_1,\dots,p_n\}$, and set 
+                \begin{equation*}
+                    f=q_1\cdots q_r.
+                \end{equation*}
+            By \cref{lem:10}, $f$ is separable. Furthermore, the proof of \cref{thm:5} shows that $L$ is the splitting field of $f$ over $F$. Thus $L$ is the splitting field over $F$ of a separable polynomial in $F[x]$, as claimed.
+        \end{proof}
+    In light of this theorem, we make the following definition.
+    \begin{definition}[Pg. 149]\label{def:12}
+        An extension $F\subseteq L$ is called a \textbf{\textit{Galois extension}} if it is a finite extension satisfying any of the equivalent conditions of \cref{thm:8}.
+    \end{definition}\newpage
+    \begin{prop}[Pg. 149]\label{prop:8}
+        Suppose that $F\subseteq L$ is a Galois extension and that we have an intermediate field $F\subseteq K\subseteq L$. Then $K\subseteq L$ is a Galois extension.
+    \end{prop}
+        \begin{proof}
+            We will use part (a) of \cref{thm:8}. If $F\subseteq L$ is Galois, then $L$ is the splitting field of a separable polynomial $f\in F[x]$. By regarding $f$ as a polynomial in $K[x]$, it follows immediately that the same is true over the larger field $K$.
+        \end{proof}
+    \begin{theorem}[Pg. 150]\label{thm:9}
+        Let $F\subseteq L$ be a finite extension. Then:
+            \begin{enumerate}[label=\normalfont{(\alph*)}]
+                \item $\abs{\text{Gal}(L/F)}$ divides $[L\colon F]$.
+                \item $\abs{\text{Gal}(L/F)}\leq[L\colon F]$.
+                \item $F\subseteq L$ is a Galois extension if and only if $\abs{\text{Gal}(L/F)}=[L\colon F]$.
+            \end{enumerate}
+    \end{theorem}
+        \begin{proof}
+            To prove part (a), let $K$ be the fixed field of $\text{Gal}(L/F)$. Then $F\subseteq K\subseteq L$. It follows that $\text{Gal}(L/K)\subseteq\text{Gal}(L/F)$ since for any automorphism of $L$ that fixes $K$ also fixes $F\subseteq K$. The reverse inclusion holds since for every $\sigma\in\text{Gal}(L/F)$, $\sigma$ fixes $K$, for $K$ is the fixed field of $\text{Gal}(L/F)$ and so $\text{Gal}(L/F)\subseteq\text{Gal}(L/K)$. Thus $K$ is the fixed field of $\text{Gal}(L/K)$, so that $K\subseteq L$ is a Galois extension by \cref{thm:8}. Hence
+                \begin{equation*}
+                    [L\colon F]=[L\colon K][K\colon F]=\abs{\text{Gal}(L/K)}[K\colon F]=\abs{\text{Gal}(L/F)}[K\colon F],
+                \end{equation*}
+            where the first equality uses \cref{thm:1}, the second uses \cref{thm:7}. It follows that the order of $\text{Gal}(L/F)$ divides $[L\colon F]$, as claimed.\par\hspace{4mm} Part (b) follows immediately from part (a). As for part (c), note that one direction follows from \cref{thm:7}. For the converse, suppose $F\subseteq L$ is a finite extension with $\abs{\text{Gal}(L/F)}=[L\colon F]$, and let $K$ be the fixed field of $\text{Gal}(L/F)$. If we can prove that $K=F$, then \cref{thm:8} will imply that $F\subseteq L$ is a Galois extension.\par\hspace{4mm} To show that $K=F$, first observe that the proof of part (a) given above implies that $K\subseteq L$ is a Galois extension and that $\text{Gal}(L/K)=\text{Gal}(L/F)$. Then
+                \begin{equation*}
+                    [L\colon F]=\abs{\text{Gal}(L/F)}=\abs{\text{Gal}(L/K)}=[L\colon K],
+                \end{equation*}
+            where the first equality is by assumption, the second uses $\text{Gal}(L/K)=\text{Gal}(L/F)$, and the third holds because $K\subseteq L$ is a Galois extension. We conclude that $K=F$.
+        \end{proof}
+    \begin{prop}[Pg. 150]\label{prop:8}
+        Let $F\subseteq L$ be a finite extension. Then $L$ is separable over $F$ if and only if $L=F(\alpha_1,\dots,\alpha_n)$, where each $\alpha_i$ is separable over $F$.
+    \end{prop}
+        \begin{proof}
+            First assume that $F\subseteq L$ is separable. Since it is also finite, \cref{thm:2} implies that $L$ has the desired form. For the converse, let $L=F(\alpha_1,\dots,\alpha_n)$, where each $\alpha_i$ is separable over $F$. Our strategy will be to embed $L$ in a larger field separable over $F$.\par\hspace{4mm} Let $p_i$ be the minimal polynomial of $\alpha_i$ over $F$, and let $q_1,\dots,q_r$ be the distinct elements of the set $\{p_1,\dots,p_n\}$. Then \cref{lem:10} implies that $f=q_1\cdots q_r$ is separable, since each $q_i$ is. Let $M$ be the splitting field of $f$, regarded as a polynomial in $L[x]$. Thus $M=L(\beta_1,\dots,\beta_m)$, where $\beta_1,\dots,\beta_m$ are the roots of $f$.\par\hspace{4mm} We claim that $M=F(\beta_1,\dots,\beta_m)$. To see why, note that we have the obvious inclusion
+                \begin{equation*}
+                    F(\beta_1,\dots,\beta_m)\subseteq L(\beta_1,\dots,\beta_m)=M.
+                \end{equation*}
+            However, the roots $\beta_1,\dots,\beta_m$ include $\alpha_1,\dots,\alpha_n$, so that 
+                \begin{equation*}
+                    L=F(\alpha_1,\dots,\alpha_n)\subseteq F(\beta_1,\dots,\beta_m).
+                \end{equation*}
+            Thus $F(\beta_1,\dots,\beta_m)$ contains both $L$ and $\beta_1,\dots,\beta_m$, which gives the inclusion
+                \begin{equation*}
+                    M=L(\beta_1,\dots,\beta_m)\subseteq F(\beta_1,\dots,\beta_m).
+                \end{equation*}
+            Hence $M=F(\beta_1,\dots,\beta_m)$.\par\hspace{4mm} This shows that $M$ is the splitting field over $F$ of the separable polynomial $f$. Then $F\subseteq M$ is Galois and hence separable by \cref{thm:8}. Since $L\subseteq M$, every element of $L$ is separable over $F$, so that $F\subseteq L$ is separable.
+        \end{proof}
+    \begin{theorem}\label{thm:10}
+        Let $E$ be the splitting field for some $f(x)\in F[x]$. Then $E/F$ is a normal extension.
+    \end{theorem}
+        \begin{proof}
+            
+        \end{proof}
+\section{The Galois Correspondence}
+    \begin{definition}[Pg. 154]\label{def:13}
+        Suppose that we have finite extensions $F\subseteq K\subseteq L$. Then, for an automorphism $\sigma\in\text{Gal}(L/F)$, we call 
+            \begin{equation*}
+                \sigma K=\{\sigma(\alpha)\mid \alpha\in K\}
+            \end{equation*}
+        a \textbf{\textit{conjugate field of}} $K$.
+    \end{definition}
+    \begin{lemma}[Pg. 154]\label{lem:14}
+        Let $F\subseteq K\subseteq L$ and $\sigma\in\text{Gal}(L/F)$ be as in \cref{def:13}. Then $F\subseteq \sigma K\subseteq L$ and $[K\colon F]=[\sigma\colon F]$.
+    \end{lemma}
+        \begin{proof}
+            The inclusion $F\subseteq \sigma K$ is clear since $F\subseteq K$ and $\sigma$ acts as the identity on $F$. Also, $\sigma(a\alpha)=\sigma(a)\sigma(\alpha)=a\sigma(\alpha)$ when $a\in F$ and $\alpha\in K$. It follows that $\sigma\mid_K K\rightarrow\sigma K$ is linear over $F$. Hence $\sigma\mid_K$ is an isomorphism of vector spaces over $F$, so that $[K\colon F]=[\sigma K\colon F]$. 
+        \end{proof}
+    \begin{example}
+        Consider the polynomial $(x^2-3)(x^3-5)$. To begin we first note that 
+                            \begin{equation*}
+                                (x^2-3)(x^3-5)=(x-\sqrt{3})(x+\sqrt{3})(x-\sqrt[3]{5})(x-\omega\sqrt[3]{5})(x-\omega^2\sqrt[3]{5}).
+                            \end{equation*}
+                        And so we need the splitting field for this polynomial. It must include each of these roots. Thus, $\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})$ is an extension that would admit each root. The degree of this extension over $\mathbb{Q}$ is
+                            \begin{equation*}
+                                [\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})\colon\mathbb{Q}(\sqrt{3},\sqrt[3]{5})][\mathbb{Q}(\sqrt{3},\sqrt[3]{5})\colon\mathbb{Q}(\sqrt[3]{5})][\mathbb{Q}(\sqrt[3]{5})\colon\mathbb{Q}]=2\cdot2\cdot3=12.
+                            \end{equation*}
+                        Moreover, this must be the splitting field since the minimal polynomials for $\omega, \sqrt{3},$ and $\sqrt[4]{5}$ all have degrees $2,2,$ and $3$, respectively, and none of the roots of the polynomials are common. Hence, $\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})/\mathbb{Q}$ is a Galois extension.\par\hspace{4mm} We know that any automorphism of this extension is defined by where it sends $\omega, \sqrt{3},\sqrt[3]{5}$. And so we have that for any automorphism $\sigma$ of the extension,
+                            \begin{equation*}
+                                \sigma(\omega)\in\{\omega,\omega^2\},\quad\sigma(\sqrt{3})\in\{\sqrt{3},-\sqrt{3}\},\quad\sigma(\sqrt[3]{5})\in\{\sqrt[3]{5},\omega\sqrt[3]{5},\omega^2\sqrt[3]{5}\}.
+                            \end{equation*}
+                        Thus, the elements of the Galois group are
+                            \begin{align*}
+                                \sigma_0&:=\begin{cases} \sqrt[3]{5}\mapsto\sqrt[3]{5} \\ \sqrt{3}\mapsto\sqrt{3} \\\omega\mapsto\omega\end{cases} & \sigma_1&:=\begin{cases} \sqrt[3]{5}\mapsto\omega\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega\end{cases} & \sigma_2&:=\begin{cases}\sqrt[3]{5}\mapsto\omega^2\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega \end{cases} \\ \sigma_3&:=\begin{cases} \sqrt[3]{5}\mapsto\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega\end{cases} & \sigma_4&:=\begin{cases} \sqrt[3]{5}\mapsto\omega\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega\end{cases} & \sigma_5&:=\begin{cases} \sqrt[3]{5}\mapsto\omega^2\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega\end{cases} \\ \sigma_6&:=\begin{cases} \sqrt[3]{5}\mapsto\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega^2\end{cases} & \sigma_7&:=\begin{cases} \sqrt[3]{5}\mapsto\omega\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega^2\end{cases} & \sigma_8&:=\begin{cases} \sqrt[3]{5}\mapsto\omega^2\sqrt[3]{5}\\\sqrt{3}\mapsto\sqrt{3}\\\omega\mapsto\omega^2\end{cases} \\ \sigma_9&:=\begin{cases} \sqrt[3]{5}\mapsto\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega^2\end{cases} & \sigma_{10}&:=\begin{cases}\sqrt[3]{5}\mapsto\omega\sqrt[3]{5}\\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega^2 \end{cases} & \sigma_{11}&:=\begin{cases} \sqrt[3]{5}\mapsto\omega^2\sqrt[3]{5} \\\sqrt{3}\mapsto-\sqrt{3}\\\omega\mapsto\omega^2\end{cases}
+                            \end{align*}
+                        Before we associate each of these automorphisms with an element from $S_{5}$, let us note that from HW 9, we saw that $G(\mathbb{Q}(\omega,\sqrt[3]{2})/\mathbb{Q})\cong S_3$
+                        and so 
+                            \begin{equation*}
+                                S_3\cong G(\mathbb{Q}(\omega,\sqrt[3]{5})/\mathbb{Q})\subseteq G(\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})/\mathbb{Q}).
+                            \end{equation*}
+                        What this means is that
+                            \begin{equation*}
+                                G(\mathbb{Q}(\omega,\sqrt[3]{5})/\mathbb{Q})=\{\sigma_0,\sigma_1,\sigma_2,\sigma_6,\sigma_7,\sigma_8\}
+                            \end{equation*}
+                        Thus, the remaining 6 automorphisms in our list can be obtained by applying $\sigma_3$ to each of the 6 in the above set. Hence, we need only associate the 6 in the set with a permutation and $\sigma_3$ with a permutation and we can recover the rest.\par\hspace{4mm} Letting
+                            \begin{equation*}
+                                c_1=\sqrt[3]{5},c_2=\omega\sqrt[3]{5},c_3=\omega^2\sqrt[3]{5},c_4=\sqrt{3},c_5=-\sqrt{3},
+                            \end{equation*}
+                        then we have that 
+                            \begin{align*}
+                                \sigma_0&:=(1) & \sigma_1&:=(123) & \sigma_2&:=(132) \\
+                                \sigma_6&:=(23) & \sigma_7&:=(12) & \sigma_8&:=(13).
+                            \end{align*}
+                        And we also have that 
+                            \begin{equation*}
+                                \sigma_3:=(45).
+                            \end{equation*}
+                        Thus, the remaining 6 permutations are 
+                            \begin{align*}
+                                \sigma_0\sigma_3=\sigma_3&:=(45) & \sigma_1\sigma_3=\sigma_4&:=(123)(45) & \sigma_2\sigma_3=\sigma_5&:=(132)(45) \\
+                                \sigma_6\sigma_3=\sigma_9&:=(23)(45) & \sigma_7\sigma_3=\sigma_{10}&:=(12)(45) & \sigma_8\sigma_3=\sigma_{11}&:=(13)(45).
+                            \end{align*}
+                        Now we will determine all the subgroups of the Galois group. Since the order is 12, then we are looking for subgroups of order, 2,3,4,6. To help with this calculation, we will refer to the Cayley table below:
+                            \begin{table}[htp]
+                            \centering
+                                \begin{tabular}{|
+                                >{\columncolor[HTML]{C0C0C0}}l |l|l|l|l|l|l|l|l|l|l|l|l|}
+                                \hline
+                                    & \cellcolor[HTML]{C0C0C0}$\sigma_0$ & \cellcolor[HTML]{C0C0C0}$\sigma_1$ & \cellcolor[HTML]{C0C0C0}$\sigma_2$ & \cellcolor[HTML]{C0C0C0}$\sigma_3$ & \cellcolor[HTML]{C0C0C0}$\sigma_4$ & \cellcolor[HTML]{C0C0C0}$\sigma_5$ & \cellcolor[HTML]{C0C0C0}$\sigma_6$ & \cellcolor[HTML]{C0C0C0}$\sigma_7$ & \cellcolor[HTML]{C0C0C0}$\sigma_8$ & \cellcolor[HTML]{C0C0C0}$\sigma_9$ & \cellcolor[HTML]{C0C0C0}$\sigma_{10}$ & \cellcolor[HTML]{C0C0C0}$\sigma_{11}$ \\ \hline
+                                    $\sigma_0$ & $\sigma_0$ & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\sigma_4$ & $\sigma_5$ & $\sigma_6$ & $\sigma_7$ & $\sigma_8$ & $\sigma_9$ & $\sigma_{10}$ & $\sigma_{11}$ \\ \hline
+                                    $\sigma_1$ & $\sigma_1$ & $\sigma_2$ & $\sigma_0$ & $\sigma_4$ & $\sigma_5$ & $\sigma_3$ & $\sigma_7$ & $\sigma_8$ & $\sigma_6$ & $\sigma_{10}$ & $\sigma_{11}$ & $\sigma_9$ \\ \hline
+                                    $\sigma_2$ & $\sigma_2$ & $\sigma_0$ & $\sigma_1$ & $\sigma_5$ & $\sigma_3$ & $\sigma_4$ & $\sigma_8$ & $\sigma_6$ & $\sigma_7$ & $\sigma_{11}$ & $\sigma_9$ & $\sigma_{10}$ \\ \hline
+                                    $\sigma_3$ & $\sigma_3$ & $\sigma_4$ & $\sigma_5$ & $\sigma_0$ & $\sigma_1$ & $\sigma_2$ & $\sigma_9$ & $\sigma_{10}$ & $\sigma_{11}$ & $\sigma_6$ & $\sigma_7$ & $\sigma_8$ \\ \hline
+                                    $\sigma_4$ & $\sigma_4$ & $\sigma_5$ & $\sigma_3$ & $\sigma_1$ & $\sigma_2$ & $\sigma_0$ & $\sigma_{10}$ & $\sigma_{11}$ & $\sigma_9$ & $\sigma_7$ & $\sigma_8$ & $\sigma_6$ \\ \hline
+                                    $\sigma_5$ & $\sigma_5$ & $\sigma_3$ & $\sigma_4$ & $\sigma_2$ & $\sigma_0$ & $\sigma_1$ & $\sigma_{11}$ & $\sigma_9$ & $\sigma_{10}$ & $\sigma_8$ & $\sigma_6$ & $\sigma_7$ \\ \hline
+                                    $\sigma_6$ & $\sigma_6$ & $\sigma_8$ & $\sigma_7$ & $\sigma_9$ & $\sigma_{11}$ & $\sigma_{10}$ & $\sigma_0$ & $\sigma_2$ & $\sigma_1$ & $\sigma_3$ & $\sigma_5$ & $\sigma_4$ \\ \hline
+                                    $\sigma_7$ & $\sigma_7$ & $\sigma_6$ & $\sigma_8$ & $\sigma_{10}$ & $\sigma_9$ & $\sigma_{11}$ & $\sigma_1$ & $\sigma_0$ & $\sigma_2$ & $\sigma_4$ & $\sigma_3$ & $\sigma_5$ \\ \hline
+                                    $\sigma_8$ & $\sigma_8$ & $\sigma_7$ & $\sigma_6$ & $\sigma_{11}$ & $\sigma_{10}$ & $\sigma_9$ & $\sigma_2$ & $\sigma_1$ & $\sigma_0$ & $\sigma_5$ & $\sigma_4$ & $\sigma_3$ \\ \hline
+                                    $\sigma_9$ & $\sigma_9$ & $\sigma_{11}$ & $\sigma_{10}$ & $\sigma_6$ & $\sigma_8$ & $\sigma_7$ & $\sigma_3$ & $\sigma_5$ & $\sigma_4$ & $\sigma_0$ & $\sigma_2$ & $\sigma_1$ \\ \hline
+                                    $\sigma_{10}$ & $\sigma_{10}$ & $\sigma_9$ & $\sigma_{11}$ & $\sigma_7$ & $\sigma_6$ & $\sigma_8$ & $\sigma_4$ & $\sigma_3$ & $\sigma_5$ & $\sigma_1$ & $\sigma_0$ & $\sigma_2$ \\ \hline
+                                    $\sigma_{11}$ & $\sigma_{11}$ & $\sigma_{10}$ & $\sigma_9$ & $\sigma_8$ & $\sigma_7$ & $\sigma_6$ & $\sigma_5$ & $\sigma_4$ & $\sigma_3$ & $\sigma_2$ & $\sigma_1$ & $\sigma_0$ \\ \hline
+                                \end{tabular}
+                            \end{table}
+                            \begin{align*}
+                                \langle\sigma_0\rangle&=\{\sigma_0\} & \langle\sigma_1\rangle&=\{\sigma_0,\sigma_1,\sigma_2\} & \langle\sigma_2\rangle&=\langle\sigma_1\rangle \\
+                                \langle\sigma_3\rangle&=\{\sigma_0,\sigma_3\} & \langle\sigma_4\rangle&=\{\sigma_0,\sigma_4,\sigma_2,\sigma_3,\sigma_1,\sigma_5\} & \langle\sigma_5\rangle&=\langle\sigma_4\rangle \\
+                                \langle\sigma_6\rangle&=\{\sigma_0,\sigma_6\} & \langle\sigma_7\rangle&=\{\sigma_0,\sigma_7\} & \langle\sigma_8\rangle&=\{\sigma_0,\sigma_8\} \\
+                                \langle\sigma_9\rangle&=\{\sigma_0,\sigma_9\} & \langle\sigma_{10}\rangle&=\{\sigma_0,\sigma_{10}\} & \langle\sigma_{11}\rangle&=\{\sigma_0,\sigma_{11}\} \\
+                                \langle\sigma_1,\sigma_6\rangle&=\{\sigma_0,\sigma_1,\sigma_2,\sigma_6,\sigma_7,\sigma_8\} & \langle\sigma_1,\sigma_9\rangle&=\{\sigma_0,\sigma_1,\sigma_2,\sigma_9,\sigma_{10},\sigma_{11}\} & \langle\sigma_3,\sigma_6\rangle&=\{\sigma_0,\sigma_3,\sigma_6,\sigma_9\} \\ \langle\sigma_3,\sigma_7\rangle&=\{\sigma_0,\sigma_3,\sigma_7,\sigma_{10}\} & \langle\sigma_3,\sigma_8\rangle&=\{\sigma_0,\sigma_3,\sigma_8,\sigma_{11}\} 
+                            \end{align*}
+                        Based on these subgroups, we can construct the lattice of subgroups of the Galois group.\newpage
+                            \begin{center}
+                                \begin{tikzpicture}[node distance=1.3cm]
+                                    \node (s0) {$\color{blue}\langle\sigma_0\rangle$};
+                                    \node (s9) [above of=s0] {$\color{red}\langle\sigma_9\rangle$};
+                                    \node (s10) [right of=s9] {$\color{red}\langle\sigma_{10}\rangle$};
+                                    \node (s11) [right of=s10] {$\color{red}\langle\sigma_{11}\rangle$};
+                                    \node (x) [right of=s11] {};
+                                    \node (y) [right of=x] {};
+                                    \node (z) [right of=y] {};
+                                    \node (w) [right of=z] {};
+                                    \node (s1) [above of=w] {$\color{blue}\langle\sigma_1\rangle$};
+                                    \node (u) [left of=s9] {};
+                                    \node (s8) [left of=u] {$\color{red}\langle\sigma_8\rangle$};
+                                    \node (s7) [left of=s8] {$\color{red}\langle\sigma_7\rangle$};
+                                    \node (s6) [left of=s7] {$\color{red}\langle\sigma_6\rangle$};
+                                    \node (s) [left of=s6] {};
+                                    \node (s3) [left of=s] {$\color{blue}\langle\sigma_3\rangle$};
+                                    \node (t) [above of=s7] {};
+                                    \node (s3s8) [above of=t] {$\color{red}\langle\sigma_3,\sigma_8\rangle$};
+                                    \node (s3s7) [left of=s3s8] {$\color{red}\langle\sigma_3,\sigma_7\rangle$};
+                                    \node (s3s6) [left of=s3s7] {$\color{red}\langle\sigma_3,\sigma_6\rangle$};
+                                    \node (e) [above of=s9] {};
+                                    \node (f) [above of=e] {};
+                                    \node (s4) [above of=f] {$\color{blue}\langle\sigma_4\rangle$};
+                                    \node (a) [right of=s4] {};
+                                    \node (s1s6) [right of=a] {$\color{blue}\langle\sigma_1,\sigma_6\rangle$};
+                                    \node (b) [right of=s1s6] {};
+                                    \node (s1s9) [right of=b] {$\color{blue}\langle\sigma_1,\sigma_9\rangle$};
+                                    \node (g) [above of=s4] {$\color{blue}G(\mathbb{Q}(\omega,\sqrt{3},\sqrt[4]{5})/\mathbb{Q})$};
+                                    \draw (s0) -- (s9);
+                                    \draw (s0) -- (s6);
+                                    \draw (s0) -- (s3);
+                                    \draw (s0) -- (s1);
+                                    \draw (s0) -- (s7);
+                                    \draw (s0) -- (s10);
+                                    \draw (s0) -- (s8);
+                                    \draw (s0) -- (s11);
+                                    \draw (s9) -- (s3s6);
+                                    \draw (s6) -- (s3s6);
+                                    \draw (s3) -- (s3s6);
+                                    \draw (s3) -- (s3s7);
+                                    \draw (s3) -- (s3s8);
+                                    \draw (s7) -- (s3s7);
+                                    \draw (s10) -- (s3s7);
+                                    \draw (s8) -- (s3s8);
+                                    \draw (s11) -- (s3s8);
+                                    \draw (s3) -- (s4);
+                                    \draw (s1) -- (s4);
+                                    \draw (s6) -- (s1s6);
+                                    \draw (s1) -- (s1s6);
+                                    \draw (s7) -- (s1s6);
+                                    \draw (s8) -- (s1s6);
+                                    \draw (s9) -- (s1s9);
+                                    \draw (s1) -- (s1s9);
+                                    \draw (s10) -- (s1s9);
+                                    \draw (s11) -- (s1s9);
+                                    \draw (s4) -- (g);
+                                    \draw (s1s6) -- (g);
+                                    \draw (s1s9) -- (g);
+                                    \draw (s3s6) -- (g);
+                                    \draw (s3s7) -- (g);
+                                    \draw (s3s8) -- (g);
+                                \end{tikzpicture}
+                            \end{center}
+                            \begin{center}
+                                \resizebox{16.5cm}{7cm}{
+                                    \begin{tikzpicture}[node distance=2.25cm]
+                                        \node (s0) {$\color{blue}\mathbb{Q}(\omega,\sqrt{3},\sqrt[3]{5})$};
+                                        \node (s9) [below of=s0] {$\color{red}\mathbb{Q}(i,\sqrt[3]{5})$};
+                                        \node (s10) [right of=s9] {$\color{red}\mathbb{Q}(i,\omega\sqrt[3]{5})$};
+                                        \node (s11) [right of=s10] {$\color{red}\mathbb{Q}(i,\omega^2\sqrt[3]{5})$};
+                                        \node (x) [right of=s11] {};
+                                        \node (y) [right of=x] {};
+                                        \node (z) [right of=y] {};
+                                        \node (w) [right of=z] {};
+                                        \node (s1) [below of=w] {$\color{blue}\mathbb{Q}(\omega,\sqrt{3})$};
+                                        \node (u) [left of=s9] {};
+                                        \node (s8) [left of=u] {$\color{red}\mathbb{Q}(\sqrt{3},\omega^2\sqrt[3]{5})$};
+                                        \node (s7) [left of=s8] {$\color{red}\mathbb{Q}(\sqrt{3},\omega\sqrt[3]{5})$};
+                                        \node (s6) [left of=s7] {$\color{red}\mathbb{Q}(\sqrt{3},\sqrt[3]{5})$};
+                                        \node (s) [left of=s6] {};
+                                        \node (s3) [left of=s] {$\color{blue}\mathbb{Q}(\omega,\sqrt[3]{5})$};
+                                        \node (t) [below of=s7] {};
+                                        \node (s3s8) [below of=t] {$\color{red}\mathbb{Q}(\omega^2\sqrt[3]{5})$};
+                                        \node (s3s7) [left of=s3s8] {$\color{red}\mathbb{Q}(\omega\sqrt[3]{5})$};
+                                        \node (s3s6) [left of=s3s7] {$\color{red}\mathbb{Q}(\sqrt[3]{5})$};
+                                        \node (e) [below of=s9] {};
+                                        \node (f) [below of=e] {};
+                                        \node (s4) [below of=f] {$\color{blue}\mathbb{Q}(\omega)$};
+                                        \node (a) [right of=s4] {};
+                                        \node (s1s6) [right of=a] {$\color{blue}\mathbb{Q}(\sqrt{3})$};
+                                        \node (b) [right of=s1s6] {};
+                                        \node (s1s9) [right of=b] {$\color{blue}\mathbb{Q}(i)$};
+                                        \node (g) [below of=s4] {$\color{blue}\mathbb{Q}$};
+                                        \draw (s0) -- (s9);
+                                        \draw (s0) -- (s6);
+                                        \draw (s0) -- (s3);
+                                        \draw (s0) -- (s1);
+                                        \draw (s0) -- (s7);
+                                        \draw (s0) -- (s10);
+                                        \draw (s0) -- (s8);
+                                        \draw (s0) -- (s11);
+                                        \draw (s9) -- (s3s6);
+                                        \draw (s6) -- (s3s6);
+                                        \draw (s3) -- (s3s6);
+                                        \draw (s3) -- (s3s7);
+                                        \draw (s3) -- (s3s8);
+                                        \draw (s7) -- (s3s7);
+                                        \draw (s10) -- (s3s7);
+                                        \draw (s8) -- (s3s8);
+                                        \draw (s11) -- (s3s8);
+                                        \draw (s3) -- (s4);
+                                        \draw (s1) -- (s4);
+                                        \draw (s6) -- (s1s6);
+                                        \draw (s1) -- (s1s6);
+                                        \draw (s7) -- (s1s6);
+                                        \draw (s8) -- (s1s6);
+                                        \draw (s9) -- (s1s9);
+                                        \draw (s1) -- (s1s9);
+                                        \draw (s10) -- (s1s9);
+                                        \draw (s11) -- (s1s9);
+                                        \draw (s4) -- (g);
+                                        \draw (s1s6) -- (g);
+                                        \draw (s1s9) -- (g);
+                                        \draw (s3s6) -- (g);
+                                        \draw (s3s7) -- (g);
+                                        \draw (s3s8) -- (g);
+                                    \end{tikzpicture}
+                                }
+                            \end{center}
+    \end{example}\newpage
+    \begin{example}
+        Construct the subgroup and subfield lattice of $\text{Gal}(\mathbb{Q}(i,\sqrt[4]{5})/\mathbb{Q})$ and determine the normal extensions as well as the conjugates. Note that $x^4-5$ is the minimal polynomial of $\sqrt[4]{5}$ and that 
+            \begin{equation*}
+                x^4-5=(x-\sqrt[4]{5})(x+\sqrt[4]{5})(x-i\sqrt[4]{5})(x+i\sqrt[4]{5})
+            \end{equation*}
+        and so $\mathbb{Q}(i,\sqrt[4]{5})$ is the splitting field for $x^4-5$ over $\mathbb{Q}$. Thus, by \cref{thm:8}, $\mathbb{Q}(i,\sqrt[4]{5})/\mathbb{Q}$ is Galois. Hence,
+            \begin{equation*}
+                \abs{\text{Gal}(\mathbb{Q}(i,\sqrt[4]{5}))}=[\mathbb{Q}(i,\sqrt[4]{5}):\mathbb{Q}]=8.
+            \end{equation*}
+        Now define
+            \begin{align*}
+                \sigma_0&:=\begin{cases} \sqrt[4]{5}\mapsto\sqrt[4]{5} \\ i\mapsto i \end{cases} & \sigma_1&:=\begin{cases} \sqrt[4]{5}\mapsto-\sqrt[4]{5} \\ i\mapsto i\end{cases} & \sigma_2&:=\begin{cases} \sqrt[4]{5}\mapsto i\sqrt[4]{5} \\ i\mapsto i\end{cases} & \sigma_3&:=\begin{cases} \sqrt[4]{5}\mapsto -i\sqrt[4]{5} \\ i\mapsto i\end{cases} \\ \sigma_4&:=\begin{cases} \sqrt[4]{5}\mapsto\sqrt[4]{5} \\ i\mapsto-i\end{cases} & \sigma_5&:=\begin{cases} \sqrt[4]{5}\mapsto-\sqrt[4]{5} \\ i\mapsto-i\end{cases} & \sigma_6&:=\begin{cases} \sqrt[4]{5}\mapsto i\sqrt[4]{5} \\ i\mapsto-i\end{cases} & \sigma_7&:=\begin{cases} \sqrt[4]{5}\mapsto-i\sqrt[4]{5} \\ i\mapsto-i\end{cases}.
+            \end{align*}
+        Letting $c_1=\sqrt[4]{5},c_2=-\sqrt[4]{5},c_3=i\sqrt[4]{5},c_4=-i\sqrt[4]{5}$, then we can associate each of the above automorphism with an element of $S_4$ as follows
+            \begin{align*}
+                \sigma_0&:=(1) & \sigma_1&:=(12)(34) & \sigma_2&:=(1324) & \sigma_3&:=(1423) \\ \sigma_4&:=(34) & \sigma_5&:=(12) & \sigma_6&:=(13)(24) & \sigma_7&:=(14)(23).
+            \end{align*}
+        To simplify this further, let $\sigma=\sigma_2$ and $\tau=\sigma_4$, then it follows that 
+            \begin{align*}
+                \sigma_0&:=e & \sigma_1&:=\sigma^2 & \sigma_2&:=\sigma & \sigma_3&:=\sigma^3 \\ \sigma_4&:=\tau & \sigma_5&:=\sigma^2\tau & \sigma_6&:=\sigma\tau & \sigma_7&:=\sigma^3\tau.
+            \end{align*}
+        Additionally, we obtain the 8 following non-trivial subgroups of the Galois group:
+            \begin{align*}
+                \langle\tau\rangle&:=\{e,\tau\} & \langle\sigma^2\rangle&:=\{e,\sigma^2\} & \langle\sigma\tau\rangle&:=\{e,\sigma\tau\} & \langle\sigma^2\tau\rangle&:=\{e,\sigma^2\tau\} \\
+                \langle\sigma^3\tau\rangle&:=\{e,\sigma^3\tau\} &
+                \langle\sigma\rangle&:=\{e,\sigma,\sigma^2,\sigma^3\} & \langle\tau,\sigma^2\rangle&:=\{e,\tau,\sigma^2,\sigma^2\tau\} &  \langle\sigma^2,\sigma\tau\rangle&:=\{e,\sigma^2,\sigma\tau,\sigma^3\tau\}.
+            \end{align*}
+        With some calculations we find that $\langle\sigma^2\rangle,\langle\sigma\rangle,\langle\tau,\sigma^2\rangle,\langle\sigma^2,\sigma\tau\rangle$ are all normal subgroups. Additionally, we have that $\langle\tau\rangle$ and $\langle\sigma^2\tau\rangle$ are conjugates and $\langle\sigma\tau\rangle$ and $\langle\sigma^3\tau\rangle$ are conjugates.\par\hspace{4mm} By \cref{lem:8}, $\{1,\sqrt[4]{5},\sqrt{5},\sqrt[4]{125},i,i\sqrt[4]{5},i\sqrt{5},i\sqrt[4]{125}\}$ constitutes a basis for $\mathbb{Q}(i,\sqrt[4]{5})$ over $\mathbb{Q}$. Then by the following table, we can see what each automorphism does to each basis element:\newpage
+            \begin{table}[htp]
+            \centering
+                \begin{tabular}{|
+                    >{\columncolor[HTML]{C0C0C0}}l |
+                    >{\columncolor[HTML]{96FFFB}}l |l|l|l|l|l|l|l|}
+                    \hline
+                    & \cellcolor[HTML]{C0C0C0}$1$ & \cellcolor[HTML]{C0C0C0}$\sqrt[4]{5}$ & \cellcolor[HTML]{C0C0C0}$\sqrt{5}$ & \cellcolor[HTML]{C0C0C0}$\sqrt[4]{125}$ & \cellcolor[HTML]{C0C0C0}$i$ & \cellcolor[HTML]{C0C0C0}$i\sqrt[4]{5}$ & \cellcolor[HTML]{C0C0C0}$i\sqrt{5}$ & \cellcolor[HTML]{C0C0C0}$i\sqrt[4]{125}$ \\ \hline
+                    $e$ & $1$ & \cellcolor[HTML]{96FFFB}$\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt[4]{125}$ & \cellcolor[HTML]{96FFFB}$i$ & \cellcolor[HTML]{96FFFB}$i\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt[4]{125}$ \\ \hline
+                    $\sigma$ & $1$ & $i\sqrt[4]{5}$ & $-\sqrt{5}$ & $-i\sqrt[4]{125}$ & \cellcolor[HTML]{96FFFB}$i$ & $-\sqrt[4]{5}$ & $-i\sqrt{5}$ & $\sqrt[4]{125}$ \\ \hline
+                    $\sigma^2$ & $1$ & $-\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt{5}$ & $-\sqrt[4]{125}$ & \cellcolor[HTML]{96FFFB}$i$ & $-i\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt{5}$ & $-i\sqrt[4]{125}$ \\ \hline
+                    $\sigma^3$ & $1$ & $-i\sqrt[4]{5}$ & $-\sqrt{5}$ & $i\sqrt[4]{125}$ & \cellcolor[HTML]{96FFFB}$i$ & $\sqrt[4]{5}$ & $-i\sqrt{5}$ & $-\sqrt[4]{125}$ \\ \hline
+                    $\tau$ & $1$ & \cellcolor[HTML]{96FFFB}$\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt[4]{125}$ & $-i$ & $-i\sqrt[4]{5}$ & $-i\sqrt{5}$ & $-i\sqrt[4]{125}$ \\ \hline
+                    $\sigma\tau$ & $1$ & $i\sqrt[4]{5}$ & $-\sqrt{5}$ & $-i\sqrt[4]{125}$ & $-i$ & $\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt{5}$ & $-\sqrt[4]{125}$ \\ \hline
+                    $\sigma^2\tau$ & $1$ & $-\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt{5}$ & $-\sqrt[4]{125}$ & $-i$ & \cellcolor[HTML]{96FFFB}$i\sqrt[4]{5}$ & $-i\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt[4]{125}$ \\ \hline
+                    $\sigma^3\tau$ & $1$ & $-i\sqrt[4]{5}$ & $-\sqrt{5}$ & $i\sqrt[4]{125}$ & $-i$ & $-\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt{5}$ & $\sqrt[4]{125}$ \\ \hline
+                \end{tabular}
+            \end{table}
+        With this table we want to answer the question when is $\varphi(x)=x$. In other words, what elements of the basis remain fixed for each automorphism. In the table the blue cells indicate fixed elements. We have the following relations:
+            \begin{align*}
+                \sigma:&a_0+a_1i\sqrt[4]{5}-a_2\sqrt{5}-a_3i\sqrt[4]{125}+a_4i-a_5\sqrt[4]{5}-a_6i\sqrt{5}+a_7\sqrt[4]{125} \\
+                &a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{125}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{125}
+            \end{align*}
+        which gives $a_1=a_5$, $a_2=0$, $a_3=-a_7$, $a_6=0$. And so 
+            \begin{equation*}
+                F_{\langle\sigma\rangle}=\{a_0+a_1(\sqrt[4]{5}+i\sqrt[4]{5})+a_3(\sqrt[4]{125}-i\sqrt[4]{125})+a_4i\mid a_i\in\mathbb{Q}\}.
+            \end{equation*}
+        Next we have 
+            \begin{align*}
+                \sigma^2:&a_0-a_1\sqrt[4]{5}+a_2\sqrt{5}-a_3\sqrt[4]{125}+a_4i-a_5i\sqrt[4]{5}+a_6i\sqrt{5}-a_7i\sqrt[4]{125} \\
+                &a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{125}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{125}
+            \end{align*}
+        which gives $a_1=0$, $a_3=0$, $a_5=0$, $a_7=0$. And so 
+            \begin{equation*}
+                F_{\langle\sigma^2\rangle}=\{a_0+a_2\sqrt{5}+a_4i+a_6i\sqrt{5}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(i,\sqrt{5}).
+            \end{equation*}
+        Next we have
+            \begin{align*}
+                \sigma^3:&a_0-a_1i\sqrt[4]{5}-a_2\sqrt{5}+a_3i\sqrt[4]{125}+a_4i+a_5\sqrt[4]{5}-a_6i\sqrt{5}-a_7\sqrt[4]{125} \\
+                &a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{125}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{125}
+            \end{align*}
+        which gives $a_1=-a_5$, $a_2=0$, $a_3=a_7$, $a_6=0$. And so 
+            \begin{equation*}
+                F_{\langle\sigma^3\rangle}=\{a_0+a_1(\sqrt[4]{5}-i\sqrt[4]{5})+a_3(\sqrt[4]{125}+i\sqrt[4]{125})+a_4i\mid a_i\in\mathbb{Q}\}.
+            \end{equation*}
+        Next we have 
+            \begin{align*}
+                \tau:&a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3i\sqrt[4]{125}-a_4i-a_5i\sqrt[4]{5}-a_6i\sqrt{5}-a_7i\sqrt[4]{125} \\
+                &a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{125}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{125}
+            \end{align*}
+        which gives $a_4=0$, $a_5=0$, $a_6=0$, $a_7=0$. And so 
+            \begin{equation*}
+                F_{\langle\tau\rangle}=\{a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{125}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(\sqrt[4]{5}).
+            \end{equation*}\newpage
+        Next we have 
+            \begin{align*}
+                \sigma\tau:&a_0+a_1i\sqrt[4]{5}-a_2\sqrt{5}-a_3i\sqrt[4]{125}-a_4i+a_5\sqrt[4]{5}+a_6i\sqrt{5}-a_7\sqrt[4]{125} \\
+                &a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{125}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{125}
+            \end{align*}
+        which gives $a_1=a_5$, $a_2=0$, $a_3=-a_7$, $a_4=0$. And so 
+            \begin{equation*}
+                F_{\langle\sigma\tau\rangle}=\{a_0+a_1(\sqrt[4]{5}+i\sqrt[4]{5})+a_3(\sqrt[4]{125}-i\sqrt[4]{125})+a_6i\sqrt{5}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(i,\sqrt[4]{5}).
+            \end{equation*}
+        Next we have 
+            \begin{align*}
+                \sigma^2\tau:&a_0-a_1\sqrt[4]{5}+a_2\sqrt{5}-a_3\sqrt[4]{125}-a_4i+a_5i\sqrt[4]{5}-a_6i\sqrt{5}+a_7i\sqrt[4]{125} \\
+                &a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{125}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{125}
+            \end{align*}
+        which gives $a_1=0$, $a_3=0$, $a_4=0$, $a_6=0$. And so 
+            \begin{equation*}
+                F_{\langle\sigma^2\tau\rangle}=\{a_0+a_2\sqrt{5}+a_5i\sqrt[4]{5}+a_7i\sqrt[4]{125}\mid a_i\in\mathbb{Q}\}=\mathbb{Q}(i\sqrt[4]{5}).
+            \end{equation*}
+        Finally, we have 
+            \begin{align*}
+                \sigma^3\tau:&a_0-a_1i\sqrt[4]{5}-a_2\sqrt{5}+a_3i\sqrt[4]{125}-a_4i-a_5\sqrt[4]{5}+a_6i\sqrt{5}+a_7\sqrt[4]{125} \\
+                &a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{125}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{125}
+            \end{align*}
+        which gives $a_1=-a_5$, $a_2=0$, $a_3=a_7$, $a_4=0$. And so 
+            \begin{equation*}
+                F_{\langle\sigma^3\tau\rangle}=\{a_0+a_1(\sqrt[4]{5}-i\sqrt[4]{5})+a_3(\sqrt[4]{125}+i\sqrt[4]{125})+a_6i\sqrt{5}\mid a_i\in\mathbb{Q}\}.
+            \end{equation*}
+        Using what we have above and considering what we found out about the normal subgroups and those subgroups which are conjugate, we can construct the two following lattices\newpage
+            \begin{center}
+                \begin{tikzpicture}[node distance=2cm]
+                    \node (e) {$\color{blue}\{e\}$};
+                    \node (s2) [above of=e] {$\color{blue}\langle\sigma^2\rangle$};
+                    \node (x) [left of=s2] {};
+                    \node (s2t) [left of=x] {$\color{red}\langle\sigma^2\tau\rangle$};
+                    \node (t) [left of=s2t] {$\color{red}\langle\tau\rangle$};
+                    \node (y) [right of=s2] {};
+                    \node (st) [right of=y] {$\color{red}\langle\sigma\tau\rangle$};
+                    \node (s3t) [right of=st] {$\color{red}\langle\sigma^3\tau\rangle$};
+                    \node (s) [above of=s2] {$\color{blue}\langle\sigma\rangle$};
+                    \node (w) [left of=s] {};
+                    \node (ts2) [left of=w] {$\color{blue}\langle\tau,\sigma^2\rangle$};
+                    \node (z) [right of=s] {};
+                    \node (s2st) [right of=z] {$\color{blue}\langle\sigma^2,\sigma\tau\rangle$};
+                    \node (g) [above of=s] {$\color{blue}\text{Gal}(\mathbb{Q}(i,\sqrt[4]{5})/\mathbb{Q})$};
+                    \draw (e) -- (s2);
+                    \draw (e) -- (s2t);
+                    \draw (e) -- (s2);
+                    \draw (e) -- (st);
+                    \draw (e) -- (s3t);
+                    \draw (e) -- (t);
+                    \draw (s2) -- (s);
+                    \draw (s2) -- (ts2);
+                    \draw (s2) -- (s2st);
+                    \draw (s2t) -- (ts2);
+                    \draw (t) -- (ts2);
+                    \draw (st) -- (s2st);
+                    \draw (s3t) -- (s2st);
+                    \draw (ts2) -- (g);
+                    \draw (s) -- (g);
+                    \draw (s2st) -- (g);
+                \end{tikzpicture}
+            \end{center}
+            \begin{center}
+                \begin{tikzpicture}[node distance=2cm]
+                    \node (e) {$\color{blue}\mathbb{Q}(i,\sqrt[4]{5})$};
+                    \node (s2) [below of=e] {$\color{blue}\mathbb{Q}(i,\sqrt{5})$};
+                    \node (x) [left of=s2] {};
+                    \node (s2t) [left of=x] {$\color{red}\mathbb{Q}(i\sqrt[4]{5})$};
+                    \node (t) [left of=s2t] {$\color{red}\mathbb{Q}(\sqrt[4]{5})$};
+                    \node (y) [right of=s2] {};
+                    \node (st) [right of=y] {$\color{red}\mathbb{Q}((1+i)\sqrt[4]{5})$};
+                    \node (s3t) [right of=st] {$\color{red}\mathbb{Q}((1-i)\sqrt[4]{5})$};
+                    \node (s) [below of=s2] {$\color{blue}\mathbb{Q}(i)$};
+                    \node (w) [left of=s] {};
+                    \node (ts2) [left of=w] {$\color{blue}\mathbb{Q}(\sqrt{5})$};
+                    \node (z) [right of=s] {};
+                    \node (s2st) [right of=z] {$\color{blue}\mathbb{Q}(i\sqrt{5})$};
+                    \node (g) [below of=s] {$\color{blue}\mathbb{Q}$};
+                    \draw (e) -- (s2);
+                    \draw (e) -- (s2t);
+                    \draw (e) -- (s2);
+                    \draw (e) -- (st);
+                    \draw (e) -- (s3t);
+                    \draw (e) -- (t);
+                    \draw (s2) -- (s);
+                    \draw (s2) -- (ts2);
+                    \draw (s2) -- (s2st);
+                    \draw (s2t) -- (ts2);
+                    \draw (t) -- (ts2);
+                    \draw (st) -- (s2st);
+                    \draw (s3t) -- (s2st);
+                    \draw (ts2) -- (g);
+                    \draw (s) -- (g);
+                    \draw (s2st) -- (g);
+                \end{tikzpicture}
+            \end{center}
+    \end{example}
+\newpage
+\section{Other Results}
+    \begin{definition}\label{def:1}
+        Let $f\in F[x]$ have degree $n>0$. Then an extension $L/F$ is a \textbf{\textit{splitting field}} of $f$ over $F$ if
+            \begin{enumerate}
+                \item $f=c(x-\alpha_1)\cdots(x-\alpha_n)$, where $c\in F$ and $\alpha_i\in L$, and
+                \item $L=F(\alpha_1,\dots,\alpha_n)$.
+            \end{enumerate}
+    \end{definition}
+    \begin{prop}\label{prop:1}
+        Let $f\in F[x]$ be a polynomial of degree $n>0$, and let $L$ be a splitting field of $f$ over $F$. Then $[L\colon F]\leq n!$.
+    \end{prop}
+        \begin{proof}
+            \emph{By induction on $n$. When $n=1$, $f=ax+b$ has the root $-b/a\in F$, since $a\neq 0$. Thus, $L=F$ in this case, and $[L\colon F]\leq 1!$.}\par\hspace{4mm}\emph{Now suppose that $f$ has degree $n>1$, and let $L=F(\alpha_1,\dots, \alpha_n)$ be a splitting field of $f$ over $F$. If we write $f=(x-\alpha_1)g$, then the division algorithm implies that $g\in F(\alpha_1)[x]$. Furthermore, the roots of $g$ are obviously $\alpha_2,\dots,\alpha_n$, so that a splitting field of $g$ over $F(\alpha_1)$ is given by}
+                \begin{equation*}
+                    F(\alpha_1)(\alpha_2,\dots,\alpha_n)=F(\alpha_1,\dots,\alpha_n)=L.
+                \end{equation*}
+            \emph{Since $g\in F(\alpha_1)[x]$ has degree $n-1$, our inductive hypothesis implies that}
+                \begin{equation*}
+                    [L\colon F(\alpha_1)]\leq (n-1)!.
+                \end{equation*}
+            \emph{By the Tower Theorem, we have}
+                \begin{equation*}
+                    [L\colon F]=[L\colon F(\alpha_1)][F(\alpha_1)\colon F]\leq (n-1)![F(\alpha_1)\colon F].
+                \end{equation*}
+            \emph{However, we know that $[F(\alpha_1)\colon F]$ is the degree of the minimal polynomial of $\alpha_1$ over $F$. Since $f(\alpha_1)=0$, then $[F(\alpha_1)\colon F]\leq n$, and then $[L\colon F]\leq n!$ follows.} 
+        \end{proof}
+    \begin{definition}\label{def:2}
+        An element $\alpha$ of an extension field $E$ of a field $F$ is \textbf{\textit{algebraic over}} $F$ if $f(\alpha)=0$ for some nonzero $f(x)\in F[x]$.
+    \end{definition}
+    \begin{definition}\label{def:3}
+        An extension field $E$ of a field $F$ is an \textbf{\textit{algebraic extension of}} $F$ if every element in $E$ is algebraic over $F$.
+    \end{definition}
+    \begin{definition}\label{def:4}
+        Let $E$ be an extension field of $F$. Then
+            \begin{equation*}
+                \overline{F}_E=\{\alpha\in E\mid \alpha\text{ if algebraic over } F\}
+            \end{equation*}
+        is a subfield of $E$, the \textbf{\textit{algebraic closure of}} $F$ \textbf{\textit{in}} $E$.
+    \end{definition}
+    \begin{definition}\label{def:5}
+        A field $F$ is \textbf{\textit{algebraically closed}} if every nonconstant polynomial in $F[x]$ has a zero in $F$.
+    \end{definition}
+    \begin{definition}\label{def:6}
+        Let $E$ be an algebraic extension of a field $F$. Two elements $\alpha,\beta\in E$ are \textbf{\textit{conjugate}} over $F$ if irr$(\alpha,F)=$irr$(\beta,F)$, that is, if $\alpha$ and $\beta$ are zeros of the same irreducible polynomial.
+    \end{definition}
+    \begin{prop}\label{prop:2}
+        Let $L$ be the splitting field of $f\in F[x]$, and let $g\in F[x]$ be irreducible. If $g$ has one root in $L$, then $g$ splits completely over $L$.
+    \end{prop}
+        \begin{proof}
+            \emph{We can assume $f$ and $g$ are monic. Then $L=F(\alpha_1,\dots, \alpha_n)$, where $f=(x-\alpha_1)\cdots(x-\alpha_n)$. If $\beta\in L$ is a root of $g$, then $g$ is the minimal polynomial of $\beta$ since $g$ is irreducible and monic over $F$. We need to prove that all the roots of $g$ lie in $L$. }TBC...
+        \end{proof}
+    \begin{prop}\label{prop:3}
+        Let $F$ be a field, $f(x)\in F[x]$, and $E/F$ be the splitting field for $f(x)$. Then $f(x)$ has a multiple root in E \textit{iff} $f(x)$ and $f'(x)$ share a common factor $d(x)\in E[x]$, where $\text{deg}(d(x))\geq 1$. 
+    \end{prop}
+        \begin{proof}
+            \emph{Assume that $f(x)$ has a multiple root. Then for some $a\in E$ and $k>1$, $f(x)=(x-a)^kg(x)$, where $g(x)\in F[x]$. Taking the derivative of $f(x)$ gives:
+                \begin{equation*}
+                    \begin{split}
+                        f'(x)&=k(x-a)^{k-1}+(x-a)g'(x) \\
+                        &= (x-a)(k(x-a)^{k-2}+(x-a)^{k-1}g'(x).
+                    \end{split}
+                \end{equation*}
+                Thus $f(x)$ and $f'(x)$ share a common factor $(x-a)^k$ where $k\geq 1$.}\par\hspace{4mm}
+            \emph{Conversely, if $f(x)$ has no multiple root, then for all $a\in E$ with $f(a)=0$, there exists $g_a(x)\in F[x]$ such that $f(x)=(x-a)g_a(x)$ and $(x-a)\nmid g_a(x)$. Note that if $(x-a)\mid g(x)$, then for some $k>1$, $(x-a)^k\mid f(x)$ which contradicts our converse assumption. Taking the derivative of $f(x)$ gives
+                \begin{equation*}
+                    f(x)=g(x)+(x-a)g'(x),
+                \end{equation*}
+            which is not a multiple of $x-a$. Since $a\in E$ was an arbitrary root of $f(x)$, then $f(x)$ and $f'(x)$ share no common factors.
+                }
+        \end{proof}
+    \begin{prop}\label{prop:4}
+        Let $F$ be a field with char$(F)=0$ and $f\in F[x]$ irreducible over $F$. Then $f$ has no roots of multiplicity greater than 1.
+    \end{prop}
+        \begin{proof}
+            \emph{For contradiction, assume that $f$ has a multiple root. Then by} Proposition \ref{prop:2}, \emph{there exists $d\in F[x]$ such that $\text{deg}(d)\geq 1$, $d\mid f$, and $d\mid f'$. Since $d\mid f$, then for some $h\in F[x]$, $f=dh$. Taking the derivative then gives $f'=d'h+dh'$.}\par\hspace{4mm}
+            \emph{Since $d\mid f'$ and $d\mid dh'$, then $d\mid d'h$. However, since $f$ is irreducible and $\text{deg}(d)\geq 1$, then $\text{deg}(h)=0$. Therefore, $h$ is a constant and so $(d,h)=1$. Then by Euclid's Lemma, $d\mid d'$ which implies $\text{deg}(d)\leq\text{deg}(d')$. However, note that for all $g\in F[x]$, $\text{deg}(g')\leq\text{deg}(g)$. Thus, $\text{deg}(d')\leq\text{deg}(d)$. Hence, $\text{deg}(d)=\text{deg}(d')$. This is only true if $\text{deg}(d)=0$. Thus, $d$ is a constant. This contradicts our assumption that $f$ has multiple roots.}
+        \end{proof}
+    \begin{prop}\label{prop:5}
+        Let $F$ be a field such that $\text{char}(F)=p$ and let $f(x)\in F[x]$ be irreducible over $F$. Then if $f(x)$ has a multiple root, there exists $g(x)\in F[x]$ such that $f(x)=g(x^p)$. 
+    \end{prop}
+        \begin{proof}
+            \emph{Assume that $f$ has a multiple root. Then by }Proposition \ref{prop:2}\emph{ there exists $d(x)\in F[x]$ with $\text{deg}(d(x))\geq 1$ such that $d(x)\mid f(x)$ and $d(x)\mid f'(x)$. If $f'(x)\neq 0$, then by the same argument used in} Proposition \ref{prop:3}\emph{, it would follow that $\text{deg}(f(x))=\text{deg}(f'(x))$ and so $f(x)=f'(x)=0$ which is a contradiction. Thus, $f'(x)=0$. Let}
+                \begin{equation*}
+                    f(x)=\sum\limits_{i=0}^na_ix^i,\quad\text{then}\quad f'(x)=\sum\limits_{i=1}^n ia_ix^{i-1}.
+                \end{equation*}
+            \emph{Since $f'(x)=0$, then $ia_i=0$ for all $i$. Thus, either $a_i=0$ or $p\mid i$ for all $i$. It cannot be the case that $a_i=0$ since that would imply that $f(x)=a_0$. Thus, $p\mid i$ for all $1\leq i\leq n$. Hence, $f(x)=\sum_{j=0}^na_j(x^p)^j=g(x^p)$. }
+        \end{proof}
+    \begin{prop}\label{prop:6}
+        If $p$ is prime and $n\in\mathbb{N}$ such that $p\nmid n$, then $x^n-1$ has $n$ distinct solutions in $\mathbb{Z}_p$.
+    \end{prop}
+        \begin{proof}
+            \emph{Let $f(x)=x^n-1$. Then $f'(x)=nx^{n-1}\neq 0$ since $p\nmid n$. Thus, $f(x)$ and $f'(x)$ share no common factors greater than or equal to 1. By} Proposition \ref{prop:2},\emph{ $f(x)$ has no multiple roots  in its splitting field. Thus, $f(x)$ has $n$ distinct roots.}
+        \end{proof}
+    \begin{prop}\label{prop:7}
+        Let $t\in\mathbb{Z}$ and let $t=p_1^{r_1}p_2^{r_2}\cdots p_m^{r_m}$ be the prime factorization of $t$. The M\"obius function, $\mu$ is defined by: 
+            \begin{equation*}
+                \mu(t)=\begin{cases} 
+                    1 &\text{if } t=1 \\
+                    (-1)^m &\text{if } r_i=1 \text{ for all } i,\; 1\leq i\leq m \\
+                    0 &\text{if } r_i>1 \text{ for some } i.
+                \end{cases}
+            \end{equation*}
+        Now define
+            \begin{equation*}
+                \Phi_n(x)=\prod_{d\mid n}(x^{n/d}-1)^{\mu(d)}.
+            \end{equation*}
+        Then $\Phi_n(x)$ is irreducible over $\mathbb{Z}[x]$.
+    \end{prop}
+        \begin{proof}
+            
+        \end{proof}
+    \begin{definition}
+        An algebraic extension $L/F$ is \textbf{\textit{normal}} if every irreducible polynomial in $F[x]$ that has a root in $L$ splits completely over $L$.
+    \end{definition}
+    \begin{definition}
+        A polynomial $f\in F[x]$ is \textbf{\textit{separable}} if it is nonconstant and its roots in a splitting field are simple.
+    \end{definition}
+    \begin{definition}
+        Let $L/F$ be an algebraic extension.
+            \begin{enumerate}
+                \item $\alpha\in L$ is \textbf{\textit{separable}} over $F$ if its minimal polynomial over $F$ is separable.
+                \item $L/F$ is a \textbf{\textit{separable extension}} is every $\alpha\in F$ is separable over $F$.
+            \end{enumerate}
+    \end{definition}
+    \begin{prop}\label{prop:1.1}
+        Assume that $F$ is a field, $f(x)\in F[x]$, and that $a\in F$. Prove that $a$ is a root of $f(x)$ iff $(x-a)\mid f(x)$.
+    \end{prop}
+        \begin{proof}
+            Assume that $a$ is a root of $f(x)$. Then $f(a)=0$. Since $F$ is a field and $a\in F$, then $(x-a)\in F[x]$. By the Division Algorithm. there exists unique polynomials $q(x),r(x)\in F[x]$ such that $f(x)=q(x)(x-a)+r(x)$ and $r(x)=0$ or $\text{deg}(r(x))<\text{deg}((x-a))$. Since $\text{deg}((x-a))=1$, then $\text{deg}(r(x))=0$ in either case. Thus, $r(x)=c$ for some $c\in F$. By assumption, 
+                \begin{equation*}
+                    f(a)=q(a)(a-a)+c=c=0.
+                \end{equation*}
+            Hence, $c=0$ and it follows that $(x-a)\mid f(x)$.\par\hspace{4mm} Conversely, assume that $(x-a)\mid f(x)$. Then for some $g(x)\in F[x]$ we have that $f(x)=g(x)(x-a)$ and so $f(a)=g(a)(a-a)=0$. Therefore, $a$ is a root of $f(x)$.
+        \end{proof}
+    \begin{prop}\label{prop:1.2}
+        Suppose $F\subseteq L$ is an extension and $\alpha\in L$.
+            \begin{enumerate}[label=(\alph*)]
+                \item $\alpha$ is algebraic over $F$ iff $[F(\alpha)\colon F]<\infty$.
+                \item Let $\alpha$ be algebraic over $F$. If $n$ is the degree of the minimal polynomial of $\alpha$ over $F$, then $1,\alpha,\dots,\alpha^{n-1}$ forms a basis of $F(\alpha)$ over $F$. Thus $[F(\alpha)\colon F]=n$.
+            \end{enumerate}
+    \end{prop}
+        \begin{proof}
+            First suppose $\alpha$ is algebraic over $F$ with minimal polynomial $p$, where $n=\deg(p)$. We need to show that $1,\alpha,\dots,\alpha^{n-1}$ forms a basis of $F(\alpha)$ over $F$. Since $F(\alpha)=F[\alpha]$,every element of $F(\alpha)$ is of the form $g(\alpha)$ for some $g\in F[x]$. Dividing $g$ by $p$ gives
+                \begin{equation*}
+                    g=qp+a_0+a_1x+\cdots+a_{n-1}x^{n-1},
+                \end{equation*}
+            where $q\in F[x]$ and $a_0,\dots,a_{n-1}\in F$, and evaluating at $x=\alpha$ yields 
+                \begin{equation*}
+                    g(\alpha)=a_0+a_1\alpha+\cdots+a_{n-1}\alpha^{n-1},
+                \end{equation*}
+            since $p(\alpha)=0$. Thus $1,\alpha,\dots,\alpha^{n-1}$ spans $F(\alpha)$ over $F$. To show linear independence, suppose that 
+                \begin{equation*}
+                    0=a_0+a_1\alpha+\cdots+a_{n-1}\alpha^{n-1},
+                \end{equation*}
+            where $a_0,\dots,a_{n-1}\in F$. Then $\alpha$ is a root of $a_0+a_1x+\cdots+a_{n-1}x^{n-1}\in F[x]$. Since the minimal polynomial $p$ has degree $n$, then this must be the zero polynomial. Hence $a_i=0$ for all $i$, and linear independence is proven. Then $[F(\alpha)\colon F]=n$.\par\hspace{4mm}This proves part (b) of the proposition and one implication of part (a). It remains to consider the case when $[F(\alpha)\colon F]<\infty$. If we let $n=[F(\alpha)\colon F]$, then $F(\alpha)$ is an $n$ dimensional vector space over $F$. This implies that any collection of $n+1$ elements of $F(\alpha)$ is linearly dependent. In particular, $1,\alpha,\dots,\alpha^n$ are linearly dependent over $F$. Hence there are $a_0,\dots,a_n\in F$, not all zero, such that     \begin{equation*}
+                a_0+a_1\alpha+\cdots+a_n\alpha^n=0.
+            \end{equation*}
+            As in the previous paragraph, it follows that $\alpha$ is a root of 
+                \begin{equation*}
+                    a_0+a_1x+\cdots+a_nx^n\in F[x],
+                \end{equation*}
+            which is nonzero since the $a_i'$s are not all zero. Hence $\alpha$ is algebraic over $F$, and the proposition is proved.
+        \end{proof}
+    \begin{prop}\label{prop:1.3}
+        Assume that 
+    \end{prop}
+        \begin{proof}
+            
+        \end{proof}
+    \begin{prop}\label{prop:1.4}
+        Assume that $F$ is a field, that $p(x)\in F[x]$ is irreducible over $F[x]$, and that $\text{deg}(p(x))=n$. Let $I=(p(x))_i$. Every element of $F[x]/I$ can be written in the form $I+h(x)$ where $h(x)=0$ or $\text{deg}(h(x))<n$, and that this representation is unique.
+    \end{prop}
+        \begin{proof}
+            Let $I+h(x)\in F[x]/I$. If $\text{deg}(h(x))< n$, then we are done. Otherwise, if $\text{deg}(h(x))\geq n$, then by the division algorithm, there exists $q(x),r(x)\in F[x]/I$ such that $h(x)=q(x)p(x)+r(x)$, where $r(x)=0$ or $\text{deg}(r(x))<n$. If $r(x)=0$, then $h(x)\in I$ and $I+h(x)=I$. If $r(x)\neq 0$, then since $q(x)p(x)\in I$, then $I+h(x)=(I+q(x)p(x))+r(x)=I+r(x)$.\par\hspace{4mm} Now suppose $I+h(x)=I+f_1(x)=I+f_2(x)$ where $\text{deg}(f_1(x))<n$ and $\text{deg}(f_2(x))<n$. Then $I+(f_1(x)-f_2(x))=I$ and it follows that $p(x)\mid(f_1(x)-f_2(x))$. Thus, for some $q(x)\in F[x]$, we have $f_1(x)=q(x)p(x)+f_2(x)$. However, since $\text{deg}(f_1(x))<n$ and $\text{deg}(q(x)p(x)+f_2(x))\geq n$ for $q(x)\neq 0$, but this is impossible. Thus $q(x)=0$ and $f_1(x)=f_2(x)$. 
+        \end{proof}\newpage
+    \begin{prop}\label{prop:1.5}
+        Assume that $F$ is a field, that $p(x)\in F[x]$ is irreducible over $F[x]$, and that $\text{deg}(p(x))=n$. Then $\{I+1,I+x,\dots,I+x^{n-1}\}$ is a basis for $F[x]/I$ over $F$.
+    \end{prop}
+        \begin{proof}
+            By \cref{prop:1.4}, every element of $F[x]/I$ can be written as $I+h(x)$, where $h(x)=0$ or $\deg(h(x))<n$. If $h(x)=0$, then
+                \begin{equation*}
+                    I+h(x)=I\in\langle\{I+1,\dots,I+x^{n-1}\}\rangle.
+                \end{equation*}
+            If $h(x)=a_0+a_1x+\cdots+a_{n-1}x^{n-1}$, then 
+                \begin{equation*}
+                    \begin{split}
+                        I+h(x)&=I+a_0+\cdots+a_{n-1}x^{n-1} \\
+                        &=(I+a_0)+(I+a_1x)+\cdots+(I+a_{n-1}x^{n-1}) \\
+                        &=a_0(I+1)+a_1(I+x)+\cdots+a_{n-1}(I+x^{n-1}).
+                    \end{split}
+                \end{equation*}
+            Thus, $I+h(x)\in\langle\{I+1,\dots,I+x^{n-1}\}\rangle$. Therefore,
+                \begin{equation*}
+                    \langle\{I+1,\dots,I+x^{n-1}\}\rangle=F[x]/I.
+                \end{equation*}
+            Now suppose for some $a_0,\dots,a_{n-1}\in F$ that 
+                \begin{equation*}
+                    a_0(I+1)+\cdots+a_{n-1}(I+x^{n-1})=I.
+                \end{equation*}
+            Then $a_0+\cdots+a_{n-1}x^{n-1}\in I$ and so $p(x)\mid a_0+\cdots+a_{n-1}x^{n-1}$. But since $\deg(p(x))=n$, then $a_0+\cdots+a_{n-1}x^{n-1}$ must be the zero polynomial and thus $a_i=0$ for all $i$. Therefore, $\{I+1,\dots,I+x^{n-1}\}$ is linearly independent.
+        \end{proof}
+\section{Exam 1}
+
+\begin{enumerate}[leftmargin=*]
+    \item Determine if the following are always true (if always true, then prove it, and if not always true, then give a counter example).
+        \begin{enumerate}
+            \item Assume that $F$ is a field, $f(x)\in F[x]$, $a\in F$, and let $g(x)=f(x)-f(a)$. Then $(x-a)\mid g(x)$.
+                \begin{solution}
+                    Since $f(a)=f(a)-f(a)=0$, then $a$ is a root of $f(x)$ and so by \cref{prop:1.1}, $(x-a)\mid f(x)$.
+                \end{solution}
+            \item Assume $E/F$, $c\in E$, and $[F(c)\colon F]=n$, $n>1$. Then $\{c,c^2,\dots,c^n\}$ is a basis for $F(c)$ over $F$.
+                \begin{solution}
+                    By \cref{prop:1.2}, we know that $\{1,c,\dots,c^{n-1}\}$ is a basis for $F(c)$ over $F$. Since $n>1$, then $c\neq 0$. Thus, in $F(c)$, $C^{-1}$ exists. Now assume that $a_1c+\cdots+a_nc^n=0$. Then, in $F(c)$, we can write 
+                        \begin{equation*}
+                            (a_1c+\cdots+a_nc^n)c^{-1}=0c^{-1}=0,
+                        \end{equation*}
+                    and thus $a_1+\cdots+a_nc^{n-1}=0$. But $\{1,c,\dots,c^{n-1}\}$ is a basis for $F(c)$ over $F$ and so it is linearly independent. Thus $a_i=0$ for all $i$, and thus $\{c,\dots,c^n\}$ is linearly independent. Therefore, we have a set of $n$ linearly independent elements in an $n$ dimensional vector space and so it is a basis.
+                \end{solution}
+        \end{enumerate}
+    \item Assume that $E$ is a field, $F$ is a subfield of $E$, $g(x)\in F[x]$ is irreducible over $F$, $c,d\in E$, and $c$ and $d$ are each roots of $g(x)$ over $E$. Prove that $F(c)\cong F(d)$.
+        \begin{proof}
+            By (??), we know that if $p(x)$ and $q(x)$ are the minimal polynomials for $c$ and $d$, respectively, then
+                \begin{equation*}
+                    F(c)=F[c]\cong F[x]/(p(x))_i\quad\text{and}\quad F(d)=F[d]\cong F[x]/(q(x))_i.
+                \end{equation*}
+            Since $g(c)=0$, then $p(x)\mid g(x)$, but $g(x)$ is irreducible and so $(g(x))_i=(p(x))_i$. Similarly, $g(d)=0$ and so $q(x)\mid g(x)$. By the same reasoning, we have that $(g(x))_i=(q(x))_i$. Thus, $F(c)\cong F[x]/(g(x))_i$ and $F(d)\cong F[x]/(g(x))_i$. Therefore, $F(c)\cong F(d)$.
+        \end{proof}
+    \item Recall from HW 4 that $x^4+2x^2-1$ is irreducible over $\mathbb{Z}_3$. Find with explanation, a field of order 81, give a basis over $\mathbb{Z}_3$, and prove that every element of this field is a root of $x^{81}-x$.
+        \begin{proof}
+            Given that $x^4+2x^2-1$ is irreducible over $\mathbb{Z}_3$, then the ideal $I=(x^4+2x^2-1)_i$ is a maximal in $\mathbb{Z}_3[x]$ and so $\mathbb{Z}_3/I$ is a field. By \cref{prop:1.4}, every element of $\mathbb{Z}_3/I$ can be written as $I+h(x)$ where $h(x)=0$ or $\deg(h(x))<4$. Thus, every element of this field is of the form $I+(ax^3+bx^2+cx+d)$ where $a,b,c,d\in\mathbb{Z}_3$. Given that there are three elements in $\mathbb{Z}_3$, then there are $3^4=81$ elements in $\mathbb{Z}_3/I$. Additionally, by \cref{prop:1.5}, a basis for this field is $\{I+1,I+x,I+x^2,I+x^3\}$.\par\hspace{4mm} Lastly, let $F=\mathbb{Z}_3/I$. Then $F$ is a field, and so $(F-\{0\},\cdot)$ is a group. We have that  $\abs{F-\{0\}}=80$. If $a\in F-\{0\}$, then by Lagrange's Theorem, $o(a)\mid 80$. Thus $a^{80}=1$ and so $a^{81}=a$. Thus $a$ is a root of $x^{81}-x$ and since 0 is also a root, then every element of $F$ is a root.
+        \end{proof}
+    \item Find, with explanation, the minimal polynomial of $\sqrt{3}+\sqrt{5}$ over $\mathbb{Q}$. (Recall from HW 4 that $\mathbb{Q}(\sqrt{3},\sqrt{5})=\mathbb{Q}(\sqrt{3}+\sqrt{5})$)
+        \begin{proof}
+            Letting $x=\sqrt{3}+\sqrt{5}$, then $x^2=8+2\sqrt{15}$. Thus $(x^2-8)^2=60$ and so $x^4-16x^2+64=60$. Thus $x^4-16x^2+4=0$ is a polynomial with $\sqrt{3}+\sqrt{5}$ as a root. Since $\mathbb{Q}(\sqrt{3},\sqrt{5})=\mathbb{Q}(\sqrt{3}+\sqrt{5})$, then 
+                \begin{equation*}
+                    [\mathbb{Q}(\sqrt{3}+\sqrt{5}\colon\mathbb{Q}]=[\mathbb{Q}(\sqrt{3},\sqrt{5})\colon\mathbb{Q}]=4.
+                \end{equation*}
+            This implies that the minimal polynomial of $\sqrt{3}+\sqrt{5}$ is of degree 4. Since $x^4-16x^2+4$ is monic and of degree 4, then it is the minimal polynomial of $\sqrt{3}+\sqrt{5}$, as desired.
+        \end{proof}
+    \item\hfill\par 
+        \begin{enumerate}
+            \item Assume that $F$ and $K$ are fields, and that $\alpha\colon F\rightarrow K$ is an isomorphism. Define $\theta\colon F[x]\rightarrow K[x]$ by
+                \begin{equation*}
+                    \theta\left(\sum_{i=0}^na_ix^i\right)=\sum_{i=0}^n\alpha(a_i)x^i.
+                \end{equation*}
+            $\theta$ is an isomorphism (this is given). Prove that if $c\in F$ is a root of $f(x)\in F[x]$, then $\alpha(c)\in K$ is a root of $\theta(f(x))$.
+                \begin{proof}
+                    Assume that $c\in F$ is a root of $f(x)=\sum_{i=0}^na_ix^i$. Then 
+                        \begin{equation*}
+                            \begin{split}
+                                \theta(f(x))(\alpha(c)) &= \sum_{i=0}^n\alpha(a_i)\alpha(c)^i \\
+                                &= \sum_{i=0}^n\alpha(a_i)\alpha(c^i) \\
+                                &=\sum_{i=0}^n\alpha(a_ic^i) \\
+                                &=\alpha\big(\sum_{i=0}^na_ic^i\big) \\
+                                &= \alpha(f(c)) \\
+                                &= \alpha(0) \\
+                                &=0.
+                            \end{split}
+                        \end{equation*}
+                    Therefore, $\alpha(c)$ is a root of $\theta(f(x))$.
+                \end{proof}
+            \item Assume $c,d$ are irrational numbers, and that $c$ and $d$ are each algebraic over $\mathbb{Q}$. If $\mathbb{Q}(c)\cong\mathbb{Q}(d)$, and $c$ is a root of $g(x)\in\mathbb{Q}[x]$. Prove that there exists $b\in\mathbb{Q}(d)$ such that $b$ is a root of $g(x)$. Additionally, if $\mathbb{Q}(c)\cong\mathbb{Q}(d)$, must there exist a irreducible polynomial $h(x)\in\mathbb{Q}[x]$ such that both $c,d$ are roots of $h(x)$?
+                \begin{proof}
+                    Assume that $\mathbb{Q}(c)\cong\mathbb{Q}(d)$, where $\alpha\colon\mathbb{Q}(c)\rightarrow\mathbb{Q}(d)$ is an isomorphism. By (a), $\theta\colon\mathbb{Q}(c)[x]\rightarrow\mathbb{Q}(d)[x]$ is an isomorphism defined by 
+                        \begin{equation*}
+                            \theta\big(\sum_{i=0}^na_ix^i\big)=\sum_{i=0}^n\alpha(a_i)x^i.
+                        \end{equation*}
+                    Also, by (a), $\alpha(c)$ is a root of $\theta(g(x))$. By HW 1, $\alpha$ is the identity on $\mathbb{Q}$. Thus $\theta(g(x))=g(x)$ and $\alpha(c)\in\mathbb{Q}(d)$ is a root of $g(x)$.\par\hspace{4mm} Consider $\mathbb{Q}(1+\sqrt{2})=\mathbb{Q}(\sqrt{2})$, these fields are equal and therefore isomorphic. However, $\sqrt{2}$ is a root of $x^2-2$, but $1+\sqrt{2}$ is not. Furthermore, any polynomial which has $\sqrt{2}$ as a root must be a multiple of $x^2-2$.
+                \end{proof}
+        \end{enumerate}
+    \item Assume that $E/K/F$, and $c\in E$, $d\in E$.\hfill\par
+        \begin{enumerate}
+            \item Prove that if $c$ is algebraic over $F$, then $c$ is algebraic over $K$.
+                \begin{proof}
+                    Assuming $c\in E$ is algebraic over $F$, then for some $f(x)\in F[x]$ we have that $f(c)=0$. Since $F\subseteq K$, then $f(x)\in K[x]$ and so $c$ is algebraic over $K$.
+                \end{proof}
+            \item Assume that $p(x)$ is the minimal polynomial for $c$ over $K$, and that $q(x)$ is the minimal polynomial for $c$ over $F$. Prove that $p(x)$ is a factor of $q(x)$.
+                \begin{proof}
+                    Consider the map $\theta\colon K[x]\rightarrow K$, where $\theta(g(x))=g(c)$. On HW (?) we showed that this map is a homomorphism. Also, we have shown that $\ker\theta=\{g\in K[x]\mid g(c)=0\}$. Since $\ker\theta$ is a principle ideal of $K[x]$ and $q(x),p(x)\in\ker\theta$, then since $q(x)$ is irreducible over $F$ and $p(x)$ is irreducible over both $K$ and $F$, then $p(x)\mid q(x)$.
+                \end{proof}
+            \item If $d$ is algebraic over $K$, must it be true that $d$ is algebraic over $F$?
+                \begin{proof}
+                    No. For example, consider $\mathbb{R}/\mathbb{Q}$. We have that $\pi$ is algebraic over $\mathbb{R}$ since it is a root of $x-\pi\in\mathbb{R}[x]$, but $\pi$ is transcendental over $\mathbb{Q}$ and therefore not algebraic.
+                \end{proof}
+        \end{enumerate}
+\end{enumerate}
+
+    \begin{prop}
+        If $f\in F[x]$, then $f$ is irreducible over $F$ if any one of the following holds:
+            \begin{enumerate}
+                \item Let $f=a_nx^n+\cdots+a_0\in\mathbb{Z}[x]$ have degree $n>0$. If there is a prime $p$ such that $p\nmid a_n$, $p\mid a_{n-1},\dots,p\mid a_0$ and $p^2\nmid a_0$, then $f$ is irreducible over $\mathbb{Q}$.
+                \item Let $p$ be a prime and $f\in\mathbb{Z}[x]$. Then let $\hat{f}=[f]_p$. If $\hat{f}$ is irreducible over $\mathbb{Z}_p$ and $\deg(f)=\deg(\hat{f})$, then $f$ is irreducible over $\mathbb{Q}$.
+            \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        If $f\in F[x]$ is monic and nonconstant, then $f$ is separable iff $(f,f')=1$.
+    \end{prop}
+        \begin{proof}
+            Suppose $f$ is separable and $(f,f')\neq 1$. Let $a_1,\dots,a_n$ be the roots of $f$ in some splitting field. Then each $a_i$ is distinct. Since $(f,f')\neq 1$, then for some $g\in F[x]$, $g\mid f$ and $g\mid f'$. Since $g\mid f$, then for some $i$, we have $g(a_i)=0$. Similarly, since $g\mid f'$, then $f'(a_i)=0$. Letting $L$ be the splitting field of $f$, it follows that in $L$ we have
+                \begin{equation*}
+                    0=f'(a_i)=\prod_{i\neq j}(a_i-a_j).
+                \end{equation*}
+            Thus for some $j\neq i$, $a_i=a_j$. This contradicts the separability of $f$.\par\hspace{4mm} Conversely, if $(f,f')=1$, then by the Euclidean algorithm we can obtain $A,B\in F[x]$ such that $Af+Bf'=1$. Evaluating this at $a_i$ gives $1=B(a_i)f'(a_i)$ and so $f'(a_i)\neq 0$. Hence $\prod_{i\neq j}(a_i-a_j)$ is nonzero for all $i$. Therefore $a_1,\dots,a_n$ are all distinct and $f$ is separable.
+        \end{proof}
+    \begin{prop}
+        Let $f\in F[x]$ be an irreducible polynomial of degree $n$. Then $f$ is separable if either of the following conditions are satisfied:
+            \begin{enumerate}[label=(\alph*)]
+                \item $F$ has characteristic 0, or
+                \item $F$ has characteristic $p>0$, where $p\nmid n$.
+            \end{enumerate}
+    \end{prop}
+        \begin{proof}
+            Let $f=a_0x^n+\cdots+a_n$, where $n>0$ and $a_0\neq 0$. Then $f'=na_0x^{n-1}+\cdots+a_{n-1}$. Condition (a) or (b) implies that $n\neq 0$ in $F$, so that $a_0\neq 0$ implies that $na_0\neq 0$. Hence $f'$ is nonzero and has degree $n-1$.\par\hspace{4mm} Since $f$ is irreducible, its only divisors (up to constant multiples) are 1 and $f$. In particular, $g=(f,f')$ must be 1 or $f$. But $g\mid f'$and $f'\neq 0$ imply $\deg(g)\leq \deg(f')=n-1$. Hence $g$ cannot be a multiple of $f$ and so $(f,f')=1$.
+        \end{proof}\newpage
+\section{Fields of Characteristic 0}
+    \begin{prop}
+        If $F$ has characteristic 0, then:
+            \begin{enumerate}[label=(\alph*)]
+                \item Every irreducible polynomial in $F[x]$ is separable.
+                \item Every algebraic extension of $F$ is separable.
+            \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Suppose $F\subseteq L$. Then $L$ is the splitting field of some $f\in F[x]$ iff $L$ is a normal and finite extension of $F$.
+    \end{prop}\newpage
+\section{The $p$th Roots of 2}
+    Let $\zeta_p=e^{2\pi i/p}$ be a $p$th root of unity, where $p$ is prime. The roots of $x^p-2$ are $\zeta_p^j\sqrt[p]{2}$ for $0\leq j\leq p-1$ so that 
+        \begin{equation*}
+            L=\mathbb{Q}(\sqrt[p]{2},\zeta_p\sqrt[p]{2},\zeta_p^2\sqrt[p]{2},\dots,\zeta_p^{p-1}\sqrt[p]{2})=\mathbb{Q}(\zeta_p,\sqrt[p]{2})
+        \end{equation*}
+    is the splitting field of $x^p-2$ over $\mathbb{Q}$. Our goal is to describe $\g{L/\mathbb{Q}}$. \par\hspace{4mm} The minimal polynomial of $\zeta_p$ over $\mathbb{Q}$ is $\Phi_p(x)=x^{p-1}+x^{p-2}+\cdots+1$ (called the \emph{$p$th cyclotomic polynomial}). The roots of this polynomial are $\zeta_p^i$ for $1\leq i\leq p-1$. Furthermore, the minimal polynomial of $\sqrt[p]{2}$ is $x^p-2$ and its roots are listed above. By (b) of \cref{thm:1}, 
+        \begin{equation*}
+            [L\colon \mathbb{Q}]=[\mathbb{Q}(\zeta_p,\sqrt[p]{2})\colon\mathbb{Q}]=[\mathbb{Q}(\zeta_p,\sqrt[p]{2})\colon\mathbb{Q}(\zeta_p)][\mathbb{Q}(\zeta_p)\colon\mathbb{Q}]=p(p-1)
+        \end{equation*}
+    Since, by (b) of \cref{lem:8}, a basis for $\mathbb{Q}(\zeta_p,\sqrt[p]{2})$ over $\mathbb{Q}(\zeta_p)$ is $1,\sqrt[p]{2},(\sqrt[p]{2})^2,\dots,(\sqrt[p]{2})^{p-1}$. And by the same result, a basis for $\mathbb{Q}(\zeta_p)$ over $\mathbb{Q}$ is $\zeta_p,\zeta_p^2,\dots,\zeta_p^{p-1}$. So that is a size $p$ basis and a size $p-1$ basis and together you get a size $p(p-1)$ basis. \par\hspace{4mm} It follows from \cref{thm:7} that $\abs{\g{L/\mathbb{Q}}}=[L\colon\mathbb{Q}]=p(p-1)$. To see what the Galois group is, note that for any $\sigma\in\g{L/\mathbb{Q}}$ it must be the case that if $\zeta_p^i$ is a root of $\Phi_p(x)$, then $\sigma(\zeta_p^i)$ must also be a root of $\Phi_p(x)$. Similarly, if $\zeta_p^j\sqrt[p]{2}$ is a root of $x^p-2$, then $\sigma(\zeta_p^j\sqrt[p]{2})$ must also be a root of $x^p-2$. In other words, for any $\sigma\in\g{L/\mathbb{Q}}$, it is uniquely determined by
+        \begin{equation*}
+            \sigma(\zeta_p)\in\{\zeta_p,\dots,\zeta_p^{p-1}\},\quad\sigma(\sqrt[p]{2})\in\{\sqrt[p]{2},\zeta_p\sqrt[p]{2},\dots,\zeta_p^{p-1}\sqrt[p]{2}\}.
+        \end{equation*}
+    In summary, there are integers $1\leq i\leq p-1$ and $0\leq j\leq p-1$ such that 
+        \begin{equation}
+            \sigma(\zeta_p)=\zeta_p^i,\quad\sigma(\sqrt[p]{2})=\zeta_p^j\sqrt[p]{2}.
+        \end{equation}
+    We will denote this $\sigma$ by $\sigma_{i,j}$. The number of possible pairs is $p(p-1)$. Since this is also the order of $\g{L/\mathbb{Q}}$, it follows that all possible pairs
+        \begin{equation}
+            (i,j)\in\{1,\dots,p-1\}\times\{0,\dots,p-1\}
+        \end{equation}
+    must occur in (4).\par\hspace{4mm} To determine the group structure, we need to compute the composition of $\sigma_{i,j}$ and $\sigma_{r,s}$. This is done as follows:
+        \begin{equation*}
+            \begin{split}
+                (\sigma_{i,j}\circ\sigma_{r,s})(\zeta_p)&=\sigma_{i,j}\big(\sigma_{r,s}(\zeta_p)\big)=\sigma_{i,j}(\zeta_p^r)=\big(\sigma_{i,j}(\zeta_p)\big)^r=(\zeta_p^i)^r \\
+                &=\zeta_p^{ir}, \\
+                (\sigma_{i,j}\circ\sigma_{r,s})(\sqrt[p]{2})&=\sigma_{i,j}\big(\sigma_{r,s}(\sqrt[p]{2})\big)=\sigma_{i,j}(\zeta_p^s\sqrt[p]{2})=\big(\sigma_{i,j}(\zeta_p)\big)^s\sigma_{i,j}(\sqrt[p]{2}) \\
+                &=(\zeta_p^i)^s(\zeta_p^j\sqrt[p]{2})=\zeta_p^{is+j}\sqrt[p]{2}.
+            \end{split}
+        \end{equation*}
+    This computation suggests that 
+        \begin{equation*}
+            \sigma_{i,j}\circ\sigma_{r,s}=\sigma_{ir,is+j}.
+        \end{equation*}
+    Unfortunately, the pair $(ir,is+j)$ need not lie in (5). We can resolve this difficulty by realizing that for $i\in\mathbb{Z}$, $\zeta_p^i$ depends only on the congruence class of $i$ modulo $p$. In other words, for $a=[i]\in\mathbb{Z}_p$, the number $\zeta_p^a=\zeta_p^i$ is well defined.\par\hspace{4mm} If we let $\mathbb{Z}_p^{*}=\mathbb{Z}_p/\{0\}$, then for 
+        \begin{equation*}
+            (a,b)\in\mathbb{Z}_p^{*}\times\mathbb{Z}_p^{*},
+        \end{equation*}
+    we can define $\sigma_{a,b}$ to be the element of $\g{L/\mathbb{Q}}$ such that
+        \begin{equation*}
+            \sigma_{a,b}(\zeta_p)=\zeta_p^a,\quad\sigma_{a,b}(\sqrt[p]{2})=\zeta_p^b\sqrt[p]{2}.
+        \end{equation*}
+    Then the previous computation shows that $\sigma_{a,b}\circ\sigma_{c,d}=\sigma_{ac,ad+b}$.\par\hspace{4mm} This composition leads to a geometric description of the Galois group $\g{L/\mathbb{Q}}$. Given $a,b\in\mathbb{Z}_p$, the function $\gamma_{a,b}\colon\mathbb{Z}\rightarrow\mathbb{Z}_p$ defined by $\gamma_{a,b}(u)=au_b$ is an \emph{affine linear transformation}. It can be shown that if $a\neq 0$, then $\gamma_{a,b}$ is a bijection and all such $\gamma_{a,b}$ form a group of order $p(p-1)$ under composition. This group is called AGL$(1,\mathbb{Z}_p)$, the \emph{one-dimensional affine linear group modulo $p$}. To understand its structure, we take $u\in\mathbb{Z}_p$ and compute
+        \begin{equation*}
+            \begin{split}
+                \gamma_{a,b}\circ\gamma_{c,d}(u)&=\gamma_{a,b}\big(\gamma_{c,d}(u)\big)=\gamma_{a,b}(cu+d) \\
+                &= a(cu+d)+b=acu+(ad+b)=\gamma_{ac,ad+b}(u).
+            \end{split}
+        \end{equation*}
+    Thus $\gamma_{a,b}\circ\gamma_{c,d}=\gamma_{ac,ad+b}$, so that the map $\sigma_{a,b}\mapsto\gamma_{a,b}$ gives an isomorphism
+        \begin{equation*}
+            \g{L/\mathbb{Q}}\cong\text{AGL}(1,\mathbb{Z}_p)
+        \end{equation*}
+    
+    
+    
+\end{document}

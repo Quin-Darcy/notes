@@ -1,0 +1,164 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 296B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 2/26/20   \\
+{ \textbf{Instructor:}}\ Dr. Pigno \hspace{\fill} \textbf{Assignment:} Homework 3 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item Give all the equivalence classes induced by congruence modulo $2+i$ in $\mathbb{Z}[i]$.
+            \begin{solution}
+                Plotting multiples of $2+i$ and then taking the points within the square with vertices $0+0i$, $2+i$, $1+3i$, and $-1+2i$ we get that the equivalence classes induced by congruence modulo $2+i$ are
+                    \begin{equation*}
+                        0,\; i,\; 2i,\; 1+i,\; 1+2i.
+                    \end{equation*}
+            \end{solution}
+        \item Show that if $p$ is an odd prime, then $\binom{p-1}{k}\equiv(-1)^k(\text{mod }p)$ for $1\leq k\leq p-1$.
+            \begin{proof}
+                To show this we first note that we can simplify in the following way
+                    \begin{equation*}
+                        \binom{p-1}{k}=\frac{(p-1)!}{k!(p-1-k)!}=\frac{(p-1)(p-2)\cdots(p-k)}{k!}.
+                    \end{equation*}
+                Thus, the numerator then becomes $p^k+a_1p^{k-1}+a_2p^{k-2}+\cdots+(-1)^kk!$, for some $a_1,\dots,a_k\in\mathbb{Z}$. The last constant term comes from the fact that we multiply $(-1)(-2)(-3)\cdots(-k)$ and if $k$ is odd then the product will be negative and if $k$ is even, then product will be positive. Factoring a $p$ out of the numerator, we get 
+                    \begin{equation*}
+                        \frac{p(p^{k-1}+a_1p^{k-2}+\cdots+a_k)+(-1)^kk!}{k!}=\frac{pN}{k!}+(-1)^k,
+                    \end{equation*}
+                where $N=p^{k-1}+a_1p^{k-2}+\cdots+a_k$. Since $\binom{p-1}{k}$ is an integer and $(-1)^k$ is an integer, then $\frac{pN}{k!}$ is an integer and thus, $\binom{p-1}{k}=\frac{pN}{k!}+(-1)^k\equiv(-1)^k(\text{mod p})$.
+            \end{proof}
+        \item Show that $2,4,6,\dots, 2m$ is a complete residue system modulo $m$ if $m$ is odd.
+            \begin{proof}
+                Let $A=\{2,4,6,\dots,2m\}$ where $m$ is odd. To show that $A$ is a complete residue system modulo $m$, we must show that there are $m$ elements in $A$ and that no two distinct elements correspond to the same equivalence class modulo $m$. The first condition is clearly satisfied. Now let $2r,2s\in A$ where $r,s\in\mathbb{Z}$, $r\neq s$, and $1\leq r,s\leq m$. If $2r\equiv 2s(\text{mod }m)$, then $m\mid 2r-2s$ and so for some $k\in\mathbb{Z}$, we have that $2(r-s)=mk$. Since $m$ is odd, then $(2,m)=1$ and so by Euclid's Lemma, $m\mid r-s$. Since $1\leq r,s\leq m$, then $m\mid r-s$ implies that $r=s$. This is a contradiction. Hence, for all $r,s\in\mathbb{Z}$, if $r\neq s$, then $2r\not\equiv 2s(\text{mod }m)$. Thus, $[2r]\neq[2s]$ for $r\neq s$. Therefore $A$ is a complete residue system.
+            \end{proof}\newpage
+        \item[5.] What are the last two digits of $2^{1000}$ and $3^{1000}$.
+            \begin{solution}
+                To calculate the last two digits, we will use a series of congruences. They are 
+                    \begin{equation*}
+                        \begin{split}
+                            2^{1000}&=(2^{25})^{40} \\
+                            &\equiv 2^{40}\\ 
+                            &=(2^{10})^4 \\
+                            &\equiv(24)^4 \\
+                            &= (2^3\cdot 3)^4 \\
+                            &=2^{10}\cdot2^2\cdot3^4 \\
+                            &\equiv 24\cdot4\cdot3^4 \\
+                            &= 2^5\cdot3^5 \\
+                            &= 2592 \\
+                            &\equiv 92(\text{mod }100).
+                        \end{split}
+                    \end{equation*}
+                Thus, 92 is the last two digits of $2^{1000}$. We proceed in a similar fashion to calculate the last two digits of $3^{1000}$. First note that $3^{1000}=(3^21)^{47}\cdot3^{13}$ and since $3^{21}\equiv 3(\text{mod }100)$, then $3^{47}\cdot 3^{13}=(3^{21})^2\cdot3^{18}\equiv 3^2\cdot 3^{18}=3^{20}\equiv 1(\text{mod }100)$. Thus, $01$ are the last two digits of $3^{1000}$.
+            \end{solution}
+        \item[6.] Solve the system $x\equiv 5(\text{mod }11)$, $x\equiv 4(\text{mod }35)$, and $x\equiv 1(\text{mod }3)$.
+            \begin{solution}
+                We begin with the largest modulus. We have $x\equiv 4(\text{mod }35)$ and so $x=35k_1+4$ for $k_1\in\mathbb{Z}$. Next we have that $x\equiv 5(\text{mod }11)$ and so $x=11k_2+5$ for $k_2\in\mathbb{Z}$. Thus, 
+                    \begin{equation*}
+                        \begin{split}
+                            35k_1+4&=11k_2+5 \\
+                            &\rightarrow 35k_1=11k_2+1 \\
+                            &\rightarrow 35k_1\equiv 1(\text{mod }11) \\
+                            &\rightarrow 2k_1\equiv 1(\text{mod }11) \\
+                            &\rightarrow k_1\equiv 6(\text{mod }11) \\
+                            &k_1=11k_2+6.
+                        \end{split}
+                    \end{equation*}
+                Thus, $x=35k_1+4=35(11k_2+6)+4=385k_2+214$. Next, from $x\equiv 1(\text{mod }3)$ it follows that 
+                    \begin{equation*}
+                        \begin{split}
+                            385k_2+214&\equiv 1(\text{mod }3) \\
+                            &\rightarrow k_2+1\equiv 1(\text{mod }3) \\
+                            &\rightarrow k_2=3k_3.
+                        \end{split}
+                    \end{equation*}
+                Hence, $x=385k_2+214=385(3k_3)+214=1155k_3+214$. Therefore, the solutions of this system are of the form $x=1155k+214$ for $k\in\mathbb{Z}$.
+            \end{solution}
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,230 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand\defeq{\stackrel{\smash{\scriptscriptstyle\mathrm{def}}}{=}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 2/5/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 2 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item[3.] Find, with explanation, a basis for the following vector spaces:
+            \begin{enumerate}[label=(\alph*)]
+                \item $F^n$ over $F$ (where $F$ is a field).
+                    \begin{solution}
+                        Let $v_1=(1,0,\dots,0)$, $v_2=(0,1,0,\dots,0),\dots,v_n=(0,0,\dots,1)$. Then define $S=\{v_i\mid 1\leq i\leq n\}$. Assume that there exists $a_1,\dots,a_n\in F$ such that 
+                            \begin{equation*}
+                                \sum\limits_{i=1}^n a_iv_i=0.
+                            \end{equation*}
+                        It follows that $(a_1,\dots,a_n)=(0,\dots,0)$ which holds if and only if $a_i=0$ for all $i$. Thus, $S$ is linearly independent. Now take $w\in F^n$. Then for some $b_1,\dots,b_n\in F$, we have that $w=(b_1,\dots,b_n)$. Hence, 
+                            \begin{equation*}
+                                w=\sum\limits_{i=1}^n b_iv_i\in \langle S\rangle.
+                            \end{equation*}
+                        Thus, $F^n=\langle S\rangle$. Therefore, $S$ is a basis for $F^n$ over $F$.
+                    \end{solution}
+                \item $\mathbb{Q}[\sqrt{2}]$ over $\mathbb{Q}$.
+                    \begin{solution}
+                        Let $S=\{1,\sqrt{2}\}$. Let $a,b\in\mathbb{Q}$ such that $a+b\sqrt{2}=0$. Then $\sqrt{2}=-\frac{a}{b}$. Since $a,b\in\mathbb{Q}$, then this equation holds only for $a=b=0$. Thus, $S$ is linearly independent. Now let $w\in\mathbb{Q}[\sqrt{2}]$. Then for some $a,b\in\mathbb{Q}$, $w=a+b\sqrt{2}$ which is a linear combination of the vectors from $S$. Hence, $\mathbb{Q}[\sqrt{2}]=\langle S\rangle$. Thus, $S$ is a basis for $\mathbb{Q}[\sqrt{2}]$.
+                    \end{solution}
+                \item $\mathbb{Q}[\sqrt{2},\sqrt{3}]$ over $\mathbb{Q}[\sqrt{2}]$.
+                    \begin{solution}
+                        Let $S=\{1,\sqrt{3}\}$. Suppose for some $a,b\in\mathbb{Q}[\sqrt{2}]$ that $a+b\sqrt{3}=0$. Then $\sqrt{3}=-\frac{a}{b}$ which has no solutions in $\mathbb{Q}[\sqrt{2}]$ apart from $a=b=0$. Thus, $S$ is linearly independent. Let $w\in\mathbb{Q}[\sqrt{2},\sqrt{3}]$. Then for some $a,b,c,d\in\mathbb{Q}$, $w=a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6}$. We can expand this to obtain that $w=(a+b\sqrt{2})+(c+d\sqrt{2})\sqrt{3}$ which is a linear combination of $S$. Thus, $\mathbb{Q}[\sqrt{2},\sqrt{3}]=\langle S\rangle$. Therefore, $S$ is a basis.
+                    \end{solution}
+                \item $\mathbb{Q}[\sqrt{2},\sqrt{3}]$ over $\mathbb{Q}$.
+                    \begin{solution}
+                        Let $S=\{1,\sqrt{2},\sqrt{3},\sqrt{6}\}$. Letting $a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6}=0$, which implies $-a$ is the linear combination of irrational numbers with rational coefficients, this is only possible provided $a=b=c=d=0$. Let $w\in\mathbb{Q}[\sqrt{2},\sqrt{3}]$. Then $w=a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6}$ which is a linear combination of the elements of $S$. Thus, $w\in\langle S\rangle$ and $S$ is a basis.
+                    \end{solution}\newpage
+                \item $\{g(x)\in F[x]\colon g(x)=0$ or deg$(g(x))\leq n\}$ over $F$ ($F$ a field).
+                    \begin{solution}
+                        Let $S=\{1,x,x^2,\dots,x^n\}$. Now suppose $a_0,\dots,a_n\in F$ such that $\sum_{i=0}^na_ix^i=0$. Then since $0\in F[x]$ denotes the function $f\colon\mathbb{N}\cup\{0\}\rightarrow F$, where $f(k)=0$ for all $k\geq 0$, then equating $f(0)=a_0, f(1)=a_1,\dots, f(n)=a_n$, it follows that $a_0=a_1=\cdots=a_n=0$. Thus, $S$ is linearly independent. Now let $g(x)\in\{ g(x)\in F[x]\colon g(x)=0$ or deg$(g(x))\leq n\}$. Then $g(x)=\sum_{i=0}^n b_ix^i$ and so $g(x)$ is a linear combination of the elements of $S$. Thus, $g(x)\in\langle S\rangle$. Therefore, $S$ is a basis.
+                    \end{solution}
+            \end{enumerate}
+        \item[4.]
+            \begin{enumerate}[label=(\alph*)]
+                \item Assume that $x^3+bx^2+cx+d=(x-r)(x-s)(x-t)$. Express $b,c,d$ in terms of $r,s,t$.
+                    \begin{solution}
+                        Taking our given factors, we can multiply them to obtain
+                            \begin{equation*}
+                                \begin{split}
+                                    (x-r)(x-s)(x-t) &= (x^2-sx-rx+rs)(x-t) \\
+                                    &= x^3-tx^2-sx^2+stx-rx^2+rtx+rsx-rst \\
+                                    &= x^3-(t+s+r)x^2+(st+rt+rs)x-rst.
+                                \end{split}
+                            \end{equation*}
+                        Thus, $b=-t-r-s$, $c=rt+st+rs$, and $d=-rst$.
+                    \end{solution}
+                \item Note that $x^3-2x^2-3=(x^2+1)(x^2-3)$, and the roots of the polynomials are: $\alpha=i$, $\beta=-i$, $\gamma=\sqrt{3}$, $\delta=-\sqrt{3}$. Determine the group, $G$, of permutations of $\alpha,\beta,\gamma,\delta$ that when applied to these equations, give valid equations.
+                    \begin{solution}
+                        Noting that $i^2=(-i)^2$, we find that $\alpha+\beta=0$, $\alpha^2+1=0$, and $\alpha\gamma-\beta\delta=0$ are all satisfied with $(\alpha\beta)$. Thus, $(\alpha\beta)\in G$. Similarly, noting that $(\sqrt{3})^2=(-\sqrt{3})^2$, we find that $(\gamma\delta)$ satisfies $\gamma+\delta=0$, $\gamma^2-3=0$, and $\alpha\gamma=\beta\delta=0$. Thus, $(\gamma\delta)\in G$. Finally, since $G$ is a group, then $(\alpha\beta)(\gamma\delta)\in G$. Hence, $G=\{(1),(\alpha\beta),(\gamma\delta),(\alpha\beta)(\gamma\delta)\}$. 
+                    \end{solution}
+            \end{enumerate}
+        \item[5.] Prove that $\mathbb{Z}[x]$ is not a PID by proving that
+            \begin{equation*}
+                I=\{u(x)(x+2)+v(x)(x+4)\colon u(x),v(x)\in\mathbb{Z}[x]\}
+            \end{equation*}
+        is not a principle ideal.
+            \begin{proof}
+                Assume, for contradiction, that $I$ is a principle ideal and let $f(x)$ be a generator of $I$. By assumption, we have that $(f(x))=I$. Since $x+2\in I$, then $x+2\in(f(x))$ and so for some $q(x)\in\mathbb{Z}[x]$ we have that $f(x)q(x)=x+2$. Since $\mathbb{Z}$ is an integral domain and $\text{deg}(x+2)=1$, then $\text{deg}(f(x)q(x))=1$. Thus, either $f(x)=0$ and $\text{deg}(q(x))=1$ or $\text{deg}(f(x))=1$ and $\text{deg}(q(x))=0$. In the first case, if $\text{deg}(f(x))=0$, then $f(x)$ is a constant and $(f(x))\neq I$. If $\text{deg}(q(x))=0$, then $f(x)=a_0+a_1x$ and $q(x)=c$. Thus, $x+2=a_0c+a_1cx$. Equating coefficients we get that $a_0c=2$ and $a_1c=1$. Thus, $a_0=\pm 2$, $a_1=\pm 1$, and $c=\pm 1$. Hence, $f(x)=x+2$ or $f(x)=-x-2$, and in either case $f(x)$ is irreducible. Suppose $f(x)=x+2$. Then since $x+4\in I$, then $x+4\in(f(x))$ and for some $p(x)\in\mathbb{Z}[x]$, we have that $x+4=(x+2)p(x)$. By a similar argument, it follows that $\text{deg}(p(x))=0$ and $p(x)=c$. Hence, $x+4=cx+2c$. This implies that $c=1$ and $c=2$ which is not possible. Thus, $f(x)\neq x+2$. Similarly, if $f(x)=-x-2$, then $x+4=-cx-2c$ which implies that $c=-1$ and $c=-2$. Thus, $f(x)\neq -x-2$. Therefore, $x+2\notin (f(x))$ and so $I\neq(f(x))$.
+            \end{proof}
+            
+        \item[6.] Assume that $F$ is a field, and that $g(x)\in F[x]$. Assume that $g(x)$ is irreducible over $F[x]$. Prove that $F[x]/(g(x))_i$ is not an integral domain.
+            \begin{proof}
+                Since $g(x)$ is reducible, then for two polynomials $p(x),q(x)\in F[x]$ such that $\text{deg}(p(x))\geq 1$ and $\text{deg}(q(x))\geq 1$, we have that $g(x)=p(x)g(x)$. Note that
+                    \begin{equation*}
+                        p(x)g(x)+(g(x))_i=\big(p(x)+(g(x))_i\big)\big(q(x)+(g(x))_i\big). 
+                    \end{equation*}
+                However, since $g(x)=p(x)q(x)$ and so $p(x)q(x)\in(g(x))_i$, then
+                    \begin{equation*}
+                        g(x)+(g(x))_i=p(x)q(x)+(g(x))_i=(g(x))_i.
+                    \end{equation*}
+                If $p(x)+(g(x))_i=(g(x))_i$, then $p(x)\in(g(x))_i$ and then for some $h(x)\in F[x]/(g(x))_i$ we would have $p(x)=g(x)h(x)$. However, since $g(x)=p(x)q(x)$, then $p(x)=p(x)q(x)h(x)$ and so $1=q(x)h(x)$ which implies that $\text{deg}(q(x))=0$ which contradicts our assumption. Thus, $p(x)+(g(x))_i$ is nonzero in $F[x]/(g(x))_i$. A similar argument shows $q(x)$ is nonzero. Thus, the product of two nonzero elements is equal to the zero and hence these two elements are zero divisors. Therefore, $F[x]/(g(x))_i$ is not an integral domain.
+            \end{proof}
+        \item[7.] Assume that $E$ and $F$ are fields, $c\in E$, $F\subseteq E$. Define $\theta\colon F[x]\rightarrow E$ by $\theta(f(x))=f(c)$. Prove $\theta$ is a ring homomorphism.
+            \begin{proof}
+                Let $f(x)\in F[x]$. Then $\theta(f(x))=f(c)\in E$ by definition. Thus, $\theta(F[x])\in E$. Now let $f(x),g(x)\in F[x]$ such that $f(x)=g(x)$. Then if $f(x)=\sum\limits_{i=0}^n a_ix^i$ and $g(x)=\sum\limits_{i=0}^m b_ix^i$, then $n=m$ and $a_i=b_i$. Thus, $\theta(f(x))=f(c)=g(c)=\theta(g(x))$. Hence, $\theta$ is well-defined. Now consider 
+                    \begin{equation*}
+                        f(x)+g(x)=\sum\limits_{i=0}^na_ix^i+\sum\limits_{j-0}^mb_ix^i=\sum\limits_{k=0}^rd_ix^i.
+                    \end{equation*}
+                Then 
+                    \begin{equation*}
+                        \theta(f(x)+g(x))=\sum\limits_{k=0}^rd_ic^i.
+                    \end{equation*}
+                Next, we consider 
+                    \begin{equation*}
+                        \theta(f(x))+\theta(g(x))=\sum\limits_{i=0}^na_ic^i+\sum\limits_{j=0}^mb_ic^i.
+                    \end{equation*}
+                Combining like terms we see that $d_i=a_i+b_i$ and thus $\theta(f(x)+g(x))=\theta(f(x))+\theta(g(x))$. Now if $f(x)g(x)=\sum_{k=0}^s d_ix^i$, then 
+                    \begin{equation*}
+                        \theta(f(x)g(x))=\sum\limits_{k=0}^s d_ic^i\quad\text{and}\quad\theta(f(x))\theta(g(x))=\bigg(\sum\limits_{i=0}^na_ic^i\bigg)\bigg(\sum\limits_{j=0}^m b_ic^i\bigg).
+                    \end{equation*}
+                By the definition of polynomial multiplication we get that $d_i=\sum_{k=0}^ia_kb_{i-k}$ and so $\theta(f(x)g(x))=\theta(f(x))\theta(g(x))$. Therefore, $\theta$ is a homomorphism of rings.
+            \end{proof}
+        \item[9.] Let $R$ be a UFD and $Q$ its field of quotients. Let $h(x)=\sum\limits_{i=0}^n d_ix^i\in R[x]$. If there exists a prime $p\in R$ such that $p\mid d_i$ for $0\leq i\leq n-1$, $p\nmid d_n$, and $p^2\nmid d_0$, then $h(x)$ is irreducible in $Q[x]$. Apply this result to $x^3+6x^2+3x+3\in\mathbb{Z}[x]$.
+            \begin{solution}
+                In this case we have that $n=3$ and if we select $p=3$, then $p\mid d_0$, $p\mid d_1$, $p\mid d_2$, $p\nmid d_1$, and $p^2\nmid d_0$. Thus, $x^3+6x^2+3x+3$ is irreducible in $\mathbb{Q}[x]$.
+            \end{solution}
+        \item[10.] Assume that $p$ is prime, and define $\varphi\colon\mathbb{Z}[x]\rightarrow\mathbb{Z}_p[x]$ by $\varphi(q)=\hat{q}$, where $\hat{q}(m)=[q(m)]$. $\varphi$ is a ring homomorphism. Assume that there exists $g(x),h(x)\in\mathbb{Z}[x]$ such that $f(x)=g(x)h(x)$, where $\text{deg}(f(x))\geq 1$, $\text{deg}(g(x))\geq 1$, and $\text{deg}(h(x))\geq 1$. If $\varphi(f(x))$ is irreducible in $\mathbb{Z}_p[x]$, then $f(x)$ is irreducible in $\mathbb{Z}[x]$. Using this result, determine if $f(x)=x^4+15x^3+7$ is irreducible in $\mathbb{Z}[x]$.
+            \begin{solution}
+                Letting $p=2$ we get that $\varphi(f(x))=x^4+x^3+[1]$. Setting this equal to the product of two degree 2 polynomials as in
+                    \begin{equation*}
+                        \begin{split}
+                            x^4+x^3+[1]&=([a]x^2+[b]x+[c])([d]x^2+[e]x+[f]) \\
+                            &= [ad]x^4+([ae+bd])x^3+([af+be+cd])x^2+([bf+ce])x+[cf].
+                        \end{split}
+                    \end{equation*}
+                we obtain the following relationships
+                    \begin{enumerate}[label=(\roman*)]
+                        \item $[ad]=[1]\rightarrow[a]=[d]=[1]$;
+                        \item $[cf]=[1]\rightarrow[c]=[f]=[1]$;
+                        \item $[ae+bd]=[e+b]=[1]\rightarrow([b]=[1]$ and $[e]=[0])$ or $([b]=[0]$ and $[e]=[1])$;
+                        \item $[bf+ce]=[b+e]=[0]$;
+                    \end{enumerate}
+                At this point we see that (iii) and (vi) contradict each other and so $\phi(f(x))$ does not factor into two degree 2 polynomials. We now try
+                    \begin{equation*}
+                        \begin{split}
+                            x^4+x^3+[1]&=([a]x^3+[b]x^2+[c]x+[d])([e]x+[f]) \\
+                            &=[ae]x^4+([af+be])x^3+([bf+ce])x^2+([cf+de])x+[df].
+                        \end{split}
+                    \end{equation*}
+                This gives
+                    \begin{enumerate}[label=(\roman*)]
+                        \item $[ae]=[1]\rightarrow[a]=[e]=[1]$;
+                        \item $[df]=[1]\rightarrow[d]=[f]=[1]$;
+                        \item $[af+be]=[1+b]=[1]\rightarrow[b]=[0]$;
+                        \item $[bf+ce]=[c]=[0]$;
+                        \item $[cf+de]=[de]=[1]=[0]$;
+                    \end{enumerate}
+                Clearly, (v) is impossible and so $\varphi(f(x))$ cannot be factored into the product of  third and first degree polynomials. Hence, $\varphi(f(x))$ is irreducible in $\mathbb{Z}_2[x]$ and by the result proven on Canvas, $f(x)$ is irreducible in $\mathbb{Z}[x]$.
+            \end{solution}
+    \end{enumerate}
+
+\end{document}

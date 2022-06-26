@@ -1,0 +1,146 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 161}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 161}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/31/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 4 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item Prove that $\vdash_L(\varphi\rightarrow\gamma)\rightarrow[(\sim(\gamma\rightarrow\theta)\rightarrow\sim\varphi)\rightarrow(\varphi\rightarrow\theta)]$.
+            \begin{proof}
+                With two applications of the Deduction Theorem, we will let\par $\Gamma=L\cup\{\varphi\rightarrow\gamma, \sim(\gamma\rightarrow\theta)\rightarrow\sim\varphi\}$. We want to show that
+                    \begin{equation*}
+                        \Gamma\vdash\varphi\rightarrow\theta
+                    \end{equation*}
+                    \begin{align*}
+                        &(1) \quad\varphi\rightarrow\gamma &&\text{axiom} \\
+                        &(2) \quad\sim(\gamma\rightarrow\theta)\rightarrow\sim\varphi &&\text{axiom} \\
+                        &(3) \quad\varphi\rightarrow(\gamma\rightarrow\theta) &&\text{A3 on (2)} \\
+                        &(4) \quad(\varphi\rightarrow(\gamma\rightarrow\theta))\rightarrow((\varphi\rightarrow\gamma)\rightarrow(\varphi\rightarrow\theta)) &&\text{A2} \\
+                        &(5) \quad(\varphi\rightarrow\gamma)\rightarrow(\varphi\rightarrow\theta) &&\text{MP on (3) and (4)} \\
+                        &(6) \quad\varphi\rightarrow\theta &&\text{MP on (1) and (5)}
+                    \end{align*}
+            \end{proof}
+        \item[4.]\par\hfill
+            \begin{enumerate}
+                \item Let $\theta$ be the wff: $\exists y\forall x(R(y,x)\rightarrow\forall zR(h(y,z),z))$. Define $\mathcal{I}$ by $A=$ the set of whole numbers; $R^{\mathcal{I}}$ is defined by $x\leq y$, and $h^{\mathcal{I}}$ is defined by $x+y$. Explain why $\theta$ is true in $\mathcal{I}$.
+                    \begin{solution}
+                        We note that $\theta$ is satisfied in $\mathcal{I}$ under two conditions: Either for some $a,b\in A$ such that $v(x)=a$ and $v(y)=b$, we have that $\sim R(y,x)$; or for some $a,b\in A$ with $v(x)=a$ and $v(y)=b$, we have that $\forall zR(h(y,z),z)$. Specifically, if $y=0$, and $x,z\in A$, then $0\leq x$ and $0+z=z\leq z$. Additionally, if $y>0$, then for all $x\in A$, $y\leq x$ is false and thus $y\leq x\rightarrow\forall z(y+z\leq z)$ is true. 
+                    \end{solution}
+                \item In $\mathcal{I}$, $A=\mathbb{N}\cup\{0\}$, $c^{\mathcal{I}}=0$. Define $f^{\mathcal{I}}$, $g^{\mathcal{I}}$, and $R^{\mathcal{I}}$ so that\par $\mathcal{I}\models\exists y\forall x(R(f(x,y),g(x,y))\rightarrow g(c,y)=c)$.
+                    \begin{solution}
+                        Let $f^{\mathcal{I}}$ be defined by $xy$, $g^{\mathcal{I}}$ by $x+y$, and $R^{\mathcal{I}}$ as $x\leq y$. Then it must be the case that for some $b\in A$ and for all $a\in A$ that $v[x\mid a,y\mid b]$ yields $\sim R(f(x,y),g(x,y))$ or that $v[x\mid a,y\mid b]$ gives $g(c,y)=c$. For $b=0$, we see that $x\cdot0\leq x+0$ and that $0+0=0$ are both true. Hence, if $y=0$, then for all $x$, we have that $xy\leq x+y\rightarrow y+0=0$. Thus $\mathcal{I}\models\exists y\forall x(R(f(x,y),g(x,y))\rightarrow g(c,y)=c)$. 
+                    \end{solution}
+            \end{enumerate}\newpage
+        \item[5.]
+            \begin{enumerate}
+                \item Prove that $v$ satisfies $\theta\land\varphi$ iff $v$ satisfies $\theta$ and $v$ satisfies $\varphi$.
+                    \begin{proof}
+                        First we note that $\theta\land\varphi\equiv\sim(\theta\rightarrow\sim\varphi)$. Now assume that $v$ satisfies $\theta\land\varphi$. Then $v$ satisfies $\sim(\theta\rightarrow\sim\varphi)$ iff $v$ does not satisfy $\theta\rightarrow\sim\varphi$ iff $v$ does not satisfy $\sim\theta$ and $v$ does not satisfy $\sim\varphi$ iff $v$ satisfies $\theta$ and $v$ satisfies $\varphi$.
+                    \end{proof}
+                \item Prove that $v$ satisfies $\varphi\rightarrow\gamma$ iff ``if $v$ satisfies $\varphi$, then $v$ satisfies $\gamma$''.
+                    \begin{proof}
+                        Assume that $v$ satisfies $\varphi\rightarrow\gamma$ and assume $v$ satisfies $\varphi$. Since $v$ satisfies $\varphi\rightarrow\gamma$, then by definition, $v$ satisfies $\sim\varphi$ or $v$ satisfies $\gamma$. We assumed that $v$ satisfies $\varphi$ and thus $v$ does not satisfy $\sim\varphi$ and thus $v$ satisfies $\gamma$.\par\hspace{4mm} Assume that ``if $v$ satisfies $\gamma$, then $v$ satisfies $\gamma$''. Either $v$ satisfies $\varphi$ or $v$ satisfies $\sim\varphi$. If $v$ satisfies $\varphi$, then, by assumption, $v$ satisfies $\gamma$. Thus $v$ satisfies $\varphi\rightarrow\gamma$. If $v$ does not satisfy $\varphi$, then $v$ satisfies $\sim\varphi$. Thus, by definition, $v$ satisfies $\varphi\rightarrow\gamma$.
+                    \end{proof}
+            \end{enumerate}
+        \item[7.] Determine (with explanation) if the following holds (for all wffs, $\varphi,\theta$, and interpretations $\mathcal{I}$).
+            \begin{equation*}
+                \mathcal{I}\models\varphi\land\gamma\text{ iff }\mathcal{I}\models\varphi\text{ and }\mathcal{I}\models\gamma.
+            \end{equation*}
+            \begin{proof}
+                Let $v$ be any valuation and assume $\mathcal{I}\models\varphi\land\gamma$ for some interpretation $\mathcal{I}$ where $v$ satisfies $\varphi\land\gamma$ in $\mathcal{I}$. Then by 5.(a), $v$ satisfies $\varphi$ and $v$ satisfies $\gamma$. Conversely, assume that $v$ satisfies $\varphi$ and $v$ satisfies $\gamma$. Then by 5.(a), $v$ satisfies $\varphi\land\gamma$ and thus $\mathcal{I}\models\varphi$ and $\mathcal{I}\models\gamma$. 
+            \end{proof}
+    \end{enumerate}
+\end{document}

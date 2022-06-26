@@ -1,0 +1,182 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+
+\usepackage{lscape}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+  \setlist[description]{leftmargin=4mm,labelindent=4mm}
+  
+\title{Properties of Various Algebraic Structures}
+
+\begin{document}
+
+\maketitle
+\section{The Properties}
+
+The following will be a list of properties written in first-order predicate logic that can be used as a checklist for identifying various algebraic structures. We begin by letting $G$, $S$, $T$ be non-empty sets. Additionally, we need two binary relations, namely $\oplus\subseteq(G\times G)\times S$ and $\otimes\subseteq(G\times G)\times T$.
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        P1. & $\forall(x,y)\forall(x',y')[(x,y)\in\oplus\wedge(x',y')\in\oplus\rightarrow(x=x'\rightarrow y=y')]$ & Functional $\oplus$\\
+        
+        P2. & $\forall(x,y)\forall(x',y')[(x,y)\in\otimes\wedge(x',y')\in\otimes\rightarrow(x=x'\rightarrow y=y')]$ & Functional $\otimes$\\
+        
+        P3. & $S=G$ & Closure $\oplus$\\
+        
+        P4. & $T=G$ & Closure $\otimes$\\
+        
+        P5. & $\forall a\forall b\forall c[(a\oplus b)\oplus c=a\oplus(b\oplus c)]$ & Associative $\oplus$\\
+        
+        P6. & $\forall a\forall b\forall c[(a\otimes b)\otimes c=a\otimes(b\otimes c)]$ & Associative $\otimes$\\
+        
+        P7. & $\exists e_{\oplus}\forall a[a\oplus e_{\oplus}=e_{\oplus}\oplus a=a]$ & Identity $\oplus$\\
+        
+        P8. & $\exists e_{\otimes}\forall a[a\otimes e_{\otimes}=e_{\otimes}\otimes a=a]$ & Identity $\otimes$\\
+        
+        P9. & $\forall a\exists a^{-1}_{\oplus}[a\oplus a^{-1}_{\oplus}=a^{-1}_{\oplus}\oplus a=e_{\oplus}]$ & Inverse $\oplus$\\
+        
+        P10.& $\forall a\exists a^{-1}_{\otimes}[a\neq e_{\oplus}\wedge a\otimes a^{-1}_{\otimes}=a^{-1}_{\otimes}\otimes a=e_{\otimes}]$ & Inverse $\otimes$\\
+        
+        P11.& $\forall a\forall b[a\oplus b=b\oplus a]$ & Commutative $\oplus$\\
+        
+        P12.& $\forall a\forall b[a\otimes b=b\otimes a]$ & Commutative $\otimes$\\
+        
+        P13. & $\forall a\forall b\forall c[a\otimes(b\oplus c)=a\otimes b\oplus a\otimes c]$ & Distribute(1) $\oplus$\\
+        
+        P14.& $\forall a\forall b\forall c[(a\oplus b)\otimes c=a\otimes c\oplus b\otimes c]$ & Distribute(2) $\oplus$\\
+        
+        P15.& $\exists a\exists b[a\neq e_{\oplus}\wedge b\neq e_{\oplus}\wedge(a\otimes b=e_{\oplus})]$ & Zero Divisor\\
+        
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\newpage
+
+
+\begin{landscape}
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+ & \textbf{P1} & \textbf{P2} & \textbf{P3} & \textbf{P4} & \textbf{P5} & \textbf{P6} & \textbf{P7} & \textbf{P8} & \textbf{P9} & \textbf{P10} & \textbf{P11} & \textbf{P12} & \textbf{P13} & \textbf{P14} & \textbf{P15} \\ \hline
+\textbf{Semigroup} & X &  & X &  & X &  &  &  &  &  &  &  &  &  &  \\ \hline
+\textbf{Monoid} & X &  & X &  & X &  & X &  &  &  &  &  &  &  &  \\ \hline
+\textbf{Group} & X &  & X &  & X &  & X &  & X &  &  &  &  &  &  \\ \hline
+\textbf{Abelian Group} & X &  & X &  & X &  & X &  & X &  & X &  &  &  &  \\ \hline
+\textbf{Ring} & X & Y & X & Y & X & Y & X &  & X &  & X &  & Y & Y &  \\ \hline
+\textbf{Ring with Unity} & X & Y & X & Y & X & Y & X & Y & X &  & X &  & Y & Y &  \\ \hline
+\textbf{Commutative Ring} & X & Y & X & Y & X & Y & X &  & X &  & X & Y & Y & Y &  \\ \hline
+\textbf{Integral Domain} & X & Y & X & Y & X & Y & X & Y & X &  & X &  & Y & Y &  \\ \hline
+\textbf{Division Ring} & X & Y & X & Y & X & Y & X & Y & X & Y & X &  & Y & Y &  \\ \hline
+\textbf{Field} & X & Y & X & X & Y & X & Y & X & Y & X & X & Y & Y & Y &  \\ \hline
+\end{tabular}
+\end{table}
+\end{landscape}
+
+\newpage
+
+\section{Brief Review of a Vector Space}
+
+Let $(F,+,\times, e_{+},e_{\times})$ be a field and let $V$ be a non-empty set. Additionally, we will take two binary relations $\otimes\subseteq(F\times V)\times W$ and $\oplus\subseteq(V\times V)\times Y$. Then we call $V$ a vector space over $F$ if the following properties are satisfied.
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l l l}
+        \hline
+        
+        V1. & $\forall(x,y)\forall (x',y')[(x,y)\in\otimes\wedge (x',y')\in\otimes\rightarrow(x=x'\rightarrow y=y')]$ & Functional $\otimes$\\
+        
+        V2. & $\forall(x,y)\forall (x',y')[(x,y)\in\oplus\wedge (x',y')\in\oplus\rightarrow(x=x'\rightarrow y=y')]$ & Functional $\oplus$\\
+        
+        V3. & $W=V$ & Closure $\otimes$\\
+        
+        V4. & $Y=V$ & Closure $\oplus$\\
+        
+        V5. & $\forall a\forall b\forall u[a\in F\wedge b\in F\wedge u\in V\rightarrow (a\times b)\otimes u=a\otimes(b\otimes u)]$ & Associative $\otimes$\\
+        
+        V6. & $\forall u\forall v\forall w[u\in V\wedge v\in V\wedge w\in V\rightarrow (u\oplus v)\oplus w=u\oplus(v\oplus w)]$ & Associative $\oplus$\\
+        
+        V7. & $\forall u\forall v[u\in V\wedge v\in V\rightarrow u\oplus v=v\oplus u]$ & Commutative $\oplus$\\
+        
+        V8. & $\exists e_{\oplus}\forall u[e_{\oplus}\in V\wedge u\in V\rightarrow u\oplus e_{\oplus}=e_{\oplus}\oplus u=u]$ & Identity $\oplus$\\
+        
+        V9. & $\forall u\exists u^{-1}_{\oplus}[u\in V\wedge u^{-1}_{\oplus}\rightarrow u\oplus u^{-1}_{\oplus}=u^{-1}_{\oplus}\oplus u=e_{\oplus}]$ & Inverse $\oplus$\\
+        
+        V10.& $\forall u[u\in V\rightarrow e_{\times}\otimes u=u]$ & Unitary\\
+        
+        V11.& $\forall a\forall u\forall v[a\in F\wedge u\in V\wedge v\in V\rightarrow a\otimes(u\oplus v)=a\otimes u\oplus a\otimes v]$ & Distribute(1)\\
+        
+        V12.& $\forall a\forall b\forall u[a\in F\wedge b\in F\wedge u\in V\rightarrow (a+b)\otimes u=a\otimes u\oplus b\otimes u]$ & Distribute(2)\\
+        
+        
+        
+        \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,487 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 230A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 230A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 11/04/20   \\
+{ \textbf{Instructor:}}\ Dr. Domokos \hspace{\fill} \textbf{Assignment:} Homework 2 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item[2.1] Show that for all $x,y\in\mathbb{R}$ we have
+            \begin{equation*}
+                \abs{\abs{x}-\abs{y}}\leq\abs{x-y}.
+            \end{equation*}
+            \begin{proof}
+                Let $a=x-y$ and $b=y$. Then
+                    \begin{equation*}
+                        \abs{a+b}=\abs{x}\leq \abs{a}+\abs{b}=\abs{x-y}+\abs{y} \Leftrightarrow \abs{x}-\abs{y}\leq\abs{x-y}.
+                    \end{equation*}
+                Then if $a=y-x$ and $b=x$ it follows that 
+                    \begin{equation*}
+                        \abs{a+b}=\abs{y}\leq\abs{a}+\abs{b}=\abs{y-x}+\abs{x}\Leftrightarrow\abs{y}-\abs{x}\leq\abs{x-y}.
+                    \end{equation*}
+                And since $\abs{\abs{x}-\abs{y}}=\max\{\abs{x}-\abs{y},\abs{y}-\abs{x}\}$, and either one is less than or equal to $\abs{x-y}$, then 
+                    \begin{equation*}
+                        \abs{\abs{x}-\abs{y}}\leq\abs{x-y}.
+                    \end{equation*}
+            \end{proof}
+        \item[2.3] Let $p,q>1$ such that $\frac{1}{p}+\frac{1}{q}=1$. Prove that for any $x,y\in\mathbb{R}^m$ the following inequality holds
+            \begin{equation*}
+                \sum_{i=1}^m\abs{x_iy_i}\leq\bigg(\sum_{i=1}^m\abs{x_i}^p\bigg)^{\frac{1}{p}}\cdot\bigg(\sum_{i=1}^{m}\abs{y_i}^q\bigg)^{\frac{1}{q}}.
+            \end{equation*}
+            \begin{proof}
+                Let 
+                    \begin{equation*}
+                        A=\sum_{i=1}^m\abs{x_i}^p,\quad B=\sum_{i=1}^m\abs{y_i}^q.
+                    \end{equation*}
+                Then Young's Inequality gives us that 
+                    \begin{equation*}
+                        x^{\frac{1}{p}}y^{\frac{1}{q}}\leq\frac{x}{p}+\frac{y}{q}
+                    \end{equation*}
+                for any $x,y\in\mathbb{R}$. Then by letting $x=x_i^p/A$ and $y=y_i^q/B$, then Young's Inequality gives 
+                    \begin{equation*}
+                        \frac{x_i}{A^p}\frac{y_i}{B^q}\leq \frac{x_i^p}{Ap}+\frac{y_i^q}{Bq}.
+                    \end{equation*}
+                for all $i$. Hence 
+                    \begin{equation*}
+                        \begin{split}
+                            \sum_{i=1}^{m}\abs{\frac{x_i}{A^{\frac{1}{p}}}\frac{y_i}{B^{\frac{1}{q}}}}\leq \bigg(\sum_{i=1}^{m}\abs{\frac{x_i^p}{Ap}}+\abs{\frac{y_i^q}{Bq}}\bigg)=\abs{\frac{\sum_{i=1}^{m}x_i^p}{Ap}}+\abs{\frac{\sum_{i=1}^{m}y_i^q}{Bq}}=\abs{\frac{A}{Ap}}+\abs{\frac{B}{Bq}}=1.
+                        \end{split}
+                    \end{equation*}
+                Thus 
+                    \begin{equation*}
+                        \sum_{i=1}^{m}\abs{x_iy_i}\leq A^{\frac{1}{p}}B^{\frac{1}{q}}=\bigg(\sum_{i=1}^{m}\abs{x_i}^p\bigg)^{\frac{1}{p}}\cdot\bigg(\sum_{i=1}^{m}\abs{y_i}^q\bigg)^{\frac{1}{q}}.
+                    \end{equation*}
+            \end{proof}
+        \item[2.4] Let $p\geq 1$. Prove that for any $x,y\in\mathbb{R}^m$ the following inequality holds
+            \begin{equation*}
+                \bigg(\sum_{i=1}^m\abs{x_i+y_i}^p\bigg)^{\frac{1}{p}}\leq \bigg(\sum_{i=1}^m\abs{x_i}^p\bigg)^{\frac{1}{p}}+\bigg(\sum_{i=1}^m\abs{y_i}^p\bigg)^\frac{1}{p}
+            \end{equation*}
+            \begin{proof}
+                If $p=1$ then the inequality holds by the Triangle inequality. Let $p>1$ and let $q=p/(q-1)$. Then 
+                    \begin{equation*}
+                        \frac{1}{p}+\frac{1}{q}=1.
+                    \end{equation*}
+                Thus
+                    \begin{equation*}
+                        \begin{split}
+                            \sum_{i=1}^{m}\abs{x_i+y_i}^p &= \sum_{i=1}^{m}\abs{x_i+y_i}\abs{x_i+y_i}^{p-1} \\
+                            &= \sum_{i=1}^{m}\abs{x_i}\abs{x_i+y_i}^{p-1}+\sum_{i=1}^{m}\abs{y_i}\abs{x_i+y_i}^{p-1} \\
+                            &\leq\bigg(\sum_{i=1}^{m}\abs{x_i}^p\bigg)^{\frac{1}{p}}\bigg(\sum_{i=1}^{m}\abs{x_i+y_i}^{(p-1)q}\bigg)^{\frac{1}{q}}+\bigg(\sum_{i=1}^{m}\abs{y_i}^p\bigg)^{\frac{1}{p}}\bigg(\sum_{i=1}^{m}\abs{x_i+y_i}^{(p-1)q}\bigg)^{\frac{1}{q}} \\
+                            &= \bigg(\sum_{i=1}^{m}\abs{x_i}^p\bigg)^{\frac{1}{p}}\bigg(\sum_{i=1}^{m}\abs{x_i+y_i}^{p}\bigg)^{\frac{1}{q}}+\bigg(\sum_{i=1}^{m}\abs{y_i}^p\bigg)^{\frac{1}{p}}\bigg(\sum_{i=1}^{m}\abs{x_i+y_i}^{p}\bigg)^{\frac{1}{q}} \\
+                            &= \bigg[\bigg(\sum_{i=1}^{m}\abs{x_i}^p\bigg)^{\frac{1}{p}}+\bigg(\sum_{i=1}^{m}\abs{y_i}^p\bigg)^\frac{1}{p}\bigg]\bigg(\sum_{i=1}^{m}\abs{x_i+y_i}^p\bigg)^{\frac{1}{q}}.
+                        \end{split}
+                    \end{equation*}
+                    Thus
+                        \begin{equation*}
+                            \begin{split}
+                                &\frac{\sum_{i=1}^{m}\abs{x_i+y_i}^p}{\bigg(\sum_{i=1}^{m}\abs{x_i+y_i}^p \bigg)^{\frac{1}{q}}} \leq \bigg(\sum_{i=1}^{m}\abs{x_i}^p\bigg)^{\frac{1}{p}}+\bigg(\sum_{i=1}^{m}\abs{y_i}^p\bigg)^\frac{1}{p} \\
+                                &\Leftrightarrow \bigg(\sum_{i=1}^{m}\abs{x_i+y_i}^p\bigg)^{\frac{1}{p}}\leq \bigg(\sum_{i=1}^{m}\abs{x_i}^p\bigg)^{\frac{1}{p}}+\bigg(\sum_{i=1}^{m}\abs{y_i}^p\bigg)^{\frac{1}{p}}
+                            \end{split}
+                        \end{equation*}
+                \end{proof}
+            \item[2.6] Let $X$ be a metric space and $A\subseteq B\subseteq X$. Show that $\overline{A}\subseteq\overline{B}$.
+                \begin{proof}
+                    Let $x\in\overline{A}$. Then by Definition 2.11, for all closed sets $F\subseteq X$, if $A\subseteq F$ then $x\in F$. Thus, if $B$ is closed then $x\inB\subseteq B\subseteq\overline{B}$ and hence $\overline{A}\subseteq\overline{B}$. Now assume $B$ is open. Then since $\overline{B}$ is an intersection of closed sets, then by Theorem 2.10, $\overline{B}$ is closed.  Moreover since $x\in\overline{A}$, then either $x$ is a limit point of $A$ or an isolated point of $A$. If $x$ is an isolated point, then $x\in A\subseteq\overline{B}$ (since an isolated point would not be added by taking the closure of $A$). If $x$ is a limit point of $A$, then for all $r>0$, $(B_r(x)\backslash\{x\})\cap A\neq\varnothing$. However, since $A\subseteq B$, then the previous line implies that for all $r>0$, $(B_r(x)\backslash\{x\})\cap B\neq\varnothing$ which implies that $x$ is a limit point of $B$ and thus $x\in\overline{B}$. Hence $\overline{A}\subseteq\overline{B}$.
+                \end{proof}\newpage
+            \item[2.7] Let $X$ be a metric space and $A_i\subseteq X$, for all $i\in\mathbb{N}$.
+                \begin{enumerate}[label=(\arabic*)]
+                    \item Prove that
+                        \begin{equation*}
+                            \overline{\bigcup_{i=1}^{n}A_i}=\bigcup_{i=1}^{n}\overline{A_i}.
+                        \end{equation*}
+                        \begin{proof}
+                            Let $x$ be an element of the left-hand side. Then $x$ is in the intersection of all closed sets containing $\bigcup_{i=1}^n A_n$. By Theorem 2.10, the right hand side is closed and since $A_i\subseteq\overline{A_i}$ for all $i$, then $\bigcup_{i=1}^n A_i\subseteq\bigcup_{i=1}^n\overline{A_i}$. Hence $x$ is an element of the right-hand side. Thus
+                                \begin{equation*}
+                                    \overline{\bigcup_{i=1}^{n}A_i}\subseteq\bigcup_{i=1}^{n}\overline{A_i}.
+                                \end{equation*}
+                            Now let $x$ be an element of the right-hand side. Then for some $i\in\mathbb{N}$, $x\in\overline{A_i}$. Then $x$ is a member of the intersection of all closed sets containing $A_i$. Since the left-hand side is closed and the left-hand side contains $A_i$, then it follows that $x$ is an element of the left-hand side. Hence
+                                \begin{equation*}
+                                    \bigcup_{i=1}^{n}\overline{A_i}\subseteq\overline{\bigcup_{i=1}^{n}A_i}.
+                                \end{equation*}
+                            Therefore
+                                \begin{equation*}
+                                    \overline{\bigcup_{i=1}^{n}A_i}=\bigcup_{i=1}^{n}\overline{A_i}.
+                                \end{equation*}
+                        \end{proof}
+                    \item Is it true that
+                        \begin{equation*}
+                            \overline{\bigcup_{i=1}^{\infty}A_i}=\bigcup_{i=1}^{\infty}\overline{A_i}\quad\text{?}
+                        \end{equation*}
+                        \begin{solution}
+                            No. By the countability of $\mathbb{Q}$, let $q_i$ denote the $i$th rational, for all $i\in\mathbb{N}$. Then define $A_i=\{q_i\}$. Then we can write $\mathbb{Q}=\cup_{i=1}^{\infty}A_i$ and thus 
+                                \begin{equation*}
+                                    \mathbb{R}=\overline{\bigcup_{i=1}^{\infty}A_i}.
+                                \end{equation*}
+                            However, since $A_i=\overline{A_i}$ for all $i$, then 
+                                \begin{equation*}
+                                    \mathbb{Q}=\bigcup_{i=1}^{\infty}\overline{A_i}.
+                                \end{equation*}
+                            Therefore
+                                \begin{equation*}
+                                    \overline{\bigcup_{i=1}^{n}A_i}\neq\bigcup_{i=1}^{n}\overline{A_i}.
+                                \end{equation*}
+                        \end{solution}
+                \end{enumerate}\newpage
+            \item[2.8] Let $X$ be a metric space and $A\subseteq X$. Prove that $A'$ is a closed set. 
+                \begin{proof}
+                    Let $x$ be a limit point of $A'$. Then for all $r>0$, there exists $a\in A'$ such that $a\neq x$ and $a\in B_r(x)$. Select some $0<r_0<d(a,x)$. Then $B_{r_0}(a)\subset B_r(x)$. Moreover, since $a\in A'$ then $a$ is a limit point of $A$ which implies that there exists $b\in A$ such that $b\neq a$ and $b\in B_{r_0}(a)$. However, we notice that $b\in B_{r_0}(a)\subset B_r(x)$ and that $b\neq x$ since $r_0<d(b,x)$. Thus, for all $r>0$, there exists $b\in A$ such that $b\neq x$ and $b\in B_r(x)$. Therefore $x$ is a limit point of $A$ and so $x\in A'$. Thus, for all limit points, $x$, of $A'$, $x\in A'$. By Theorem 2.14, $A'$ is closed.
+                \end{proof}
+            \item[2.10] Let $\varnothing\neq A\subseteq\mathbb{R}$. Assume that all the points of $A$ are isolated. Show that $A$ is at most countable.
+                \begin{proof}
+                    Let $x\in A$. Then since $x$ is not a limit point of $A$, there exists $r>0$ such that $(B_r(x)\backslash\{x\})\cap A=\varnothing$. By Theorem 1.33, there exists $q\in\mathbb{Q}$ such that $x<q<x+r$. Now define a map $f\colon A\rightarrow\mathbb{Q}$ such that $f(x)=q$, where for some $r>0$ such that $(B_r(x)\backslash\{x\})\cap A=\varnothing$, we have that $q\in B_r(x)$ and $q\in\mathbb{Q}$. Then we see that if $f(x_1)=f(x_2)$, this implies that $q_1=q_2$ where $x_1<q_1<x_1+r_1$ and $x_2<q_2<x_2+r_2$, for some $r_1,r_2>0$. However this implies that $B_{r_1}(x_1)\cap B_{r_2}(x_2)\neq\varnothing$. By construction it follows that $x_1=x_2$. Thus $f$ is injective and since $\mathbb{Q}$ is countable, then $A$ is at most countable.
+                \end{proof}
+            \item[2.11] Let $A\subseteq\mathbb{R}$ be an uncountable set. Show that $A$ has limit points. Will this result be true if we assume $A$ is countable?
+                \begin{proof}
+                    Let $A'$ denote all the limit points of $A$ and $S$ denote the set of all isolated points of $A$. Then for any $x\in A$, it follows that $x$ is either a limit point of $A$ or it is not a limit point of $A$. Thus for any $x\in A$, we have that $x\in A'\cup S$ and so $A\subseteq A'\cup S$. By Exercise 2.10, the set $S$ is at most countable. Since $A$ is uncountable, then $A'$ is uncountable and therefore $A'\neq\varnothing$ and so $A$ has limit points.\par\hspace{4mm} If $A$ is countable, then the result does not hold for every case. Consider $\mathbb{Z}\subseteq\mathbb{R}$ which is countable, but every point is an isolated point and thus no point is a limit point.
+                \end{proof}
+            \item[2.12] Show that $\overline{\mathbb{I}}=\mathbb{R}$.
+                \begin{proof}
+                    Since both $\mathbb{Q}$ and $\mathbb{I}$ are dense in $\mathbb{R}$, then  that for any $x\in\mathbb{R}$, and for any $r>0$, there exists $s\in\mathbb{R}$ such that $x<s<x+r$. Thus $(B_r(x)\backslash\{x\})\cap\mathbb{R}\neq\varnothing$. Hence, $\mathbb{R}$ contains all its limit points and as such $\mathbb{R}$ is closed. Additionally, we have that $\mathbb{I}\subseteq\mathbb{R}$. Thus, by Definition 2.11, $\overline{\mathbb{I}}\subseteq\mathbb{R}$. Now if $x\in\mathbb{R}$, then either $x\in\mathbb{Q}$ or $x\in\mathbb{I}$. If $x\in\mathbb{Q}$, then by the density of $\mathbb{I}$ in $\mathbb{R}$, it follows that for all $r>0$, there exists $i\in\mathbb{I}$ such that $x<i<x+r$. Thus for all $r>0$, $(B_r(x)\backslash\{x\})\cap\mathbb{I}\neq\varnothing$. Hence, for any $x\in\mathbb{Q}$, $x$ is a limit point of $\mathbb{I}$ which, by Theorem 2.14, implies that $x\in\overline{\mathbb{I}}$. Finally, if $x\in\mathbb{I}$, then since $\mathbb{I}\subseteq\overline{\mathbb{I}}$, then $x\in\overline{\mathbb{I}}$. Thus $\mathbb{R}\subseteq\overline{\mathbb{I}}$. Therefore $\overline{\mathbb{I}}=\mathbb{R}$.
+                \end{proof}\newpage
+            \item[2.14] Let $\{x_n\}$ be a sequence in $\mathbb{R}$. Show that 
+                \begin{equation*}
+                    \lim_{n\rightarrow\infty}x_n=x\Longrightarrow\lim_{n\rightarrow\infty}\abs{x_n}=\abs{x}.
+                \end{equation*}
+                Is the converse true?
+                \begin{proof}
+                    Let $\varepsilon>0$. Then there exists $N\in\mathbb{N}$ such that for all $n\geq N$, $\abs{x_n-x}<\varepsilon$. Thus by Exercise 2.1, for all $n\geq N$
+                        \begin{equation*}
+                            \abs{\abs{x_n}-\abs{x}}\leq\abs{x_n-x}<\varepsilon.
+                        \end{equation*}
+                    Therefore, $\lim_{n\rightarrow\infty}\abs{x_n}=\abs{x}$. The converse is not true since $\lim_{n\rightarrow\infty}\abs{(-1)^n}=1$, but the same sequence without the absolute value does not converge at all.
+                \end{proof}
+            \item[2.15] Let $\{x_n\}$ be a sequence in $\mathbb{R}$. Show that 
+                \begin{equation*}
+                    \lim_{n\rightarrow\infty}x_n=0\Longleftrightarrow\lim_{n\rightarrow\infty}\abs{x_n}=0.
+                \end{equation*}
+                \begin{proof}
+                    Assume that $\lim_{n\rightarrow\infty}x_n=0$. Then for all $\varepsilon>0$, there exists $N\in\mathbb{N}$ such that for all $n\geq N$, we have that $\abs{x_n}<\varepsilon$. Thus by Exercise 2.1, for all $n\geq N$, $\abs{\abs{x_n}}<\abs{x_n}<\varepsilon$. Thus $\lim_{n\rightarrow\infty}\abs{x_n}=0$.\par\hspace{4mm} Assume that $\lim_{n\rightarrow\infty}\abs{x_n}=0$. Then since $\abs{\abs{x_n}}=\abs{x_n}$, it follows that for all $\varepsilon>0$, there exists $N\in\mathbb{N}$ such that for all $n\geq N$, we have that $\abs{\abs{x_n}}=\abs{x_n}<\varepsilon$. Therefore $\lim_{n\rightarrow\infty}\abs x_n=0$.
+                \end{proof}
+            \item[2.16] Let $\{x_n\}$ be a sequence in a metric space $X$. Prove that 
+                \begin{equation*}
+                    \lim_{n\rightarrow\infty}x_n=x\Longleftrightarrow\lim_{n\rightarrow\infty}d(x_n,x)=0.
+                \end{equation*}
+                \begin{proof}
+                    Assume that $\lim_{n\rightarrow\infty}x_n=x$. Then for all $\varepsilon>0$, there exists $N\in\mathbb{N}$ such that for all $n\geq N$, $d(x_n,x)<\varepsilon$. Thus $\lim_{n\rightarrow\infty}d(x_n,x)=0$. Now assume that $\lim_{n\rightarrow\infty}d(x_n,x)=0$. Then for all $\varepsilon>0$, there exists $N\in\mathbb{N}$ such that for all $n\geq N$, $d(x_n,x)=0$. Thus, by definition $\lim_{n\rightarrow\infty}x_n=x$.
+                \end{proof}
+            \item[2.17] Let $\{x_n\}$ and $\{y_n\}$ be sequences in a metric space $X$. Show that if $\{x_n\}\rightarrow x$ and $\{d(x_n,y_n)\}\rightarrow 0$, then $\{y_n\}\rightarrow x$.
+                \begin{proof}
+                    Assume that $\{x_n\}\rightarrow x$ and that $\{d(x_n,y_n)\}\rightarrow 0$. Now let $\varepsilon>0$ and set $\varepsilon_0=\varepsilon/2$, then there exists $N_1,N_2\in\mathbb{N}$ such that for all $n_1\geq N_1$ and $n_2\geq N_2$, we have $d(x_{n_1},x)<\varepsilon_0$ and that $d(x_{n_2},y_{n_2})<\varepsilon_0$. Let $N=\max\{N_1,N_2\}$. Then by the triangle inequality, for all $n\geq N$
+                        \begin{equation*}
+                            d(x,y_n)\leq d(x,x_n)+d(x_n,y_n)<2\varepsilon_0=\varepsilon.
+                        \end{equation*}
+                    Therefore $\{y_n\}\rightarrow x$.
+                \end{proof}\newpage
+            \item[2.18] Let $\{x_n\}$ and $\{y_n\}$ be sequences in $\mathbb{R}$. Suppose $\{x_n\}\rightarrow x\neq 0$ and that $\{x_n\cdot y_n\}$ is also convergent. Prove that $\{y_n\}$ is convergent. What can be said about the case $x=0$? 
+                \begin{proof}
+                    Let $\lim_{n\rightarrow\infty}x_n\cdot y_n=L$, for some $L\in\mathbb{R}$. Then since $\{x_n\}\rightarrow x\neq 0$, by Theorem 2.24
+                        \begin{equation*}
+                            \begin{split}
+                                &\lim_{n\rightarrow\infty}x_n\cdot y_n = L \\
+                                &\Leftrightarrow \lim_{n\rightarrow\infty}y_n=\frac{L}{\lim_{n\rightarrow\infty} x_n} \\
+                                &\Leftrightarrow\lim_{n\rightarrow\infty} y_n=\frac{L}{x}.
+                            \end{split}
+                        \end{equation*}
+                    Thus $\{y_n\}\rightarrow L/x$. In the case that $\{x_n\}\rightarrow 0$, $\{y_n\}$ diverges to infinity.
+                \end{proof}
+            \item[2.19] Let $\{x_n\}$, $\{y_n\}$, and $\{z_n\}$ be sequences of real numbers. Suppose that 
+                \begin{equation*}
+                    x_n\leq y_n\leq z_n, \quad \forall n\in\mathbb{N}
+                \end{equation*}
+                and there exists $a\in\mathbb{R}$ such that 
+                    \begin{equation*}
+                        \lim_{n\rightarrow\infty} x_n=\lim_{n\rightarrow\infty}z_n=a.
+                    \end{equation*}
+                Show that $\lim_{n\rightarrow\infty}y_n=a$.
+                \begin{proof}
+                    Let $\varepsilon>0$. Then there exists $N\in\mathbb{N}$ such that for all $n\geq N$, we have that $\abs{x_n-a}<\varepsilon$ and $\abs{z_n-a}<\varepsilon$. Thus $-\varepsilon<x_n-a<\varepsilon$ and $-\varepsilon<z_n-a<\varepsilon$. Since $x_n-a<y_n-a<z_n-a$, then it follows that $-\varepsilon<y_n-a<\varepsilon$ and thus $\abs{y_n-a}<\varepsilon$. Therefore $\abs{y_n}\rightarrow a$.
+                \end{proof}
+            \item[2.20] Let $\{x_n\}$ be a sequence in $\mathbb{R}$ with $x_n>0$ for all $n\in\mathbb{N}$. Suppose that 
+                \begin{equation*}
+                    \lim_{n\rightarrow\infty}\frac{x_{n+1}}{x_n}=L.
+                \end{equation*}
+                \begin{enumerate}
+                    \item Show that is $L<1$, then $\{x_n\}\rightarrow 0$.
+                        \begin{proof}
+                            Let $\varepsilon>0$ such that $L+\varepsilon<1$, then there exists $N\in\mathbb{N}$ such that for all $n\geq N$,
+                                \begin{equation*}
+                                    \abs{\frac{x_{n+1}}{x_n}-L}<\varepsilon\Leftrightarrow x_{n+1}<(L+\varepsilon)x_n<x_n.
+                                \end{equation*}
+                            Thus $\{x_n\}$ is monotone decreasing for $n\geq N$ and since $x_n>0$ for all $n$, then it is bounded below by 0. By Theorem 2.27, $\{x_n\}$ is convergent. Let $\lim_{n\rightarrow\infty}x_n=l$. Then if $l>0$, it follows from Theorem 2.24 that 
+                                \begin{equation*}
+                                    \lim_{n\rightarrow\infty}\frac{x_{n+1}}{x_n}=\frac{l}{l}=1.
+                                \end{equation*}
+                            This contradicts our assumption, thus $l\leq 0$. However, if $l<0$, then for all $n\geq N$, for some $N$, we would have that $x_{n+1}<x_n<0$ which is also a contradiction. Therefore $l=0$ and thus $\{x_n\}\rightarrow 0$.
+                        \end{proof}\newpage
+                    \item Show that if $L>1$, then $\{x_n\}\rightarrow\infty$.
+                        \begin{proof}
+                            Let $\varepsilon>0$ and let $L=1+2\varepsilon$. Then there exists $N\in\mathbb{N}$ such that for all $n\geq N$,
+                                \begin{equation*}
+                                    \abs{\frac{x_{n+1}}{x_n}-L}<\varepsilon\Leftrightarrow (1+\varepsilon)x_n=(L-\varepsilon)x_n<x_{n+1}<(L+\varepsilon)x_n
+                                \end{equation*}
+                            Thus $(1+\varepsilon)^mx_N<x_{N+m}$ for all $m\in\mathbb{N}$. This implies $\{x_n\}$ is monotonically increasing and unbounded. Therefore $\{x_n\}\rightarrow\infty$.
+                        \end{proof}
+                    \item What can we say if $L=1$?
+                        \begin{solution}
+                            Inconclusive.
+                        \end{solution}
+                \end{enumerate}
+            \item[2.22] Let $k\in\mathbb{N}$ and the sequence $\{x_n\}$ defined by:
+                \begin{equation*}
+                    x_1=k,\quad x_{k+1}=\frac{x_n}{2}+\frac{k}{2x_n},\quad \forall n\in\mathbb{N}.
+                \end{equation*}
+                Prove $\{x_n\}$ is convergent and find its limit.
+                \begin{proof}
+                    We begin by noting that the recursive definition given allows us to write
+                        \begin{equation*}
+                            x_{k+1}=\frac{x_n}{2}+\frac{k}{2x_n}\Leftrightarrow x_n^2-2x_{n+1}x_n+k=0.
+                        \end{equation*}
+                    Thus $x_n$ is a real root of the above quadratic equation. From this and the quadratic formula it follows that $4x_{n+1}^2-4k\geq 0$ and thus $x_{n+1}^2\geq k$ for all $n\geq 1$.\par\hspace{4mm} Now suppose that $n\geq 2$. Then the difference
+                        \begin{equation*}
+                            x_n-x_{n+1}=x_n-\bigg(\frac{x_n}{2}+\frac{k}{2x_n}\bigg)=\frac{x_n}{2}-\frac{k}{2x_n}=\frac{1}{2}\bigg(\frac{x_n^2-k}{x_n}\bigg).
+                        \end{equation*}
+                    Since $x_{n+1}^2\geq k$ for all $n\geq 1$, then $x_n^2\geq k$ for all $n\geq 2$. Thus 
+                        \begin{equation*}
+                            x_n-x_{n+1}=\frac{1}{2}\bigg(\frac{x_n^2-k}{x_n}\bigg)\geq 0\Leftrightarrow x_n\geq x_{n+1}
+                        \end{equation*}
+                    for all $n\geq 2$. Hence $\{x_n\}_{n=2}^{\infty}$ is a monotonically decreasing sequence. Furthermore, since $x_n^2\geq k\geq 0$ for all $n\geq 2$, then $\{x_n\}$ is bounded below by 0. Thus by Theorem 2.27, $\{x_n\}$ is convergent. Let $\lim_{n\rightarrow\infty}x_n=a$. Then it follows that 
+                        \begin{equation*}
+                            \lim_{n\rightarrow\infty}x_{n+1}=\lim_{n\rightarrow\infty}\bigg(\frac{x_n}{2}+\frac{k}{2x_n}\bigg)\Leftrightarrow a=\frac{a}{2}+\frac{k}{2a}\Leftrightarrow a^2=k.
+                        \end{equation*}
+                    Hence $a=\pm\sqrt{k}$. However, since $x_n\geq 0$ for all $n\geq 2$, then $a\geq 0$ and thus $\{x_n\}\rightarrow\sqrt{k}$.
+                \end{proof}\newpage
+            \item[2.24] Let the sequence $\{x_n\}$ be defined by:
+                \begin{equation*}
+                    x_1=2,\quad x_{n+1}=\sqrt{2+\sqrt{x_n}},\quad \forall n\in\mathbb{N}.
+                \end{equation*}
+                Prove that $\{x_n\}$ is convergent. What can we say about its limit.
+                \begin{proof}
+                    We begin by first considering the sequence $y_{n+1}=\sqrt{y_n}$. We wish to show that this sequence is monotonic. For $y_1=\sqrt{2}$, we have that $y_1=\sqrt{2}<\sqrt{\sqrt{2}}=y_2$. Let this be the base case for an inductive proof that $y_{n+1}<y_n$ for all $n$. Then assume that for some $k>1$, $y_{k+1}<y_k$. Then taking the square root of both sides we get that $\sqrt{y_{k+1}}=y_{k+2}<y_{k+1}=\sqrt{y_k}$. Therefore the sequence is monotonically decreasing.\par\hspace{4mm} Now consider the given sequence. We have that $x_1=2$ and $x_2=\sqrt{2+\sqrt{2}}$ and thus $x_1>x_2$. We claim that $\{x_n\}$ is monotone and decreasing. Having just shown the base case, assume that for $k>1$, that $x_{k+1}<x_k$. Then 
+                        \begin{equation*}
+                            \begin{split}
+                                x_{k+1}=\sqrt{2+\sqrt{\sqrt{2+\sqrt{x_{k-1}}}}}&<\sqrt{2+\sqrt{x_{k-1}}}=x_{k} \\
+                                \Leftrightarrow\sqrt{x_{k+1}}=\sqrt{\sqrt{2+\sqrt{\sqrt{2+\sqrt{x_{n-1}}}}}}&<\sqrt{\sqrt{2+\sqrt{x_{k-1}}}}=\sqrt{x_k} \\
+                                \Leftrightarrow2+\sqrt{x_{k+1}}&<2+\sqrt{x_k} \\
+                                \Leftrightarrow x_{k+2}=\sqrt{2+\sqrt{x_{k+1}}}&<\sqrt{2+\sqrt{x_k}}=x_{k+1}
+                            \end{split}
+                        \end{equation*}
+                    Therefore the result holds for all $n\in\mathbb{N}$ and the sequence is monotone and decreasing. Additionally, the sequence is bounded below by 1 and thus $\{x_n\}$ is convergent.
+                \end{proof}
+            \item[2.26] Let 
+                \begin{equation*}
+                    x_n=\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2n}, \quad\forall n\in\mathbb{N}.
+                \end{equation*}
+                Show that $\{x_n\}$ is convergent. What can we say about its limit?
+                \begin{proof}
+                    We begin by showing the sequence is monotone and increasing. Let $n\geq 2$. Then 
+                        \begin{equation*}
+                            \begin{split}
+                                x_{n}-x_{n-1}&=\bigg(\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2n-2}+\frac{1}{2n-1}+\frac{1}{2n}\bigg)\\
+                                &\quad\quad-\bigg(\frac{1}{n}+\frac{1}{n+1}+\cdots+\frac{1}{2n-2}\bigg) \\
+                                &=\frac{1}{2n}+\frac{1}{2n-1}-\frac{1}{n} \\
+                                &= \frac{4n-1}{n(4n-2)}-\frac{1}{n}.
+                            \end{split}
+                        \end{equation*}\newpage
+                    Moreover, since 
+                        \begin{equation*}
+                            \frac{4n-1}{4n-2}>1\Leftrightarrow \frac{4n-1}{n(4n-2)}>\frac{1}{n}
+                        \end{equation*}
+                    then $x_n-x_{n-1}>0$ and thus $x_n>x_{n-1}$. Hence, the sequence is monotone and increasing. Next, we claim it is bounded above by 1. We proceed by induction on $n$ and prove that $x_n\leq 1$ for all $n\in\mathbb{N}$. For the base case we let $n=1$ and obtain $x_1=\frac{1}{2}\leq \frac{1}{2}$. Now assume that for some $k>1$ that 
+                        \begin{equation*}
+                            x_k=\frac{1}{k+1}+\cdots +\frac{1}{2k}\leq\frac{1}{2}.
+                        \end{equation*}
+                    Note that 
+                        \begin{equation*}
+                            x_{k+1}=x_k-\frac{1}{k+1}+\frac{1}{2k+1}+\frac{1}{2k+2}=x_k-\frac{1}{k+1}+\frac{4k+3}{(2k+1)(2k+2)}.
+                        \end{equation*}
+                    Furthermore, we have that 
+                        \begin{equation*}
+                            \frac{4k+3}{(2k+1)(2k+2)}-\frac{1}{k+1}=\frac{2k+1}{2(2k+1)(k+1)}=\frac{1}{2(k+1)}\leq\frac{1}{2}.
+                        \end{equation*}
+                    So since $x_k\leq \frac{1}{2}$ and $\frac{1}{2(k+1)}\leq\frac{1}{2}$, then 
+                        \begin{equation*}
+                            x_{k+1}=x_k+\frac{1}{2(k+1)}\leq \frac{1}{2}+\frac{1}{2}=1. 
+                        \end{equation*}
+                    Therefore this sequence is monotonically increasing and bounded above by 2 and so by Theorem 2.27, it is convergent. 
+                \end{proof}
+            \item[2.29] Prove that any compact space is separable.
+                \begin{proof}
+                    Let $K$ be a compact space. Let $n\in\mathbb{N}$ and define $C_n=\{B_{1/n}(x)\colon x\in X\}$. Then we claim that $C_n$ is an open cover of $X$ for each $n$. To show this, we let $y\in X$. Then $y\in B_{1/n}(y)\subseteq\bigcup C_n$. Moreover, by Proposition 2.6, $B_{1/n}(x)$ is open for each $x\in X$. Thus, $C_n$ is an open cover. As such, then since $X$ is compact $C_n$ contains a finite subcover, call it $D_n\subseteq C_n$. Note that each $D_n$ is finite and thus countable. Now define $D'_n=\{x\colon B_{1/n}(x)\in D_n\}$. Then $D'_n$ is countable since $D_n$ is countable. Hence
+                        \begin{equation*}
+                            A=\bigcup_{n\in\mathbb{N}} D'_n
+                        \end{equation*}
+                    is countable by Exercise 1.15.\par\hspace{4mm} We want to show that $A$ is dense in $X$ and to do this we need to show that $\overline{A}=X$. Let $x\in\overline{A}$. Then since $X$ is compact, by Theorem 2.57, $X$ is closed and thus by Definition 2.11, $x\in X$. Hence $\overline{A}\subseteq X$. Now let $x\in X$. Then for any $n\in\mathbb{N}$, $x\in B_{1/n}(x)\in D_n$ and thus $x\in D'_n\subseteq \overline{A}$. Thus $X\subseteq \overline{A}$ and therefore $A$ is a countable dense subset of $X$. Thus $X$ is separable.
+                \end{proof}
+            \item[2.30] Show that in $\mathbb{R}^m$, the collection of open balls with rational radii and centers at points with rational coordinates is countable.
+                \begin{proof}
+                    Define $A_r=\{B_r(\mathbf{x})\colon \mathbf{x}\in\mathbb{Q}^m\}$. Then we want to show that 
+                        \begin{equation*}
+                            C=\bigcup_{r\in\mathbb{Q}} A_r
+                        \end{equation*}
+                    is countable. If we can show that $A_r$ is countable for any $r\in\mathbb{Q}$, then by Exercise 1.15, $C$ is countable. Moreover, since $A_r\sim\mathbb{Q}^m$ then it suffices to show that $\mathbb{Q}^m$ is countable. We will proceed with induction. We want to show that $\mathbb{Q}^m$ is countable for all $m\in\mathbb{N}$. We know that for $m=1$, $\mathbb{Q}^m$ is countable and this covers our base case. Now assume that for some $k>1$ that $\mathbb{Q}^k$ is countable. Then there exists a bijective function $f\colon \mathbb{N}\rightarrow\mathbb{Q}^k$. Now define a function $g\colon\mathbb{Q}^k\rightarrow\mathbb{Q}^k\times\mathbb{Q}$ by $\mathbf{x}\mapsto(\mathbf{x},p)$, where $p\in\mathbb{Q}$. Then if $f(\mathbf{x})=f(\mathbf{y})$ for some $\mathbf{x},\mathbf{y}\in\mathbb{Q}^k$, this implies that $((\mathbf{x}),p)=((\mathbf{y}),p)$ and thus $\mathbf{x}=\mathbf{y}$. Hence $g$ is one-to-one. Finally, if $(\mathbf{x},q)\in\mathbb{Q}^k\times\mathbb{Q}$, then clearly $g(\mathbf{x})=(\mathbf{x},q)$ and $g$ is therefore onto. Thus both $f$ and $g$ are bijective and so $g\circ f\colon\mathbb{N}\rightarrow\mathbb{Q}^k\times\mathbb{Q}$ is bijective. Furthermore, since card$(\mathbb{Q}^k\times\mathbb{Q})=\text{card}(\mathbb{Q}^{k+1})$, then $\text{card}(\mathbb{N})=\text{card}(\mathbb{Q}^{k+1})$ and thus $\mathbb{Q}^{k+1}$ is countable. Therefore $\mathbb{Q}^m$ is countable for all $m\in\mathbb{N}$.
+                \end{proof}
+            \item[2.31] Prove that every open set $A\subseteq\mathbb{R}^m$ is the union of an, at most countable, collection of open sets.
+                \begin{proof}
+                    Let $A\subseteq\mathbb{R}^m$ be open and define $Q=A\cap\mathbb{Q}^m$. Further, for any $\mathbf{x}\in A$, define $I_\mathbf{x}$ to be the union of all open subsets of $A$ that contain $\mathbf{x}$. Then for any $\mathbf{x}\in A$, there exists $r>0$ such that $\mathbf{x}\in B_r(\mathbf{x})$. Moreover, since $\mathbb{Q}^m$ is dense in $\mathbb{R}^m$, then there exists some $\mathbf{q}\in\mathbb Q$ such that $\mathbf{q}\in B_r(\mathbf{x})$ and since $B_r(\mathbf{x})$ is an open set containing $\mathbf{q}$, then $\mathbf{x}\in B_r(\mathbf{x})\subseteq I_{\mathbf{q}}$. Therefore, for all $\mathbf{x}\in A$, there exists $\mathbf{q}\in\mathbb Q$ such that $\mathbf{x}\in I_{\mathbf{q}}$. Hence
+                        \begin{equation*}
+                            A\subseteq \bigcup_{\mathbf{q}\in Q}I_{\mathbf{q}} =I.
+                        \end{equation*}
+                    Moreover, since $Q\subseteq\mathbb{Q}^m$ and by Exercise 2.30, $\mathbb{Q}^m$ is countable, and thus $I$ is countable. Conversely, we have $I_{\mathbf{q}}\subseteq A$ for each $\mathbf{q}\in Q$ and thus $I\subseteq A$. Hence $A=I$ and so $A$ is a countable union of open sets.
+                \end{proof}
+            \item[2.32] Let $A\subseteq\mathbb{R}^m$. Prove that every open cover of $A$ contains an, at most countable, subcover. 
+                \begin{proof}
+                    Let $A\subseteq\mathbb{R}^m$ be an open set. Define $C=\bigcup_{x\in A}B_{r_x}(x)$. Then $C$ is an open cover of $A$. As such, it is an open set and so by Exercise 2.31, $C=\bigcup_i K_i$ where $K_i$ is an open set for each $i$. Therefore $C$ is an at most countable subcover of itself.
+                    
+                \end{proof}\newpage
+            \item[2.33] Let $A\subseteq\mathbb{R}^m$ and assume that for all $x\in A$ there exists an open ball $B_r(x)$ such that $A\cap B_r(x)$ is at most countable. Show that $A$ is at most countable.
+                \begin{proof}
+                    Let $x\in A$. Then there exists $B_{r_x}(x)$ such that $B_{r_x}(x)\cap A$ is at most countable. Now define
+                        \begin{equation*}
+                            C=\bigcup_{x\in A}B_{r_x}(x).
+                        \end{equation*}
+                    Then this is an open cover of $A$ since it is a union of open balls whose centers are each point of $A$. By Exercise 2.32, $C$ contains an at most countable subcover,
+                        \begin{equation*}
+                            C'=\bigcup_{i}B_{r_{x_i}}(x_i).
+                        \end{equation*}
+                    Finally, we note that
+                        \begin{equation*}
+                            C'\cap A=(B_{r_{x_1}}(x_1)\cap A)\cup(B_{r_{x_2}}(x_2)\cap A)\cdots 
+                        \end{equation*}
+                    which is an at most countable union of at most countable sets and is therefore at most countable. Since $A\subseteq C'$, then $C'\cap A=A$. Therefore $A$ is at most countable.
+                \end{proof}
+            \item[2.35] Let $X$ be a complete metric space and $Y\subseteq X$ be a closed set. Show that, with the inherited metric from $X$, $Y$ is a complete metric space.
+                \begin{proof}
+                    Let $\{y_n\}$ be a Cauchy sequence in $Y$. Then $\{y_n\}$ is a Cauchy sequence in $X$ and thus $\{y_n\}\rightarrow y$. Thus $y$ is a limit point of the set $Y$ and as such $y\in \overline{Y}=Y$. Hence $\{y_n\}$ converges in $Y$ and $Y$ is therefore complete. 
+                \end{proof}
+            \item[2.36] Let $X$ be a metric space and $\{x_n\}$ be a sequence in $X$. If $\{x_n\}$ is a Cauchy sequence, then $\{x_n\}$ is a bounded sequence.
+                \begin{proof}
+                    Let $\varepsilon>0$. Then there exists $N=N(\varepsilon)$ such that for all $m,n\geq N$
+                        \begin{equation*}
+                            d(x_n,x_m)<\varepsilon.
+                        \end{equation*}
+                    Thus, for all $n\geq N$ we have that $d(x_n,x_N)<\varepsilon$. Hence $d(x_n,0)\leq d(0,x_N)+\varepsilon$. Now let $M=\max\{d(0,x_1),\dots,d(0,x_N),d(0,x_N)+\varepsilon\}$, then for all $n\in\mathbb{N}$ it follows that $d(x_n,0)\leq M$ and therefore $\{x_n\}$ is bounded.
+                \end{proof}
+            \item[2.37] Let $X$ be a metric space and $\{x_n\}$ be a sequence in $X$. Assume there exists a sequence of real numbers $\{r_n\}$ converging to 0 such that 
+                \begin{equation*}
+                    d(x_n,x_{n+k})<r_n,\quad\forall n,k\in\mathbb{N}.
+                \end{equation*}
+            Prove that $\{x_n\}$ is a Cauchy sequence.
+                \begin{proof}
+                    Let $\varepsilon>0$. Then there exists $N=N(\varepsilon)$ such that for all $n\geq N$, $\abs{r_n}<\varepsilon$, we can also write $r_n<\varepsilon$ since $r_n\geq 0$ for all $n\in\mathbb{N}$ by assumption. Moreover, if $k\in\mathbb{N}$, then 
+                        \begin{equation*}
+                            d(x_n,x_{n+k})<r_n<\varepsilon.
+                        \end{equation*}
+                    Thus for all $\varepsilon>0$, there exists $N=N(\varepsilon)$ such that for all $n> N$ and for all $k\in\mathbb{N}$, $d(x_n,x_{n+k})<\varepsilon$. Hence, by Definition 2.63, $\{x_n\}$ is Cauchy.
+                \end{proof}\newpage
+            \item[2.39] Let $X$ be a metric space and $A\subseteq X$ be a set which is open and dense. Show that $B=X\backslash A$ is nowhere dense.
+                \begin{proof}
+                    We need to show that for all $x\in X$, $B_r(x)\cap B=\varnothing$ for all $r>0$. Let $x\in X$, $r_0>0$ and that $y\in B_{r_0}(x)\cap B$. Then $y\in B_{r_0}(x)$ and $y\in B$. Since $y\in B$, then $y\in X$ and $y\notin A$. Since $A$ is dense in $X$, then $\overline{A}=X$. Thus $y\in\overline{A}$ but $y\notin A$ and since $A$ is open, then $\overline{A}\neq A$. Thus $y$ must be a limit point of $A$. Hence for all $r>0$, $(B_r(y)\backslash\{y\})\cap A\neq\varnothing$. Let $r=r_0/2$. Then there exists $t\in(B_r(y)\backslash\{y\})\cap A$. Since $B_r(y)\subseteq B_{r_0}(x)$, then $t\in B_{r_0}(x)\cap A$. Moreover since $B_{r_0}(x)\subseteq B$, then $t\in B\cap A$ which is a contradiction. Therefore $B_r(x)\cap B=\varnothing$ from which it follows $\overline{B_r(x)\cap B}=\varnothing$ and so $B_r(x)\cap B$ is not dense in $B_r(x)$. Therefore, by Definition 2.71, $B$ is nowhere dense.
+                \end{proof}
+            \item[2.41] Let $X$ be a metric space and $\{x_n\}$ be a Cauchy sequence in $X$. Assume there is a subsequence $\{x_{n_k}\}$ convergent to $x$. Prove that $\{x_n\}\rightarrow x$.
+                \begin{proof}
+                     Let $\varepsilon>0$. Then since $\{x_n\}$ is Cauchy, there exists $N$ such that for all $m,n\geq N$, we have that $d(x_m,x_n)<\varepsilon/2$. Moreover, there exists $K$ such that for all $k\geq K$, we have that $d(x_{n_k},x)<\varepsilon/2$. Choose $k$ such that $k\geq K$ and $n_k\geq N$ and $m\geq N$, then 
+                        \begin{equation*}
+                            d(x_m,x)\leq d(x_m,x_{n_k})+d(x_{n_k},x)\leq \frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
+                        \end{equation*}
+                    Thus, $\{x_n\}\rightarrow x$.
+                \end{proof}
+            \item[2.42] Let $P$ be the set of condensation points of $A$. Prove that $P$ is a perfect set and $A\backslash P$ is at most countable.
+                \begin{proof}
+                    We want to show that $P$ is closed and that every point of $P$ is a limit point of $P$. To show that $P$ is closed we will prove that $P$ contains all of its limit points.\par\hspace{4mm} Let $x$ be a limit point of $P$. Then we need to show that every neighborhood of $x$ contains uncountably many points of $A$. As a limit point of $P$, letting $r>0$ we get that $(B_r(x)\backslash\{x\})\cap P\neq \varnothing$. Thus there exists $q\in P$ such that $q\in B_r(x)$ and $q\neq x$. Since $q\in B_r(x)$ and $B_r(x)$ is an open set, then there exists $r_0>0$ such that $B_{r_0}(q)\subset B_r(x)$. With $q\in P$, it follows that $q$ is a condensation point of $A$. Thus $B_{r_0}(q)$ contains uncountably many points of $A$. Hence $B_r(x)$ contains uncountably many points of $A$. Thus $x$ is a condensation point of $A$. Therefore $x\in P$ and so $P$ contains all of its limit points.\par\hspace{4mm} Now we need to show that every point of $P$ is a limit point of $P$. Let $x\in P$ and $r>0$. Then take $a\in(B_r(x)\backslash\{x\})$ such that $d(x,a)<r/4$. Then it follows that $B_{r/8}(x)\subset B_{r/2}(a)$, and since $B_{r/8}(x)$ contains uncountably many points of $A$, then $B_{r/2}(a)$ contains uncountably many points of $A$. Thus $a\in P$ which implies $(B_r(x)\backslash\{x\})\cap P\neq \varnothing$ for all $r>0$. Therefore $x$ is a limit point of $P$.\par\hspace{4mm} Finally, we need to show that $A\backslash P$ is at most countable. Let $x\in A\backslash P$. Then for any $r>0$, $B_r(x)\cap A$ must be at most countable, otherwise $x\in P$. Thus for each $x\in A\backslash P$, there exists $B_r(x)$ such that $B_r(x)\cap P$ is at most countable. By Exercise 2.33, $A\backslash P$ is at most countable.
+                \end{proof}
+            \item[2.43] Prove that every countable, closed subset of $\mathbb{R}^m$ has isolated points.
+                \begin{proof}
+                    Let $A\subseteq\mathbb{R}^m$ be a closed and countable set. Assume that $A$ has no isolated points. Then every point of $A$ is a limit point and thus $A$ is perfect. By Exercise 2.42, this implies that $\mathbb{R}^m\backslash A$ is at most countable. Thus $\mathbb{R}^m=(\mathbb{R}^m\backslash A)\cup A$ which is the union of two at most countable sets. Hence $\mathbb{R}^m$ is at most countable. This is a contradiction and so $A$ must have isolated points.
+                \end{proof}
+        \end{enumerate}
+\end{document}

@@ -1,0 +1,376 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 230A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 230A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/10/20   \\
+{ \textbf{Instructor:}}\ Dr. Domokos \hspace{\fill} \textbf{Assignment:} Homework 1 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item[1.1] Let $A,B,C\subseteq X$. Prove the following:
+            \begin{enumerate}
+                \item $A\cup(B\cap C)=(A\cup B)\cap(A\cup C)$.
+                    \begin{proof}
+                        \begin{equation*}
+                            \begin{split}
+                                x\in A\cup(B\cap C) &\Leftrightarrow (x\in A)\lor (x\in B\cap C) \\
+                                &\Leftrightarrow (x\in A)\lor(x\in B\land x\in C) \\
+                                &\Leftrightarrow (x\in A\lor x\in B)\land(x\in A\lor x\in C) \\
+                                &\Leftrightarrow (x\in A\lor x\in B)\cap(x\in A\lor x\in C) \\
+                                &\Leftrightarrow x\in (A\cup B)\cap(A\cup C).
+                            \end{split}
+                        \end{equation*}
+                    \end{proof}
+                \item[(c)] $A\backslash (B\cup C)=(A\backslash B)\cap(A\backslash C)$.
+                    \begin{proof}
+                        \begin{equation*}
+                            \begin{split}
+                                x\in A\backslash(B\cup C)&\Leftrightarrow (x\notin A)\land(x\in B\cup C) \\
+                                &\Leftrightarrow (x\in A)\land(x\notin B\land x\notin C) \\
+                                &\Leftrightarrow (x\in A\land x\notin B)\land(x\in A\land x\notin C) \\
+                                &\Leftrightarrow (x\in A\backslash B)\land(x\in A\backslash C) \\
+                                &\Leftrightarrow x\in (A\backslash B)\cap(A\backslash C).
+                            \end{split}
+                        \end{equation*}
+                    \end{proof}
+                \item[(e)] $(A\cup B)^c=A^c\cap B^c$.
+                    \begin{proof}
+                        \begin{equation*}
+                            \begin{split}
+                                x\in (A\cup B)^c&\Leftrightarrow x\notin A\cup B \\
+                                &\Leftrightarrow (x\notin A)\land(x\notin B) \\
+                                &\Leftrightarrow (x\in A^c)\land(x\in B^c) \\
+                                &\Leftrightarrow x\in A^c\cap B^c.
+                            \end{split}
+                        \end{equation*}
+                    \end{proof}
+            \end{enumerate}\newpage
+        \item[1.2] Prove that\hfill
+            \begin{enumerate}
+                \item\[\bigcup_{n=1}^{\infty}\left[\frac{1}{n},1\right]=(0,1]\]
+                    \begin{proof}
+                        Let $x$ be an element of the LHS. Then by Archimedes Principle, there exists $n\in\mathbb{N}$ such that $1/n<x$. Thus, $x\in [1/n,1]\subseteq(0,1]$. Hence,
+                            \begin{equation*}
+                                \bigcup_{n=1}^{\infty}\left[\frac{1}{n},1\right]\subseteq (0,1].
+                            \end{equation*}
+                        Now assume $x\in (0,1]$. Then $x>0$ and so by Archimedes Principle, there exists $n\in\mathbb{N}$ such that $1/n<x$ and thus
+                            \begin{equation*}
+                                x\in\left[\frac{1}{n},1\right]\subseteq \bigcup_{n=1}^{\infty}\left[\frac{1}{n},1\right]\leftrightarrow (0,1]\subseteq\bigcup_{n=1}^{\infty}\left[\frac{1}{n},1\right].
+                            \end{equation*}
+                        Therefore,
+                            \begin{equation*}
+                                \bigcup_{n=1}^{\infty}\left[\frac{1}{n},1\right]=(0,1].
+                            \end{equation*}
+                    \end{proof}
+                \item\[\bigcap_{n=1}^{\infty}\bigg(0,\frac{n+1}{n}\bigg)=(0,1]\].
+                    \begin{proof}
+                        Note that for all $n$, $1\leq (n+1)/n$ and so we immediately get that 
+                            \begin{equation*}
+                                (0,1]\subseteq\bigcap_{n=1}^{\infty}\bigg(0,\frac{n+1}{n}\bigg).
+                            \end{equation*}
+                        Thus, if $x$ is an element of the intersection, then $x\in (0,1]$. Hence,
+                            \begin{equation*}
+                                \bigcap_{n=1}^{\infty}\bigg(0,\frac{n+1}{n}\bigg)\subseteq (0,1].
+                            \end{equation*}
+                        Therefore,
+                            \begin{equation*}
+                                \bigcap_{n=1}^{\infty}\bigg(0,\frac{n+1}{n}\bigg)=(0,1].
+                            \end{equation*}
+                    \end{proof}
+            \end{enumerate}\newpage
+        \item[1.3] Prove that $\sqrt{2}\notin\mathbb{Q}$.
+            \begin{proof}
+                Assume, for contradiction, that $\sqrt{2}\in\mathbb{Q}$. Then there exists $a,b\in\mathbb{Z}$ such that $b\neq 0$, gcd$(a,b)=1$ and $\sqrt{2}=a/b$. Taking the square of both sides we obtain
+                    \begin{equation}
+                        2=\frac{a^2}{b^2}\rightarrow 2b^2=a^2.
+                    \end{equation}
+                This means that $a^2$ is an even number. Note that if $a$ is odd, i.e., $a=2k+1$ for some $m\in\mathbb{Z}$, then $a^2=4k^2+4k+1$ which is an odd number. Hence, if $a^2$ is even, then $a$ is even. Thus we can write $a=2m$ for some $m\in\mathbb{Z}$. Substituting into (1), we get
+                    \begin{equation*}
+                        2b^2=(2m)^2=4m^2\rightarrow b^2=2m^2.
+                    \end{equation*}
+                Hence, $b$ is an even number. Thus, $2\mid a$ and $2\mid b$ which implies $2\mid\text{gcd}(a,b)$. Thus, gcd$(a,b)\neq 1$ which is a contradiction. Therefore $\sqrt{2}\notin\mathbb{Q}$.
+            \end{proof}
+        \item[1.4] Let $f\colon X\rightarrow Y$ be a function. Show that $f$ is one-to-one if and only if for every $y\in Y$, the pre-image $f^{-1}(\{y\})$ contains at most one element.
+            \begin{proof}
+                ?
+            \end{proof}
+        \item[1.5] Let $f\colon X\rightarrow Y$ be a function. Show that $f$ is onto if and only if for every $y\in Y$, the pre-image $f^{-1}(\{y\})\neq\varnothing$.
+            \begin{proof}
+                Assume $f$ is onto. Then by Definition 1.5, for every $y\in Y$ there exists $x\in X$ such that $f(x)=y$. Hence, if $y\in Y$, then $f^{-1}(\{y\})=\{x\in X\mid f(x)\in\{y\}\}$ which is necessarily nonempty by the previous line. Now assume that for every $y\in Y$, $f^{-1}(\{y\})\neq\varnothing$. Let $y\in Y$ and let $x\in f^{-1}(\{y\})$, then $f(x)=y$. Thus for every $y\in Y$, there exists $x\in X$ such that $f(x)=y$. Therefore, $f$ is onto.
+            \end{proof}
+        \item[1.6] Let $f\colon X\rightarrow Y$ be a function. Show that $f$ is one-to-one if and only if $f(A_1\cap A_2)=f(A_1)\cap f(A_2)$ for every pair of sets $A_1,A_2\subseteq X$.
+            \begin{proof}
+                Assume that $f$ is one-to-one. Let $A_1,A_2\subseteq X$. By Proposition 1.4.(b), we know $f(A_1\cap A_2)\subseteq f(A_1)\cap f(A_2)$. Let $y\in f(A_1)\cap f(A_2)$. Then $y\in f(A_1)\land y\in f(A_2)$. This implies that there is some $x_1\in A_1$ and $x_2\in A_2$ such that $f(x_1)=y=f(x_2)$. Since $f$ is one-to-one, then $x_1=x_2$. Hence, $x_1\in A_1\land x\in A_2$. Thus $x_1\in A_1\cap A_2$. Thus, $f(x_1)=y\in f(A_1\cap A_2)$. Therefore, $f(A_1\cap A_2)=f(A_1)\cap f(A_2)$.\par\hspace{4mm} Assume that $f(A_1\cap A_2)=f(A_1)\cap f(A_2)$ for all $A_1,A_2\subseteq X$. Let $x_1,x_2\in X$ and assume $y\in f(\{x_1\})\cap f(\{x_2\})$. Then $f(x_1)=y=f(x_2)$. Additionally, we have that $y\in f(\{x_1\}\cap\{x_2\})$. Thus either $\{x_1\}\cap\{x_2\}=\varnothing$ or $x_1=x_2$. The latter cannot be true since this would imply $f(\varnothing)=y$. Hence, $x_1=x_2$ and therefore $f$ is one-to-one.
+            \end{proof}\newpage
+        \item[1.7] Let $f\colon X\rightarrow Y$ be a function. Show that $f$ is one-to-one if and only if $f^{-1}(f(A))=A$ for every set, $A\subseteq X$.
+            \begin{proof}
+                Assume that $f$ is one-to-one and that $A\subseteq X$. If $a\in A$, then $f(a)\in f(A)$. The latter is true iff $a\in f^{-1}(f(A))$. Hence, $A\subseteq f^{-1}(f(A))$. Now let $x\in f^{-1}(f(A))$. This implies that $f(x)\in f(A)$. Thus there exists $a\in A$ such that $f(x)=f(a)$ and since $f$ is one-to-one, then $x=a$. Thus $x\in A$ and so $f^{-1}(f(A))\subseteq A$. Therefore $f^{-1}(f(A))=A$.\par\hspace{4mm} Assume $f^{-1}(f(A))=A$ for all $A\subseteq X$. Let $x_1,x_2\in X$ such that $f(x_1)=f(x_2)$. By our assumption we have that $f^{-1}(f(\{x_1\}))=\{x_1\}$ and $f^{-1}(f(\{x_2\}))=\{x_2\}$. Since $f(x_1)=f(x_2)$, it follows that $f(x_1), f(x_2)\in f(\{x_1\})$. Similarly, $f(x_1), f(x_2)\in f(\{x_2\})$. If there were some $y\neq f(x_1)=f(x_2)$ such that $y\in f(\{x_1\})$, then $f(x_1)=y\neq f(x_1)$ which would contradict that $f$ is well-defined. Hence $f(\{x_1\})=f(x_1)$ and $f(\{x_2\})=f(x_2)$. Thus
+                    \begin{equation*}
+                        f^{-1}(f(\{x_1\}))=f^{-1}(f(x_1))=\{x_1\}=\{x_2\}=f^{-1}(f(x_2))=f^{-1}(f(\{x_2\}))
+                    \end{equation*}
+                Which implies that $x_1=x_2$. Therefore $f$ is one-to-one.
+            \end{proof}
+        \item[1.8] Let $f\colon X\rightarrow Y$ be a function. Show that $f$ is onto if and only if $f(f^{-1}(B))=B$ for all $B\subseteq Y$.
+            \begin{proof}
+                Assume $f$ is onto. Let $y\in B$. Then since $f$ is onto, $f(f^{-1}(y))=y$ and $f^{-1}(y)\in f^{-1}(B)$. Thus, $y=f(f^{-1}(y))\in f(f^{-1}(B))$. Hence $B\subseteq f(f^{-1}(B))$. Now let $y\in f(f^{-1}(B))$. Then $f^{-1}(y)\in f^{-1}(B)$. Thus there is some $y'\in B$ such that $f^{-1}(y)=f^{-1}(y')$. Since $f$ is onto then $f(f^{-1}(y))=y=y'=f(f^{-1}(y'))$. Hence $y=y'\in B$ and so $f(f^{-1}(B))\subseteq B$. Therefore $f(f^{-1}(B))=B$.\par\hspace{4mm} Assume $f(f^{-1}(B))=B$ for all $B\subseteq Y$ and let $y\in Y$. Then $\{y\}\subseteq Y$ and $f(f^{-1}(\{y\}))=\{y\}$. Thus either there exists $x\in f^{-1}(\{y\})$ such that $f(x)\in \{y\}$, or $f^{-1}(\{y\})=\varnothing$. If the latter were true, then for all $x\in f^{-1}(\{y\})$,  $f(x)\in\{y\}$ is true vacuously. Therefore, there exists $x\in f^{-1}(\{y\})\subseteq X$ such that $f(x)=y$. Thus $f$ is onto.
+            \end{proof}
+        \item[1.9] Let $f\colon X\rightarrow Y$ be a function. Show that $f$ is one-to-one and onto if and only if $f(A^c)=(f(A))^c$ for all $A\subseteq X$.
+            \begin{proof}
+                Assume $f$ is a bijection. Let $y\in (f(A))^c$. Then $y\notin f(A)$ which implies that for all $x$, if $f(x)=y$, then $x\in A^c$ which implies $f(x)\in f(A^c)$. Since $y$ was arbitrary, then the previous statement holds for all $y\in (f(A))^c$. Moreover, since $f$ is bijective, then for all $y\in (f(A))^c$, there exists $x\in X$ such that $f(x)=y$. Hence, if $y\in(f(A))^c$, then $y=f(x)\in f(A^c)$. Thus, $(f(A))^c\subseteq f(A^c)$. Now we argue the contrapositive. Assume $y\notin(f(A))^c$. Then $y\in f(A)$ which implies there exists $x\in A$ such that $f(x)=y$. This implies that there exists $x\notin A^c$ (which is unique since $f$ is bijective) such that $f(x)=y$ and $y\notin f(A^c)$. Hence, $f(A^c)\subseteq (f(A))^c$. Therefore $f(A^c)=(f(A))^c$.\par\hspace{4mm} Assume $f(A^c)=(f(A))^c$ for all $A\subseteq X$. Let $x_1,x_2\in X$ such that $x_1\neq x_2$. Then $x_1\in X\backslash\{x_2\}$ and $x_2\in X\backslash\{x_1\}$. Thus $f(\{x_1\})\subseteq f(X\backslash\{x_2\})\subseteq Y\backslash\{f(x_2)\}$. Hence $f(x_1)\neq f(x_2)$ and so $f$ is one-to-one. Finally since $f(X\backslash\varnothing)=f(X)=Y\backslash f(\varnothing)=Y\backslash\varnothing= Y$, then the codomain of $f$ is all of $Y$. Hence $f$ is onto.
+            \end{proof}
+        \item[1.10] Let $f\colon X\rightarrow Y$ and $g\colon Y\rightarrow Z$ be one-to-one and onto functions. Show that $g\circ f\colon X\rightarrow Z$ is invertible and 
+            \begin{equation*}
+                (g\circ f)^{-1}=f^{-1}\circ g^{-1}.
+            \end{equation*}
+            \begin{proof}
+                Let $x_1,x_2\in X$ such that $(g\circ f)(x_1)=(g\circ f)(x_2)$. Then if follows that $g(f(x_1))=g(f(x_2))$ and since $g$ is one-to-one, this implies that $f(x_1)=f(x_2)$. Similarly, since $f$ is one-to-one, then this implies $x_1=x_2$. Hence, $g\circ f$ is one-to-one. Now let $z\in Z$. Then since $g$ is onto, there exists $y\in Y$ such that $g(y)=z$. Similarly, since $y\in Y$ and $f$ is onto, then there exists some $x\in X$ such that $f(x)=y$. Thus, $g(f(x))=z$ and so $g\circ f$ is onto. Therefore $g\circ f$ is invertible. Finally, let $z\in Z$. Then $(g\circ f)^{-1}(z)=x$ for some $x\in X$. This means that $f(x)=y$ for $y\in Y$ and $g(y)=z$. Hence $f^{-1}(y)=x$ and $g^{-1}(z)=y$. Thus
+                    \begin{equation*}
+                        (f^{-1}\circ g^{-1})(z)=f^{-1}(g^{-1}(z))=f^{-1}(y)=x.
+                    \end{equation*}
+                Therefore $(g\circ f)^{-1}(z)=(f^{-1}\circ g^{-1})(z)$ for all $z\in Z$ which implies the left and right hand side are equal.
+            \end{proof}
+        \item[1.11] Prove Proposition 1.14.
+            \begin{enumerate}
+                \item\begin{proof}
+                    Let $f\colon X\rightarrow X$ be defined by $f(x)=x$. Then $f$ is a bijection and therefore $X\sim X$.
+                \end{proof}
+                \item\begin{proof}
+                    Assume that $X\sim Y$. Then there exists a bijection $f\colon X\rightarrow Y$ and since $f$ is a bijection, then $f^{-1}\colon X\rightarrow Y$ exists. Furthermore, we have that $f^{-1}(x)=f^{-1}(y)$ gives $f(f^{-1}(x))=f(f^{-1}(y))$ and so $x=y$. Thus $f^{-1}$ is one-to-one. Lastly, if $x\in X$, then $f^{-1}(f(x))=x$. Hence, $f^{-1}$ is onto. Therefore $f^{-1}$ is one-to-one and onto and thus $Y\sim X$.
+                \end{proof}
+                \item\begin{proof}
+                    Assume $X\sim Y$ and $Y\sim Z$. Then $f\colon X\rightarrow Y$ and $g\colon Y\rightarrow Z$ are each bijections and by problem 1.10, $g\circ f\colon X\rightarrow Z$ is a bijection. Therefore $X\sim Z$. 
+                \end{proof}
+            \end{enumerate}
+        \item[1.12] Prove that the union of two countable sets is countable.
+            \begin{proof}
+                Let $A$ and $B$ be countable sets and let $S=A\cup B$. Since $A$ and $B$ are both countable, we can denote each as $\{a_k\}$ and $\{b_k\}$, respectively, for $k=1,2,\cdots$. Define $f$ by
+                    \begin{align*}
+                        f(n)&=\begin{cases} a_{n} & \text{if}\quad 2\mid n \\ b_{n} &\text{if}\quad 2\nmid n. \end{cases}
+                    \end{align*}
+                Now assume $2\mid n$ and that $n=m$. Then $f(n)=a_{n}$ and $f(m)=a_{m}$ from which it follows $a_{n}=a_{m}$. Similarly, if $2\nmid n$, then $b_{n}=b_{m}$. Hence, $f(n)=f(m)$ for all $n,m\in\mathbb{N}$ and so $f\colon\mathbb{N}\rightarrow S$ is well-defined. Now take some $x_i\in S$. Then if $x_i\in A$, it follows that $2\mid i$ and  $f(i)=x_i$. Similarly, if $x_i\in B$, then $2\nmid i$ and $f(i)=x_i$. Hence, $f$ is onto.\par\hspace{4mm} Finally, define $g\colon S\rightarrow\mathbb{N}$ by $g(x)=n$ such that $n$ is the smallest natural number such that $f(n)=x$. This $n$ exists by the well-ordering principle. Assume $g(x_i)=g(x_j)$. Then $f(g(x_i))=x_i=x_j=f(g(x_j))$. Therefore $g$ is one-to-one. Moreover since $g(S)\subseteq\mathbb{N}$ and $S\sim g(S)$ then by Lemma 1.15, $S\sim g(S)\sim\mathbb{N}$.
+            \end{proof}
+        \item[1.13] Prove that the union of countably many countable sets is countable.
+            \begin{proof}
+                Let $A_1,A_2,\dots$ be a countable collection of countable sets. Then we want to show that $\bigcup_{n=1}^{\infty}A_n\sim\mathbb{N}$. Define $B_1=A_1$, $B_2=A_2\backslash A_1$, $B_3=A_3\backslash(A_1\cup A_2)$, $\dots$. Now note that for any $i,j\in\mathbb{N}$ such that $i<j$, if $a\in B_i$, then 
+                    \begin{equation*}
+                        x\in A_i\backslash(A_1\cup\cdots\cup A_{i-1})
+                    \end{equation*}
+                which implies that $x\in A_i$. However, since 
+                    \begin{equation*}
+                        B_j = A_j\backslash(A_1\cup\cdots\cup A_i\cup\cdots\cup A_{j-1})
+                    \end{equation*}
+                then it follows that $x\notin B_j$. Hence $B_i\cap B_j=\varnothing$.\par\hspace{4mm} Now we note that if $b\in\bigcup_{n=1}^{\infty} B_n$, then there exists some $i\in\mathbb{N}$ such that $b\in B_i$ and by definition, this implies that $b\in A_i\subseteq\bigcup_{n=1}^{\infty}A_n$. Hence, 
+                    \begin{equation*}
+                        \bigcup_{n=1}^{\infty}B_n\subseteq\bigcup_{n=1}^{\infty} A_n.
+                    \end{equation*}
+                Next, we let $a\in\bigcup_{n=1}^{\infty} A_n$ and define $S=\{n\in\mathbb{N}\mid a\in A_n\}$. Clearly, $S\subseteq\mathbb{N}$ and so by the Well-Ordering Principle, $S$ has a smallest element, call it $n_0=\min(S)$. It follows that $a\in A_{n_0}$ and $a\notin(A_1\cup\cdots\cup A_{n_0-1})$. Therefore
+                    \begin{equation*}
+                        a\in A_{n_0}\backslash(A_1\cup\cdots\cup A_{n_0-1})=B_{n_0}\subseteq\bigcup_{n=1}^{\infty} B_n.
+                    \end{equation*}
+                Hence, $\bigcup_{n=1}^{\infty}A_n\subseteq\bigcup_{n=1}^{\infty}B_n$ and therefore
+                    \begin{equation*}
+                        \bigcup_{n=1}^{\infty}B_n=\bigcup_{n=1}^{\infty}A_n.
+                    \end{equation*}
+                Now we will let denote the prime numbers as $p_1,p_2,\dots$ and define the following function:
+                    \begin{equation*}
+                        f\colon\bigcup_{n=1}^{\infty}B_n\rightarrow\mathbb{N}
+                    \end{equation*}
+                where, since each $B_n$ is countable then there is a bijection $g_n\colon B_n\rightarrow\mathbb{N}$, and so for all $b\in\bigcup_{n=1}^{\infty}B_n$, $f(b)=p_n^{g_n(b)}$. Note that $g_n(b)\in\mathbb{N}$ which means $f(b)\in\mathbb{N}$. Now let $b,b'\in\bigcup_{n=1}^{\infty}B_n$ such that $f(b)=f(b')$. Since $b$ and $b'$ are elements of the union, then there exists $i,j\in\mathbb{N}$ such that $b\in B_i$ and $b'\in B_j$. Since we showed that $B_i\cap B_j=\varnothing$ if $i\neq j$, then either $i\neq j$ or $B_i=B_j$. If $i\neq j$, then $b\neq b'$. However, by assumption
+                    \begin{equation*}
+                        f(b)=p_i^{g_i(b)}=p_j^{g_j(b')}=f(b')
+                    \end{equation*}
+                which implies $p_i\mid p_j^{g_j(b')}$ which further implies that for some $k\leq g_j(b')$, $p_i=p_j^m$ which is a contradiction since $p_i\neq p_j$. Hence, $B_i=B_j$. Thus $f(b)=p_i^{g_i(b)}=p_i^{g_i(b')}=f(b')$. This equality only holds if $g_i(b)=g_i(b')$ and since $g_i$ is one-to-one, then it follows that $b=b'$. Therefore, $f$ is one-to-one.\par\hspace{4mm} Moreover, we have that 
+                    \begin{equation*}
+                        \bigcup_{n=1}^{\infty}B_n\sim f(\bigcup_{n=1}^{\infty}B_n)\subseteq\mathbb{N}.
+                    \end{equation*}
+                Thus if $f(\bigcup_{n=1}^{\infty}B_n)$ is finite, then $\bigcup_{n=1}^{\infty}B_n$ is finite and hence countable. Otherwise, if $f(\bigcup_{n=1}^{\infty}B_n)$ is infinite, then $f(\bigcup_{n=1}^{\infty}B_n)\sim\mathbb{N}$ and by Proposition 1.14, $\bigcup_{n=1}^{\infty}B_n\sim\mathbb{N}$ and therefore countable. Finally, since $\bigcup_{n=1}^{\infty}B_n=\bigcup_{n=1}^{\infty}A_n$, then the latter is countable.
+            \end{proof}
+        \item[1.14] Let $A$ be the collection of all sequences of the digits 0 and 1, for which the number of digits 1 is finite. Show that $A$ is countable.
+            \begin{proof}
+                First we need to show that $\mathbb{N}^n$ is countable for all $n\in\mathbb{N}$. Define $f_n\colon\mathbb{N}^n\rightarrow\mathbb{N}$ by $(a_1,\dots,a_n)\mapsto 2^{a_1}3^{a_2}\cdots p_n^{a_n}$, where $p_n$ is the $n$th prime number. Now assume that $f_n((a_1,\cdots,a_n))=f_n((b_1,\cdots,b_n))$. Then $2^{a_1}\cdots p_n^{a_n}=2^{b_1}\cdots p_n^{b_n}$. Rewrite the left and right hand sides by only including powers greater than or equal to 1. From this we get 
+                    \begin{equation*}
+                        p_i^{a_i}\cdots p_j^{a_j}=p_r^{b_r}\cdots p_s^{b_s}.
+                    \end{equation*}
+                Wlog, assume that $j-i\leq s-r$. Clearly, $p_i^{a_i}$ divides the left and right hand sides and so either $p_i^{a_i}\mid p_r^{b_r}$ or $p_i^{a_i}\nmid p_r^{b_r}$. If the former is true, then $p_i=p_r$ and $a_i\leq b_r$. Thus dividing both sides by $p_i^{a_i}$ we obtain
+                    \begin{equation*}
+                        1\cdots p_j^{p_j}=p_r^{b_r-a_i}\cdots p_s^{b_s}.
+                    \end{equation*}
+                However, if $a_i<b_r$ then the right hand side and left hand side are both multiples of $p_r$, but this is a contradiction since the left hand side no longer contains any power of $p_r$. Hence, if $p_i^{a_i}\mid p_r^{b_r}$, then $a_i=b_r$. Additionally, if $p_i^{a_i}\nmid p_r^{b_r}$, then either $p_i<p_r$ or $p_i>p_r$. If $p_i<p_r$, then the left hand side is a multiple of $p_i$ whereas the right is not which is a contradiction. Similarly, the same argument holds if $p_i>p_r$. Thus, $p_i=p_r$ and $a_i=b_r$.  Finally, if $j-i<s-r$, then dividing the left and right hand side by the left hand side we obtain
+                    \begin{equation*}
+                        1=p_t^{b_t}\cdots p_v^{b_v}
+                    \end{equation*}
+                which is a which contradicts our assumption that all exponents were greater than or equal to 1. Hence, $j-i=s-r$ and thus $a_i=b_i$ for all $1\leq i\leq n$. Therefore, $f_n$ is one-to-one. Finally, letting $x\in\mathbb{N}$, by the fundamental theorem of arithmetic, we can uniquely express $x$ as $2^{a_1}\cdots p_n^{a_n}$ and hence $f_n((a_1,\dots,a_n))=x$. Thus $f_n$ is onto. Thus $\mathbb{N}^n\sim\mathbb{N}$ and so $\mathbb{N}^n$ is countable.\par\hspace{4mm} Let $A_n\subseteq A$ be the set of all sequences in $A$ which contain $n$ many 1's. Then define the function $g_n\colon A_n\rightarrow\mathbb{N}^n$ in the following way: If $a\in A$ and $a=a_1,a_2,\dots,$, then 
+                    \begin{equation*}
+                        a_1,a_2,\dots\mapsto(\alpha_1,\alpha_2,\dots,\alpha_n)
+                    \end{equation*}
+                if and only if $a_{\alpha_i}=1$ for all $i=1,2,\dots,n$ and 0 otherwise. Assume that $g_n(a)=g_n(b)$ for some $a,b\in A_n$. Then $(\alpha_1,\dots,\alpha_n)=(\beta_1,\dots,\beta_n)$ which implies that $\alpha_i=\beta_i$ for all $i$. Hence, for each $a_i$ and $b_i$, we have that either $a_i=b_i=0$ or $a_{\alpha_i}=b_{\alpha_i}=1$. Therefore, $a=b$ and $g_n$ is one-to-one. Next, if we take $(\alpha_1,\dots,\alpha_n)\in \mathbb{N}^n$, then if $a$ is the sequence for which $a_{\alpha_1},\dots,a_{\alpha_n}$ are all 1 and the rest are 0, then $g_n(a)=(\alpha_1,\dots,\alpha_n)$ and $g_n$ is onto. Thus $A_n\sim\mathbb{N}^n$ and so $A_n$ is countable for all $n$.\par\hspace{4mm} The last part of this argument is to show that $A=\bigcup_{n=1}^{\infty}A_n$. If $a\in A$, then $a$ contains $m$ many 1's for some $m\in\mathbb{N}$ and thus $a\in A_m\subseteq\bigcup_{n=1}^{\infty} A_n$. Conversely, if $a\in\bigcup_{n=1}^{\infty}A_n$, then for some $m\in\mathbb{N}$, $a\in A_m$ and thus $a$ is a sequence of digits 0 and 1 for which there are $m$ many digits 1. Hence, $a\in A$ and the equality has been shown. Thus, since for each $n\in\mathbb{N}$, $A_n$ is countable, then by problem 1.13, 
+                    \begin{equation*}
+                        A=\bigcup_{n=1}^{\infty} A_n
+                    \end{equation*}
+                is countable.
+            \end{proof}
+        \item[1.15] Let $X$ be the set of all numbers from $[0,1]$ whose decimal expansion contains only the digits 3 or 5. Is $X$ countable or uncountable?
+            \begin{solution}
+                Assume that $X$ is countable. Then we can list each element of $X$ in the following way: $x_1,x_2,\dots$, where $x_i=0.x_{i1}x_{i2}\dots$ for all $i\in\mathbb{N}$. In other words, $x_{mn}$ is the $n$th digit of the $m$th decimal expansion. Now define a new decimal expansion $y=0.y_1y_2\dots$ such that 
+                    \begin{align*}
+                        y_i &= \begin{cases} 3 & \text{if}\quad x_{ii}=5 \\ 5 & \text{if}\quad x_{ii}=3\end{cases}.
+                    \end{align*}
+                We can see that $y\in[0,1]$ and that each of its digits are either 3 or 5. Hence, $y\in X$. However, we claim that $y$ is not in the list provided above. For if we assume that there is some $x_t$ such that $y=x_t$, then this implies $y_i=x_{ii}$ for all $i$. But this is not the case since by construction $y_t\neq x_{tt}$. Therefore $y$ is not in the list above and the elements of $X$ cannot be enumerated. Hence $X$ is uncountable.
+            \end{solution}\newpage
+        \item[1.17] Show that if card$(X)=n$, then card$(2^X)=2^n$.
+            \begin{proof}
+                We proceed by induction on $n\in\mathbb{N}$. Define
+                    \begin{equation*}
+                        P(n):=\text{card}(X)=n\rightarrow\text{card}(2^X)=2^n.
+                    \end{equation*}
+                For the base case, we assume $\text{card}(X)=0$. Then $X=\varnothing$ and thus $2^X=\{\varnothing\}$. Hence card$(2^X)=1=2^0$. Thus $P(1)$ holds.\par\hspace{4mm} Now assume $P(k)$ holds for some $k\geq 2$. Then $\text{card}(X)=k$ implies $\text{card}(2^X)=2^k$. Let $Y$ be a set such that $\text{card}(Y)=k+1$ and take $y\in Y$ and set $\hat{Y}=Y\backslash\{y\}$. Then clearly, $\text{card}(\hat{Y})=k$ and hence $\text{card}(2^{\hat{Y}})=2^k$. It follows that for any subset $S\subseteq Y$, that $y\in S$ or $y\notin S$. Moreover, in collecting all the subsets $S\subseteq Y$ such that $y\notin S$, we find that there are $2^k$ of them since this collection is precisely $\hat{Y}$. It follows then that $Y\backslash\hat{Y}$ contains all the elements of $\hat{Y}$ but with $y$ as a member, of which there are $2^k$ such elements. Hence, $\text{card}(Y)=2\cdot2^k=2^{k+1}$. Thus $P(k+1)$ holds. Therefore $P(n)$ holds for all $n\in\mathbb{N}$.
+            \end{proof}
+        \item[1.18] Show that $2^{\mathbb{N}}\sim\mathbb{R}$.
+            \begin{proof}
+                First note that since $\mathbb{N}\in2^{\mathbb{N}}$, then $2^{\mathbb{N}}$ is not finite. Next, assume for contradiction that $2^{\mathbb{N}}\sim\mathbb{N}$. Then there exists a bijection $h\colon\mathbb{N}\rightarrow 2^{\mathbb{N}}$ such that $h(n)=S_n$. Now define a function $f\colon 2^{\mathbb{N}}\rightarrow[0,1]$ in the following way: for any $S_i\in 2^{\mathbb{N}}$
+                    \begin{align*}
+                        f(S_i)=\sum_{n=1}^{\infty}\frac{s_{in}}{10^{n}};\quad s_{in}&=\begin{cases} 3 &\text{if}\quad n\in S_i \\ 5 &\text{if}\quad n\notin S_i \end{cases}.
+                    \end{align*}
+                We want to show this function is one-to-one. Assume for $S_i,S_j\in 2^{\mathbb{N}}$ that $f(S_i)=f(S_j)$. Then $0.s_{i1}s_{i2}\dots=0.s_{j1}s_{j2}\dots$ which implies $s_{ik}=s_{jk}$ for all $k\in\mathbb{N}$. Thus, if $k\in S_i$, then $s_{ik}=3=s_{jk}$ and hence $k\in S_j$. Thus $S_i\subseteq S_j$. Similarly, it follows by the same reasoning that $S_j\subseteq S_i$ and thus $S_i=S_j$. Therefore $f$ is one-to-one.\par\hspace{4mm} Define $r=0.g_1g_2\dots$, where $g_i=3$ if $s_{ii}=5$ or $g_i=5$ if $s_{ii}=3$. Assume there exists some $S_i\in 2^{\mathbb{N}}$ such that $f(S_i)=r$. Then $0.g_1g_2\dots g_i\dots=0.s_{i1}s_{i2}\dots s_{ii}\dots$, which implies $g_i=s_{ii}$, but this is not possible by construction of $r$ and hence for all $S_i\in 2^{\mathbb{N}}$, $f(S_i)\neq r$. Finally, define $S'=\{n\in\mathbb{N}\mid g_n=3\}$, where $g_n$ is the $n$th digit in the decimal expansion $r$.Then it follows by construction that $f(S')=r$. However, $S'\in 2^{\mathbb{N}}$ yet $f(S')=r\neq f(S_i)$ for all $i\in\mathbb{N}$ which implies $S'\neq S_i$ for all $i\in\mathbb{N}$. Hence $S'\notin h(\mathbb{N})$ which is a contradiction.\par\hspace{4mm} Therefore $2^{\mathbb{N}}\not\sim\mathbb{N}$. Thus, by the Continuum Hypothesis, $\text{card}(2^{\mathbb{N}})\geq\text{card}(\mathbb{R})$. However, since $f$ is one-to-one, then $2^\mathbb{N}\sim f(2^{\mathbb{N}})\subseteq [0,1]\sim\mathbb{R}$ and hence\par $\text{card}(2^{\mathbb{N}})\not>\text{card}(\mathbb{R})$ which implies $\text{card}(2^{\mathbb{N}})=\text{card}(\mathbb{R})$. Therefore $2^{\mathbb{N}}\sim\mathbb{R}$.
+            \end{proof}\newpage
+        \item[1.19] Prove Proposition 1.27.
+            \begin{proof}
+                Assume $\alpha^*=\inf A$. Then by Definition 1.26, $\alpha^*$ is a lower bound of $A$ (part (i) of Proposition 1.27) and if $\alpha$ is a lower bound of $A$, then $\alpha\leq\alpha^*$. Let $B$ be the set of all lower bounds of $A$. By definition, for any $b\in B$, $b\leq\alpha^*$. Conversely, if $b\leq\alpha^*$, then $b$ is a lower bound of $A$ and hence $b\in B$. Now let $\varepsilon>0$. It follows that $\alpha^*<\alpha^*+\varepsilon$. Thus $\alpha^*+\varepsilon\notin B$, otherwise $\alpha^*+\varepsilon\leq\alpha^*$ which is not the case. Hence, $\alpha^*+\varepsilon$ is not a lower bound of $A$. Thus there exists some $a\in A$ such that $a<\alpha^*+\varepsilon$. Moreover, since $a\in A$ then $\alpha^*\leq a$ and thus $\alpha^*\leq a<\alpha^*+\varepsilon$ (part (ii) of Proposition 1.27).\par\hspace{4mm} Conversely, assume that $\alpha^*$ is a lower bound of $A$ and that for all $\varepsilon>0$, there exists $a_{\varepsilon}\in A$ such that $\alpha^*\leq a_{\varepsilon}<\alpha^*+\varepsilon$. From the second condition it follows that $\alpha^*-\varepsilon\leq\alpha^*$ for all $\varepsilon>0$. Then if $b$ is any lower bound of $A$, then there exists $\varepsilon>0$ such that $b+\varepsilon=\alpha^*$ and hence $b=\alpha^*-\varepsilon\leq\alpha^*$. Therefore $\alpha^*=\inf A$.
+            \end{proof}
+        \item[1.20] Prove Proposition 1.29.
+            \begin{proof}
+                Let $\beta^*=\sup A$. Then $\beta^*$ is an upper bound of $A$ (condition (i) of the proposition) and for any upper bound $a$ of $A$, $\beta\leq a$. Let $B$ be the set of all upper bounds of $A$. Then by definition if $b\in B$, $\beta^*\leq b$. Conversely, if $\beta^*\leq b$, then $b$ is an upper bound of $A$ and hence $b\in A$. Let $\varepsilon>0$. Then $\beta^*-\varepsilon<\beta^*$ and hence $\beta^*-\varepsilon\notin B$. Thus $\beta^*-\varepsilon$ is not an upper bound of $A$. This implies that there exists $a\in A$ such that $\beta^*-\varepsilon<a$. But since $a\in A$, then $a\leq\beta^*$. Hence $\beta^*-\varepsilon<a\leq\beta^*$ (part (ii) of the proposition).\par\hspace{4mm} Conversely, assume that $\beta^*$ is an upper bound of $A$ and that for all $\varepsilon>0$, there exists $b_{\varepsilon}\in A$ such that $\beta^*-\varepsilon<b_{\varepsilon}\leq\beta^*$. Then $\beta^*\leq\beta^*+\varepsilon$ for all $\varepsilon>0$. Thus if $b$ is any upper bound of $A$ then $\beta^*\leq b$ and so there exists $\varepsilon>0$ such that $\beta^*-\varepsilon=b$. Hence $\beta^*\leq b=\beta^*-\varepsilon$. Therefore $\bate^*=\sup A$.
+            \end{proof}
+        \item[1.21] Let $A\subseteq\mathbb{R}$ be a nonempty set which is bounded from above. Show that if $\sup A\notin A$, then for all $\varepsilon>0$ the open interval $(\sup A-\varepsilon,\sup A)$ contains infinitely many terms of $A$.
+            \begin{proof}
+                Let $\varepsilon>0$ and define $S=(\sup A-\varepsilon,\sup A)$. Assume for contradiction that for some $n\in\mathbb{N}$ $S$ is finite and $S=\{s_1,s_2,\dots,s_n\}$. Being finite implies that $S$ has a maximum, call it $s=\max(S)$. Let $R=\{\sup A-s_i: s_i\in S\}$. Note that $R\subseteq\mathbb{R}$ and $R$ is nonempty since otherwise $\sup A-(\sup A-\varepsilon)=0$ which would imply $\varepsilon=0$. Further, note that $R$ is bounded below by 0 since if for some $1\leq i\leq n$, $\sup A-s_i<0$ then $\sup A<s_i$ which implies $\sup A$ is not an upper bound of $A$. Therefore by Axiom 5, $\inf R$ exists.\par\hspace{4mm} We claim that $\inf R=\sup A-s$. First, let $r\in R$, then for some $s_i\in S$, $r=\sup A-s_i$. If $\sup A-s_i<\sup A-s$ then $s<s_i$ which is a contradiction since $s=\max(S)$. Thus $\sup A-s$ is a lower bound of $R$. Let $b$ be a lower bound of $R$. Then for all $s_i\in S$, $b\leq\sup A-s_i$ and hence $b\leq\sup A-s$. Therefore $\sup A-s=\inf R$. Finally, by Proposition 1.20 there exists $s'\in S$ such that $\sup A-s<s'\leq\sup A$. Thus $s>\sup A-s'$. But this contradicts that $s=\inf R$. Therefore $S$ is not finite and $S$ contains infinitely many terms if $A$.
+            \end{proof}
+        \item[1.21] Let $A,B\subseteq\mathbb{R}$ be nonempty bounded sets, and let $c\in\mathbb{R}$. Define the following sets:
+            \begin{align*}
+                A+B&=\{a+b\mid a\in A,b\in B\} \\ A-B&=\{a-b\mid a\in A,b\in B\} \\ A\cdot B&=\{ab\mid a\in A,b\in B\} \\cA&=\{ca\mid a\in A\}.
+            \end{align*}
+        Prove that:
+            \begin{enumerate}[label=(\arabic*)]
+                \item $\inf(A+B)=\inf(A)+\inf(B)$ 
+                    \begin{proof}
+                        Let $\alpha=\inf(A+B)$, $\alpha_1=\inf A$, and $\alpha_2=\inf B$. Assume $\alpha<\alpha_1+\alpha_2$. Let $a\in A, b\in B$. Then $\alpha\leq a+b$, $\alpha_1\leq a$, and $\alpha_2\leq b$. Thus $\alpha_1+\alpha_2\leq a+b$. Hence $\alpha_1+\alpha_2$ is a lower bound of $A+B$. Thus $\alpha_1+\alpha_2\leq\alpha$ which is a contradiction. Assume $\alpha_1+\alpha_2<\alpha$. Let $a\in A$, $b\in B$. Then $\alpha\leq a+b$ and $\alpha_2\leq b$. Hence $\alpha-\alpha_2\leq a$. Thus $\alpha-\alpha_2$ is a lower bound of $A$ which implies $\alpha-\alpha_2\leq \alpha_1$. Thus $\alpha\leq\alpha_1+\alpha_2$ which is a contradiction. Therefore $\alpha=\alpha_1+\alpha_2$, or $\inf(A+B)=\inf A+\inf B$.
+                    \end{proof}
+                \item[(3)] $\sup(-A)=-\inf(A)$
+                    \begin{proof}
+                        Let $\alpha=\sup(-A)$ and $\beta=-\inf(A)$. For any $a\in A$ we have that $-a\leq\alpha$ and $-\beta\leq a$ which implies $-a\leq\beta$. Thus $\beta$ is an upper bound of $-A$ and so $\alpha\leq\beta$. Similarly, $-\alpha\leq a$ and so $-\alpha$ is a lower bound of $A$. Thus $-\alpha\leq-\beta$. Hence $\beta\leq\alpha$. Therefore $\alpha=\beta$.
+                    \end{proof}
+                \item[(5)] $\sup(A-B)=\sup A-\inf B$.
+                    \begin{proof}
+                        Let $C=-B$. Then by (1) and (2) it follows that 
+                            \begin{equation*}
+                                \sup(A-B)=\sup(A+C)=\sup A+\sup C=\sup A+\sup(-B)=\sup A-\inf B.
+                            \end{equation*}
+                    \end{proof}
+                \item[(7)] $\sup(cA)=c\sup A$ if $c>0$.
+                    \begin{proof}
+                        Let $ca\in cA$. Then $ca\leq\sup(cA)$. Similarly, for any $a\in A$ we have that $a\leq\sup A$ and thus for any $c>0$, $ca\leq c\sup A$. Thus $c\sup A$ is an upper bound of $cA$ and hence $\sup(cA)\leq c\sup A$. Also note that since $ca\leq\sup(cA)$ for all $c>0$ and $a\in A$, then $a\leq\frac{1}{c}\sup(cA)$ and hence $\frac{1}{c}\sup(cA)$ is an upper bound of $A$. As such it follows that $\sup A\leq\frac{1}{c}\sup(cA)$ and hence $c\sup A\leq\sup(cA)$. Therefore $c\sup A=\sup(cA)$.
+                    \end{proof}
+                \item[(9)] $\sup(cA)=c\inf A$ if $c<0$.
+                    \begin{proof}
+                        Let $ca\in cA$. Then $ca\leq\sup(cA)$ and so $\frac{1}{c}\sup(cA)\leq a$. Hence $\frac{1}{c}\sup(cA)$ is a lower bound of $A$. Thus $\frac{1}{c}\sup(cA)\leq\inf A$. Additionally, if $a\in A$ then $\inf A\leq a$ and so $ca\leq c\inf A$. Thus $c\inf A$ is an upper bound of $cA$ which implies $\sup(cA)\leq c\sup A$. Hence $\sup A\leq\frac{1}{c}\sup(cA)$. Since $\inf A\leq\sup A$ then $\inf A\leq\frac{1}{c}\sup(cA)$. Thus $\frac{1}{c}\sup(cA)=\inf A$ and hence $\sup(cA)=c\inf A$.
+                    \end{proof}\newpage
+                \item[(11)] Is it true that $\sup(A\cdot B)=\sup A\cdot\sup B$?
+                    \begin{solution}
+                        Let $A=[-2,-1]$ and $B=[0,1]$ then $A\cdot B=[-2,0]$. Thus $\sup(A\cdot B)=0$ and $\sup A\cdot\sup B=(-1)(1)=-1$. Thus this claim is not true.
+                    \end{solution}
+            \end{enumerate}
+        \item[1.23] State and prove the density property of the irrational numbers.
+            \begin{proof}
+                \textit{If $x,y\in\mathbb{R}$ and $x<y$, then there exists $i\in\mathbb{I}$ such that $x<i<y$.}\par\par\par\par\vspace{4mm} By Theorem 1.33, for any $x,y\in\mathbb{R}$ with $x<y$ there exists $p\in\mathbb{Q}$ such that $x<q<y$. Moreover, by Corollary 1.32 there exists $n\in\mathbb{N}$ such that $\frac{1}{n}<\frac{y-p}{2}$. Thus $p+\frac{\sqrt{2}}{n}<p+\frac{2}{n}<y$ and since $x<p$ then $x<p+\frac{\sqrt{2}}{n}$. Hence $x<p+\frac{\sqrt{2}}{n}<y$. Now assume that $p+\frac{\sqrt{2}}{n}\in\mathbb{Q}$. Then there exists $a,b\in\mathbb{Z}$ such that $b\neq 0$, gcd$(a,b)=1$, and $p+\frac{\sqrt{2}}{n}=\frac{a}{b}$. Hence $\sqrt{2}=\frac{(a-bp)n}{b}\in\mathbb{Q}$. However this contradicts problem 1.3. Therefore $p+\frac{\sqrt{2}}{n}\in\mathbb{I}$. 
+            \end{proof}
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{STAT 215A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newenvironment{solution}
+{\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+{\end{proof}}
+\newenvironment{psmall}{\left(\begin{smallmatrix}}{\end{smallmatrix}\right)}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large STAT 215A}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 02/08/2022   \\
+    { Instructor:}\ Dr. Cetin \hspace{\fill} Assignment:
+    Homework 01 \\ \hrule}
+
+    \begin{enumerate}
+        \item Let $F_1$ and $F_2$ be two sigma-algebras on a sample space
+            $\Omega$. We know that $F_1\cap F_2$ is a sigma-algebra on $\Omega$ 
+            Show that $F_1\cup F_2$ is not necessarily
+            a sigma-algebra on $\Omega$. 
+            \begin{solution}
+                Consider an experiment where two coins are flipped at the same
+                time. If a coin lands on heads, we will denote that with
+                a 1 and tails with a 0. Then the sample space is defined as 
+                \begin{equation*}
+                    \Omega=\{(0, 0), (0, 1), (1, 0), (1, 1)\}.
+                \end{equation*}
+                Let $A=\{(0, 0)\}$ and $B=\{(1, 0)\}$ be two subsets of
+                $\Omega$. Then consider the two following $\sigma$-algebras
+                \begin{align*}
+                    &\mathcal{F}_1=\{\varnothing, A, A^c, \Omega\} \\
+                    &\mathcal{F}_2=\{\varnothing, B, B^c, \Omega\}
+                \end{align*}
+                which happen to be the smallest $\sigma$-algebras containing
+                $A$ and $B$, respectively. The union of these two
+                $\sigma$-algebras is 
+                \begin{align*}
+                    \mathcal{F}_1\cup\mathcal{F}_2&=\{\varnothing, A, B, A^c,
+                    B^c, \Omega\} \\
+                    &=\bigg\{\varnothing, \;\{(0, 0)\}, \;\{(1, 0)\}, \;\{(0, 1), (1, 0),
+                    (1, 1)\}, \;\{(0, 0), (0, 1), (1, 1)\}, \;\Omega\bigg\}.
+                \end{align*}
+                With this we can see that $A\cup B=\{(0, 0), (1, 0)\}$ is not
+                an element of $\mathcal{F}_1\cup\mathcal{F}_2$. Thus it is not
+                true that $\mathcal{F}_1\cup\mathcal{F}_2$ is closed under
+                unions. Therefore, it is not a $\sigma$-algebra. 
+            \end{solution}
+        \item Let $\{A_k:k=1, 2, \dots, n\}$ be finite collection of events in
+            a probability space $(\Omega, \mathcal{F}, \mathbb{P})$. Prove the
+            following inequality for any such finite collection of $n$ events:
+            \begin{equation*}
+                \mathbb{P}\big(\bigcup_{k=1}^nA_k\big)\geq\sum_{k=1}^n\mathbb{P}(A_k)-\sum_{1\leq
+                j<k\leq n}\mathbb{P}(A_j\cap A_k).
+            \end{equation*}
+            \begin{proof}
+                We proceed by induction on $n$. For our base case we let $n=2$.
+                Then 
+                \begin{align*}
+                    \mathbb{P}(A_1\cup A_2) &= \mathbb{P}(A_1\cup(A_2\;\backslash
+                    \;A_1)) \\
+                    &=\mathbb{P}(A_1)+\mathbb{P}(A_2\;\backslash\; A_1) \\
+                    &=\mathbb{P}(A_1)+\mathbb{P}(A_2\;\backslash\;(A_1\cap
+                    A_2)) \\
+                    &=\mathbb{P}(A_1)+\mathbb{P}(A_2)-\mathbb{P}(A_1\cap A_2).
+                \end{align*}
+                With equality we satisfy the claim for $n=2$.\par\hspace{4mm}
+                Now assume the claim is true for some $n\geq 2$. Let
+                $A_{n+1}\in\mathcal{F}$ and let $A=\bigcup_{k=1}^{n} A_k$. Then 
+                \begin{align*}
+                    \mathbb{P}\big(\bigcup_{k=1}^{n+1}A_k\big)&=
+                    \mathbb{P}\big(\bigcup_{k=1}^{n}A_k\cup A_{n+1}\big) \\
+                    &=\mathbb{P}(A\cup A_{n+1}) \\
+                    &= \mathbb{P}(A)+\mathbb{P}(A_{n+1})-\mathbb{P}(A\cap
+                    A_{n+1}) \\
+                    &= \mathbb{P}\big(\bigcup_{k=1}^n
+                    A_k\big)+\mathbb{P}(A_{n+1})-\mathbb{P}\big(\bigcup_{k=1}^{n}A_k\cap
+                    A_{n+1}\big) \\
+                    &\geq
+                    \sum_{k=1}^{n}\mathbb{P}(A_k)+\mathbb{P}(A_{n+1})-\sum_{1\leq
+                    j<k\leq n}\mathbb{P}(A_j\cap A_k)-\mathbb{P}(A_{n+1}) \\
+                    &\geq\sum_{k=1}^{n+1}\mathbb{P}(A_k)-\sum_{1\leq j<k\leq
+                    n+1}\mathbb{P}(A_j\cap A_k).
+                \end{align*}
+                Therefore the claim is true for $n+1$ and so it is true for all
+                $n$. 
+            \end{proof}
+        \item Let $A$, $B$, and $C$ be three events in a probaility space
+            $(\Omega, \mathcal{F}, \mathbb{P})$. 
+            \begin{enumerate}
+                \item Let $D$ be the event that exactly one event in the set
+                    ${A, B}$ occurs. Show that
+                    $\mathbb{P}(D)=\mathbb{P}(A)+\mathbb{P}(B)-2\mathbb{P}(A\cap
+                    B)$.
+                    \begin{proof}
+                        We want to determine the probability of either $A$ or
+                        $B$ happening but not both. Thus we are looking for
+                        $\mathbb{P}(A\vartriangle B)$. Since $A\vartriangle
+                        B=(A\;\backslash\;B)\cup(B\;\backslash\;A)$, then we have
+                        \begin{align*}
+                            \mathbb{P}(A\vartriangle
+                            B)&=\mathbb{P}((A\;\backslash\;B)\cup(B\;\backslash\;A))
+                            \\
+                            &=\mathbb{P}(A\;\backslash\;B)+\mathbb{P}(B\;\backslash\;A)\\
+                            &=\mathbb{P}(A\;\backslash\;(A\cap
+                            B))+\mathbb{P}(B\;\backslash\;(A\cap B)) \\
+                            &=\big(\mathbb{P}(A)-\mathbb{P}(A\cap
+                            B)\big)+\big(\mathbb{P}(B)-\mathbb{P}(A\cap B)\big)
+                            \\
+                            &=\mathbb{P}(A)+\mathbb{P}(B)-2\mathbb{P}(A\cap B).
+                        \end{align*}
+                    \end{proof}
+                \item Let $E$ be the event that at least one event in $\{A, B,
+                    C\}$ occurs. Describe $\mathbb{P}(E)$ in terms of the
+                    probabilities of the events in $\{A, B, C\}$ and/or their
+                    intersection probabilities.
+                    \begin{solution}
+                       To approach this we can ask in what ways can at least
+                       one of these events happen. At least one of these events
+                       can happen in the following ways
+                       \begin{equation*}
+                           \{A, A\cap B, A\cap C, B, B\cap C, C\}.
+                       \end{equation*}
+                       Thus 
+                       \begin{equation*}
+                           E=A\cup(A\cap B)\cup(A\cap C)\cup B\cup(B\cap C)\cup
+                           C=A\cup B\cup C.
+                       \end{equation*}
+                       Then by the Inclusion-Exclusion Principle, we have
+                       \begin{align*}
+                           \mathbb{P}(A\cup B\cup C) =
+                           \mathbb{P}(A)&+\mathbb{P}(B)+\mathbb{P}(C) \\
+                           &-\mathbb{P}(A\cap
+                           B)-\mathbb{P}(A\cap C)-\mathbb{P}(B\cap
+                           C)+\mathbb{P}(A\cap B\cap C).
+                       \end{align*}
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,180 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 161}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 161}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/24/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 3 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item Without constructing truth tables, prove that $\varphi\land\gamma$ logically implies $\theta$ iff $\varphi$ logically implies $\gamma\rightarrow \theta$.
+            \begin{proof}
+                By definition, if $\varphi\land\gamma\Rightarrow\theta$, then $\varphi\land\gamma\rightarrow\theta$ is a tautology. Similarly, $\varphi\Rightarrow(\gamma\rightarrow\theta)$ iff $\varphi\rightarrow(\gamma\rightarrow\theta)$ is a tautology. Note that 
+                    \begin{equation*}
+                        \begin{split}
+                            \varphi\land\gamma\rightarrow\theta &\equiv \sim\varphi\lor\sim\gamma\lor\theta
+                        \end{split}
+                    \end{equation*}
+                and 
+                    \begin{equation*}
+                        \varphi\rightarrow(\gamma\rightarrow\theta)\equiv\sim\varphi\lor(\gamma\rightarrow\theta)\equiv\sim\varphi\lor\sim\gamma\lor\theta.
+                    \end{equation*}
+                Hence $\varphi\land\gamma\rightarrow\theta\equiv\varphi\rightarrow(\gamma\rightarrow\theta)$. Thus if the left hand side is a tautology, then the right hand side is a tautology and vice versa.
+            \end{proof}
+        \item Prove that $\vdash_L(\sim\varphi\rightarrow\sim\gamma)\rightarrow((\sim\varphi\rightarrow\gamma)\rightarrow\varphi)$.
+            \begin{proof}
+                Let $L=\Gamma$ and consider $\Gamma\cup\{\sim\varphi\rightarrow\sim\gamma\}$. Then 
+                    \begin{align*}
+                        &(1) \quad\sim\varphi\rightarrow\sim\gamma &&\text{axiom} \\
+                        &(2) \quad(\sim\varphi\rightarrow\sim\gamma)\rightarrow\sim\varphi &&\text{A1} \\
+                        &(3) \quad\sim\varphi && \text{MP on (1) and (2)} \\
+                        &(4) \quad\sim\gamma && \text{MP on (1) and (3)} \\
+                        &(5) \quad\sim\varphi\land\sim\gamma && \text{Conj. of (3) and (4)} \\
+                        &(6) \quad(\sim\varphi\land\sim\gamma)\lor\varphi && \text{Logically equiv. to (5)} \\
+                        &(7) \quad\sim(\varphi\lor\gamma)\lor\varphi && \text{Logically equiv. to (6)} \\
+                        &(8) \quad\sim(\sim\varphi\rightarrow\gamma)\lor\varphi && \text{Logically equiv. to (7)} \\
+                        &(9) \quad(\sim\varphi\rightarrow\gamma)\rightarrow\varphi && \text{Logically equiv. (8)}
+                    \end{align*}
+                Thus $\Gamma\cup\{\sim\varphi\rightarrow\sim\gamma\}\vdash(\sim\varphi\rightarrow\gamma)\rightarrow\varphi$. Hence, by the Deduction Theorem
+                    \begin{equation*}
+                        \vdash_L(\sim\varphi\rightarrow\sim\gamma)\rightarrow((\sim\varphi\rightarrow\gamma)\rightarrow\varphi).
+                    \end{equation*}
+            \end{proof}\newpage
+        \item Explain why each line below is a line of a proof, and then complete the proof so that line (8) is $\varphi$. Explain why from this proof we can conclude $\sim\sim\varphi\rightarrow\varphi$.
+            \begin{solution} 
+                Consider $L\cup\{\sim\sim\varphi\}$.
+                    \begin{align*}
+                        &(1) \quad\sim\sim\varphi &&\text{axiom} \\
+                        &(2) \quad\sim\sim\varphi\rightarrow(\sim\sim\sim\sim\varphi\rightarrow\sim\sim\varphi) &&\text{A1} \\
+                        &(3) \quad\sim\sim\sim\sim\varphi\rightarrow\sim\sim\varphi && \text{MP on (1) and (2)} \\
+                        &(4) \quad(\sim\sim\sim\sim\varphi\rightarrow\sim\sim\varphi)\rightarrow(\sim\varphi\rightarrow\sim\sim\sim\varphi) && \text{A3} \\
+                        &(5) \quad\sim\varphi\rightarrow\sim\sim\sim\varphi && \text{MP on (3) and (4)} \\
+                        &(6) \quad(\sim\varphi\rightarrow\sim\sim\sim\varphi)\rightarrow(\sim\sim\varphi\rightarrow\varphi) && \text{A3} \\
+                        &(7) \quad\sim\sim\varphi\rightarrow\varphi && \text{MP on (5) and (6)} \\
+                        &(8) \quad\varphi && \text{MP on (1) and (7)} \\
+                    \end{align*}
+                Thus, by the Deduction Theorem, $\vdash_L\sim\sim\varphi\rightarrow\varphi$.
+            \end{solution}
+        \item Explain why each line below is a line in a proof (and then $\vdash_L \varphi\rightarrow\sim\sim\varphi$).
+            \begin{solution}
+                    \begin{align*}
+                        &(1) \quad(\sim\sim\sim\varphi\rightarrow\sim\varphi)\rightarrow((\sim\sim\sim\varphi\rightarrow\varphi)\rightarrow\sim\sim\varphi) &&\text{A2} \\
+                        &(2) \quad\sim\sim\sim\varphi\rightarrow\sim\varphi&&\text{Theorem from question (3)} \\
+                        &(3) \quad(\sim\sim\sim\varphi\rightarrow\varphi)\rightarrow\sim\sim\varphi&& \text{MP on (1) and (2)} \\
+                        &(4) \quad\varphi\rightarrow(\sim\sim\sim\varphi\rightarrow\varphi) && \text{A1} \\
+                        &(5) \quad\sim\varphi\rightarrow\sim\sim\sim\varphi && \text{?} \\
+                    \end{align*}
+                Since $\sim\varphi\rightarrow\sim\sim\sim\varphi$, then letting $\gamma:=\sim\varphi$, it follows that $\gamma\rightarrow\sim\sim\gamma$.
+            \end{solution}
+        \item Assume that $J$ is an extension of $L$, that $J\vdash\varphi$, and that $\varphi$ logically implies $\theta$. Explain why $J\vdash\theta$.
+            \begin{solution}
+                Since $\varphi\rightarrow\theta$ is a tautology in $L$, then by the Adequacy Theorem for Propositional Logic, $\vdash_L\varphi\rightarrow\theta$. Moreover, with $J$ an extension of $L$, it follows by definition that $J\vash\varphi\rightarrow\theta$. By the Deduction Theorem, $J\cup\{\varphi\}\vdash\theta$. But since $\varphi$ is a sentence letter of $L$ and $J$ is an extension of $L$, then $\varphi$ is a sentence letter of $J$. Thus $J\cup\{\varphi\}=J$. Hence, $J\vdash\theta$.
+            \end{solution}\newpage
+        \item Assume $N(x)$ denotes ``$x$ is a real number'', $R(x)$ denotes ``$x$ is rational'', and $S(x)$ denotes the square root of $x$ -- then express the following statements symbolically. Do each first without using $\exists$, and then again without using $\forall$. Try to simplify the symbolic expressions.
+            \begin{enumerate}
+                \item ``Every real number is either rational or irrational''.
+                    \begin{solution}\hfill\par
+                        \begin{enumerate}
+                            \item $\forall x\colon N(x)\rightarrow(R(x)\lor\sim R(x))$
+                            \item $\exists x\colon N(x)\land(\sim(R(x)\lor\sim R(x)))$
+                        \end{enumerate}
+                    \end{solution}
+                \item ``There exists a real number whose square root is irrational''.
+                    \begin{solution}\hfill\par 
+                        \begin{enumerate}
+                            \item $\forall x\colon \sim N(x)\lor\sim R(S(x))$
+                            \item $\exists x\colon N(x)\land R(S(x))$
+                        \end{enumerate}
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

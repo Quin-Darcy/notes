@@ -1,0 +1,169 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 161}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 161}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/17/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 2 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item For each of the following wffs, find (and show your process) logically equivalent wffs that contain only the logical symbols $\sim$, and $\land$:
+            \begin{enumerate}
+                \item $p\rightarrow(q\rightarrow r)$
+                    \begin{solution}
+                        \begin{equation*}
+                            \begin{split}
+                                p\rightarrow(q\rightarrow r) &\equiv \sim p\lor(p\rightarrow r)\\
+                                &\equiv \sim p\lor(\sim q\lor r) \\
+                                &\equiv \sim(p\land\sim(\sim q\lor r)) \\
+                                &\equiv \sim\big(p\land\sim\big(\sim(q\land\sim r)\big)\big) \\
+                                &\equiv \sim\big(p\land(q\land\sim r)\big) \\
+                                &\equiv \sim\big(p\land q\land\sim r\big).
+                            \end{split}
+                        \end{equation*}
+                    \end{solution}
+                \item $(p\leftrightarrow(\sim q))\leftrightarrow r$. 
+                    \begin{solution}
+                        \begin{equation*}
+                            \begin{split}
+                                (p\leftrightarrow(\sim q))\leftrightarrow r &\equiv \left[((p\rightarrow(\sim q))\land(\sim q\rightarrow p))\rightarrow r\right]\land\left[r\rightarrow((p\rightarrow(\sim q))\land(\sim q\rightarrow p))\right] \\
+                                &\equiv \left[\sim((p\rightarrow(\sim q))\land(\sim q\rightarrow p))\lor r\right]\land\left[\sim r\lor((p\rightarrow(\sim q))\land(\sim q\rightarrow p))\right] \\
+                                &\equiv \left[\sim((\sim p\lor\sim q)\land(q\lor p))\lor r\right]\land\left[\sim r\lor((\sim p\lor\sim q)\land(q\lor p))\right] \\
+                                &\equiv \left[\sim(\sim(p\land q)\land\sim(\sim q\land \sim p))\lor r\right]\land\left[\sim r\lor(\sim(p\land q)\land\sim(\sim q\land \sim p))\right] \\
+                            \end{split}
+                        \end{equation*}
+                        \begin{equation*}
+                            \equiv\left[\sim((\sim(p\land q)\land\sim(\sim q\land \sim p))\land\sim r)\right]\land\left[\sim(r\land\sim((\sim(p\land q)\land\sim(\sim q\land \sim p))))\right]
+                        \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+        \item For the following wff, find (and show your process) a logically equivalent wff that contains only the logical symbols $\sim$, and $\rightarrow$:
+            \begin{enumerate}
+                \item $(p\land q)\lor(r\land s)$
+                    \begin{solution}
+                        \begin{equation*}
+                            \begin{split}
+                                (p\land q)\lor(r\land s)&\equiv \sim(\sim p\lor\sim q)\lor\sim(\sim r\lor\sim s) \\
+                                &\equiv \sim(p\rightarrow(\sim q))\lor\sim(r\rightarrow(\sim s)) \\
+                                &\equiv (p\rightarrow(\sim q))\rightarrow(\sim(r\rightarrow(\sim s))).
+                            \end{split}
+                        \end{equation*}
+                    \end{solution}
+            \end{enumerate}\newpage
+        \item[5.] Prove that $p\rightarrow(q\lor r)\equiv(p\rightarrow q)\lor(p\rightarrow r)$.
+            \begin{proof}
+                \begin{equation*}
+                    \begin{split}
+                        p\rightarrow(q\lor r) &\equiv \sim p\lor(q\lor r) \\
+                        &\equiv (\sim p\lor \sim p)\lor(q\lor r) \\
+                        &\equiv \sim p\lor(\sim p\lor q)\lor r \\
+                        &\equiv \sim p\lor(q\lor\sim p)\lor r \\
+                        &\equiv (\sim p\lor q)\lor(\sim p\lor r) \\
+                        &\equiv (p\rightarrow q)\lor(p\rightarrow r).
+                    \end{split}
+                \end{equation*}
+            \end{proof}
+        \item[6.] Prove that for any wffs, $\varphi, \gamma, \theta$ of $L$, $\{\varphi\rightarrow\gamma, \gamma\rightarrow\theta\}\vdash_L \varphi\rightarrow\theta$.
+            \begin{proof} Let $\Gamma=\{\varphi\rightarrow\gamma,\gamma\rightarrow\theta\}$. Then we will show that $\Gamma\cup\{\varphi\}\vdash_L\theta$.
+                \begin{align*}
+                    &(1) \quad\varphi &&\text{Axiom} \\
+                    &(2) \quad\varphi\rightarrow\gamma &&\text{Axiom} \\
+                    &(3) \quad\gamma && \text{MP on (1) and (2)} \\
+                    &(4) \quad\gamma\rightarrow\theta && \text{Axiom} \\
+                    &(5) \quad\theta && \text{MP on (3) and (4)} \\
+                \end{align*}
+            Hence, $\Gamma\cup\{\varphi\}\vdash_L\theta$ as desired. By the Deduction Theorem it then follows that $\Gamma\vdash_L\varphi\rightarrow\theta$.
+            \end{proof}
+    \end{enumerate}
+    
+\end{document}

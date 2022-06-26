@@ -1,0 +1,165 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/9/19   \\
+{ \textbf{Instructor:}} \ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 5 \\ \hrule}
+
+\justifying
+
+\begin{enumerate}[leftmargin=*]
+    \item Assume that $G$ is a group, and $a\in G$\hfill\par
+        \begin{enumerate}[label=(\alph*)]
+            \item Assume that $o(a)=r$, and that $m\mid r$, say $r=mt$. Prove that $o(a^t)=m$.
+                \begin{proof}
+                    Let $y=o(a^t)$. From the above assumption, it follows that $a^r=a^{mt}=(a^t)^m=e$. Thus, by 5 of hw 1, $y\mid m$. Thus, there exists $k_1\in\mathbb{Z}$ such that $m=k_1y$. By the division algorithm, there exists $\alpha,\beta\in\mathbb{Z}$ with $0\leq \beta<m$ such that $y=\alpha m+\beta$. Thus,
+                    
+                    \begin{equation*}
+                        \begin{split}
+                            (a^t)^y &= (a^t)^{\alpha m+\beta} \\
+                            &= (a^t)^{\alpha m}(a^t)^{\beta} \\
+                            &= \big((a^t)^m\big)^{\alpha}(a^t)^{\beta} \\
+                            &= e^{\alpha}(a^t)^{\beta} \\
+                            &= (a^t)^{\beta} \\
+                            &= e.
+                        \end{split}
+                    \end{equation*}
+                    
+                    Hence, by 5 of hw 1, $y\mid \beta$. Thus, there exists $k_2\in\mathbb{Z}$ such that $\beta=k_2 y$. Note that since $y>0$ by definition, then since $y=\alpha m+\beta$ and $m>\beta$, then it follows that $\alpha m>0$ and $\beta\geq 0$. Now substituting for $m$ and $\beta$ we get that 
+                    
+                    \begin{equation*}
+                        y=\alpha(k_1 y)+(k_2y).
+                    \end{equation*}
+                    
+                    Since $\alpha k_1\in\mathbb{Z}$, then for ease of notation we will let $n=\alpha k_1$ and $k=k_2$. Thus, $y=ny+ky$. Thus, $1=n+k$. Since $n>0$ and $k\geq 0$ and both $n$ and $k$ are integers, then it follows that $k=0$ and $n=1$. Thus, $\alpha k_1=1$. Thus, $\alpha=1$ and $k_1=1$. Thus, $m=k_1 y=y$. Therefore, $o(a^t)=y=m$. 
+                \end{proof}
+                
+            \item Assume that $G/\langle a\rangle$ has an element $\langle a\rangle d$ of order $m$. Let $o(d)=k$. Prove that $m\mid k$, and if $k=ms$ then $o(d^s)=m$.
+                \begin{proof}
+                    It follows from our assumptions that $d^k=e$. Thus, $\big(\langle a\rangle d\big)^k=\langle a\rangle d^k=\langle a\rangle$. Thus, by 5 of hw 1, $m\mid k$. Since $o(d)=k$ and $m\mid k$, which implies $k=ms$ for $s\in\mathbb{Z}$, then by (a), $o(d^s)=m$.
+                \end{proof}
+        \end{enumerate}
+        
+    \item Recall (from p 10) that if $\sigma,\tau\in S_n$, and $\sigma=(a_1a_2\dots a_k)$ is a cycle of length $k$, then $\tau\circ \sigma\circ\tau^{-1}=(\tau(a_1)\tau(a_2)\dots\tau(a_k))$. Using this, prove that if $n>2$, then $Z(S_n)=\{(1)\}$. 
+        \begin{proof}
+            Recall that $Z(S_n)=\{\sigma\in S_n\mid\forall\tau\in S_n\colon \tau\circ\sigma\circ\tau^{-1}=\sigma\}$. Let $n>2$, $\sigma\in Z(S_n)$, and suppose $\sigma=(a_1a_2\dots a_k)$. Then it follows that for all $\tau\in S_n$
+            
+            \begin{equation*}
+                \tau\circ\sigma\circ\tau^{-1}=\sigma.
+            \end{equation*}
+            
+            Thus, 
+            
+            \begin{equation*}
+                \tau\circ\sigma\circ\tau^{-1}=(\tau(a_1)\tau(a_2)\dots\tau(a_k))=(a_1a_2\dots a_k).
+            \end{equation*}
+            
+            It follows that $\tau(a_i)=a_i$ for all $1\leq i\leq k$. Thus, $\tau=(1)$. Thus, for all $\sigma\in Z(S_n)$, the conjugate of $\sigma$ is the identity. By pg. 10, two permutations are conjugates iff they have the same cycle structure. Thus, since $\tau$ is the conjugate of $\sigma$ and $\tau$ has cycle structure 1, then $\sigma$ has cycle structure 1. Thus, $\sigma=(1)$. Hence, if $\sigma\in Z(S_n)$, then $\sigma\in\{(1)\}$. Thus, $Z(S_n)\subseteq\{(1)\}$.\par\hspace{4mm} Now let $\sigma\in\{(1)\}$. Then $\sigma=(1)$. Then if $\tau\in S_n$, we have that $\tau\circ(1)\circ\tau^{-1}=(1)$. Hence, $(1)\in Z(S_n)$. Thus, $\{(1)\}\subseteq Z(S_n)$. Therefore, $Z(S_n)=\{(1)\}$.
+        \end{proof}
+        
+    \item[4.] Assume that $G=\langle a\rangle$, and $o(G)=n$. Prove that $\text{Aut}(G)\cong (\mathbb{Z}_{(n)},\odot)$.
+        \begin{proof}
+            Let $f\colon\text{Aut}(G)\rightarrow\mathbb{Z}_{(n)}$ be defined as $f(\theta)=[k]$ where $\theta(a)=a^k$, where $k\in\mathbb{Z}$ such that $(n,k)=1$. By definition, $f$ is defined over Aut$(G)$. Next, we will check if $f$ is well defined. Let $\theta,\gamma\in\text{Aut}(G)$ and assume $\theta=\gamma$. Then we want to show that $f(\theta)=f(\gamma)$. We have that $\theta(a)=a^i$ and $\gamma(a)=a^j$. Thus, $f(\theta)=[i]$ and $f(\gamma)=[j]$. Since $\theta=\gamma$, then $a^i=a^j$. Thus, $\theta(a)=a^j$. Hence, $f(\theta)=[j]=f(\gamma)$. So $f$ is well defined.\par\hspace{4mm} Now assume that $f(\theta)=f(\gamma)$. Then $[i]=[j]$. Thus, $i\in[j]$ and so there exists some $m\in\mathbb{Z}$ such that $i=mn+j$. Thus, $a^{i}=a^{mn+j}=a^{mn}a^j=a^j$. It follows that $\theta(a)=\gamma(a)$, and since $a$ generates $G$, then $\theta=\gamma$. Hence, $f$ is 1-1.\par\hspace{4mm} Now let $[k]\in\mathbb{Z}_{(n)}$. Now consider some $\varphi$ whose domain is $G$, where $\varphi(a)=a^k$. Then we want to show that $\varphi\in\text{Aut}(G)$. By definition, $\text{ran}(\varphi)\subseteq G$ and so $\varphi\colon G\rightarrow G$. Now assume that $x,y\in G$ and that $x=y$. Then since $G=\langle a\rangle$, then $x=a^s$ and $y=a^t$, for some $s,t\in\mathbb{Z}$. Thus, $\varphi(x)=\varphi(a^s)=(a^s)^k$, and $\varphi(y)=\varphi(a^t)=(a^t)^k$. But since $a^s=a^t$, then $(a^s)^k=(a^t)^k$. Thus, $\varphi(x)=\varphi(y)$. Thus, $\varphi$ is well defined. Now let $a^i,a^j\in G$. Then $\varphi(a^ia^j)=\varphi(a^{i+j})=(a^{i+j})^k=a^{ik}a^{jk}=\varphi(a^i)\varphi(a^j)$. Thus, $\varphi$ is a homomorphism. Now assume $\varphi(x)=\varphi(y)$. Thus, $(a^s)^k=(a^t)^k$, for some $s,t\in\mathbb{Z}$. Thus, $a^{k(s-t)}=e$. Then $n\mid k(s-t)$, Since $(n,k)=1$, then $n\mid(s-t)$. Thus, $s=qn+t$, for some $q\in\mathbb{Z}$. Thus, $a^s=a^{qn+t}=a^{qn}a^t=a^t$. Hence, $x=y$ and $\varphi$ is 1-1. Since $(n,k)=1$, then $\langle a\rangle=\langle a^k\rangle$. Thus, $\varphi$ is onto. Therefore, $\varphi\in\text{Aut}(G)$ and $f(\varphi)=[k]$. Thus, $f$ is onto.\par\hspace{4mm} Now we want to show that $f$ is a homomorphism. Let $\theta,\gamma\in\text{Aut}(G)$ and suppose $\theta(a)=a^i$ and $\gamma(a)=a^j$. Then we have that $(\theta\circ\gamma)(a)=\theta(\gamma(a))=\theta(a^j)=(a^j)^i=a^{ji}$. Then $f(\theta\circ\gamma)=[ji]=[j]\odot[i]=f(\gamma)\odot f(\theta)=f(\theta)\odot f(\gamma)$. Thus, $f$ is a homomorphism. Therefore, $f$ is an isomorphism. Hence, $\text{Aut}(G)\cong(\mathbb{Z}_{(n)},\odot)$. 
+        \end{proof}
+        
+    \item[6.] Assume that $G$ is a group, $k\in\mathbb{Z}^{+}$, and that $p^k\mid o(G)$. Let $S=\{H\subseteq_g G\colon o(H)=p^k\}$. On exam 1 we proved that $\varph\colon G\times S\rightarrow S$ by $\varphi(g,H)=gHg^{-1}$ is an action of $G$ on $S$. Let $R$ be one of the orbits under this action (so $R\subseteq S$), and let $P\in S$. Define $\theta$ with domain $P\times R$ by $\theta(d,H)=dHd^{-1}$. Explain why $\theta$ is an action of $P$ on $R$.
+        \begin{proof}
+            In order for $\theta$ to be an action of $P$ on $R$, we first need that $\theta\colon P\times R\rightarrow R$. We can see that this holds since $R=\{gMg^{-1}\colon g\in G\}$, for some $M\in S$, and for any $(d,H)\in P\times R$, it follows that $\theta(d,H)=\theta(d,gMg^{-1})=d(gMg^{-1})d^{-1}$. Thus, because $dg\in G$, then $d(gMg^{-1})d=(dg)M(dg)^{-1}\in R$. Thus, $\theta(d,H)\in R$ for all $(d,H)\in P\times R$. Thus, $\theta\colon P\times R\rightarrow R$. Now let $c,d\in P$ and $H\in R$, then 
+            
+            \begin{equation*}
+                \theta(cd, H)=(cd)H(cd)^{-1}=c(dHd^{-1})c^{-1}=\theta(c,dHd^{-1})=\theta(c,\theta(d,H)).
+            \end{equation*}
+            
+            Lastly, consider
+            
+            \begin{equation*}
+                \theta(e,H)=eHe^{-1}=H.
+            \end{equation*}
+            
+            Thus, $\theta$ is an action of $P$ on $R$.
+        \end{proof}
+\end{enumerate}
+
+\end{document}

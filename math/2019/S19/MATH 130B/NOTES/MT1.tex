@@ -1,0 +1,369 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1.2in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\newenvironment{twoproof}{\tabular{@{\stepproofc}c|l}}{\endtabular}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=10mm,labelindent=8mm, rightmargin=10mm}
+\setlength{\parindent}{4mm}
+
+\begin{document}
+
+\section{MT1 Review}
+
+\hline
+
+\vspace{2mm}
+
+\centerline{DEFINITIONS}
+
+\vspace{2mm}
+
+\hline
+
+\vspace{4mm}\par 
+
+ \hspace{4mm}\textbf{Topology:} A \textit{topology} on a set $X$ is a collection $\mathcal{O}$ of subsets of $X$ having the following properties:
+
+\begin{enumerate}[label=(\arabic*)]
+    \item $\varnothing$ and $X$ are in $\mathcal{O}$.
+    \item The union of the elements of any arbitrary subcollection of $\mathcal{O}$ is in $\mathcal{O}$.
+    \item The intersection of the elements of any finite subcollection of $\mathcal{O}$ is in $\mathcal{O}$.
+\end{enumerate}
+
+\vspace{4mm}\par
+
+\textbf{Topological Space:} A set $X$ for which a topology $\mathcal{O}$ has been specified is called a \textit{topological space}.
+
+\vspace{4mm}\par
+
+\textbf{Open Set:} If $X$ is a topological space with topology $\mathcal{O}$, we say that a subset $U$ of $X$ is an \textit{open set} of $X$ if $U$ belongs to the collection $\mathcal{O}$.
+
+\vspace{4mm}\par
+
+\textbf{Open Set(2):} A set $O\subseteq\mathbb{R}$ is \textit{open} if for all points $a\in O$, there exists an $\epsilon$-neighborhood $V_{\epsilon}(a)\subseteq O$.
+
+\vspace{4mm}\par
+
+\textbf{Basis:} If $X$ is a set, a \textit{basis} for a topology on $X$ is a collection $\mathcal{B}$ of subsets of $X$ (called \textit{basis elements}) such that
+
+\begin{enumerate}[label=(\arabic*)]
+    \item For each $x\in X$, there is at least one basis element $B$ containing $x$.
+    \item If $x$ belongs to the intersection of two basis elements $B_1$ and $B_2$, then there is a basis element $B_3$ containing $x$ such that $B_3\subset B_1\cap B_2$.
+\end{enumerate}
+
+\vspace{4mm}\par
+
+\textbf{Closed Set (1):} A subset $A$ of a topological space $X$ is said to be a \textit{closed set} if the set $X-A$ is open.
+
+\vspace{4mm}\par
+
+\textbf{Closed Set (2):} A subset $A$ of a topological space $X$ is said to be closed if it contains all of its limit points.
+
+\vspace{4mm}\par
+
+\textbf{Interior:} Given a subset $A$ of a topological space $X$, the \textit{interior} of $A$ is defined as the union of all open sets contained in $A$.
+
+\vspace{4mm}\par
+
+\textbf{Closure:} Given a subspace $A$ of a topological space $X$, the \textit{closure} of $A$ is defined as the intersection of all closed sets containing $A$.
+
+\vspace{4mm}\par
+
+\textbf{Limit Point (1):} If $A$ is a subset of the topological space $X$ and if $x$ is a point of $X$, we say $x$ is a \textit{limit point} of $A$ if every open set containing $x$ (or ``neighborhood of $x$'') intersects $A$ in some point other than $x$.
+
+\vspace{4mm}\par
+
+\textbf{Limit Point (2):} Given a subset $K\subset X$ and a point $x\in X$. We say $x$ is a \textit{limit point} of $K$ if there exists a sequence $(x_n)\subseteq K$ which converges to $x$
+
+\vspace{4mm}\par
+
+\textbf{Separation/Connected:} Let $X$ be a topological space. A \textit{separation} of $X$ is a pair $U$, $V$ of disjoint nonempty open subsets of $X$ whose union is $X$. The space $X$ is said to be \textit{connected} if there does not exist a separation of $X$.
+
+\vspace{4mm}\par
+
+\textbf{Cover:} A collection $\matcal{A}$ of subsets of a space $X$ is said to \textit{cover} $X$, if the union of the elements of $\mathcal{A}$ is equal to $X$. It is called an \textit{open covering} if its elements are open subsets.
+
+\vspace{4mm}\par
+
+\textbf{Compact:} A space $X$ is said to be compact if every open covering $\mathcal{A}$ of $X$ contains a finite subcollection that also covers $X$.
+
+\vspace{4mm}\par
+
+\textbf{Functional Limit:} Let $f\colon A\rightarrow\mathbb{R}$ and let $c$ be a limit point of the domain. We say $\lim_{x\rightarrow c}f(x)=L$ provided that, for all $\varepsilon>0$, there exists $\delta>0$ such that whenever $\abs{x-c}<\delta$ (and $x\in A$) it follows that $\abs{f(x)-f(c)}<\varepsilon$.
+
+\vspace{4mm}
+
+\newpage
+
+\hline
+
+\vspace{2mm}
+
+\centerline{THEOREMS}
+
+\vspace{2mm}
+
+\hline
+
+\vspace{4mm}\par
+
+\textbf{Arbitrary Union:} \textit{The union of an arbitrary collection of open sets is open.}
+
+\begin{description}
+    \item\textit{\textbf{Proof.}} Let $\{O_{\lambda}\colon \lambda\in\Lambda\}$ be an arbitrary collection of open subsets and let $O=\bigcup_{\lambda\in\Lambda}O_{\lambda}$. Now let $x\in O$. It follows that there is some $\beta\in \Lambda$ for which $x\in O_{\beta}$. By assumption, $O_{\beta}$ is an open set and thus there exists some $\epsilon$-neighborhood $V_{\epsilon}(x)\subseteq O_{\beta}$. Moreover, since $O_{\beta}\subseteq O$, then $V_{\epsilon}(x)\subseteq O$. Thus, for all $x\in O$, there exists an $\epsilon$-neighborhood $V_{\epsilon}(x)\subseteq O$. Therefore, the union of an arbitrary collection of open sets is open. $\square$
+\end{description}
+
+\par
+
+\textbf{Finite Intersection:} \textit{The intersection of a finite collection of open sets is open.}
+
+\begin{description}
+    \item\textit{\textbf{Proof.}} Let $\{O_1, \dots, O_N\}$ be a finite collection of open sets where $N\in\mathbb{N}$ and Let $O=\bigcap_{k=1}^{N} O_k$. Now let $x\in O$. Then for all $k$, where $1\leq k\leq N$, $x\in O_k$. Thus, for each $k$, these exists an $\epsilon$-neighborhood with a particular $\epsilon_k$ for which $V_{\epsilon_k}(x)\subseteq O_k$. Let $\epsilon=\min\{\epsilon_1,\dots,\epsilon_N\}$. Then $V_{\epsilon}(x)\subseteq O$ for all $x\in O$. Therefore, the intersection of a finite collection of open sets is open. $\square$
+\end{description}
+
+\vspace{4mm}\par
+
+\textbf{Extreme Value Theorem (Topo.):} \textit{ Let $f\colon X\rightarrow Y$ be continuous, where $Y$ is an ordered set in the order topolgy. If $X$ is compact, then there exists points $c$ and $d$ in $X$ such that $f(c)\leq f(x)\leq f(d)$ for every $x\in X$.}
+
+\begin{description}
+    \item\textit{\textbf{Proof.}} Since $f$ is continuous and $X$ is compact, then the set $A=f(X)$ is compact. We show that $A$ has a largest element $M$ and smallest element $m$. Then since $m$ and $M$ belong to $A$, we must have $m=f(c)$ and $M=f(d)$ for some points $c$ and $d$ in $X$. If $A$ has no largest element, then the collection
+    
+    \begin{equation*}
+        \{(-\infty, a)\mid a\in A\}
+    \end{equation*}
+    
+    forms an open covering of $A$. Since $A$ is compact, then there exists a finite subcovering 
+    
+    \begin{equation*}
+        \{(-\infty, a_1),\dots,(-\infty, a_n)\}
+    \end{equation*}
+    
+    which covers $A$. If $a_i$ is the largest of the elements $a_1,\dots, a_n$, then $a_i$ does not belong to any of these sets, contrary to the fact that they cover $A$. A similar argument shows that $A$ must have a smallest element. $\square$
+\end{description}
+
+\vspace{4mm}\par
+
+\textbf{Extreme Value Theorem:} \textit{If $f\colon K\rightarrow\mathbb{R}$ is continuous on a compact set $K\subseteq\mathbb{R}$, then $f$ attains a maximum and minimum value. In other words, there exists $x_0,x_1\in K$ such that $f(x_0)\leq f(x)\leq f(x_1)$ for all $x\in K$.}
+
+\begin{description}
+
+    \item\textit{\textbf{Proof.}} Because $f(K)$ is compact, we can set $\alpha=\sup f(K)$ and know that $\alpha\in f(K)$. It follows that there exists $x_1\in K$ with $\alpha=f(x_1)$. The argument for the minimum value is similar. $\square$
+
+\end{description}
+
+\vspace{4mm}
+
+\textbf{Image of Connected Spaces: } \textit{The image of a connected space under a continuous map is connected.}
+
+\begin{description}
+    \item\textit{\textbf{Proof.}} Let $f\colon X\rightarrow Y$ be a continuous map; let $X$ be connected. We want to show that the image set $Z=f(X)$ is connected. Since the map obtained by restricting the range of $f$ to the space $Z$ is also continuous, then consider the surjective map 
+    
+    \begin{equation*}
+        g\colon X\rightarrow Z.
+    \end{equation*}
+    
+    Suppose that $Z=A\cup B$ is a separation of $Z$ into two disjoint nonempty sets open in $Z$. Then $g^{-1}(A)$ and $g^{-1}(B)$ are disjoint sets whose union is $X$; they are open in $X$ since $g$ is continuous, and nonempty since $g$ is surjective. Therefore, they form a separation of $X$, contradicting the assumption that $X$ is connected. $\square$
+\end{description}
+
+\vspace{4mm}
+
+\textbf{Intermediate Value Theorem (Topo.):} \textit{ Let $f\colon X\rightarrow Y$ be a continuous map of the connected space $X$ into the ordered set $Y$, in the order topology. If $a$ and $b$ are two points of $X$ and if $r$ is a point of $Y$ lying between $f(a)$ and $f(b)$, then there exists a point $c$ in $X$ such that $f(c)=r$.}
+
+\begin{description}
+    \item\textit{\textbf{Proof.}} Assume the hypothesis of the theorem. Now construct the following two sets 
+    
+    \vspace{2mm}
+    
+    \centerline{$A=f(X)\cap(-\infty,r)$ \hspace{2mm}and\hspace{2mm} $B=f(X)\cap(r,\infty)$.}
+    
+    \vspace{2mm}
+    
+    These two sets are disjoint and they are open in $f(X)$ since they are the intersection of $f(X)$ with open rays. If there did not exists $c\in X$ for which $f(c)=r$, then $A\cup B=f(X)$ and $A$ and $B$ form a separation on $f(X)$. This is a contradiction however, since the image of a connected space is connected. Therefore, there must exist $c\in X$ such that $f(c)=r$. $\square$
+\end{description}
+
+\newpage
+
+\textbf{Preservation of Compact Sets (Topo.): } \textit{The image of a compact space under a continuous map is compact.}
+
+\begin{description}
+    \item\textit{\textbf{Proof.}} Let $f\colon X\rightarrow Y$ be continuous; let $X$ be compact. Let $\mathcal{A}$ be a covering of the set $f(X)$ by sets open in $Y$. The collection
+    
+    \begin{equation*}
+        \{f^{-1}(A)\mid A\in\mathcal{A}\}
+    \end{equation*}
+    
+    is a collection a collection of sets covering $X$; these sets are open in $X$ because $f$ is continuous. Hence finitely many of them, say
+    
+    \begin{equation*}
+        f^{-1}(A_1), \dots, f^{-1}(A_n).
+    \end{equation*}
+    
+    cover $X$. Then the sets $A_1,\dots,A_n$ cover $f(X)$. $\square$
+\end{description}
+
+\vspace{4mm}\par
+
+\textbf{Preservation of Compact Sets:} \textit{Let $f\colon A\rightarrow\mathbb{R}$ be continuous on $A$. If $K\subseteq A$ is compact, then $f(K)$ is compact.}
+
+\begin{description}
+    \item\textit{\textbf{Proof.}} Let $(y_n)$ be an arbitrary sequence contained in the range set $f(K)$. To prove this result, we must find a subsequence $(y_{n_k})$, which converges to a limit also in $f(K)$. To assert that $(y_n)\subseteq f(K)$ means that, for each $n\in\mathbb{N}$, we can find (at least one) $x_n\in K$ with $f(x_n)=y_n$. This yields a sequence $(x_n)\subseteq K$. Because $K$ is compact, there exists a convergent subsequence $(x_{n_k})$ whose limit $x=\lim x_{n_k}$ is also in $K$. Since $f$ is continuous on $K$ and $x\in K$, then $f$ is certainly continuous at $x$. Given that $(x_{n_k})\rightarrow x$, we conclude that $(y_{n_k})\rightarrow f(x)$. Because $x\in K$, we have that $f(x)\in f(X)$, and hence $f(X)$ is compact. $\square$ 
+\end{description}
+
+\newpage
+
+\hline
+
+\vspace{2mm}
+
+\centerline{PROOFS TO KNOW}
+
+\vspace{2mm}
+
+\hline
+
+\begin{enumerate}
+    \item Using the definition of functional limit, prove that $\lim\limits_{x\rightarrow 1}\bigg(\frac{x^3}{x-1}-\frac{1}{x-1}\bigg)=3$.
+    
+    \begin{description}
+        \item\textit{\textbf{Scratch Work.}} Let $\varepsilon_0>0$. Then we need
+        
+        \begin{equation*}
+            \abs{\frac{x^3}{x-1}-\frac{1}{x-1}-3} =\abs{(x-1)(x+2)} = \abs{x-1}\cdot\abs{x+2} <\varepsilon_0.
+        \end{equation*}
+        
+        Thus, 
+        
+        \begin{equation*}
+            \abs{x-1}<\frac{\varepsilon_0}{\abs{x+2}}.
+        \end{equation*}
+        
+        Now assume $\delta\leq 1$. Then $\abs{x-1}<1$ implies $-1<x-1<1$, which means $0<x<2$. Thus, $\abs{x+2}$ cannot be any bigger than 4. Hence, 
+        
+        \begin{equation*}
+            \abs{x-1}<\frac{\varepsilon_0}{4}.
+        \end{equation*}
+        
+        So we want $\delta\leq \varepsilon_0/4$ while insisting that $\delta\leq 1$. So we will take the smallest possible $\delta$ in this range by letting $\delta=\min\{\varepsilon_0/4, 1\}$.
+        
+        \item\textit{\textbf{Proof.}} Let $\varepsilon>0$ and let $\delta=\min\{\varepsilon/4, 1\}$. Then take any $x$ in the domain such that $\abs{x-1}<\delta$. Because of what $\delta$ is, it certainly follows that $\abs{x-1}<1$. Thus, $0<x<2$, which implies $\abs{x+2}<4$. Now consider
+        
+        \begin{equation*}
+            \begin{split}
+                \abs{\bigg(\frac{x^3}{x-1}-\frac{1}{x-1}\bigg)-3} &= \abs{\frac{x^3-3x+2}{x-1}} \\
+                &= \abs{\frac{(x-1)(x+2)}{x-1}} \\
+                &= \abs{(x-1)(x+2)} \\
+                &= \abs{x-1}\cdot\abs{x+2} \\
+                &\leq \abs{x-1}\cdot 4 \\
+                &< \delta\cdot 4 \\
+                &= \frac{\varepsilon}{4}\cdot 4 \\
+                &= \varepsilon.
+            \end{split}
+        \end{equation*}
+        
+    \end{description}
+    
+    \vspace{4mm}
+    
+    \item Assume $f\colon\mathbb{R}\rightarrow\mathbb{R}$ is continuous at $c$, and $f(c)>0$. Prove that there exists some $\delta>0$ such that $f(x)>0$ for all $x$ in the $\delta$-neighborhood of $c$.
+    
+    \begin{description}
+    
+        \item\textit{\textbf{Proof.}} Let $\varepsilon=f(c)$. Then since $f$ is continuous, there exists $\delta>0$ such that for all $x$ in the $\delta$-neighborhood of $c$, $f(x)$ is in the $\varepsilon$-neighborhood of $f(c)$. Thus,
+        
+        \begin{equation*}
+            \begin{split}
+                \abs{f(x)-f(c)}&<\varepsilon \\
+                &\Rightarrow \abs{f(x)-f(c)} < f(c) \\
+                &\Rightarrow -f(c)<f(x)-f(c)<f(c) \\
+                &\Rightarrow 0 < f(x)<2f(c).
+            \end{split}
+        \end{equation*}
+        
+        Thus, given the $\delta$ corresponding to $\varepsilon=f(c)$, it follows that for all $x$ such that $\abs{x-c}<\delta$, we have $f(x)>0$.
+        
+    \end{description}
+    
+    \item Let $f$ and $g$ be continuous functions on $[a,b]$, and suppose that $f(a)<g(a)$ while $f(b)>g(b)$. Prove that $f(x)=g(x)$ for some $x\in[a,b]$.
+    
+    \begin{description}
+        \item\textit{\textbf{Proof.}} Consider the function $h\colon \mathbb{R}\rightarrow\mathbb{R}$, $h(x)=f(x)-g(x)$. By the func-y limit laws, $h$ is continuous. Note that
+        
+        \begin{equation*}
+            \begin{split}
+                &h(a)=f(a)-g(a)<0, \\
+                &h(b)=f(b)-g(b)>0.
+            \end{split}
+        \end{equation*}
+        
+        Therefore, $h(a)$ and $h(b)$ have different signs, and so by the intermediate value theorem with $r=0$, there exists $c\in(a,b)$ such that $h(c)=0$. Thus, $f(c)-g(c)=0$, which implies that at the point $c$, $f(c)=h(c)$.
+    \end{description}
+    
+    \item Give an example of the following.
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item An unbounded continuous function on $(0,1)$ that is not uniformly continuous. 
+        
+        \begin{description}
+            \item\textbf{Solution:} $$\frac{1}{x}$$
+        \end{description}
+        
+        \item A bounded continuous function on $(0,1)$ that is not uniformly coninuous.
+        
+        \begin{description}
+            \item\textbf{Solution: } 
+        \end{description}
+    \end{enumerate}
+    
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,377 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+
+
+
+
+\begin{document}
+
+\title{The Baire Category Theorem}
+\author{Quin Darcy}
+\date{March 16, 2019}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+\section{Introduction}
+
+The theorem to be discussed is one that brings a new way of thinking about $\mathbb{R}$ and sets similar to $\mathbb{R}$. Specifically, we will see that the Baire Category Theorem will provide us with a mathematically precise way to compare sizes of sets without having to appeal directly to their respective cardinalities. The uses of this theorem can be found in both topology and functional analysis. However, its use to us presently lies in its ability to help us appreciate and understand the nuances of $\mathbb{R}$ as well as even more general sets. \par In this paper we will briefly introduce some history, then quickly move into the statement of the theorem. After this will come a lengthy list of definitions and assumed and proven results that we will need in order to prove the main theorem. Interspersed throughout these sections will be a general discussion on the concepts that have preceded. The goal with the discussions are to refine our perspective as new information is introduced and this will hopefully help us avoid getting trapped in the details. Not losing the forest for the trees as they say.  
+
+\subsection{A Brief History}
+
+Ren\'{e}-Louis Baire was born in Paris on January 21, 1874.$^{[1]}$ While going to school for his doctorate, his area of research was limits and discontinuities.$^{[2]}$ After finishing school, Dr. Baire taught at several schools, ending up at the Univeristy of Burgundy in 1905.$^{[2]}$ He would remain there until retiring in 1925. Ren\'{e}-Louis Baire died at the age of 58 on July 5, 1932.$^{[1]}$.\par
+Although Ren\'{e}-Louis Baire made many contributions to mathematics, his most notable work was the following theorem.
+
+\begin{theorem}[\textbf{Baire Category Theorem}] A complete metric space is not the union of a countable collection of nowhere-dense sets. 
+\end{theorem}
+
+\noindent Very little of this should mean anything to us at the moment, but to begin preparing ourselves for the proof of this theorem, here are some necessary definitions.
+
+\newpage
+
+
+\section{Definitions And Theorems}
+
+\subsection{Definitions}
+
+\begin{definition}
+    Given a nonempty set $X$ and a map $d\colon X\times X\rightarrow\mathbb{R}$, we call this map a \textbf{metric} on $X$ if for all $x,y,z\in X$
+    
+    \begin{enumerate}
+        \item[(1)] $d(x,y)\geq0$ with $d(x,y)=0$ if and only if $x=y$, 
+        \item[(2)] $d(x,y)=d(y,x)$, and  
+        \item[(3)] $d(x,z)\leq d(x,y)+d(y,z)$
+    \end{enumerate}
+    
+    \noindent holds. Any set $X$ equipped with a metric is called a \textbf{metric space} and is denoted $(X,d)$.$^{[3]}$
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$ and a point $p\in X$, we call the set $V_{\varepsilon}(p)=\{q\in X\colon d(p,q)<\varepsilon\}$, for some $\varepsilon>0$, a \textbf{neighborhood} of $p$.
+\end{definition}
+
+\begin{definition}
+    Let $(X,d)$ be a metric space. A subset $A$ of $X$ is said to be \textbf{bounded} if there exists some number $M$ such that 
+    
+    \begin{equation*}
+        d(a_1,a_2)\leq M
+    \end{equation*}
+    
+    \noindent for all $a_1,a_2\in A$.
+    
+    If $A$ is bounded, the \textbf{diameter} of $A$ is defined to be the number
+    
+    \begin{equation*}
+        \text{diam}(A)=\text{lub}\{d(a_1,a_2)\colon a_1,a_2\in A\}.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$, a set $E\subseteq X$, and a point $p\in X$, we call $p$ a \textbf{limit point} of $E$ if every neighborhood of $p$ contains a point $q\neq p$ such that $q\in E$.$^{[4]}$
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$ and a set $E\subseteq X$, we call $E$ \textbf{closed} if every limit point of $E$ is contained in $E$.
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$, a set $E\subseteq X$, and a point $p\in X$, we call $p$ an \textbf{interior} point of $E$ if there exists $\varepsilon>0$ such that $V_{\varepsilon}(p)\subset E$. That is, $V_{\varepsilon}(p)$ is a proper subset of $E$.
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$ and a set $E\subseteq X$, we say that $E$ is \textbf{open} if every point of $E$ is an interior point of $E$.
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$ and a set $E\subseteq X$, we say that $E$ is \textbf{dense} in $X$ if every point of $X$ is a limit point of $E$, or a point in $E$ (or both). 
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$ and a set $E\subseteq X$, the \textbf{closure} of $E$ is the union of $E$ with all of its limit points, denoted by $\closure{E}$.
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$ and a proper subset $E$ of $X$, we call $E$ \textbf{nowhere-dense} in $X$ if $\closure{E}$ contains no nonempty open sets of $X$.
+\end{definition}
+
+\begin{definition}
+    Given a nonempty set $X$, and a function $f\colon\mathbb{N}\rightarrow X$, we call $f(\mathbb{N})$ a \textbf{sequence} in $X$. It is typically denoted by $(x_n)$, where for each $i\in\mathbb{N}$, $x_i\in X$.
+\end{definition}
+
+\begin{definition}
+    Given a set $X$ and a function $f\colon\mathbb{N}\rightarrow X$, and a function $g\colon\mathbb{N}\rightarrow X$, where $g(\mathbb{N})\subseteq f(\mathbb{N})$, we call $g(\mathbb{N})$ a \textbf{subsequence} of the sequence $f(\mathbb{N})$. If we denote the sequence $f(\mathbb{N})$ as $(x_n)$, then the subsequence is denoted $(x_{n_k})$.
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$ and a sequence $(x_n)$ in $X$, we say that $(x_n)$ \textbf{converges} to a point $L\in X$ if and only if for all $\varepsilon>0$, there exists $N\in\mathbb{N}$ such that for all $n\in\mathbb{N}$, if $n\geq N$, then $d(x_n,L)<\varepsilon$.
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$ and a sequence $(x_n)$ in $X$, we say that the sequence $(x_n)$ is \textbf{Cauchy} if and only if for all $\varepsilon>0$, there exists $N\in\mathbb{N}$, such that for all $m,n\in\mathbb{N}$, if $m,n\geq N$, then $d(x_m,x_n)<\varepsilon$.
+\end{definition}
+
+\begin{definition}
+    Given a metric space $(X,d)$, if every Cauchy sequence in $X$ converges to some point in $X$, then we call the metric space \textbf{complete}.
+\end{definition}
+
+\vspace{4mm}
+
+Below are the three results we will assume without proof. The reason behind not including the first two proofs is because it would have required us to define \textbf{partial order}, \textbf{field}, and an \textbf{ordered field}. The reason for not including the third is purely to keep the length of the paper down.
+
+\vspace{4mm}
+
+\begin{theorem}[Archimedean Principle]
+    Given any real number $x\in\mathbb{R}$, there exists an $n\in\mathbb{N}$ such that $n>x$.$^{[5]}$
+\end{theorem}
+
+\begin{corollary}
+    Given any real number $y>0$, there exists an $n\in\mathbb{N}$ satisfying $1/n<y$.
+\end{corollary}
+
+\begin{example}
+    Let $(x_n)$ be a sequence where for each $n\in\mathbb{N}$, $x_n=1/n$. From this corollary it follows that $(x_n)$ converges to 0. This is because we may choose any $\varepsilon>0$ and are guaranteed some $N\in\mathbb{N}$ such that $1/N<\varepsilon$, as well as $1/n<\varepsilon$ for all $n\geq N$.
+\end{example}
+
+\begin{theorem}
+    Consider a complete metric space $(X,d)$ and sequences $(x_n)$, $(y_n)$, and $(z_n)$ such that 
+    
+    \begin{equation*}
+        \lim_{n\rightarrow\infty}x_n=\lim_{n\rightarrow\infty}z_n=p,
+    \end{equation*}
+    
+    \noindent for some $p\in X$. If for all $n\in\mathbb{N}$, $x_n\leq y_n\leq z_n$, then 
+    
+    \begin{equation*}
+        \lim_{n\rightarrow\infty}y_n=p.
+    \end{equation*}
+\end{theorem}
+
+\newpage
+
+\subsection{Necessary Results}
+
+\begin{prop}
+    Let $\{E_n\}$ be a countable collection of nonempty sets in a metric space $(X,d)$. Then 
+    
+    \begin{equation*}
+        \bigcup_{n=1}^{\infty} E_n\subseteq\bigcup_{n=1}^{\infty}\closure{E_n}.
+    \end{equation*}
+\end{prop}
+
+\begin{proof}
+    Assume 
+    
+    \begin{equation*}
+        x\in\bigcup_{n=1}^{\infty} E_n,
+    \end{equation*}
+    
+    \noindent then for some $k\in\mathbb{N}$, $x\in E_k$. Now let $L$ be the set of all limit points of the set $E_k$. Then by Definition 2.9, $\closure{E_k}= E_k\cup L$. Thus, if $x\in E_k$, then $x\in\closure{E_k}$. Moreover, since 
+    
+    \begin{equation*}
+        \closure{E_k}\subset\bigcup_{n=1}^{\infty}\closure{E_n},
+    \end{equation*}
+    
+    \noindent then it follows that $x\in\bigcup_{n=1}^{\infty}\closure{E_n}$. Therefore, 
+    
+    \begin{equation*}
+        \bigcup_{n=1}^{\infty} E_n\subseteq\bigcup_{n=1}^{\infty}\closure{E_n}.
+    \end{equation*}
+\end{proof}
+
+\begin{theorem}
+    If $(x_n)$ is a convergent sequence in a metric space $(X,d)$ with limit $x\in X$, then every subsequence $(x_{n_k})$ of $(x_n)$ converges to $x$.
+\end{theorem}
+
+\begin{discussion}
+    Before we prove this theorem, we will provide a graph of the sequence of steps since the logic is somewhat difficult to follow. We begin by making two claims
+    
+    \begin{enumerate}
+        \item$\displaystyle\lim_{n\rightarrow\infty} (x_n)=x$
+        \item $\displaystyle\lim_{n\rightarrow\infty}(x_{n_k})\neq x$.
+    \end{enumerate}
+    
+    \noindent A few things to note about these claims are: Claim 1 is more of a supposition or premise than it is an assumption. Claim 2 is an assumption based on premise 1. The reason being is that we ``suppose'' $(x_n)$ is a sequence which converges to a point $x\in X$, and we ``assume'' the existence of a subsequence $(x_{n_k})$ of $(x_n)$ that does not converge to $x$. Now the core of this proof relies on Definition 2.13 and its negation. In first order predicate logic, these two premises are as follows
+    
+    \begin{enumerate}[label=\roman*)]
+        \item $\forall\varepsilon[\varepsilon>0\rightarrow\exists N(N\in\mathbb{N}\wedge\forall n[n\geq N\rightarrow d(x_n,x)<\varepsilon])]$
+        \item $\exists\varepsilon[\varepsilon>0\wedge\forall N(N\notin\mathbb{N}\vee\exists n[n\geq N\wedge d(x_n,x)\geq\varepsilon])]$.
+    \end{enumerate}
+    
+    \noindent So the proof begins with an existential instantiation on (ii). This gives us a particular $\varepsilon_1>0$. Then we move to (i), and since there is a unversal qantifier, we can choose any value, so we let it take on the value of $\varepsilon_1$. Having instantiated this and satisfying the anticedent ``$\varepsilon_1>0$'', then modus ponens on (i) allows us to instantiate a particular $N_1\in\mathbb{N}$. Now we jump back to (ii) where there is another universal quantifier on $N$ which allows us to take on any value, so we let $N=N_1$. Then since $N_1\in\mathbb{N}$, then by disjunctive syllogism on (ii), we can instantiate a particular $n_1\geq N_1$. Since the last part of (ii) is a conjunction, we also get that $d(x_{n_1},x)\geq\varepsilon_1$. Then we move back to (i) where there is another universal quantifier on $n$, meaning it can take on any value, so we let $n=n_1$. Since $n_1\geq N_1$, then modus ponens on the last conditional in (i) gives us $d(x_{n_1},x)<\varepsilon_1$. Thus, we have that $\big(d(x_{n_1},x)<\varepsilon\big)\wedge\big(d(x_{n_1},x)\geq \varepsilon_1\big)$. This is the conjunction of a proposition with its negation and is therefore a contradiction. Here is a graph illustrating the sequence of instantiations.
+    
+    \begin{align*}
+        &2.\longrightarrow\exists\varepsilon_1\quad\quad\quad N=N_1\longrightarrow\exists n_1\text{\hspace{2.5mm}}\wedge\text{\hspace{2.5mm}} n_1\geq N_1\text{\hspace{2.5mm}}\wedge\text{\hspace{2.5mm}}[d(x_{n_1},x)\geq\varepsilon_1] \\
+        &\quad\quad\quad\downarrow\quad\quad\quad\quad\uparrow\quad\quad\quad\quad\quad\downarrow \\
+        &1.\quad\quad\varepsilon=\varepsilon_1\longrightarrow\exists N_1\quad\quad\quad\quad n=n_1\text{\hspace{1mm}}\wedge\text{\hspace{1mm}} n_1\geq N_1\rightarrow[d(x_{n_1},\varepsilon)<\varepsilon_1]
+    \end{align*}
+\end{discussion}
+
+\begin{proof}
+    Assume $(x_n)$ is a convergent sequence in $X$ with limit point $x\in X$. Now let $(x_{n_k})$ be any subsequence of $(x_n)$. For contradiction, assume $(x_{n_k})$ diverges or converges to some other $x'\neq x$. Then by negating Definition 2.13, we get that there exists $\varepsilon_1>0$ such that for all $N\in\mathbb{N}$, there exists an $n\in\mathbb{N}$ for which $n\geq N$ and $d(x_{n},x)\geq\varepsilon_1$. Thus, given the particular $\varepsilon_1>0$, we may select any $N\in\mathbb{N}$. So choose some particular $N_1$. Then it follows that with respect to this particular $N_1$, there exists $n_1\in\mathbb{N}$, such that $n_1\geq N_1$ and $d(x_{n_1},x)\geq\varepsilon_1$. \par 
+    By assumption, $(x_n)$ converges to $x$. Thus, by Definition 2.13, we may begin by selecting any $\varepsilon>0$. So we choose $\varepsilon=\varepsilon_1$. Then there exists some $N'\in\mathbb{N}$ such that for all $n\in\mathbb{N}$, if $n\geq N'$, then $d(x_n,x)<\varepsilon'$. Now assume we chose $N_1=N'$, then select $n=n_1$. It follows that $d(x_{n_1}, x)<\varepsilon_1$. A contradiction as desired. 
+\end{proof}
+
+\begin{theorem}
+    Let $C_1\supset C_2\supset\cdots$ be a nested sequence of nonempty closed sets in a complete metric space $(X,d)$. If diam$(C_n)\rightarrow 0$, then $\bigcap C_n\neq\varnothing$.$^{[3]}$
+\end{theorem}
+
+\begin{proof}
+    Let $C_1\supset C_2\supset\cdots$ be a nested sequence of nonempty closed sets in the complete metric space $(X,d)$. Assume $\lim_{n\rightarrow\infty}\text{diam}(C_n)\rightarrow 0$. Then by Definition 2.12, for each $\varepsilon>0$, there exists $N\in\mathbb{N}$, such that for all $n\in\mathbb{N}$, if $n\geq N$, then $d(\text{diam}(C_n), 0)<\varepsilon$. Now choose $x_n\in C_n$, for each $n\in\mathbb{N}$. Let $\varepsilon>0$ and select $m,n\in\mathbb{N}$, such that $m,n\geq N$. Then since $x_n,x_m\in C_N$ and $d(\text{diam}(C_N),0)<\varepsilon$, then it follows that $d(x_n,x_m)<\varepsilon$. Thus, by Definition 2.13, the sequence $(x_n)$ of chosen $x_n\in C_n$ is Cauchy. Hence, by Definition 2.14, the sequence $(x_n)$ converges to a point in $X$. Now suppose $(x_n)$ converges to a point $x$. Then by Theorem 2.3, for a given $k\in\mathbb{N}$, the subsequence $x_k,x_{k+1},x_{k+2},\dots$ converges to $x$ as well. This implies that $x$ is a limit point of $C_k$, for every $k\in\mathbb{N}$. Moreover, since for each $k\in\mathbb{N}$, $C_k$ is closed, then by Definition 2.5, $x\in C_k$, for all $k\in\mathbb{N}$. Therefore, $x\in\bigcap C_n$ as desired.
+\end{proof}
+
+\section{The Baire Category Theorem}
+
+\begin{theorem}[\textbf{Baire Category Theorem}] A complete metric space is not the union of a countable collection of nowhere-dense sets. 
+\end{theorem}
+
+\begin{proof}
+    Let $(X,d)$ be a complete metric space and let $\{E_n\}$ be a countable collection of nowhere-dense sets. Now let $U_0$ be a nonempty open set of $X$. By Definition 2.9, $U_0\not\subseteq \closure{E_1}$. Thus, there exists some $y_1\in U_0$ such that $y\notin \closure{E_1}$. We assert that there exists $\varepsilon>0$, such that $V_{\varepsilon}(y)\subset U_0$ and $V_{\varepsilon}(y_1)\cap\closure{E_1}=\varnothing$.\par The first part of the assertion follows from Definition 2.6. The second part of the assertion can be proven by assuming the contrary, which, by Definition 2.3, would imply $y_1$ is a limit point of $E_1$, which implies $y_1\in\closure{E_1}$. This is a contradiction. So since $V_{\varepsilon}(y_1)\subset U_0$,  we wish to choose $\varepsilon_1<\varepsilon$. Moreover, by Corollary 2.1.1, we can choose $\varepsilon_1<\varepsilon$ such that $\varepsilon_1<1$. Then it follows that $V_{\varepsilon_1}(y_1)\subset V_{\varepsilon}(y_1)$ and that $\closure{V_{\varepsilon_1}(y_1)}\subseteq V_{\varepsilon}(y_1)$. Thus, let $U_1=\closure{V_{\varepsilon_1}(y_1)}$. Then we have that $U_0\supset U_1$ and $U_1\cap\closure{E_1}=\varnothing$.\par
+    
+    Since $U_1$ is a nonempty open set of $X$, then by Definition 2.9, $U_1\not\subseteq\closure{E_2}$. Hence, there exists some $y_2\in U_1$ such that $y_2\notin\closure{E_2}$. By the same argument as before, there exists some $\varepsilon_2<\varepsilon_1$ and by Corollary 2.1.1, we can take $\varepsilon_2<1/2$. Thus, $\closure{V_{\varepsilon_2}(y_2)}\subseteq U_1$ and $\closure{V_{\varepsilon_2}(y_2)}\cap\closure{E_2}=\varnothing$. Let $U_2=\closure{V_{\varepsilon_2}(y_2)}$. Then we have that $U_0\supset U_1\supset U_2$ and $U_2\cap\closure{E_2}=\varnothing$.\par
+    
+    Continuing this process inductively, we have that for each $n\in\mathbb{N}$, there exists $U_n\subset U_{n-1}$ such that $U_n\cap\closure{E_n}=\varnothing$ and diam$(U_n)<1/n$. Now consider the set
+    
+    \begin{equation*}
+        I=\bigcap_{n=1}^{\infty} U_n.
+    \end{equation*}
+    
+    \noindent By construction, $I$ is the countable intersection of a nested sequence of nonempty, closed sets of $X$. Moreover, we have that for each $n\in\mathbb{N}$, diam$(U_n)<1/n$. Thus, since the diameter of a set is always positive, then we have that for all $n\in\mathbb{N}$
+    
+        \begin{equation*}
+            0\leq\text{diam}(U_n)<\frac{1}{n}.
+        \end{equation*}
+    
+    Finally, since $\lim_{n\rightarrow\infty}1/n=0$ by Example 2.1, then by Theorem 2.2, $\lim_{n\rightarrow\infty}\text{diam}(U_n)=0$. Hence, by Theorem 2.4, $I$ is nonempty. Let $y\in I$. Then assume $y\in\bigcup_{n=1}^{\infty}\closure{E_n}$. Then there exists $n\in\mathbb{N}$, such that $y\in\closure{E_n}$. However, since $I\subset U_n$, then $y\in U_n$. Thus, $y\in U_n$ and $y\in\closure{E_n}$, which implies $U_n\cap\closure{E_n}\neq\varnothing$. This is a contradiction. Thus, $y\notin\bigcup_{n=1}^{\infty}\closure{E_n}$. Now since $\bigcup_{n=1}^{\infty}E_n\subseteq\bigcup_{n=1}^{\infty}\closure{E_n}$, by Proposition 2.1, and since $I\subseteq X$, by construction, then there exists some $y\in X$ such that $y\notin\bigcup_{n=1}^{\infty}\closure{E_n}$, which implies there exists $y\in X$ such that $y\notin\bigcup_{n=1}^{\infty}E_n$. Hence, $X\not\subset\bigcup_{n=1}^{\infty}E_n$. Therefore, $X\neq\bigcup_{n=1}^{\infty}E_n$.
+\end{proof}
+
+\newpage
+
+\section{Appendix}
+
+This appendix is here to tie up any loose ends and to make this paper as self-contained as possible. We finish with just a few more definitions and examples.
+
+\subsection{A Few More Definitions}
+
+\begin{definition}
+    A set $A\subseteq\mathbb{R}$ is \textbf{bounded above} if there exists a number $b\in\mathbb{R}$ such that $a\leq b$ for all $a\in A$. The number $b$ is called an \textbf{upper bound} for $A$. Similarly, the set $A$ is \textbf{bounded below} if there exists a \textbf{lower bound} $l\in\mathbb{R}$ satisfying $l\leq a$ for every $a\in A$.$^{[1]}$
+\end{definition}
+
+\begin{definition}
+    A real number $s$ is the \textbf{least upper bound} for a set $A\subseteq\mathbb{R}$ if it meets the following two criteria:
+    
+    \begin{enumerate}[label=(\roman*)]
+        \item $s$ is an upper bound for $A$;
+        \item if $b$ is any upper bound for $A$, then $s\leq b$.$^{[1]}$
+    \end{enumerate}
+\end{definition}
+
+\subsection{Three Examples}
+
+\begin{example}
+    Consider the set of integers $\mathbb{Z}$. This set is closed in $\mathbb{R}$ since it contains all of its limits points. Now if we took a non-empty open interval of $\mathbb{R}$, say $(a,b)$, it is clear that $(a,b)\not\subseteq\mathbb{Z}$. This is true for any $a,b\in\mathbb{R}$. This is equivalent to saying that since $\mathbb{Z}$ is closed, then $\closure{\mathbb{Z}}=\mathbb{Z}$ and $\mathbb{Z}$ contains no nonempty open intervals of $\mathbb{R}$. Thus, $\mathbb{Z}$ is an example of a nowhere-dense set in $\mathbb{R}$.
+\end{example}
+
+\begin{example}
+    Consider the following set 
+    
+        \begin{equation*}
+            A=\bigg\{\frac{1}{n}\colon n\in\mathbb{N}\bigg\}.
+        \end{equation*}
+        
+    \noindent It is easily shown that $\closure{A}=A\cup\{0\}$. Now take any open interval of $\mathbb{R}$, say $(c,d)$. We claim without proof that for any such $c,d\in\mathbb{R}$, $(c,d)\not\subseteq A$. Intuitively, any open interval $(c, d)$ does not contain any `holes'. This means that for any $x_1, x_2\in(c,d)$, there exists $x_3\in(c,d)$ such that $x_1<x_3<x_2$. The same cannot be said for $\closure{A}$, however. The reason for this is $\closure{A}\subset\mathbb{Q}$ and therefore does not contain any irrational numbers, whereas any open interval of $\mathbb{R}$ contains infinitely many irrationals. Thus, $\closure{A}$ contains no non-empty open intervals of $\mathbb{R}$. Thus, $\closure{A}$ is nowhere-dense in $\mathbb{R}$. 
+\end{example}
+
+\begin{example}
+    The last and most interesting example is the following. Let $C[0,1]$ denote the set of all real-valued functions, continuous over the interval $[0,1]$. If we equip this set with the following function
+    
+    \begin{equation*}
+        \begin{split}
+            &\|\;,\;\|_{\infty}\colon C[0,1]\times C[0,1]\rightarrow\mathbb{R} \\
+            &\|f,g\|_{\infty}\mapsto\text{sup}\big\{\abs{f(x)-g(x)}\colon x\in[0,1]\big\},
+        \end{split}
+    \end{equation*}
+    
+    \noindent then this function in fact satisfies all three conditions of Definition 2.1. Moreover, with this metric, we find that all Cauchy sequences converge. Thus, by Definition 2.15, $(C[0,1],\|\;,\;\|_{\infty}) $ is a complete metric space and by Theorem 3.1, cannot be expressed as the countable union of nowhere-dense sets.\par 
+        Now let us consider the following subset of $C[0,1]$, 
+        
+        \begin{equation}
+            \bigg\{f\in C[0,1]\mid\exists x_0\in[0,1]\colon \lim_{x\rightarrow x_0} \frac{f(x)-f(x_0)}{x-x_0}\in\mathbb{R}\bigg\}.
+        \end{equation}
+        
+    \noindent This represents the set of all functions in $C[0,1]$ that are differentiable for at least one point in $[0,1]$. We claim, without proof, that this set can be written as the countable union of nowhere-dense sets. These sets are defined in the following way: Consider
+    
+    \begin{equation*}
+        A_{m,n}=\bigg\{f\in C[0,1]\mid \exists x\in[0,1]\colon \big(0<\abs{x-t}<\frac{1}{m}\big)\rightarrow\abs{\frac{f(x)-f(t)}{x-t}}\leq n\bigg\},
+    \end{equation*}
+    
+    for every $m,n\in\mathbb{N}$. Then the union of the collection $\{A_{m,n}\colon m,n\in\mathbb{N}\}$ is in fact equal to the set in (1). Additionally, each $A_{m,n}$ is nowhere-dense in $C[0,1]$. Hence, it cannot be a complete metric space. To fully appreciate what this says, think of it this way: The set of all functions continuous over $[0,1]$ is large enough for us to be able to define a metric on it, while the set of differentiable functions is too small for us to do so. Thus, amongst the set of all continuous functions, those that are also differentiable are in fact very rare and the majority of continuous functions are nowhere differentiable!
+\end{example}
+
+\newpage
+
+\section*{Bibliography}
+
+\vspace{4mm}
+
+\begin{enumerate}[leftmargin=*, label={[\arabic*]}]
+    \item Abbott, S. (2016). Understanding analysis. New York: Springer.
+    
+    \item O'Connor, J. J., & Robertson, E. F. (n.d.). René-Louis Baire. Retrieved from http://www-history.mcs.st-and.ac.uk/Biographies/Baire.html
+    
+    \item Munkres, J. R. (2018). Topology. New York, NY: Pearson.
+    
+    \item Rudin, W. (2013). Principles of mathematical analysis. New Delhi: McGraw-Hill Education (India) Private Limited.
+    
+    \item Cummings, J. (2018). Real analysis: A long-form mathematics textbook. California: CreateSpace Independent Publishing Platform.
+    
+\end{enumerate}
+
+ 
+
+
+\end{document}

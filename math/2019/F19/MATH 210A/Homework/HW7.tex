@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 10/23/19   \\
+{ \textbf{Instructor:}} \ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 7 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item Assume that $\varphi\colon G\rightarrow H$ is a homomorphism, and that $M\subseteq_g G$. Let $K=\ker(\varphi)$. Let $\gamma$ be the function $\varphi$ restricted to $M$ (that is $\gamma(x)=\varphi(x)$ for all $x\in M$, and dom$(\gamma)=M$). Then $\gamma\colon M\rightarrow\varphi(M)$ is a homomorphism onto $\varphi(M)$. Prove that $\ker(\gamma)=K\cap M$. Using this, and the FHT, prove that $o(\varphi(M))\mid o(M)$.
+            \begin{proof}
+                Let $x\in\ker(\gamma)$. Then $\gamma(x)=e_H$. Since $\ker(\gamma)\subseteq M\subseteq_g G$ and thus $x\in\ker(\varphi)$. Thus, $x\in K$. Additionally, since $\ker(\gamma)\subseteq M$, then $x\in M$. Consequently, $x\in K\cap M$. Thus, $\ker(\gamma)\subseteq K\cap M$. Now let $x\in K\cap M$. Then $x\in K$ and $x\in M$. Since $x\in K$ then $\varphi(x)=e_H$. Moreover, since $x\in M$, then $\gamma(x)=\varphi(x)=e_H$. Thus, $x\in\ker(\gamma)$. Hence, $K\cap M\subseteq\ker(\gamma)$. Thus, $\ker(\gamma)=K\cap M$.\par\hspace{4mm} Since $\ker(\gamma)\triangleleft M$, then by FHT, $M/(K\cap M)\cong \varphi(M)$. Moreover, since $\ker(\gamma)=K\cap M$ and $\ker(\gamma)\triangleleft M$, then by Lagrange's Theorem, $o(K\cap M)\mid o(M)$. Thus, $o(M/(K\cap M))$ divides $o(M)$. Thus, since $M/(K\cap M)\cong\varphi(M)$, then $o(M/(K\cap M))=o(\varphi(M))$. Thus, $o(\varphi(M))\mid o(M)$.
+            \end{proof}
+            
+        \item[3.] Without simply citing the results that we have proved for groups of order $pq$, determine the structure of all groups of order 21.
+            \begin{proof}
+                Let $G$ be a group of order 21. To start, we note that the prime factorization of 21 is $3\times 7$ and so by Sylow I, $G$ contains a 3-Sylow subgroup and a 7-Sylow subgroup. By Sylow III, we know that $n_3\equiv 1(\text{mod }3)$, $n_3\mid 7$, $n_7\equiv 1(\text{mod }7)$, and $n_7\mid 3$. From these statements it follows that $n_3=1$ or $n_3=7$ and $n_7=1$. Thus, $P_7\triangleleft G$.\par\hspace{4mm} Now let $\langle a\rangle$ be a 3-Sylow subgroup and let $\langle b\rangle$ be the 7-Sylow subgroup. Assume $\theta\colon\langle a\rangle\rightarrow\text{Aut}(\langle b\rangle)$ is a homomorphism where for each $h\in\langle a\rangle$, we have $\theta(h)=\varphi_k$. Since $\langle b\rangle\triangleleft G$, then it follows that $aba^{-1}\in\langle b\rangle$. Thus, $aba^{-1}=b^k$ and to each $\varphi_k\in\text{Aut}(\langle b\rangle)$ there corresponds an instance of $aba^{-1}=b^k$.\par\hspace{4mm} Since $\theta$ is a homomorphism, then it follows that $o(\theta(a))\mid 3$. Given that $\theta(a)=\varphi_k$, then it follows that $o(\varphi_k)=1$ or $o(\varphi_k)=3$. In the former case where $o(\varphi_k)=1$ we have that $\theta$ is a trivial homomorphism which maps each element of $\langle a\rangle$ to the identity map $\varphi_1$. It follows from this that $aba^{-1}=b$ and so $ab=ba$ which implies that $G$ is abelian. Moreover, $G\cong\mathbb{Z}_3\times\mathbb{Z}_7\cong\mathbb{Z}_{21}$. In the latter case where $o(\varphi_k)=3$ it follows that $\varphi_{k^3}=\varphi_1$. Thus, in this case we are looking for all values $k$ such that $k^3\equiv 1(\text{mod }7)$.\par\hspace{4mm} We can see that since $2^3=8\equiv 1(\text{mod }7)$, then 2 is a solution. By the result from number theory referenced on page 23, we have that there are 3 solutions and they are of the form 1, $d$, and $d^2$, where $d$ is a solution. Thus, we have $1, 2,$ and $4$. Furthermore, as noted on page 23, each of the solutions to $k^3\equiv 1(\text{mod }7)$ are equivalent. Thus, any group $G$ of order 21 is either isomorphic to the abelian group $\mathbb{Z}_{21}$ or a nonabelian group of order 21 where $G=\langle a\rangle\langle b\rangle$, $a^3=1=b^7$, and $ab=b^2a$.
+            \end{proof}
+            
+        \newpage
+            
+        \item[4.] Assume that $p$ is prime, and that $o(G)=p^n$. Prove that $G$ is solvable.
+            \begin{proof}
+                Assume that $G$ is Abelian. By Sylow I, $G$ contains subgroups of order $p^k$ for all $1\leq k\leq n-1$. Since $G$ is Abelian, then all of these subgroups are normal in $G$. Now let $H_{k+1}\subseteq_g G$ such that $o(H)=p^{k+1}$, for some $0\leq k+1\leq n$. Then by Sylow I, $H_{k+1}$ contains a subgroup $H_k$ of order $p^{k-1}$ and since $H_k \triangleleft G$, then $H_k\triangleleft H_{k+1}$. Continuing in this way, we can construct a normal series for $G$
+                
+                \begin{equation*}
+                    \{e\}=H_0\triangleleft H_1\triangleleft\cdots\triangleleft H_n=G,
+                \end{equation*}
+                
+                where for each $H_i$, we have that $o(H_i)=p^i$. Now consider the factor $H_{i+1}/H_i$. It follows that $o(H_{i+1}/H_i)=p$ and thus $H_{i+1}/H_i$ is Abelian. Thus, the normal series above has factors which are all abelian. Hence, ig $G$ is Abelien, then $G$ is solvable.\par\hspace{4mm} Now assume that $G$ is not Abelian and that $n\geq 3$. Continuing by complete induction on $n$, assume that if $o(H)=p^t$, where $t<n$, then $H$ is solvable. Now consider the subgroup $Z(G)$. Since $G$ is not Abelian, then $Z(G)\neq G$ and thus, $o(Z(G))=p^t$ for some $t<n$. Thus, by assumption, $Z(G)$ is solvable. Since $Z(G)$ is Abelian, then $Z(G)\triangleleft G$. Additionally, since $o(Z(G))=p^t$, from which it follows that $o(G/Z(G))=p^{n-t}$, then since $n-t<n$, then by assumption $G/Z(G)$ is solvable. Thus, by the result on page 24, it follows that $G$ is solvable.
+            \end{proof}
+            
+        \item[5.] Let $G$ be a group of order 8.\par\hfill
+            \begin{enumerate}[label=(\alph*)]
+                \item Prove that if $g^2=e$ for all $g\in G$, then $G$ is Abelian.
+                    \begin{proof}
+                        Let $a,b\in G$. Then by assumption, both $a^2=e$ and $b^2=e$. Thus, $a=a^{-1}$ and $b=b^{-1}$. It follows then that $ab=a^{-1}b^{-1}=(ba)^{-1}$. However, since $ba\in G$, then $(ba)^2=e$ and so $(ba)^{-1}=ba$. Thus, $ab=(ba)^{-1}=ba$. Hence, $G$ is Abelian. Additionally, if we let $a,b\in G$ be two non-equal elements of order 2 and let $c\in G$ such that $c$ is distinct from $e,a,b,ab$, then it follows that the set $\{e,a,b,c,ab,ac,bc,abc\}$ is a subgroup of $G$ of order 8. Thus, $G=\{e,a,b,c,ab,ac,bc,abc\}$. Hence,  $G=\langle a\rangle\langle b\rangle\langle c\rangle$. Furthermore, since each of these subgroups are normal in $G$ and $\langle a\rangle\cap\langle b\rangle=\{e\}$, $\langle a\rangle\cap\langle c\rangle=\{e\}$, and $\langle b\rangle\cap\langle c\rangle=\{e\}$, then it follows that $G\cong\mathbb{Z}_2\times\mathbb{Z}_2\times\mathbb{Z}_2$.
+                    \end{proof}
+                \item Assume that there exists $a\in G$ such that $o(a)=4$, and that no element of $G$ has order 8. Explain why $\langle a\rangle\triangleleft G$. Assume that $b\notin\langle a\rangle$. Prove that $b^2\in\langle a\rangle$.
+                    \begin{enumerate}[label=(\roman*)]
+                        \item If $b^2=e$ explain why $G=\langle a\rangle\langle b\rangle$, and prove that either $bab^{-1}=a$ or $bab^{-1}=a^{-1}$, and determine the structure of the groups in these two cases. 
+                        \item If $o(b)=4$, then prove $b^2=a^2$, and again prove that either $bab^{-1}=a$ or $bab^{-1}=a^{-1}$, and determine the structure of the groups in these two cases (if $bab^{-1}=a^{-1}$ prove that $Z(G)=\{e,a^2\}$)
+                    \end{enumerate}
+                    \begin{proof}
+                        By assumption, $o(a)=4$ and if it is the only element of $G$ with order 4, then every other element of $G$ must have order $1, 2, $ or 8. If $G$ has an element of order 8, then $G$ is cyclic and thus Abelian, from which it would follow that $\langle a\rangle\triangleleft G$.\par\hspace{4mm} Now assume $G$ does not contain an element of order 8, and assume $H\subseteq_g G$ such that $o(H)=4$ and $H\neq\langle a\rangle$. Clearly, $a\notin H$ and $H\cap\langle a\rangle =\{e\}$. Note that every element of $H$ except for the $e$ has order 2. Now let $x\in G$ such that $x\neq e$, then $x\in \langle a\rangle$ or $x\in H$.\par\hspace{4mm} If $x\in\langle a\rangle$, then  $x\langle a\rangle=\langle a\rangle=\langle a\rangle x$. Now assume $x\in H$. Then $x\notin\langle a\rangle$. Thus, $x\langle a\rangle\subseteq H$. This implies that $xa\in H$ and since $x\in H$, then $x(xa)=x^2a=a\in H$. This is a contradiction. Thus, for all $x\in G$ we have that $x\in\langle a\rangle$. This would imply that $G=\langle a\rangle$ which is not possible by assumption. Thus, there exists no other subgroup $H$ of $G$ of order 4. Hence, $\langle a\rangle$ is the only subgroup of $G$ of order 4. By 4.(c) of Homework 2, it follows that $\langle a\rangle\triangleleft G$.\par\hspace{4mm} Now assume that $b\notin\langle a\rangle$. By virtue of being an element of $G$, it follows that $o(b)\mid 8$. Thus, $o(b)=1,2,4,8$. We know that $o(b)\neq 1, 4$ since if $o(b)=1$, then $b=e\in\langle a\rangle$, and $o(b)\neq 4$ since we have assumed that $a$ is the only element of order 4. Thus, $o(b)=2$ or $o(b)=8$.\par\hspace{4mm} If $o(b)=2$, then $b^2=e\in\langle a\rangle$. If $o(b)=8$, then $G=\langle b\rangle$. However, if this were the case then we would have that $o(b^2)=4$ and $o(b^6)=4$. This is a contradiction since $a$ is the only element of order 4. Thus, $o(b)\neq 8$ and so $o(b)=2$. Thus, $b^2=e\in\langle a\rangle$.\par\hspace{4mm} \textbf{(i)} Assume that $b^2=e$. Let $x\in\langle a\rangle\langle b\rangle$. Then for some $i,j\in\mathbb{Z}^{+}$, we have that $x=a^ib^j$ and since $a^i,b^j\in G$, then $a^ib^j\in G$. Thus, $x\in G$. Hence, $\langle a\rangle\langle b\rangle\subseteq G$. Note that $o(\langle a\rangle\langle b\rangle)=8$. Thus, since $\langle a\rangle\langle b\rangle$ is a subset of $G$ with the same cardinality of $G$, then it follows that $G=\langle a\rangle\langle b\rangle$.\par\hspace{4mm} Since $\langle a\rangle\triangleleft G$, then it follows that $bab^{-1}\in\langle a\rangle$. Thus, for some $k\in\mathbb{Z}$, we have that $bab^{-1}=a^k$. Assume that $bab^{-1}=e$. Then $ba=b$ and thus, $a=e$ which is a contradiction. Now assume that $bab^{-1}=a^2$. Then this would imply that $a=b^{-1}a^2b$. Thus, $a^2=(b^{-1}a^2b)(b^{-1}a^2b)=b^{-1}a^4b=b^{-1}eb=b^{-1}b=e$. This is also a contradiction. Thus, it follows that $bab^{-1}=a$ or $bab^{-1}=a^3=a^{-1}$. If $aba^{-1}=a$, then it follows that $ab=ba$ and thus $G=\langle a\rangle\langle b\rangle\cong\mathbb{Z}_4\times\mathbb{Z}_2$. If $bab^{-1}=a^{-1}$, then $ba=a^{-1}b$. In this case we have a group of order $4\times 2$, where $o(a)=4$, $o(b)=2$, $G=\langle a\rangle\langle b\rangle$, and $ba=a^{-1}b$. Thus, in this case it follows that $G\cong D_4$.\par\hspace{4mm}\textbf{(ii)}  Let $H=\langle a\rangle$ and assume that every element of $G-H$ has order 4 and let $b$ be such an element. Then $o(b)=4$ and it follows that $o(b^2)=2$, thus $b^2\in H$ and since the only element of $H$ with order 2 is $a^2$, then we have that $a^2=b^2$. Now assume that $bab^{-1}=a^2$, then it follows that $bab^{-1}=b^2$ and thus $ba=b^3$, hence $a=b^2=a^2$. Thus, this cannot be the case. Now assume that $bab^{-1}=e$. Then $a=e$ which is a contradiction. Thus, $bab^{-1}=a$ or $bab^{-1}=a^3=a^{-1}$.\par\hspace{4mm} Now let $bab^{-1}=a^{-1}$, then it follows that $ba=a^3b$. Thus, the set $H\cup Hb=\{e,a,b,ab,a^2,a^3, a^2b,a^3b\}$ is a subgroup of order 8 such that $a^4=b^4=e$, $a^2=b^2$, and $ba=a^3b$. Thus, $G\cong Q_8$.
+                    \end{proof}
+                    
+                \item Determine all groups of order 8.
+                    \begin{solution}
+                        $\mathbb{Z}_8$, $\mathbb{Z}_2\times\mathbb{Z}_2\times\mathbb{Z}_2$, $\mathbb{Z}_4\times\mathbb{Z}_2$, $D_8$, $Q_8$.
+                    \end{solution}
+            \end{enumerate}
+            
+        \newpage
+            
+        \item[6.] Assume that $p$ is prime, $o(G)=p^t$, $b\in G$, $b^{p^k}\neq e$, and $o(b^{p^k})=p^m$. Prove that $o(b)=p^{k+m}$.
+            \begin{proof}
+                 Let $o(b)=p^y$. Since $o(b^{p^k})=p^m$, then $(b^{p^k})^{p^m}=b^{p^{k+m}}=e$. Thus, $p^y\mid p^{k+m}$. It follows from this that $p^{k+m}$ is a multiple of $p^y$. In particular, the multiple is some power of $p$. Thus, $p^{k+m}=p^xp^y$.
+            \end{proof}
+    \end{enumerate}
+    
+\end{document}

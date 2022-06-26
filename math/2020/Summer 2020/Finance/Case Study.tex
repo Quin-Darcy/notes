@@ -1,0 +1,197 @@
+\section{}
+\documentclass[leqno]{article}
+%------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+%------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[colorlinks=true,pagebackref=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red, linkcolor=blue}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{biblatex}
+
+\addbibresource{Analysis.bib}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}[theorem]
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+
+\begin{document}
+\section{Taxes}
+   \begin{itemize}
+       \item Income: \$75,000/yr
+       \item Married Filing Jointly. Deduction: \$24,400
+       \item One Child Under 17: \$2,000 tax credit
+       \item Taxable (Federal) Income: \$46,000
+       \item Federal Income Tax Rate: 15\%; \$6,990
+       \item State Income Tax: 5\%; \$3,750
+       \item Take Home Pay: \$64,260
+   \end{itemize}
+ \section{Living Expenses}
+    \begin{itemize}
+        \item Yearly Living Expenses: \$40,000
+        \item Expendable Annual Income: \$24,260
+    \end{itemize} 
+\section{Goals}
+    \begin{itemize}
+        \item Start business in 10 years. Needs \$100,000 in today's dollars.\par Amount Required: \$141,059.88.
+        \item Buy house for \$310,000. Parental loan of \$30,000.\par Money required: \$280,000\par Upfront Cash: \$80,000\par Down Payment: \$62,000 (Personal Cost: \$32,000)\par Closing Costs: \$9,300\par Loan Amount: \$248,000\par Monthly Payment: \$1,645.
+        \item Vacation Money: \$135,000 over 30 years.
+        \item Retirement in 30 years with \$50,000 per year after retiring. \par Money Needed: \$10,999,400.29
+    \end{itemize}
+\section{Investments}
+    \begin{itemize}
+        \item 401K Plan: After 10 years with current company, 10\% salary deference, 75\% employer matching, and expected return is 9.6\% annually\par Amount After 10 years: \$222,663. Rollover into new account instead of withdrawal to avoid taxation. \par\hspace{4mm} Think about how they want \$50,000 a year and so if at the time of retirement they have $X$ amount invested and it has a rate of return of $r$ with compounding period $n$, then 
+            \begin{equation*}
+                A=X\left(1+\frac{r}{n}\right)^{nt}
+            \end{equation*}
+        is the capital $t$ years after retirement. We want $X$ such that every year, we can extract \$50,000 from interest alone. In other words, we want $X$ such that for some $r-\varepsilon<r$, $50,000=(r-\varepsilon)A$. Hence
+            \begin{equation*}
+                50000=(r-\varepsilon)X\left(1+\frac{r}{n}\right)^{n} 
+                \rightarrow X=\frac{50000}{(r-\varepsilon)\left(1+\frac{r}{n}\right)^n}.
+            \end{equation*}
+        Assume $r=0.05$, $\varepsilon=0.03$, $n=12$. Then 
+            \begin{equation*}
+                X=\frac{50000}{0.02\left(1+\frac{0.05}{12}\right)^{12}}=2378320.6.
+            \end{equation*}
+        Assume $r=0.096$, $\varepsilon=0.006$, $n=12$. Then 
+            \begin{equation*}
+                X=\frac{50000}{0.09\left(1+\frac{0.096}{12}\right)^{12}}=504895.05.
+            \end{equation*}
+        The last scenario is far more favorable. We are making a 9.6\% return every year and living off of 9\% of it and thus allowing the principle to grow 0.6\% each year.\par\hspace{4mm} Now we need to adjust for inflation and devise a time-varying investment strategy. At 27 we can invest aggressively and deffer up to 10\% of our salary into the S\&P 500 and expect a 9.6\% rate of return. We will be with our employer who matches our contributions into our 401(k) up to, lets say 40\%, for 10 years. This means that we can invest up to \$7,000 into the account annually for 10 years.\par\hspace{4mm} Let's determine how much we would have after 10 years under these circumstances and given that CPI will average 3.5\% annually. The inflation adjusted inflation rate is
+            \begin{equation*}
+                \frac{0.096-0.035}{1+0.035}=0.05894.
+            \end{equation*}
+        Thus, assuming monthly compounding and that the first deposit will occur one year from now, and our 401(k) currently has \$37,840 in it, then after the first year we should expect
+            \begin{equation*}
+                A_1=37850\left(1+\frac{0.05894}{12}\right)^{12}=40142.14.
+            \end{equation*}
+        After year two we have
+            \begin{equation*}
+                \begin{split}
+                    A_2&=\left(37850\left(1+\frac{0.05894}{12}\right)^{12}+7000\right)\left(1+\frac{0.05894}{12}\right)^{12} \\
+                    &=37850\left(1+\frac{0.05894}{12}\right)^{24}+7000\left(1+\frac{0.05894}{12}\right)^{12} \\
+                    &= 49997.00
+                \end{split}
+            \end{equation*}
+        Finally, after 10 years we have 
+            \begin{equation*}
+                \begin{split}
+                    A_{10}&=37850\left(1+\frac{0.05894}{12}\right)^{120}+7000\sum_{i=1}^{9}\left(1+\frac{0.05894}{12}\right)^{12i}\\
+                    &=153650.00.
+                \end{split}
+            \end{equation*}
+        Thus after 10 years we now have \$153,650.\par\hspace{4mm} Now we have left our business and started a new one in which there is no employer matching. We want to determine how much we out to put into our new 401(k) every year in order to have enough to pay \$50,000 annual annuities from retirement until death. To do this we will equate the present value of all of their deposits with the present value of all their withdrawals. This yields 
+            \begin{equation*}
+                \begin{split}
+                153650&\left(1+\frac{0.05894}{12}\right)^{-240}+x\sum_{i=1}^{20}\left(1+\frac{0.05894}{12}\right)^{-12i} \\
+                &=47406.7+(11.4181)x
+                \end{split}
+            \end{equation*}
+        equated with
+            \begin{equation*}
+                50000\sum_{i=21}^{33}\left(1+\frac{0.05894}{12}\right)^{-12i}=136124
+            \end{equation*}
+        implies an annual deposit of \$7,770. In order to stay within our 10\% salary deferral, we would need a salary of at least \$77,700.
+    \end{itemize}
+    \newpage 
+
+\end{document}

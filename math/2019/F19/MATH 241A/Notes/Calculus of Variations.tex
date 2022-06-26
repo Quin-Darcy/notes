@@ -1,0 +1,223 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}[theorem]
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]
+    {\par\normalfont\topsep6\p@\@plus6\p@\relax
+        \list{}{\leftmargin=0mm
+                 \rightmargin=0mm
+                 \settowidth{\itemindent}{\itshape#1}%
+                 \labelwidth=\itemindent
+                 \parsep=0pt \listparindent=\parindent 
+                }
+        \item[\hskip\labelsep\itshape#1\@addpunct{.}]\ignorespaces
+    }
+    {%
+        \popQED\endlist\@endpefalse
+    }
+
+
+\begin{document}
+
+\section{Needed Results}
+    \begin{theorem}[\textbf{Leibniz's Rule}]
+        Suppose that $f(x,t)$ and $\frac{\partial f}{\partial t}$ are continuous for $x\in[a,b]$ and $t\in[t_0-\delta,t_0+\delta]$ for some $\delta>0$. Then 
+            \begin{equation*}
+                \frac{d}{dt}\int\limits_a^b f(x,t)dt\biggr\rvert_{t=t_0}=\int\limits_a^b\frac{\partial f}{\partial t}(x,t_0)dt.
+            \end{equation*}
+    \end{theorem}
+    
+    \begin{theorem}[\textbf{The Chain Rule}]
+        Consider a function $w=f(x,y,z)$, with continuous partial derivatives $\partial w/\partial x$, $\partial w/\partial y$, $\partial w/\partial z$. Suppose that $x, y, z$ are in turn differentiable function s of $t$. Then $w$ is a differentiable function of $t$ and 
+            \begin{equation*}
+                \frac{dw}{dt}=\frac{\partial w}{\partial x}\frac{dx}{dt}+\frac{\partial w}{\partial y}\frac{dy}{dt}+\frac{\partial w}{\partial z}\frac{dz}{dt}.
+            \end{equation*}
+    \end{theorem}
+    
+    \begin{theorem}[\textbf{Integration by Parts}]
+        Let $f(x)$, $\eta(x)$ be continuously differentiable functions on $[a,b]$ such that $\eta(x)$ vanishes at the endpoints. Then 
+            \begin{equation*}
+                \int\limits_a^b f\eta'=-\int\limits_a^b f'\eta.
+            \end{equation*}
+    \end{theorem}
+    
+\section{Calculus of Variations}
+    The classic calculus of variations consists of minimizing expressions of the form
+        \begin{equation*}
+            I(u)=\int\limits_a^b F(t,u(t),u'(t))dt,
+        \end{equation*}
+    where $F\colon[a,b]\times\mathbb{R}^d\times\mathbb{R}^d\rightarrow\mathbb{R}$ is given. One seeks a function $u\colon[a,b]\rightarrow\mathbb{R}^d$. Usually $u$ has to satisfy some constraints, the most common one being a Dirichlet boundary condition
+        \begin{equation*}
+            \begin{split}
+                u(a)&=u_1 \\
+                u(b)&=u_2.
+            \end{split}
+        \end{equation*}
+        
+    \noindent Also one needs to specify a class of admissible functions among which one seeks a minimizing $u$.\par If one seeks a minimum of a smooth function 
+        \begin{equation*}
+            f\colon\Omega\rightarrow\mathbb{R}\quad(\Omega\text{ open in }\mathbb{R})
+        \end{equation*}
+    \noindent then it must be the case that at a minimizing point $z_0\in\Omega$, we have that 
+        \begin{equation*}
+            Df(z_0)=0,
+        \end{equation*}
+    \noindent where $Df$ is the derivative of $f$. In order to distinguish a minimizer from other critical points, we must also require that $D^2f(z_0)>0$.\par In the present case, however, we do not have a function $f$ of finitely many independent real variables, but a functional $I$ on a class of functions. Nevertheless, we expect that a first derivative of $I$ -- something still to be defined -- needs to vanish at a minimizer, and moreover that a suitably defined second derivative is positive.
+    
+    \subsection{The Euler-Lagrange equations}
+        Assume that $F$ is of class $C^1$ and that we have a critical point of $I$ that is also of class $C^1$. We also assume prescribed Dirichlet boundary conditions $u(a)=u_1$, $u(b)=u_2$. In other words, we assume that $u$ minimizes $I$ in the class of all functions of class $C^1$ satisfying the prescribed boundary conditions. We then have for any $\eta\in C_0^1([a,b],\mathbb{R}^d)$ and any $s\in\mathbb{R}$
+            \begin{equation*}
+                I(u+s\eta)\geq I(u).
+            \end{equation*}
+        \noindent Note that for any $\eta\in C_0^1([a,b],\mathbb{R}^d)$, this means that $\eta$ is continuously differentiable as a function on $[a,b]$ with output values in $\mathbb{R}^d$ and that there exists $a<a_1\leq b_1< b$ with $\eta(x)=0$ for all $x\notin[a_1,b_1]$. Now 
+            \begin{equation*}
+                I(u+s\eta)=\int\limits_a^b F(t,u(t)+s\eta(t),u'(t)+s\eta'(t))dt.
+            \end{equation*}
+        Since $F$, $u$, and $\eta$ are assumed to be of class $C^1$, we may differentiate the preceding expression w.r.t. $s$ and obtain at $s=0$ (referring to the middle and last components as $y$ and $z$, respectively)
+            \begin{equation*}
+                \begin{split}
+                    \frac{d}{ds}I(u+s\eta)\biggr\rvert_{s=0}&=\frac{d}{ds}\int\limits_a^b F(t,u+s\eta,u'+s\eta') dt\biggr\rvert_{s=0} \\
+                    &=\int\limits_a^b\bigg(\frac{\partial F}{\partial t}\frac{dt}{ds}+\frac{\partial F}{\partial y}\frac{dy}{ds}+\frac{\partial F}{\partial z}\frac{dz}{ds}\bigg) dt\\
+                    &=\int\limits_a^b\bigg(\frac{\partial F}{\partial y}\cdot\eta+\frac{\partial F}{\partial z}\cdot\eta'\bigg)dt.
+                \end{split}
+            \end{equation*}
+        \noindent We now keep $\eta$ fixed and let $s$ vary. We are thus just in the situation of a real valued $f(s)$, $s\in\mathbb{R}$, $(f(s)=I(u+s\eta))$, and the condition $f'(0)=0$ translates to 
+            \begin{equation}
+                0=\int\limits_a^b\bigg(\frac{\partial F}{\partial y}\cdot\eta+\frac{\partial F}{\partial z}\cdot\eta'\bigg)dt=\int\limits_a^b\bigg(\frac{\partial F}{\partial y}-\frac{d}{dt}\frac{\partial F}{\partial z}\bigg)\cdot\eta\;\; dt,
+            \end{equation}
+        \noindent and this actually then has to hold for all $\eta\in C_0^1$. Note that we obtained the last equality we assumed $F$ and $u$ are of class $C^2$ and using integration by parts where $\frac{\partial F}{\partial z}\cdot\eta'$ became $\frac{d}{dt}\frac{\partial F}{\partial z}\cdot\eta$ and then we factored out the $\eta$. To proceed, we need the following lemma.
+        \begin{lemma}[\textbf{The Fundamental Lemma of the Calculus of Variations}]\label{lem:2.0.1}
+            If $h\in C^0((a,b),\mathbb{R}^d)$ satisfies
+                \begin{equation*}
+                    \int\limits_a^b h(t)\varphi(t)=0\quad\text{\textit{for all }}\varphi\in C_0^{\infty}((a,b),\mathbb{R}^d),
+                \end{equation*}
+            then $h\equiv 0$ on $(a,b)$.
+        \end{lemma}
+            \begin{proof}
+                Otherwise, there exists some $t_0\in(a,b)$ with 
+                    \begin{equation*}
+                        h(t_0)\neq 0.
+                    \end{equation*}
+                \noindent Thus, $h^{i_0}(t_0)\neq 0$ for some index $i_0\in\{1,\dots,d\}$. Since $h$ is continuous, then there exists some $\delta>0$ with
+                    \begin{equation*}
+                        a<t_0-\delta<t_0+\delta<b
+                    \end{equation*}
+                \noindent and
+                    \begin{equation*}
+                        \abs{h^{i_0}(t)}>\frac{1}{2}\abs{h^{i_0}(t_0)}\quad\text{whenever}\quad\abs{t-t_0}<\delta.
+                    \end{equation*}
+                \noindent We then choose $\varphi\in C_0^{\infty}((a,b),\mathbb{R}^d)$ with 
+                    \begin{equation*}
+                        \begin{split}
+                            \varphi(t)&=0\quad\text{if}\quad\abs{t-t_0}\geq\delta \\
+                            \varphi^{i_0}(t)&>0\quad\text{if}\quad\abs{t-t_0}<\delta \\
+                            \varphi^{i_0}(t)&=0\quad\text{for}\quad i\neq i_0,\;i\in\{1,\dots,d\}.
+                        \end{split}
+                    \end{equation*}
+                \noindent For this choice of $\varphi$, however
+                    \begin{equation*}
+                        \int\limits_a^b h(t)\varphi(t)dt=\int\limits_{t_0-\delta}^{t_0+\delta}h(t)\varphi(t)\neq 0,
+                    \end{equation*}
+                contradicting our assumption. Thus, necessarily $h(t_0)=0$ for all $t_0\in(a,b)$.
+            \end{proof}
+        \vspace{4mm} Lemma \ref{lem:2.0.1} and equation (1) imply that a minimizer of $I$ of class $C^2$ has to satisfy the so-called \textit{Euler-Lagrange equations}. namely:\newpage
+            \begin{theorem}\label{thm:2.0.1}
+                Let $F\in C^2([a,b]\times\mathbb{R}^d\times\mathbb{R}^d,\mathbb{R})$, and let $u\in C^2([a,b],\mathbb{R}^d)$ be a minimizer of 
+                    \begin{equation*}
+                        I(u)=\int\limits_a^b F(t,u(t),u'(t))dt
+                    \end{equation*}
+                \noindent among all functions with prescribed boundary values $u(a)$ and $u(b)$. Then $u$ is a solution of the following system of second order ordinary differential equations, the Euler-Lagrange equations
+                    \begin{equation*}
+                        \frac{\partial F}{\partial u}=\frac{d}{dt}\frac{\partial F}{\partial u'}.
+                    \end{equation*}
+            \end{theorem}
+\end{document}

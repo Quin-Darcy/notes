@@ -1,0 +1,100 @@
+=]\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+
+
+\begin{document}
+
+\title{Quick Notes for 134}
+\author{Quin Darcy}
+\date{09 March 2019\\\small{(Last Edited : 09 March 2019)}}
+\affil{\small{California State University Sacramento}}
+\maketitle
+
+\section{Complex Inegration}
+ The following is an example of the simplest type of complex integration. Namely, a complex values function $f$ being integrated over a finite interval $[a,b]$. Splitting $f$ into its real and imaginary parts $u$ and $v$, then this case can be reduced to integration of real valued functions. 
+ 
+\begin{definition}
+    Let $f=u+iv\colon[a,b]\rightarrow\mathbb{C}$ be a continuous function. Then the integral of $f$ over $[a,b]$ is defined by
+ 
+    \begin{equation*}
+        \int_{a}^{b}f(t)\;dt:=\int_{a}^{b}u(t)\;dt+i\int_{a}^{b}v(t)\;dt.
+    \end{equation*}
+ 
+    \noindent The continuity assumption was only made for simplicity. 
+\end{definition}
+ 
+\begin{example}
+    Let $k\in\mathbb{Z}$. Then 
+    
+    \begin{equation*}
+        \int_{0}^{2\pi} e^{ikt}\;dt=\int_{0}^{2\pi}\cos{kt}\;dt+i\int_{0}^{2\pi}\sin{kt}\;dt=\begin{cases} 2\pi &\quad\text{if}\quad k=0 \\ 0 &\quad\text{if}\quad k\neq 0. \end{cases}
+    \end{equation*}
+\end{example}
+
+\begin{definition}
+    A \textbf{path} in the complex plane is a continuous function 
+    
+    \begin{equation*}
+        \gamma\colon[a,b]\subseteq\mathbb{R}\rightarrow\mathbb{C}.
+    \end{equation*}         
+\end{definition}
+
+\begin{definition}
+    A \textbf{curve} $C$ from $z_1,z_2\in\mathbb{C}$ is a subset of $\mathbb{C}$ that is equal to the image of a path $\gamma$, im$_{\gamma}([a,b])$, where $\gamma(a)=z_1$ and $\gamma(b)=z_2$.
+\end{definition}
+
+\begin{definition}
+    Given a curve $C$, a \textbf{parameterization} of $C$ is a path $\sigma\colon[c,d]\rightarrow \mathbb{C}$, such that $C$ is the image of $\sigma$, where $\sigma(c)=z_1$ and $\sigma(d)=z_2$
+\end{definition}
+
+\begin{definition}
+    A path $\gamma\colon[a,b]\rightarrow\mathbb{C}$ is \textbf{smooth} if $\gamma'$ exists and is continuous throughout all of $[a,b]$.
+\end{definition}
+
+\newpage
+
+\subsection{Exercises}
+
+
+
+
+
+\end{document}

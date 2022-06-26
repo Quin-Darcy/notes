@@ -1,0 +1,260 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+ \setlist[description]{leftmargin=4mm,labelindent=4mm}
+  
+ \begin{document}
+  
+ \begin{flushleft}
+  
+    Quin Darcy\par
+    Dr. Ebrahimzadeh\par
+    MATH 117\par
+    9/7/18
+  
+ \end{flushleft}
+  
+ \centerline{Homework: 2F}
+ 
+ \vspace{4mm}
+ 
+ \noindent\textsc{Section: 1.5}\par
+ 
+ \justifying
+ 
+ \vspace{1mm}
+ 
+ \hline
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{9.} Let $u$ and $v$ be distinct vectors in a vector space $V$. Then $\{u,v\}$ is linearly dependent\par if and only if $u$ or $v$ is a multiple of the other.
+ 
+ \vspace{4mm}
+ 
+ \begin{addmargin}[1.4em]{1.4em}
+ 
+    \noindent\textbf{Proof}\par
+ 
+    \vspace{2mm}
+ 
+    \noindent By construction, we know that $\{u,v\}\subseteq V$. Now let $c$ be a scalar such that $cu=-v$ and $c\neq 0$. Then the linear combination $cv+u=-u+u=0_V$. Since these vectors were from a subset of $V$ and there was a finite number of distinct scalars, namely 1, not all equal to $0$, such that their linear combination resulted in the zero vector, then this set is linearly dependent by definition.\hspace{60mm}\blacksquare
+ 
+ \end{addmargin}
+ 
+ \vspace{4mm}
+ 
+ \noindent\textbf{10.} Let $v_1,v_2.v_3\in\mathbb{R}^3$ such that $v_1=(5,9,-3)$, $v_2=(-6,-5,4)$ and $v_3=(1,-4,-1)$.\par Then if we take scalars $c_1=c_2=c_3=1$, we obtain the following linear combination
+ 
+ \begin{equation*}
+     \begin{split}
+         c_1v_1+c_2v_2+c_3v_3& =(5,9,-3)+(-6,-5,4)+(1,-4,-1) \\
+         & = (5-6+1,9-5-4,-3+4-1) \\
+         & =(0,0,0).
+     \end{split}
+ \end{equation*}
+ 
+ \noindent\textbf{11.} Let $S=\{u_1,u_2,\dots, u_n\}$ be a linearly independent subset of a vector space over the\par field $\mathbb{Z}_2$. The number of vectors in span$(S)$ can be found by observing that for each\par of the $n$ vectors, it's coefficient can either be $[0]$ or $[1]$. Thus, there are 2 options for\par each of the $n$ vectors, and by the multiplication principle, this implies that $|span(S)|=$\par $2^n$. 
+ 
+ \vspace{6mm}
+ 
+ \noindent\textbf{12.} \textsc{Theorem 1.6} Let $V$ be a vector space, and let $S_1\subseteq S_2\subseteq V$. If $S_1$ is linearly\par dependent,  then $S_2$ is linearly dependent.
+ 
+ \vspace{4mm}
+ 
+ \begin{addmargin}[1.4em]{1.4em}
+ 
+    \noindent\textbf{Proof} (By Contrapositive)
+    
+    \vspace{2mm}
+    
+    \noindent Let $S_1$ and $S_2$ be subsets of a vector space $V$, such that $S_1\subseteq S_2$. Assume $S_2$ is linearly independent. Then for all vectors $u_i\in S_2$, the linear combination $c_1u_1+\cdots +c_nu_n=0$ if and only if $c_i=0$ for all $1\leq i\leq n$. Now suppose $w_i\in S_1$ and the linear combination $b_1w_1+\cdots +b_mw_m=0$. Then since $w_i\in S_1$, this implies that $b_i=0$, for all $i$. If $b_i\neq 0$ for some $i$, then there would exists a vector in $S_1$ that can be represented as a linear combination of other vectors in $S_1$ which would mean it were linearly dependent, and thus a contradiction would arise. Therefore, if $S_2$ is linearly independent, then $S_1$ is linearly independent.\hspace{35mm}\blacksquare
+ 
+ \end{addmargin}
+ 
+\newpage
+
+\noindent\textbf{13.} Let $V$ be a vector space over a field of characteristic not equal to two.
+
+\vspace{4mm}
+
+\begin{addmargin}[1.4em]{1.4em}
+
+    \noindent\textbf{a)} Let $u$ and $v$ be distinct vectors in $V$. Then $\{u,v\}$ is linearly independent if and\par only if $\{u+v,u-v\}$ is linearly independent.   
+    
+    \vspace{4mm}
+    
+    \noindent\textbf{Proof}
+    
+    \vspace{2mm}
+    
+    \noindent Assume $\{u+v, u-v\}$ is linearly independent. Then
+    
+    \vspace{2mm}
+    
+    \centerline{$c_1(u+v)+c_2(u-v)=0\rightarrow c_1=0\wedge c_2=0$.}
+    
+    \vspace{2mm}
+    
+    \noindent Thus
+    
+    \vspace{2mm}
+    
+    \centerline{$(c_1+c_2)u+(c_1-c_2)v=0\rightarrow c_1=0\wedge c_2=0$.}
+    
+    \vspace{2mm}
+    
+    \noindent Thus, for any $c_1,c_2$, $(c_1+c_2)u+(c_1-c_2)v=0\rightarrow c_1=0\wedge c_2=0$, and $\{u,v\}$ is therefore linearly independent.\par
+    
+    Assume $\{u,v\}$ is linearly independent. Then if $c_1u+c_2v=0$, then $c_1=0$ and $c_2=0$. Thus, $c_1+c_2=0$ and $c_1-c_2=0$. The first equality is thereby equivalent to $(c_1+c_2)u+(c_1-c_2)v=0$. Simplifying this expression yields
+    
+    \vspace{2mm}
+    
+    \centerline{$c_1(u+v)+c_2(u-v)=0$.}
+    
+    \vspace{2mm}
+    
+    \noindent Since $c_1=0$ and $c_2=0$, then $\{u+v,u-v\}$ is by definition linearly independent.\par
+    \hspace{137mm}\blacksquare
+
+\end{addmargin}
+
+\vspace{4mm}
+
+\noindent\textbf{17.} Let $M$ be a square upper triangular matrix with non-zero diagonal entries. Then\par the columns of $M$ are linearly independent.
+
+\vspace{4mm}
+
+\begin{addmargin}[1.4em]{1.4em}
+
+    \noindent\textbf{Proof} (By Contradiction)
+    
+    \vspace{2mm}
+    
+    \noindent Assume the columns of $M$ are linearly dependent. Then there exists at least one column in $M$ such that it can be written as a linear combination of the remaining columns in $M$. Let $M_{i\alpha}$ be a redundant column vector from $M$. Then we have
+    
+    \vspace{2mm}
+    
+    \centerline{$c_1M_{i1}+\cdots c_nM_{in}=M_{i\alpha}$.}
+    
+    \vspace{2mm}
+    
+    \noindent The term on the left side can have at most $n$ non-zero entries. If we assume it does, then this would imply $M_{i\alpha}$ has $n$ non-zero entries. However, if $M$ has two columns which both contain $n$ non-zero entries then $M$ is not upper triangular since $M_{i\alpha}\neq 0$ if $i>\alpha$. This is a contradiction and thus the columns of $M$ are therefore linearly independent.\hspace{89mm}\blacksquare
+
+\end{addmargin}
+
+\vspace{4mm}
+
+\noindent\textbf{18.} Let $S$ be a set of non-zero polynomials in $P(F)$ such that no two have the same\par degree. Then $S$ is linearly independent.
+
+\vspace{4mm}
+
+\begin{addmargin}[1.4em]{1.4em}
+
+    \noindent\textbf{Proof} (By Contradiction)
+    
+    \vspace{2mm}
+    
+    \noindent Assume $f(x)\in S$ such that $c_1g_1(x)+\cdots +c_ng_n(x)=f(x)$, where $g_i(x)\in S$. Then we can express this as
+    
+    \newpage
+    
+    \begin{equation*}
+        \begin{split}
+            c_1g_1(x)+\cdots +c_ng_n(x)& =c_1(a_{11}+\cdots a_{1m}x^m)+\cdots c_n(a_{n1}+\cdots a_{nn}x^n) \\
+            & =b_1+\cdots +b_nx^n \\
+            & =f(x). \\
+        \end{split}
+    \end{equation*}
+    
+    \noindent Since the resulting polynomial of our linear combination is of degree $n$, then $f(x)$ must be degree $n$. However, since $S$ is defined to contain polynomials of distinct degree, then such an $f(x)$ would contradict this definition. Therefore, $S$ is linearly independent.\hspace{121mm}\blacksquare
+
+\end{addmargin}
+
+\vspace{4mm}
+
+\noindent\textbf{20.} Let $f,g\in\mathcal{F}(\mathbb{R},\mathbb{R})$ be functions defined by $f(t)=e^{rt}$ and $g(t)=e^{st}$, where $r\neq s$.\par Then $f$ and $g$ are linearly independent in $\mathcal{F}(\mathbb{R},\mathbb{R})$.
+
+\vspace{4mm}
+
+\begin{addmargin}[1.4em]{1.4em}
+
+    \noindent\textbf{Proof} (By Contradiction)
+    
+    \vspace{2mm}
+    
+    \noindent Assume $f$ and $g$ are linearly dependent. Then there exists some $c\in\mathbb{R}$ such that $cf=g$. It follows then that $ce^{rt}=e^{st}$. Solving for $c$ yields 
+    
+    \begin{equation*}
+        \begin{split}
+            c& =\frac{e^{st}}{e^{rt}} \\
+            & =e^{st}e^{-rt} \\
+            & =e^{st-rt} \\
+            & =e^{(s-r)t}.
+        \end{split}
+    \end{equation*}
+    
+    \noindent Thus, if $cf(x)=g(x)$ then $c=e^{(s-r)t}$. However, it follows that $c\in\mathcal{F}(\mathbb{R},\mathbb{R})$ and $c\notin\mathbb{R}$ which is a contradiction. Therefore, $f$ and $g$ are linearly independent.\hspace{7mm}\blacksquare
+
+\end{addmargin}
+ 
+ \end{document}

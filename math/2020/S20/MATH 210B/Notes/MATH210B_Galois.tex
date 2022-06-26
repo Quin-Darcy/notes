@@ -1,0 +1,163 @@
+\section{}
+\documentclass{article}
+
+%------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+%------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,pagebackref=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red, linkcolor=blue}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\textit{\oldproofname}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\begin{document}
+    \begin{prop}[Pg. 1]
+        If $E$ is a field, then $(\text{Aut}(E),\circ)$ is a group.
+    \end{prop}
+    \begin{prop}[Pg. 1]
+        If $E/F$, $g(x)\in F[x]$ is irreducible over $F$, $\varphi$ is an automorphism on $E$, and $\varphi$ is the identity on $F$, and $c$ is a root of $g(x)$, then $\varphi(c)$ is a root of $g(x)$.
+    \end{prop}
+    \begin{prop}[Pg. 1]
+        If $E/F$, $g(x)\in F[x]$ is irreducible over $F$, and $c$ and $d$ are each roots of $g(x)$, then there is an automorphism $\varphi$ of $E$ such that $\varphi(c)=d$ and $\varphi$ is the identity on $F$.
+    \end{prop}
+    \begin{theorem}[Pg. 1]
+        If $K$ is a field, $\alpha_1,\dots,\alpha_n$ are distinct automorphisms of $K$, then $\{\alpha_1,\dots,\alpha_n\}$ is linearly independent over $K$.
+    \end{theorem}
+    \begin{prop}[HW6]
+        Assume that $\varphi$ is an automorphism of $E$. $F_{\varphi}=\{a\in E\mid \varphi(a)=a\}$ is a subfield of $E$. 
+    \end{prop}
+    \begin{prop}[Pg. 2]
+        If $G=\{g_1,\dots,g_n\}$ is a group and $g\in G$, then $G=\{gg_1,\dots,gg_n\}$.
+    \end{prop}
+    \begin{theorem}[Pg. 2]
+        If $E/F$, and $S$ is a finite group of automorphisms on $E$, then $[E\colon F_S]=\abs{S}$.
+    \end{theorem}
+    \begin{prop}[Pg. 4]
+        Assume that $E/K$ is finite, and that $H$ is a subgroup of $G(E/K)$. Then $[E\colon F_H]=\abs{H}$. Also since $E/F_H/K$, then 
+            \begin{equation*}
+                [F_H\colon K]=\frac{[E\colon F_H]}{\abs{H}}.
+            \end{equation*}
+        If $H=G(E/K)$, then $[E\colon K]=\abs{G(E/K)}[F_{G(E/K)}\colon K]$. Thus $\abs{G(E/K)}\leq[E\colon K]$.
+    \end{prop}
+    \begin{prop}[Pg. 5]\hfill\par
+        \begin{itemize}
+            \item If $E/K/M$, then $G(E/K)\subseteq G(E/M)$.
+            \item If $G$ and $H$ are subgroups of $\text{Aut}(E)$, $G\subseteq H$, then $F_H\subseteq F_G$.
+            \item If $G$ is a subgroup of $\text{Aut}(E)$, the $[E\colon F_G]=\abs{G}$.
+            \item $\abs{G(E/K)}\leq[E\colon K]$ with equality iff $F_{G(E/K)}=K$.
+        \end{itemize}
+    \end{prop}\newpage
+    
+    \begin{theorem}
+        If $L$ is the splitting field of a separable polynomial in $F[x]$ and $\text{char}(F)=0$, then $\abs{G(L/F)}=[L\colon F]$.
+    \end{theorem}
+        \begin{proof}
+            Assume that $L$ is the splitting field of a separable polynomial $f\in F[x]$ and that $F$ has characteristic 0. Then $L=F(\alpha_1,\dots,\alpha_n)$, where $\alpha_1,\dots,\alpha_n$ are the roots of $f$. By Pg. 8 of Galois Theory, $L$ is a finite extension of $F$ and $\text{char}(F)=0$ and thus $L/F$ is separable. By Theorem 4, there exists $c\in L$ such that $L=F(c)$. Let $h\in F[x]$ be the minimal polynomial of $c$. Note that $h$ is separable since $c$ is separable. Assume that $\text{deg}(h)=m$. Then $[L\colon F]=m$.\par\hspace{4mm} Since $L$ is the splitting field of $f\in F[x]$, then by Theorem 3, $L/F$ is normal
+        \end{proof}
+\end{document}

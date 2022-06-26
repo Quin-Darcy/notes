@@ -1,0 +1,224 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+
+\begin{document}
+
+\title{Notes for Applied Mathematics}
+\author{Quin Darcy}
+\date{May 18, 2019}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+\section{Perturbation Theory}
+    What does it mean to solve a polynomial equation by a perturbation method? Suppose the problem is
+        \begin{equation}
+            x^2-3.99x+3.02=0.
+        \end{equation}
+    \noindent Of course, this can be solved by the quadratic formula. But yo approach it by perturbation theory, there are four steps:
+        \begin{enumerate}
+            \item Notice that since $-3.99=-4+0.01$ and $3.02=3+0.02$, then equation (1) is almost the same as $x^2-4x+3=0$ which can be factored as $(x-1)(x-3)=0$, giving two roots $x^{(1)}=1$, $x^{(2)}=3$.
+            \item The next step is to create a family of problems that lay between the factorable problem and the original problem. If we let $\varepsilon=0.01$, then $-3.99=-4+\varepsilon$ and $3.02=3+2\varepsilon$. Then equation (1) can be written as 
+                \begin{equation}
+                    x^2+(\varepsilon-4)x+(3+2\varepsilon)=0.
+                \end{equation}
+            By doing this we no longer obtain a single equation, but rather a family of equations, one for each $\varepsilon$. When $\varepsilon=0$, then we get the factorable problem, and when $\varepsilon=0.01$ then we obtain the ``target problem'' equation (1). For $0<\varepsilon<0.01$, it is midway between the two. Equation (2) is called a \textit{perturbation family}, a family of problems depending on a small parameter $\varepsilon$ which is easily solvable when $\varepsilon=0$.
+            \item Find approximate solutions of equation (2), in the form of polynomials in the small parameter $\varepsilon$. Suitable solutions turn out to be 
+                \begin{equation*}
+                    \begin{split}
+                        x^{(1)}&\approx 1+\frac{3}{2}\varepsilon+\frac{15}{8}\varepsilon^2, \\
+                        x^{(2)}&\approx 3-\frac{5}{2}\varepsilon-\frac{15}{8}\varepsilon^2.
+                    \end{split}
+                \end{equation*}
+            Evaluating this solutions when $\varepsilon=0.01$ gives an approximate solution to (1), namely $x^{(1)}\approx 1.0151875$, $x^{(2)}\approx 2.9748125$.
+            \item The last step is to say something about the amount of error in these approximations.
+        \end{enumerate}
+    
+    It is useful to think of a perturbation family as a \textit{path} leading from the easy \textit{reduced problem} to the given \textit{target problem}. To clarify this idea of a path, think of (1) as a special case of a general quadratic equation $ax^2+bx+c=0$. If a set of three perpendicular coordinate axes, labeled $a,b,$ and $c$, is constructed, then to each point $(a,b,c)$ there corresponds a specific quadratic equation. Hence, $(1,-3.99,3.02)$ corresponds to (8), and $(1,-4,3)$ corresponds to the factorable quadratic equation in step 1. Thus, the three equations $a=1, b=\varepsilon-4$, and $c=3+2\varepsilon$ are the parametric equations of a straight line in this coordinate system, joining the reduced and target problem.\par
+    It is important to realize that perturbation families must be created and do not arise automatically. As an example of the choices involved in formulating a perturbation problem, suppose the target problem is 
+        \begin{equation}
+            x^2+3.9x+5.002=0.
+        \end{equation}
+    \noindent This is close to $x^2+4x-5=(x-1)(x+5)$. Two possible perturbation families for (3) are 
+        \begin{equation}
+            x^2+(4-\varepsilon)x-(5+2\varepsilon^2)=0
+        \end{equation}
+    \noindent and 
+        \begin{equation}
+            x^2+(4-\varepsilon)x-(5+0.02\varepsilon)=0.
+        \end{equation}
+    \noindent Both reduce to (3), and they represent two different paths leading from the easy problem $x^2+4x-5=0$ to the target problem (3). Which of them will yield a better solution? In the present case the issue to be decided is by error analysis alone, because the only basis for decision is numerical accuracy. 
+\subsection{Formal Approximations In The Nondegenerate Case}
+    We will develop approximate solutions to the perturbation problem (2) by using two heuristic ideas:
+        \begin{enumerate}[label=(\roman*)]
+            \item Try polynomial.
+            \item Ignore high powers of $\varepsilon$.
+        \end{enumerate}
+    As a motivation for (ii), we have already remarked that if $0<\varepsilon<1$, then $\dots\varepsilon^4<\varepsilon^3<\varepsilon^2<\varepsilon<1$. For instance, if $\varepsilon=0.01$, then $\varepsilon^2=0.0001$ and $\varepsilon^3=0.000001$. If one is interested in a solution with three or four decimal places of accuracy, it seems reasonable to ignore $\varepsilon^3$ and all powers higher than 3. Idea (i) can be motivated by noting that many functions can be expressed as power series, and ignoring high powers in a power series leaves a polynomial. Combining (i) and (ii), taking the cutoff at $\varepsilon^3$, suggests looking for approximate solutions to (2) in the form of quadratic polynomials:
+        \begin{equation}
+            \begin{split}
+                x^{(1)}&\approx 1+a\varepsilon+b\varepsilon^2 \\
+                x^{(2)}&\approx 3+c\varepsilon+d\varepsilon^2.
+            \end{split}
+        \end{equation}
+    \noindent The leading terms here are the known solutions of (2) when $\varepsilon=0$. Substituting the first equation of (6) into (2) gives
+        \begin{equation*}
+            (1+a\varepsilon+b\varepsilon^2)^2+(\varepsilon-4)(1+a\varepsilon+b\varepsilon^2)+(3+2\varepsilon)=0.
+        \end{equation*}
+    \noindent The next step is to multiply this out and arrange it in powers of $\varepsilon$. To do this effeciently, note that the coefficient of $\varepsilon^2$ in $(1+a\varepsilon+b\varepsilon^2)^2=(1+a\varepsilon+b\varepsilon^2)(1+a\varepsilon+b\varepsilon^2)$ is $a^2+2b$. This is because $\varepsilon^2$ can only arise in two ways: either $a\varepsilon$ gets multiplied by itself, or $1$ gets multiplied by $b\varepsilon^2$. Continuing with this reasoning, we can break down each term into ascending powers of $\varepsilon$.
+        \begin{equation*}
+            \begin{split}
+                (1+a\varepsilon+b\varepsilon^2)^2&: 1+2a\varepsilon+(a^2+2b)\varepsilon^2+2ab\varepsilon^3+b^2\varepsilon^4 \\
+                (\varepsilon-4)(1+a\varepsilon+b\varepsilon^2)&:-4+(-4a+1)\varepsilon+(a-4b)\varepsilon^2+b\varepsilon^3 \\
+                (3+2\varepsilon)&: 3+2\varepsilon.
+            \end{split}
+        \end{equation*}
+    \noindent Adding these all together we get
+        \begin{equation}
+            (-2a+3)\varepsilon+(a^2+a-2b)\varepsilon^2+(2ab+b)\varepsilon^3+(b^2)\varepsilon^4=0.
+        \end{equation}
+    \noindent Since a polynomial in $\varepsilon$ which equals zero for all $\varepsilon$ must have every coefficient equal to zero. Thus, (7) can hold only if 
+        \begin{equation*}
+            \begin{split}
+                -2a+3&=0, \\
+                a^2+a-2b&=0,\\
+                2ab+b&=0,\\
+                b^2=0.
+            \end{split}
+        \end{equation*}
+    \noindent This is a system of four equations in two unknowns which clearly has no solutions. However, this is to be expected otherwise (6) would represent an exact solution. Thus, we deploy idea (ii) and by doing this $a$ and $b$ need only satisfy the first to equations. Hence, $a=3/2$ and $b=15/8$. A similar calculation for $c$ and $d$ completes the result stated previously in step 3.\par We now come to an important point. This procedure will not work on every method. And so we must look to the general case as stated in the following theorem.
+        \begin{theorem}
+            Let $\varphi(x,\varepsilon)$ be a function having partial derivatives up to the second order. Let $x_0$ satisfy $\varphi(x_0,0)=0$ and $\varphi_x(x_0,0)\neq 0$. Then there is a unique quadratic polynomial $x_0+\varepsilon x_1+\varepsilon^2x_2$ which is regarded as a formal approximate solution of $\varphi(x,\varepsilon)=0$ for small $\varepsilon$.
+        \end{theorem} 
+        
+    \newpage
+    
+    \begin{enumerate}[leftmargin=*]
+        \item Assuming $f\sim a_1\varepsilon^{\alpha}+a_2\varepsilon^{\beta}+\cdots$, find $\alpha$ and $\beta$ (with $\alpha <\beta$), and nonzero $a_1$ and $a_2$ for the following:
+            \begin{enumerate}[label=(\alph*)]
+                \item $f=e^{\sin(\varepsilon)}$.
+                    \begin{solution}
+                        To begin, we using the Taylor expansion of $\sin(x)$, which is 
+                            \begin{equation*}
+                                \sin(x)=x-\frac{1}{3!}x^3+\frac{1}{5!}x^5-\cdots,
+                            \end{equation*}
+                        to re-express the given function as 
+                            \begin{equation*}
+                                \begin{split}
+                                    e^{\sin(\varepsilon)} &\sim e^{\varepsilon-\frac{1}{3!}\varepsilon^3+\frac{1}{5!}\varepsilon^5-\cdots} \\
+                                    &= 1+(\varepsilon-\frac{1}{3!}\varepsilon^3+\frac{1}{5!}\varepsilon^5-\cdots)+\frac{1}{2}(\varepsilon-\frac{1}{3!}\varepsilon^3+\frac{1}{5!}\varepsilon^5-\cdots)^2+\cdots \\
+                                    &=1+\varepsilon+\frac{1}{2}\varepsilon^2-\cdots.
+                                \end{split}
+                            \end{equation*}
+                        We can see here that $a_1=1$, $\alpha=0$, $a_2=1$, $\beta=1$.
+                    \end{solution}
+                \item $f=\sin(\sqrt{1+\varepsilon x})$, for $0\leq x\leq 1$. 
+                    \begin{solution}
+                        We start by rewriting the square root function. We have that 
+                            \begin{equation*}
+                                \begin{split}
+                                    \sqrt{1+\varepsilon x} &=1+\frac{1}{2}\varepsilon x-\frac{1}{8}\varepsilon^2x^2+\cdots.
+                                \end{split}
+                            \end{equation*}
+                        Then we can use the expansion of $\sin(x)$ to obtain
+                            \begin{equation*}
+                                \begin{split}
+                                    \sin(\sqrt{1+\varepsilon x})&\sim \sin\big(1+\frac{1}{2}\varepsilon x-\frac{1}{8}\varepsilon^2x^2+\cdots\big) \\
+                                    &=\sin(1)+\big(1+\frac{1}{2}\varepsilon x-\cdots\big)\cos(1)-\frac{1}{2}\big(1+\frac{1}{2}\varepsilon x-\cdots\big)^2\sin(1) \\
+                                    &= \sin(1)+\cos(1)-\frac{1}{2}\sin(1)+\frac{1}{2}\varepsilon x\big(\cos(1)-\sin(1)\big)+\cdots
+                                \end{split}
+                            \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+    
+
+\end{document}

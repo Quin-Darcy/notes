@@ -1,0 +1,134 @@
+\section{}
+\documentclass[leqno]{article}
+%------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+%------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[colorlinks=true,pagebackref=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red, linkcolor=blue}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{biblatex}
+
+\addbibresource{Analysis.bib}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}[theorem]
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+
+\begin{document}
+\title{Random Number Competition}
+\author{ }
+\date{August, 15 2020}
+\maketitle
+
+\section{Description}
+
+Using any language of your choosing, write the code for a random number generator. The output must be some number between 1 and 10. You may not use any random number library functions, nor can you use any reference to a clock as the seed for random number generation. The seed must be provided by user input. For example, the user enters, say, 3 and the program spits out 7. How 3 goes to 7 is up to you. Another example would be the user enters 3 and this triggers the program to run 100 times, each time outputting a number from 1 to 10 where 3 is used directly, indirectly, or not at all.\par To compare the performance of these two codes, we will run the program 100 times and export each output into either R or Excel and plot a probability density function. The person whose code yields a the closest distribution in which 1/10 is assigned to each number with the smallest amount of variance is the winner.
+
+\section{Probability Measures}
+A box has $s$ balls, labeled $1,2,\dots, s$ but otherwise identical. The balls are mixed up and a person reaches into the box, draws a ball, notes the number on the ball and then places it back into the box. The outcome of the experiment is number on the drawn ball.\par Suppose we repeat the above experiment $n$ times. Let $N_n(k)$ denote the number of times the ball labeled $k$ was drawn during these $n$ trials. Then the \textit{relative frequency} of the outcome $k$ is
+    \begin{equation*}
+        \frac{N_n(k)}{n}.
+    \end{equation*}
+As the number of trials gets large we should expect the relative frequencies $N_n(1)/n, N_n(2)/n,\dots,N_n(s)/n$ to settle down to some fixed numbers $p_1,\dots,p_s$ (which according to our intuition in this case should all be $1/s$).\par By the relative frequency interpretation, the number $p_i$ would be called the probability that the $i$th ball will be drawn when the experiment is performed once. 
+
+\end{document}

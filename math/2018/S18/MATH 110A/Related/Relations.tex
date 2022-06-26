@@ -1,0 +1,414 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{commath}
+\usepackage{colonequals}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\newcolumntype{C}{>$c<$}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=10mm,labelindent=10mm}
+
+
+%\section*{\centerline{\underline{First Isomorphism Theorem}}}
+
+
+\begin{document}
+
+\vspace{10mm}
+
+\begin{flushleft}
+
+\textbf{\large{\underline{RELATIONS}}}
+
+\vspace{8mm}
+
+\blacksquare \textbf{ DEFINITION}
+
+\end{flushleft}
+
+A set $R$ is an $(\mathbf{n}$\textbf{-ary}$)$ \textbf{relation} if there exists $A_0,A_1,\dots,A_{n-1}$ such that\par
+
+\vspace{4mm}
+
+\centerline{$R\subseteq A_0\times A_1\times\cdots A_{n-1}$.}
+
+\vspace{4mm}
+
+In particular, $R$ is a \textbf{unary} relation if $n=1$ and a \textbf{binary} relation if $n=2$. If\par$R\subseteq A\times A$ for some set $A$, then $R$ is a \textbf{relation on} $A$ and we write $(A,R)$.
+
+\begin{flushleft}
+
+\blacksquare \textbf{ EXAMPLE}
+
+\end{flushleft}
+
+For any set $A$, define\par
+
+\vspace{4mm}
+
+\centerline{$I_A=\{(a,a)\colon a\in A\}$.}
+
+\vspace{4mm}
+
+Call this set the \textbf{identity} on $A$. 
+
+\begin{flushleft}
+
+\blacksquare \textbf{ DEFINITION}
+
+\end{flushleft}
+
+Let $R\subseteq A\times B$. The \textbf{domain} of $R$ is the set\par
+
+\vspace{4mm}
+
+\centerline{dom$(R)=\{x\in A\colon\exists y(y\in B\wedge(x,y)\in R)\}$,}
+
+\vspace{4mm}
+
+and the \textbf{range} of $R$ is the set\par
+
+\vspace{4mm}
+
+\centerline{ran$(R)=\{y\in B\colon\exists x(x\in A\wedge(x,y)\in R)\}$.}
+
+\begin{flushleft}
+
+\textbf{COMPOSITION}
+
+\vspace{4mm}
+
+Given the relations $R$ and $S$, let us define a new relation. Suppose $(a,b)\in S$ and $(b,c)\in R$. Therefore, $a$ is related to $c$ through $c$. The new relation will contain the ordered pair $(a,c)$ to represent this relationship.
+
+\vspace{4mm}
+
+\blacksquare \textbf{ DEFINITION}
+
+\end{flushleft}
+
+Let $R\subseteq A\times B$ and $S\subseteq B\times C$. The \textbf{composition} of $S$ and $R$ is the subset of $A\times C$ defined as\par
+
+\vspace{4mm}
+
+\centerline{$S\circ R=\{(x,z)\colon\exists y(y\in B\wedge(x,y)\in R\wedge(y,z)\in S\}$.}
+
+\newpage
+
+\begin{flushleft}
+
+\blacksquare \textbf{ EXAMPLE}
+
+\end{flushleft}
+
+Define\par
+
+\vspace{4mm}
+
+\centerline{$R=\{(x,y)\in\mathbb{R}^2\colon x^2+y^2=1\}$}
+
+\vspace{4mm}
+
+and\par
+
+\vspace{4mm}
+
+\centerline{$S=\{(x,y)\in\mathbb{R}^2\colon y=x+1\}$.}
+
+\vspace{4mm}
+
+Notice that $R$ is the unit circle and $S$ is the line with slope of 1 and $y$-intercept of\par$(0,1)$. Let us find $R\circ S$.\par
+
+\vspace{4mm}
+
+\centerline{$R\circ S=\{(x,z)\in\mathbb{R}^2\colon\exists y(y\in\mathbb{R}\wedge(x,y)\in S\wedge(y,z)\in\mathbb{R}\}$}
+
+\vspace{2mm}
+
+\hspace{31.5mm} $=\{(x,z)\in\mathbb{R}^2\colon\exists y(y\in\mathbb{R}\wedge y=x+1\wedge y^2+z^2=1)\}$
+
+\vspace{2mm}
+
+\hspace{31.5mm} $=\{(x,z)\in\mathbb{R}^2\colon(x+1)^2+z^2=1\}$.
+
+\begin{flushleft}
+
+\blacksquare \textbf{ EXAMPLE}
+
+\end{flushleft}
+
+\textbf{\textsc{PROPOSITION }}\par 
+\hspace{5mm}If $R\subseteq A\times B$, then $R\circ I_A=R$ and $I_B\circ R=R$.
+
+\vspace{4mm}
+
+\textbf{\textsc{PROOF}}\par
+
+\hspace{5mm}Assume $R\subseteq A\times B$. Then,\par
+
+\vspace{4mm}
+
+\hspace{10mm}$(x,z)\in R\circ I_A$\par
+\vspace{2mm}
+\hspace{20mm}$\Leftrightarrow\exists y(y\in A\wedge(x,y)\in I_A\wedge(y,z)\in R)$\par
+\vspace{2mm}
+\hspace{20mm}$\Leftrightarrow\exists y(y\in A\wedge y=x\wedge(y,z)\in R)$\par
+\vspace{2mm}
+\hspace{20mm}$\Leftrightarrow\exists x(x\in A\wedge(x,z)\in R)$\par
+\vspace{2mm}
+\hspace{20mm}$\Leftrightarrow(x,z)\in R$. \blacksquare
+
+\vspace{4mm}
+
+\hspace{10mm}$(x,z)\in I_B\circ R$\par
+\vspace{2mm}
+\hspace{20mm}$\Leftrightarrow\exists y(y\in B\wedge(x,y)\in R\wedge(y,z)\in I_B)$\par
+\vspace{2mm}
+\hspace{20mm}$\Leftrightarrow\exists y(y\in B\wedge(x,y)\in R\wedge y=z)$\par
+\vspace{2mm}
+\hspace{20mm}$\Leftrightarrow\exists z(z\in B\wedge(x,z)\in R)$\par
+\vspace{2mm}
+\hspace{20mm}$\Leftrightarrow (x,z)\in R$. \blacksquare
+
+
+\begin{flushleft}
+
+\textbf{INVERSES}
+
+\vspace{4mm}
+
+Let $R\subseteq A\times B$. We know that $R\circ I_A=R$ and $I_B\circ R=R$. If we want $I_A=I_B$, we need $A=B$ so that $R$ is a relation on $A$. Then,\par
+
+\vspace{4mm}
+
+\centerline{$R\circ I_A=I_A\circ R=R$.}
+
+\end{flushleft}
+
+\newpage
+
+\begin{flushleft}
+
+For example, if we define $R=\{(2,4),(1,3),(2,5)\}$ and view it as a relation on $\mathbb{Z}$, then $R$ composed on either side by $I_{\mathbb{Z}}$ yields $R$. To illustrate, consider the ordered pair $(1,3)$. It is an element of $R\circ I_{\mathbb{Z}}$ because\par
+
+\vspace{4mm}
+
+\centerline{$(1,1)\in I_{\mathbb{Z}}\wedge(1,3)\in R$,}
+
+\vspace{4mm}
+
+and it is also an element of $I_{\mathbb{Z}}\circ R$ because\par
+
+\vspace{4mm}
+
+\centerline{$(1,3)\in R\wedge(3,3)\in I_{\mathbb{Z}}$.}
+
+\vspace{4mm}
+
+Notice that not every identity relation will have this property. Using the same definition of $R$ as above,\par
+
+\vspace{4mm}
+
+\centerline{$R\circ I_{\{1,2\}}=R$,}
+
+\vspace{4mm}
+
+but\par
+
+\vspace{4mm}
+
+\centerline{$I_{\{1,2\}}\circ R=\varnothing$.}
+
+\end{flushleft}
+
+\begin{flushleft}
+
+\blacksquare \textbf{ DEFINITION}
+
+\end{flushleft}
+
+Let $R$ be a binary relation. The \textbf{inverse} of $R$ is the set\par
+
+\vspace{4mm}
+
+\centerline{$R^{-1}=\{(y,x)\colon(x,y)\in R\}$.}
+
+\begin{flushleft}
+
+\blacksquare \textbf{ EXAMPLE}
+
+\end{flushleft}
+
+We now check whether $R\circ R^{-1}=R^{-1}\circ R=I_A$ for any relation on $A$. Consider $R=\{(2,1),(4,3)\}$, which is a relation on $\{1,2,3,4\}$. Then,\par
+
+\begin{flushleft}
+
+\centerline{$R^{-1}=\{(1,2),(3,4)\}$,}
+
+\vspace{4mm}
+
+and we see that composing does not yield the identity on $\{1,2,3,4\}$ because\par
+
+\vspace{4mm}
+
+\centerline{$R\circ R^{-1}=\{(1,1),(3,3)\}=I_{\{1,3\}}$}
+
+\vspace{4mm}
+
+and\par
+
+\vspace{4mm}
+
+\centerline{$R^{-1}\circ R=\{(2,2),(4,4)\}=I_{\{2,4\}}$.}
+
+\vspace{4mm}
+
+The situation is worse when we define $S=\{(2,1),(2,3),(4,3)\}$. In this case, we have that\par
+
+\vspace{4mm}
+
+\centerline{$S^{-1}=\{(1,2),(3,2),(3,4)\}$}
+
+\vspace{4mm}
+
+but\par
+
+\vspace{4mm}
+
+\centerline{$S\circ S^{-1}=\{(1,1),(1,3),(3,1),(3,3)\}$}
+
+\end{flushleft}
+
+\newpage
+
+\begin{flushleft}
+
+and\par
+
+\vspace{4mm}
+
+\centerline{$S^{-1}\circ S=\{(2,2),(2,4),(4,4)\}$.}
+
+\vspace{4mm}
+
+Neither of these compositions leads to an identity, but at least we have that\par
+
+\vspace{4mm}
+
+\centerline{$\{(1,1),(3,3)\}\subseteq S\circ S^{-1}$}
+
+\vspace{4mm}
+
+and\par
+
+\vspace{4mm}
+
+\centerline{$\{(2,2),(4,4)\}\subseteq S^{-1}\circ S$.}
+
+\vspace{4mm}
+
+This can be generalized.
+
+
+\end{flushleft}
+
+\begin{flushleft}
+
+\blacksquare \textbf{ THEOREM}
+
+\end{flushleft}
+
+$I_{ran(R)}\subseteq R\circ R^{-1}$ and $I_{dom(R)}\subseteq R^{-1}\circ R$ for any binary relation.
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+$\phi\circ\psi\colon G/$ker$(\phi)\rightarrow$ im$(\phi)$, where $\psi\colon G/$ker$(\phi)\rightarrow G$ defined by $g$ker$(\phi)\mapsto g$. \par
+
+\vspace{4mm}
+
+Let $(g_1$ker$(\phi)),(g_2$ker$(\phi))\in G/$ker$(\phi)$.
+
+\vspace{6mm}
+
+\begin{center}
+\begin{tabular}{ |p{3mm}||p{26mm}||p{8.5cm}| }
+ \hline
+ \hspace{1mm} &\textbf{Connectives} & \hspace{30mm}\textbf{Predicates}\\
+ \hline
+ 
+1. & \hspace{12mm}A & \hspace{3mm}$\forall h\in$ker$(\phi)(h=e_G)$\\
+\hline
+ 
+2. & \hspace{12mm}A & \hspace{3mm}$g_1$ker$(\phi)=g_2$ker$(\phi)$\\
+\hline
+ 
+3. & \hspace{11.5mm}$\Leftrightarrow$ & \hspace{3mm}$g_1$ker$(\phi)\subseteq g_2$ker$(\phi)\wedge g_2$ker$(\phi)\subseteq g_1$ker$(\phi)$\\
+ \hline
+ 
+4. & \hspace{11.5mm}$\Leftrightarrow$ & \hspace{3mm}$g_1$ker$(\phi)\subseteq g_2$ker$(\phi)$\\
+ \hline
+ 
+5. & \hspace{11.5mm}$\Leftrightarrow$ & \hspace{3mm}$g_1\in g_1$ker$(\phi)$\\
+ \hline
+ 
+6. & \hspace{11.5mm}$\Leftrightarrow$ & \hspace{3mm}$\exists h(h\in$ker$(\phi)\wedge(g_1=g_2h))$\\
+ \hline
+ 
+7. & \hspace{11.5mm}$\Leftrightarrow$ & \hspace{3mm}$\exists h(h\in$ker$(\phi)\wedge(g_1=g_2e_G))$\\
+ \hline
+ 
+8. & \hspace{12mm}$\therefore$ & \hspace{3mm}$g_1=g_2$ \\
+\hline
+ 
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+
+
+
+\end{document}

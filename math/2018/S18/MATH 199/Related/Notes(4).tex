@@ -1,0 +1,117 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcolumntype{C}{>$c<$}
+\usepackage{stackengine}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=60mm,labelindent=60mm}
+
+
+
+\begin{document}
+
+
+\section*{\centerline{A Tensor Example The Whole Family Can Enjoy}}
+
+\justifying
+
+\begin{flushleft}
+
+    Let us suppose we have a position vector $\mathbf{R}$ in $\mathbb{R}^2$ that is determined by its component functions, call them $f^1(u^1,u^2)$ and $f^2(u^1,u^2)$. We can write this vector as\par
+    
+\vspace{4mm}
+
+        \centerline{$\mathbf{R}=\mathbf{R}(f^1(u^1,u^2), f^2(u^1,u^2))$.}
+        
+\vspace{4mm}
+
+    Written in tensor notation with function argument indices suppressed, our vector is\par
+    
+\vspace{4mm}
+
+        \centerline{$\mathbf{R}=\mathbf{R}(f(u))$.}
+        
+\end{flushleft}
+
+    Now let us consider how this vector changes with respect to its independent variables $u^1$ and $u^2$. By investigating this, we can take a step forward in looking at objects `geometrically'. This means we can describe objects without direct reference to a coordinate system and by doing this, we free ourselves up to understand objects, and the properties that distinguish objects, intrinsically.
+    
+    Now let us get to it. These calculations naturally involve partial derivatives since our position vector is multivariate by construction. The vector that represents the `rate at which our vector is changing' with respect to our first variable, which we will denote as $\mathbf{Z}_1$, is\par
+    
+\vspace{6mm}
+
+        \centerline{$\mathbf{Z}_1=\frac{\partial \mathbf{R}(f(u))}{\partial u^1}=\frac{\partial \mathbf{R}(f^1(u^1,u^2),f^2(u^1,u^2))}{\partial u^1}=\frac{\partial \mathbf{R}}{\partial f^1}\frac{\partial f^1}{\partial u^1}+\frac{\partial \mathbf{R}}{\partial f^2}\frac{\partial f^2}{\partial u^1}$.}
+        
+\vspace{6mm}
+
+\begin{flushleft}
+
+    It follows that the $\mathbf{Z}_2$ is\par
+    
+\end{flushleft}
+    
+\vspace{6mm}
+
+        \centerline{$\mathbf{Z}_2=\frac{\partial \mathbf{R}(f(u))}{\partial u^2}=\frac{\partial \mathbf{R}(f^1(u^1,u^2),f^2(u^1,u^2))}{\partial u^2}=\frac{\partial \mathbf{R}}{\partial f^1}\frac{\partial f^1}{\partial u^2}+\frac{\partial \mathbf{R}}{\partial f^2}\frac{\partial f^2}{\partial u^2}$.}
+        
+\vspace{6mm}
+
+    With both these vectors in front of us we can write them together in tensor notation as\par
+    
+\vspace{6mm}
+
+        \centerline{$\mathbf{Z}_i=\sum\limits_{j=1}^2 \frac{\partial \mathbf{R}}{\partial f^j}\frac{\partial f^j}{\partial u^i}=\frac{\partial\mathbf{R}}{\partial u^i}$.}
+        
+\begin{flushleft}
+
+    Now that we have this concise expression, we can do the big reveal! *inhales slowly* This object is called the \textit{covariant basis}! But let us continue. So this objects `decomposes' our position vector into two vectors that `report back' how the position vector is changing at each point. So, deviating from our example slightly, imagining our vector stemming from some point in $\mathbb{R}^3$, tracing out some path in space or along a surface, this covariant basis is something that can tell us something about the path or surface as our position vector runs along it.
+        
+\newpage
+
+    To further our understanding of this object, let us recall back to Calculus I where we learned definite derivatives. Here we have some function, call it $\mathbf{R}(f(u))$, and the value of its derivative at some point, say $p$, was equal to the slope of the tangent line that was tangent to the function's graph at the point $\mathbf{R}(f(p))$. This should tell us that the derivative of our vector-valued function $\mathbf{R}(f(u))$, at some point $p$, with respect to one of its two variables, will depend on that point.\par
+    
+\vspace{6mm}
+
+        \centerline{$(\mathbf{R}_{f^1},\mathbf{R}_{f^2})\cdot(f^1_{u^1},f^2_{u^1})\big|_{u^1=p}=\frac{\partial}{\partial u^1}(\mathbf{R})\big|_{u^1=p}$}
+        
+\vspace{6mm}
+
+    Not very confident with the math up there lol. Tried to break it down in my head and just type what came to mind. yikes. Anyway, lets go ahead and talk about the \textit{covariant metric tensor}. This pup, denoted $Z_{ij}$, is 
+
+        
+        
+\end{flushleft}
+
+
+
+
+
+
+
+
+\end{document}

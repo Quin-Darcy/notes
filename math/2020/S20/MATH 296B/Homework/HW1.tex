@@ -1,0 +1,181 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 296B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 2/5/20   \\
+{ \textbf{Instructor:}}\ Dr. Pigno \hspace{\fill} \textbf{Assignment:} Homework 1 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item Find the GCD of the following, use the Fast Euclidean Algorithm on at least one of the pairs.
+            \begin{enumerate}[label=(\alph*)]
+                \item 2947 and 3997.
+                    \begin{solution}
+                        Applying the traditional algorithm yields $q=1$ and $r=1050$ and since $r<\frac{2947}{2}$, then we will proceed as usual. We have
+                            \begin{equation*}
+                                \begin{split}
+                                    3997 &= (1)2947+1050 \\
+                                    2947 &= (2)1050+847 \\
+                                    1050 &= (1)847+203 \\
+                                     847 &= (4)203+35 \\
+                                     203 &= (5)35 +38 \\
+                                      35 &= (1)28+7 \\
+                                      28 &= (4)7.
+                                \end{split}
+                            \end{equation*}
+                        Thus, GCD$(2947,3997)=7$.
+                    \end{solution}
+                \item 1109 and 4999.
+                    \begin{solution}
+                        Applying the traditional algorithm gives us $q=4$ and $r=563$. Since $r>\frac{1109}{2}$, we will let $q'=5$ and $r'=-546$. Then 
+                            \begin{equation*}
+                                \begin{split}
+                                    4999 &= (5)1109-546 \\
+                                    1109 &= (-2)(-546)+17 \\
+                                    -546 &= (-32)17-2 \\
+                                      17 &= (-8)(-2)+1 \\
+                                      -2 &= (-2)1.
+                                \end{split}
+                            \end{equation*}
+                        Thus, GCD$(1109,4999)=1$.
+                    \end{solution}
+            \end{enumerate}
+        \item Find values of $x$ and $y$ to satisfy 
+            \begin{enumerate}[label=(\alph*)]
+                \item $43x+64y=1$.
+                    \begin{solution}
+                        Since GCD$(43,64)=1$, then by the GCDLC theorem, there exists solutions in $\mathbb{Z}$. To begin, we will calculate the GCD:
+                            \begin{enumerate}[label=\arabic*.]
+                                \item $64=(1)43+21$ 
+                                \item $43=(2)21+1$ 
+                                \item $21=(21)1$.
+                            \end{enumerate}
+                        From 2. we get that $43-(2)21=1$ and from 1. we get that $21=64-43$. Thus, $43-(2)(64-43)=1$. Hence, $(3)43-(2)64=1$ and thus $x=3$ and $y=-2$.
+                    \end{solution}\newpage
+                \item $93x-18y=3$.
+                    \begin{solution}\hfill\par
+                        \begin{center}
+                            \begin{tabular}{ |c|c|c|c| } 
+                                \hline
+                                $93x-18y$ & 93 & 18 & 3 \\ \hline
+                                $x$ & 1 & 0 & 1 \\ \hline
+                                $y$ & 0 & -1 & 5 \\ 
+                                \hline
+                            \end{tabular}
+                        \end{center}
+                    \end{solution}
+            \end{enumerate}
+        \item Prove that $4\nmid(n^2+2)$ for any integer $n$.
+            \begin{proof}
+                Let $n\in\mathbb{Z}$ and assume $4\mid(n^2+2)$. Suppose $n$ is even. Then for some $m\in\mathbb{Z}$, we have that $n=2m$. Since $4\mid(n^2+2)$, then for some $k\in\mathbb{Z}$, $n^2+2=4k$ and thus $(2m)^2+2=4m^2+2=4k$. Dividing through by 2 we obtain $2m^2+1=2k$. This is not possible since for any $m\in\mathbb{Z}$, $2m^2+1$ is an odd number, while for any $k\in\mathbb{Z}$, $2k$ is an even number. Now suppose $n$ is odd. Then for some $m\in\mathbb{Z}$. $n=2m+1$. Thus, $(2m+1)^2+2=4m^2+4m+3=4k$. Simplifying we get that $2(2m^2+2m)=2(2k-1)-1$. This is not possible by a similar argument. Thus, $n$ is neither even nor odd. Hence, $n\notin\mathbb{Z}$, a contradiction. Therefore, $4\nmid(n^2+2)$ for all $n\in\mathbb{Z}$.
+            \end{proof}
+        \item[5.] Without using the Fundamental Theorem of Arithmetic, prove that if $a,b,c$ are integers with $a\mid c$, $b\mid c$, and $(a,b)=1$, then $ab\mid c$.
+            \begin{proof}
+                Since $(a,b)=1$, then by GCDLC theorem, there exists $x,y\in\mathbb{Z}$ such that $ax+by=1$. Thus, $acx+bcy=c$. Since $a\mid c$, then $c=ak_1$ for some $k_1\in\mathbb{Z}$ and since $b\mid c$, then there exists $k_2\in\mathbb{Z}$ such that $c=bk_2$. Thus, $a(bk_2)x+b(ak_1)y=c$, hence $ab(k_2x+k_1y)=c$. Thus, $ab\mid c$.
+            \end{proof}
+        \item[7.] Prove that $a\mid bc$ if and only if $\frac{a}{(a,b)}\mid c$.
+            \begin{proof}
+                Assume $a\mid bc$. Then let $d=(a,b)$. Since $d\mid a$ and $d\mid b$, then for $k_1,k_2\in\mathbb{Z}$, we have that $a=k_1d$ and $b=k_2d$. Moreover, since $d=(a,b)$, then for any $x\in\mathbb{Z}$ such that $x\mid a$ and $x\mid b$, then $x\mid d$. Thus, $(\frac{a}{d},\frac{b}{d})=(k_1,k_2)=1$. By assumption $a\mid bc$. Thus, $bc=ak_3$ for $k_3\in\mathbb{Z}$. Hence, $(dk_2)c=(dk_1)k_3$ and so $k_2c=k_1k_3$. Thus, $k_1\mid k_2c$. Since $(k_1,k_2)=1$, then by Euclid's lemma, $k_1\mid c$. Thus, $\frac{a}{(a,b)}\mid c$.\par\hspace{4mm} Let $d=(a,b)$. Then $d\mid a$ and $d\mid b$. Thus, for $k_1,k_2\in\mathbb{Z}$, we have $a=k_1d$ and $b=k_2d$. Assume $\frac{a}{(a,b)}\mid c$, i.e., $k_1\mid c$. Then $c=\lambda k_1$ for $\lambda\in\mathbb{Z}$. Since $\mathbb{Z}$ is a UFD, then there exists $q,r\in\mathbb{Z}$ such that $bc=qa+r$ with $0\leq r<a$. Thus,
+                    \begin{equation*}
+                        \begin{split}
+                            r &= bc-qa \\
+                            &= (dk_2)(\lambda k_1)-qa \\
+                            &= (dk_1)(\lambda k_2)-qa \\
+                            &= a(\lambda k_2)-qa \\
+                            &= a(\lambda k_2-q).
+                        \end{split}
+                    \end{equation*}
+                Thus, $a\mid r$. This implies that $r\geq a$ or $r=0$. Since $0\leq r<a$, then $r=0$. Hence, $bc=qa$ and so $a\mid bc$.
+            \end{proof}
+    \end{enumerate}    
+\end{document}
+
+                              

@@ -1,0 +1,159 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+\usepackage{relsize}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{polynom}
+
+
+
+\begin{document}
+
+\noindent\textbf{Definition 1.} Let $(G,+)$ be a group and let $H\subseteq G$. The set $H$ is a \textbf{subgroup of G} if\par
+
+\vspace{2mm}
+
+\begin{enumerate}
+    \item $\forall a\forall b(a\in H\wedge b\in H\rightarrow[a-b\in H])$.
+\end{enumerate}
+
+\noindent\textbf{Definition 2.} Let $(R,+,\cdot)$ be a ring and let $I\subseteq R$. The set $I$ is an \textbf{ideal of R} if\par
+
+\vspace{2mm}
+
+\begin{enumerate}
+    \item $(I, +)$ is a subgroup of $(R,+)$.
+    \item $\forall r\forall i(r\in R\wedge i\in I\rightarrow [r\cdot i\in I\wedge i\cdot r\in I])$
+\end{enumerate}
+
+\noindent\textbf{Definition 3.} Let $(R,+,\cdot)$ be a ring and let $I\subseteq R$ be an ideal of $R$. Then $I$ is \textbf{maximal} if
+
+\begin{enumerate}
+    \item $\forall J(J\subseteq R\wedge I\subseteq J\rightarrow[J=I\vee J=R])$.
+\end{enumerate}
+
+\noindent\textbf{Proposition:} Let $\mathbb{Z}_3[X]$ be the ring of polynomials with coefficients from $\mathbb{Z}_3$. Then the ideal $J=(X^2+3)_i$ is maximal.
+
+\vspace{4mm}
+
+\noindent\textbf{\textit{Proof.}} Assume $I\subseteq\mathbb{Z}_3[X]$ is an ideal and that $J\subseteq I$. Since $I$ is an ideal, then there is some $p(X)\in\mathbb{Z}_3[X]$ such that
+
+\vspace{4mm}
+
+\centerline{$I=\{h(X)\cdot p(X)\mid h(X)\in\mathbb{Z}_3[X]\}$.}
+
+\vspace{4mm}
+
+\noindent Consequently, because $p(X)$ is any arbitrary polynomial, then either
+
+\vspace{4mm}
+
+\centerline{$(p(X)=1)\vee (p(X)\neq 1)$.}
+
+\vspace{8mm}\par
+
+\underline{Case 1}: Assume $p(X)=1$. Then
+
+\begin{equation*}
+        \begin{split}
+            I &= \{h(X)\cdot p(X)\mid h(X)\in\mathbb{Z}_3[X]\} \\
+            &= \{h(X)\cdot(1)\mid h(X)\in\mathbb{Z}_3[X]\} \\
+            &=\mathbb{Z}_3[X],
+        \end{split}
+    \end{equation*}
+    
+\vspace{4mm}
+
+\par and we are done.
+
+\vspace{8mm}\par
+
+\underline{Case 2}: Assume $p(X)\neq 1$. Recall that $J=\{g(X)\cdot(X^2+3)\mid g(X)\in\mathbb{Z}_3[X]\}$ and then suppose $f(X)\in J$. Then there exists some $g(X)\in\mathbb{Z}_3[X]$ such that
+
+\vspace{4mm}
+
+\centerline{$f(X)=g(X)\cdot(X^2+3)$.}
+
+\vspace{4mm}
+
+\noindent However, since $J\subseteq I$, then there exists some $h(X)\in\mathbb{Z}_3[X]$ such that 
+
+\vspace{4mm}
+
+\centerline{$f(X)=h(X)\cdot p(X)$.}
+
+\vspace{4mm}
+
+\noindent Thus, $g(X)\cdot(X^2+3)=h(X)\cdot p(X)$. Now suppose $g(X)=1$. 
+
+\newpage
+
+\noindent Then $(X^2+3)=h(X)\cdot p(X)$. Thus, $p(X)\mid(X^2+3)$. However, since $(X^2+3)$ is irreducible, then $p(X)=1$ or $p(X)=X^2+3$. If $p(X)=1$, then refer to Case 1. If $p(X)=X^2+3$, then 
+
+\vspace{4mm}
+
+\begin{equation*}
+        \begin{split}
+            I &= \{h(X)\cdot p(X)\mid h(X)\in\mathbb{Z}_3[X]\} \\
+            &= \{h(X)\cdot(X^2+3)\mid h(X)\in\mathbb{Z}_3[X]\} \\
+            &= J.
+        \end{split}
+    \end{equation*}
+    
+\vspace{4mm}
+
+
+
+
+
+\end{document}

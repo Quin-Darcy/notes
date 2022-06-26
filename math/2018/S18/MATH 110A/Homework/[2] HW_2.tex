@@ -1,0 +1,341 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+
+
+\begin{document}
+
+\begin{flushleft}
+Quin Darcy\linebreak
+MATH 110A\linebreak
+Prof. Krauel\linebreak
+1/27/18\linebreak
+\hfill
+\end{flushleft}
+
+\section*{\hfil\hfil Homework 2\hfil}
+\hfil
+
+
+\begin{flushleft}
+\hfil\textbf{Exercise 1.3} Define the function $\phi$: $\mathbb{R}\rightarrow\mathbb{R}$ by $\phi(k)=e^k$. Show that $\phi$ is a\linebreak morphism from the magma $(\mathbb{R}, +)$ to the magma $(\mathbb{R}, \cdot)$.
+
+
+
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Solution:}  Let $a,b\in\mathbb{R}$ be any two real numbers. Now consider the image of the sum of $a$ and $b$ under the mapping $\phi$:\linebreak
+\hfil
+\hfil
+\end{flushleft}
+
+\begin{flushright}\hfil\hfil\hfil$\phi(a+b)=e^{a+b}$\hfil\hfil\hfil\hfil(1)\linebreak\end{flushright}
+
+\begin{flushleft}If we now compare (1) to the product of $\phi(a)$ and $\phi(b$), while making use of the properties of exponents, we see the product, (2),\linebreak
+\hfil
+\hfil
+\hfil
+\end{flushleft}
+
+\begin{flushright}\hfil\hfil$\phi(a)\cdot\phi(b)=e^a\cdot e^b=e^{a+b}$,\hfil\hfil\hfil(2)\linebreak\end{flushright}
+
+\begin{flushleft}
+is equal to (1). Thus, $\phi(a+b)=\phi(a)\cdot \phi(b)$. We can see then that the mapping $\phi$ preserves the operation between the two magmas $(\mathbb{R}, +)$ and $(\mathbb{R}, \cdot)$. Therefore, $\phi$ is a morphism.\linebreak
+\hfil
+\hfil
+\hfil 
+\hfil
+\end{flushleft}
+
+\begin{flushleft}
+\hfil\textbf{Exercise 1.4.} Suppose $(S, \star)$ is a magma and $(T, \circ)$ is a semigroup. Additionally, suppose $f$: $S\rightarrow T$ is a morphism of magmas. Show that if $f$ is injective, the $(S, \star)$ is also a semigroup. 
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Solution} Assume $f$ is injective. Then for any $x_1,x_2\in S$, if $f(x_1)=f(x_2)$, then $x_1=x_2$. Let $a,b,c\in S$. Now let $\rho=(a\star b)\star c$ and $\sigma=a\star(b\star c)$. Consider the image of $\rho$ under $f$:\linebreak
+\hfil
+\hfil
+\hfil
+\hfil
+\end{flushleft}
+
+\begin{flushright}
+\hfil$f(\rho)=f((a\star b)\star c)=f(a\star b)\circ f(c)=(f(a)\circ f(b))\circ f(c)$\hfil\hfil(1)\linebreak
+\end{flushright}
+
+\begin{flushleft}
+Now let us look at the image of $\sigma$ under $f$:\linebreak
+\hfil
+\hfil
+\hfil
+\hfil
+\end{flushleft}
+
+\begin{flushright}
+\hfil$f(\sigma)=f(a\star (b\star c))=f(a)\circ f(b\star c)=f(a)\circ (f(b)\circ f(c))$\hfil\hfil(2)\linebreak
+\end{flushright}
+
+\begin{flushleft}
+Since $(T, \circ)$ is a semigroup, then the operator $\circ$ is associative. We can then rewrite (1) as:\linebreak
+\hfil
+\hfil
+\hfil
+\hfil
+\end{flushleft}
+
+\begin{flushright}
+\hfil$f(\rho)=(f(a)\circ f(b))\circ f(c)=f(a)\circ (f(b)\circ f(c))$\hfil\hfil(3)\linebreak
+\end{flushright}
+
+\begin{flushleft}
+We can see (2) is equal to (3), thus $f(\rho)=f(\sigma)$. Then by assumption, $\rho=\sigma$. Hence,\linebreak
+\hfil
+\hfil
+\hfil
+\hfil
+\end{flushleft}
+
+\begin{flushright}
+$(a\star b)\star c=a\star (b\star c)$.\hfil\hfil
+\linebreak
+\end{flushright}
+
+\begin{flushleft}
+Thus, if $f$ is injective then $\star$ is associative. $(S, \star)$ is then a semigroup, by definition.\linebreak
+\hfil
+\hfil
+\hfil
+\linebreak
+\end{flushleft}
+
+\begin{flushleft}
+\hfil\textbf{Exercise 1.5.} Find an example of the following structures. In each case, show\linebreak
+that the structure satisfies the axioms of that structure, and also provide the axiom\linebreak (or axioms) that fail for the more complex structure.\vspace*{3mm}\linebreak
+\hspace*{10mm}(a) A set $S$ and operation $\star$ that is not a magma.\linebreak
+\hspace*{10mm}(b) A magma that is not a semigroup.\linebreak
+\hspace*{10mm}(c) A semigroup that is not a monoid.\linebreak
+\hspace*{10mm}(d) A monoid that is not a group.\linebreak
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Solution}\vspace*{3mm}\linebreak
+\hspace*{10mm}(a) Since a magma is a set equipped with a binary operation in which it is\linebreak
+\hspace*{16.7mm}closed under, then an example of something that fails the closure axiom\linebreak
+\hspace*{16.7mm}would be the integers with division, or $(\mathbb{Z}, \div)$. Consider the two integers\linebreak
+\hspace*{16.7mm}$2$ and $3$. It is clear that $\div(2, 3)\notin\mathbb{Z}$. Thus, this set is not closed under\linebreak
+\hspace*{16.7mm}this operation, as demonstrated by counterexample.\vspace*{3mm}\linebreak
+
+\hspace*{10mm}(b) A semigroup requires its binary operation be associative. We can choose\linebreak
+\hspace*{16.7mm}our set to be the integers and our operator to be substraction. Consider, for\linebreak
+\hspace*{16.7mm}example, the equation $(1-1)-1=1-(1-1)$. Simplifying yields $-1=1$. 
+\hspace*{16.7mm}Since this is not true, then we can conclude associativity does not hold on\linebreak
+ \hspace*{16.7mm}this magma. Thus, $(\mathbb{Z}, -)$ is a magma that is not a semigroup.\vspace*{3mm}\linebreak
+
+\hspace*{10mm}(c) A monoid is a semigroup with an identity element. A trivial, but correct\linebreak
+\hspace*{16.7mm}example would be the set $\mathbb{N}$ and the operator $+$. This is an example\linebreak
+\hspace*{16.7mm}of a semigroup that is not a monoid because $0$ is the additive identity on\linebreak
+\hspace*{16.7mm}the positive integers. Restricting our set to $\mathbb{N}$ removes $0$, and this is what    \hspace*{16.7mm}makes this set fail the identity axiom needed to be a monoid. Thus, $(\mathbb{N}, +)$ is \hspace*{16.7mm}an example of a semigroup that is not a monoid.\vspace*{3mm}\linebreak
+
+\hspace*{10mm}(d) A monoid is a set equipped with an associative operation in which it is\linebreak \hspace*{16.7mm}closed under, and it also contains an identity element with respect to the\linebreak
+\hspace*{16.7mm}operation. A group is a monoid that has an inverse for every element in\linebreak
+\hspace*{16.7mm}the set. Consider the set of all 2x2 square matrices $\mathbb{M}_2(\mathbb{R})$, with our binary\linebreak
+\hspace*{16.7mm}associative operation being multiplication. To prove that this is not a group\linebreak
+\hspace*{16.7mm}we need only find an element in our set with no inverse. \vspace*{3mm}\linebreak
+
+\begin{itemize}
+
+\item Let $A=\left[ \begin{array}{cc} a & b \\ c & d \end{array} \right]$ be an element of $\mathbb{M}_2(\mathbb{R})$, such that $ad-bc=0$. Then it is clear\vspace*{2mm} that $A$ does not have an inverse. Thus, $\mathbb{M}_2(\mathbb{R})$ is not a group.\linebreak \par
+
+\end{itemize}
+
+\end{flushleft}
+
+
+\begin{flushleft}
+\hspace*{8mm}\textbf{Exercise 1.13} Is the function $\phi$ given in Exercise 1.3 a group homomorphism? How about the same function from $(\mathbb{R}, +)$ to $(\mathbb{R}\backslash \{ 0\}, \cdot)$?\linebreak
+
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Solution} To answer these two questions we must first determine if $(\mathbb{R}, +)$, $(\mathbb{R}, \cdot)$, and $(\mathbb{R}\backslash \{ 0\}, \cdot)$ are groups. Let us first look at $(\mathbb{R}, +)$:\linebreak
+
+\begin{itemize}
+\item \textbf{Closure} Let $a$,$b\in \mathbb{R}$ be any two real numbers. Since $a+b\in \mathbb{R}$ is also a real number, we can conclude the closure axiom is satisfied.
+\item \textbf{Associativity} Let $a$,$b$,$c\in \mathbb{R}$ be any three real numbers. Since $(a+b)+c=a+(b+c)$, we can conclude that this axiom is satisfied.
+\item \textbf{Identity} Let $a,e\in \mathbb{R}$ such that $e=0$, then it is clear that $a+e=a+0=a=0+a=e+a$. Thus, this axiom is satisfied.
+\item \textbf{Inverse} Let $a,\sigma \in \mathbb{R}$ such that $\sigma=-a$. Then $a+\sigma=a+(-a)=0$. Thus, every element has an inverse. 
+\end{itemize}
+\vspace*{5mm}
+
+With all four axioms being satisfied, this shows that $(\mathbb{R}, +)$ is a group. Now let us look at $(\mathbb{R}, \cdot)$:\linebreak
+
+\begin{itemize}
+\item \textbf{Closure} Let $a,b\in \mathbb{R}$ be any two real numbers. Since the product of reals is itself a real, then $a\cdot b\in \mathbb{R}$. Thus, this set is closed with respect to multiplication.
+\item \textbf{Associativity} Let $a,b,c\in \mathbb{R}$ be any three real numbers. Since it is true that $(a\cdot b)\cdot c=a\cdot (b\cdot c)$, then the operator is associative.
+\item \textbf{Identity} Let $a,e\in \mathbb{R}$ be two real numbers such that $e=1$. Then $a\cdot e=a\cdot 1=a=1\cdot a=e\cdot a$. Thus, this set has an identity with $e=1$. 
+\item \textbf{Inverse} This set contains an inverse for every element except for $0$. This axiom is thereby unsatisfied with respect to multiplication.
+\end {itemize}
+\vspace*{5mm}
+
+From the failure of the axiom regarding the existence of inverses, we can conclude $(\mathbb{R}, \cdot)$ is not a group. Thus, the function $\phi$ is not a group homomorphism.\linebreak
+\par
+We now focus our attention on whether or not $\phi$ constitutes a group homomorphism if we remove $0$ from the codomain and have $\phi$ defined instead as $\phi: \mathbb{R} \rightarrow \mathbb{R} \backslash \{ 0\}$. However, based on the fact that the inverse axiom was the only axiom that failed, and its failure was because the element $0$ did not have an inverse, then the removal of $0$ will then satisfy the inverse axiom and $\phi$ becomes a group homomorphism as a result.\linebreak
+\par
+
+\begin{flushleft}
+\hspace*{8mm} \textbf{Exercise 1.15} Recall Examples 1.6, 1.10, 1.13, 1.17, and 1.20.  (Note: You\linebreak may use the result of Exercise 1.14 whenever you'd like.)\linebreak
+\end{flushleft}
+
+\begin{flushleft}
+
+\hspace*{10mm}(a) Using cycle notation, what are all of the distinct elements of $S_3$?\linebreak
+\hspace*{16.7mm}(Hint: $|S_3|=6$ and we have already listed three. Note: You only need to\linebreak
+\hspace*{16.7mm}give one expression for an element, as there are often more than one way\linebreak
+\hspace*{16.7mm}to write such a permutation (for example, $(12)=(21)$.)\linebreak
+
+\hspace*{10mm}(b) Argue that $S_3$ is closed under the operation of composition of permuta-\linebreak
+\hspace*{16.7mm}tions.\linebreak
+
+\hspace*{10mm}(c) Show that the operation of composition of permutations is associative on\linebreak
+\hspace*{16.7mm}$S_3$.\linebreak
+
+\hspace*{10mm}(d) Show that $(1)$ is an identity element for $S_3$.\linebreak
+
+\hspace*{10mm}(e) For each element in $S_3$, calculate its inverse element.\linebreak
+
+\hspace*{10mm}(f) Use the previous part to conclude that $S_3$ under the operation of compo-\linebreak
+\hspace*{16.7mm}sition is a group.\linebreak
+
+\hspace*{10mm}(g) Is $S_3$ an abelian group? Justify your answer.\linebreak
+
+\end{flushleft}
+
+
+\begin{flushleft}
+
+\textbf{Solution}\vspace*{3mm}\linebreak
+\hspace*{10mm}(a)\vspace*{8mm}\linebreak
+\hspace*{28mm}$\epsilon=\left (\begin{array}{ccc} 1 & 2 & 3 \\ 1 & 2 & 3 \end{array} \right)$, 
+$\alpha=\left (\begin{array}{ccc} 1 & 2 & 3 \\ 2 & 3 & 1 \end{array} \right)$, 
+$\beta=\left (\begin{array}{ccc} 1 & 2 & 3 \\ 3 & 1 & 2 \end{array} \right)$,\vspace*{10mm}\linebreak
+\hspace*{27.5mm}$\gamma=\left (\begin{array}{ccc} 1 & 2 & 3 \\ 1 & 3 & 2 \end{array} \right)$, 
+\hspace*{1mm}$\delta=\left (\begin{array}{ccc} 1 & 2 & 3 \\ 3 & 2 & 1 \end{array} \right)$, 
+\hspace*{1mm}$\epsilon=\left (\begin{array}{ccc} 1 & 2 & 3 \\ 2 & 1 & 3 \end{array} \right)$.\vspace*{14mm}\linebreak
+
+
+\end{flushleft}
+
+\begin{flushleft}
+
+\hspace*{10mm}(b) To argue that $S_3$ is closed under composition of permutations we first\linebreak
+\hspace*{16.7mm}note two things: the set is finite, and the permutations are bijective maps. \linebreak
+\hspace*{16.7mm}This means that the maps are injective, and the entries in the second row \linebreak
+\hspace*{16.7mm}are thus all distinct. There are $27$ possible maps from the set $\{1,2,3\}$ to\linebreak
+\hspace*{16.7mm}itself, but only $6$ of them are bijections (e.g. permutations), so regardless\linebreak
+\hspace*{16.7mm}of the composition, the result can only be another permutation, otherwise the\linebreak
+\hspace*{16.7mm}mappings would not be bijections.\vspace*{3mm}\linebreak
+
+\hspace*{16.7mm}The following table will aid in answering the remaining parts of this problem.\vspace*{5mm}
+\linebreak
+
+\end{flushleft}
+
+
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{c|cccccc}
+\large$\circ$ & \large$\epsilon$ & \large$\alpha$ & \large$\beta$ & \large$\gamma$ & \large$\delta$ & \large$\phi$ \\
+\hline
+\large$\epsilon$ & \large$\epsilon$ & \large$\alpha$ & \large$\beta$ & \large$\gamma$ & \large$\delta$ & \large$\phi$ \\
+$\alpha$ & $\alpha$ & $\beta$ & $\epsilon$ & $\phi$ & $\gamma$ & $\delta$ \\
+\large$\beta$ & \large$\beta$ & \large$\epsilon$ & \large$\alpha$ & \large$\delta$ & \large$\phi$ & \large$\gamma$ \\
+\large$\gamma$ & \large$\gamma$ & \large$\delta$ & \large$\phi$ & \large$\epsilon$ & \large$\alpha$ & \large$\beta$ \\
+\large$\delta$ & \large$\delta$ & \large$\phi$ & \large$\gamma$ & \large$\beta$ & \large$\epsilon$ & \large$\alpha$ \\
+\large$\phi$ & \large$\phi$ & \large$\gamma$ & \large$\delta$ & \large$\alpha$ & \large$\beta$ & \large$\epsilon$ \\
+\end{tabular}
+\end{table}
+
+
+
+\begin{flushleft}
+
+\vspace*{5mm}\hspace*{10mm}(c) Let $f,g,h\in S_3$ be any three permutations. Then by definition, for all 
+\hspace*{16.7mm}$x\in \{1,2,3\}$,\vspace*{3mm}\linebreak
+
+
+\hspace*{44.5mm}$((h\circ g)\circ f)(x)$\hspace*{3mm} $=$ $\hspace*{3mm} (h\circ g)(f(x))$\vspace*{5mm}\linebreak
+\hspace*{76mm}$=$ \hspace*{3mm}$h(g(f(x)))$\vspace*{5mm}\linebreak
+\hspace*{76mm}$=$ \hspace*{3mm}$h(g\circ f(x))$\vspace*{5mm}\linebreak
+\hspace*{76mm}$=$ \hspace*{3mm}$(h\circ (g\circ f))(x).$\vspace*{3mm}\linebreak
+ 
+
+\end{flushleft}
+
+\begin{flushleft}
+
+\hspace*{16.7mm}It follows that the maps $(h\circ g)\circ f$ and $h\circ (g\circ f)$ are equal. Therefore,\linebreak
+\hspace*{16.7mm}the operation of composition of permutation is associative on $S_3$.\vspace*{3mm}\linebreak
+
+\end{flushleft}
+
+\begin{flushleft}
+
+\hspace*{10mm}(d) The element $(1)$ is the mapping equivalent to $\epsilon$ listed above. Let $f \in S_3$,\linebreak
+\hspace*{16.7mm}be any permutation. Then by the definition of $(1)$ (e.g. $\epsilon$), which tells us
+\hspace*{16.7mm}that this element takes each number in the set $\{1,2,3\}$ and maps it to itself.
+\hspace*{16.7mm}We now have the following: $f\circ \epsilon= f = \epsilon\circ f$.\vspace*{25mm}\linebreak
+
+\hspace*{10mm}(e) With the aid of the previous Cayley table, we can see the inverses are those
+\hspace*{16.7mm}maps which when applied, result in $\epsilon$. The list of inverses is as follows:\vspace*{4mm}\linebreak
+
+\end{flushleft}
+
+\centering
+$\large\epsilon^{-1}=\large\epsilon$, \hspace*{3mm} $\large\alpha^{-1}=\large\beta$, \hspace*{3mm} 
+$\large\beta^{-1}=\large\alpha$\vspace*{3mm}\linebreak
+$\large\gamma^{-1}=\large\gamma$, \hspace*{3mm} $\large\delta^{-1}=\large\delta$, \hspace*{3mm}
+$\large\phi^{-1}=\large\phi$.\vspace{4mm}\linebreak
+
+
+\begin{flushleft}
+
+\hspace*{10mm}(f) As we can see from parts (b), (c), (d), and (e), the set $S_3$ with the operation of\linebreak
+\hspace*{16.7mm}composition of permutations is closed, associative, contains an identity, and 
+\hspace*{16.7mm}each element has an inverse. $(S_3, \circ)$ is therefore a group.
+
+
+\end{flushleft}
+
+\begin{flushleft}
+
+\hspace*{10mm}(g) $(S_3, \circ)$ is not an abelian group and this will be demonstrated by counter 
+\hspace*{16.7mm}example: Consider elements $\beta, \gamma \in S_3$. We can see from the table that the\linebreak
+\hspace*{16.7mm}composition $\beta \circ \gamma = \delta$, but the composition $\gamma \circ \beta = \phi$. Thus, 
+$\beta \circ \gamma \neq \gamma \circ \beta$.\linebreak
+\hspace*{16.7mm}Therefore, $(S_3, \circ)$ is not abelian.
+
+
+\end{flushleft}
+
+
+
+\end{flushleft}
+
+
+
+
+
+
+
+
+
+
+\end{document}

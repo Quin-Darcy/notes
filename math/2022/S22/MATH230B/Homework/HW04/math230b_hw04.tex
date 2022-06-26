@@ -1,0 +1,199 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 230B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newenvironment{solution}
+{\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+{\end{proof}}
+\newenvironment{psmall}{\left(\begin{smallmatrix}}{\end{smallmatrix}\right)}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 230B}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 04/01/2022   \\
+    { Instructor:}\ Dr. Ricciotti \hspace{\fill} Assignment:
+    Homework 04 \\ \hrule}
+
+    \begin{enumerate}
+        \item Let $a_k\geq 0$, $b_k>0$ for all $k\in\mathbb{N}$. Assume that
+            $\lim_{k\to\infty}\frac{a_k}{b_k}=\lambda$, where
+            $0<\lambda<\infty$. Prove that $\sum_{k=1}^{\infty}a_k$ is
+            convergent if and only if $\sum_{k=1}^{\infty}b_k$ is convergent. 
+            \begin{proof}
+                Assume that $\sum_{k=1}^{\infty}b_k$ is convergent. Let
+                $\varepsilon=1$. Then since $\lim_{n\to\infty}a_n/b_n=\lambda$,
+                then there exists $N\in\mathbb{N}$ such that 
+                \begin{align*}
+                    \bigg|\frac{a_n}{b_n}-\lambda\bigg|<1 
+                    \Leftrightarrow \bigg|\frac{a_n}{b_n}\bigg|-|\lambda|<1 
+                    \Leftrightarrow \frac{a_n}{b_n}<1+\lambda 
+                    \Leftrightarrow a_n<(1+\lambda)b_n
+                \end{align*}
+                for all $n\geq N$. Hence for any $M\geq N$
+                \begin{equation*}
+                    \sum_{k=N}^{M}a_k<\sum_{k=N}^{M}(1+\lambda)b_k
+                    \leq(1+\lambda)\sum_{k=1}^{\infty}b_k<\infty.
+                \end{equation*}
+                The last inquality holds by assumption. Noting that
+                $\sum_{k=1}^{N-1}a_k$ is finite, then the above inequality
+                implies that the sequence of partial sums
+                $S_n=\sum_{k=1}^{n}a_k$ is bounded from above. Moreover, this
+                sequence is monotonically increasing as all of its terms are
+                positive. Therefore the sequence of parthial sums is convergent
+                and so 
+                \begin{equation*}
+                    \sum_{k=1}^{\infty}a_k<\infty. 
+                \end{equation*}
+                Now assume that $\sum_{k=1}^{\infty}a_k<\infty$. Let
+                $\varepsilon>0$ such that $\varepsilon<\lambda$. Then there
+                exists $N\in\mathbb{N}$ such that 
+                \begin{equation*}
+                    \bigg|\frac{a_n}{b_n}-\lambda\bigg|<\varepsilon
+                    \Leftrightarrow(\lambda-\varepsilon)b_n<a_n<(\lambda+\varepsilon)b_n 
+                \end{equation*}
+                for all $n\geq N$. This implies that for any $M\geq N$
+                \begin{equation*}
+                    \sum_{k=N}^{M}b_k<(\lambda-\varepsilon)\sum_{k=N}^{M}a_k
+                    \leq(\lambda-\varepsilon)\sum_{k=1}^{\infty}a_k<\infty.
+                \end{equation*}
+                Since $\sum_{k=1}^{N-1}b_k<\infty$, then the sequence of
+                partial sums $S_n=\sum_{k=1}^n b_k$ is bounded above. Since the
+                sequence is monotincally increasing, then it converges.
+                Therefore
+                \begin{equation*}
+                    \sum_{k=1}^{\infty}b_k<\infty.
+                \end{equation*}
+            \end{proof}
+        \item Let $a_k\geq 0$ for all $k\in\mathbb{N}$. Prove that if
+            $\sum_{k=1}^{\infty}a_k$ is convergent, then
+            $\sum_{k=1}^{\infty}a^2_k$ is convergent. 
+            \begin{proof}
+                Since $\sum_{k=1}^{\infty}a_k$ converges, then from Theorem
+                3.23 (Rudin), it follows that $\lim_{k\to\infty}a_k=0$. Letting
+                $\varepsilon=1$, there exists $N\in\mathbb{N}$ such that
+                $|a_k|<1$ for all $k\geq N$. Since $a_k\geq 0$ for all
+                $k\in\mathbb{N}$, then $a_k<1$ for all $k\geq N$. Hence,
+                $a_k^{2}\leq a_k<1$ for all $k\geq N$. This implies that for
+                all $M\geq N$ 
+                \begin{equation*}
+                    \sum_{k=N}^{M}a^2_k\leq\sum_{k=N}^{M}a_k\leq\sum_{k=1}^{\infty}a_k<\infty.
+                \end{equation*}
+                By Theorem 3.25 (Rudin), 
+                \begin{equation*}
+                    \sum_{k=1}^{\infty}a^2_k<\infty.
+                \end{equation*}
+            \end{proof}
+        \item Let $a_k\geq0$ for all $k\in\mathbb{N}$. Prove that if
+            $\sum_{k=1}^{\infty}a_k$ is convergent, then
+            $\sum_{k=1}^{\infty}\sqrt{a_ka_{k+1}}$ is convergent.
+            \begin{proof}
+                Before proceeding, we note that if $a, b\geq 0$, then
+                $(\sqrt{a}-\sqrt{b})^2\geq 0$, which implies that 
+                \begin{equation}
+                    a+b-2\sqrt{ab}\geq 0\Leftrightarrow
+                    \sqrt{ab}\leq\frac{a+b}{2}.  
+                \end{equation}
+                From (1) it follows that for all $k\in\mathbb{N}$
+                \begin{equation*}
+                    \sqrt{a_ka_{k+1}}\leq\frac{a_k+a_{k+1}}{2}. 
+                \end{equation*}
+                Thus for any $n\in\mathbb{N}$
+                \begin{equation*}
+                    \sum_{k=1}^{n}\sqrt{a_ka_{k+1}}
+                    \leq\frac{1}{2}\sum_{k=1}^{n}a_k+a_{k+1}
+                    =\frac{a_1}{2}+\sum_{k=1}^{n-1}a_{k+1}.
+                \end{equation*}
+                This implies that the sequence of partial sums 
+                $S_n=\sum_{k=1}^{n}\sqrt{a_ka_{k+1}}$ is bounded above and
+                therefore converges. 
+            \end{proof}
+        \item Let $a_k\geq 0$ for all $k\in\mathbb{N}$. Prove that
+            $\sum_{k=1}^{\infty}a_k$ is convergent if and only if
+            $\sum_{k=1}^{\infty}\frac{a_k}{1+a_k}$ is convergent. 
+            \begin{proof}
+                Assume that $\sum_{k=1}^{\infty}a_k$ is convergent. Then
+                since $a_k\geq 0$ for all $k\in\mathbb{N}$, we have that
+                \begin{equation*}
+                    \frac{a_k}{1+a_k}\leq a_k
+                \end{equation*}
+                for all $k\in\mathbb{N}$. By Theorem 3.25 (Rudin) it follows
+                that 
+                \begin{equation*}
+                    \sum_{k=1}^{\infty}\frac{a_k}{1+a_k}<\infty.
+                \end{equation*}
+                Now assume that $\sum_{k=1}^{\infty}\frac{a_k}{1+a_k}$ is
+                convergent. Then $\lim_{k\to\infty}\frac{a_k}{1+a_k}=0$.
+                Letting $0<\varepsilon<1$, then there exists $N\in\mathbb{N}$ such
+                that for all $k\geq N$
+                \begin{align*}
+                    \frac{a_k}{1+a_k}<\varepsilon
+                    &\Leftrightarrow a_k<\varepsilon(1+a_k) \\
+                    &\Leftrightarrow a_k(1-\varepsilon)<\varepsilon \\
+                    &\Leftrightarrow a_k<\frac{\varepsilon}{1-\varepsilon}.
+                \end{align*}
+                As $\varepsilon\to 0$, then
+                $\frac{\varepsilon}{1-\varepsilon}\to0$ and therefore $a_k\to
+                0$ as $k\to\infty$. Since $\lim_{k\to\infty}a_k=0$, then for
+                any $1<B$, there exists $N$ such that for all $k\geq N$,
+                we have that $1+a_k<B$. Then $\frac{B}{1+a_k}>1$ for all $k\geq
+                N$. Thus for all $k\geq N$
+                \begin{equation*}
+                    a_k\leq\frac{Ba_k}{1+a_k}.
+                \end{equation*}
+                By Theorem 3.23 (Rudin), 
+                \begin{equation*}
+                    \sum_{k=1}^{\infty}a_k<\infty.
+                \end{equation*}
+            \end{proof}
+        \item Prove that if $\sum_{k=1}^{\infty}a_k$ is conditionally
+            convergent, then $\sum_{k=1}^{\infty}k^2a_k$ is not convergent. 
+            \begin{proof}
+                If $\sum_{k=1}^{\infty}a_k$ is conditionally convergent, then
+                $\sum_{k=1}^{\infty}|a_k|$ is divergent. For contradiction,
+                assume that $\sum_{k=1}^{\infty}k^2a_k$ converges. Then
+                $\lim_{k\to\infty}k^2a_k=0$. If $\varepsilon=1$, there exists
+                $N\in\mathbb{N}$ such that for all $k\geq N$,
+                \begin{equation*}
+                    |k^2a_k|=k^2|a_k|<\varepsilon\Rightarrow
+                    |a_k|<\frac{1}{k^2}.
+                \end{equation*}
+                Given that by Theorem 3.28 (Rudin), $\sum_{k=1}^{\infty}\frac{1}{k^2}$ 
+                converges, then by Theorem 3.23 (Rudin),
+                $\sum_{k=1}^{\infty}|a_k|$ converges. This contradicts our
+                assumption that $\sum_{k=1}^{\infty}a_k$ converges
+                conditionally. Therefore $\sum_{k=1}^{\infty}k^2a_k$ is
+                divergent. 
+            \end{proof}
+        \item Let $a_n\geq 0$ for all $k\in\mathbb{N}$. Prove that if
+            $\sum_{k=1}^{\infty}a_k$ is convergent, then $\lim_{k\to\infty}\inf
+            ka_k=0$. Is it true that $\lim_{k\to 0}ka_k=0$?
+            \begin{proof}
+                For contradiction, assume that $\lim_{n\to\infty}\inf ka_k>0$.
+                Then no subsequences of $\{ka_k\}$ converge to 0. Hence, there
+                exists $r>0$ and some $N\in\mathbb{N}$ such that for all $n\geq
+                N$ we have that $na_n>r$ which implies that $a_n>r/n$. Thus 
+                \begin{equation*}
+                    \sum_{k=1}^{\infty}a_k=\sum_{k=1}^{N-1}a_k+\sum_{k=N}^{\infty}a_k
+                    \geq \sum_{k=1}^{N-1}a_k+\sum_{k=N}^{\infty}\frac{r}{k}.
+                \end{equation*}
+                Since $\sum_{k=N}^{\infty}r/k=\infty$, then this contradicts
+                the assumption that $\sum_{k=1}^{\infty}a_k$ is convergent. 
+            \end{proof}
+    \end{enumerate}
+\end{document}

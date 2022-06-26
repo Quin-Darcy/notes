@@ -1,0 +1,12 @@
+\documentclass[tikz, border = 5pt]{standalone}
+
+\begin{document}
+\begin{tikzpicture}
+  % axis
+  \draw[thick, <->] (0, -4.1) -- (0, 4.1);
+  \draw[thick, <->] (-4.1, 0) -- (4.1, 0);
+
+  % grid
+  \draw[help lines, step = 0.5cm] (-4, -4) grid (4, 4);
+\end{tikzpicture}
+\end{document}

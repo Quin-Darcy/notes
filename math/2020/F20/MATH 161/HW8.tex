@@ -1,0 +1,179 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 161}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 161}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 11/05/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 8 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item Let $R$ and $Q$ be unary relation symbols.\par Prove that $\forall x(R(x)\lor Q(x))\leftrightarrow(\forall xR(x)\lor\forall xQ(x))$ is not logically valid.
+            \begin{proof}
+                Let $\mathcal{I}$ be any interpretation and $\mathbb{Z}$ be the domain. Let
+                    \begin{equation*}
+                        R(x):=``x \text{ is odd}"\quad \text{and}\quad Q(x):=``x \text{ is even}",
+                    \end{equation*}
+                and let $v$ be any valuation. Then for any $n\in\mathbb{Z}$, $n$ is either even or $n$ is odd and thus $v[x|n]$ satisfies $R(x)$ or $v[x|n]$ satisfies $Q(x)$. Thus $v[x|n]$ satisfies $R(x)\lor Q(x)$. Thus $v$ satisfies $\forall x(R(x)\lor Q(x))$. If $v$ satisfies the right-hand side, then for all $n\in\mathbb{Z}$ and for all $m\in\mathbb{Z}$, $v[x|n]$ satisfies $R(x)$ and $v[x|m]$ satisfies $Q(x)$. However, for $n=m$ it follows that $v[x|n]$ satisfies $R(x)$ and $v[x|n]$ satisfies $Q(x)$. Thus $n$ is even and $n$ is odd. This is false and thus $v$ does not satisfy the right-hand side. In particular, when $v$ satisfies the left-hand side, $v$ does not satisfy the right-hand side. Therefore the given wff is not true in $\mathcal{I}$ and so the wff is not logically valid. 
+            \end{proof}
+        \item Without the Soundness Theorem, prove that $\exists x(\varphi(x)\rightarrow\theta(x))\rightarrow(\forall x\varphi(x)\rightarrow\exists x\theta(x))$ is logically valid.
+            \begin{proof}
+                Let $\mathcal{I}$ be any interpretation with domain $A$, and let $v$ be any valuation in $\mathcal{I}$. We want to show that if $v$ satisfies $\exists x(\varphi(x)\rightarrow\theta(x))$, then $v$ satisfies $\forall x\varphi(x)\rightarrow\exists x\theta(x)$. Assume $v$ satisfies $\exists x(\varphi(x)\rightarrow\theta(x))$. Then for some $a\in A$, $v[x|a]$ satisfies $\varphi(x)\rightarrow\theta(x)$. Thus $v[x|a]$ satisfies $\sim\varphi(x)$ or $v[x|a]$ satisfies $\theta(x)$.\par\hspace{4mm} If $v[x|a]$ satisfies $\sim\varphi(x)$, then $v$ satisfies $\exists x\varphi(x)$. Thus $v$ satisfies $\sim\forall x\varphi(x)$ and so $v$ satisfies $\sim\forall x\varphi(x)\lor\exists x\theta(x)$. Therefore $v$ satisfies $\forall x\varphi(x)\rightarrow\exists x\theta(x)$.\par\hspace{4mm} If $v[x|a]$ satisfies $\theta(x)$. Then $v$ satisfies $\exists x\theta(x)$. Thus $v$ satisfies $\sim\forall x\varphi(x)\lor\exists x\theta(x)$. Therefore $v$ satisfies $\forall x\varphi(x)\rightarrow\exists x\theta(x)$. Thus if $v$ satisfies $\exists x(\varphi(x)\rightarrow\theta(x))$, then $v$ satisfies $\forall x\varphi(x)\rightarrow\exists x\theta(x)$.\par\hspace{4mm} Therefore $v$ satisfies $\exists x(\varphi(x)\rightarrow\theta(x))\rightarrow(\forall x\varphi(x)\rightarrow\exists x\theta(x))$. Thus the wff is logically valid.
+            \end{proof}
+        \item Assume $\Sigma$ is a set of wffs in the language of $K$ such that for every positive integer, $n$, there exists a model $\mathcal{I}_n$, of $\Sigma$ such that the domain of $\mathcal{I}_n$ has $n$ elements. Prove that there exists a model of $\Sigma$ that is infinite.
+            \begin{proof}
+                Let $\Delta=\{d_i\neq d_j\mid i\neq j\}$, where each $d_i$ is a new constant symbols. This implies that there is no element in $\Delta$ which contradicts anything in $\Sigma$. Now let $F\subseteq\Sigma\cup\Delta$ such that $F$ is finite. Then since $F$ is finite, $F\cap\Delta$ is finite. Suppose $m$ is the largest positive integer such that $d_m\in F$, then as an element of $F$, it follows that $d_m\in\Sigma$ and $d_m\in\Delta$. Note that the domain of $\mathcal{I}_m$ is $\{a_1,\dots,a_m\}$ and we can interpret $d_1,\dots,d_m$ in $\mathcal{I}_m$ by: $d_1^{\mathcal{I}_m}=a_1,\dots,d_m^{\mathcal{I}_m}=a_m$. Then we claim $\mathcal{I}_m\models F$. It follows since $\mathcal{I}_m\models F\cap\Sigma$ since $\mathcal{I}_m\models\Sigma$. Similarly, $\mathcal{I}_m\models F\cap\Delta$ since for all $d_i\neq d_j\in F$, $d_i^{\mathcal{I}_m}\neq d_j^{\mathcal{I}_m}$. Thus every finite subset of $\Sigma\cup\Delta$ has a model and so by the Compactness Theorem, $\Sigma\cup\Delta$ has a model $\mathcal{M}$. Moreover, the domain of $\mathcal{M}$ must be infinite since $d_i^{\mathcal{M}}\neq d_j^{\mathcal{M}}$ for all $i,j\in\mathbb{N}$. Finally, $\mathcal{M}$ is a model of $\Sigma$ and thus $\Sigma$ has a model with a domain containing infinitely many elements.
+            \end{proof}
+        \item\hfill\par 
+            \begin{enumerate}
+                \item Prove in PA that + is associative.
+                    \begin{proof}
+                        Let $\alpha(z):=``(x+y)+z=x+(y+z)"$. Then $\alpha(0*)$ is true since $(x+y)+0^*=x+y$ by A3, and $x+y=x+(y+0^*)$ by A3. Thus $(x+y)+0^*=x+(y+0^*)$. Now we assume that for some $k$, that $\alpha(k):=``(x+y)+k=x+(y+k)"$ holds. Then we have that 
+                            \begin{align*}
+                                (x+y)+k'&=((x+y)+k)' &&\text{A4} \\
+                                &=(x+(y+k))' &&\alpha(k) \\
+                                &=x+(y+k)' &&\text{A4} \\
+                                &=x+(y+k') &&\text{A4}.
+                            \end{align*}
+                        Thus, $\alpha(k')$ holds. By A7, $\alpha(z)$ holds for all $z\in\mathbb{N}$ and thus + is associative.
+                    \end{proof}
+                \item Prove in PA$\vdash_K x'\cdot y=x\cdot y+y$.
+                    \begin{proof}
+                        Let $\alpha(y):=``x'\cdot y=x\cdot y+y"$. Then $\alpha(0^*)$ holds since by A5, $x'\cdot 0^*=x=0^*$ and by A5, $0^*=x\cdot 0^*$. Finally, by A3, $x\cdot 0^*=x\cdot 0^*+0^*$. Hence $x'\cdot0^*=x\cdot0^*+0^*$. Now assume that for some $k$, $\alpha(k):=``x'\cdot k=x\cdot k+k"$ holds. Then 
+                            \begin{align*}
+                                x'\cdot k'&=x'\cdot k+x' &&\text{A6} \\
+                                &=(x'\cdot k)+x' &&\text{4.(a)} \\
+                                &=(x\cdot k+k)+x' &&\alpha(k) \\
+                                &=x\cdot k+(k+x') &&\text{4.(a)} \\
+                                &=x\cdot k+(x+k)' &&\text{A4} \\
+                                &=(x\cdot k+x+k)' &&\text{A4} \\
+                                &=((x\cdot k+x)+k)' &&\text{4.(a)} \\
+                                &=(x\cdot k'+k)' &&\text{A6} \\
+                                &=x\cdot k'+k' &&\text{A4}.
+                            \end{align*}
+                        Thus $\alpha(k')$ holds and so by A7, $\alpha(y)$ holds for all $y\in\mathbb{N}$.
+                    \end{proof}\newpage
+                \item Prove in PA, that for all $x$, $0^*''\cdot x=x+x$.
+                    \begin{proof}
+                        Let $\alpha(x):=``0^*''\cdot x=x+x"$. Then $\alpha(0^*)$ holds since by 4.(b), we have that 
+                            \begin{equation*}
+                                0^*''\cdot 0^*=0^*'\cdot 0^*+0^*
+                            \end{equation*}
+                        and by A5, $0^*'\cdot 0^*=0^*$. Thus $0^*''\cdot 0^*=0^*+0^*$. Now assume that for some $k$, that $\alpha(k):=``0^*''\cdot k=k+k"$. Then it follows that 
+                            \begin{align*}
+                                0^*''\cdot k' &= 0^*''\cdot k+0^*'' &&\text{A6} \\
+                                &=(k+k)+0^*'' &&\alpha(k) \\
+                                &=k+(k+0^*'') &&\text{4.(a)} \\
+                                &=k+(k+0^*')' &&\text{A4} \\
+                                &=(k+(k+0^*'))' &&\text{A4} \\
+                                &=(k+(k+0^*)')' &&\text{A4} \\
+                                &=(k+(k)')' &&\text{A3} \\
+                                &=(k+k')' &&\text{A4} \\
+                                &=(k'+k)' &&\text{?} \\
+                                &=k'+k' &&\text{A4}
+                            \end{align*}
+                        Thus $\alpha(k')$ holds and so by A7, $\alpha(x)$ holds for all $x$.
+                    \end{proof}
+                \item Prove in PA that $\cdot$ is commutative.
+                    \begin{proof}
+                        Let $\alpha(y):=``x\cdot y=y\cdot x"$. Then $\alpha(0^*)$ holds since $x\cdot 0^*=0^*=0^*\cdot x$. Now assume that for some $k$, $\alpha(k):=``x\cdot k=k\cdot x"$ holds. Then 
+                            \begin{align*}
+                                x\cdot k'&= x\cdot k+x &&\text{A6} \\
+                                &=(k\cdot x)+x &&\alpha(k) \\
+                                &=k'\cdot x &&\text{4.(b)}.
+                            \end{align*}
+                        Thus, $\alpha(k')$ holds and so by A7, $\alpha(y)$ holds for all $y$. Therefore, $\cdot$ is commutative.
+                    \end{proof}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,556 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{enumitem}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{/home/arbegla/figures/}{#1.pdf_tex}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+  {\end{proof}}
+
+\newenvironment{psmall}
+  {\left(\begin{smallmatrix}}
+  {\end{smallmatrix}\right)}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+
+\begin{document}
+\title{MATH 296C Portfolio}
+\author{Quin Darcy}
+\date{April, 15 2021}
+\maketitle
+\newpage
+\tableofcontents
+\section{Introduction}
+This course covered many small topics, but what this class covered, in the 
+broadest view, was the classification of Lie algebras. We started by defining 
+what a Lie algebra is and saw that it was no more exotic, in definition, than 
+a vector space with a tad more machinery. After the initial definitions, we looked 
+at some examples of Lie algebras and there was one particular Lie algebra which 
+became the object of our attention for most of the semester. The set of $n\times n$ 
+matrices over $\mathbb{C}$ with trace 0, or $\mathfrak{sl}_n(\mathbb{C})$. For many 
+of our computations, we specifically looked at the case where $n=2,3$. This Lie 
+algebra proved quite demonstrative of properties found in all Lie algebras.
+\par The path to classifying Lie algebras is quite involved, but on the way there 
+we made friends with many interesting topics including modules and representations of
+Lie algebras. In simple terms, we were able to peer behind the Lie curtains by observing 
+how it acted on something else, a vector space. It turns out that a finite dimensional 
+Lie algebra behaves as if (not sure about wording) its elements are matrices in a vector 
+space and the algebraic properties of the Lie algebra are preserved. \par With our module 
+in hand, we can ask many linear algebra type questions, and use linear algebra tools to
+break it down into more fundamental pieces. The thinking here is that if we can take 
+stock of the fundamental pieces, then we can say something about all (not quite all) Lie
+algebras, as they are composed of these fundamental pieces, or rather, their modules and 
+representations are.
+
+\section{Exercise Solutions}
+    \begin{enumerate}
+        \item[1.1] Find the matrix $A$ that represents $f$ in example 1.26.
+            \begin{solution}
+                We can solve for $A$ as follows:
+                \begin{equation*}
+                    \begin{pmatrix} a & b \\
+                    c & d\end{pmatrix}\begin{pmatrix}1 \\
+                    0\end{pmatrix} = \begin{pmatrix} a \\
+                    c\end{pmatrix}=\begin{pmatrix}2 \\
+                    1\end{pmatrix}
+                \end{equation*}
+                Thus $a=2$ and $c=1$. Which gives 
+                \begin{equation*}
+                    \begin{pmatrix} 2 & b \\
+                    1 & d\end{pmatrix}\begin{pmatrix} 1 \\
+                    1\end{pmatrix}=\begin{pmatrix} 2+b \\
+                    1+d\end{pmatrix}=\begin{pmatrix}1 \\
+                    2\end{pmatrix}
+                \end{equation*}
+                the last system yields $b=-1$ and $d=1$. Hence
+                \begin{equation*}
+                    A=\begin{pmatrix}2 & -1\\
+                    1 & 1\end{pmatrix}.
+                \end{equation*}
+            \end{solution}
+        \item[1.5] Let
+            $\mathfrak{sl}_2(\mathbb{R}):=\{\begin{psmall}a&b\\c&d\end{psmall}\mid
+            a+d=0, a, b, c, d\in\mathbb{R}\}$. That is,
+            $\mathfrak{sl}_2(\mathbb{R})$ consists
+            of $2\times 2$ trace 0 matrices with entries in $\mathbb{R}$.
+            \begin{enumerate}[label=(\alph*)]
+                \item Show that $\mathfrak{sl}_2(\mathbb{R})$ is a Lie algebra with
+                    bracket $[A, B]=AB-BA$.
+                    \begin{proof}
+                        As a subset of $\mathfrak{gl}_{2}(\mathbb{R})$, which
+                        is a Lie algebra, we can prove the claim by
+                        showing that $\mathfrak{sl}_{2}(\mathbb{R})$
+                        is a Lie subalgebra of $\mathfrak{gl}_{2}(\mathbb{R})$.
+                        Recall that a Lie subalgebra is a subspace
+                        closed under the bracket of the outer space. So
+                        do prove our claim,
+                        consider any $c\in\mathbb{R}$ and any $u,
+                        v\in\mathfrak{sl}_{2}(\mathbb{R})$. It follows that
+                        $\text{tr}(u+v)=\text{tr}(u)+\text{tr}(v)=0+0=0$
+                        and so $u+v\in\mathfrak{sl}_{2}(\mathbb{R})$.
+                        Similarly, we have that
+                        $\text{tr}(cu)=c\text{tr}(u)=c0=0$. Thus,
+                        $cu\in\mathfrak{sl}_{2}(\mathbb{R})$ and it is
+                        therefore a subspace.\par\hspace{4mm} Taking
+                        the same $u,
+                        v\in\mathfrak{sl}_{2}(\mathbb{R})$, and letting 
+                        \begin{equation*}
+                            u=\begin{pmatrix} a&b\\c&d
+                            \end{pmatrix}\quad\text{and}\quad
+                            v=\begin{pmatrix}e&f\\g&h
+                            \end{pmatrix},  
+                        \end{equation*}
+                        then 
+                        \begin{equation*}
+                            \begin{split}
+                                [u, v]&=\begin{pmatrix}a&b\\c&d
+                                \end{pmatrix}\begin{pmatrix}e&f\\g&h\end{pmatrix}-\begin{pmatrix}e&f\\g&h
+                                \end{pmatrix}\begin{pmatrix}a&b\\c&d\end{pmatrix}\\
+                                &=\begin{pmatrix}ae+bg&af+bh\\ce+dg&cf+dh\end{pmatrix}-
+                                \begin{pmatrix}ea+fc&eb+fd\\ga+hc&gb+hd\end{pmatrix} \\
+                                &=\begin{pmatrix}bg-fc&af+bh-eb-fd\\ce+dg-ga-he&cf-gb\end{pmatrix}. 
+                            \end{split}
+                        \end{equation*}
+                        By the commutativity of the reals, it follows
+                        that $\text{tr}([u, v])=bg-fc+cf-gb=0$. Hence,
+                        $[u, v]\in\mathfrak{sl}_{2}(\mathbb{R})$.
+                    \end{proof}
+                \item Find a basis for $\mathfrak{sl}_{2}(\mathbb{R})$. 
+                    \begin{solution}
+                        Considering that the definition of this set requires
+                        that the entries be elements of $\mathbb{R}$ and that
+                        the trace must be zero, then we find that we have two
+                        ``free" entries in the upper right and lower left, and
+                        that we have only one free entry along the diagonal
+                        since the other must be its additive inverse. Hence,
+                        a basis for this Lie algebra is 
+                        \begin{align*}
+                            \begin{pmatrix}0&1\\0&0 \end{pmatrix},&
+                            &\begin{pmatrix}0&0\\1&0\end{pmatrix},
+                            & &\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+                        \end{align*}
+                    \end{solution}
+                \item Find
+                    $\text{dim}_{\mathbb{R}}(\mathfrak{sl}_{2}(\mathbb{R}))$.
+                    \begin{solution}
+                        Considering the basis provided in part (b), we can
+                        conclude that this Lie algebra has dimension 3.
+                    \end{solution}
+            \end{enumerate}
+        \item[1.7] Prove that every Lie algebra $(L,[\cdot, \cdot])$ over
+            a field $K$ is a $K$-algebra if one sets $x\cdot y=[x, y]$.
+            \begin{proof}
+                We first recall the definition of a $K$-algebra and hence need
+                to show that $L$ is a vector space over $K$ such that $L$ is
+                a ring with under addition and $[\cdot, \cdot]$, however,
+                associativity is not required for the second operation.
+                Additionally, we need to show that for any $k, l\in K$, and any
+                $x, y\in L$, we have $[kx, ly]=(kl)[x, y]$.\par\hspace{4mm} By
+                the definition of a Lie algebra, $L$ is a vector space over
+                some field $K$. As such, it is an abelian group with respect to
+                addition and a magma with respect to $[\cdot, \cdot]$. By the
+                bilinearity of $[\cdot, \cdot]$, it follows that $[kx, ly]=k[x,
+                ly]=l[kx, y ]=(kl)[x, y]$. Thus, $(L, [\cdot, \cdot])$ is
+                a $K$-algebra.
+            \end{proof}
+        \item[2.9] Prove $\mathfrak{sl}_{2}(K)$ is simple if and only if the
+            characteristic of $K$ is not 2.
+            \begin{proof}
+                Assume that the characteristic of $K$ is 2 and consider the
+                following set
+                \begin{equation*}
+                    S = \text{span}\{\begin{pmatrix} 1&0\\0&-1 \end{pmatrix}
+                    \}.
+                \end{equation*}
+                $S$ is a subspace of $\mathfrak{sl}_{2}(K)$ by the definition
+                of span. Moreover, if we notice that 
+                \begin{equation*}
+                    \forall u=\begin{pmatrix}a&b\\c&-a
+                    \end{pmatrix}\in\mathfrak{sl}_{2}(K)\quad
+                    \text{and}\quad\forall v=\begin{pmatrix}k&0\\0&-k\end{pmatrix}\in
+                    S, 
+                \end{equation*}
+                we get that 
+                \begin{equation*}
+                    \begin{split}
+                        [u, v] &= \begin{pmatrix} 0&-2bk\\2ck&0\end{pmatrix} \\
+                        &=\begin{pmatrix}0&0\\0&0 \end{pmatrix} \in S.
+                    \end{split}
+                \end{equation*}
+                Seeing as we just found a one-dimensional (non-trivial) ideal
+                of $\mathfrak{sl}_{2}(K)$, we can conclude that
+                $\mathfrak{sl}_{2}(K)$ is not simple when the characteristic of
+                $K$ is two.\par\hspace{4mm} Now assume that
+                $\mathfrak{sl}_{2}(K)$ is simple and consider the following basis:
+                \begin{align*}
+                    x=\begin{pmatrix}0&1\\0&0\end{pmatrix},& &y=\begin{pmatrix}
+                    0&0\\1&0\end{pmatrix},& &h=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+                \end{align*}
+                We have the following commutation relations: 
+                \begin{align*}
+                    [x, y]=h,& &[x, h]=-2x,& &[y, h]=2y.
+                \end{align*}
+                Now suppose that $I$ is a nonempty ideal of $\mathfrak{sl}_2(K)$. 
+                Then since the latter was assumed to be simple, it follows 
+                that $I=\mathfrak{sl}_2(K)$. However, if $K$ had characteristic 2, 
+                then this would imply that $[x, h]=0$ and $[y, h]=0$, rendering 
+                $I$ one-dimensional which is a contradiction. Hence, the 
+                characteristic is not two.
+            \end{proof}
+        \item[2.10] Prove that $\mathfrak{sl}_n(\mathbb{C})$ is an ideal of $\mathfrak{gl}_n(\mathbb{C})$.
+            \begin{proof}
+                To show that $\mathfrak{sl}_n(\mathbb{C})$ is an ideal, 
+                we must show that it is a subspace such that $[x, y]\in\mathfrak{sl}_n(\mathbb{C})$ 
+                for all $x\in\mathfrak{gl}_n(\mathbb{C})$ and all 
+                $y\in\mathfrak{sl}_n(\mathbb{C})$. That it is a subspace is 
+                immediate since it is a subset and it is a vector space under 
+                the same operations. Now let $x\in\mathfrak{gl}_n(\mathbb{C})$ 
+                and $y\in\mathfrak{sl}_n(\mathbb{C})$. We want to show that 
+                $[x, y]\in\mathfrak{sl}_n(\mathbb{C})$. Thus we need that 
+                $\text{tr}([x, y])=0$. By the fact that $\text{tr}(AB)=\text{tr}(BA)$ 
+                for all $A, B\in\text{Mat}_{n\times n}(\mathbb{C})$, then we 
+                have that $\text{tr}([x, y])=\text{tr}(xy)-\text{tr}(yx)=0$, as desired. 
+            \end{proof}
+        \item[2.12] Find the structure constants for
+            $\mathfrak{sl}_{2}(\mathbb{C})$.
+            \begin{solution}
+                By the above commutation relations, the structure constants are
+                as follows: Letting $a_{xy}^k$ denote the $k$th coefficient on
+                the linear combination representing $[x, y]$, then we have
+                \begin{align*}
+                    &a_{xy}^0=0;& &a_{xy}^1=0;& &a_{xy}^2=1; \\
+                    &a_{xh}^0=-2;& &a_{xh}^1=0;& &a_{xh}^2=0; \\
+                    &a_{yh}^0=0;& &a_{yh}^1=2;& &a_{yh}^2=0.
+                \end{align*}
+            \end{solution}
+        \item[5.1] Recall $\mathcal{V}_2$ of Example 4.6.
+            \begin{enumerate}
+                \item Find all weights of $h$ for $\mathcal{V}_2$.
+                    \begin{solution}
+                        We first recall that  
+                        \begin{equation*}
+                            h.(aX^2+bXY+cY^2):=(X\frac{\partial}{\partial
+                            X}-Y\frac{\partial}{\partial
+                        Y})(aX^2+bXY+cY^2)=2aX^2-2cY^2.
+                        \end{equation*}
+                        Moreover, using $\{X^2, XY, Y^2\}$ as a basis for
+                        $\mathcal{V}_2$, then we can apply $h$ to each of the
+                        basis elements to obtain:
+                            \begin{align*}
+                                &h.X^2 = (X\frac{\partial}{\partial
+                                X}-Y\frac{\partial}{\partial Y})X^2 =2X^2& \\
+                                &h.XY = (X\frac{\partial}{\partial
+                                X}-Y\frac{\partial}{\partial Y})XY =XY-XY=0& \\
+                                &h.Y^2 = (X\frac{\partial}{\partial
+                                X}-Y\frac{\partial}{\partial Y})Y^2=-2Y^2.
+                            \end{align*}
+                        This suffices to show that the only weights of $h$ for
+                        $\mathcal{V}_2$ are 2, 0, and -2.
+                    \end{solution}
+                \item Describe (find a basis) all weight spaces. 
+                    \begin{solution}
+                        By the above calculation, we can see that $w_0=X^2$ is the
+                        highest weight vector with weight $2$. By Lemma 5.6, it
+                        follows that 
+                        \begin{equation*}
+                            \begin{split}
+                                &w1 = \frac{1}{1!}y^1.w_0=Y\frac{\partial}{\partial
+                                X}(X^2)=2XY \\
+                                &w2
+                                = \frac{1}{2!}y^2.w_0=\frac{1}{2}(Y^2\frac{\partial^2}{\partial
+                                X^2})(X^2)=Y^2.
+                            \end{split}
+                        \end{equation*}
+                        Thus $w_0=X^2, w_1=2XY, w_2=Y^2$ gives us a basis for
+                        $V(2)$. Moreover, by Theorem 5.8, $V(2)\cong\mathcal{V}_2$.
+                        Thus by part (a), we have that $V_{-2}=\text{span}(w_2)$,
+                        $V_0=\text{span}(w_1)$, and $V_2=\text{span}(w_0)$.
+                    \end{solution}
+                \item Express $\mathcal{V}_2$ as a direct sum of its weight
+                    spaces as in Theorem 5.1.
+                    \begin{solution}
+                        By parts (a) and (b), we found that the weight spaces
+                        of $h$ are $V_{-2}$, $V_0$, and $V_2$ and as such it
+                        follows that 
+                        \begin{equation*}
+                            \mathcal{V}_2=\bigoplus_{i=0}^2V_{-2+2i}
+                            =\text{span}(X^2)\oplus\text{span}(2XY)\oplus\text{span}(Y^2).
+                        \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+        \item[5.2] Define a vector space $\mathcal{V}_3$ similar to example
+            4.6.
+            \begin{enumerate}
+                \item Prove that $\mathcal{V}_3$ is an
+                    $\mathfrak{sl}_2$-module.
+                    \begin{solution}
+                        Letting $\mathcal{V}_3=\{aX^3+bX^2Y+cXY^2+dY^3\mid a, b,
+                        c, d\in\mathbb{C}\}$, then for the same reason that
+                        $\mathcal{V}_2$ is a $\mathbb{C}$-linear space, we have
+                        that $\mathcal{V}_3$ is a $\mathbb{C}$-linear space. We
+                        will also re-use the same following relations. For all
+                        $v\in\mathcal{V}_3$, and for $x, y, h$ as basis elements of
+                        $\mathfrak{sl}_2$, then 
+                        \begin{align*}
+                            &x.v = (X\frac{\partial}{\partial Y})v,&
+                            &y.v = (Y\frac{\partial}{\partial X})v,&
+                            &h.v = (X\frac{\partial}{\partial X}
+                            - Y\frac{\partial}{\partial Y})v.
+                        \end{align*}
+                        With this we will let $\alpha_1x+\beta_1y+\gamma_1h,
+                        \alpha_2x+\beta_2y+\gamma_2h\in\mathfrak{sl}_2$ and we let
+                        $u=a_1X^3+b_1X^2Y+c_1XY^2+d_1Y^3$ and
+                        $v=a_2X^3+b_2X^2Y+c_2XY^2+d_2Y^3$ be two arbitrary elements
+                        of $\mathcal{V}_3$. Then
+                        \begin{equation*}
+                            \begin{split}
+                                ((\alpha_1x+\beta_1y+\gamma_1h)+(\alpha_2x+\beta_2y+\gamma_2h)).u
+                                &=((\alpha_1+\alpha_2)x+(\beta_1+\beta_2)y+(\gamma_1+\gamma_2)h).u
+                                \\ 
+                                &=(\alpha x+\beta y+\gamma h).u \\
+                                &=(\alpha X\frac{\partial}{\partial
+                                Y}+\beta Y\frac{\partial}{\partial X}+\gamma(X\frac{\partial}{\partial X}
+                                -Y\frac{\partial}{\partial Y}))u \\
+                                &=\alpha (X\frac{\partial}{\partial
+                                Y})u+\beta (Y\frac{\partial}{\partial
+                                X})u+\gamma(X\frac{\partial}{\partial
+                                X}-Y\frac{\partial}{\partial Y})u \\
+                                &=\alpha(x.u)+\beta(y.u)+\gamma(h.u) \\
+                                &=(\alpha_1+\alpha_2)(x.u)+(\beta_1+\beta_2)(y.u)+(\gamma_1+\gamma_2)(h.u)
+                                \\
+                                &= \alpha_1(x.u)+\beta_1(y.u)+\gamma_1(h.u) \\
+                                &\quad\quad
+                                +\alpha_2(x.u)+\beta_2(y.u)+\gamma_2(h.u),
+                            \end{split}
+                        \end{equation*}
+                        which proves M1. REMINDER: Finish showing M2 and M3.
+                    \end{solution}
+                \item Find all the weights of $h$ for $\mathcal{V}_3$.
+                    \begin{solution}
+                        Letting $\{X^3, X^2Y, XY^2, Y^3\}$ be a basis for
+                        $\mathcal{V}_2$, then we can find the weights of $h$ by
+                        applying $h$ to each basis element. Doing this we get
+                        \begin{equation*}
+                            \begin{split}
+                                &h.X^3=(X\frac{\partial}{\partial
+                                X}-Y\frac{\partial}{\partial Y})X^3=3X^3 \\
+                                &h.X^2Y=(X\frac{\partial}{\partial
+                                X}-Y\frac{\partial}{\partial Y})X^2Y=X^2Y \\
+                                &h.XY^2=(X\frac{\partial}{\partial
+                                X}-Y\frac{\partial}{\partial Y})XY^2=-XY^2 \\
+                                &h.Y^3=(X\frac{\partial}{\partial
+                                X}-Y\frac{\partial}{\partial Y})Y^3=-3Y^3.
+                            \end{split}
+                        \end{equation*}
+                        Hence, the weights of $h$ are $-3, -1, 1, 3$.
+                    \end{solution}
+                \item Describe all weight spaces.
+                    \begin{solution}
+                        By part (b), we see that the highest weight is $3$ with
+                        weight vector $w_0=X^3$. With this we can use Lemma 5.6 to
+                        calculate the remaining weight spaces.
+                        \begin{equation*}
+                            \begin{split}
+                                &w_1 =\frac{1}{1}y.w_0=Y\frac{\partial}{\partial
+                                X}(X^3)=3X^2Y \\ 
+                                &w_2=\frac{1}{2}y^2.w_0=\frac{1}{2}(Y^2\frac{\partial^2}{\partial
+                                X^2})X^3=3XY^2 \\
+                                &w_3=\frac{1}{6}(Y^3\frac{\partial^3}{\partial
+                                X^3})X^3=Y^3.
+                            \end{split}
+                        \end{equation*}
+                        Thus, we have that the weight spaces of $\mathcal{V}_3$
+                        are $V_{-3}=\text{span}(w_3)$, $V_{-1}=\text{span}(w_2)$,
+                        $V_1=\text{span}(w_1)$, and $V_3=\text{span}(w_0)$.
+                    \end{solution}
+                \item Express $\mathcal{V}_3$ as a direct sum of its weight
+                    spaces as in Theorem 5.1.
+                    \begin{solution}
+                        With $-3, -1, 1, 3$ being distinct eigenvalues for $h$,
+                        then by Theorem 5.1 it follows that 
+                        \begin{equation*}
+                            \mathcal{V}_3\cong\bigoplus_{i=0}^{3}V_{-3+2i}
+                        \end{equation*}
+                    \end{solution}
+            \end{enumerate}\newpage
+        \item[6.1] Fill in the question marks of equation (6.1).
+            \begin{solution}
+                \begin{align*}
+                    &\text{ad}_{h_1}(h_1)=0& &\text{ad}_{h_2}(h_1)=0& \\
+                    &\text{ad}_{h1}(h_2)=0& &\text{ad}_{h_2}(h_2)=0& \\
+                    &\text{ad}_{h_1}(x_1)=2x_1& &\text{ad}_{h_2}(x_1)=-x_1& \\
+                    &\text{ad}_{h_1}(x_2)=-x_2& &\text{ad}_{h_2}(x_2)=2x_2& \\
+                    &\text{ad}_{h_1}(x_3)=x_3& &\text{ad}_{h_2}(x_3)=x_3& \\
+                    &\text{ad}_{h_1}(y_1)=-2y_1& &\text{ad}_{h_2}(y_1)=y_1& \\
+                    &\text{ad}_{h_1}(y_2)=y_2& &\text{ad}_{h_2}(y_2)=-2y_2 \\
+                    &\text{ad}_{h_1}(y_3)=-y_3& &\text{ad}_{h_2}(y_3)=-y_3&
+                \end{align*}
+            \end{solution}
+        \item[6.2] Prove Lemma 6.1.
+            \begin{proof}
+                
+            \end{proof}
+    \end{enumerate}
+    \section{Section Writing}
+    Below is a description of a program that was written to 
+    generate the roots of $\mathfrak{sl}_n(\mathbb{C})$. Additionally, 
+    the program generates images showing a selection of eigenvalues of 
+    $\mathfrak{sl}_n(\mathbb{C})$.
+    \section{How the roots are calculated}
+    \begin{enumerate}
+        \item Generate basis for $\mathfrak{sl}_n(\mathbb{C})$, given some
+            $n\in\mathbb{Z}_{\geq 1}$: This is done in 3 parts.
+            \begin{enumerate}
+                \item Calculate dimension of $\mathfrak{sl}_n(\mathbb{C})$. We
+                    use the formula 
+                    \begin{equation*}
+                        \text{dim}(\mathfrak{sl}_n(\mathbb{C}))=n-1+2\sum_{i=1}^{n-1}i,
+                    \end{equation*}
+                    where the $n-1$ term is a count of how many basis elements have
+                    entries only on the main diagonal, and the sum is a count of
+                    all the basis elements with entries off the main diagonal.
+                \item As the formula suggests, we simply fill an array with 1's at
+                    all entries $a_{ij}$, where $i\neq j$, i.e., 
+                    \begin{equation*}
+                        \begin{split}
+                            &\texttt{for i in range(n):} \\
+                            &\quad\quad\texttt{for j in range(n):} \\
+                            &\quad\quad\quad\quad\texttt{if (i != j)} \\
+                            &\quad\quad\quad\quad\quad\quad\texttt{B[matnum][i][j] = 1} \\ 
+                            &\quad\quad\quad\quad\quad\quad\texttt{matnum++}.
+                        \end{split} 
+                    \end{equation*}
+                    Similarly, for the diagonal elements, we use 
+                    \begin{equation*}
+                        \begin{split}
+                            &\texttt{for i in range(n-1):} \\
+                            &\quad\quad\texttt{B[matnum][i][i] = 1} \\
+                            &\quad\quad\texttt{B[matnum][i+1][i+1] = -1} \\
+                            &\quad\quad\texttt{matnum++}.
+                        \end{split} 
+                    \end{equation*}
+                    Here \texttt{n} is the number the user entered and
+                    \texttt{matnum} is a count of the matrices since \texttt{B}
+                    is an array containing as many matrices as there are
+                    dimensions in $\mathfrak{sl}_n(\mathbb{C})$, and each
+                    matrix is $n\times n$.
+            \end{enumerate}
+    \end{enumerate}
+    \subsection{A Quick Visual Detour}
+        We stop here after step 1 for a moment since there is something
+        interesting that we can look at with what we have so far. With a basis
+        in hand, we can, in theory, generate all of
+        $\mathfrak{sl}_n(\mathbb{C})$. However, this is not possible on
+        a physical computer, as it
+        would require taking the span of the basis elements which is an
+        uncountably infinite set.\par\hspace{4mm} We can instead consider a finite spanning
+        set. Suppose for instance that we want to see how the eigenvalues of
+        $\mathfrak{sl}_n(\mathbb{C})$ are distributed in $\mathbb{C}$ as we
+        range over $n$. To do this, we can, as stated before, take a particular
+        finite spanning set of the basis, and plot all of the complex
+        eigenvalues of each element in this spanning set.\par\hspace{4mm} But how do we choose
+        the elements which populate our finite spanning set? In other words,
+        any finite selection would in a sense be arbitrary. I could not think
+        of a way around this aside from making the choice as natural and
+        uniform as possible. With this I ask you, dear reader, what is more
+        uniform and natural that the complex unit circle? Each point is unit
+        length, and it occupies all 4 quadrants. As you ponder the
+        answer to that question, let us just roll with it (``roll" $\dots$
+        ``circle"$\dots$, you get it) and see where it takes
+        us.\par\hspace{4mm} Let $N\in\mathbb{N}_{\geq 0}$, then we can choose $N$ 
+        many points from the complex unit circle by letting $\theta
+        = 2\pi/N$ and taking $M=\{c\in\mathbb{C}\mid \cos(\theta
+        k)+i\sin(\theta k)=c, \text{ for }0\leq k<N\}$. We can now thing of the set 
+        $M$ as the set containing all the multiples which we shall use to form our 
+        linear combinations. For example, suppose $M=\{\alpha_1, \alpha_2\}$ and 
+        our basis $B=\{x, y, h\}$. Then we want to calculate the following linear 
+        combinations (which we'll denote $A_i$):
+        \begin{align*}
+            &A_{1}=\alpha_1x+\alpha_1y+\alpha_1h& 
+            &A_{2}=\alpha_1x+\alpha_1y+\alpha_2h& \\ 
+            &A_{3}=\alpha_1x+\alpha_2y+\alpha_1h& 
+            &A_{4}=\alpha_1x+\alpha_2y+\alpha_2h& \\ 
+            &A_5=\alpha_2x+\alpha_1y+\alpha_1h&   
+            &A_6=\alpha_2x+\alpha_1y+\alpha_2h& \\
+            &A_7=\alpha_2x+\alpha_2y+\alpha_1h&   &A_8=\alpha_2x+\alpha_2y+\alpha_2h&
+        \end{align*}
+        If it is not already clear, given a basis with $b$ many elements, and a 
+        set of $N$ many multiples, then we will have a spanning set containing 
+        $N^b$ many elements. So in our particular case our spanning set will contain
+        \begin{equation*}
+            N^{\text{dim}(\mathfrak{sl}_n(\mathbb{C}))}
+        \end{equation*}
+        many elements.\par\hspace{4mm} Alright, now with our linear combinations, 
+        we need only calculate the eigenvalues for each $A_i$. So finally, supposing 
+        all such eigenvalues are collected neatly into a set, then the last step is 
+        to plot each element of this set. Below are the results of this.\newpage
+        
+    \subsection{Continuing where we left off}
+    \begin{enumerate}
+        \item[3.] Obtain the Cartan subalgebra. This step is actually quite
+            easy in the case of $\mathfrak{sl}_n(\mathbb{C})$ since a basis for this
+            subalgebra can be found by simply selecting, from the elements of the
+            entire basis, those elements with entries on the main diagonal.
+        \item[4.] Calculate the adjoint representation of each basis element of
+            the Cartan subalgebra. The reason we are doing this is because we
+            can think of the roots of the Lie algebra as the nonzero weights of
+            the adjoint representation. Calculating the adjoint representation
+            is relatively simple on paper, but quite dry in code. Essentially,
+            we take each (Cartan) basis element, bracket it with every (entire)
+            basis element, express the result as a linear combination of the
+            (entire) basis elements, and use the coefficients in this linear
+            combination as a row in the adjoint representation matrix.
+        \item[5.] Calculate the eigenvectors of each adjoint representation.
+            The weight vectors are those who are eigenvectors to every adjoint
+            representation matrix. Hence, the weights are the eigenvalues of
+            such eigenvectors.
+        \item[6.] Filter through these eigenvalues, removing those with 0 in
+            ever component and voila you have your roots!
+    \end{enumerate}  
+\end{document}

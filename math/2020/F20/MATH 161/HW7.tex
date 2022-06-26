@@ -1,0 +1,159 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 161}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 161}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 10/29/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 7 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item Without using the Soundness Theorem prove that if $x$ does not occur free in $\varphi$, then $(\varphi\rightarrow\forall x\theta)\rightarrow\forall x(\varphi\rightarrow\theta)$ is logically valid.
+            \begin{proof}
+                We want to show that the given wff is true in every interpretation. Let $\mathcal{I}$ be any interpretation and let $v$ be any valuation of $\mathcal{I}$. Then assume that $v$ satisfies $\varphi\rightarrow\forall x\theta$. Then by A4, $\forall x\theta\rightarrow\theta$ is holds in $\mathcal{I}$ and so $v$ satisfies $\forall x\theta\rightarrow\theta$. By HS, $\varphi\rightarrow\theta$ holds in  $\mathcal{I}$ and so $v$ satisfies $\varphi\rightarrow\theta$. By GEN $\forall x(\varphi\rightarrow\theta)$ holds in $\mathcal{I}$ and thus $v$ satisfies $\forall x(\varphi\rightarrow\theta)$. Therefore, by HW4, problem 5.(b) $v$ satisfies $(\varphi\rightarrow\forall x\theta)\rightarrow\forall x(\varphi\rightarrow\theta)$. Thus the wff is true in every interpretation. Hence the wff is logically valid.
+            \end{proof}
+        \item Prove that $\vdash_K\forall x(\varphi\rightarrow\gamma)\rightarrow(\forall x\varphi\rightarrow\forall x\gamma)$.
+            \begin{proof}
+                \begin{align*}
+                    &(1) \quad\forall x(\varphi\rightarrow\gamma) && \text{additional axiom} \\
+                    &(2) \quad\forall x(\varphi\rightarrow\gamma)\rightarrow(\varphi\rightarrow\gamma) && \text{A4} \\
+                    &(3) \quad\varphi\rightarrow\gamma && \text{MP on (1) and (2)} \\
+                    &(4) \quad\forall x\varphi && \text{additional axiom} \\
+                    &(5) \quad\forall x\varphi\rightarrow\varphi && \text{A4} \\
+                    &(6) \quad\varphi && \text{MP on (4) and (5)} \\
+                    &(7) \quad\gamma && \text{MP on (3) and (6)} \\
+                    &(8) \quad\forall x\gamma && \text{GEN on (7)}
+                \end{align*}
+            Since the only instance of GEN was on $\gamma$ in which $x$ does not occur free, then by the Deduction Theorem, $\{\forall x(\varphi\rightarrow\gamma),\forall x\varphi\}\vdash_K\forall x\gamma$ and by a second application of the Deduction Theorem we have that $\{\forall x(\varphi\rightarrow\gamma)\}\vdash_K\forall x\varphi\rightarrow\forall x\gamma$. Finally, by one more application of the Deduction Theorem, we get $\vdash_K\forall x(\varphi\rightarrow\gamma)\rightarrow(\forall x\varphi\rightarrow\forall x\gamma)$.
+            \end{proof}
+        \item Prove if $\Sigma\vdash_K\varphi\rightarrow\gamma$, then $\Sigma\cup\{\varphi\}\vdash_K\gamma$.
+            \begin{proof}
+                Assume that $\Sigma\vdash_K\varphi\rightarrow\gamma$. Then there is a proof of $\varphi\rightarrow\gamma$ in $\Sigma$ and so $\varphi\rightarrow\gamma$ is a theorem of $\Sigma$. Therefore $\varphi\rightarrow\gamma$ is a theorem of $\Sigma\cup\{\varphi\}$. Thus $\varphi,\varphi\rightarrow\gamma,\gamma$ (MP) is a proof of $\gamma$ in $\Sigma\cup\{\varphi\}$. Therefore $\Sigma\cup\{\varphi\}\vdash_K\gamma$.
+            \end{proof}\newpage
+        \item[6.] Let $J$ be a consistent extension of $K$ such that if for any closed wff, $\theta$, if $J\cup\{\theta\}$ is consistent, then $\vdash_J\theta$. Prove that $J$ is complete.
+            \begin{proof}
+                Let $\theta$ be a closed wff of $J$. Then either $\vdash_J\theta$ or $\not\vdash_J\theta$. If $\vdash_J\theta$, then every closed wff of $J$ is a theorem of $J$ and we are done. If $\not\vdash_J\theta$, then by the contrapositve, this implies that $J\cup\{\theta\}$ is not consistent. Thus there exists some $\varphi$ in $J\cup\{\theta\}$ such that both $\varphi$ and $\sim\varphi$ are theorems of $J\cup\{\theta\}$. Since $J$ is consistent, then either $\varphi$ is not a wff of $J$ or $\sim\varphi$ is not a wff of $J$. Thus $\theta=\varphi$ or $\theta=\sim\varphi$. In either case, since $\not\vdash_J\theta$, then $\vdash_J\sim\theta$. Hence, $J$ is complete.
+            \end{proof}
+        \item[7.] Assume that $J$ is a consistent extension of $K$ and that $\mathcal{M}$ is a model of $J$. Let $R$ be the extension of $J$ formed by adding to $J$, as additional axioms, all atomic formulas of $J$ that are true in $\mathcal{M}$. Determine whether or not $R$ is consistent.
+            \begin{proof}
+                Let $\theta$ be a wff of $R$. Then $\theta$ is either a theorem of $J$ or it is an atomic formula of $J$. If it is a theorem of $J$, then it is true in the model by definition. If it is an atomic formula of $J$, then it is true in the model by construction. Thus $\mathcal{M}\models\theta$ for all $\theta\in R$ and hence $\mathcal{M}$ is a model of $R$. Therefore by the theorem on page 16, $R$ is consistent.
+            \end{proof}
+        \item[8.] Assume that for every positive integer $m$, there exists a model $\mathcal{I}$ of $F$ such that 
+            \begin{equation*}
+                \mathcal{I}\models R(c_1)\land\cdots\land R(c_m).
+            \end{equation*}
+            Prove that there exists a model $\mathcal{M}$ of $F$ such that $\mathcal{M}\models R(c_i)$ for all positive integers $i$. 
+            \begin{proof}
+                Let $\Gamma=\{\delta\colon \delta\text{ is an axiom of }F\}\cup\{R(c_1),R(c_2),\dots\}$ and let $\Sigma$ be a finite subset of $\Gamma$. Then for any $\theta\in\Sigma$ it follows that $\theta$ is either an axiom of $F$, or for some positive integer $i$, $\theta=R(c_i)$. If $\theta$ is an axiom of $F$ then $\mathcal{M}\models\theta$ for any model $\mathcal{M}$ of $F$. If $\theta=R(c_i)$, then we have that
+                    \begin{equation*}
+                        \mathcal{I}\models R(c_1)\land\dots\land R(c_i).
+                    \end{equation*}
+                This implies that $\mathcal{I}\modelsR(c_n)$ for all $1\leq n\leq i$ and thus $\mathcal{I}\models R(c_i)$. Therefore $\mathcal{I}\models\theta$ for all $\theta\in\Sigma$ and thus $\mathcal{I}$ is a model of $\Sigma$. Since $\Sigma$ was arbitrary, then every finite subset $\Sigma$ of $\Gamma$ has a model. By the Compactness Theorem, there exists a model $\mathcal{M}$ of $\Gamma$. Hence $\mathcal{M}\models R(c_i)$ for all positive integers $i$.
+            \end{proof}
+        \item[9.]\hfill\par 
+            \begin{enumerate}
+                \item Assume that $h(x,y)$ is represented in $\mathbb{N}$ as $x+y$. Using $0^*$, $f$, and $h$, find a wff that represents $x<y$.
+                    \begin{solution}
+                        \varphi(x,y):= \exists n( n\neq 0\land h(x,f^{(n)}(0^*))=y)
+                    \end{solution}
+                \item Let $prn(x)$ be a wff that represents that $x$ is the $n$th prime. Find a wff that represents $y$ is greater than the $n$th prime.
+                    \begin{solution}
+                        $\gamma(y):=\varphi(prn(x), y)$.
+                    \end{solution}
+                \item Let $S$ be the relation defined by $(x,y)\in S$ iff $x<y$, and $x$ and $y$ are prime, and there are no primes between $x$ and $y$. Find a wff that represents $S$.
+                    \begin{solution}
+                        \varphi(x,y)\land pr(x)\land pr(y)\land\forall z(\varphi(x,z)\land\varphi(z,y)\rightarrow\sim pr(z))
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,64 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 220A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 220A}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 05/06/21 \\
+    { Instructor:}\ Dr. Martins \hspace{\fill} Assignment:
+    MT3 Notes \\ \hrule}
+
+    \begin{enumerate}
+        \item Let $\{A_n\}_{n\in\mathbb{N}}$ be a sequence of connected subspaces of $X$, such that $A_n\cap A_{n+1}\neq \varnothing$ for all $n\in\mathbb{N}$. Show that $\bigcup_{n=1}^{\infty}A_n$ is connected.
+            \begin{proof}
+                Suppose there exists disjoint sets $U, V$ such that $\bigcup_{n=1}^{\infty}A_n=U\cup V$. To show that $\bigcup_{n=1}^{\infty}A_n$ is connected, we must show that either $U$ or $V$ is empty. Since $A_1$ is a connected subspace of $\bigcup_{n=1}^{\infty}A_n$, then either $A_1\subset U$ or $A_1\subset V$. WLOG, we can assume that $A_1\subset U$. We then continue by induction. By the previous line, the statement holds for $n=1$. For the inductive step we assume that for some $n$, $A_n\subset U$ and consider the subspace $A_n\cup A_{n+1}$. Since $A_n\cap A_{n+1}\neq\varnothing$, then $A_n\cup A_{n+1}$ is a union of connected subspaces of $X$ which share a point in common, and thus by Theorem 23.3, $A_n\cup A_{n+1}$ is connected. Recall that $U$ and $V$ are disconnected and so it cannot be the case that $A_n\cup A_{n+1}\subset U$ and $A_n\cup A_{n+1}\subset V$, as the union is a connected subspace. Thus $A_n\cup A_{n+1}\subset U$ or $A_n\cup A_{n+1}\subset V$. Now note that since $A_n\subset U$, then $A_n\cap U\subset A_n\cup A_{n+1}$. Hence $A_n\cup A_{n+1}\subset U$. Therefore $A_{n+1}\subset U$ and this completes our inductive step. Thus $V=\varnothing$. 
+            \end{proof}
+        \item Show that if $Y$ is compact, then the projection $\pi_1:X\times Y\to X$ is a closed map.
+            \begin{proof}
+                Let $C\subset X\times Y$ be a closed set, we will show that $\pi_1(C)$ is closed by showing that $X-\pi_1(C)$ is open.
+            \end{proof}
+    \end{enumerate}
+\end{document}

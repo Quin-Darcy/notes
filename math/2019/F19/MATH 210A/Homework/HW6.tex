@@ -1,0 +1,172 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 10/16/19   \\
+{ \textbf{Instructor:}} \ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 6 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item Recall (p. 7 and hw 2) that if $\varphi$ is an action of $G$ on $S$, $s\in S$, and $t\in G(s)$, then $G_t=gG_sg^{-1}$. Assume that $S=G$, and the action is conjugacy.
+        \begin{enumerate}[label=(\alph*)]
+            \item Give an example to show that $G_a$ is not necessarily a normal subgroup of $G$. 
+                \begin{solution}
+                    Let $G=S_3$. Let $\sigma=(12)$. Then $G_{\sigma}=\{(1),(12)\}$. In order for $G_{\sigma}$ to be normal in $G$, it must be the case that for all $\gamma\in G_{\sigma}$, $\tau\circ\gamma\circ\tau^{-1}\in G_{\sigma}$, for all $\tau\in G$. Thus, let $\gamma=(12)$, then let $\tau=(13)$. It follows that $(13)(12)(13)=(23)$. However, $(23)\notin G_{\sigma}$. Thus, $G_{\sigma}$ is not normal in $G$.
+                \end{solution}
+                
+            \item Prove that if $a\in Z(G)$, then $G_a\triangleleft G$.
+                \begin{proof}
+                    Assume that $a\in Z(G)$. Then for all $g\in G$, $ag=ga$. Thus, for all $g\in G$, $gag^{-1}=a$. Now consider the stabilizer of $a$. We have that $G_a=\{g\in G\mid gag^{-1}=a\}$. However, since $a\in Z(G)$, then $G_a=G$. Since $G\triangleleft G$, then $G_a\triangleleft G$.
+                \end{proof}
+                
+            \item Give an example to show $G_a\triangleleft G$ does not imply that $a\in Z(G)$. 
+                \begin{solution}
+                    Let $G=S_3$ and let $\sigma=(123)$. Then $G_{\sigma}=\{(1),(123),(132)\}\neq G$. Thus, $(123)\notin Z(G)$.
+                \end{solution}
+        \end{enumerate}
+        
+        \item Assume that $p$ is prime and $o(G)=p^n$. Using the class equation, prove that $Z(G)\neq\{e\}$.
+            \begin{proof}
+                Consider the class equation
+                
+                \begin{equation*}
+                    \abs{G}=\abs{Z(G)}+\sum_{N(s)\neq G}\frac{\abs{G}}{\abs{N(s)}}.
+                \end{equation*}
+                
+                Since for each $N(s)$, we are stipulating that $N(s)\neq G$ and so $[G\colon N(s)]>1$. Moreover, since $p\mid\abs{G}$ and $p\mid[G\colon N(s)]$, then it follows that $p\mid\abs{Z(G)}$. Because $e\in Z(G)$, then $\abs{Z(G)}\geq 1$. Thus, $Z(G)$ has at least $p$ many elements. Therefore, $\abs{Z(G)}>1$. Hence, $Z(G)\neq\{e\}$.
+            \end{proof}
+            
+        \item Assume that $p$ is prime, and $o(G)=p^2$. Prove that $G$ has a normal subgroup of order $p$. 
+            \begin{proof}
+                By the first Sylow Theorem, $G$ contains a subgroup $H$ of order $p$. By Lagrange's Theorem, $[G\colon H]=\abs{G}/\abs{H}=p^2/p=p$. Since $p$ is the smallest prime factor of $o(G)$, then by the second result on Pg. 21, we have that $H\triangleleft G$.
+            \end{proof}
+            
+    \newpage
+            
+        \item Assume that $p$ is prime, and $o(G)=p^2$. Using the class equation, prove that $G$ is Abelian.
+            \begin{proof}
+                By problem 3 of Homework 2, we proved that $Z(G)\subseteq_g G$. Thus, by Lagrange's Theorem, $\abs{Z(G)}\mid p^2$. Thus, $\abs{Z(G)}\in\{1,p,p^2\}$. Since
+                
+                \begin{equation*}
+                    \abs{G}=\abs{Z(G)}+\sum_{N(s)\neq G}\frac{\abs{G}}{\abs{N(s)}}
+                \end{equation*}
+                
+                and since $N(s)\neq G$, then $[G\colon N(s)]>1$, for each $s\in G$. Thus, it follows that $p\mid[G\colon N(s)]$, thus $p$ divides the sum. So since $p$ divides $\abs{G}$ and $p$ divides $\sum_{N(s)\neq G}\frac{\abs{G}}{\abs{N(s)}}$, then $p\mid\abs{Z(G)}$. Thus, $\abs{Z(G)}\in\{p,p^2\}$.\par\hspace{4mm} Assume $\abs{Z(G)}=p$. Let $g\in G$ and $a\in Z(G)$, then $gag^{-1}\in Z(G)$ and thus, $Z(G)\triangleleft G$. By Lagrange's Theorem, $[G\colon Z(G)]=p$. Thus, the group $G/Z(G)$ has order $p$. Now let $a\in G$ such that $a\neq e$. Then consider the subgroup $\langle aZ(G)\rangle$ of $G/Z(G)$. Since $a\neq e$, then $\abs{\langle aZ(G)\rangle}>1$. Thus, $\abs{\langle aZ(G)\rangle}$ divides $p$ by Langrange's Theorem. Thus, $\abs{\langle aZ(G)\rangle}=p$.  Hence, $\abs{\langle aZ(G)\rangle}=\abs{G/Z(G)}$ and $\langle aZ(G)\rangle\subseteq G/Z(G)$. Thus, $\langle aZ(G)\rangle =G/Z(G)$. Therefore, $G/Z(G)$ is cyclic.\par\hspace{4mm} Now let $a$ denote the generator of $G/Z(G)$. Then for since the set of cosets of $Z(G)$ in $G$ partition $G$, it follows that for all $g,h\in G$, there exists $n,m\in\mathbb{N}$ such that $g=a^nx$ and $h=a^my$, for some $x,y\in Z(G)$. Thus, 
+                
+                \begin{equation*}
+                    \begin{split}
+                        gh&=(a^nx)(a^my) \\
+                          &= a^na^mxy \\
+                          &= a^{n+m}xy \\
+                          &= a^{m+n}xy \\
+                          &= a^ma^nxy \\
+                          &= a^ma^nyx \\
+                          &= a^mya^nx \\
+                          &= (a^my)(a^nx) \\
+                          &= hg.
+                    \end{split}
+                \end{equation*}
+                
+                Hence, for all $g,h\in G$, $gh=hg$. Thus, $Z(G)=G$ and $\abs{Z(G)}=p^2$. Therefore, $G$ is abelian.
+            \end{proof}
+            
+        \item Determine (with proof) the structure(s) of a group of order 15.
+            \begin{proof}
+                We have that $\abs{G}=15=3\times 5$. Thus, by Sylow III, it follows that $n_3\equiv 1(\text{mod }3)$ and $n_3\mid 15$. Similarly, $n_5\equiv 1(\text{mod }5)$ and $n_5\mid 15$. Since 15 has factors $1, 3, 5,$ and 15, then amongst these numbers, those which satisfy $n_3\equiv 1(\text{mod }3)$ and $n_3\mid 15$ is only the number 1. And those which satisfy $n_5\equiv 1(\text{mod }5)$ and $n_5\mid 15$ is only the number 1. Thus, $P_3\triangleleft G$ and $P_5\triangleleft G$. Moreover, since both $P_3$ and $P_5$ have orders less than or equal to 5, then by Question 7 on Homework 1, both $P_3$ and $P_5$ are Abelian. Thus, $P_3\cong\mathbb{Z}_3$ and $P_5\cong\mathbb{Z}_5$. Hence, $G\cong\mathbb{Z}_3\times\mathbb{Z}_5\cong \mathbb{Z}_{15}$. Hence, $G$ is cyclic.
+            \end{proof}
+            
+        \item Assume that $o(G)=5^27^2$. Determine the possibilities for $n_5$ and $n_7$, and determine what can be concluded in each case about the Sylow 5-subgroup(s) and the Sylow 7-subgroup(s), and prove that $G$ is Abelian.
+            \begin{proof}
+                By Sylow III, we have that $n_5\equiv 1(\text{mod }5)$ and $n_5\mid 875$. Similarly, $n_7\equiv 1(\text{mod }7)$ and $n_7\mid 875$. The number 875 has the following factors: 1, 5, 7, 25, 35, 49, and 875. Thus, $n_5=1$ or $n_5=49$, and $n_7=1$. Thus, $P_7\triangleleft G$. If $n_5=1$, then $P_5\triangleleft G$ and $P_5P_7\cong P_5\times P_7\cong\mathbb{Z}_5\times\mathbb{Z}_7\cong\mathbb{Z}_{35}$. Additionally, since the orders of $P_7$ and $P_5$ are prime, then they are cyclic. Now let $P_5=\langle a\rangle$ and let $P_7=\langle b\rangle$. Note that $\text{Aut}(P_7)=\{\varphi_1,\varphi_2,\varphi_3,\varphi_4, \varphi_5,\varphi_6\}$. Now let $\theta\colon P_5\rightarrow\text{Aut}(P_7)$ be a homomorphsim defined by $\theta(g)=\varphi_k$. If $g=e$, then $\theta(e)=\varphi_1$. If $g=a$, then $o(\theta(a))\mid 5$. Thus, $o(\theta(b))=1$ or $o(\theta(b))=5$. Hence, $\varphi_{k^5}=\varphi_1$. However, only $\varphi_1$ satisfies this condition. Note that since $P_7\triangleleft G$, then $aba^{-1}\in\langle b\rangle$. Thus, $\varphi_1$ gives us $aba^{-1}=b$. And so $ab=ba$ and $G$ is therefore Abelian. Additionally, $P_5\cong\mathbb{Z}_5$ and $P_7\cong\mathbb{Z}_7$.
+            \end{proof}
+            
+        \item Assume that $p$ is prime, $p\neq 2$. Determine, with explanation, all groups of order $2p$.
+            \begin{proof}
+                By Sylow III, we have that $n_2\equiv 1(\text{mod }2)$ and $n_2\mid 2p$, and $n_p\equiv 1(\text{mod }p)$ and $n_p\mid 2p$. Thus, $n_2=1$ or $n_2=p$. Similarly, $n_p=1$. Thus, $P_p\triangleleft G$. Since both $P_2$ and $P_p$ are of prime order, then they are cyclic. Let $a,b\in G$ with $o(a)=2$ and $o(b)=p$. Let $P_2=\langle a\rangle$ and $P_p=\langle b\rangle$. It follows that since $P_2\cap P_p=\{e\}$, then $G=P_2P_p$. We have that $\text{Aut}(P_p)=\{\varphi_k\colon 1\leq k\leq p-1\}$, where $\varphi_k(x)=x^k$. Assume that $\theta\colon P_2\rightarrow\text{Aut}(P_p)$ is a homomorphism, where $\theta(g)=\varphi_k$.\par\hspace{4mm} Each $\varphi_k$ corresponds to $aba^{-1}=b^k$ since $P_p=\langle b\rangle\triangleleft G$, and thus $aba^{-1}\in\langle b\rangle$. Note that $o(\theta(a))\mid 2$. Thus, $o(\theta(a))=1$ or $o(\theta(a))=2$. If $o(\theta(a))=1$, then $\varphi_k=\varphi_1$ and thus $aba^{-1}=b$. Thus, $ab=ba$ and hence $G\cong \mathbb{Z}_{2p}$  In the case that $o(\theta(a))=2$, then we need $(\varphi_k)^2=\varphi_1$, where $\varphi_1$ is the identity in $\text{Aut}(P_p)$. Thus, we need $\varphi_{k^2}=\varphi_1$. Hence, for each $1\leq k\leq p-1$, we are looking for those $k$ in which $k^2\equiv 1(\text{mod }p)$. By the results on Pg. 23, there are $(2,p-1)$ solutions or no solutions. Since $2\mid p-1$, there are $2$ solutions. We can see that $k=\pm 1$. Thus, there are two groups of order $2p$, namely $\mathbb{Z}_{pq}$ and a nonabelian group of order $pq$ whose structure is defined by $a^2=b^p=e$ and $ab=b^{-1}a$. The latter group defined the structure of $D_{p}$.  
+            \end{proof}
+    \end{enumerate}
+
+\end{document}

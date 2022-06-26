@@ -1,0 +1,417 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 4/15/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 9 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item[5.] Determine, with explanation, if it is always true that if $E/F$ is finite, and $E/L/F$, then $\abs{G(E/F)}=\abs{G(E/L)}\abs{G(L/F)}$.
+            \begin{solution}
+                It is not always true. Let $E=\mathbb{Q}(i,\sqrt[4]{2})$, $L=\mathbb{Q}(\sqrt[4]{2})$, and $F=\mathbb{Q}$. Then $E$ is the splitting field for the separable polynomial $x^4-2\in F[x]$ and so $E/F$ is Galois. Thus,
+                    \begin{equation*}
+                        \abs{G(E/F)}=[E\colon F]=[E\colon L][L\colon F].
+                    \end{equation*}
+                Now consider $E/L$. Since $E$ is the splitting field of the separable polynomial $x^2+1$ over $L$, then $E/L$ is Galois and so $\abs{G(E/L)}=[E\colon L]$. However, $L$ contains a root of $x^4-2\in F[x]$, but $x^4-2$ does not split over $L$ and thus $L/F$ is not a normal extension. Hence, $L/F$ is not Galois and so $\abs{G(L/F)}<[L\colon F]$. Thus, 
+                    \begin{equation*}
+                        \abs{G(E/F)}>\abs{G(E/L)}\abs{G(L/F)}.
+                    \end{equation*}
+            \end{solution}
+        \item[6.] Recall from (1) of HW 4 that $\mathbb{Q}(i,\sqrt{2})=\mathbb{Q}(\sqrt{i})$.
+            \begin{enumerate}[label=(\alph*)]
+                \item Let $\zeta$ be a primitive $8^{\text{th}}$ root of unity. Explain why $\zeta\in\mathbb{Q}(i,\sqrt[8]{2})$ and thus why it follows that $\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}$ is a Galois extension.
+                    \begin{solution}
+                        Since $\zeta$ is an $8^{\text{th}}$ root of unity, then using De Moivre's theorem, we can write,
+                            \begin{equation*}
+                                \zeta=e^{2\pi i/8}=e^{\pi i/4}=\frac{\sqrt{2}}{2}+i\frac{\sqrt{2}}{2}=\frac{\sqrt{2}}{2}(1+i).
+                            \end{equation*}
+                        Now observe that $\sqrt[8]{2}\in\mathbb{Q}(i,\sqrt[8]{2})$ and $(\sqrt[8]{2})^{16}=\sqrt{2}\in\mathbb{Q}(i,\sqrt[8]{2})$. It follows that $\frac{\sqrt{2}}{2}\in\mathbb{Q}(i,\sqrt[8]{2})$. Finally, since $i$ is also an element, then $1+i$ is an element and so $\frac{\sqrt{2}}{2}(1+i)=\zeta\in\mathbb{Q}(i,\sqrt[8]{2})$. Because $\zeta$ is primitive, then $x^8-1$ splits completely in $\mathbb{Q}(i,\sqrt[8]{2})$. Finally, we can factor
+                            \begin{equation*}
+                                x^8-2=(x-\sqrt[8]{2})(x+\sqrt[8]{2})(x-\zeta^2\sqrt[8]{2})(x+\zeta^2\sqrt[8]{2})(x^4+\sqrt{2}).
+                            \end{equation*}
+                        Letting $u=x^2$, then $x^4+\sqrt{2}=u^2+\sqrt{2}$. Using the quadratic formula, we find that $u=\pm i\sqrt[4]{2}$ and so $x^4-\sqrt{2}=(x^2-i\sqrt[4]{2})(x^2+i\sqrt[4]{2})$. Applying the quadratic formula on each of these factors we obtain
+                            \begin{equation*}
+                                x^4+\sqrt{2}=(x-\zeta\sqrt[8]{2})(x+\zeta\sqrt[8]{2})(x-\zeta^3\sqrt[8]{2})(x+\zeta^3\sqrt[8]{2}).
+                            \end{equation*}
+                        Hence, the roots of $x^8-2$ are $\pm\sqrt[8]{2},\pm\zeta\sqrt[8]{2},\pm\zeta^2\sqrt[8]{2},\pm\zeta^3\sqrt[3]{2}$, all of which are distinct and so $x^8-2$ is separable and splits in $\mathbb{Q}(i,\sqrt[8]{2})$. Now note that since $\zeta\in\mathbb{Q}(i,\sqrt[8]{2})$, then we get that $\mathbb{Q}(\zeta,\sqrt[8]{2})\subseteq\mathbb{Q}(i,\sqrt[8]{2})$. Similarly, since $\zeta^2=i$ it follows that $\mathbb{Q}(i,\sqrt[8]{2})\subseteq\mathbb{Q}(\zeta,\sqrt[8]{2})$ and so $\mathbb{Q}(i,\sqrt[8]{2})=\mathbb{Q}(\zeta,\sqrt[8]{2})$ and the former is the splitting field of $x^8-2$. Therefore, $\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}$ is Galois.
+                    \end{solution}\newpage
+                \item Explain why $o\big(\text{Aut}(\mathbb{Q}(i,\sqrt[8]{2})\big)=16$. Define $\alpha,\beta\in\text{Aut}\big(\mathbb{Q}(i,\sqrt[8]{2})\big)$ by $\alpha(\sqrt[8]{2})=\zeta\sqrt[8]{2}$, $\alpha(i)=i$; $\beta(\sqrt[8]{2})=\sqrt[8]{2}$, $\beta(i)=-i$. Determine $\alpha(\zeta)$ and $\beta(\zeta)$. Then determine $\alpha^2,\dots,\alpha^7$ and $\beta\alpha,\dots,\beta\alpha^7$. Explain why $\text{Aut}(\mathbb{Q}(i,\sqrt[8]{2})=\{e,\alpha,\dots,\alpha^7,\beta,\dots,\beta\alpha^7\}$.
+                    \begin{solution}
+                        Given any $\sigma\in\text{Aut}(\mathbb{Q}(i,\sqrt[8]{2})$, $\sigma$ must act on the roots of $x^8-2$ by permuting them and $\sigma$ must also permute the roots of $x^2+1$. Thus, there are $8\cdot 2=16$ possible automorphisms and so $o\big(\text{Aut}(\mathbb{Q}(i,\sqrt[8]{2})\big)=16$.\par\hspace{4mm} Using the fact that $\alpha(\sqrt[8]{2})=\zeta\sqrt[8]{2}$ and $\alpha(i)=i$, then it follows that
+                            \begin{equation*}
+                                \alpha(\sqrt{2})=\alpha\big((\sqrt[8]{2})^4\big)=\big(\alpha(\sqrt[8]{2})\big)^4=\big(\zeta\sqrt[8]{2})^4=\zeta^4(\sqrt[4]{2})^4=(-1)\sqrt{2}=-\sqrt{2}.
+                            \end{equation*}
+                        Thus, 
+                            \begin{equation*}
+                                \alpha(\zeta)=\alpha\bigg(\frac{\sqrt{2}}{2}(1+i)\bigg)=\alpha\bigg(\frac{\sqrt{2}}{2}\bigg)\alpha(1+i)=-\frac{\sqrt{2}}{2}(1+i)=-\zeta.
+                            \end{equation*}
+                        Hence, $\alpha(\zeta)=\zeta^5$. Now we can look at 
+                            \begin{equation*}
+                                \beta(\sqrt{2})=\beta\big((\sqrt[8]{2})^4\big)=\big(\beta(\sqrt[8]{2})\big)^4=\big(\sqrt[8]{2})^4=\sqrt{2}.
+                            \end{equation*}
+                        Combining this with the fact that $\beta(i)=-i$, then
+                            \begin{equation*}
+                                \beta(\zeta)=\beta\bigg(\frac{\sqrt{2}}{2}(1+i)\bigg)=\beta\bigg(\frac{\sqrt{2}}{2}\bigg)\beta(1+i)=\frac{\sqrt{2}}{2}(1-i)=-\zeta^3.
+                            \end{equation*}
+                        To determine $\alpha^2,\dots,\alpha^7,\beta,\dots,\beta\alpha^7$, we look to the following table:
+                            \begin{table}[htp]
+                                \resizebox{\textwidth}{!}{%
+                                    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+                                        \hline
+                                        &
+                                        $id$ & $\alpha$ & $\alpha^2$ & $\alpha^3$ & $\alpha^4$ & $\alpha^5$ &
+                                        $\alpha^6$ & $\alpha^7$ & $\beta$ & $\beta\alpha$ & $\beta\alpha^2$ &
+                                        $\beta\alpha^3$ & $\beta\alpha^4$ & $\beta\alpha^5$ & $\beta\alpha^6$ &
+                                        $\beta\alpha^7$ \\ \hline
+                                        $i$ &$i$ &$i$ &$i$ &$i$ &$i$ &$i$ &$i$ &$i$ &$-i$ &$-i$ &$-i$ &$-i$ &$-i$ &$-i$ & $-i$ &$-i$ \\ \hline$\sqrt[8]{2}$ &$\sqrt[8]{2}$ &$\zeta\sqrt[8]{2}$ &$-\zeta^2\sqrt[8]{2}$ &$-\zeta^3\sqrt[8]{2}$ &$-\sqrt[8]{2}$ &$-\zeta\sqrt[8]{2}$ &$\zeta^2\sqrt[8]{2}$ &$\zeta^3\sqrt[8]{2}$ &$\sqrt[8]{2}$ &$-\zeta^3\sqrt[8]{2}$ &$\zeta^2\sqrt[8]{2}$ &$\zeta\sqrt[8]{2}$ &$-\sqrt[8]{2}$ &$\zeta^3\sqrt[8]{2}$ &$-\zeta^2\sqrt[8]{2}$ &$-\zeta\sqrt[8]{2}$ \\ \hline$\zeta$ &$\zeta$ &$-\zeta$ &$\zeta$ &$-\zeta$ &$\zeta$ &$-\zeta$ &$\zeta$ &$-\zeta$ &$-\zeta^3$ &$\zeta^3$ &$-\zeta^3$ &$-\zeta^3$ &$\zeta^3$ &$-\zeta^3$ &$\zeta^3$ &$-\zeta^3$ \\ \hline
+                                    \end{tabular}%
+                                }
+                            \end{table}
+                        Since both $\alpha$ and $\beta$ are automorphisms, then each $\alpha^2,\dots,\alpha^7$ and $\beta\alpha,\dots,\beta\alpha^7$ are automorphisms. We can see by the table that each of these maps are distinct and there are 16 of them. Thus $\text{Aut}(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}))=\{id,\alpha,\dots,\alpha^7,\beta,\beta\alpha,\dots,\beta\alpha^7\}$.
+                    \end{solution}
+                \item Find the elements of $G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(i))$, $G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(\sqrt{2}))$, $G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(i\sqrt{2}))$, and in each case determine what well known group the Galois group is isomorphic to.
+                    \begin{solution}
+                        Using the table in part (b), we get 
+                            \begin{equation*}
+                                \begin{split}
+                                    &G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(i))=\{id,\alpha,\alpha^2,\alpha^3,\alpha^4,\alpha^5,\alpha^6,\alpha^7\}\cong\mathbb{Z}_8 \\
+                                    &G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(\sqrt{2}))=\{id,\beta,\beta\alpha^2,\beta\alpha^4,\beta\alpha^6\}\cong\mathbb{Z}_5 \\
+                                    &G(\mathbb{Q}(i,\sqrt[8]{2})/\mathbb{Q}(i,\sqrt{2}))=\{id\}\cong\{e\}.
+                                \end{split}
+                            \end{equation*}
+                    \end{solution}
+            \end{enumerate}
+        \item[7.] On HW8 we found $G(E/F)$ for $E=\mathbb{Q}(\sqrt[4]{5},i)$, $F=\mathbb{Q}$. Construct the lattice of subgroups of $G(E/F)$, and the corresponding lattice of subfields of $E$ over $F$, Identify all the normal extensions in the lattice of subfields.
+            \begin{solution}
+                To start, lets recall that a basis for $\mathbb{Q}(\sqrt[4]{5},i)$ over $\mathbb{Q}$ is $\{1,\sqrt[4]{5},\sqrt{5},\sqrt[4]{5^3},i,i\sqrt[4]{5},i\sqrt{5},i\sqrt[4]{5^3}\}$. Next, from HW 8 we found that $G(\mathbb{Q}(\sqrt[4]{5},i)/\mathbb{Q})=\{\varphi_0,\varphi_1,\varphi_2,\varphi_3,\varphi_4,\varphi_5,\varphi_6,\varphi_7\}$, where\newpage
+                
+                    \begin{align*}
+                        &\varphi_0:=
+                            \begin{cases}
+                                a\in \mathbb{Q}\mapsto a \\
+                                \sqrt[4]{5}\mapsto\sqrt[4]{5}\\
+                                i\mapsto i
+                            \end{cases} 
+                            && 
+                        \varphi_1:=
+                            \begin{cases} 
+                                a\in \mathbb{Q}\mapsto a \\
+                                \sqrt[4]{5}\mapsto -\sqrt[4]{5}\\
+                                i\mapsto i
+                            \end{cases} 
+                            && 
+                        \varphi_2:=
+                            \begin{cases} 
+                                a\in \mathbb{Q}\mapsto a \\
+                                \sqrt[4]{5}\mapsto i\sqrt[4]{5}\\
+                                i\mapsto i
+                            \end{cases} 
+                            &&
+                        \varphi_3:=
+                            \begin{cases} 
+                                a\in \mathbb{Q}\mapsto a \\
+                                \sqrt[4]{5}\mapsto -i\sqrt[4]{5}\\
+                                i\mapsto i
+                            \end{cases} \\ 
+                        &\varphi_4:=
+                            \begin{cases} 
+                                a\in \mathbb{Q}\mapsto a \\
+                                \sqrt[4]{5}\mapsto\sqrt[4]{5}\\
+                                i\mapsto -i
+                            \end{cases} 
+                            && 
+                        \varphi_5 :=
+                            \begin{cases} 
+                                a\in \mathbb{Q}\mapsto a \\
+                                \sqrt[4]{5}\mapsto-\sqrt[4]{5}\\
+                                i\mapsto -i
+                            \end{cases}
+                            &&
+                        \varphi_6 :=
+                            \begin{cases}
+                                a\in\mathbb{Q}\rightarrow a \\
+                                \sqrt[4]{5}\mapsto i\sqrt[4]{5} \\
+                                i\mapsto -i
+                            \end{cases}
+                            &&
+                        \varphi_7 :=
+                            \begin{cases}
+                                a\in\mathbb{Q}\mapsto a \\
+                                \sqrt[4]{5}\mapsto -i\sqrt[4]{5} \\
+                                i\mapsto -i.
+                            \end{cases}
+                    \end{align*}
+                From this, we found a correspondence between the automorphisms and the following permutations:
+                    \begin{align*}
+                        &\varphi_0 := (1) && \varphi_1 := (13)(24) && \varphi_2 := (1234) && \varphi_3 := (1432) \\ &\varphi_4 := (24) && \varphi_5 := (13) && \varphi_6 := (12)(34) && \varphi_7 := (14)(23).
+                    \end{align*}
+                Additionally, from the Cayley table we found that $G(\mathbb{Q}(\sqrt[4]{5},i)/\mathbb{Q})\cong D_8$.\par\hspace{4mm} Now we wish to find the fixed field of each subgroup generated by each automorphism. To do this, we begin by constructing a table which indicates where each automorphism sends each basis element.
+                    \begin{table}[htp]
+                        \centering
+                        \begin{tabular}{|
+                            >{\columncolor[HTML]{C0C0C0}}c |
+                            >{\columncolor[HTML]{96FFFB}}c |c|c|c|c|c|c|c|}
+                            \hline
+                            & \cellcolor[HTML]{C0C0C0}$1$ & \cellcolor[HTML]{C0C0C0}$\sqrt[4]{5}$ & \cellcolor[HTML]{C0C0C0}$\sqrt{5}$ & \cellcolor[HTML]{C0C0C0}$\sqrt[4]{5^3}$ & \cellcolor[HTML]{C0C0C0}$i$ & \cellcolor[HTML]{C0C0C0}$i\sqrt[4]{5}$ & \cellcolor[HTML]{C0C0C0}$i\sqrt{5}$ & \cellcolor[HTML]{C0C0C0}$i\sqrt[4]{5^3}$ \\ \hline
+                            $\varphi_0$ & $1$ & \cellcolor[HTML]{96FFFB}$\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt[4]{5^3}$ & \cellcolor[HTML]{96FFFB}$i$ & \cellcolor[HTML]{96FFFB}$i\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt[4]{5^3}$ \\ \hline
+                            $\varphi_1$ & $1$ & \cellcolor[HTML]{FFCCC9}$-\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt{5}$ & \cellcolor[HTML]{FFCCC9}$-\sqrt[4]{5^3}$ & \cellcolor[HTML]{96FFFB}$i$ & \cellcolor[HTML]{FFCCC9}$-i\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt{5}$ & \cellcolor[HTML]{FFCCC9}$-i\sqrt[4]{5^3}$ \\ \hline
+                            $\varphi_2$ & $1$ & $i\sqrt[4]{5}$ & \cellcolor[HTML]{FFCCC9}$-\sqrt{5}$ & $-i\sqrt[4]{5^3}$ & \cellcolor[HTML]{96FFFB}$i$ & $-\sqrt[4]{5}$ & \cellcolor[HTML]{FFCCC9}$-i\sqrt{5}$ & $\sqrt[4]{5^3}$ \\ \hline
+                            $\varphi_3$ & $1$ & $-i\sqrt[4]{5}$ & \cellcolor[HTML]{FFCCC9}$-\sqrt{5}$ & $i\sqrt[4]{5^3}$ & \cellcolor[HTML]{96FFFB}$i$ & $\sqrt[4]{5}$ & \cellcolor[HTML]{FFCCC9}$-i\sqrt{5}$ & $-\sqrt[4]{5^3}$ \\ \hline
+                            $\varphi_4$ & $1$ & \cellcolor[HTML]{96FFFB}$\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt[4]{5^3}$ & \cellcolor[HTML]{FFCCC9}$-i$ & \cellcolor[HTML]{FFCCC9}$-i\sqrt[4]{5}$ & \cellcolor[HTML]{FFCCC9}$-i\sqrt{5}$ & \cellcolor[HTML]{FFCCC9}$-i\sqrt[4]{5^3}$ \\ \hline
+                            $\varphi_5$ & $1$ & \cellcolor[HTML]{FFCCC9}$-\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$\sqrt{5}$ & \cellcolor[HTML]{FFCCC9}$-\sqrt[4]{5^3}$ & \cellcolor[HTML]{FFCCC9}$-i$ & \cellcolor[HTML]{96FFFB}$i\sqrt[4]{5}$ & \cellcolor[HTML]{FFCCC9}$-i\sqrt{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt[4]{5^3}$ \\ \hline
+                            $\varphi_6$ & $1$ & $i\sqrt[4]{5}$ & \cellcolor[HTML]{FFCCC9}$-\sqrt{5}$ & $-i\sqrt[4]{5^3}$ & \cellcolor[HTML]{FFCCC9}$-i$ & $\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt{5}$ & $-\sqrt[4]{5^3}$ \\ \hline
+                            $\varphi_7$ & $1$ & $-i\sqrt[4]{5}$ & \cellcolor[HTML]{FFCCC9}$-\sqrt{5}$ & $i\sqrt[4]{5^3}$ & \cellcolor[HTML]{FFCCC9}$-i$ & $-\sqrt[4]{5}$ & \cellcolor[HTML]{96FFFB}$i\sqrt{5}$ & $\sqrt[4]{5^3}$ \\ \hline
+                        \end{tabular}
+                    \end{table}\par
+                Here the blue cells indicate the unchanged basis elements and the pink cells indicate a sign flip.\par\hspace{4mm} Now for each automorphism, $\varphi_i$, we want to determine when is $\varphi_i(x)=x$. To answer this we need to solve
+                    \begin{equation*}
+                        \begin{split}
+                            \varphi_i&(a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}) \\
+                            &=a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}
+                        \end{split}
+                    \end{equation*}
+                for each $i$. This gives us the following equations:\newpage
+                    \begin{enumerate}[label=\arabic*.]
+                        \item\hspace{3mm} $a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\par
+                        $=a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\vspace{2mm}
+                        \item\hspace{3mm} $a_0-a_1\sqrt[4]{5}+a_2\sqrt{5}-a_3\sqrt[4]{5^3}+a_4i-a_5i\sqrt[4]{5}+a_6i\sqrt{5}-a_7i\sqrt[4]{5^3}$\par $=a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\vspace{2mm}
+                        \item\hspace{3mm} $a_0+a_1i\sqrt[4]{5}-a_2\sqrt{5}-a_3i\sqrt[4]{5^3}+a_4i-a_5\sqrt[4]{5}-a_6i\sqrt{5}+a_7\sqrt[4]{5^3}$\par $=a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\vspace{2mm}
+                        \item\hspace{3mm} $a_0-a_1i\sqrt[4]{5}-a_2\sqrt{5}+a_3i\sqrt[4]{5^3}+a_4i+a_5\sqrt[4]{5}-a_6i\sqrt{5}-a_7\sqrt[4]{5^3}$\par
+                        $=a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\vspace{2mm}
+                        \item\hspace{3mm} $a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}-a_4i-a_5i\sqrt[4]{5}-a_6i\sqrt{5}-a_7i\sqrt[4]{5^3}$\par 
+                        $=a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\vspace{2mm}
+                        \item\hspace{3mm} $a_0-a_1\sqrt[4]{5}+a_2\sqrt{5}-a_3\sqrt[4]{5^3}-a_4i+a_5i\sqrt[4]{5}-a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\par 
+                        $=a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\vspace{2mm}
+                        \item\hspace{3mm} $a_0+a_1i\sqrt[4]{5}-a_2\sqrt{5}-a_3i\sqrt[4]{5^3}-a_4i+a_5\sqrt[4]{5}+a_6i\sqrt{5}-a_7\sqrt[4]{5^3}$\par 
+                        $=a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\vspace{2mm}
+                        \item\hspace{3mm} $a_0-a_1i\sqrt[4]{5}-a_2\sqrt{5}+a_3i\sqrt[4]{5^3}-a_4i-a_5\sqrt[4]{5}+a_6i\sqrt{5}+a_7\sqrt[4]{5^3}$\par
+                        $=a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}+a_4i+a_5i\sqrt[4]{5}+a_6i\sqrt{5}+a_7i\sqrt[4]{5^3}$\vspace{2mm}
+                    \end{enumerate}
+                Solving for these equations we get that
+                    \begin{enumerate}[label=\arabic*.]
+                        \item Each basis element was fixed and so 
+                            \begin{equation*}
+                                F_{\langle\varphi_0\rangle}=\mathbb{Q}(\sqrt[4]{5},i).
+                            \end{equation*}
+                        \item $a_1=0$, $a_3=0$, $a_5=0$, $a_7=0$. Thus, 
+                            \begin{equation*}
+                                F_{\langle\varphi_1\rangle}=\{a_0+a_2\sqrt{5}+a_4i+a_6i\sqrt{5}\mid a_i\in\mathbb{Q}\}.
+                            \end{equation*}
+                        \item $a_1=a_5$, $a_2=0$, $a_3=-a_7$, $a_6=0$. Thus,
+                            \begin{equation*}
+                                F_{\langle\varphi_2\rangle}=\{a_0+a_1(\sqrt[4]{5}+i\sqrt[4]{5})+a_3(\sqrt[4]{5^3}-i\sqrt[4]{5^3})+a_4i\mid a_i\in\mathbb{Q}\}.
+                            \end{equation*}
+                        \item $a_1=-a_5$, $a_2=0$, $a_3=a_7$, $a_6=0$. Thus,
+                            \begin{equation*}
+                                F_{\langle\varphi_3\rangle}=\{a_0+a_1(\sqrt[4]{5}-i\sqrt[4]{5})+a_3(\sqrt[4]{5^3}+i\sqrt[4]{5^3})+a_4i\mid a_i\in\mathbb{Q}\}.
+                            \end{equation*}
+                        \item $a_4=0$, $a_5=0$, $a_6=0$, $a_7=0$. Thus, 
+                            \begin{equation*}
+                                F_{\langle\varphi_4\rangle}=\{a_0+a_1\sqrt[4]{5}+a_2\sqrt{5}+a_3\sqrt[4]{5^3}\mid a_i\in\mathbb{Q}\}.
+                            \end{equation*}
+                        \item $a_1=0$, $a_3=0$, $a_4=0$, $a_6=0$. Thus, 
+                            \begin{equation*}
+                                F_{\langle\varphi_5\rangle}=\{a_0+a_2\sqrt{5}+a_5i\sqrt[4]{5}+a_7i\sqrt[4]{5^3}\mid a_i\in\mathbb{Q}\}.
+                            \end{equation*}
+                        \item $a_1=a_5$, $a_2=0$, $a_3=-a_7$, $a_4=0$. Thus,
+                            \begin{equation*}
+                                F_{\langle\varphi_6\rangle}=\{a_0+a_1(\sqrt[4]{5}+i\sqrt[4]{5})+a_3(\sqrt[4]{5^3}-i\sqrt[4]{5^3})+a_6i\sqrt{5}\mid a_i\in\mathbb{Q}\}.
+                            \end{equation*}
+                        \item $a_1=-a_5$, $a_2=0$, $a_3=a_7$, $a_4=0$. Thus,
+                            \begin{equation*}
+                                F_{\langle\varphi_7\rangle}=\{a_0+a_1(\sqrt[4]{5}-i\sqrt[4]{5})+a_3(\sqrt[4]{5^3}+i\sqrt[4]{5^3})+a_6i\sqrt{5}\mid a_i\in\mathbb{Q}\}.
+                            \end{equation*}
+                    \end{enumerate}\newpage
+                We will now simplify the above fixed fields. 
+                    \begin{enumerate}[label=\arabic*.]
+                        \item $F_{\langle\varphi_0\rangle}=\mathbb{Q}(\sqrt[4]{5},i)$.
+                        \item $F_{\langle\varphi_1\rangle}=\mathbb{Q}(\sqrt{5},i)$.
+                        \item $F_{\langle\varphi_2\rangle}=\mathbb{Q}(\sqrt[4]{5}+i\sqrt[4]{5})$
+                        \item $F_{\langle\varphi_3\rangle}=\mathbb{Q}(\sqrt[4]{5}-i\sqrt[4]{5})$
+                        \item $F_{\langle\varphi_4\rangle}=\mathbb{Q}(\sqrt[4]{5})$.
+                        \item $F_{\langle\varphi_5\rangle}=\mathbb{Q}(i\sqrt[4]{5})$.
+                        \item $F_{\langle\varphi_6\rangle}=\mathbb{Q}(\sqrt[4]{5}+i\sqrt[4]{5})$.
+                        \item $F_{\langle\varphi_7\rangle}=\mathbb{Q}(\sqrt[4]{5}-i\sqrt[4]{5})$.
+                    \end{enumerate}
+                We can see that there are only 6 distinct fixed fields listed here. We know that there should be as many subfields as there are subgroups of $D_8$, of which there are 10. Recall that $D_8$ can be generated by two elements and so consider the two following automorphisms:
+                    \begin{equation*}
+                        \varphi_2:=(1234)\quad\text{and}\quad\varphi_4:=(24).
+                    \end{equation*}
+                We claim that these two automorphisms generate the entire Galois group. First note,
+                    \begin{equation*}
+                        \begin{split}
+                            \langle\varphi_2\rangle&:=\{\varphi_0,\varphi_1,\varphi_2,\varphi_3\} \\
+                            \langle \varphi_4\rangle&:=\{\varphi_0,\varphi_4\} \\
+                            \langle\varphi_2^2\rangle&:=\{\varphi_0,\varphi_1\} \\
+                            \langle\varphi_2^2,\varphi_4\rangle&:=\{\varphi_0,\varphi_1,\varphi_4,\varphi_5\} \\
+                            \langle\varphi_2\varphi_4\rangle&:=\{\varphi_0,\varphi_6\} \\  
+                            \langle\varphi_2^2,\varphi_2\varphi_4\rangle&:=\{\varphi_0,\varphi_1,\varphi_6,\varphi_7\} \\
+                            \langle\varphi_2^2\varphi_4\rangle&:=\{\varphi_0,\varphi_5\} \\
+                            \langle\varphi_2^3\varphi_4\rangle&:=\{\varphi_0,\varphi_7\}
+                        \end{split}
+                    \end{equation*}
+                Performing similar calculations as above, we find that 
+                    \begin{enumerate}[label=\arabic*.]
+                        \item $F_{\langle\varphi_2\rangle}=\mathbb{Q}(i)$.
+                        \item $F_{\langle\varphi_4\rangle}=\mathbb{Q}(\sqrt[4]{5})$
+                        \item $F_{\langle\varphi_2^2\rangle}=\mathbb{Q}(i,\sqrt{5})$
+                        \item $F_{\langle\varphi_2^2,\varphi_4\rangle}=\mathbb{Q}(\sqrt{5})$
+                        \item $F_{\langle\varphi_2\varphi_4\rangle}=\mathbb{Q}(\sqrt[4]{5}+i\sqrt[4]{5})$
+                        \item $F_{\langle\varphi_2^2,\varphi_2\varphi_4\rangle}=\mathbb{Q}(i\sqrt{5})$
+                        \item $F_{\langle\varphi_2^2\varphi_4\rangle}=\mathbb{Q}(i\sqrt[4]{5})$
+                        \item $F_{\langle\varphi_2^3\varphi_4\rangle}=\mathbb{Q}(\sqrt[4]{5}-i\sqrt[4]{5})$.
+                    \end{enumerate}
+                Finally, given the subgroup relations that are clear from the above list, we can construct the subgroup and subfield lattice. 
+                    \newpage
+                    \begin{center}
+                        \begin{tikzpicture}[node distance=2.6cm]
+                            \node (Q) {$\mathbb{Q}$};
+                            \node (Qi) [above of=Q] {$\mathbb{Q}(i)$};
+                            \node (Q5) [left of=Qi] {$\mathbb{Q}(\sqrt{5})$};
+                            \node (Qi5) [right of=Qi] {$\mathbb{Q}(i\sqrt{5})$};
+                            \node (Qia5) [above of=Qi] {$\mathbb{Q}(i,\sqrt{5})$};
+                            \node (Qi45) [left of=Qia5] {$\mathbb{Q}(i\sqrt[4]{5})$};
+                            \node (Q45)  [left of=Qi45] {$\mathbb{Q}(\sqrt[4]{5})$};
+                            \node (Q1pi45) [right of=Qia5] {$\mathbb{Q}((1+i)\sqrt[4]{5})$};
+                            \node (Q1mi45) [right of=Q1pi45] {$\mathbb{Q}((1-i)\sqrt[4]{5})$};
+                            \node (Qia45) [above of=Qia5] {$\mathbb{Q}(i,\sqrt[4]{5})$};
+                            \draw (Q) -- (Qi);
+                            \draw (Q) -- (Q5);
+                            \draw (Q) -- (Qi5);
+                            \draw (Q5) -- (Q45);
+                            \draw (Q5) -- (Qi45);
+                            \draw (Q5) -- (Qia5);
+                            \draw (Qi) -- (Qia5);
+                            \draw (Qi5) -- (Qia5);
+                            \draw (Qi5) -- (Q1pi45);
+                            \draw (Qi5) -- (Q1mi45);
+                            \draw (Q45) -- (Qia45);
+                            \draw (Qi45) -- (Qia45);
+                            \draw (Qia5) -- (Qia45);
+                            \draw (Q1pi45) -- (Qia45);
+                            \draw (Q1mi45) -- (Qia45);
+                        \end{tikzpicture}
+                    \end{center}
+                \begin{center}
+                        \begin{tikzpicture}[node distance=2.6cm]
+                            \node (Q) {$G(\mathbb{Q}(i,\sqrt[4]{5})/\mathbb{Q})$};
+                            \node (Qi) [above of=Q] {$\langle\varphi_2\rangle$};
+                            \node (Q5) [left of=Qi] {$\langle\varphi_2^2,\varphi_4\rangle$};
+                            \node (Qi5) [right of=Qi] {$\langle\varphi_2^2,\varphi_2\varphi_4\rangle$};
+                            \node (Qia5) [above of=Qi] {$\langle\varphi_2^2\rangle$};
+                            \node (Qi45) [left of=Qia5] {$\langle\varphi_2^2\varphi_4\rangle$};
+                            \node (Q45)  [left of=Qi45] {$\langle\varphi_4\rangle$};
+                            \node (Q1pi45) [right of=Qia5] {$\langle\varphi_2\varphi_4\rangle$};
+                            \node (Q1mi45) [right of=Q1pi45] {$\langle\varphi_2^3\varphi_4\rangle$};
+                            \node (Qia45) [above of=Qia5] {$\langle\varphi_0\rangle$};
+                            \draw (Q) -- (Qi);
+                            \draw (Q) -- (Q5);
+                            \draw (Q) -- (Qi5);
+                            \draw (Q5) -- (Q45);
+                            \draw (Q5) -- (Qi45);
+                            \draw (Q5) -- (Qia5);
+                            \draw (Qi) -- (Qia5);
+                            \draw (Qi5) -- (Qia5);
+                            \draw (Qi5) -- (Q1pi45);
+                            \draw (Qi5) -- (Q1mi45);
+                            \draw (Q45) -- (Qia45);
+                            \draw (Qi45) -- (Qia45);
+                            \draw (Qia5) -- (Qia45);
+                            \draw (Q1pi45) -- (Qia45);
+                            \draw (Q1mi45) -- (Qia45);
+                        \end{tikzpicture}
+                    \end{center}
+            \end{solution}
+    \end{enumerate}
+\end{document}

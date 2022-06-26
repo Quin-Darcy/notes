@@ -1,0 +1,505 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcolumntype{C}{>$c<$}
+\usepackage{stackengine}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=60mm,labelindent=60mm}
+
+
+
+\begin{document}
+
+
+\section*{\centerline{Notes and Definitions}}
+
+\justifying
+
+\vspace{5mm}
+
+
+\begin{flushleft}
+\textsc{\textbf{\large{Vector Spaces}}}
+\end{flushleft}
+
+
+\begin{flushleft}
+Let $\mathbb{R}$ denote the field of real numbers. A \textit{\textbf{vector space over }}$\mathbb{R}$ (or \textit{\textbf{real vector space}}) is a set $V$ endowed with two operations: \textit{\textbf{vector addition}} $V\times V\rightarrow V$, denoted by $(v, w)\mapsto v+w$, and \textit{\textbf{scalar multiplication}} $\mathbb{R}\times V\rightarrow V$, denoted by $(a, v)\mapsto av$, satisfying the following properties:
+\end{flushleft}
+
+\vspace{2mm}
+
+(i) $V$ is an abelian group under vector addition.\par
+(ii) Scalar multiplication satisfies the following identities:\par
+
+\vspace{4mm}
+
+\centerline{$a(bv)=(ab)v$\hspace{5mm}for all $v\in V$ and $a,b\in\mathbb{R}$;}
+\vspace{2mm}
+\hspace{41mm}$1v=v$\hspace{11mm} for all $v\in V$.
+
+\vspace{4mm}
+
+(iii) Scalar multiplication and vector addition are related by the following distributive\par\hspace{6.5mm} laws:\par
+
+\vspace{4mm}
+
+\centerline{$(a+b)v=av+bv$\hspace{5mm} for all $v\in V$ and $a,b\in\mathbb{R}$;}
+\vspace{2mm}
+\hspace{29mm}$a(v+w)=av+aw$\hspace{4mm} for all $v,w\in V$ and $a\in\mathbb{R}$.
+
+\vspace{4mm}
+
+This definition can be generalized in two directions. First, replacing $\mathbb{R}$ by an arbitrary field $\mathbb{F}$ everywhere, we obtain the definition of a \textit{\textbf{vector space over}} $\mathbb{F}$. Second, if $\mathbb{R}$ is replaced by a commutative ring $\mathcal{R}$, this becomes the definition of a \textit{\textbf{module over}} $\mathcal{R}$ (or $\mathcal{R}$-\textit{\textbf{module}}.\par
+
+A finite sum of the form $\sum_{i=1}^{k} a^iv_i$, where $a^i$ are scalars and $v_i\in V$, is called a \textit{\textbf{linear combination of the vectors }}$\bm{v_1, ... , v_k}$. If $S$ is an arbitrary subset of $V$, the set of all linear combinations of elements of $S$ is called the \textit{\textbf{span of }}$\bm{S}$ and is denoted by span($S$).\par
+
+\vspace{4mm}
+
+\begin{flushleft}
+\textit{\large{Bases and Dimension}}
+\end{flushleft}
+
+
+
+Suppose $V$ is a vector space. A subset $S\subseteq V$ is said to be \textit{\textbf{linearly dependent}} if there exists a linear relation of the form $\sum_{i=1}^{k} a^iv_i=0$, where $v_1, ... , v_k$ are distinct elements of $S$ and at least one of the coefficients $a^i$ is nonzero; $S$ is said to be \textit{\textbf{linearly independent}} otherwise. A \textit{\textbf{basis for }}$\bm{V}$ is a subset $S\subseteq V$ that is linearly independent and spans $V$. If $S$ is a basis for $V$, every element of $V$ has a \textit{unique} expression as a linear combination of elements of $S$. If $(E_1, ... E_n)$ is a basis for $V$, each vector $v\in V$ has a unique expression as a linear combination of basis vectors:\par
+
+\vspace{4mm}
+
+\centerline{\large{$\sum\limits_{i=1}^{n} v_1E_i$}.}
+
+\newpage
+
+The numbers $v^i$ are called the \textit{\textbf{components of}} $\bm{v}$ with respect to this basis, and the ordered $n$-tuple $(v^1, ... , v^n)$ is called its \textit{\textbf{basis representation}}.
+
+\vspace{4mm}
+
+\begin{flushleft}
+\textbf{\large{Linear Maps}}
+\end{flushleft}
+
+Let $V$ and $W$ be real vector spaces. A map $T\colon V\rightarrow W$ is \textit{\textbf{linear}} if $T(av+bw)=aTv+bTw$ for all vectors $v,w\in V$ and all scalars $a,b$. (Because of the close connection between linear maps and matrix multiplication described below, we generally write the action of a linear map $T$ on a vector $v$ as $Tv$ without parentheses, unless parentheses are needed for grouping.) In the special case $W=\mathbb{R}$, a linear map from $V$ to $\mathbb{R}$ is usually called a \textit{\textbf{linear functional on}} $\bm{V}$.\par
+If $T\colon V\rightarrow W$ is a linear map, the \textit{\textbf{kernel}} or \textit{\textbf{null space of}} $\bm{T}$, denoted Ker $T$ or $T^{-1}(0)$, is the set $\{v\in V \colon Tv=0\}$, and the \textit{\textbf{image of}} $\bm{T}$, denoted Im $T$ or $T(V)$, is the set $\{w\in W\colon w=Tv$ for some $v\in V\}$.\par
+One simple but important example of a linear map arises in the following way. Given a subspace $S\subseteq V$ and a complementary subspace $T$, there is a unique linear map $\pi\colon V\rightarrow S$ defined by\par
+
+\vspace{2mm}
+
+\centerline{$\pi(v+w)=v$\hspace{5mm}for all $v\in S$, $w\in T$.}
+
+\vspace{4mm}
+
+This map is called the \textit{\textbf{projection onto}} $\bm{S}$ \textit{\textbf{with kernel}} $\bm{T}$. If $V$ and $W$ are vector spaces, a bijective linear map $T\colon V\rightarrow W$ is called an \textit{\textbf{isomorphism}}. In this case, there is a unique inverse map $T^{-1}\colon W\rightarrow V$ which is also linear. Now suppose $V$ and $W$ are finite-dimensional vector spaces with ordered bases $(E_1, ... E_n)$ and $(F_1, ... F_m)$, respectively. If $T\colon V\rightarrow W$ is a linear map, the \textit{\textbf{matrix of}} $\bm{T}$ with respect to these bases if the $m\times n$ matrix\par
+
+\vspace{4mm}
+
+\centerline{$A=(A^{i}_j)=\begin{bmatrix} A^1_1 & \dots & A^1_n \\ \vdots & \ddots & \vdots \\ A^m_1 & \dots & A^m_n \end{bmatrix}$}
+
+\vspace{4mm}
+
+whose $j$th column consists of the components of $TE_j$ with respect to the basis $(F_i)$:\par
+
+\vspace{4mm}
+
+\centerline{\large{$TE_j=\sum\limits_{i=1}^{m} A^i_jF_i$}.}
+
+\vspace{4mm}
+
+By linearity, the action of $T$ on an arbitrary vector $v=\sum_j v^jE_j$ is then given by\par
+
+\vspace{4mm}
+
+\centerline{\large{$T(\sum\limits_{j=1}^{n}v^jE_j)=\sum\limits_{i=1}^{m}\sum\limits_{j=1}^{n} A^i_jv_jF_i$}.}
+
+\newpage
+
+If we write out the components of a vector with respect to a basis as a column matrix, then the matrix representation of $w=Tv$ is given by matrix multiplication:\par
+
+\vspace{4mm}
+
+\centerline{$\begin{bmatrix} w^1 \\ \vdots \\ w^m \end{bmatrix}=\begin{bmatrix} A^1_1 & \dots & A^1_n \\ \vdots & \ddots & \vdots \\ A^m_1 & \dots & A^m_n \end{bmatrix}\begin{bmatrix} v^1 \\ \vdots \\ v^n \end{bmatrix}$,}
+
+\vspace{4mm}
+
+or more succinctly,\par
+
+\vspace{4mm}
+
+\centerline{$w^i=\large{\sum\limits_{j=1}^{n}} A^i_jv^j$.}
+
+\vspace{4mm}
+
+If $V$, $W$, and $Z$ are vector spaces, a map $B\colon V\times W\rightarrow Z$ is said to be \textit{\textbf{bilinear}} if it is linear in each variable separately when the other is held fixed:\par
+
+\vspace{4mm}
+
+\centerline{$B(a_1v_1+a_2v_2, w)=a_1B(v_1, w)+a_2B(v_2, w)$,}
+\vspace{2mm}
+\centerline{$B(v, a_1w_1+a_2w_2)=a_1B(v, w_1)+a_2B(v, w_2)$.}
+
+\vspace{4mm}
+
+An \textit{\textbf{algebra}} (over $\mathbb{R}$) is a real vector space $V$ endowed with a bilinear product map $V\times V\rightarrow V$. The algebra is said to be \textit{\textbf{commutative}} or \textit{\textbf{associative}} if the bilinear product has that property.
+
+\vspace{4mm}
+
+\begin{flushleft}
+\textit{\large{Inner Products and Norms}}
+\end{flushleft}
+
+If $V$ is a real vector space, an \textit{\textbf{inner product on}} $\bm{V}$ is a map $V\times V\rightarrow\mathbb{R}$, usually written $(v, w)\mapsto \langle v, w\rangle$, that satisfies the following conditions:\par
+
+\vspace{4mm}
+
+(i) \textsc{Symmetry}:\par
+\centerline{$\langle v, w \rangle= \langle w, v \rangle$;}
+
+(ii) \textsc{Bilinearity}:\par
+\centerline{$\langle av+a'v', w\rangle=a\langle v, w\rangle+a'\langle v', w\rangle$,}
+\vspace{2mm}
+\centerline{$\langle v, bw+b'w'\rangle=b\langle v, w\rangle+b'\langle v, w'\rangle$;}
+
+\vspace{4mm}
+
+(iii) \textsc{Positive Definiteness}:\par
+
+\vspace{4mm}
+\centerline{$\langle v, v\rangle\geq 0$,\hspace{5mm}with equality if and only if $v=0$.}
+
+\vspace{4mm}
+
+A vector space endowed with a specific inner product is called an \textit{\textbf{inner product space}}. The standard example is, of course, $\mathbb{R}^n$ with its \textit{\textbf{Euclidean dot product}}:\par
+
+\vspace{4mm}
+
+\centerline{$\langle x, y\rangle= x\cdot y=\sum\limits_{i=1}^{n}x^iy^i$.}
+
+\vspace{4mm}
+
+If $V$ is a real vector space, a \textit{\textbf{norm on}} $\bm{V}$ is a function from $V$ to $\mathbb{R}$, written $v\mapsto\abs{v}$, satisfying the following properties.
+
+\newpage
+
+(i) \textsc{Positivity}: $\abs{v}\geq 0$ for all $v\in V$, with equality if and only if $v=0$.\par
+(ii) \textsc{Homogeneity}: $\abs{cv}=\abs{c}\abs{v}$ for all $c\in\mathbb{R}$ and $v\in V$.\par
+(iii) \textsc{Triangle Inequality}: $\abs{w+w}\leq \abs{v}+\abs{w}$ for all $v,w\in V$.
+
+
+\vspace{6mm}
+
+\begin{flushleft}
+\textbf{\large{Advanced Calculus}}
+\end{flushleft}
+
+For maps between (open subsets of) finite-dimensional vector spaces, the most general notion of derivative is the total derivative.\par
+
+Let $V$ and $W$ be finite-dimensional vector spaces, which we may assume to be endowed with norms. If $U\subseteq V$ is an open subset and $a\in U$, a map $F\colon U\rightarrow W$ is said to be \textit{\textbf{differentiable at a}} if there exists a linear map $L\colon V\rightarrow W$ such that\par
+
+\vspace{4mm}
+
+\centerline{$\lim\limits_{v\to 0}\frac{\abs{F(a+v)-F(a)-Lv}}{\abs{v}}=0$.}
+
+
+
+
+
+
+
+
+
+\vspace{6mm}
+
+\begin{flushleft}
+\textit{\large{Tangent Vectors on Manifolds}}
+\end{flushleft}
+
+
+Let $M$ be a smooth manifold with or without boundary, and let $p$ be a point of $M$. A linear map $v\colon C^{\infty}(M)\rightarrow\mathbb{R}$ is called a \textit{\textbf{derivation at}} $\bm{p}$ if it satisfies\par
+
+\vspace{4mm}
+
+\centerline{$v(fg)=f(p)vg+g(p)vf$\hspace{5mm}for all $f,g\in C^{\infty}(M)$.}
+
+\vspace{4mm}
+
+The set  of all derivations of $C^{\infty}(M)$ at $p$, denoted $T_pM$, is a vector space called the \textit{\textbf{tangent space to}} $\bm{M}$ \textit{\textbf{at}} $\bm{p}$. An element of $T_pM$ is called a \textit{\textbf{tangent vector at}} $\bm{p}$.
+
+
+
+\vspace{6mm}
+
+\begin{flushleft}
+
+\textit{\large{Velocity Vector}}
+
+\end{flushleft}
+
+
+The velocity vector is just the vector whose components are the derivatives of the component functions of the curve.
+If $M$ is a manifold with or without boundary, we define a \textit{\textbf{curve in}} $\bm{M}$ to be a continuous map $\gamma\colon J\rightarrow M$, where $J\subseteq\mathbb{R}$ is an interval.\par
+
+Given a smooth curve $\gamma\colon J\rightarrow M$ and $t_0\in J$, we define the \textit{\textbf{velocity of}} $\bm{\gamma}$ \textit{\textbf{at}} $\bm{t_0}$, denoted by $\gamma'(t_0)$, to be the vector\par
+
+\vspace{4mm}
+
+\centerline{\large{$\gamma'(t_0)=d\gamma(\tfrac{d}{dt}\Big|_{t_0})\in T_{\gamma(t_0)}M$},}
+
+\vspace{4mm}
+
+where $d/dt\mid_{t_0}$ is the standard coordinate basis vector in $T_{t_0}\mathbb{R}$. Other common notations for the velocity are\par
+
+\vspace{4mm}
+
+\centerline{\large{$\dot{\gamma}(t_0)$}, and \large{$\frac{d\gamma}{dt}(t_0)$}.}
+
+\vspace{6mm}
+
+This tangent vector acts on functions by\par
+
+\vspace{6mm}
+
+\centerline{\large{$\gamma'(t_0)f=d\gamma(\tfrac{d}{dt}\Big|_{t_0})f=
+\tfrac{d}{dt}\Big|_{t_0} (f\circ\gamma)=(f\circ\gamma)'(t_0)$}.}
+
+\vspace{6mm}
+
+In other words, $\gamma'(t_0)$ is the derivation at $\gamma(t_0)$ obtained by taking the derivative of a function along $\gamma$. 
+
+\vspace{20mm}
+
+
+\begin{flushleft}
+\large{Informal Notes}
+\end{flushleft}
+
+\vspace{4mm}
+
+Let $M$ be a smooth manifold. Then we can construct the vector space over $\mathbb{R}$ whose underlying set is the set of all smooth functions on the manifold $M$, namely $C^{\infty}(M)$. This set is equipped with an addition and s-multiplication. So we have $(C^{\infty}(M), +, \cdot)$.\par
+
+\vspace{4mm}
+
+To be clear,\par
+
+\vspace{4mm}
+
+\hspace{10mm}$C^{\infty}(M)=\{f\colon M\rightarrow\mathbb{R}\mid f$ is smooth$\}$\par
+
+\vspace{4mm}
+
+\hspace{10mm}$+\colon (f+g)(p)\coloneqq f(p)+g(p)$. Here you go from the addition on $C^{\infty}(M)$ to the\par
+\hspace{10mm}addition on the reals.\par
+
+\vspace{4mm}
+
+\hspace{10mm}$\cdot\colon (\lambda\cdot f)(p)\coloneqq \lambda f(p)$ Same thing here as well.
+
+\vspace{4mm}
+
+It is quickly checked that this set with these operations are an infinite-dimensional vector space.\par
+
+\vspace{4mm}
+
+\begin{flushleft}
+\textbf{Definition.} Let $\gamma\colon\mathbb{R}\rightarrow M$ be a smooth curve through a point $p\in M$; with out loss of generality, we may arrange for $p$ to be that point for which the cure $\gamma$ is, at parameter value $0$. Or rather, we may always have it be the case that $p=\gamma(0)$. You can always choose a $\gamma$ that is as the point $p$ at parameter value $0$. Then the \textit{\textbf{directional derivative operator at the point}} $\bm{p}$\textit{\textbf{, along the curve}} $\bm{\gamma}$ is the \textit{linear map} (i.e., it must send a vector space to a vector space), denoted\par
+
+\vspace{8mm}
+
+\centerline{$X_{\gamma, p}\colon C^{\infty}(M)\rightarrow\mathbb{R}$}
+\vspace{2mm}
+\hspace{85mm}$f\mapsto (f\circ\gamma)'(0)\in\mathbb{R}$
+\vspace{2mm}
+\hspace{45mm}
+\begin{tikzcd}
+0\in\mathbb{R} \arrow[r] \arrow[r, "\gamma"] \arrow[dr, "x\circ\gamma"']
+& \gamma(0)=p\in M \arrow[d, "x"] \\
+& x(p)\in\mathbb{R}^d 
+\end{tikzcd}
+\vspace{6mm}
+
+Here we are considering the set $\mathbb{R}$ that we are mapping to, to be the real vector space $\mathbb{R}^1$. For any smooth function $f$ on the manifold, this operator maps it to the composition of $f$ after $\gamma$, where $\gamma$ takes you from $\mathbb{R}$ to $M$, and $f$ takes you from $M$ to $\mathbb{R}$, so in total this is a map from $\mathbb{R}$ to $\mathbb{R}$. This being the case, then we now how to build its derivative and evaluate it at $0$.\par
+
+\vspace{4mm}
+
+In differential geometry, $X_{\gamma, p}$ is usually called the \textit{\textbf{tangent vector to the curve}} $\bm{\gamma}$ \textit{\textbf{at the point}} $\bm{p\in M}$.
+\end{flushleft}
+
+\newpage
+
+"Tangent vectors are derivative operators that act on smooth functions. This is how the concept of a tangent vector survives in differential geometry."-(Schuller)\par
+
+\vspace{4mm}
+
+A precise intuition is the following: $X_{\gamma, p}$ is the \textit{velocity} of the curve $\gamma$ at the point $p$. So given a manifold, we wish to construct tangent spaces not by referring to an outside space into which we embed the manifold, but rather we wish to do this intrinsically. So we have a manifold, and we consider a point on the manifold and a curve that passes through this point and so one of the tangent vectors of the manifold at this point is the velocity of the curve we chose, at this point. Consider $\delta(\lambda)\coloneqq \gamma(2\lambda)$. This curve is the same as $\gamma$ but it moves at double the speed. Then 
+
+\vspace{4mm}
+
+\centerline{$X_{\delta, p}f=(f\circ\delta)'(0)=2(f\circ\gamma)'(0)=2X_{\gamma, p}$}
+
+\vspace{4mm}
+
+The intuition here is that by running through the curve at double the speed, you get a velocity vector that is twice as long. So then running through at all speeds would result in a line in which is the span of all the velocity vectors at that point along $\gamma$.
+
+\vspace{4mm}
+
+\begin{flushleft}
+\textbf{Definition.} The \textit{\textbf{tangent vector space at}} $\bm{p\in M}$ is the set\par
+
+\vspace{4mm}
+
+\centerline{$T_pM\coloneqq \{X_{\gamma, p}\mid \gamma$ is a smooth curve through the point $p\}$}
+
+\end{flushleft}
+
+
+
+So if you take all curves that pass through $p$ and run through them at all possible velocities, then you can picture a tangent plane at that point on the manifold as a result of doing this. This is the set that underlies the tangent space. We need to assure that this set is in fact a vector space, so we must define two operations:\par
+
+\vspace{4mm}
+
+\centerline{$\oplus\colon T_pM\times T_pM\rightarrow T_pM$}
+\vspace{2mm}
+\centerline{$\odot\colon \mathbb{R}\times T_pM\rightarrow T_pM$\hspace{5mm}}
+
+\vspace{4mm}
+
+We wish to define the addition on the elements of this set to be such that:\par
+
+\vspace{4mm}
+
+\centerline{$(X_{\gamma, p}\oplus X_{\delta, p})(f)\coloneqq X_{\gamma, p}(f)+X_{\delta, p}(f)=(f\circ\gamma)'(0)+(f\circ\delta)'(0)$.}
+
+\vspace{4mm}
+
+So here we took two elements from $T_pM$ and their sum mapped us into the real numbers where in which we know what the additions there is. S-multiplication is similar.
+
+\vspace{4mm}
+
+\centerline{$(\lambda\odot X_{\gamma, p})(f)=\lambda(f\circ\gamma)'(0)$.}
+
+\vspace{4mm}
+
+Although we have these two operations defined, we need to ensure that the result is not just \textit{any} linear map, but a linear map that has been constructed from a smooth curve that passes through $p\in M$. So for the sum above, we need to find the underlying curve that produces that tangent vector. The question is does there exist a curve $\sigma$ such that\par
+
+\vspace{4mm}
+
+\centerline{$(X_{\gamma, p}\oplus X_{\delta, p})(f)=X_{\sigma, p}(f)$.}
+
+\newpage
+
+Only if there does exist such a curve can we be confident that addition, as we've defined it, is closed in this set.
+
+\vspace{4mm}
+
+\begin{flushleft}
+\textsc{Claim:} $\oplus$ and $\odot$ close in $T_pM$.
+\end{flushleft}
+
+\begin{flushleft}
+\textsc{proof.} Construct the curve $\sigma$:
+\end{flushleft}
+
+Employ a chart (a chart is a pair that consists of some open subset of our manifold $U\subseteq M$, and a map $x\colon U\rightarrow\hat{U}\subseteq\mathbb{R}^n$), $(U, x)$ where $p\in U$ and define the curve $\sigma$ as follows:\par
+
+\vspace{6mm}
+
+\centerline{$\sigma(\lambda)\coloneqq x^{-1}\circ(x\circ\gamma + x\circ\delta - x(p))$.}
+
+\vspace{6mm}
+
+So the curve $\sigma$ must go from some some interval of the real line $I\subseteq\mathbb{R}$ and into $M$. This is because we want $\sigma$ to be the curve on $M$, that passes through the point $p$, such that its tangent vector at the point $p$, must be the same tangent vector that we get from adding $X_{\gamma, p}$ and $X_{\delta, p}$.\par
+To break down this definition of $\sigma$, let us consider each part of the above expression. We first note that $\lambda\in I\subseteq\mathbb{R}$, for some interval $I$. Let us now consider what is in the parentheses. First we have $x\circ\gamma$:\par
+
+\vspace{4mm}
+
+
+Since both $\gamma$ and $\delta$ are maps from the reals into $M$, then, for our purposes, we need only explain one of the two maps $x\circ\gamma$ and $x\circ\delta$.\par
+So $\gamma$ is a map from some interval on the real line, that takes these real numbers into $M$. $x$ is a map that takes us from $U\subseteq M$ into $\mathbb{R}^d$. We recall that $\mathbb{R}^d$ is the set which contains a neighborhood such that our map $x$, defines a diffeomorphism between $U\subseteq M$ and $x(U)\subseteq\mathbb{R}^d$. Meaning, there is some subset of $\mathbb{R}^n$ that locally 'looks like' our manifold around some point $p\in M$. Thus, $x(U)$ is a representation of our manifold in euclidean space.\par
+We now see that with $\gamma$ taking us from $\mathbb{R}\rightarrow M$ and $x$ taking us from $M\rightarrow\mathbb{R}^d$, then the composition of these two maps takes us through $\mathbb{R}\rightarrow M\rightarrow\mathbb{R}^d$. Hence, $x\circ\gamma\colon I\subseteq\mathbb{R}\rightarrow \mathbb{R}^d$. The composition map of both $x\circ\gamma$ and $x\circ\delta$ can be expressed as:\par
+
+\vspace{6mm}
+
+
+\hspace{45mm}
+\begin{tikzcd}
+preim_{\gamma}(U) \arrow[r] \arrow[r, "\gamma"] \arrow[dr, "x\circ\gamma"']
+& U \arrow[d, "x"] \\
+& x(U)\subseteq\mathbb{R}^d
+\end{tikzcd}
+
+
+\vspace{5mm}
+
+
+\hspace{45mm}
+\begin{tikzcd}
+preim_{\gamma}(U) \arrow[r] \arrow[r, "\delta"] \arrow[dr, "x\circ\delta"']
+& U \arrow[d, "x"] \\
+& x(U)\subseteq\mathbb{R}^d
+\end{tikzcd}
+
+\newpage
+
+
+The next thing to consider is the term $x(p)$. Well we know that $x$ is a map from $M$ to $\mathbb{R}^d$. So then $p\in M$ and $x(p)$ is some point in $\mathbb{R}^d$. 
+
+Thus, its diagram would be\par
+
+\vspace{5mm}
+
+
+
+\vspace{5mm}
+We can see that each curve within the parentheses is in fact a map into $\mathbb{R}^d$, and so we may easily add them together since this would simply consist of adding points in $\mathbb{R}^d$. So the idea is that on our manifold $M$, we think of some point $p\in M$ and we picture two curves, $\gamma$ and $\delta$, that both run through the point $p\in M$ at parameter value $\lambda=0$. Now we condider the tangent vectors to both curves at this point. Recall that the tangent vector is a linear map that takes some smooth function on our manifold (this function is to takes us from $M$ to $\mathbb{R}$), this function can possibly be 
+
+\vspace{6mm}
+
+hold on. Lets say $f(x_1, x_2, x_3)$ is a function from $\mathbb{R}^3\rightarrow\mathbb{R}$. We may also assume that each coordinate is a function of some parameter. So we have $f(x_1(t), x_2(t), x_3(t))$. Thus, $f$ is a function that 'moves' through 3-space and at each point, it has some real number it associates to that point. Now suppose we have a manifold $M$ that locally 'looks' like $\mathbb{R}^3$ around every point $p\in M$. Then the map that takes us from some neighborhood of $p$ into some region of $\mathbb{R}^3$, we may call $\varphi$. So then what if we asked, at what rate does the function $f$ change at as it moves along a path that runs along the region of three space that $\varphi$ maps us to? Well, consider some curve $\gamma\colon \mathbb{R}\rightarrow M$ and consider some point $p\in M$ and suppose $\gamma(0)=p$. Then $\varphi(p)\in\mathh{R}^3$ is some point in that region of 3-space, to which the function $f$ has a particular rate of change at.
+
+\vspace{5mm}
+
+\centerline{$f'(\varphi(p))=f'(\varphi(\gamma(0)))$}
+\vspace{2mm}
+\centerline{$=\frac{d}{dt}\Big|_0 (f\circ\varphi\circ\gamma)=(f\circ\varphi\circ\gamma)'(0)$}
+\vspace{2mm}
+\centerline{\Large{$=(\frac{\partial x_1}{\partial \varphi}\frac{\partial \varphi}{\partial \gamma}\frac{d\gamma}{dt}(0),\frac{\partial x_2}{\partial \varphi}\frac{\partial \varphi}{\partial \gamma}\frac{d\gamma}{dt}(0),\frac{\partial x_3}{\partial \varphi}\frac{\partial \varphi}{\partial \gamma}\frac{d\gamma}{dt}(0))$}}
+
+\vspace{5mm}
+
+\normalsize
+
+We can see here that the derivative of $f$ at the point $\varphi(p)$ is some vector with tail at $\varphi(p)$ and terminates at the coordinate above. 
+
+\newpage
+
+\centerline{\textbf{Coordinates}}
+
+\vspace{4mm}
+
+
+
+\end{document}

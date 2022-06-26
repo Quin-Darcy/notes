@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 3/25/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 7 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item[10.] Let $E=\mathbb{Q}(\sqrt[3]{2},\sqrt[4]{5},i)$. For $0\leq j\leq 3$, define $\varphi_j\in\text{Aut}(E)$ by $\varphi_j(i)=(-1)^ji$ and $\varphi_j(\sqrt[4]{5})=i^j\sqrt[4]{5}$, and for $4\leq j\leq 7$, define $\varphi_j\in\text{Aut}(E)$ by $\varphi_j(i)=(-1)^{j+1}i$ and $\varphi_j(\sqrt[4]{5})=i^j\sqrt[4]{5}$.
+            \begin{enumerate}
+                \item Find $G(E/\mathbb{Q}(i))$, $G(E/\mathbb{Q}(\sqrt[3]{2}))$, $G(E/\mathbb{Q}(\sqrt[4]{5}))$, $G(E/\mathbb{Q}(\sqrt[4]{5},i))$.
+                    \begin{solution}
+                        Considering all the automorphisms which map $i$ to $i$ we get that $G(E/\mathbb{Q}(i))=\{\varphi_0,\varphi_2,\varphi_5,\varphi_7\}$. Note that $x^3-2$ is the minimal polynomial of $\sqrt[3]{2}$ over $E$ and so $E$ only contains one root of this polynomial. Thus, every automorphism must map $\sqrt[3]{2}$ to itself and so $G(E/\mathbb{Q}(\sqrt[3]{2}))=\text{Aut}(E)$. Considering all the automorphisms which map $\sqrt[4]{5}$ to itself, we get that $G(E/\mathbb{Q}(\sqrt[4]{5})=\{\varphi_0,\varphi_4\}$. Finally, there is only one automorphism which fixes both $i$ and $\sqrt[4]{5}$ and so $G(E/\mathbb{Q}(\sqrt[4]{5},i))=\{\varphi_0\}$.
+                \end{solution} 
+            \item Find $[E\colon\mathbb{Q}(i)]$, $[E\colon\mathbb{Q}(\sqrt[3]{2})]$, $[E\colon\mathbb{Q}(\sqrt[4]{5})]$, $[E\colon\mathbb{Q}(\sqrt[4]{5},i)]$.
+                \begin{solution}
+                    Since the minimal polynomial of $\sqrt[3]{2}$ over $\mathbb{Q}(i)$ is $x^3-2$ and the minimal polynomial of $\sqrt[4]{5}$ over $\mathbb{Q}(i)$ is $x^4-5$, then we have that $[E\colon\mathbb{Q}(i)]=3\cdot 4=12$. Similarly, since $x^4-5$ is the minimal polynomial of $\sqrt[4]{5}$ over $\mathbb{Q}(\sqrt[3]{2})$ and $x^2+1$ is the minimal polynomial of $i$ over $\mathbb{Q}(\sqrt[3]{2})$, then $[E\colon\mathbb{Q}(\sqrt[3]{2})]=4\cdot 2=8$. Again, we have that $x^3-2$ is the minimal polynomial of $\sqrt[3]{2}$ over $\mathbb{Q}(\sqrt[4]{5})$ and $x^2+1$ is the minimal polynomial of $i$ over $\mathbb{Q}(\sqrt[4]{5})$ and so $[E\colon\mathbb{Q}(\sqrt[4]{5})]=3\cdot 2=6$. Lastly, the minimal polynomial of $\sqrt[3]{2}$ over $\mathbb{Q}(\sqrt[4]{5},i)$ is $x^3-2$ and so $[E\colon\mathbb{Q}(\sqrt[4]{5},i)]=3$.
+                \end{solution}
+            \item Determine which of these extensions are normal.
+                \begin{solution}
+                    Note that $x^3-2$ is irreducible over $\mathbb{Q}(i)$, $\mathbb{Q}(\sqrt[4]{5})$, and $\mathbb{Q}(\sqrt[4]{5},i)$, and $E$ contains a root of $x^3-2$, yet $x^3-2$ does not split over $E$ and so none of these extensions are normal. Now note that $x^3-2$ is reducible over $\mathbb{Q}(\sqrt[3]{2})$, but its nonlinear irreducible factor is $x^2+\sqrt[3]{2}x+\sqrt[3]{4}$. $E$ does not contain a root of this polynomial and so all other irreducible polynomials over $\mathbb{Q}(\sqrt[3]{2})$ split over $E$. Thus, $E/\mathbb{Q}(\sqrt[3]{2})$ is a normal extension.
+                \end{solution}
+            \item Determine which of these extensions are separable.
+                \begin{solution}
+                    We have that both $\sqrt[3]{2}$ and $\sqrt[4]{5}$ are algebraic over $\mathbb{Q}(i)$ and neither $x^3-2$ and $x^4-5$ have multiple roots in any extension. Thus, $E/\mathbb{Q}(i)$ is separable. By the same reasoning we can see that $i,\sqrt[3]{2},$ and $\sqrt[4]{5}$ are all algebraic over each of the base fields and all of the respective minimal polynomials do not contain multiple roots. Thus, every extension is separable.
+                \end{solution}\newpage
+            \item For each $K$, determine $F_{G(E/K)}$, and determine if $F_{G(E/K)}=K$.
+                \begin{solution}
+                    Based on part (a), we have that
+                        \begin{equation*}
+                            \begin{split}
+                                F_{G(E/\mathbb{Q}(i))} &= \mathbb{Q}(\sqrt[3]{2},i) \\
+                                F_{G(E/\mathbb{Q}(\sqrt[3]{2}))}&=\mathbb{Q}(\sqrt[3]{2}) \\
+                                F_{G(E/\mathbb{Q}(\sqrt[4]{5}))}&=\mathbb{Q}(\sqrt[3]{2},\sqrt[4]{5}) \\
+                                F_{G(E/\mathbb{Q}(\sqrt[4]{5},i))} &= \mathbb{Q}(\sqrt[3]{2},\sqrt[4]{5},i).
+                            \end{split}
+                        \end{equation*}
+                    $E/\mathbb{Q}(\sqrt[3]{2})$ satisfies $F_{G(E/K)}=K$.
+                \end{solution}
+        \end{enumerate}    
+    \end{enumerate}
+\end{document}

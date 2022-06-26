@@ -1,0 +1,70 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcolumntype{C}{>$c<$}
+\usepackage{stackengine}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=60mm,labelindent=60mm}
+
+
+
+\begin{document}
+
+
+\section*{\centerline{Notes and Definitions}}
+
+\justifying
+
+\section*{\centerline{Tangent Vectors}}
+
+\vspace{6mm}
+
+    We begin by considering \textit{geometric tangent vectors} in $\mathbb{R}^n$, which can be visualized as ``arrows" attached to points. Because the definition of smooth manifolds is built around the idea of identifying which functions are smooth, the property of a geometric tangent vector that is amenable to generalization is its action on smooth functions as a ``directional derivative". The process of taking directional derivatives gives a one-to-one correspondence between geometric tangent vectors and linear maps from $C^{\infty}(\mathbb{R}^n)$ to $\mathbb{R}$ satisfying the product rule. (Such maps are called \textit{derivations}.)\par
+    
+    Any smooth coordinate chart $(U, \varphi)$ gives a natural isomorphism from the space of tangent vectors to $M$ at $p$ to the space of tangent vectors to $\mathbb{R}^n$ at $\varphi(p)$, which in turn is isomorphic to the space of geometric tangent vectors at $\varphi(p)$. Thus, any smooth any smooth coordinate chart yields a basis for each tangent space.\par
+    
+    Next we will show how a smooth curve determines a tangent vector at each point, called its \textit{velocity}, which can be regarded as the derivation of $C^{\infty}(M)$ that takes the derivative of each function along the curve.\par
+    
+\vspace{10mm}
+
+
+    
+    Imagine a manifold in Euclidean space--for example, the unit sphere $\mathbb{S}^{n-1}\subseteq\mathbb{R}^n$. What do we mean by a ``tangent vector" at a point of $\mathbb{S}^{n-1}$? We first must acknowledge the way we think about elements of $\mathbb{R}^n$. On one hand, we usually think of them as \textit{points} in space, whose only property is location, expressed by coordinates $(x^1,\dots, x^n)$. On the other hand, when doing calculus we sometimes think of them instead as \textit{vectors}, which are objects that have magnitude and direction, but whose location is irrelevant. A vector $v=v^ie_i$ (where $e_i$ denotes the $i$th standard basis vector) can be visualized as an arrow with its initial point anywhere in $\mathbb{R}^n$.\par
+
+    What we really have in mind here is a separate copy of $\mathbb{R}^n$ at each point. When we talk about vectors tangent to the sphere at a point $a$, for example, we imagine them as living in a copy of $\mathbb{R}^n$ with its origin translated to $a$.
+
+
+
+
+
+
+
+
+
+\end{document}

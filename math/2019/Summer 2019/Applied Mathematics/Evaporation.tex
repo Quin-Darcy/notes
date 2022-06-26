@@ -1,0 +1,197 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\begin{document}
+
+\title{A First Approach To Calculating Water Loss Due To Evaporation}
+\date{July 21, 2019}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+\section{Outline}
+
+Suppose we have a set $P$ of $n$ plants $P=\{p_1, p_2, \dots, p_n\}$ and we have a function $W\colon P\rightarrow\mathbb{R}^{+}$ which assigns to each plant a positive real number representing the plant's weight. From here we can determine the \textit{average} or \textit{arithmetic mean} $\mu$, of the plant weights simply by summing each weight and dividing the result by $n$. Hence, the average plant weight can be determined by the formula
+
+\begin{equation}
+    \mu=\frac{1}{n}\sum_{i=1}^{n}W(p_i).
+\end{equation}
+
+\noindent To calculate the degree of variation present in the set of all weights, we must refer to the \textit{standard deviation}. This will tell us if the weights of the plants tend to be close together or far apart. Why this interests us is because it will inform our understanding of the $\mu$ and how accurate it is. To calculate the standard deviation we must first calculate the deviations of each weight from the average weight. We do this by taking the square of the difference between the two numbers. Hence, we obtain the following list
+
+\begin{equation*}
+    \begin{split}
+        &\big(W(p_1)-\mu\big)^2 \\
+        &\big(W(p_2)-\mu\big)^2 \\
+        &\quad\quad\quad\quad\vdots \\
+        &\big(W(p_n)-\mu\big)^2
+    \end{split}
+\end{equation*}
+
+\noindent Next, the \textit{population variance} is essentially the average of these deviations. Thus, we have that 
+
+\begin{equation}
+    \sigma^2=\frac{1}{n}\sum_{i=1}^{n}\big(W(p_i)-\mu\big)^2.
+\end{equation}
+
+Finally, in order to preserve the units used to represent the weight, we take the square root of the variance to obtain the standard deviation $\sigma$. This yields
+
+\begin{equation}
+    \sigma=\sqrt{\frac{1}{n}\sum_{i=1}^{n}\big(W(p_i)-\mu\big)^2}.
+\end{equation}
+
+\noindent Now let us suppose that each of our $n$ plants gets trimmed and these trimmings are collected into one pile and weighed. Let us denote this weight  by $T_W$. Additionally, let us suppose that $\sigma$ is very small, meaning each of our plant's weights are very close to the average weight, $\mu$. Then if we take $T_W$ and divide it by $n$, this will represent an approximate weight of trimmings that came from each plant. Thus, 
+
+\begin{equation}
+    \mu-\frac{T_W}{n}
+\end{equation}
+
+would represent an approximation of the plant's weight after trimming. Finally, we let the plants dry, put them all into one pile as before and assign it a weight, call it $D_W$. Thus, $D_W/n$ would represent the average weight of a trimmed plant that has dried. Hence, 
+
+\begin{equation}
+    \mu-\frac{1}{n}\big(T_W+D_W\big)
+\end{equation}
+
+would represent the average plant's weight minus the average weight of it's trimmings minus the weight of the plant when dry. Therefore, equation (5) can be considered a rough estimate of the weight of water lost due to evaporation. 
+
+\section{An Example}
+
+Let's suppose we have 5 plants with each of their weights are
+
+\begin{align*}
+    &p_1=9.1 g &p_2= 8.8 g &&p_3=9.7g& &p_4=10.1g& &p_5=9.9g
+\end{align*}
+
+Then we have that 
+
+\begin{equation*}
+    \mu=\frac{1}{5}\sum_{i=1}^{5}W(p_i)=\frac{9.1+8.8+9.7+10.1+9.9}{5}=9.5.
+\end{equation*}
+
+\noindent Next, the deviations would be
+
+\begin{equation*}
+    \begin{split}
+        (9.1-9.5)^2&=0.16 \\
+        (8.8-9.5)^2&=049\\
+        (9.7-9.5)^2&=0.04\\
+        (10.1-9.5)^2&=0.36\\
+        (9.9-9.5)^2&=0.16
+    \end{split}
+\end{equation*}
+
+\noindent Thus, the standard deviation is 
+
+\begin{equation*}
+    \sigma=\sqrt{\frac{0.16+0.49+0.04+0.36+0.16}{5}}=0.49 g.
+\end{equation*}
+
+\noindent Next, lets suppose we trim the plants and weigh the trimmings  individually and get
+
+\begin{align*}
+    &t_1=4.3g& &t_2=5.1g& &t_3=3.2g& &t_4=4.9g& &t_5=4.4g&
+\end{align*}
+
+\noindent Then the collective weight is 21.9g with an average of 4.4g. Finally, we dry each plant out and weigh them individually and get 
+
+\begin{align*}
+    &d_1=3.9g& &d_2=4.8g& &d_3=3.9g& &d_4=4.7g& &d_5=4.0g&.
+\end{align*}
+
+\noindent This gives a collective weight of 21.3g with a mean of 4.26g. Thus, the water weight lost per plant is 
+
+\begin{align*}
+    &w_1=0.9g& &w_2=
+\end{align*}
+
+
+
+
+\end{document}

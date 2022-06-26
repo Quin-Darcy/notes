@@ -1,0 +1,177 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 220A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+\begin{document}
+    \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 220A}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 05/02/21 \\
+    { Instructor:}\ Dr. Martins \hspace{\fill} Assignment:
+    Homework 5 \\ \hrule}
+
+    \begin{enumerate}
+        \item[23.2.] Let $\{A_n\}$ be a sequence of connected subspaces of $X$,
+            such that $A_n\cap A_{n+1}\neq \varnothing$ for all $n$. Show that
+            $\bigcup A_n$ is connected.
+            \begin{proof}
+                Assume for contradiction, that $\bigcup A_n$ is not connected.
+                Then there exists nonempty open subsets $U, V\subset\bigcup
+                A_n$ such that $U\cap V=\varnothing$ and $U\cup V=\bigcup A_n$.
+                By Lemma 23.2, for each $n$, $A_n$ is entirely contained in
+                either $U$ or $V$. Moreover, 
+                as $\bigcup A_n$ is a sequence of subspaces, it follows that
+                for some $m$, $A_m\subset U$, but $A_{m+1}\not\subset U$, and
+                instead, $A_{m+1}\in V$. However, since $A_m\cap
+                A_{m+1}\neq\varnothing$, then $A_m\cap A_{m+1}\subset U\cap
+                V\neq\varnothing$, which is a contradiction.
+            \end{proof}
+        \item[23.6.] Let $A\subset X$. Show that if $C$ is a connected subspace
+            of $X$ that intersects both $A$ and $X-A$, then $C$ intersected
+            $\text{Bd}A$.
+            \begin{proof}
+                (Two contradiction proofs in a row, don't hate me!) Assume that
+                $C$ does not intersect the boundary of $A$. Then since
+                $\overline{A}=\text{Int}A\cup\text{Bd}A$, and $C$ intersects
+                $A$, it follows that $C\cap\text{Int}A\neq\varnothing$. By
+                similar reasoning, we have that
+                $C\cap\text{Int}(X-A)\neq\varnothing$. Since
+                $\text{Int}A\cap\text{Int}(X-A)=\varnothing$ and
+                $\text{Int}A\cup\text{Int}(X-A)=C$, then the two previous sets
+                are a separation of $C$ and therefore $C$ is not connected.
+            \end{proof}
+        \item[24.1]\hfill\par
+            \begin{enumerate}
+                \item Show that no two of the spaces $(0, 1)$, $(0, 1]$, $[0,
+                    1]$ are homeomorphic.
+                    \begin{proof}
+                        By Corollary 24.2, each of the above intervals are
+                        connected in $\mathbb{R}$. However, note that if
+                        $a\in(0, 1)$ and we let $A=(0, 1)/\{a\}$, then $A$ is
+                        not connected since we can let $U=(0, a)$ and $V=(a,
+                        1)$ and this would constitute a separation. On the
+                        other hand, if we let $B=(0, 1]/\{1\}=(0, 1)$, then $B$
+                        is connected. Further note that if $(0, 1)$ was
+                        homeomorphic to $(0, 1]$, then $A$ would be
+                        homeomorphic to $B$, however this is not the case as
+                        $A$ is not connected but $B$ is. Therefore, $(0, 1)$ is
+                        not homeomorphic to $(0, 1]$. By the same reasoning, we
+                        can show that $(0, 1)$ is not homeomorphic to $[0, 1)$.
+                        Now note that if $a\in [0, 1]$ such that $0<a<1$, then
+                        $[0, 1]/\{a\}$ is not connected since we can let $U=[0,
+                        a)$ and $V=(a, 1]$ and this forms a separation on
+                        $[0,1]/\{a\}$. However, by removing either $0$ or $1$
+                        from $[0, 1]$ we preserve its connectedness. Though
+                        doing so results in either $(0, 1]$ or $[0, 1)$, both
+                        of which we have shown not to be homeomorphic to (0,
+                        1). 
+                    \end{proof}
+                \item[(c)] Show $\mathbb{R}^n$ and $\mathbb{R}$ are not homeomorphic
+                    if $n>1$.
+                    \begin{proof}
+                        By Example 4 in section 24, we have that the punctured
+                        euclidean space $\mathbb{R}^n-\{0\}$ is path connected
+                        and therefore connected, for $n>1$. However,
+                        $\mathbb{R}-\{0\}$ is not connected since $U=(-\infty,
+                        0)$ and $V=(0, \infty)$ forms a separation on the set.
+                        Therefore, for $n>1$, $\mathbb{R}$ and $\mathbb{R}^n$
+                        are not homeomorphic.
+                    \end{proof}
+            \end{enumerate}
+        \item[24.3] Let $f:X\to X$ be continuous. Show that if $X=[0, 1]$, there is
+            a point $x$ such that $f(x)=x$. What happens if $X$ equals $[0, 1)$
+            or $(0, 1)$.
+            \begin{proof}
+                Consider the function $h(x)=f(x)-id(x)$, where $id:X\to X$ is
+                the identity map on $X$. Since both $f$ and $id$ are continuous
+                on $X$, then $h$ is continuous on $X$. Note that if either
+                $f(0)=0$ or $f(1)=1$, then this proves the claim. On the other
+                hand, if $f(0)\neq 0$ and $f(1)\neq 1$, then considering the
+                range of $f$, this would imply that $f(0)>0$ and $f(1)<1$. Now
+                given that $h$ is continuous on $X$, $X$ is connected, and $X$ is an ordered set in the
+                order topology, then we may apply the Intermediate Value
+                Theorem. Namely, we have that $h(1)<0<h(0)$ and thus by IVP,
+                there exists some $x\in X$ such that $h(x)=0$. This implies
+                that $f(x)-id(x)=f(x)-x=0$. Hence, $f(x)=x$.\par\hspace{4mm} If
+                $X=[0, 1)$ or $X=(0, 1)$, then we want to show that there does not exist
+                a fixed point. To do this, we need a counterexample consisting
+                of a function continuous on $X$, but such that there is no
+                $x\in X$ for which $f(x)=x$. Letting $f(x)=(x+1)/2$, we see
+                that $f$ is continuous as a scalar multiple of a continuous
+                function. Now if we assume that $f(x)=x$, for some $x\in X$,
+                then we have that $(x+1)/2=x$, which implies that $x=1$.
+                However, this cannot be as $1\not\in X$ for $X=[0, 1)$, nor for
+                $X=(0, 1)$.
+            \end{proof}
+        \item[24.10] Show that if $U$ is an open connected subspace of
+            $\mathbb{R}^2$, then $U$ is path connected.
+            \begin{proof}
+                Let $x_0\in U$, and define $P$ as the set of all points, $x$, for
+                which there exists a path connecting $x_0$ to $x$. Then if
+                $x\in P$, then $x\in U$ and since $U$ is open, there exists
+                a neighborhood $V$ of $x$ contained in $U$. Specifically, we
+                may assume that $V\cap U=V$. Now we cite Example 3 in Section
+                24, which states that the unit ball $B^n$ is path connected in
+                $\mathbb{R}^n$. Thus, open balls in $\mathbb{R}^2$ are path
+                connected. With $V$ being such an open ball around $x$, we
+                observe that if $\gamma$ is a path connecting $x_0$ and $x$,
+                then for any other $x'\in V$, we can construct a path $\gamma'$
+                from $x$ to $x'$. Thus taking $\lambda=\gamma'\circ\gamma$, we
+                have a path from $x_0$ to $x'$. This implies that for all
+                $x'\in V$, there exists a path connecting it to $x_0$. Hence,
+                $V\subset P$. Therefore, $P$ is open.\par\hspace{4mm} To show
+                that $P$ is also closed, we want to show that $U-P$ is open.
+                Letting $x\in U-P$, then as $U$ is open, there exists an open
+                ball $B$ such that $x\in B$ and $B\subset U$. Now assume that
+                $x'\in B\cap P$. Then $x'\in P$ which implies that there exists
+                a path from $x_0$ to $x'$. But we also have that $x\in B$ and
+                so there is a path from $x'$ to $x$. As before we can then
+                construct a path from $x_0$ to $x$. This implies that $x\in P$,
+                which is a contradiction. Therefore, $B\cap P=\varnothing$ and
+                so $U-P$ is open. Hence, $P$ is closed. We have shown that for
+                every such $P\subset U$, $P$ is open and closed which implies
+                that $P$ is connected.
+            \end{proof}
+    \end{enumerate}
+\end{document}

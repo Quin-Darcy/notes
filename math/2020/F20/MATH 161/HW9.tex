@@ -1,0 +1,187 @@
+\section{}
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tikz-cd}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 161}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 161}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 11/12/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 9 \\ \hrule}
+
+\justifying
+    \begin{enumerate}[leftmargin=*]
+        \item Assume that $\Gamma$ and $\Sigma$ are two sets of closed wffs such that $\Gamma\cup\Sigma$ does not have a model. Prove that there exists a closed wff $\theta$ such that $\Gamma\vdash\theta$ and $\Sigma\vdash\sim\theta$.
+            \begin{proof}
+                By the Theorem on pg.16, we have that from $\Gamma\cup\Sigma$ not having a models it follows that $\Gamma\cup\Sigma$ is not consistent. So we now consider the following cases:\hfill\par\hspace{4mm}
+                    \begin{enumerate}[label=(\roman*)]
+                        \item $\Gamma$ is inconsistent. Let $\sim\theta$ be any theorem of $\Sigma$. Then $\Sigma\vdash\sim\theta$ and since $\Gamma$ is inconsistent, then $\Gamma\vdash\theta$.
+                        \item The argument is the same if $\Sigma$ is inconsistent.
+                        \item Both $\Gamma$ and $\Sigma$ are each consistent. By assumption, $\Gamma\cup\Sigma$ is inconsistent, and so by The Compactness Theorem, there exists a finite subset, $F$, of $\Gamma\cup\Sigma$ such that $F$ does not have a model. This implies that $F$ is neither a subset of $\Gamma$ nor a subset of $\Sigma$ since both are consistent and $F$ is not. Thus we can write $F=\{\gamma_1, \dots, \gamma_m, \sigma_1,\dots, \sigma_t\}$ where $\gamma_i\in\Gamma$ and $\sigma_j\in\Sigma$ for all $1\leq i\leq m$, $1\leq j\leq t$. Let $\theta=\gamma_1\land\cdots\land\gamma_m$. Then since $\Gamma\vdash\gamma_i$ for each $i$, it follows that $\Gamma\vdash\theta$. Now note that if $\Sigma\not\vdash\sim\theta$, then by Proposition 2 on pg.12, it follows that $\Sigma\cup\{\theta\}$ is consistent and thus $\Sigma\cup\{\theta\}$ has a model. However, since $F\subseteq\Sigma\cup\{\theta\}$ and so any model of $\Sigma\cup\{\theta\}$ is a model of $F$. This is a contradiction since $F$ does not have a model. Thus $\Sigma\vdash\sim\theta$.
+                    \end{enumerate}
+            \end{proof}
+        \item\hfill\par 
+            \begin{enumerate}
+                \item Prove in PA that $x'=x+1^*$.
+                    \begin{proof} 
+                        Let $\alpha(x):=x'=x+1$. Then $\alpha(0^*)$ holds since $0^*'=1^*=0^*+1^*$. Now assume that $\alpha(k):=k'=k+1$ holds for some $k$. Then 
+                            \begin{align*}
+                                k''&=k''+0^* &&\text{A3} \\
+                                &=0^*+k'' &&\text{pg.2(b)} \\
+                                &=(0^*+k')' &&\text{A4} \\
+                                &=(k'+0^*)' &&\text{pg.2(b)} \\
+                                &=k'+0^*' &&\text{A4} \\
+                                &=k'+1 &&\text{pg.2}
+                            \end{align*}
+                        Thus, $\alpha(k')$ holds and so by $A7$, $\alpha(x)$ holds for all $x$.
+                    \end{proof}
+                \item Prove in PA that if $x<z'$, then either $x=z$ or $x<z$.
+                    \begin{proof}
+                        Assume that $x<z'$. Then by HW 7, there exists $n$ such that $n\neq 0$ and $h(x, 0^*(n))=z'$, where $h(x,y):=x+y$. By 2.(a), we have that
+                            \begin{equation*}
+                                x+0^*(n)=z'=z+1.
+                            \end{equation*}
+                        Since $n\neq 0$, then either $n=1$ or $n>1^*$. If $n=1$, then 
+                            \begin{equation*}
+                                x+0^*'=z+1=z+0^*'
+                            \end{equation*}
+                        Thus by A4, $(x+0^*)'=(z+0^*)'$ and by A3, we have $x'=z'$. Finally, by A2, $x=z$. If $n>1$, then by A4, $(x+0^{*(n-1)})'=(z+0^*)'=z'$. Thus by A2 and A3 we have
+                            \begin{equation*}
+                                x+0^{*(n-1)}=z.
+                            \end{equation*}
+                        By A1 and since $n>1$ it follows that $0^{*(n-1)}\neq 0$. Thus by HW 7, $x<z$.
+                    \end{proof}
+                \item Prove in PA that $<$ is transitive.
+                    \begin{proof}
+                        Assume that $x<y$ and that $y<z$. Then by HW 7, there exists $m,n\neq 0$ such that $x+0^{*(n)}=y$ and $y+0^{*(m)}=z$. Thus substituting for $y$ we get that $x+0^{*(n)}+0^{*(m)}=z$. By $A4$ we have 
+                            \begin{equation*}
+                                \begin{split}
+                                    x+(0^{*(n)}+0^*)^{(m)}&=x+(0^*+0^{*(n)})^{(m)} \\
+                                    &= x+(0^*+0^*)^{(n+m)} \\
+                                    &= x+0^{*(n+m)} \\
+                                    &= z
+                                \end{split}
+                            \end{equation*}
+                        Since $m,n\neq 0$, then by HW 7 and A1, $x<z$.
+                    \end{proof}
+            \end{enumerate}
+        \item Let $r(x,y)=$ the remainder when $y$ is divided by $x$. Find a wff that represents $r(x,y)$.
+            \begin{solution}
+                We can say that 
+                    \begin{equation*}
+                        \gamma(x,yz,):=\exists n( 
+                        (x\cdot n + z = y)\land\exists u(z+u'=x)
+                    \end{equation*}
+            \end{solution}
+        \item Define $e$ on $\mathbb{N}\times\mathbb{N}$ by $e(m,n)=m^n$. Explain why $e$ is a recursive function.
+            \begin{solution}
+                Let $e(m,0)=s(g(m,0))=s(z(m))=s(0)=1$. Then we can define 
+                    \begin{equation*}
+                        \begin{split}
+                            e(m,1) &= g(m, e(m,0)) \\
+                            &= g(m, 1) \\
+                            &= m.
+                        \end{split}
+                    \end{equation*}
+                Next, we have that 
+                    \begin{equation*}
+                        \begin{split}
+                            e(m,n+1) &= g(m, e(m,n)) \\
+                            &= h(m, n, e(m,n)) \\
+                            &= g(pr_1(m,n,e(m,n)),pr_3(m,n,e(m,n)))  \\
+                            &= m\cdot e(m,n) \\
+                            &= m\cdots m^n \\
+                            &= m^{n+1}.
+                        \end{split}
+                    \end{equation*}
+                In general we have that $e(m, n+1)=g(m, e(m,n))$. Thus having shown that $e$ is defined solely from $g$ which itself is recursive, then $e$ can obtained from the zero function, successor function recursively and through substitution. Hence, $e$ is a recursive function.  
+            \end{solution}
+    \end{enumerate}
+\end{document}

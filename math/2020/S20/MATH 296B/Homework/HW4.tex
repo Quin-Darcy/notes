@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 296B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 3/30/20   \\
+{ \textbf{Instructor:}}\ Dr. Pigno \hspace{\fill} \textbf{Assignment:} Homework 4 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item Let $a,b\in\mathbb{Z}$ and $m\in\mathbb{N}$. If $a\equiv b\text{ mod } m$, then $a^{m^k}\equiv b^{m^k}\text{mod }m^{k+1}$ for any $k\geq 1$.
+            \begin{proof}
+                Since $a\equiv b(\text{mod }m)$, then for some $t\in\mathbb{Z}$, we have that $a=b+mt$. Raising both sides to $m^k$ we get that 
+                    \begin{equation*}
+                        a^{m^k}=(b+mt)^{m^k}.
+                    \end{equation*}
+                Applying the binomial formula, we obtain
+                    \begin{equation*}
+                        \begin{split}
+                            (b+mt)^{m^k} &= \sum\limits_{i=0}^{m^k}\binom{m^k}{i}b^{m^k-i}(mt)^i \\
+                            &b^{m^k}+m^kb^{m^k-1}(mt)+\cdots+(mt)^{m^k} \\
+                            &= b^{m^k}+m^{k+1}b^{m^k-1}t+\cdots+(mt)^{m^k} \\
+                            &= b^{m^k}+m^{k+1}(b^{m^k-1}t+\cdots+m^{m^k-k-1}t^{m^k}) \\
+                            &\equiv b^k(\text{mod }m^{k+1}).
+                        \end{split}
+                    \end{equation*}
+                Therefore, $a^{m^k}\equiv b^{m^k}(\text{mod }m^{k+1})$.
+            \end{proof}
+        \item[3.] Let $p,q$ be distinct odd primes, $m=pq$ and $L=(p-1)(q-1)$, and $d,e$ be any positive integers with $de\equiv 1\text{ mod }L$. Let our message $M$ be a positive integer relatively prime to $m$ with $M<m$. The smallest positive integer congruent to $M^e\text{ mod }m$ will be our encoded message, denoted $M_e$. Our decoded message $M_d$ will be the least residue of $M^d_e\text{ mod }m$.
+            \begin{enumerate}
+                \item Prove that the decoded message $M_d$ is equal to the message $M$.
+                    \begin{proof}
+                        Note that $L=\phi(m)$ and since $de\equiv 1(\text{mod }L)$, then for some $k\in\mathbb{Z}$, we have $de-1=\phi(m)k$ and so $de=\phi(m)k+1$. Thus, 
+                            \begin{equation*}
+                                M_d\equiv (M^e)^d\equiv M^{de}\equiv M^{\phi(m)k+1}\equiv (M^{\phi(m)})^kM(\text{mod }L).
+                            \end{equation*}
+                        Then by Euler's Theorem, we have that $M^{\phi(m)}\equiv 1(\text{mod }L)$ and so 
+                            \begin{equation*}
+                                M_d\equiv 1^kM\equiv M(\text{mod }L).
+                            \end{equation*}
+                    \end{proof}
+                \item Suppose $p=11$ and $q=13$. Let $e=7$. Find $d$.
+                    \begin{solution}
+                        We begin by finding the GCD of $7$ and $\phi(143)=120$. Note that $120=(17)7+1$ and so $(17)7\equiv 1(\text{mod }120)$. Thus, $d=17$.
+                    \end{solution}
+            \end{enumerate}
+        \item[4.] Let $p$ be an odd prime. Give a factorization of the following polynomials into linear factors in $\mathbb{Z}_p[x]$.
+            \begin{enumerate}
+                \item $x^p-2$
+                    \begin{solution}
+                        By Fermat's little theorem, we have that $2^p\equiv 2(\text{mod }p)$ and so $x^p-2\equiv x^p-2^p(\text{mod }p)$. Since $(a+b)^p\ equiva^p+b^p(\text{mod }p)$, then it follows that $x^p-2^p\equiv (x-2)^p(\text{mod }p)$. Therefore, $x^p-2\equiv (x-2)^p(\text{mod }p)$.
+                    \end{solution}
+                \item $x^{(p-1)/2}-1$
+                    \begin{solution}
+                        From Euler's criterion, it follows that $x^{(p-1)/2}\equiv 1(\text{mod }p)$ whenever $x$ is a square modulo $p$. This being the case, we get $\frac{p-1}{2}$ many zeros for the given polynomial and a factorization of 
+                            \begin{equation*}
+                                (x-a)^{(p-1)/2}(b-1)^{(p-1)/2},
+                            \end{equation*}
+                        where $a^2\equiv x(\text{mod }p)$ and $b\equiv x^{(p-1)/2}(\text{mod }p)$.
+                    \end{solution}
+            \end{enumerate}
+        \item[6.] Let $p$ be an odd prime. Prove that every primitive root of $p$ is a quadratic nonresidue. Prove that every quadratic nonresidue is a primitive root if and only if $p$ is of the form $2^{2^n}+1$, where $n\geq 0$.
+            \begin{proof}
+                Let $a$ be a primitive root modulo $p$. Then $a$ is relatively prime to $p$ and $\phi(p)=\text{ord}_p(a)$. In this case, $a$ is not a square modulo $p$ and so by Euler's criterion, we have that $a^{(p-1)/2}\equiv -1(\text{mod }p)$. Furthermore, since $(a,p)=1$, then $a^{\phi(p)}\equiv a^{p-1}\equiv 1(\text{mod }p)$. If $a^{(p-1)/2}\equiv 1(\text{mod }p)$, then $a$ would not be a primitive root since $\frac{p-1}{2}<p-1$ and so $a$ is a quadratic nonresidue.\par\hspace{4mm} Since there are $\phi(\phi(p))$ primitive roots modulo $p$ and there are $\frac{p-1}{2}$ quadratic nonresidues modulo $p$, then if $a$ is a primitive root and quadratic nonresidue implies that 2 is the only factor of $p-1$ and so there exists $n\in\mathbb{N}$ such that $p=2^{2^n}+1$.\par\hspace{4mm} Note that if $2^k+1$ is prime, then $k=2^n$ for some integer $n$. Otherwise, there is some odd prime $p$ such that $k=pr$ for some $1\leq r< k$. Additionally, since for any $s\geq 1$, $(a-b)\mid a^s-b^s$. Letting $a=2^r$, $b=-1$, and $s=p$, then $(2^r+1)\mid(2^k+1)$. Thus, $2^k+1$ is not prime for $k\neq 2^n$.  
+            \end{proof}
+    \end{enumerate}
+\end{document}

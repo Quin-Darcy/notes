@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\justifying
+
+% Document begins here
+
+
+
+\begin{prop}
+    Let $G$ be a group, $a\in G$, and $o(a)=t$. For all $k\in\mathbb{Z}^{+}$, if $a^k=e$, then $t\mid k$.
+\end{prop}
+    \begin{proof}
+        \hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill
+    \end{proof}
+    
+\vspace{10mm}
+
+\begin{prop}
+    Let $G$ be a group, and let $a,b\in G$. Assume $ab=ba$. Then for all $n\in\mathbb{Z}^{+}$, $(ab)^n=a^nb^n$.
+\end{prop}
+    \begin{proof}
+        \hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill
+    \end{proof}
+
+\newpage
+    
+\begin{prop}
+    Let $G$ be a group, $a,b\in G$, $o(a)=m$, $o(b)=n$, $(m,n)=1$, and $ab=ba$. Then $o(ab)=o(a)o(b)$.
+\end{prop}
+    \begin{proof}
+        \hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill
+    \end{proof}
+    
+\begin{prop}
+    Let $G$ be a group, $a,b\in G$, $o(a)=m$, $o(b)=n$, $(m,n)=1$. For all $k,t\in\mathbb{Z}$, if $a^k=b^t$, then $a^k=b^t=e$.
+\end{prop}
+    \begin{proof}
+        \hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill\par\hfill
+    \end{proof}
+
+
+
+\end{document}

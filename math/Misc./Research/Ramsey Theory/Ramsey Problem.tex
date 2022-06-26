@@ -1,0 +1,296 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\newenvironment{twoproof}{\tabular{@{\stepproofc}c|l}}{\endtabular}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{caption}
+\graphicspath{{./Ramsey Theory/}}
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=1.7mm,labelindent=0mm}
+
+
+ %Defining colour with different models.
+\definecolor{mypink1}{rgb}{0.858, 0.188, 0.478}
+\definecolor{mypink2}{RGB}{219, 48, 122}
+\definecolor{mypink3}{cmyk}{0, 0.7808, 0.4429, 0.1412}
+\definecolor{mygray}{gray}{0.6}
+\usepackage{multicol}
+
+
+ \begin{document}
+ \section{An Example}
+ 
+ Suppose $n = 5$, $k = 3$, $m = 1$, and $r = 3$. We want to know if in all $r^n$ colorings of 
+ 
+ \begin{equation*}
+     1 & 2 & 3 & 4 & 5
+ \end{equation*}
+ 
+ \noindent each contains a length $3$ arithemetic progression. To answer this, let us consider all the length 3 arithmetic progressions whose terms are any of the five numbers listed. We have the following
+ 
+ \begin{description}
+    \item 1. \textbf{1 2 3}
+    \item 2. \textbf{1 3 5}
+    \item 3. \textbf{2 3 4}
+    \item 4. \textbf{3 4 5}
+ \end{description}
+ 
+ \noindent So then if it were true that every coloring of $12345$, given 3 colors, contained a length 3 arithmetic progression, then we would expect to find at least one of the above four progressions in each of the colorings. So then let us list out each coloring that contains one of the above four progressions. Choosing our arithmetic progressions as being colored red, then the following are all the colorings that contain 1 2 3, 1 3 5, 2 3 4, and 3 4 5, respectively.
+ 
+\begin{multicols}{3}
+\begin{enumerate}
+    \item \textcolor{red}{1 2 3 4 5} 
+    \item \textcolor{red}{1 2 3 4 }\textcolor{blue}{5} 
+    \item \textcolor{red}{1 2 3 }\textcolor{blue}{4 }\textcolor{red}{5} 
+    \item \textcolor{red}{1 2 3 }\textcolor{blue}{ 4 5} 
+    \item \textcolor{red}{1 2 3 }\textcolor{blue}{ 4 }5 
+    \item \textcolor{red}{1 2 3 }4 \textcolor{blue}{ 5} 
+    \item \textcolor{red}{1 2 3 }4 5 
+    \item \textcolor{red}{1 2 3 }4 \textcolor{red}{5} 
+    \item \textcolor{red}{1 2 3 4 }5 
+\end{enumerate}
+\end{multicols}
+
+\hline
+
+\begin{multicols}{3}
+\begin{enumerate}
+    \item \textcolor{red}{1 2 3 4 5}
+    \item \textcolor{red}{1 2 3 }\textcolor{blue}{4 }\textcolor{red}{5} 
+    \item \textcolor{red}{1 }\textcolor{blue}{2 }\textcolor{red}{3 4 5} 
+    \item \textcolor{red}{1 }\textcolor{blue}{2 }\textcolor{red}{3 }\textcolor{blue}{4 }\textcolor{red}{5} 
+    \item \textcolor{red}{1 }\textcolor{blue}{2 }\textcolor{red}{3 }4 \textcolor{red}{5} 
+    \item \textcolor{red}{1 }2 \textcolor{red}{3 }\textcolor{blue}{4 }\textcolor{red}{5} 
+    \item \textcolor{red}{1 }2 \textcolor{red}{3 }4 \textcolor{red}{5} 
+    \item \textcolor{red}{1 }2 \textcolor{red}{3 4 5} 
+    \item \textcolor{red}{1 2 3 }4 \textcolor{red}{5}
+\end{enumerate}
+\end{multicols}
+
+\hline
+
+\begin{multicols}{3}
+\begin{enumerate}
+    \item \textcolor{red}{1 2 3 4 5}
+    \item \textcolor{red}{1 2 3 4 }\textcolor{blue}{5}
+    \item \textcolor{blue}{1 }\textcolor{red}{2 3 4 5} 
+    \item \textcolor{blue}{1 }\textcolor{red}{2 3 4 }\textcolor{blue}{5} 
+    \item \textcolor{blue}{1 }\textcolor{red}{2 3 4 }5 
+    \item 1 \textcolor{red}{2 3 4 }\textcolor{blue}{5} 
+    \item 1 \textcolor{red}{2 3 4 }5 
+    \item 1 \textcolor{red}{2 3 4 5} 
+    \item \textcolor{red}{1 2 3 4 }5
+\end{enumerate}
+\end{multicols}
+
+\hline
+
+\begin{multicols}{3}
+\begin{enumerate}
+    \item \textcolor{red}{1 2 3 4 5}
+    \item \textcolor{blue}{1 }\textcolor{red}{2 3 4 5}
+    \item \textcolor{red}{1 }\textcolor{blue}{2 }\textcolor{red}{3 4 5}
+    \item \textcolor{blue}{1 2 }\textcolor{red}{3 4 5} 
+    \item \textcolor{blue}{1 }2 \textcolor{red}{3 4 5} 
+    \item 1 \textcolor{blue}{2 }\textcolor{red}{3 4 5} 
+    \item 1 2 \textcolor{red}{3 4 5} 
+    \item 1 \textcolor{red}{2 3 4 5}
+    \item \textcolor{red}{1 }2 \textcolor{red}{3 4 5}
+\end{enumerate}
+\end{multicols}
+
+\newpage
+
+\noindent So we can see that these four progressions are present in a total of 36 colorings. However, these colorings are not all distinct. For instance, they all share the first coloring in common. In total, there are actually only 25 distinct colorings. Now to be more precise, we chose our arithmetic progressions to be red when there were 2 other color options. Thus, this same scenario would occur again two more times for each other choice of color. This means our four progressions span a total of $3\cdot 25= 75$ colorings.\par
+With our given $r$ and $n$ values we know there are a total of $r^n=3^5=243$ different colorings. It should be clear then that if the set of all length 3 arithmetic progressions from $[n]$ only span 75 colorings, then it is not the case that \textit{every} possible coloring of $12345$ contains a monochromatic length 3 arithmetic progression. 
+
+\section{A Closer Look}
+
+In our previous example we had chosen $n=5$, $k=3$, $m=1$, and $r=3$. Given these chosen values, there were a total of 4 progressions which satisfied the set $k$ and $m$ values for the given $n$. Now let us take a closer look at one of these 4 progressions
+
+\vspace{4mm}
+
+\begin{table}[htb]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textcolor{red}{1} & \textcolor{red}{2} & \textcolor{red}{3} & \textcolor{gray}{4} & \textcolor{gray}{5} \\ \hline
+    \end{tabular}
+\end{table}
+
+\vspace{2mm}
+
+\noindent We see that the numbers 4 and 5 have yet to be given a color and that each can take on any 1 of 3 different colors. This means that there are $3\cdot 3=9$ progressions which contain a red 1 2 3. This same logic applies to our other length 3 arithmetic progressions and indeed we listed out a total of 36 colorings which contained these 4 progressions. However, we soon realized that these progressions shared some common colorings. How then might we determine the number of distinct colorings which contain a red 1 2 3? Perhaps we should look at an example of a distict coloring and a non-distinct coloring and try to see if anything peculiar stands out. \par
+Below we have listed a coloring which appears only once (distinct) in the above 4 lists and a coloring which appears twice (non-distinct).
+
+\begin{center}
+    \textcolor{red}{1 2 3 }\textcolor{blue}{ 4 5}\par
+    \vspace{2mm}
+    \textcolor{red}{1 2 3 4 }\textcolor{blue}{5}
+    
+\end{center}
+
+\noindent Now we can see that the first coloring has two blue numbers while the second only has 1. There is certainly a more significant difference than that at play here for which might explain why one of these appears only once and the other twice. The first progression came from the list corresponding to all the colorings which contained a red 1 2 3, and the second came from the list corresponding to all the colorings which contained a red 2 3 4. Now note that the progression 1 2 3 shares two numbers in common with the progression 2 3 4. This observation might be able to guide us into further understanding the problem at hand.
+
+\newpage
+
+\begin{figure}
+    \begin{flushleft}
+    \includegraphics{"1-PseudoColorings".png}
+    \caption{3 Coloring of 3-length Arithmetic Progressions}
+    \label{fig:my_label}
+    \end{flushleft}
+\end{figure}
+
+Above is a figure which contains every possible coloring of all four of our length 3 arithmetic progressions. However, we have made the progressions themselves colorless. So now we ask the question: Under what conditions should be anticipate a non-distinct coloring? To answer this, suppose each of the progressions were colored blue. In this case we can see that row 4 in each of the matrices would be identical. Additionally, rows 3 and 5 in matrix A and C would also be identical. Below is a list of all the non-distinct rows if each of the progressions were colored blue. Also, when we write ``A5'', for example, that is to denote row 5 of matrix A.
+
+\begin{itemize}
+    \item $A2=B3$
+    \item $A3=C3$
+    \item $A4=B4=C4=D4$
+    \item $A5=C5$
+    \item $A6=B5$
+    \item $B2=D3$
+    \item $B6=D5$
+    \item $C2=D2$
+    \item $C6=D6$
+\end{itemize}
+
+\noindent Thus, the only distinct rows are $A1, A2, A3, A4, A5, A6, A7, A8, A9, B1, B2, B6, B7, B8, B9$\par \noindent$C1, C2, C6, C7, C8, C9, D1, D7, D8, D9$. There are 25 in total. Now consider $A2$ and $B3$.
+
+\newpage
+
+The $A$ matrix has the columns which contain 1 2 and 3 grayed out. Similarly, the $B$ matrix has the columns which contain 1 3 and 5 grayed out. We know that 1 2 3 and 1 3 5 are both length 3 arithmetic progressions. Now consider both these progressions as subsets of $\{1, 2, 3, 4, 5\}$, as in $P_1=\{1, 2, 3\}$ and $P_2=\{1, 3, 5\}$. Now, as sets, both $P_1$ and $P_2$ can be intersected, unioned and complemented. Observe that the intersection of $P_1$ and $P_2$ has 2 elements, namely
+
+\begin{equation}
+    P_1\cap P_2=\{1, 3\}.
+\end{equation}
+
+\vspace{2mm}
+
+\noindent Now consider the complement of both sets. We have
+
+\begin{equation}
+    P_1^c=\{4, 5\}\text{\hspace{5mm}and\hspace{5mm}}P_2^c=\{2, 4\}.
+\end{equation}
+
+\vspace{2mm}
+
+\noindent Lastly, consider the intersection of the complements. This yields
+
+\begin{equation}
+    P_1^c\cap P_2^c=\{4\}.
+\end{equation}
+
+\vspace{2mm}
+
+\noindent Now let us consider two more progressions. Take $P_2=\{1, 3, 5\}$ and $P_3=\{2, 3, 4\}$.\par\noindent Their intersection yields
+
+\begin{equation}
+    P_2\cap P_3 =\{3\}.
+\end{equation}
+
+\vspace{2mm} 
+
+\noindent Their complements are
+
+\begin{equation}
+    P_2^c=\{2, 4\}\text{\hspace{5mm}and\hspace{5mm}}P_3^c=\{1, 5\}.
+\end{equation}
+
+\vspace{2mm}
+
+\noindent And finally, the intersection of their complements is
+
+\begin{equation}
+    P_2^c\cap P_3^c=\varnothing.
+\end{equation}
+
+\vspace{2mm}
+
+\noindent The reason behind considering these three progressions in this way is because matrix $A$ and matrix $B$ share a coloring in common. Namely, $A2$. However, matrix $B$ and $C$ share no common colorings aside from $B4$, but the fourth row of each of these matrices are all identical. So aside from the fourth row, $B$ and $C$ have no further common colorings while $A$ and $B$ do. With this in mind we regard the above as possibly containing an indication to this end. Specifically, it may be of significance that the cardinality of the sets in (1) and (3) add up to the length of our progression, which the sum of the cardinalities of the sets in (4) and (6) do not. However, this one example is not enough to make any generalizations. At the moment, we submit the following claim:
+
+\vspace{2mm}
+
+\textbf{Claim: }\textit{ Assume we are given $n$, $k$, $m$, and $r$. Suppose there are $s$ many $k$-length $m$-pseudo progressions. Now let us denote the $i^{\text{th}}$ progression as $P_i=\{a^i_1, a^i_2, \dots, a^i_k\}$. Additionally, let $C^l_{i}$ denote the set of all colorings which contain a monochromatic coloring of the $l^{\text{th}}$ color of the progression $P_i$. Then for any two progressions $P_i$ and $P_j$, if  $k\leq\abs{P_i\cap P_j}+\abs{P^c_i\cap P^c_j}$, then $C^l_i\cap C^l_j\neq\varnothing$ for all $1\leq l\leq r$}.
+
+\newpage
+
+\noindent To further demonstrate the idea behind this claim, let us consider a few more examples. Suppose $n=16$, $k=9$, $m=5$, and $r=4$. Now consider the following two progressions.
+
+\begin{equation*}
+    \begin{split}
+        P_1 &= \{1, 2, 4, 7, 11, 16\} \\
+        P_2 &= \{1, 3, 6, 10, 11, 13\} \\
+        P_1^c &= \{3, 5, 6, 8, 9, 10, 12, 13, 14, 15\} \\
+        P_2^c &= \{2, 4, 5, 7, 8, 9, 12, 14, 15, 16\}
+    \end{split}
+\end{equation*}
+
+
+
+
+
+\newpage
+
+\begin{figure}
+    \begin{flushleft}
+    \hspace{13mm}
+    \includegraphics{"3-PseudoColorings".png}
+    \caption{3 Coloring of 4-length 3-Pseudo Progressions}
+    \label{fig:my_label}
+    \end{flushleft}
+\end{figure}
+ 
+ 
+ \end{document}

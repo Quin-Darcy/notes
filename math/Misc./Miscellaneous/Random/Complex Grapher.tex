@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+
+
+
+
+\begin{document}
+
+\title{Idea for A Complex Grapher Program}
+
+\date{8 September 2020}
+\affil{\small{California State University Sacramento}}
+\maketitle
+
+\section{Introduction}
+    We will be interested in the graphs of complex functions $f\colon D\subseteq\mathbb{C}\rightarrow\mathbb{C}$, with domain $D$. A complex function is composed of its real $u=$Re$f$ and its imaginary part $v=$Im$f$ as $f=u+iv$. Note that Re$f$ and Im$f$ are real-valued functions having the same domain as $f$.\par We can consider functions $f$ of a complex variable $z$ as a function of two real variables $x=$Re$f$ and $y=$Im$f$, thus writing
+        \begin{equation*}
+            f(x+iy)=f(x,y)=u(x,y)+iv(x,y).
+        \end{equation*}
+    The problem we aim to address is apparent when considering the graph $G_f$ of a complex function $f$, where
+        \begin{equation*}
+            G_f=\{(z,f(z))\in\mathbb{C}\times\mathbb{C}\mid z\in D\}.
+        \end{equation*}
+    As we can see, the graph has four real dimensions. For any $z\in\mathbb{C}$, the two properties which define this point are its modulus $\abs{z}$ and its phase $\psi(z)=z/\abs{z}$. Taking the phase of a complex number associates the number to a point on the complex unit circle $\mathbb{T}$. What this does is disregard the ``length'' of the complex number and gives us only information about its angle. In other words, if we think of complex numbers as vectors, then plotting the phase of the image of each vector under some function $f$ would show us how each vector was rotated via the function. This type of graph is called a \textit{phase portrait} of the function $f$.\par Formally, if $f$ is a complex function on $D$, then the mapping
+        \begin{equation*}
+            \Psi_f\colon D\rightarrow\hat{\mathbb{T}}, \quad z\mapsto\psi(f(z))
+        \end{equation*}
+    is called the \textit{phase} of $f$, and its graph
+        \begin{equation*}
+            P_f=\{(z,\Psi_f(z))\colon z\in D\}
+        \end{equation*}
+    is referred to as the \textit{phase portrait} or \textit{phase plot} of $f$. Above we see the set $\hat{\mathbb{T}}$ which is the complex unit circle $\{z\in\mathbb{C}\colon\abs{z}=1\}$ extended with the points $\{0,\infty\}$, so $\hat{\mathbb{T}}=\mathbb{T}\cup\{0,\infty\}$.\newpage
+    \section{The Graph}
+        
+\end{document}

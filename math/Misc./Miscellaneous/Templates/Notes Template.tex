@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{example}
+\newtheorem{example}{Example}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+
+
+
+\begin{document}
+
+\title{Example}
+\author{Quin Darcy}
+\maketitle
+
+\begin{example}
+We are given two urns, each containing a collection of colored
+balls. Urn I contains two white balls and three blue balls. Urn
+II contains three white balls and four blue balls. Select a ball from urn I
+and place it into urn II, then select a ball from urn II. 
+\end{example}
+
+Let urn I and urn II be represented as follows:
+\begin{align*}
+    &U_1=\{b^1_{11}, b^1_{12}, b^1_{21}, b^1_{22}, b^1_{23}\}, & &U_2=\{b^2_{11}, b^2_{12}, b^2_{13}, b^2_{21}, b^2_{22}, b^2_{23}, b^2_{24}\}.
+\end{align*}
+Where $b^i_{jk}$ is the $k$th ball of color $j$ in the $i$th urn. With these two urns we will perform the following experiment: Choose a ball from urn I, place the selected ball into urn II, then select a ball from urn II. Any one outcome of this experiment will be an ordered pair $(b^1_{jk}, b^2_{lm})$. The set of all possible outcomes of this experiment is then 
+\begin{equation*}
+    \Omega=\bigcup_{b\in U_1}\{b\}\times U_2\cup\{b\}.
+\end{equation*}
+Seeing as adding a ball to urn II gives it a total of 8 balls, and there are 5 balls from urn I that we can place into urn II, then it follows that 
+\begin{equation*}
+    |\Omega|=5\cdot 8=40. 
+\end{equation*}
+Letting $\mathcal{F}=\mathcal{P}(\Omega)$ be the powerset of $\Omega$, then $(\Omega, \mathcal{F})$ is a measurable space. Letting $P:\mathcal{F}\to[0, \infty]$ be defined by 
+\begin{equation*}
+    P(E)=\frac{|E|}{|\Omega|},
+\end{equation*}
+for every $E\in\mathcal{F}$, then $(\Omega, \mathcal{F}, P)$ is a probability space.\par We can then ask what is the probability that the ball we draw from urn II is blue? If the first ball drawn was white, then there are two ways this can happen and 4 blue balls in urn II the white balls will be paired with, giving a total of $2\cdot 4=8$ outcomes corresponding to drawing a white ball first. If we draw a blue ball first, then there are 3 ways to do this and a resulting 5 blue balls in urn II for them to be paired with, giving a total of $3\cdot 5=15$ outcomes corresponding to drawing a blue ball first. Hence, there are $8+15=23$ outcomes in which a blue ball is drawn from urn II. Then if $E$ denotes the event that a blue ball is drawn from urn II, we have that its probability measure is
+\begin{equation*}
+    P(E)=\frac{|E|}{|\Omega|}=\frac{23}{40}.
+\end{equation*}
+\begin{example}
+We are given $n$ urns $U_1, \dots, U_n$. Amongst all the balls in all the urns there are a total of $m$ many colors that a ball could have. The $i$th urn contains $n_i$ many balls in which $c^1_{n_i}$ of them are of the first color, $c^2_{n_i}$ of them are of the second color, and so on. We then perform the experiment of selecting a ball from urn I, placing the selection into urn II, then taking a ball from urn II and placing it into urn III, and so on until finally we have taken a ball from urn $n-1$, placed it into urn $n$ and selected our ball from urn $n$.  
+\end{example}
+
+As before, we can represent the contents of the urns as follows:
+
+\begin{align*}
+    U_i&=\{b^i_{11}, b^i_{12}, \cdots, b^i_{1c^1_{n_i}}, b^i_{21}, \cdots, b^i_{2c^2_{n_i}}, \cdots, b^i_{mc^m_{n_i}}\} ,
+\end{align*}
+where $b^i_{jk}$ is the $k$th ball of color $j$ from urn $i$, for $1\leq i\leq n$, $1\leq j\leq m$, $0\leq k\leq c^j_{n_i}$. Then the set of all possible outcomes of this experiment is 
+\begin{equation*}
+    \Omega=?
+\end{equation*}
+\end{document}

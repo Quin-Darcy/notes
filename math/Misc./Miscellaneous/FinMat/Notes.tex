@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\title{Notes}
+\author{Quin Darcy}
+\date{16 March 2019}
+\affil{\small{California State University Sacramento}}
+\maketitle
+
+\section{Exercises}
+
+\begin{enumerate}[leftmargin=*]
+    \item Suppose that \$3659 is deposited in a savings account which earns 6.5\% simple interest. What is the amount due after 5 years?
+    
+    \begin{solution} We see that the principle amount $P=3659$, the interest rate $r=0.065$, and since this is simple interest, it follows that after $t=5$ years the amount due is
+    
+        \begin{equation*}
+            A=P\big(1+rt)=(3659)\big[1+(0.065)(5)\big]=\$4848.18.
+        \end{equation*}
+    \end{solution}
+    
+    \item Suppose that \$3993 is deposited in an account which earns 4.3\% interest. What is the compound amount after two years if the interest is compounded
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item monthly?
+        \item weekly?
+        \item daily?
+        \item continuously?
+    \end{enumerate}
+    
+    \begin{solution}\hfill\par
+        \begin{enumerate}[label=(\alph*)]
+            \item 
+        \end{enumerate}
+    
+    \end{solution}
+\end{enumerate}
+
+\end{document}

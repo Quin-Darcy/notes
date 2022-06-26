@@ -1,0 +1,271 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+
+
+
+\begin{document}
+
+\title{MT2 Study Guide}
+\author{Quin Darcy}
+\date{14 April 2019}
+\affil{\small{California State University Sacramento}}
+\maketitle
+
+\section{Things To Be Stated}
+
+Of these 15 things, you will be asked to state 3 of them. So here are them all!
+
+\begin{enumerate}[leftmargin=*]
+    \item Define what it means for a function $f$ to be \textit{differentiable}
+\end{enumerate}
+
+\section{The Four Proofs}
+
+Below is a selection of questions pulled from homeworks 5, 6, and 7. Of these four questions, one of them will be included on Midterm 2. So learn `em all ya' bitch!
+
+\vspace{4mm}
+
+\noindent\textsc{Questions}\par
+\hline
+
+\begin{enumerate}[leftmargin=*]
+    \item Is $f(x)=\begin{cases} \frac{1}{2}x &\quad\text{if}\quad x\in\mathbb{Q} \\ x &\quad\text{if}\quad x\notin\mathbb{Q} \end{cases}$, differentiable at 0?
+
+
+\begin{discussion}
+    Let us remind ourselves what it means for a function to be differentiable. Suppose $f\colon I\rightarrow\mathbb{R}$ is a function with an interval domain $I\subseteq\mathbb{R}$. Then for some point $c\in I$, we would say that $f$ is differentiable at $c$ if 
+    
+    \begin{equation*}
+        \lim_{x\rightarrow c}\frac{f(x)-f(c)}{x-c}\in\mathbb{R},
+    \end{equation*}
+    
+    \noindent for $x\in I$.\par 
+    
+    So then is our function $f$ differentiable at 0? Well it is very hard to tell. This is because as we let $x$ approach 0, it is taking on rational and irrational values so the 1/2 is coming in and out, so to speak. Well then how can we crack this thing open? What if we made a sequence of rationals and a sequence of irrationals and then took the limit of the quotient? The reasoning behind this is based off of the following corollary.
+    
+    \begin{corollary}
+        Let $f$ be a function defined on $A$, and let $c$ be a limit point of $A$. If there exist two sequences $(x_n)$ and $(y_n)$ in $A$ with $x_n\neq c$ and $y_n\neq c$ and 
+        
+        \begin{equation*}
+            \lim x_n=\lim y_n\quad\text{but}\quad\lim f(x_n)\neq\lim f(y_n),
+        \end{equation*}
+        
+        \noindent then we can conclude that the functional limit $\lim_{x\rightarrow c} f(x)$ does not exist.
+    \end{corollary}
+    
+    \newpage
+    
+    \noindent So the idea here is this: We know that the rationals are dense in $\mathbb{R}$ and the irrationals are also dense in $\mathbb{R}$, so this means that every real number is a limit point of both sets. Thus, 0 is a limit point of both $\mathbb{Q}$ and $\mathbb{Q}^c$. This means we are looking pretty good so far in our intention to use the previous corollary. But! Can we find sequences $(x_n)\subseteq\mathbb{Q}$ and $(y_n)\subseteq\mathbb{Q}^c$ such that $\lim x_n=\lim y_n=0$? Well yeah ya' dumdum, that's precisely what it means for 0 to be a limit point of both sets. Okay, so to avoid spoiling the big surprise, we will save the rest of this for the proof. 
+    
+\end{discussion}
+    
+    \begin{proof}
+        We want to show that $f(x)$ is not differentiable at 0. To do this we will show that the limit of the quotient does not exist. Let $(x_n)\subseteq\mathbb{Q}$ be a sequence such that $\lim x_n=0$. We can do this since $\mathbb{Q}$ is dense in the $\mathbb{R}$. Similarly, let $(y_n)\subseteq\mathbb{Q}^c$ be a sequence such that $\lim y_n=0$. Then we have that $\lim x_n=\lim y_n$. Now consider the following limit
+        
+        \begin{equation*}
+            \begin{split}
+                \lim_{n\rightarrow \infty}\frac{f(x_n)-f(0)}{x_n} &= \lim_{n\rightarrow\infty}\frac{\frac{1}{2}x_n}{x_n} = \frac{1}{2}.
+            \end{split}
+        \end{equation*}
+        
+        \noindent And now consider this limit
+        
+        \begin{equation*}
+            \lim_{n\rightarrow\infty}\frac{f(y_n)-f(0)}{y_n} = \lim_{n\rightarrow\infty}\frac{x_n}{x_n} = 1.
+        \end{equation*}
+        
+        \noindent Hence, 
+        
+        \begin{equation*}
+            \lim_{n\rightarrow\infty}\frac{f(x_n)-f(0)}{x_n}\neq\lim_{n\rightarrow\infty}\frac{f(y_n)-f(0)}{y_n}.
+        \end{equation*}
+        
+        \noindent Therefore, by the previous corollary the limit does not exist and $f$ is not differentiable at 0.
+    \end{proof}
+    
+    \item Consider the function $s\colon[0,2]\rightarrow\mathbb{R}$ given by
+    
+    \begin{equation*}
+        s(x)=\begin{cases} 1 &\quad\text{if}\quad x\in[0,1) \\
+        5 &\quad\text{if}\quad x=1 \\
+        2 &\quad\text{if}\quad x\in(1,2]
+        \end{cases}.
+    \end{equation*}
+    
+    \noindent Prove $s$ is integrable on $[0,2]$.
+    
+    \begin{discussion}
+    
+        As before, let us remind ourselves what it would mean for $s$ to be integrable on $[0,2]$. There are several equivalent definitions, but the one we will use is the following:
+        
+        \begin{theorem}
+            A bounded function $f$ is integrable on $[a,b]$ if and only if, for every $\varepsilon>0$, there exists a partition $P_{\varepsilon}$ of $[a,b]$ such that
+            
+            \begin{equation*}
+                U(f,P_{\varepsilon})-L(f,P_{\varepsilon})<\varepsilon.
+            \end{equation*}
+        \end{theorem}
+        
+        \noindent So notice that our function is in fact  
+        
+    \end{discussion}
+    
+    \begin{proof}
+    
+    \end{proof}
+    
+    \item Give an example of numbers $a$ and $b$, and of integrable functions $f,g\colon[a,b]\rightarrow\mathbb{R}$, where $U(f+g,P)<U(f,P)+U(g,P)$ for every partition $P$ of $[a,b]$.
+    
+    \begin{proof} Let $f,g\colon[0,2]\rightarrow\mathbb{R}$ be functions defined in the following way
+    
+    \begin{align*}
+        f(x)&=\begin{cases} 1 & \text{if}\quad x<1 \\ 0 &\text{if}\quad x\geq 1 \end{cases} &  g(x)&=\begin{cases} 0 &\text{if}\quad x<1 \\ 1 &\text{if}\quad x\geq 1 \end{cases}.
+    \end{align*}
+    
+    \noindent We will skip the part where we prove both functions are integrable. However, if you want to check, just let $\varepsilon>0$, and let  $P=\{0,1-\frac{\varepsilon}{3},1+\frac{\varepsilon}{3},2\}$. Okay, so let us get on with the proof.\par
+    \hspace{4mm}We begin by creating a partition $P=\{x_0,\dots,x_n\}$. Now since every partition must include the endpoints of the domain of the function, then we know that $\abs{P}\geq 2$. So this gives us two cases. 
+    
+    \vspace{4mm}
+    
+    \noindent\underline{\textsc{Case 1:}} Assume $\abs{P}=2$. Then this implies $P=\{x_0,x_n\}=\{0,2\}$. In this case, we get the following calculation for $U(f,P),U(g,P)$, and $U(f+g,P)$. 
+    
+    \begin{align*}
+        M_f&=\sup\{g(x)\colon x\in[0,2]\}=1 & M_g&=\sup\{g(x)\colon x\in[0,2]\}=1.
+    \end{align*}
+    
+    \noindent Thus, $U(f,P)+U(g,P)=2+2=4$. Next, calculating the upper sum of the sum of the functions, we obtain $M_{fg}=\sup\{f(x)+g(x)\colon x\in[0,2]\}=1$. Thus, $U(f+g,P)=2$. Hence, if $\abs{P}=2$, then 
+    
+    \begin{equation*}
+        U(f+g)<U(f,P)+U(g,P).
+    \end{equation*}
+    
+    \noindent\underline{\textsc{Case 2:}} Assume $\abs{P}>2$. Consider the sets $A=\{x\in P\colon x<1\}$ and $B=\{x\in P\colon x\geq 1\}$. Clearly, $P=A\cup B$. Moreover, we can assume without loss of generality, that $\abs{A}=r$ and $\abs{B}=n-r$. With this in mind, we will calculate the upper sums. Starting with the function $f$, we get
+    
+    \newpage
+    
+    \begin{align*}
+        M_1&=\sup\{f(x)\colon x\in[x_0,x_1]\}=1, & M_{r+2}&=\{f(x)\colon x\in[x_{r+1},x_{r+2}]\} = 0 \\ 
+        &\hspace{2mm}\vdots & &\hspace{2mm}\vdots \\
+        M_{r+1}&=\sup\{f(x)\colon x\in[x_r,x_{r+1}]\}=1 & M_n&=\sup\{f(x)\colon x\in[x_{n-1},x_n]\}=0.
+    \end{align*}
+    
+    \noindent Thus,
+    
+    \begin{equation*}
+        \begin{split}
+            U(f,P)&=\sum_{k=1}^n M_k(x_k-x_{k-1}) \\
+            &=\sum_{k=1}^{r+1}M_k(x_k-x_{k-1})+\sum_{k=r+2}^n M_k(x_k-x_{k-1}) \\
+            &=1(x_1-x_0)+1(x_2-x_1)+\cdots+1(x_{r+1}-x_r)+0 \\
+            &= x_{r+1}-x_0 \\
+            &=x_{r+1}.
+        \end{split}
+    \end{equation*}
+    
+    \noindent Now calculating $U(g,P)$, we get
+    
+    \begin{align*}
+        M_1&=\sup\{g(x)\colon x\in[x_0,x_1]\}=0, & M_{r+1}&=\{g(x)\colon x\in[x_{r},x_{r+1}]\} = 1 \\ 
+        &\hspace{2mm}\vdots & &\hspace{2mm}\vdots \\
+        M_{r}&=\sup\{g(x)\colon x\in[x_{r-1},x_r]\}=0 & M_n&=\sup\{g(x)\colon x\in[x_{n-1},x_n]\}=1.
+    \end{align*}
+    
+    \noindent Thus,
+    
+    \begin{equation*}
+        \begin{split}
+            U(g,P) &= \sum_{k=1}^n M_k(x_k-x_{k-1}) \\
+            &= \sum_{k=1}^r M_k(x_k-x_{k-1}) +\sum_{k=r+1}^n M_k(x_k-x_{k-1}) \\
+            &= 0+1(x_{r+1}-x_r)+1(x_{r+2}-x_{r+1})+\cdots+1(x_n-x_{n-1}) \\
+            &= x_n-x_r \\
+            &= 2-x_r.
+        \end{split}
+    \end{equation*}
+    
+    \noindent Thus, $U(f,P)+U(g,P)=2+x_{r+1}-x_r>2$. Finally, calculating, $U(f+g,P)$, we get 
+    
+    \begin{equation*}
+        \begin{split}
+            &M_1=\sup\{f(x)+g(x)\colon x\in[x_0,x_1]\} = 1 \\
+            &M_2=\sup\{f(x)+g(x)\colon x\in[x_1,x_2]\}=1 \\
+            &\hspace{7mm}\vdots \\
+            &M_n=\sup\{f(x)+g(x)\colon x\in[x_{n-1},x_n]\}=1.
+        \end{split}
+    \end{equation*}
+    
+    \noindent Thus, 
+    
+    \begin{equation*}
+        \begin{split}
+            U(f+g,P)&=\sum_{k=1}^n M_k(x_k-x_{k-1}) \\
+            &= 1(x_1-x_0)+1(x_2-x_1)+\cdots+1(x_n-x_{n-1}) \\
+            &= x_n-x_0 \\
+            &= 2.
+        \end{split}
+    \end{equation*}
+    
+    \noindent Therefore, 
+    
+    \begin{equation*}
+        U(f+g,P)=2 < 2+x_{r+1}-x_r = U(f,P)+U(g,P).
+    \end{equation*}
+    
+    \end{proof}
+    
+    \item Prove that if $f\colon[a,b]\rightarrow\mathbb{R}$ is integrable, then there exists a sequence $P_n$ of partitions of $[a,b]$ for which 
+    
+    \begin{equation*}
+        \lim_{n\rightarrow\infty}[U(f,P_n)-L(f,P_n)]=0.
+    \end{equation*}
+    
+    \begin{discussion}
+        
+    \end{discussion}
+    
+    \begin{proof}
+    
+    \end{proof}
+    
+\end{enumerate}
+
+\end{document}

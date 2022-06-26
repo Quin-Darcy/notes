@@ -1,0 +1,218 @@
+\section{}
+\documentclass[leqno]{article}
+
+%------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+%------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[colorlinks=true,pagebackref=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red, linkcolor=blue}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+
+\newcommand{\deg}[1]{\text{deg}(#1)}
+\newcommand{\g}[1]{\text{Gal}(#1)}
+
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{customthm}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\textit{\oldproofname}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+
+\makeatletter
+\renewenvironment{proof*}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=4mm
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\begin{document}
+\title{Liar's Dice: A Closer Look}
+\author{Quin Darcy}
+\date{June, 22 2020}
+\maketitle
+
+\section{A Motivating Example}
+
+Suppose there was 4 people, each person had 5 dice, and each dice had 6 sides. What is the probability that there will be 7 total 2's after all the dice have been rolled once? To answer this we need to know two things:
+    \begin{enumerate}[label=(\roman*)]
+        \item How many ways can 7 dice, amongst the 20, have 2 on their face?
+        \item How many possible outcomes are there if 20 dice are rolled?
+    \end{enumerate}
+To answer the first question consider a box of 5 balls, numbered 1,2,3,4,5 and  randomly selecting 3 balls from the box. How many ways can you do this? Below is a list of all the possibilities:
+    \begin{align*}
+         &1,2,3 & &1,4,5 \\
+         &1,2,4 & &2,3,4 \\
+         &1,2,5 & &2,3,5 \\
+         &1,3,4 & &2,4,5 \\
+         &1,3,5 & &3,4,5
+    \end{align*}
+We see that there are 10 possible ways to select 3 numbered balls from a box containing 5 balls. Also note that the order we select the balls does not matter, only the number on the ball.\par What the above is an illustration of is something called the \emph{choose function} or the \emph{binomial coefficient}, denoted
+    \begin{equation*}
+        \binom{n}{k}=\frac{n!}{k!(n-k)!},
+    \end{equation*}
+where $n$ stands for how many balls are in the box and $k$ stands for how many things are we selecting from the box. So in the above example $n=5$ and $k=3$. Hence,
+    \begin{equation*}
+        \binom{5}{3}=\frac{5!}{3!(5-3)!}=\frac{5\cdot4\cdot3\cdot2\cdot1}{(3\cdot2\cdot1)(2\cdot1)}=\frac{20}{2}=10.
+    \end{equation*}
+This does not fully capture the question posed in (i) however.\par Suppose now that we have a box of 15 balls where 5 of them are red and numbered 1 through 5, 5 are blue and numbered 1 through 5, and 5 are green and numbered 1 through 5. How many ways can we select 5 balls where each number appears once and exactly 3 of the 5 bals are red?\par Well for every set of 5 balls, if 3 balls are red, then the remaining 2 balls can either be: (blue, blue), (blue, green), (green, blue), or (green, green). This means that every instance of 5 balls where exactly 3 are red, has 4 variations. Thus, we first imagine a selection of 5 balls and consider how many ways we can select 3, but we already know this to be $\binom{5}{3}=10$, and we then multiply this by the number of variations which is equal to 4. Also note that the number of variations is determined by
+    \begin{equation*}
+        (\text{\# of colors}-1)^{\text{\# of balls selected}-\text{\# of balls that are red}}=(3-1)^{5-3}=2^2=4.
+    \end{equation*}
+Thus, our final answer is $10\cdot 4=40$ and so there are 40 different ways you can select 5 balls where each number appears once and exactly 3 of them are red.\par We are now ready to answer question (i). All we have to do is think of the sides of the dice as the number of colors each ball comes in. So if we roll 20 dice, then there are 
+    \begin{equation*}
+        \binom{20}{7}
+    \end{equation*}
+many ways we can select 7 dice from the 20 rolled and there are
+    \begin{equation*}
+        (6-1)^{20-7}=5^{13}
+    \end{equation*}
+ways you can have exactly 7 dice displaying 2. Hence, there are
+    \begin{equation*}
+        5^{13}\binom{20}{7}=(1220703125)(77520)=94,628,906,250,000
+    \end{equation*}
+ways that you can roll 20 dice and have exactly 7 of those dice display 2. That is a lot of ways! But what is the probability that this will happen? To determine this, we need to answer question (ii).\par This one is quite easy to answer. Imagine rolling 20 dice. The first die can be any number between 1 and 6. The second die can be any number between 1 and 6, and so on. Thus, there is 6 possibilities for the first die, 6 possibilities for the second die, etc. Hence, there are 
+    \begin{equation*}
+        6^{20}
+    \end{equation*}
+possible rolls in total.\par Finally, to calculate the probability of a certain event (i.e., having exactly 7 die show 2) we determine how many ways that event can occur and divide that by the total number of possible outcomes. Thus, the probability of our event is
+    \begin{equation*}
+        \frac{5^{13}\binom{20}{7}}{6^20}=\frac{94628906250000}{3656158440062976}=0.0258820584.
+    \end{equation*}
+So there is a about a 2.6\% chance of this happening.
+\section{Expected Value}
+As we saw in the example above, the chances of exactly 7 dice displaying the same value if 20 dice were rolled was about 2.6\%, which is quite small. A natural question then might be: If we rolled 20 dice, how many of those dice should we expect to have the same value? In other words, what number can we replace 7 with to maximize the probability?\par Consider the case with one die. We know that each value on the die has a probability of 1/6 of being displayed. So then if we rolled the die, say, an infinite number of times, what would the average value be? To calculate this, we simply add each value multiplied by the probability associated with that value. So if we rolled a die infinitely many times, the average value rolled would be
+    \begin{equation*}
+        \begin{split}
+            \sum_{i=1}^6 i\frac {1}{6}&=1\frac{1}{6}+2\frac{1}{6}+3\frac{1}{6}+4\frac{1}{6}+5\frac{1}{6}+6\frac{1}{6} \\
+            &=\frac{1}{6}(1+2+3+4+5+6) \\
+            &=\frac{21}{6}=3.5.
+        \end{split}
+    \end{equation*}
+This number is called the \emph{expected value} and is the average value of a die that has been rolled infinitely many times. So if you roll a die $n$ times, then as $n$ grows larger, the average will converge to the expected value.\par In the case of our 20 dice, we learned how to calculate the probability that $s$ many of them will be the same. We learned that this probability is 
+    \begin{equation*}
+        p(s)=\frac{5^{20-s}\binom{20}{s}}{6^{20}}.
+    \end{equation*}
+So then imagine we rolled 20 dice and counted how many of them displayed a 2. Then we did the same thing again and again, noting how many had a 2 each time, then we averaged these numbers. If we do this experiment infinitely many times, the average will be equal the expected value. In fact, the expected value is the number which maximizes the probability. So what is the expected value for 20 dice? Using the formula above we see that it is
+    \begin{equation*}
+        \sum_{i=1}^{20}i\cdot p(i)=\frac{20}{6}\approx 3.33.
+    \end{equation*}
+So this means that if 20 dice are rolled, that about 3 of those dice have the same value is the most likely outcome. In fact, this has a probability of 
+    \begin{equation*}
+        p(3)=\frac{5^{20-3}\binom{20}{3}}{6^{20}}\approx 24\%
+    \end{equation*}
+and any other outcome is less likely to occur. So then if you were to guess how many 2's there are if 20 dice are rolled, guess 3.
+\newpage
+\section{Generalization} 
+With everything we learned above, we can now generalize this situation. Suppose there was $k$ many people, each of which had $m$ many dice and each die had $n$ many sides. Then if all the dice are rolled, the probability that exactly $s$ many of them have the same face value is
+    \begin{equation*}
+        p(s)=\frac{(n-1)^{mk-s}\binom{mk}{s}}{n^{mk}}.
+    \end{equation*}
+And if those $mk$ many dice are rolled, the most likely outcome is that 
+    \begin{equation*}
+        \frac{mk}{n}
+    \end{equation*} 
+many of them have the same face value. And this outcome has a probability of 
+    \begin{equation*}
+        \sum_{i=1}^{mk}i\cdot p(i),
+    \end{equation*}
+which is the maximum probability of all outcomes. So, in short, once the dice are rolled, take the total number of dice and divide it by the number of sides the die has and this number is the safest bet if you were trying to guess how many dice in total had some particular value on it.
+\end{document}

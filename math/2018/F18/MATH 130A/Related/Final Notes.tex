@@ -1,0 +1,327 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\newenvironment{twoproof}{\tabular{@{\stepproofc}c|l}}{\endtabular}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=1.7mm,labelindent=0mm}
+
+\begin{document}
+
+\section{Final Review}
+
+\hline
+
+\vspace{2mm}
+ 
+Four of the following 22 items will be asked on the final. Shove 'em all in your brain doohd.
+
+\vspace{2mm}
+
+\begin{enumerate}
+    \item State the triangle inequality.
+    \begin{description}
+        \item\textbf{Solution:} For all $x,y\in\mathbb{R}$: $\abs{x+y}\leq\abs{x}+\abs{y}$.
+    \end{description}
+    \item Define what it means to be complete.
+    \begin{description}
+        \item\textbf{Solution:} \textit{A field \mathbb{F} is complete when: if $S\subseteq\mathbb{F}$, and $S$ has at least one element, and $S$ has at least one lower bound, then there is an $s\in\mathbb{F}$ that is the greatest lower bound of $S$.} 
+    \end{description}
+    \item State the supremums analytically theorem.
+    \begin{description}
+        \item\textbf{Solution:} Let $A\subseteq\mathbb{R}$. Then $\text{sup}(A)=\alpha$ iff
+        \begin{enumerate}
+            \item $\alpha$ is an upper bound of $A$.
+            \item Given any $\epsilon>0$, $\alpha-\epsilon$ is not an upper bound of $A$. That is, there is some $x\in A$ for which $ x>\alpha-\epsilon$.
+        \end{enumerate}
+    \end{description}
+    \item State the Archimedean Principle.
+    \begin{description}
+        \item\textbf{Solution:} \textit{If $r\in\mathbb{R}$, then there is an $n\in\mathbb{N}$ such that $r<n$. In particular, for any $\epsilon>0$, there exists $n\in\mathbb{N}$ such that $1/n<\epsilon$.}
+    \end{description}
+    \item State the bijection principle.
+    \begin{description}
+       \item\textbf{Solution:} \textit{Two sets have the same cardinality iff there exists a bijection between them.} 
+    \end{description}
+    \item Between $\{1,7,12\},\mathbb{N},\mathbb{Q},\mathbb{Z},\mathbb{R}$, and $\mathcal{P}(\mathbb{R})$, state which of these sets have the same size and place the sets into increasing order.
+    \begin{description}
+        \item\textbf{Solution:} \begin{enumerate}
+            \item $\abs{\mathbb{N}}=\abs{\mathbb{Z}}=\abs{\mathbb{Q}}$.
+            \item $\abs{\{1,7,12\}}<\abs{\mathbb{N}}=\abs{\mathbb{Z}}=\abs{\mathbb{Q}}<\abs{\mathbb{R}}<\abs{\mathcal{P}(\mathbb{R})}$.
+        \end{enumerate}
+    \end{description}
+    \item Define what it means for a sequence to be bounded. 
+    \begin{description}
+        \item\textbf{Solution:} A sequence $(a_n)$ is bounded iff there exists some $C\in\mathbb{R}$ such that $\abs{a_n}\leq C$, for all $n$.
+    \end{description}
+    \item Define what it means for a sequence $(a_n)$ to converge to a number $a$.
+    \begin{description}
+        \item\textbf{Solution:} $(a_n)\rightarrow a$ if for all $\epsilon>0$ there exists $N\in\mathbb{N}$ such that for all $n>N$, $\abs{a_n-a}<\epsilon$.
+    \end{description}
+    \item State the three types of ways that a sequence can diverge.
+    \begin{description}
+        \item\textbf{Solution:} A sequence $(a_n)$ diverges
+        \begin{enumerate}
+            \item to $\infty$ if, for all $M>0$, there exists some $N$ such that $a_n>M$ for all $n>N$.
+            \item to $-\infty$ if, for all $M<0$, there exists some $N$ such that $a_n<M$ for all $n>N$.
+            \item Otherwise, the limit of $(a_n)$ does not exist.
+        \end{enumerate}
+    \end{description}
+    \item State the five limit laws.
+    \begin{description}
+        \item\textbf{Solution:} Assume $(a_n)$ and $(b_n)$ are convergent sequences of real numbers such that $a_n\rightarrow a$, and $b_n\rightarrow b$. Also assume that $c\in\mathbb{R}$. Then
+        \begin{enumerate}
+            \item $(a_n+b_n)\rightarrow a+b$.
+            \item $(a_n-b_n)\rightarrow a-b$.
+            \item $(a_n b_n)\rightarrow a b$.
+            \item $(\frac{a_n}{b_n})\rightarrow\frac{a}{b}$. Provided that $b_n\neq 0$, for all $n$.
+            \item $(c a_n)\rightarrow c a$.
+        \end{enumerate}
+    \end{description}
+    \item State the sequence squeeze theorem.
+    \begin{description}
+        \item\textbf{Solution:} Assume that $a_n\leq x_n\leq b_n$. Also assume that $a_n\rightarrow L$, and $b_n\rightarrow L$. Then $x_n\rightarrow L$.
+    \end{description}
+    \item State the monotone convergence theorem.
+    \begin{description}
+        \item\textbf{Solution:} Suppose $(a_n)$ is monotone. Then $(a_n)$ converges iff it is bounded. Moreover,
+        \begin{enumerate}
+            \item If $(a_n)$ is increasing, then either $(a_n)$ diverges to $\infty$, or 
+            \begin{equation*}
+                \lim\limits_{n\rightarrow\infty}a_n=\text{sup}(\{a_n\colon n\in\mathbb{N}\}).
+            \end{equation*}
+            \item If $(a_n)$ is decreasing, then either $(a_n)$ diverges to $-\infty$, or 
+            \begin{equation*}
+                \lim\limits_{n\rightarrow\infty}a_n=\text{inf}(\{a_n\colon n\in\mathbb{N}\}).
+            \end{equation*}
+        \end{enumerate}
+    \end{description}
+    \item State the Bolzano-Weierstrass theorem.
+    \begin{description}
+        \item\textbf{Solution:} Every bounded sequence has a convergent subsequence.
+    \end{description}
+    \item Define what it means for a sequence to be Cauchy.
+    \begin{description}
+        \item\textbf{Solution:} A sequence $(a_n)$ is Cauchy if for all $\epsilon>0$, there exists some $N$ such that 
+        \begin{equation*}
+            \abs{a_m-a_n}<\epsilon, \text{ for all }m,n>N.
+        \end{equation*}
+    \end{description}
+    \item Define what it means to say $\sum\limits_{k=1}^{\infty}a_k=L$.
+    \begin{description}
+        \item\textbf{Solution:} Given a series $\sum\limits_{k=1}^{\infty}a_k$, 
+        \begin{enumerate}
+            \item The numbers $a_k$ are the terms of the series.
+            \item The sequence of partial sums is the sequence $\bigg(\sum\limits_{k=1}^na_k\bigg)_{n=1}^{\infty}$. That is, it's the sequence $(s_n)$, where 
+            \begin{equation*}
+                \begin{split}
+                    &s_1 = a_1 \\
+                    &s_2 = a_1 + a_2 \\
+                    &s_3 = a_1 + a_2 + a_3 \\
+                    &s_4 = a_1 + a_2 + a_3 + a_4 \\
+                    &\text{\hspace{6mm}}\vdots
+                \end{split}
+            \end{equation*}
+            \item The series converges (or is equal to) $L$ if $s_n\rightarrow L$, and diverges otherwise.
+        \end{enumerate}
+    \end{description}
+    \item State the $k^{\text{th}}$ term test, the geometric series test, the comparison, the $p$-test, and the alternating series test.
+    \begin{description}
+        \item\textbf{Solution:}
+        \begin{enumerate}
+            \item(\textit{kth term test})  If $a_k\not\rightarrow 0$, then $\sum\limits_{k=1}^{\infty}a_k$ diverges.
+            \item(\textit{Geometric Series Test}) Assume that $a$ and $r$ are nonzero real numbers. Then
+            \begin{equation*}
+                \sum\limits_{k=1}^{\infty}a\cdot r^k=\begin{cases} \frac{a}{1-r} & \text{if }\abs{r}<1 \\ \text{diverges} & \text{if }\abs{r}\geq 1 \end{cases}.
+            \end{equation*}
+            \item(\text{Comparison Test}) Assume $0\leq a_k\leq b_k$ for all $k$,
+            \begin{enumerate}
+                \item If $\sum\limits_{k=1}^{\infty} b_k$ converges, then $\sum\limits_{k=1}^{\infty} a_k$ converges.
+                \item If $\sum\limits_{k=1}^{\infty} a_k$ diverges, then $\sum\limits_{k=1}^{\infty} b_k$ diverges.
+            \end{enumerate}
+            \item(\textit{The p-test}) The series
+            \begin{equation*}
+                \sum\limits_{k=1}^{\infty}\frac{1}{k^p}
+            \end{equation*}
+            \noindent converges iff $p>1$.
+            \item(\textit{The Alternating Series Test}) Assume that $(a_k)$ is a monotonically decreasing sequence and $a_k\rightarrow 0$, then 
+            \begin{equation*}
+                \sum\limits_{k=1}^{\infty}(-1)^{k+1}a_k
+            \end{equation*}
+            \noindent converges.
+        \end{enumerate}
+    \end{description}
+    \item Define what it means to converge absolutely and converge conditionally.
+    \begin{description}
+        \item\textbf{Solution:} Consider the series $\sum\limits_{k=1}^{\infty}a_k$.
+        \begin{enumerate}
+            \item If $\sum\limits_{k=1}^{\infty}\abs{a_k}$ converges, then we say $\sum\limits_{k=1}^{\infty}a_k$ converges absolutely. 
+            \item If $\sum\limits_{k=1}^{\infty}a_k$ converges, but $\sum\limits_{k=1}^{\infty}\abs{a_k}$ diverges, then we say $\sum\limits_{k=1}^{\infty}a_k$ converges conditionally.
+        \end{enumerate}
+    \end{description}
+    \item State the series rearrangement theorem.
+    \begin{description}
+        \item\textbf{Solution:}
+        \begin{enumerate}
+            \item(\textit{Series Rearrangement Theorem}) If a series $\sum_{k=1}^{\infty}a_k$ converges conditionally, then for any $L$ ($L\in\mathbb{R}$ or $L=\pm\infty$) there exists some rearrangement of $\sum_{k=1}^{\infty}a_k$ which converges to $L$.
+        \end{enumerate}
+    \end{description}
+\end{enumerate}
+
+\section{Selected Proofs}
+Two of the following proofs will be asked for on the final. 
+
+\begin{enumerate}
+    \item Assume that $\mathbb{F}$ is an ordered field and $a,b,c,d\in\mathbb{F}$ with $a<b$ and $c<d$. Show $a+c<b+d$.
+    \begin{description}
+        \item\textbf{PROOF:} Since $a<b$, then $b-a\in P$. Similarly, since $c<d$, then $d-c\in P$. Thus, $b-a\in P$ and $d-c\in P$. By the properties of $P$, we then have that $(b-a)+(d-c)\in P$. Rearranging terms we obtain, $(b+d)-(a+c)\in P$. Therefore, $a+c<b+d$. \square
+    \end{description}
+    \item Assume $\text{sup}(A)<\text{sup}(B)$. Show that there exists an element $b\in B$ that is an upper bound for $A$.
+    \begin{description}
+        \item\textbf{PROOF:} Recall the Supremums Analytically Theorem. We have that $\alpha=\text{sup}(B)$ iff $\alpha$ is an upper bound for the set $B$, and for all $\epsilon>0$, $\alpha-\epsilon$ is not an upper bound for $B$. If we let $\epsilon=\text{sup}(B)-\text{sup}(A)>0$, then by the previously mentioned theorem, there exists some $b\in B$ such that $b>\text{sup}(B)-\epsilon$. This is equivalent to $b>\text{sup}(A)$. Thus, for all $a\in A$ we have 
+        \begin{equation*}
+            b>\text{sup}(A)\geq a.
+        \end{equation*}
+        \noindent Therefore, there exists a $b\in B$ which is an upper bound for $A$. \square
+    \end{description}
+    \item Is the subset of rational numbers
+    \begin{equation*}
+        \bigg\{\frac{m}{n}\colon m,n\in\mathbb{Z}\wedge 1\leq n\leq 10\bigg\}
+    \end{equation*}
+    \noindent dense in $\mathbb{R}$?
+    \begin{description}
+        \item\textbf{PROOF:} Recall that for a set $A\in\mathbb{R}$ to be dense, we require that for all $x,y\in\mathbb{R}$, there must exist $a\in A$ such that $x<a<y$. Now let $x,y\in\mathbb{R}$. If our set is dense in $\mathbb{R}$, then we must show there exists some $m/n$ with $1\leq n\leq 10$, such that $x<m/n<y$. Since this must be true for all $x$ and $y$. Let $y=1/11$ and let $x=1/12$. Then if there is such an $m/n$ which satisfies the condition, we should have 
+        \begin{equation*}
+            \begin{split}
+                &\frac{1}{12}<\frac{m}{n}<\frac{1}{11} \\
+                &\Rightarrow \frac{n}{12}<m<\frac{n}{11}. \\
+            \end{split}
+        \end{equation*}
+        \noindent Now consider
+        \begin{equation*}
+            \frac{n}{11}-\frac{n}{12}=\frac{12n}{132}-\frac{11n}{132}=\frac{n}{132}.
+        \end{equation*}
+        \noindent Since $1\leq n\leq 10$, then for all $n$ within this range
+        \begin{equation*}
+            0<\frac{n}{132}<1.
+        \end{equation*}
+        Thus, any number between $n/11$ and $n/12$ cannot be an integer. This is a contradiction since
+        \begin{equation*}
+            \frac{n}{12}<m<\frac{n}{11}
+        \end{equation*}
+        \noindent and $m\in\mathbb{Z}$. Thus, it is not true that for all $x,y\in\mathbb{R}$, there exists $m/n$ from our set such that $x<m/n<y$. Therefore, the set 
+        \begin{equation*}
+            \bigg\{\frac{m}{n}\colon m,n\in\mathbb{Z}\wedge 1\leq n\leq 10\bigg\}
+        \end{equation*}
+        \noindent is \underline{not} dense in $\mathbb{R}$. \square
+    \end{description}
+    \item Show that the smallest infinity is $\abs{\mathbb{N}}$. That is, show that if $A\subseteq\mathbb{N}$, then either $A$ is finite or $\abs{A}=\abs{\mathbb{N}}$.
+    \begin{description}
+        \item\textbf{PROOF:} Assume that $A\subseteq\mathbb{N}$ and that $A$ is not a finite set. Then since $\mathbb{N}$ is ordered and $A\subseteq\mathbb{N}$, this means we may order the elements of $A$. Let this ordering be written as
+        \begin{equation*}
+            a_1<a_2<a_3<\cdots
+        \end{equation*}
+        \noindent Then consider the function 
+        \begin{equation*}
+            \begin{split}
+                f&\colon\mathbb{N}\rightarrow A \\
+                &f(n)\mapsto a_n.
+            \end{split}
+        \end{equation*}
+        \noindent Now suppose for some $m,n\in\mathbb{N}$, $f(m)=f(n)$. This means that $a_m=a_n$. Thus, $m=n$ and $f$ is thereby injective. Now let $a_k\in A$. Then since $k\in\mathbb{N}$ by definition, it follows that $f(k)=a_k$ and $f$ is thereby surjective. Thus, $f$ is bijective. Therefore, $\abs{A}=\abs{N}$. \square
+    \end{description}
+    \item If $a_n\rightarrow a$ and $b_n\rightarrow b$, then $(a_n+b_n)\rightarrow(a+b)$.
+    \begin{description}
+        \item\textbf{PROOF:} Let $\epsilon>0$. Since $\frac{\epsilon}{2}>0$ and $a_n\rightarrow a$, then we know there exists some $N_1\in\mathbb{N}$ such that for all $n>N_1$,
+        \begin{equation}
+            \abs{a_n-a}<\frac{\epsilon}{2}.
+        \end{equation}
+        \noindent Similarly, since $b_n\rightarrow b$, then there exists some $N_2\in\mathbb{N}$ such that for all $n>N_2$, 
+        \begin{equation}
+            \abs{b_n-b}<\frac{\epsilon}{2}.
+        \end{equation}
+        \noindent Now let $N=\text{max}\{N_1, N_2\}$. Then for all $n>N$, it follows that $\abs{a_n-a}<\epsilon/2$ and $\abs{b_n-b}<\epsilon/2$. Adding these two inequalities together yields the following
+        \begin{equation*}
+            \abs{a_n-a}+\abs{b_n-b}<\epsilon.
+        \end{equation*}
+        \noindent Thus, by the triangle inequality we obtain
+        \begin{equation*}
+            \begin{split}
+                &\abs{(a_n+b_n)-(a+b)}\leq\abs{a_n-a}+\abs{b_n-b}<\epsilon \\
+                &\Leftrightarrow\abs{(a_n+b_n)-(a+b)}<\epsilon \\
+                &\Leftrightarrow (a_n+b_n)\rightarrow(a+b). 
+            \end{split}
+        \end{equation*}
+        \noindent Thus, $(a_n+b_n)\rightarrow(a+b)$ as desired. \square
+    \end{description}
+    \item Let $(a_n)$ be a sequence where $a_1=1$ and, for each $n>1$, $a_n=a_{n-1}+\frac{1}{n^2}$. We will take as fact that $(a_n)\rightarrow\frac{\pi^2}{6}$. Now let $(b_n)$ be the sequence where $b_1=1$ and. for each $n>1$, $b_n=b_{n-1}+\frac{1}{n^3}$. Prove that $(b_n)$ converges.
+    \begin{description}
+        \item\textbf{PROOF:} By assumption, both $a_1=1$ and $b_1=1$. Thus, we can say that $b_1\leq a_1$. Now observe that since $a_n-a_{n-1}=\frac{1}{n^3}>0$, and $b_n-b_{n-1}=\frac{1}{n^2}>0$, then both $(a_n)$ and $(b_n)$ are monotonically increasing. The former converges by assumption, and so by the monotone convergence theorem
+        \begin{equation*}
+            a_n\rightarrow\text{sup}(\{a_n\colon n\in\mathbb{N}\}).
+        \end{equation*}
+        \noindent This means the supremum exists. Now assume $b_{k-1}\leq a_{k-1}$, for some $k>1$. Then we have the following
+        \begin{equation*}
+            \begin{split}
+                &b_{k-1}\leq a_{k-1} \\
+                &\Leftrightarrow b_{k-1}+\frac{1}{k^3}\leq a_{k-1}+\frac{1}{k^2} \\
+                &\Leftrightarrow b_k\leq a_k.
+            \end{split}
+        \end{equation*}
+        \noindent Thus, $b_k\leq a_k$ for all $k$. Thus, 
+        \begin{equation*}
+            b_k\leq a_k\leq\text{sup}(\{a_n\colon n\in\mathbb{N}\})
+        \end{equation*}
+        \noindent for any $k\in\mathbb{N}$. Thus, $(b_n)$ is bounded above and below. Therefore, by the monotone convergence theorem, $(b_n)$ converges. 
+    \end{description}
+\end{enumerate}
+
+\end{document}

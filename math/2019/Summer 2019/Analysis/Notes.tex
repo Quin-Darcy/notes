@@ -1,0 +1,867 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+
+%\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\newcommand{\closure}[2][3]{%
+  {}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=0mm%\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+
+\begin{document}
+
+\title{Notes for Analysis}
+\author{Quin Darcy}
+\date{May 18, 2019}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+\section{Metric Spaces And Other Fun Stuff}
+
+Most math, up to calculus, uses a notion of distance to be able to say things about the behavior of functions. In calculus, distance is needed to define convergence and continuity of functions, which are two foundational concepts upon which differentiation and integration are built. The distance used in these instances are referring to a distance between either numbers or geometric vectors. This is because all of calculus, as it is initially taught, takes place in Euclidian space. However, if we wish to burrow deeper into the theory behind all things which exhibit similar properties and behavior, we need a notion of distance that will work for things beyond just numbers and vectors, but should also include sequences, sets, and functions. This is because, as far as spaces go, there are many spaces of interest to us and its elements are neither numbers nor geometric vectors. This necessity of a broader understanding of distance is what motivates the following section. To set the stage, we are going to keep the intuitions of first year calculus in mind, but we want to lower the resolution on that picture and see what are the fundamental properties of a space equipped with a distance. In other words, open your calculus book, squint your eyes until your vision is blurry and ask ``Okay, what can I still see? What statements in this book are purely a result of us having distance?''
+
+\newpage
+
+\subsection{Definitions}
+
+\vspace{0.5mm}
+
+\hline
+
+\vspace{4mm}
+
+\begin{definition}
+\label{df:1.1}
+    A \textbf{metric space} $(X, d)$ consists of a nonempty set $X$ and a function $d\colon X\times X\rightarrow[0,\infty)$ such that:
+    
+    \begin{enumerate}[label=(\roman*)]
+        \item (Positivity) $\forall x\forall y\big[x\in X\wedge y\in  X\rightarrow \big(d(x,y)\geq 0\big)\wedge\big(d(x,y)=0\leftrightarrow x=y\big)\big]$ 
+        \item (Symmetry) $\forall x\forall y\big(x\in X\wedge y\in X\rightarrow d(x,y)=d(y,x)\big)$
+        \item (T.I.) $\forall x\forall y\forall z\big(x\in X\wedge y\in X\wedge z\in X\rightarrow d(x,y)\leq d(x,z)+d(z,y)\big)$.
+    \end{enumerate}
+    
+    \noindent Here T.I. stands for Triangle Inequality. A function $d$ satisfying conditions (i)-(iii) is called a metric space on $X$.
+\end{definition}
+
+\begin{definition}
+\label{df:1.2}
+    Assume that $(X, d_X)$ and $(Y, d_Y)$ are metric spaces. An \textbf{isometry} between $(X,d_X)$ to $(Y,d_Y)$ is a bijection $i\colon X\rightarrow Y$ such that $d_X(x,y)=d_Y(i(x),i(y))$ for all $x,y\in X$. We say that $(X, d_X)$ and $(Y,d_Y)$ are isometric if there exists an isometry from $(X,d_X)$ to $(Y,d_Y)$.
+\end{definition}
+
+\begin{definition}
+\label{df:1.3}
+    Given a metric space $(X,d)$ and a map $f\colon\mathbb{N}\rightarrow X$, we call the image $f(\mathbb{N})$ a \textbf{sequence} in $X$. Typically, sequnces are denotes as $(x_n)$ or $\{x_n\}_{n=1}^{\infty}$. 
+\end{definition}
+
+\begin{definition}
+\label{df:1.4}
+    Given a metric space $(X,d)$, a sequence $(x_n)$ in $X$, and a point $L\in X$, we say that the the sequence \textbf{converges} to $L$ if for every $\varepsilon>0$, there exists some $N\in\mathbb{N}$ such that if $n\in\mathbb{N}$ and $n\geq N$, then $d(x_n,L)<\varepsilon$. Typically, if $(x_n)$ converges to $L$, we denote it by 
+    
+    \begin{equation*}
+        \lim_{n\rightarrow\infty}x_n=L\quad\text{or}\quad x_n\rightarrow L.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+\label{df:1.5}
+    Given two metric spaces $(X,d_X)$ and $(Y,d_Y)$, and a point $c\in X$, a function $f\colon X\rightarrow Y$ is said to be \textbf{continuous at $c$} if for every $\varepsilon>0$, there exists a $\delta>0$ such that for all $x$, if $x\in X$ and $d_X(x,c)<\delta$, then $d_Y(f(x),f(c))<\varepsilon$. If this holds for every $c\in X$, then we say $f$ is \textbf{continuous on $X$}.
+\end{definition}
+
+\begin{definition}
+\label{df:1.6}
+    Let $(X, d_X)$ and $(Y,d_Y)$ be two metric spaces. A function $f\colon X\rightarrow Y$ is said to be a \textbf{Lipschitz function} if there is a constant $K\in\mathbb{R}$ such that $d_Y(f(u),f(v))\leq K\cdot d_X(u,v)$ for all $u, v\in X$.
+\end{definition}
+
+\begin{definition}
+\label{df:1.7}
+    Given a metric space $(X,d)$ and a function $f\colon X\rightarrow X$, if there exists a real number $0<s<1$ such that for all $x,y\in X$,
+    
+    \begin{equation*}
+        d\big(f(x),f(y)\big)\leq s\cdot d(x,y),
+    \end{equation*}
+    
+    \noindent then $f$ is called a \textbf{contraction mapping} with \textbf{contraction factor} $s$.
+\end{definition}
+
+\newpage
+
+\subsection{Some Interesting Examples And Results}
+
+\vspace{0.5mm}
+
+\hline 
+
+\vspace{4mm}
+
+    
+    \begin{prop}\label{prop:1.2} 
+        Assume that $(X,d_X)$ and $(Y,d_Y)$ are two metric spaces. Define a function 
+    
+        \begin{equation*}
+            d\colon\big(X\times Y\big)\times\big(X\times Y\big)\rightarrow\mathbb{R}
+        \end{equation*}
+    
+        \noindent by 
+    
+        \begin{equation*}
+            d\big((x_1,y_1),(x_2,y_2)\big)=d_X(x_1,x_2)+d_Y(y_1,y_2).
+        \end{equation*}
+    
+        \noindent Then $d$ is a metric on $X\times Y$.
+    \end{prop}
+    
+    \begin{proof}
+        Let $(x_1,y_1),(x_2,y_2)\in X\times Y$. Then we have that 
+        
+        \begin{equation*}
+            d\big((x_1,y_1),(x_2,y_2)\big)=d_X(x_1,x_2)+d_Y(y_1,y_2).
+        \end{equation*}
+        
+        Since both $(X,d_X)$ and $(Y,d_Y)$ are metric spaces by assumption, then it follows that $d_X(x_1,x_2)\geq 0$ and $d_Y(y_1,y_2)\geq 0$. Thus,
+        
+        \begin{equation}
+        \label{eq:1.1}
+            d\big((x_1,y_1),(x_2,y_2)\big)\geq 0.
+        \end{equation}
+        
+        Now assume $d\big((x_1,y_1),(x_2,y_2)\big)=0$. From this equality it follows that 
+        
+        \begin{equation}
+        \label{eq:1.2}
+            d_X(x_1,x_2)+d_Y(y_1,y_2)=0\Leftrightarrow d_X(x_1,x_2)=-d_Y(y_1,y_2).
+        \end{equation}
+        
+        \noindent Since $(Y,d_Y)$ is a metric space, then $d_Y(y_1,y_2)\geq 0$, which implies that $-d_Y(y_1,y_2)\leq 0$. Similarly, since $(X,d_X)$ is a metric space, then $d_X(x_1,x_2)\geq 0$. From the equality in (1), it follows that 
+        
+        \begin{equation}
+            \big(d_X(x_1,x_2\geq 0\big)\wedge\big(d_X(x_1,x_2)\leq 0\big).
+        \end{equation}
+        
+        \noindent With simplification and disjunctive syllogism on (2), we obtain that
+        
+        \begin{equation}
+            d_X(x_1,x_2)=0.
+        \end{equation}
+        
+        \noindent Furthermore, by the equality in (1), it follows that 
+        
+        \begin{equation}
+            0=-d_Y(y_1,y_2)\Leftrightarrow d_Y(y_1,y_1)=0.
+        \end{equation}
+        
+        \noindent Thus, from (3) and (4) it follows that $x_1=x_2$ and $y_1=y_2$. Thus, $(x_1,y_1)=(x_2,y_2)$. Therefore,
+        
+        \begin{equation}
+            d\big((x_1,y_1),(x_2,y_2)\big)=0\rightarrow (x_1,y_1)=(x_2,y_2).
+        \end{equation}
+        
+        Now assume $(x_1,y_1)=(x_2,y_2)$. Then $x_1=x_2$ and $y_1=y_2$. By the first property of metric spaces, we conclude that $d_X(x_1,x_2)=0$ and $d_Y(y_1,y_2)=0$. Thus, 
+        
+        \begin{equation*}
+            d\big((x_1,y_1),(x_2,y_2)\big)=0+0=0.
+        \end{equation*}
+        
+        \noindent Therefore, 
+        
+        \begin{equation}
+            (x_1,y_1)=(x_2,y_2)\rightarrow  d\big((x_1,y_1),(x_2,y_2)\big)=0.
+        \end{equation}
+        
+        \noindent Having shown (1), (6), and (7) we have proven condition (i) in Definition \ref{df:1.1} holds for the function $d$. Now let $(x_1,y_1),(x_2,y_2)\in X\times Y$. By assumption, 
+        
+        \begin{equation*}
+            d\big((x_1,y_1),(x_2,y_2)\big)=d_X(x_1,x_2)+d_Y(y_1,y_2).
+        \end{equation*}
+        
+        \noindent Since both $d_X$ and $d_Y$ are metrics, then 
+        
+        \begin{equation*}
+            d_X(x_1,x_2)\in\mathbb{R}\quad\text{and}\quad d_Y(y_1,y_2)\in\mathbb{R}.
+        \end{equation*}
+        
+        \noindent Then by commutativity of the real numbers it follows that
+        
+        \begin{equation*}
+            d_X(x_1,x_2)+d_Y(y_1,y_2)=d_Y(y_1,y_2)+d_X(x_1,x_2).
+        \end{equation*}
+        
+        \noindent Thus, 
+        
+        \begin{equation*}
+            \begin{split}
+                d\big((x_1,y_1),(x_2,y_2)\big)&=d_X(x_1,x_2)+d_Y(y_1,y_2) \\
+                &=d_Y(y_1,y_2)+d_X(x_1,x_2) \\
+                &= d\big((x_2,y_2),(x_1,y_2)\big).
+            \end{split}
+        \end{equation*}
+        
+        \noindent This proves condition (ii) of Definition \ref{df:1.1}.\par \hspace{4mm} Finally, let $(x_1,y_1),(x_2,y_2),(x_3,y_3)\in X\times Y$. Then consider the following sum 
+        
+        \begin{equation*}
+            \begin{split}
+                d&\big((x_1,y_1),(x_3,y_3)\big)+d\big((x_3,y_3),(x_2,y_2)\big)\\
+                &= d_X(x_1,x_3)+d_Y(y_1,y_3)+d_X(x_3,x_2)+d_Y(y_3,y_2) \\
+                &= \bigg(d_X(x_1,x_3)+d_X(x_3,x_2)\bigg)+\bigg(d_Y(y_1,y_3)+d_Y(y_3,y_2)\bigg)\\
+                &\geq d_X(x_1,x_2)+d_Y(y_1,y_2) \\
+                &= d\big((x_1,y_1),(x_2,y_2)\big).
+            \end{split}
+        \end{equation*}
+        
+        \noindent Thus, 
+        
+        \begin{equation*}
+            d\big((x_1,y_1),(x_2,y_2)\big)\leq d\big((x_1,y_1),(x_3,y_3)\big)+d\big((x_3,y_3),(x_2,y_2)\big).
+        \end{equation*}
+        
+        \noindent Condition (iii) of Definition \ref{df:1.1} is satisfied with this function $d$. Having satisfied (i), (ii), and (iii) of Definition \ref{df:1.1}, we conclude that the function $d$ is a metric on $X\times Y$.   
+    \end{proof}
+    
+    \newpage
+    
+    \begin{prop}\label{prop:1.2} 
+        Let $(X, d)$ be a metric space and choose a point $a\in X$. The function $f\colon X\rightarrow\mathbb{R}$ given by $f(x)=d(x,a)$ is continuous (we are using the usual metric on $\mathbb{R}$ given by $d_{\mathbb{R}}(x,y)=\abs{x-y}$).
+    \end{prop}
+    
+    \begin{proof}
+        Let $c\in X$ and let $\varepsilon>0$. We want to show that there exists $\delta>0$ such that $d_{\mathbb{R}}(f(x),f(c))<\varepsilon$ whenever $d_X(x,c)<\delta$. In other words, we need to show that there exists $\delta >0$ such that for all $x\in X$
+        
+        \begin{equation*}
+            \abs{x-c}<\delta\rightarrow\Bigl|\;\abs{x-a}-\abs{c-a}\,\Bigr|<\varepsilon.
+        \end{equation*}
+        
+        By the Reverse Triangle Inequality, we have that 
+        
+        \begin{equation*}
+            \begin{split}
+                \Bigl|\;\abs{x-a}-\abs{c-a}\,\Bigr|&\leq\abs{x-a-(c-a)}=\abs{x-c}.
+            \end{split}
+        \end{equation*}
+        
+        Now let $\delta=\varepsilon$ and let $x\in X$ such that $\abs{x-c}<\delta$. Then 
+        
+        \begin{equation*}
+            \delta=\varepsilon>\abs{x-c}=\abs{x-a-(c-a)}\geq\Bigl|\;\abs{x-a}-\abs{c-a}\,\Bigr|.
+        \end{equation*}
+        
+        Thus, if $\delta=\varepsilon$ and $x\in X$ such that $\abs{x-c}<\delta$, then 
+        
+        \begin{equation*}
+            \Bigl|\;\abs{x-a}-\abs{c-a}\,\Bigr|<\varepsilon.
+        \end{equation*}
+        
+        Therefore, $f$ is continuous.
+    \end{proof}
+    
+    \begin{prop}\label{prop:1.3} 
+        Let $(X,d)$ be a metric space and let $x_1,x_2,\dots,x_n\in X$. Then  
+        \begin{equation*}
+            d(x_1,x_n)\leq d(x_1,x_2)+d(x_2,x_3)+\cdots d(x_{n-1},x_n).
+        \end{equation*}
+    \end{prop}
+        
+    \begin{proof}
+        We will prove this by induction. Let $n\in\mathbb{N}$ and let $x_1,\dots,x_n\in X$. Define $\varphi(n)\coloneqq d(x_1,x_n)\leq d(x_1,x_2)+d(x_2,x_3)+\cdots+d(x_{n-1},x_n)$. We want to show that for all natural numbers $n\geq 2$, that $\varphi(n)$ holds.
+        
+        \vspace{4mm}
+        
+        \hspace{4mm}\underline{\textsc{Base Case:}} Let $n=2$. Then $d(x_1,x_2)=d(x_1,x_2)$. Thus, $d(x_1,x_2)\leq d(x_1,x_2)$. Therefore, $\varphi(2)$ holds.
+        
+        \vspace{4mm}
+        
+        \hspace{4mm}\underline{\textsc{Inductive Step:}} Assume that for some natural number $k\geq 2$, that $\varphi(k)$ holds. Then we have that 
+        
+        \begin{equation}
+            d(x_1,x_k)\leq d(x_1,x_2)+d(x_2,x_3)+\cdots+d(x_{k-1},x_k).
+        \end{equation}
+        
+        Now adding $d(x_k,x_{k+1})$ to both sides of (8), the left side becomes $d(x_1,x_k)+d(x_k,x_{k+1})$. This, by (iii) of Definition \ref{df:1.1}, is greater than or equal to $d(x_1,x_{k+1})$. Thus, 
+        
+        \begin{equation*}
+            d(x_1,x_{k+1})\leq d_(x_1,x_2)+d(x_2,x_3)+\cdots+d(x_k,x_{k+1}).
+        \end{equation*}
+        
+        Having shown that $\varphi(k)$ implies $\varphi(k+1)$ means that for all natural numbers $n\geq 2$, $\varphi(n)$ holds.
+    \end{proof}
+    
+    \begin{prop}\label{prop:1.4} 
+        All Lipschitz functions are continuous.
+    \end{prop}
+    
+    \begin{proof}
+        Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Assume $f\colon X\rightarrow Y$ is a Lipschitz function and that $c\in X$. Since $f$ is Lipschitz, then by Definition \ref{df:1.6}, we get that $K\in\mathbb{R}$ is our constant. Let $\varepsilon>0$ and let $\delta=\varepsilon/K$. Now let $x\in X$ such that $d_X(x,c)<\delta$. Since $x,c\in X$, then by assumption, 
+        
+        \begin{equation*}
+            d_Y(f(x),f(c))\leq K\cdot d_X(x,c)<K\cdot\delta=K\cdot\frac{\varepsilon}{\delta}=\varepsilon.
+        \end{equation*}
+        
+        Therefore, $d_Y(f(x),f(c))<\varepsilon$, as desired.
+    \end{proof}
+    
+    \begin{prop}\label{prop:1.5}
+        Let $(X,d)$ be a metric space and let $f\colon X\rightarrow X$ be a contraction mapping with contraction factor $s$. If $x,y\in X$, then
+    
+        \begin{equation*}
+            d\big(f^{\circ n}(x),f^{\circ n}(y)\big)\leq s^n\cdot d(x,y),
+        \end{equation*}
+    
+        \noindent for all $n\in\mathbb{N}$.
+    \end{prop}
+    
+    \begin{proof}
+        We will prove this using induction. First, let $n\in\mathbb{N}$ and define the predicate $\varphi(n)\coloneqq d\big(f^{\circ n}(x),f^{\circ n}(y)\big)\leq s^n\cdot d(x,y)$, for points $x,y\in X$.
+        
+        \vspace{4mm}
+        
+        \hspace{4mm}\underline{\textsc{Base Case:}} Let $n=1$. Then $d\big(f(x),f(y)\big)\leq s\cdot d(x,y)$ is true by the assumption that $f$ is a contraction mapping. Thus, $\varphi(1)$ holds.
+        
+        \vspace{4mm}
+        
+        \hspace{4mm}\underline{\textsc{Inductive Step:}} Assume $k\geq 1$ is a natural number and $\varphi(k)$ holds. Then we have that
+        
+        \begin{equation}
+           d\big(f^{\circ k}(x),f^{\circ k}(y)\big)\leq s^k\cdot d(x,y). 
+        \end{equation}
+        
+         However, since $f\colon X\rightarrow X$, then it follows that $f^{\circ k}(x),f^{\circ k}(y)\in X$. This being the case, then it follows from our assumption that $f$ is a contraction that 
+        
+        \begin{equation}
+            d\big(f^{\circ(k+1)}(x),f^{\circ(k+1)}(y)\big)\leq s\cdot d\big(f^{\circ k}(x),f^{\circ k}(y)\big).
+        \end{equation}
+        
+        Multiplying both sides of (9) by $s$, we find that 
+        
+        \begin{equation}
+            s\cdot d\big(f^{\circ k}(x),f^{\circ k}(y)\big)\leq s^{k+1}\cdot d(x,y).
+        \end{equation}
+        
+        Thus, (10) and (11) imply that 
+        
+        \begin{equation*}
+           d\big(f^{\circ(k+1)}(x),f^{\circ(k+1)}(y)\big)\leq s^{k+1}\cdot d(x,y).
+        \end{equation*}
+        
+        Therefore, having shown that $\varphi(k)$ implies $\varphi(k+1)$, then $\varphi(n)$ holds for all $n\in\mathbb{N}$.
+    \end{proof}
+    
+    \newpage
+    
+    \begin{prop}\label{prop:1.6}
+        Let $d_{\mathbb{R}}$ be the usual metric on $\mathbb{R}$ and let $d_{\text{disc}}$ be the discrete metric on $\mathbb{R}$. Let $id\colon\mathbb{R}\rightarrow\mathbb{R}$ be the identity function $id(x)=x$. The function 
+    
+        \begin{equation*}
+            id\colon(\mathbb{R}, d_{\text{disc}})\rightarrow(\mathbb{R},d_{\mathbb{R}})
+        \end{equation*}
+    
+        \noindent is continuous, but  
+    
+        \begin{equation*}
+            id\colon(\mathbb{R},d_{\mathbb{R}})\rightarrow(\mathbb{R},d_{\text{disc}})
+        \end{equation*}
+    
+        \noindent is not continuous.
+    \end{prop}
+    
+    \begin{proof}
+        To prove the first part, then by Definition \ref{df:1.5}, we must show that for all $c\in\mathbb{R}$,
+        
+        \begin{equation}
+            \big(\forall\varepsilon>0\big)\big(\exists\delta>0\big)\big(\forall x\big[x\in\mathbb{R}\wedge d_{\text{disc}}(x,c)<\delta\rightarrow d_{\mathbb{R}}\big(id(x),id(c)\big)<\varepsilon\big]\big).
+        \end{equation}
+        
+        We begin by letting $\varepsilon>0$. We then need to find a $\delta>0$ for which choosing an $x\in\mathbb{R}$ such that $d_{\text{disc}}(x,c)<\delta$ implies $\abs{x-c}<\varepsilon$. By nature of the discrete metric, we have that for all $x\in\mathbb{R}$, either $d_{\text{disc}}(x,c)=0$ or $d_{\text{disc}}(x,c)=1$. Thus, if we let $\delta=1$ and assume $d_{\text{disc}}(x,c)<\delta$, then this implies $d_{\text{disc}}(x,c)\neq 1$. Thus, $d_{\text{disc}}(x,c)=0$ and $x=c$. If $x=c$, then $\abs{x-c}=0<\varepsilon$, as desired. Therefore, $id$ is continuous at all $c\in\mathbb{R}$. \par\hspace{4mm}To prove the second claim, we must show that for some $c\in\mathbb{R}$
+        
+        \begin{equation}
+            \big(\exists\varepsilon>0\big)\big(\forall\delta>0\big)\big(\exists x\big[x\in\mathbb{R}\wedge d_{\mathbb{R}}(x,c)<\delta\wedge d_{\text{disc}}\big(id(x),id(c)\big)\geq \varepsilon\big]\big).
+        \end{equation}
+        
+        Let $\varepsilon=1/2$, let $\delta>0$, and let $x\in\mathbb{R}$ such that $x\neq c$ and $d_{\mathbb{R}}(x,c)<\delta$. By definition of the discrete metric, since $x\neq c$, then $d_{\text{disc}}(x,c)=1>\varepsilon$, as desired. Therefore, $id$ is discontinuous at every $c\in\mathbb{R}$. 
+    \end{proof}
+    
+    \begin{prop}\label{prop:1.7}
+        Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $f\colon X\rightarrow Y$ be a function and let $c\in X$. Then the following statements are equivalent:
+    
+        \begin{enumerate}[label=(\roman*)]
+            \item \textit{$f$ is continuous at $c$.}
+            \item \textit{For all sequences $(x_n)\subset X$, if $\displaystyle{\lim_{n\rightarrow\infty}x_n=c}$, then $\displaystyle{\lim_{n\rightarrow\infty}f(x_n)=f(c)}$.}
+        \end{enumerate}
+    \end{prop}
+    
+    \begin{proof}
+        Assume that $f$ is continuous at $c$ and let $(x_n)\subset X$ be a sequence that converges to $c$. We need to show that for all $\varepsilon>0$, there exists $N> 0$ such that for all $n$, if $n\in\mathbb{N}$ and $n\geq N$, then $d_Y(f(x_n),f(c))<\varepsilon$. We begin by letting $\varepsilon>0$. Since $f$ is continuous at $c$ by assumption, then there exists a $\delta_0>0$ such that $d_Y(f(x),f(c))<\varepsilon$ whenever $d_X(x,c)<\delta_0$. Now since $(x_n)$ converges to $c$, then there exists $N_0>0$ such that $d_X(x_n,c)<\delta_0$ whenever $n\geq N_0$. Thus, if we let $n\in\mathbb{N}$ and $n\geq N_0$, then $d_X(x_n,c)<\delta_0$ which implies that $d_Y(f(x_n),f(c))<\varepsilon$. Hence, $\lim_{n\rightarrow\infty}f(x_n)=f(c)$.\par\hspace{4mm} Assume that for all sequences $(x_n)\subset X$, if $(x_n)$ converges to $c$, then $(f(x_n))$ converges to $f(c)$. We need to show that for all $\varepsilon>0$, there exists $\delta>0$ such that for all $x$, if $x\in X$ and $d_X(x,c)<\delta$, then $d_Y(f(x),f(c))<\varepsilon$. We begin by letting $\varepsilon>0$ and letting $(x_n)\subset X$ be a sequence that converges to $c$. Since $(f(x_n))$ converges to $f(c)$, then there must exist some $N_0>0$ such that for all $n\geq N$, it follows that $d_Y(f(x_n),f(c))<\varepsilon$. Let $\delta=d_X(x_N,c)$. Then if $d_X(x,c)<\delta$ for some $x\in X$, then ...
+    \end{proof}
+    
+    \begin{theorem}[Banach's Fixed Point Theorem]\label{thm:1.1}
+        Assume that $(X,d)$ is a complete metric space and that $f\colon X\rightarrow X$ is a contraction mapping. Then $f$ has a unique fixed point $a$, and for all $x_0\in X$, the sequence 
+        
+        \begin{equation*}
+            x_0, x_1=f(x_0), x_2=f^{\circ 2}(x_0), \dots, x_n=f^{\circ n}(x_0),\dots
+        \end{equation*}
+        
+        \noindent converges to $a$.
+    \end{theorem}
+    
+    \begin{proof}
+        We'll begin by first proving the uniqueness of the fixed point $a$. To do this, we will assume $f$ has two fixed points, $a$ and $b$, and we will show they must be equal. If $a$ and $b$ are fixed points of $f$, then $f(a)=a$ and $f(b)=b$. Moreover, since $f$ is a contraction mapping, then 
+        
+        \begin{equation}\label{eq:14}
+            d(f(a),f(b))=d(a,b)\leq sd(a,b).
+        \end{equation}
+        
+        Taking equation (14) and subtracting $d(a,b)$ from both sides we obtain
+        
+        \begin{equation*}
+            0\leq sd(a,b)-d(a,b)=d(a,b)(s-1).
+        \end{equation*}
+        
+        Here we have the product of two real numbers resulting in a positive number. However, since $0\leq s<1$, then $(s-1)<0$. This implies that $d(a,b)=0$ or $d(a,b)<0$. By (i) of Definition \ref{df:1.1}, $d(a,b)\not<0$. Thus, $d(a,b)=0$, which by (i) of Definition \ref{df:1.1}, implies that $a=b$. Hence, if $f$ has a fixed point, it is unique.\par\hspace{4mm} Now we will select an arbitrary point $x_0\in X$ and construct the following sequence
+        
+        \begin{equation}
+            x_0, x_1=f(x_0),\dots, x_n=f^{\circ n}(x_0),\dots
+        \end{equation}
+        
+        Select two arbitrary terms from this sequence, say $x_n$ and $x_{n+k}$. By Proposition \ref{prop:1.3}, it follows that 
+        
+        \begin{equation}
+            d(x_n,x_{n+k})\leq d(x_n,x_{n+1})+d(x_{n+1},x_{n+2})+\cdots+d(x_{n+k-1},x_{n+k}).
+        \end{equation}
+        
+        Recall equation (15). With proposition \ref{prop:1.5}, we can rewrite (16) as
+        
+        \begin{equation*}
+            \begin{split}
+                d(x_n,x_{n_k})&\leq d\big(f^{\circ n}(x_0), f^{\circ n}(x_1)\big)+\cdots+d\big(f^{\circ(n+k-1)}(x_0),f^{\circ(n+k-1)}(x_1)\big) \\
+                &\leq s^nd(x_0,x_1)+s^{n+1}d(x_0,x_1)+\cdots+s^{n+k-1}d(x_0,x_1) \\
+                &=s^nd(x_0,x_1)(1+s+s^2+\cdots+s^{k-1}) \\
+                &=s^nd(x_0,x_1)\bigg(\frac{1-s^k}{1-s}\bigg) \\
+                &\leq \bigg(\frac{s^n}{1-s}\bigg)d(x_0,x_1).
+            \end{split}
+        \end{equation*}
+        
+        Since for any $0\leq s<1$, the sequence $s^n$  converges to 0 as $n\rightarrow\infty$, then it follows that for all $\varepsilon>0$, there exists $N\in\mathbb{N}$ such that 
+        
+        \begin{equation*}
+            \bigg(\frac{s^N}{1-s}\bigg)d(x_0,x_1)<\varepsilon.
+        \end{equation*}
+        
+        Thus, for any $m,n\in\mathbb{N}$ where $m,n\geq N$ and $m=n+k$, it follows that 
+        
+        \begin{equation*}
+            d(x_n,x_m)\leq\bigg(\frac{s^n}{1-s}\bigg)d(x_0,x_1)<\varepsilon.
+        \end{equation*}
+        
+        \hspace{4mm}Therefore, the sequence in (15) is Cauchy and since $(X,d)$ is complete by assumption, then the sequence in (15) converges to some point $a\in X$. Furthermore, we see that $\lim_{n\rightarrow\infty}x_n=a$ and $\lim_{n\rightarrow\infty}x_{n-1}=a$. Thus, as $n\rightarrow\infty$ of $x_n=f(x_{n-1})$ we obtain $a=f(a)$. Thus, $f$ has a fixed point and the sequence in (15) converges to this fixed point.
+    \end{proof}
+
+\section{Compact Sets}
+
+\begin{prop}\label{prop:2.1}
+    Every convergent sequence is a Cauchy sequence.
+\end{prop}
+
+\begin{proof}
+    Let $(X,d)$ be a metric space and let $\{x_n\}$ be a sequence in $X$ with limit point $a$. Then for any $\varepsilon_0>0$, if we let $\varepsilon=\varepsilon_0/2$, then there exists a number $N\in\mathbb{N}$, such that $d(x_n,a)<\varepsilon$ whenever $n\geq N$.If $n,m\geq N$, then by the triangle inequality,
+    
+    \begin{equation*}
+        d(x_n,x_m)\leq d(x_n,a)+d(a,x_m)<\frac{\varepsilon_0}{2}+\frac{\varepsilon_0}{2}=\varepsilon.
+    \end{equation*}
+    
+    Thus, $\{x_n\}$ is Cauchy.
+\end{proof}
+
+\begin{prop}\label{prop:2.2}
+    Assume that $\{x_n\}$ is a Cauchy sequence in a metric space $(X,d)$. If there is a subsequence $\{x_{n_k}\}$ converging to a point $a$, then the original sequence $\{x_n\}$ also converges to $a$.
+\end{prop}
+
+\begin{proof}
+    We must show that for every $\varepsilon>0$, there exists $N\in\mathbb{N}$, such that for all $n\in\mathbb{N}$ where $n\geq N$, we have that $d(x_n, a)<\varepsilon$. Since $\{x_n\}$ is Cauchy, then letting $\varepsilon=\varepsilon_0/2$ for some $\varepsilon_0>0$, yields some $N\in\mathbb{N}$ such that for any $m,n\in\mmathbb{N}$ where $m,n\geq N$, it follows that 
+    
+    \begin{equation}
+        d(x_n,x_m)<\frac{\varepsilon_0}{2}.
+    \end{equation}
+    
+    Next, since $\{x_{n_k}\}$ converges to $a$, then letting $\varepsilon=\varepsilon_0/2$ yields some $K\in\mathbb{N}$ such that for any $n_k\geq K$, we have that 
+    
+    \begin{equation}
+        d(x_{n_k},a)<\frac{\varepsilon_0}{2}.
+    \end{equation}
+    
+    Now let $n,n_k\geq\text{max}\{N,K\}$. What we are doing here is selecting indices that will produce terms of the sequence satisfying both equations (17) and (18). Thus, choosing such indices yields
+    
+    \begin{equation}
+        d(x_n,x_{n_k})+d(x_{n_k},a)<\frac{\varepsilon_0}{2}+\frac{\varepsilon_0}{2}=\varepsilon.
+    \end{equation}
+    
+    However, by the Triangle Inequality from Definition \ref{df:1.1}, it follows that $d(x_n,a)\leq d(x_n,x_{n_k})+d(x_{n_k},a)$. Thus, 
+    
+    \begin{equation*}
+        d(x_n,a)<\varepsilon.
+    \end{equation*}
+    
+    Hence, for all $\varepsilon>0$, there exists $N\in\mathbb{N}$, such that for all $n\in\mathbb{N}$ where $n\geq N$, we have that $d(x_n,a)<\varepsilon$. Therefore, $\{x_n\}$ converges to $a$.
+\end{proof}
+
+\begin{prop}\label{prop:2.3}
+    Every compact metric space is complete.
+\end{prop}
+
+\begin{proof}
+    Assume $(X,d)$ is a compact metric space and let $\{x_n\}$ be a Cauchy sequence. Since $(X,d)$ is compact, then every sequence in $X$ has a convergent subsequence. Thus, $\{x_n\}$ has a convergent subsequence. By Proposition \ref{prop:2.2}, it follows that $\{x_n\}$ converges. Hence, every Cauchy sequence converges. Therefore, $(X,d)$ is complete.
+\end{proof}
+
+\begin{definition}\label{df:2.1}
+    A subset $K$ of a metric space $X$ is called \textbf{totally bounded} if for each $\varepsilon>0$, there is a finite number $B(k_1;\varepsilon), B(k_2;\varepsilon),\dots,B(k_n;\varepsilon)$ of balls with centers in $K$ and radius $\varepsilon$ such that 
+    
+    \begin{equation*}
+        A\subseteq B(k_1;\varepsilon)\cup B(k_2;\varepsilon)\cup\cdots\cup B(k_n;\varepsilon).
+    \end{equation*}
+\end{definition}
+
+\begin{prop}\label{prop:2.4}
+    Let $K$ be a compact subset of a metric space $(X,d)$. Then $K$ is totally bounded.
+\end{prop}
+
+\begin{proof}
+    We will prove this proposition contrapositively. That is, we will show that if $K$ is \textit{not} totally bounded, then $K$ is \textit{not} compact. Assume $K$ is not totally bounded. Then to see what this means, we simply negate Definition \ref{df:2.1}. The negated definition states that there exists some $\varepsilon>0$, such that for all finite collections of $\varepsilon$-balls, none of them cover $K$. We want to construct a sequence $\{x_n\}$ that does not have a convergent subsequence, for this will be equivalent to negating compactness.\par\hspace{4mm} At the moment, all we have is an existentially instantiated $\varepsilon$ which came from negating Definition \ref{df:2.1}. Now choose any $x_1\in K$. From the above assumption, we know that $B(x_1;\varepsilon)$ does not cover $K$ and thus, $K\backslash B(x_1;\varepsilon)\neq\varnothing$. Thus, with this set not being empty, we can select some $x_2\in K\backslash B(x_1;\varepsilon)$. By the same assumption, we know that $B(x_1;\varepsilon)\cup B(x_2;\varepsilon)$ does not cover $K$, and so $K\backslash\big(B(x_1;\varepsilon)\cup B(x_2;\varepsilon)\big)\neq\varnothing$. With this set also not being empty, we can select some $x_3\in K\backslash\big(B(x_1;\varepsilon)\cup B(x_2;\varepsilon)\big)$. Continuing in this way, we can construct a sequence $\{x_n\}$ such that 
+    
+    \begin{equation*}
+        x_n\in K\backslash\big(B(x_1;\varepsilon)\cup B(x_2;\varepsilon)\cup\cdots\cup B(x_{n-1};\varepsilon)\big).
+    \end{equation*}
+    
+    Now let $x_n,x_m\in\{x_n\}$. Without loss of generality, suppose $n>m$. Then it follows that 
+    
+    \begin{equation*}
+        x_n\in K\backslash\big(B(x_1;\varepsilon)\cup\cdots\cup B(x_m;\varepsilon)\cup\cdots\cup B(x_{n-1};\varepsilon)\big).
+    \end{equation*}
+    
+    Thus, every element of $K$ which is less than $\varepsilon$ away from $x_m$, has been removed from the set that we pull $x_n$ out of. Hence, $d(x_n,x_m)\geq\varepsilon$. Since $x_n$ and $x_m$ were arbitrary, then we have that $d(x_n,x_m)\geq\varepsilon$, for all $n,m\in\mathbb{N}$, where $n\neq m$. If we now suppose that $\{x_n\}$ has a convergent subsequence $\{x_{n_k}\}$, then by Proposition \ref{prop:2.1}, $\{x_{n_k}\}$ is Cauchy. However, this would contradict the above, which states that there exists $\varepsilon>0$ such that for all $n,m\in\mathbb{N}$, where $n\neq m$, $d(x_n,x_m)\geq\varepsilon$. Thus, $\{x_n\}$ does not have a convergent subsequence. Therefore, $K$ is not compact. 
+\end{proof}
+
+\begin{prop}\label{prop:2.5}
+    Let $(X,d)$ be a metric space and assume $X$ is finite. If $\{x_n\}$ is a sequence in $X$, then there exists some $x_i\in X$ such that $x_i$ occurs infinitely many times in $\{x_n\}$.
+\end{prop}
+
+\begin{proof}
+    Let $(X,d)$ be a metric space and assume $X$ is finite. Let $\{x_n\}$ be a sequence in $X$ and for contradiction, assume there does not exist $x_i\in X$ which occurs infinitely many times in $\{x_n\}$. Now consider, $x_1\in X$. By assumption, this element occurs only finitely many times in $\{x_n\}$. Thus, there is some $N_1\in\mathbb{N}$ such that for all $m>N_1$, we have that $x_m\neq x_1$. Similarly, if we take $x_2\in X$, then this element also occurs only finitely many times in $\{x_n\}$. Thus, there is some $N_2\in\mathbb{N}$ such that for all $m>N_2$, we have that $x_m\neq x_2$. Continuing this, we obtain a finite collection of numbers $N_1,N_2,\dots,N_n$. Now let $N=\text{max}\{N_1,N_2,\dots,N_n\}$ and consider some $m>N$. From this we have that for all $1\leq i\leq n$, $x_m\neq x_i$. Thus, $x_m\notin X$. Since $x_m\in\{x_n\}$ and $x_m\notin X$, then $\{x_n\}\not\subseteq X$ and therefore not a sequence in $X$. This is a contradiction. Thus, there exists some $x_i\in X$ such that $x_i$ occurs infinitely many times in any sequence $\{x_n\}$ in $X$.
+\end{proof}
+
+\newpage
+
+\begin{prop}\label{prop:2.6}
+    Let $(X,d)$ be a metric space with the discrete metric. $(X,d)$ is a compact metric space if and only if $X$ is finite. 
+\end{prop}
+
+\begin{proof}
+    Assume $(X,d)$ is a compact metric space with the discrete metric. Since $X\subseteq X$, and $X$ is compact, then $X$ is a compact subset of $X$. Thus, by Proposition \ref{prop:2.4}, $X$ is totally bounded. Let $\varepsilon=1$. Then there exists a finite collection of $\varepsilon$-balls, with centers in $X$, which cover $X$. Thus, for some $x_1,x_2,\dots,x_n\in X$, 
+    
+    \begin{equation*}
+        X\subseteq\big(B(x_1;\varepsilon)\cup B(x_2;\varepsilon)\cup\cdots\cup B(x_n;\varepsilon)\big).
+    \end{equation*}
+    
+    Since $d$ is the discrete metric and $\varepsilon=1$, then for each $1\leq i\leq n$, we have that 
+    
+    \begin{equation*}
+        B(x_i;1)=\{x\in X\colon d(x,x_i)<1\}=\{x_i\}.
+    \end{equation*}
+    
+    Thus, 
+    
+    \begin{equation*}
+        X\subseteq\big(\{x_1\}\cup\{x_2\}\cup\cdots\cup\{x_n\}\big)=\{x_1,x_2,\dots,x_n\}.
+    \end{equation*}
+    
+    Thus, $X$ is finite.\par\hspace{4mm} Assume $X$ is finite and let $\{x_n\}$ be a sequence in $X$. By Proposition \ref{prop:2.5}, there is some $x_i\in X$ such that $x_i$ occurs infinitely times in $\{x_n\}$. Now construct the subsequence $\{x_{n_k}\}$ in the following way: for each $n\in\mathbb{N}$ such that $x_n=x_i$, let $x_{n_k}=x_n$. Now let $\varepsilon>0$ and let $N$ be any natural number. It follows that for all $n_k\geq N$, $d(x_{n_k}, x_i)=0<\varepsilon$. Thus, $\{x_{n_k}\}$ converges to $x_i$ and it therefore a convergent subsequence. Since $\{x_n\}$ was arbitrary, then every sequence in $X$ has a convergent subsequence. Therefore, $X$ is compact.
+\end{proof}
+
+\newpage
+
+\section{Spaces of Continuous Functions}
+
+\begin{definition} \label{df:3.1}
+    Let $f\colon X\rightarrow Y$ be a function between two metric spaces. We say that $f$ is \textbf{uniformly continuous} if for each $\varepsilon>0$ there is a $\delta>0$ such that for all points $x,y\in X$ with $d_X(x,y)<\delta$, we have $d_Y(f(x),f(y))$.
+\end{definition}
+
+\begin{definition} \label{df:3.2}
+    Let $(X, d_X)$ and $(Y,d_Y)$ be two metric spaces, and let $\{f_n\}$ be a sequence of functions $f_n\colon X\rightarrow Y$. We say that $\{f_n\}$ \textbf{converges pointwise} to a function $f\colon X\rightarrow Y$ if $f_n(x)\rightarrow f(x)$ for all $x\in X$. This means that for each $x\in X$ and each $\varepsilon>0$, there is an $N\in\mathbb{N}$ such that $d_Y(f_n(x),f(x))<\varepsilon$ when $n\geq N$. 
+\end{definition}
+
+\begin{definition} \label{df:3.3}
+    Let $(X, d_X)$ and $(Y,d_Y)$ be two metric spaces, and let $\{f_n\}$ be a sequence of functions $f_n\colon X\rightarrow Y$. We say that $\{f_n\}$ \textbf{converges uniformly} to a function $f\colon X\rightarrow Y$ if for each $\varepsilon>0$. there is an $N\in\mathbb{N}$ such that if $n\geq N$, then $d_Y(f_n(x),f(x))<\varepsilon$ for all $x\in X$.   
+\end{definition}
+
+\begin{prop} \label{prop:3.1}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces, and let $\{f_n\}$ be a sequence of functions $f_n\colon X\rightarrow Y$. For any function $f\colon X\rightarrow Y$ the following are equivalent:
+    
+    \begin{enumerate}[label=(\roman*)]
+        \item $\{f_n\}$ converges uniformly to $f$.
+        \item $\sup\{d_Y\big(f_n(x),f(x)\big)\in\mathbb{R}\mid x\in X\}\rightarrow 0$ as $n\rightarrow\infty$.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    Assume $\{f_n\}$ converges uniformly to $f$. Now let $\varepsilon>0$. By assumption, there exists $N\in\mathbb{N}$ such that letting $n\geq N$ implies that $d_Y(f_n(x),f(x))<\varepsilon$ for all $x\in X$. Thus, the set 
+    
+    \begin{equation*}
+        \{d_Y(f_n(x),f(x))\mid x\in X\}
+    \end{equation*}
+    
+    is nonempty since $X$ and $Y$ are metric spaces, and this set is also bounded above by $\varepsilon$. Hence, by A.\ref{prop:5.2}, this set has a supremum. In fact, since $n\geq N$ was arbitrary, then the supremum exists for every set associated with every $n\geq N$. What this means is that for every $\varepsilon>0$, there is some $N\in\mathbb{N}$ such that for all $n\geq N$, we get that 
+    
+    \begin{equation*}
+        \sup\{d_Y(f_n(x),f(x))\mid x\in X\}\leq\varepsilon.
+    \end{equation*}
+    
+    It follows then that if we select $n$ to be strictly greater than $N$, then 
+    
+    \begin{equation*}
+        \sup\{d_Y(f_n(x),f(x))\mid x\in X\}<\varepsilon.
+    \end{equation*}
+    
+    Therefore, $\sup\{d_Y(f_n(x),f(x))\mid x\in X\}\rightarrow0$ as $n\rightarrow\infty$.\par
+    \hspace{4mm} Assume $\sup\{d_Y(f_n(x),f(x))\mid x\in X\}\rightarrow0$ as $n\rightarrow\infty$. Now let $\varepsilon>0$, then there exists $N\in\mathbb{N}$ such that for if $n\geq N$, then 
+    
+    \begin{equation*}
+        \sup\{d_Y(f_n(x),f(x))\mid x\in X\}<\varepsilon.
+    \end{equation*}
+    
+    Hence, letting $x\in X$ implies that 
+    
+    \begin{equation*}
+        d_Y(f_n(x),f(x))\leq\sup\{d_Y(f_n(x),f(x))\mid x\in X\}<\varepsilon.
+    \end{equation*}
+    
+    Thus, for all $\varepsilon>0$, there exists $N\in\mathbb{N}$ such that if $n\geq N$, then $d_Y(f_n(x),f(x))<\varepsilon$ for all $x\in X$. Therefore, $\{f_n\}$ converges uniformly to $f$.
+\end{proof}
+
+\begin{prop}
+     Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and assume that $\{f_n\}$ is a sequence of continuous functions $f_n\colon X\rightarrow Y$ converging uniformly to a function $f$. Then $f$ is continuous.
+\end{prop}
+
+\begin{proof}
+    Our intent is to show that the function $f$ is continuous. This means that if we let $a\in X$ and $\varepsilon>0$, then we must show that there exists $\delta>0$ such that for all $x\in X$, if $d_X(x,a)<\delta$, then $d_Y(f(x),f(a))<\varepsilon$. Thus, having
+\end{proof}
+
+\newpage
+
+\section{The Pi Theorem}
+
+In general, the Pi Theorem states that a physical law 
+
+\begin{equation}
+    f(q_1, q_2, \dots, q_m)=0
+\end{equation}
+
+\noindent relating $m$ dimensional quantities $q_1, q_2, \dots, q_m$, is equivalent to a physical law 
+
+\begin{equation}
+    F(\pi_1, \pi_2, \dots, \pi_k)=0
+\end{equation}
+
+\noindent relating $k$ dimensionless quantities $\pi_1, \dots, \pi_k$ that can be formed from $q_1, \dots, q_m$. By dimensioned quantities $q_1, \dots, q_m$, we mean these can be expressed in a natural way in terms of a minimal set of fundamental dimensions $L_1, l_2, \dots, L_n$ $(n<m)$, appropriate to the problem being studied. Examples of these fundamental dimensions would be be time $T$, mass $M$, length  $L$, etc.\par In general, the dimensions $q_i$, denoted by the square bracket notation $[q_i]$, can be written in terms of the fundamental dimensions as 
+
+\begin{equation}
+    [q_i]=L_1^{a_1}l_2^{a_2}\cdots L_n^{a_n}
+\end{equation}
+
+\noindent for some choice of exponents $a_1, \dots, a_n$. If $[q_i]=1$, then the quantity $q_i$ is said to be \textbf{dimensionless}.\par We proceed as follows, if $\pi$ is a quantity of the form 
+
+\begin{equation}
+    \pi=q_1^{p_1}q_2^{p_2}\cdots q_m^{p_m},
+\end{equation}
+
+\noindent a monomial in the dimensioned quantities, we want to find all exponents $p_1, \dots, p_m$ for which $[\pi]=1$. Then 
+
+\begin{equation}
+    \begin{split}
+        [\pi] &= [q_1]^{p_1}[q_2]^{p_2}\cdots[q_m]^{p_m} \\
+        &= \big(L_1^{a_{11}}L_2^{a_{21}}\cdots L_n^{a_{n1}}\big)^{p_1}\cdots\big(L_1^{a_{1m}}L_2^{a_{2m}}\cdots L_n^{a_{nm}}\big)^{p_m} \\
+        &= 1.
+    \end{split}
+\end{equation}
+
+\noindent This means that the exponents on each $L_i$ must sum to 0. Thus, simplifying (24), we obtain 
+
+\begin{equation}
+    \begin{split}
+        1 = L_1^{a_{11}p_1+a_{12}p_2+\cdots+&a_{1m}p_m}\cdots L_n^{a_{n1}p_1+a_{n2}p_2+\cdots+a_{nm}p_m} \\
+        &= \prod_{i=1}^{n}L_i^{\sum_{j=1}^{m}a_{ij}p_j}
+    \end{split}
+\end{equation}
+
+
+\noindent Since the exponents on each $L_i$ must sum to zero, then we get the
+homogeneous system of $n$ linear equations with $m$ unknowns
+
+\begin{equation*}
+    \begin{bmatrix} 0 \\ \vdots \\ 0\end{bmatrix} = \begin{bmatrix} a_{11}p_1+a_{12}p_2+\cdots+a_{1m}p_m \\ \vdots \\ a_{n1}p_1+a_{n2}p_2+\cdots+a_{nm}p_m\end{bmatrix}=\begin{bmatrix} a_{11} & a_{12} &\cdots&a_{1m} \\ a_{21} & a_{22} & \cdots & a_{2m} \\ \vdots & \vdots & \ddots & \vdots \\ a_{n1} & a_{n2} & \cdots & a_{nm} \end{bmatrix}  \begin{bmatrix} p_1 \\ p_2 \\ \vdots \\ p_m \end{bmatrix} = A\mathbf{p}. 
+\end{equation*}
+
+\noindent The matrix seen here is referred to as the dimension matrix and the elements of the $i$th column give the exponents for $q_i$ in terms of the powers of $L_1,\dots,L_n$. 
+
+\newpage
+
+
+\section{A Musical Diversion}
+
+\vspace{4mm}
+    \centerline{\textbf{\textcolor{red}{NEEDS SIGNIFICANT REVISING}}}
+\vspace{4mm}
+
+Let us consider the concept of a key signature for a moment and see if we can formalize it into something more mathematical. Given the following 12 notes 
+
+\begin{equation*}
+    C, C\#, D, D\#, E, F, F#, G, G\#, A, A\#, B,
+\end{equation*}
+
+\noindent a key signature is a sequence of 7 notes $n_1, n_2, \dots, n_7$ which follows a pattern dependent on whether it is a major key signature or a minor key signature. For now we will focus on major key signatures. If we denote these 12 notes as numbers $0,1,\dots,11$ instead, then we can describe the pattern as follows. 
+
+\begin{equation*}
+    \begin{split}
+        n_2-n_1&=2\\
+        n_3-n_2&=2\\
+        n_4-n_3&=1\\
+        n_5-n_4&=2\\
+        n_6-n_5&=2\\
+        n_7-n_6&=2\\
+        n_1-n_7&=1.
+    \end{split}
+\end{equation*}
+
+We call the note corresponding to $n_1$ the \textit{tonic}. 
+
+\newpage
+
+\section{Appendix}
+
+\hline
+
+\vspace{4mm}
+
+\begin{prop}\label{prop:5.1} 
+     Let $0<s<1$ be a real number and let $n\in\mathbb{N}$. Then 
+    
+    \begin{equation*}
+        \sum_{k=0}^{n}s^k=\frac{1-s^{n+1}}{1-s}.
+    \end{equation*}
+\end{prop}
+    
+    \begin{proof}  Denote the sum $S=\sum_{k=0}^{n}s^k$. Then by subtracting $sS$ from $S$, we obtain
+    
+        \begin{equation}
+            \begin{split}
+                S-sS&=\sum_{k=0}^{n}s^k-s\sum_{k=0}^{n}s^k \\
+                &=(1+s+s^2+\cdots+s^n)-(s+s^2+s^3+\cdots+s^{n+1}) \\
+                &= 1+(s-s)+(s^2-s^2)+\cdots+(s^n-s^n)-s^{n+1} \\
+                &= 1-s^{n+1}.
+            \end{split}
+        \end{equation}
+    
+        Thus, $S-sS=1-s^{n+1}$. Factoring $S$ from the left side we get that $S(1-s)=1-s^{n+1}$. Finally, diving both sides by $1-s$, we get 
+    
+        \begin{equation*}
+        S=\sum_{k=0}^{n} s^k=\frac{1-s^{n+1}}{1-s}.
+        \end{equation*}
+    \end{proof}
+        
+    \begin{prop}\label{prop:5.2}
+        Every nonempty subset $A$ of $\mathbb{R}$ that is bounded above has a least upper bound, or supremum.
+    \end{prop}
+    
+    \newpage
+    
+    \begin{prop}
+         The function $f\colon (0,1)\rightarrow\mathbb{R}$, $f(x)=\frac{1}{x}$ is not uniformly continuous.
+    \end{prop} 
+    
+    \begin{proof}
+        Let us begin by negating the definition of uniform continuity. We have that 
+        
+        \begin{equation*}
+            \neg(\forall \varepsilon>0)(\exists\delta>0)(\forall x,yh
+        \end{equation*}
+    \end{proof}
+
+
+
+\end{document}

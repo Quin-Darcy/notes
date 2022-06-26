@@ -1,0 +1,672 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\newenvironment{twoproof}{\tabular{@{\stepproofc}c|l}}{\endtabular}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=8mm,labelindent=8mm}
+
+
+
+
+\newtheorem{theorem}{Theorem}
+ 
+\begin{document}
+
+\section{Preliminaries}
+\hline
+
+\vspace{8mm}
+
+
+\noindent The following sections will be a brief review of the concepts needed to present the axioms of set theory and construct the real numbers.\par
+
+\vspace{10mm}
+
+\noindent\large{\textbf{1.1 PROPOSITIONAL LOGIC}}\normalsize\par
+
+\vspace{10mm}
+
+\noindent\large{\textbf{1.2 RELATIONS}}\normalsize\par
+
+\vspace{4mm}
+
+\noindent A relation is what lies beneath the concept of a function. It is an association between objects. The form in which we will see it most is as a predicate of two variables. Two objects are said to relate if those two objects evaluate to true when placed as arguments in the predicate that defines the relation.\par
+
+\vspace{6mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 1.2.1}\par
+
+\vspace{4mm}
+
+A set $R$ is an ($\mathbf{n}$\textbf{-ary}) \textbf{relation} if there exists sets $A_0,A_1,\ldots,A_{n-1}$ such\par that\par
+
+\vspace{4mm}
+
+\centerline{$R\subseteq A_0\times A_1\times\dots A_{n-1}$.}
+
+\vspace{4mm}
+
+In particular, $R$ is a \textbf{unary} relation if $n=1$ and a \textbf{binary} relation if\par$n=2$. If $R\subseteq A\times A$ for some set $A$, then $R$ is a \textbf{relation on} $A$ and we\par write $(A,R)$.\par
+
+\vspace{6mm}
+
+\noindent\blacksquare\textbf{ EXAMPLE 1.2.1}\par
+
+\vspace{4mm}
+
+For any set $A$, define\par
+
+\vspace{4mm}
+
+\centerline{$I_A=\{(a,a)\colon a\in A\}$.}
+
+\vspace{4mm}
+
+Call this set the \textbf{identity} on $A$.\par
+
+\vspace{6mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 1.2.2}\par
+
+\vspace{4mm}
+
+Let $R\subseteq A\times B$. The \textbf{domain} of $R$ is the set\par
+
+\vspace{4mm}
+
+\centerline{dom$(R)=\{x\in A\colon\exists y(y\in B\wedge(x,y)\in R)\}$,}
+
+\vspace{4mm}
+
+and the \textbf{range} of $R$ is the set\par
+
+\vspace{4mm}
+
+\centerline{ran$(R)=\{y\in B\colon\exists x(x\in A\wedge(x,y)\in R)\}$.}
+
+
+\newpage
+
+\noindent\large\textbf{Composition}\normalsize\par
+
+\vspace{4mm}
+
+\noindent Given the relations $R$ and $S$, let us define a new relation. Suppose that $(a,b)\in S$ and $(b,c)\in R$. Therefore, $a$ is related to $c$ through $b$. The new relation will contain the ordered pair $(a,c)$ to represent this relationship.\par
+
+\vspace{6mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 1.2.3}\par
+
+\vspace{4mm}
+
+Let $R\subseteq A\times B$ and $S\subseteq B\times C$. The \textbf{composition} of $S$ and $R$ is the subset of $A\times C$\par defined as\par
+
+\vspace{4mm}
+
+\centerline{$S\circ R=\{(x,z)\colon\exists y(y\in B\wedge(x,y)\in R\wedge(y,z)\in S)\}$.}
+
+\vspace{4mm}
+
+\noindent This definition is a lot to take in, but just remember that what it is doing is collecting all those ordered pairs $(x,z)$ for which there exists a particular $y$ such that $x$ and $z$ form a pair with it respectively.\par
+
+\vspace{6mm}
+
+\noindent\large\textbf{Inverses}\normalsize\par
+
+\vspace{4mm}
+
+\noindent Inverses will be touched on in greater detail later. For now we will only provide the following definition.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 1.2.4}\par
+
+\vspace{4mm}
+
+Let $R$ be a binary relation. The \textbf{inverse} of $R$ is the set\par
+
+\vspace{4mm}
+
+\centerline{$R^{-1}=\{(y,x)\colon(x,y)\in R\}$.}
+
+\vspace{6mm}
+
+\noindent\large\textbf{Equivalence Relations}\normalsize\par
+
+\vspace{4mm}
+
+\noindent Equivalence relations are far more useful a concept then just relations. Relations can only be defined by means of its elements alone, whereas the elements in an equivalence relation are elements whose components satisfy a predicate. For instance, one could collect all of the pairs of integers $(a,b)$ such that the sum of $a$ and $b$ is an even number.\par
+
+\vspace{6mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 1.2.3}\par
+
+\vspace{4mm}
+
+Let $R$ be a relation on a set $A$. Then $R$ is an equivalence relation if\par
+
+\begin{description}
+
+    \item i. $R$ is \textbf{reflexive\hspace{7mm}}$:=\forall a\in A((a,a)\in R)$.
+
+    \item ii. $R$ is \textbf{symmetric }$ :=\forall a\in A\forall b\in A((a,b)\in R\rightarrow(b,a)\in R)$.
+
+    \item iii. $R$ is \textbf{transitive\hspace{3mm}}$ :=\forall a\in A\forall b\in A\forall c\in A([(a,b)\in R\wedge(b,c)\in R]\rightarrow(a,c)\in R)$.
+
+\end{description}
+
+\newpage
+
+\noindent\large\textit{Remark}\normalsize\par
+
+\vspace{4mm}
+
+\noindent There is some standard notation regarding equivalence relations. The notation is as follows: Let $R$ be a relation on $A$. For all $a,b\in A$,\par
+
+\vspace{4mm}
+
+\centerline{$aRb\Leftrightarrow (a,b)\in R$,}
+
+\vspace{4mm}
+
+and
+
+\vspace{4mm}
+
+\centerline{$a\slashed{R} b\Leftrightarrow(a,b)\notin R$.}
+
+\vspace{6mm}
+
+\noindent\blacksquare\textbf{ DEFINITION 1.2.4}\par
+
+\vspace{4mm}
+
+Let $R$ be a relation on $A$ with $a\in A$. The \textbf{class} of $a$ with respect to $R$ is the set
+
+\vspace{4mm}
+
+\centerline{$[a]_R=\{x\in A\colon(a,x)\in R\}$.}
+
+
+\newpage
+
+\section{Axiomatic Set Theory}
+
+We now move our attention from logic to axiomatic set theory. Set theory is build upon the notion that there exists a fundamental relation, or rather a predicate of two variables, called $\in$. There are nine axioms of set theory that lay at the foundation of mathematics, and these axioms are written in the language of logic and are comprised of objects called sets, together with the $\in$-relation. In order to develop this theory as the foundation it is intended to be, it is paramount that we minimize the number of notions we approach this new topic with. For this reason, we shall refrain from providing explicit definitions of  the term ``set'' and the relation $\in$. In place of these definitions, we will rely on the nine axioms in which `speak' of $\in$ and sets.\par
+
+
+\vspace{8mm}
+ 
+\noindent\large{\textit{The $\in$-Relation}}\normalsize
+
+\vspace{4mm}
+
+\noindent Using the fact that $\in$ is a predicate, we can immediately define the following:\par
+
+\begin{description}
+
+    \item $x\notin y\logeq\neg(x\in y)$,
+    \item $x\subseteq y\logeq\forall a(a\in x\Rightarrow a\in y)$,
+    \item $x=y\logeq(x\subseteq y\wedge y\subseteq x)$.
+
+\end{description}
+
+\noindent With these definitions in place, we shall now move to the first axiom.
+
+\vspace{8mm}
+
+\noindent\large{\textbf{Existence Axioms}}\normalsize
+
+\vspace{4mm}
+
+\noindent The following axiom implicitly lays out the relationship between $\in$ and sets. This axiom only relies upon our understanding of a proposition, which recall, from the previous section on logic, is a sentence that is either true or false.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ AXIOM 1 [Epsilon Relation]}\par
+
+\vspace{4mm}
+
+$\forall x\forall y[(x\in y)\veebar\neg(x\in y)]$.\par
+
+\vspace{4mm}
+
+\noindent Informally speaking, this axiom states that the expression $x\in y$ is a proposition if and only if $x$ and $y$ are both sets. Meaning, that so long as $x$ and $y$ are sets (whatever that means) we are able to falsify the previous expression which is important if we wish to use our knowledge of propositional logic to evaluate more complex mathematical expressions.
+
+\vspace{8mm}
+
+\noindent\large{\textit{Remark}}\normalsize
+
+\vspace{4mm}
+
+\noindent We will now present a famous paradox that should illuminate, at the least, what is \textit{not} a set. Consider the following statement:\par
+
+\vspace{4mm}
+
+\centerline{$\exists u\forall z(z\in u\leftrightarrow z\notin z)$.}
+
+\newpage
+
+\noindent This statement instantiates the existence of some object $u$ in which contains all sets, $z$, that do not contain themselves as elements. The question which seems most in need of answering is: ``Is $u$ a set?" From the first axiom, we know that if $u$ is a set, then $u\in u$ is a proposition. This means that if $u$ is a set, then $u\in u$ is either true or it is false.\par
+
+\vspace{4mm}
+
+\textbf{i.} Assume $u\in u$ is true. This means that $u$ satisfies the biconditional $z\in u\Leftrightarrow z\notin z$. Thus, $u$ is one of those $z$ such that $z\notin z$. Thus, $u\notin u$. Therefore, $u\in u\rightarrow u\notin u$. Since $u\in u$ was assumed to be true, and ($u\in u\rightarrow u\notin u)\Leftrightarrow\neg(u\in u)\vee (u\notin u)$ through material equivalence, and furthermore, we have $\neg(u\in u)\vee(u\notin u)\Leftrightarrow (u\notin u)\vee (u\notin u)$. Thus, by simplification we have $(u\notin u)\vee(u\notin u)\Leftrightarrow u\notin u$. So finally, our assumption was that $u\in u$ and we have deduced $u\notin u$. Therefore, we have $u\in u\wedge u\notin u$ which is a contradiction.\par
+
+\vspace{4mm}
+
+\textbf{ii.} Assume $u\in u$ is false. Thus, $u\notin u$. Since $u\notin u$ and we have $z\in u\leftrightarrow z\notin z$, then this means that $u$ is one of those $z$ such that it does not contain itself as an element. Thus, $u\in u$ by definition. Hence, $u\notin u\rightarrow u\in u$. By the same reasoning as shown in \textbf{i.}, we deduce that $u\notin u\wedge u\in u$, which is a contradiction.\par
+
+\vspace{4mm}
+
+\noindent We have just demonstrated that assuming $u\in u$ is true led to a contradiction and assuming $u\in u$ was false led to a contradiction. Thus, $u\in u$ is neither true nor false and is therefore not a proposition. Thus, by Axiom 1 we conclude that $u$ is not a set.\par
+
+\vspace{10mm}
+
+\noindent\blacksquare\textbf{ AXIOM 2 [Empty Set]}\par
+
+\vspace{4mm}
+
+$\exists x\forall y(y\notin x)$.\par
+
+\vspace{4mm}
+
+\noindent What this axiom states is that there exists a set that contains no elements. This set is called the \textit{empty set} and is denoted with the symbol $\varnothing$.\par
+
+\vspace{4mm}
+
+\noindent\textbf{THEOREM 1}\textit{ The empty set is unique.}
+
+\vspace{4mm}
+
+\noindent\textbf{PROOF}
+
+\vspace{4mm}
+
+
+Assume $x$ and $x'$ are empty. From this assumption we know that, for any $y$, $y\in x$ is false. Thus, by \textit{ex falso quodlibet}, we know $y\in x\rightarrow y\in x'$ is a true statement. Since $y$ is arbitrary, then by universal generalization, we have $\forall y(y\in x\rightarrow y\in x')$. Thus, $x\subseteq x'$, by definition. Now we take the false statement $y\in x'$ and embed it in $y\in x'\rightarrow y\in x$ and this yields a true proposition. And as before, universal generalization gives $\forall y(y\in x'\rightarrow y\in x)$. Thus, $x'\subseteq x$. Therefore, $(x\subseteq x')\wedge (x'\subseteq x)\Leftrightarrow x=x'$.
+
+
+\vspace{6mm}
+
+\noindent\large\textit{Remark}\normalsize
+
+\vspace{4mm}
+
+By showing that for any two sets that are empty, the two sets are equal, this means that there is only one empty set and is therefore unique.\par
+
+\vspace{10mm}
+
+\newpage
+
+\noindent\large\textbf{Construction Axioms}\normalsize\par
+
+\vspace{4mm}
+
+\noindent These axioms are used in the construction of new sets from old sets. They also further illuminate other sets we get from the axioms themselves.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ AXIOM 3 [Pair Sets]}\par
+
+\vspace{4mm}
+
+$\forall x\forall y\exists m\forall u(u\in m\leftrightarrow u=x\vee u=y)$.\par
+
+\vspace{4mm}
+
+\noindent This axiom states that if $x$ and $y$ are sets, then there exists a set $m$ that contains, as its elements, precisely $x$ and $y$, or $m=\{x,y\}$. We emphasize that $m$ is in fact a set. This is rather significant since we already have the empty set and so long as we have just one more set then we can construct a new set by pairing those two together. We can then continue to pair all new sets created and create more sets.\par
+
+\vspace{6mm}
+
+\noindent\large{\textit{Remark}}\normalsize\par
+
+\vspace{4mm}
+
+\noindent At this point it is worth making note of two things. The first being whether order of elements `matters'. Or more precisely, if $\{x,y\}$ and $\{y,x\}$ are sets, then is it true that $\{x,y\}=\{y,x\}$? To answer this, consider the following. Let $a\in\{x,y\}$. Then $a=x\vee a=y$. If $a=x$, then $a\in\{y,x\}$. If $a=y$, then $a\in\{y,x\}$. Thus, for all $a\in\{x,y\}$ we have $a\in\{y,x\}$. Thus, $\{x,y\}\subseteq\{y,x\}$. By similar reasoning, it can be shown that $\{y,x\}\subseteq\{x,y\}$. Therefore, $\{x,y\}=\{y,x\}$ and the order of the elements does not matter.\par
+The next thing we wish to point out is the existence of single element sets. Consider $\{x\}$. In order to assure that this is a set, we use the pair set axiom to define $\{x\}:=\{x,x\}$. This is valid since the pair set axiom requires that for all elements in $\{x\}$, namely $x$, each element must be equal to either $x$ or $x$. Since $x=x$, then the axiom has been satisfied and we can conclude that $\{x\}$ is in fact a set on the basis that $\{x,x\}$ is a set, which it is by virtue of the pair set axiom.  
+
+\vspace{10mm}
+
+\noindent\blacksquare\textbf{ AXIOM 4 [Union]}\par
+
+\vspace{4mm}
+
+$\forall x\exists y\forall u(u\in y\leftrightarrow\forall v[v\in x\wedge u\in v])$.\par
+
+\vspace{4mm}
+
+\noindent This axioms translates to the following. Let $x$ be a set. Then there exists a set $y$ whose elements are precisely the elements of the elements of $x$.\par
+
+\vspace{6mm}
+
+\noindent\large{\textit{Remark}}\normalsize\par
+
+\vspace{4mm}
+
+\noindent To better understand this axiom, consider the following example. Let $a$ and $b$ be sets. We know that if $a$ is a set, then $\{a\}$ is a set by the pair set axiom. Similarly, if $b$ is a set, then $\{b\}$ is a set. Thus, we have the sets $\{a\}$ and $\{b\}$. So again, by the pair set axiom, we know that $\{\{a\},\{b\}\}$ is itself a set. Let us then call this set $x$. Thus, the union set axiom assures us that $\bigcup x$ is in fact a set and is denoted $\bigcup x=\{a,b\}$.\par
+
+\newpage
+
+We will consider one more example. Let $a,b$ and $c$ be sets. We then know, by the pair set axiom, that $\{a\}$ and $\{b,c\}$ are sets. Thus, the pair set axiom assures us that $\{\{a\},\{b,c\}\}$ is again a set. Let us call this set $x$. Then, finally, the union set axiom assures us that $\bigcup x$ is a set, and we may denote it as $\{a,b,c\}$. It should be noted that this is the first three element set we have encountered. This leads us to the following definition.\par
+
+\vspace{6mm}
+
+\noindent\textbf{DEFINITION 1}\par
+
+\vspace{4mm}
+
+Let $a_1,a_2,\ldots, a_n$, for $n\geq 3$, be sets. Then $\{a_1,\ldots, a_n\}$ is a set and is called a \textbf{\textit{finite element set}}. This is assured by the following recursive definition:\par
+
+\vspace{4mm}
+
+\centerline{$\{a_1,\ldots, a_n\}=\bigcup\{\{a_1,\ldots,a_{n-1}\},\{a_n\}\}$.}\par
+
+\vspace{4mm}
+
+\noindent The idea here being that regardless of how many sets we have, we may use the pair set axiom to group the collection of all the sets into two sets and thereby appeal to the pair set axiom and then the union set axiom to assure the original collection of sets is itself a set.\par
+
+\vspace{10mm}
+
+\noindent\blacksquare\textbf{ AXIOM 5 [Replacement]}\par
+
+\vspace{4mm}
+
+\noindent Let $R$ be a relation (i.e., predicate of two variables). Then,\par
+
+\vspace{4mm}
+
+$\forall x[\forall a\exists! b R(a,b)\rightarrow\exists y\forall b(b\in x\leftrightarrow\exists a[a\in x\wedge R(a,b)])]$.\par
+
+\vspace{4mm}
+
+\noindent This axiom states the following. Let $R$ be a \textbf{\textit{functional}} relation. Let $m$ be a set. Then the \textbf{\textit{image}} of $m$ under $R$ is again a set.\par
+
+\vspace{6mm}
+
+\noindent\textbf{DEFINITION 2}\par
+
+\vspace{4mm}
+
+Let $p(x)$ be any predicate. Then define\par
+
+\vspace{4mm}
+
+\centerline{$\exists!yp(y):=\exists y\forall x(p(x)\leftrightarrow x=y)$.}\par
+
+\vspace{4mm}
+
+\noindent This notation means that ``there exists one and only one".\par
+
+\vspace{6mm}
+
+\noindent\textbf{DEFINITION 3}\par
+
+\vspace{4mm}
+
+A relation $R$ is called \textbf{\textit{functional}} if\par
+
+\vspace{4mm}
+
+\centerline{$\forall x\exists! y R(x,y)$.}
+
+\vspace{4mm}
+
+\noindent This definition can informally be thought of as defining a function. As in, for every $x$, there is assigned exactly one $y$, such that $R(x,y)$.\par
+
+\newpage
+
+\noindent\textbf{DEFINITION 4}\par
+
+\vspace{4mm}
+
+The \textbf{\textit{image}} of a set $m$ under a functional relation $R$ consists of all those $y$ for which there is an $x\in m$ such that $R(x,y)$. We now know from the axiom of replacement that the image is in fact a set.
+
+\vspace{6mm}
+
+\noindent\large{\textit{Remark}}\normalsize
+
+\vspace{4mm}
+
+\noindent The axiom of replacement may not look familiar. However, it is likely that a weaker form of this axiom would be very familiar. The weaker form is called the Principle of Restricted Comprehension and is implied by axiom of replacement.This principle is as follows.\par
+
+\vspace{6mm}
+
+\noindent\textsc{\underline{Principle of restricted comprehension}}\par
+
+\vspace{4mm}
+
+Let $P$ be a predicate of one variable and let $m$ be a set. Then those elements $y\in m$ for which $P(y)$ holds, constitute a set. The usual notation for this\par
+
+\vspace{4mm}
+
+\centerline{$\{y\in m\colon P(y)\}$.}\par
+
+\vspace{4mm}
+
+\noindent This is not to be confused with the inconsistent ``principle" of universal comprehension. This principle states that the collection of all those $y$ for which some condition holds is a set. The problem here is exemplified by Russell's paradox. Namely, if we were to collect all those sets for which do not contain themselves as elements then--as was shown earlier--this would yield a paradox. So the idea is that you can only collect those elements in which are already coming from a set. In the previous case it would be the set $m$.\par
+So we can, at most, collect as many elements as the set from which we are pulling them from contains. This is perhaps why it is called ``restricted" comprehension. Since if we have $\{y\in m\colon P(y)\}$, then we not have more $y$ than are already in why. Thus, collecting these elements cannot yield a set that is bigger than $m$. We will now prove PRC.\par
+
+\vspace{4mm}
+
+\noindent\textbf{THEOREM 2.}\textit{ Let $m$ be a set and let $P(y)$ be a predicate of one variable. Then $\{y\in m\colon P(y)\}$ is a set.}
+
+\vspace{4mm}
+
+\noindent\textbf{PROOF}\par
+
+\vspace{4mm}
+
+\noindent Let $m$ be a set.\par
+
+\vspace{4mm}
+
+Case(1): $\forall y(y\in m\rightarrow\neg P(y))$.\par
+
+\vspace{4mm}
+\noindent In this case we have $\{y\in m\colon P(y)\}=\varnothing$. Since $\varnothing$ is a set by the empty set axiom, Case(1) is finished.\par
+
+\vspace{4mm}
+
+Case(2): $\exists\hat{y}(\hat{y}\wedge P(\hat{y}))$.\par
+
+\vspace{4mm}
+
+\noindent Now we need to invoke the axiom of replacement in order to prove $\{y\in m\colon P(y)\}$ is a set. To do this, we need to define a functional relation so that we can appeal to the axiom of replacement. Define $R(x,y):=(P(x)\wedge x=y)\vee(\neg P(x)\wedge y=\hat{y})$. Now, we need to show that $R$ is functional. Once we do this, then the axiom of replacement tells us that the image of $m$ under $R$ is a set. We then need to show that the image is equal to $\{y\in m\colon P(y)\}$. We recall that $R$ is functional if $\forall x\exists! y R(x,y)$. Meaning that each $x$ must have assigned to it, exactly one $y$.\par
+Our definition for $R(x,y)$ states that for all those $x$ for which $P(x)$, each one of those $x$ relates to the $y$ which is equal to the $x$. This is essentially the same thing as the identity relation which is certainly functional since if an element relates to itself, then that element is assigned exactly one element, itself. Thus, all the $y$ which relate to all the $x$ that satisfy $P(x)$, also satisfy $P(y)$ since, for each of those $x$, $y=x$. As for the set of all $x$ that do not satisfy $P(x)$, we need to assign to them exactly one $y$. We choose this $y$ to be $\hat{y}$, which we know satisfies $P(y)$. Furthermore, we know this also satisfies $R$ being functional since if each $x$ that does not satisfy $P(x)$ is assigned to $\hat{y}$, then each of those $x$ has assigned to it exactly one $y$, namely $\hat{y}$. Thus, all of the $y$ for which there exists an $x$, such that $R(x,y)$, are those $y$ for which $P(y)$ holds.\par
+We recall that the image of $m$ under $R$ is the set of all $y\in m$ such that there exists an $x\in m$ such that $R(x,y)$. Therefore, the image of $m$ under our relation is the set of all $y\in m$ such that $P(y)$. Hence Im$_{R}(m)=\{y\in m\colon P(y)\}$. By the axiom of replacement, we can conclude $\{y\in m\colon P(y)\}$ is a set.\hspace{83mm}\square\par
+
+\vspace{10mm}
+
+\noindent\blacksquare\textbf{ AXIOM 6 [Power Set]}\par
+
+\vspace{4mm}
+
+$\forall x\exists y\forall u(u\in y\leftrightarrow u\subseteq m)$.\par
+
+\vspace{4mm}
+
+\noindent This axiom states that if $x$ is a set, then there exists a set $y$ (typically denoted $\mathcal{P}(x)$ and called the `power set' of $x$), whose elements are precisely the subsets of $x$.\par
+
+\vspace{6mm}
+
+\noindent\large{\textit{Remark}}\normalsize\par
+
+\vspace{4mm}
+
+\noindent It was thought that the following set, $\{y\colon y\subseteq m\}$ required the (inconsistent) ``principle" of universal comprehension in order to assure that it was in fact a set. Because of the inconsistency, however, the previous axiom was made in place of the principle. So it is by postulate that the power set exists. Or in other words, we cannot argue, by means of the principle of restricted comprehension, that $\{y\colon y\subseteq\ m\}$ is a set. This is because, we would not know \textit{a priori} what set the elements $y$ were coming from. So the existence of the the set from which each $y$ would be coming from had to be given by axiom.\par
+
+\vspace{10mm}
+
+\noindent\large{\textbf{Further Existence Axioms}}\normalsize\par
+
+\vspace{6mm}
+
+\noindent\blacksquare\textbf{ AXIOM 7 [Infinity]}\par
+
+\vspace{4mm}
+
+$\exists x(\varnothing\in x\wedge\forall u[u\in x\rightarrow\exists y(y\in x\wedge u\in y\wedge\forall v[v\in u\rightarrow v\in y])])$.\par
+
+\vspace{4mm}
+
+\noindent This axiom states that there exists a set, call it $x$, such that the empty set is an element of $x$, and for each element in $x$, call it $y$, there exists an element $y\cup\{y\}$ that is also in $x$. 
+
+\vspace{6mm}
+
+\noindent\large\textit{Remark}\normalsize\par
+
+\vspace{4mm}
+
+\noindent A very interesting example of this axiom is the following. The definition tells us that there exists a set that contains the empty set. So at first we can think of having $\{\varnothing\}$. The definition then indicates that for each element in our set, there exists another element in our set such that it is equal to the union of itself with itself within a set. Thus, our set becomes $\{\varnothing,\{\varnothing\}\}$. We can see how this shall continue. The end result can informally be written as $\{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\},\ldots\}$. Furthermore, if we were two list out each element of this set and designate each element by a symbol, then we could construct something rather familiar.\par
+
+\begin{align*} 
+\varnothing &=  0 \\ 
+\{\varnothing\} &=  1 \\
+\{\varnothing,\{\varnothing\}\} &= 2
+\end{align*}
+
+\hspace{80mm}$\vdots$\par
+
+\vspace{6mm}
+
+\noindent It should be noted that the construction of the natural number requires more information than this. However, this informal example does demonstrate that without the axiom of infinity, one could not prove that the natural numbers constitutes a set.\par
+
+\vspace{6mm}
+
+\noindent\large{\underline{Axiom of Choice}}\normalsize
+
+\vspace{4mm}
+
+\noindent Suppose that we are given the pairwise disjoint family of sets\par
+
+\vspace{4mm}
+
+\centerline{\rsfs F\hspace{2mm}$ =\{\{1,3,5\},\{2,9,11\},\{7,8,13\}\}$\rm .}
+
+\vspace{4mm}
+
+\noindent It is easy to find a set $S$ such that\par
+
+\vspace{4mm}
+
+\centerline{$S\cap A$ is a singleton for every $A\in$\hspace{1mm}\rsfs F\rm .}
+
+\vspace{4mm}
+
+\noindent Simply run through the elements of \rsfs F\hspace{1mm}\rm and choose an element from each set and put it in $S$. Since \rsfs F\hspace{1mm}\rm is pairwise disjoint, each choice will differ from the others. For example, it might be that\par
+
+\vspace{4mm}
+
+\centerline{$S=\{1,9,13\}$.}
+
+\vspace{4mm}
+
+\noindent However, what is \rsfs F\hspace{1mm}\rm is an infinite set? If there was not a prescription as to how exactly each element was chosen from each set in \rsfs F\hspace{1mm}\rm, then we would have infinitely many choices, which is a notion that is not defined. The previous axioms cannot be used to prove the existence of such a set $S$, and so we need to postulate the existence of this set by including another axiom.\par
+
+\newpage
+
+\noindent\blacksquare\textbf{ AXIOM 8 [Choice]}
+
+\vspace{4mm}
+
+If \rsfs F\hspace{1mm}\rm is a family of pairwise disjoint, nonempty sets, there exists $S\subseteq\bigcup$\rsfs \hspace{1mm}F\hspace{1mm}\rm such that\par $S\cap A$ is a singleton for all $A\in$\rsfs\hspace{1mm}F\hspace{1mm}\rm.\par
+
+\vspace{4mm}
+
+\noindent\blacksquare\textbf{ COROLLARY}
+
+\vspace{4mm}
+
+For every binary relation $R$, there exists a function $\varphi$ such that $\varphi\subseteq R$ and dom$(\varphi)=$dom$(R)$.\par
+
+\vspace{4mm}
+
+\noindent\textbf{PROOF}
+
+\vspace{4mm}
+
+To be continued.\par
+
+\vspace{6mm}
+
+\noindent\blacksquare\textbf{ AXIOM 9 [Foundation]}
+
+\vspace{4mm}
+
+$\forall x(x\neq\varnothing\rightarrow\exists y[y\in x\wedge\neg\exists u(u\in y\wedge u\in x)])$.\par
+
+\vspace{4mm}
+
+\noindent This axiom states that for every non-empty set $x$, it contains an element $y$ that shares no common element with $x$. This immediately takes care of Russell's paradox. This axiom can be thought of as a non-existence axiom since it states that there are no sets which contain themselves as elements. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

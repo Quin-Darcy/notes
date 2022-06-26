@@ -1,0 +1,491 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{commath}
+\usepackage{colonequals}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=60mm,labelindent=60mm}
+
+
+
+\begin{document}
+
+\begin{flushleft}
+Quin Darcy\linebreak 
+MATH 110A\linebreak	
+Prof. Krauel\linebreak
+3/29/18\linebreak
+\end{flushleft}
+
+
+
+
+\section*{\centerline{Homework 9}}
+
+\justifying
+
+\vspace{10mm}
+
+\textbf{\textsc{Exercise 5.1}}\par
+
+\vspace{6mm}
+
+\textsc{Theorem 5.3} \it Let $H$ be a subgroup of a group $G$. Then $ \abs{g_1 H}=\abs{g_2 H} $ for any $g_1,g_2\in G$. In particular, $\abs{H}=\abs{g H}$ for any $g\in G$. Additionally, $\abs{Hg_1}=\abs{Hg_2}$ and $\abs{H}=\abs{Hg}$ for any $g,g_1,g_2\in G$.\rm\par
+
+\vspace{10mm}
+
+\textsc{Corollary.} Let $g_1 H,g_2 H\in G/H$, where $G/H$ is the set of all left cosets of $H$ in $G$. Then $\abs{g_1 H}=\abs{g_2 H}$ if and only if there exists a bijective map $\phi\colon g_1 H \longrightarrow g_2 H$. The requirements of $\phi$ can be stated as follows:\hspace{2mm}\textit{$\phi$ is a bijective map if and only if}\par
+
+\vspace{6mm}
+
+
+\textbf{i. }$\phi\colon g_1 H\longrightarrow g_2 H$ is a \textit{function} $\logeq\exists\phi\in\mathscr{P}((g_1 H)\times(g_2 H))$, such that
+
+\vspace{4mm}
+
+\centerline{$\forall (g_1 h, g_2 h),(g_1 h', g_2 h')\in (g_1 H)\times(g_2 H)\colon[(g_1 h=g_1 h')\implies(g_2 h=g_2 h')]$.}
+
+\vspace{10mm}
+
+
+\textbf{ii. } $\phi\colon g_1 H\longrightarrow g_2 H$ is \textit{injective} $\logeq\exists\phi\in\mathscr{P}((g_1 H)\times(g_2 H))$, such that
+
+\vspace{4mm}
+
+\centerline{$\forall g_1 h,g_1 h'\in g_1 H\colon [(\phi(g_1 h)=\phi(g_1 h'))\implies(g_1 h=g_1 h')]$.}
+
+\vspace{10mm}
+
+
+\textbf{iii. } $\phi\colon g_1 H\longrightarrow g_2 H$ is \textit{surjective} $\logeq\exists\phi\in\mathscr{P}((g_1 H)\times(g_2 H))$, such that
+
+\vspace{4mm}
+
+\centerline{$\forall g_2 h\in g_2 H\colon\exists g_1 h\in g_1 H\colon\phi(g_1 h)=g_2 h$.}
+
+\vspace{4mm}
+
+\begin{flushleft}
+We now proceed to prove the \textsc{Corollary} by prescribing $\phi$ with a particular definition and showing that this definition satisfies \textbf{i.}, \textbf{ii.}, and \textbf{iii.}. By doing this, we will have proven $\phi$ is a bijection, and thus the existence of a one-to-one correspondence between $g_1 H$ and $g_2 H$. Hence, $\abs{g_1 H}=\abs{g_2 H}$, for all $g_1,g_2\in G\Leftrightarrow$ \textsc{Theorem 5.3}.
+\end{flushleft}
+
+\newpage
+
+
+\textsc{Proof. }Let $g_1,g_2\in G$ be any two elements. Then consider $\phi\in\mathscr{P}((g_1 H)\times(g_2 H))$. It follows that $\phi\subseteq\{(g_1 h, g_2 h)\mid (g_1 h\in g_1 H)\wedge(g_2 h\in g_2 H)\}$. Consider the following definition of $\phi$:
+
+\vspace{2mm}
+
+\centerline{$\phi\colon g_1 H\longrightarrow g_2 H$}
+
+\vspace{4mm}
+
+\centerline{$g_1 h\mapsto(g_2\hspace{1mm} g^{-1}_1)g_1 h$.}
+
+\vspace{4mm}
+
+With the given definition, we see that for any element $g_1 h\in g_1 H$, the image of the element under the map, is a product of itself with an element obtained from the particular $g_1,g_2\in G$, namely $g_2\hspace{1mm} g^{-1}_1$. This element is a member of $G$ since $G$ is a group and is closed with respect to the given operation. 
+
+\vspace{6mm}
+
+
+\textbf{i. }Let $(g_1 h, g_2 h),(g_1 h', g_2 h')\in (g_1 H)\times(g_2 H)$. Assume $g_1 h=g_1 h'$. Then, $\phi(g_1 h)=(g_2\hspace{1mm} g^{-1}_1)g_1 h=g_2 h$ and $\phi(g_1 h')=(g_2\hspace{1mm} g^{-1}_1)g_1 h'=g_2 h'$. However, since $g_1 h=g_1 h'$, by assumption, then by the law of cancellation we have $h=h'$. Thus, $g_2 h=g_2 h'$. Therefore, if $g_1 h=g_1 h$, then $\phi(g_1 h)=\phi(g_1 h')$. Condition \textbf{i.} is satisfied and $\phi$ is a \textit{function}.
+
+\vspace{6mm}
+
+\textbf{ii. }Let $g_1 h,g_1 h'\in g_1 H$. Assume $\phi(g_1 h)=\phi(g_1 h')$. Then,
+
+
+\vspace{4mm}
+
+\centerline{$\phi(g_1 h)=(g_2\hspace{1mm} g^{-1}_1)g_1 h=(g_2\hspace{1mm} g^{-1}_1)g_1 h'=\phi(g_1 h')$}
+
+\begin{description}
+\item{$\Leftrightarrow$\hspace{1mm}}$(g_2\hspace{1mm} g^{-1}_1)g_1 h=(g_2\hspace{1mm} g^{-1}_1)g_1 h'$
+\item{$\Leftrightarrow\hspace{1mm}$}$g_2 h=g_2 h'$
+\item{$\Leftrightarrow\hspace{1mm}$}$h=h'$
+\item{$\Leftrightarrow\hspace{1mm}$}$g_1 h=g_1 h'$\par
+\end{description}
+
+
+Thus, if $\phi(g_1 h)=\phi(g_1 h')$, then $g_1 h=g_1 h'$. Therefore, condition \textbf{ii.} is satisfied and $\phi$ is \textit{injective}.
+
+\vspace{2mm}
+
+\begin{flushleft}
+\textbf{iii. }Let $g_2 h\in g_2 H$. Then for $\phi$ to be \textit{surjective}, there must exist some element in $g_1 H$, such that its image is $g_2 h$. Consider the following
+\end{flushleft}
+
+
+\hspace{55mm}$g_2 h=g_2 h$\par
+
+\begin{description}
+\item{$\Leftrightarrow$\hspace{1mm}}$(g^{-1}_2)g_2 h=h$
+\item{$\Leftrightarrow$\hspace{1mm}}$(g_1\hspace{1mm} g^{-1}_2)g_2 h=g_1 h$
+\item{$\Leftrightarrow$\hspace{1mm}}$g_1 h\in g_1 H$
+\end{description}
+
+
+Thus, for all $g_2 h\in g_2 H$, there exists an element $g_1 h\in g_1 H$, such that $\phi(g_1 h)=g_2 h$. Therefore, condition \textbf{iii.} is satisfied and $\phi$ is \textit{surjective}. Having satisfied all three conditions, we have sufficiently proven that there exists a bijective map $\phi\colon g_1 H\longrightarrow g_2 H$. Therefore, $\abs{g_1 H}=\abs{g_2 H}$, for all $g_1,g_2\in G$.
+
+\hspace{150mm}$\Box$
+
+\newpage
+
+\begin{flushleft}
+\textbf{\textsc{Exercise 5.2}}\par
+\end{flushleft}
+
+\vspace{6mm}
+
+\textbf{(a). }Let $G=\langle a\rangle$ be a cyclic group of order 10 and let $H=\langle a^2\rangle$ be a subgroup of $G$. The cardinality of $H$ can be determined by observing that $H\subseteq G$, by assumption, thus we have the following equivalences:
+
+\vspace{2mm}
+
+\begin{description}
+\item{$H\subseteq G$}
+\item{$\Leftrightarrow$}\hspace{3mm}$\forall a^{2j}\in H\implies a^{2j}\in G$
+\item{$\Leftrightarrow$}\hspace{3mm}$a^{2j}\in G\implies 0\leq 2j<10$
+\item{$\Leftrightarrow$}\hspace{3mm}$0\leq 2j<10\implies 0\leq j<5$\par\vspace{1mm}\hspace{1mm} $\Leftrightarrow\hspace{3mm}\abs{H}=5$
+\end{description}
+
+\vspace{4mm}
+
+By \textsc{Theorem 5.3}, for all $a^k\in G$, we have $\abs{H a^k}=\abs{H}=5$. And by \textsc{Theorem 5.5}, we have\par
+
+\vspace{4mm}
+
+\centerline{$[G:H]\abs{H}=\abs{G}\Leftrightarrow [G:H]5=10\implies [G:H]=2$.}
+
+\vspace{8mm}
+
+Thus, we can conclude that there are two right cosets, each with $5$ elements. The following is a list of each right coset, which are all the elements of the quotient set $G\backslash H$:
+
+\vspace{3mm}
+
+\begin{description}
+\item{$k=0$ : }$Ha^0=\{a^0, a^2, a^4, a^6, a^8\}$.
+\item{$k=1$ : }$Ha^1=\{a^1, a^3, a^5, a^7, a^9\}$.
+\end{description}
+
+\vspace{4mm}
+
+The partition formed on $G$ by the quotient group is clear. Let $[Ha^0]$ and $[Ha^1]$ denote the equivalence classes of $a^0 H$ and $a^1 H$, respectively. The equivalence relation, call it $\sim$, is defined as: 
+
+\vspace{4mm}
+
+\centerline{$\forall a^m,a^n\in G\colon a^m\sim a^n\Leftrightarrow\exists j\in \mathbb{Z}\colon a^{2j+m}=a^n$}
+
+\vspace{6mm}
+
+Thus, the equivalence classes can be written as
+
+\vspace{8mm}
+
+\centerline{$[a^0]=\{\hspace{1mm}Ha^n\subseteq G\mid a^0\sim a^n\hspace{1mm}\}=\{\hspace{1mm}Ha^0, Ha^2, ... , Ha^8\hspace{1mm}\}$.}
+\vspace{2mm}
+\centerline{$[a^1]=\{\hspace{1mm}Ha^n\subseteq G\mid a^1\sim a^n\hspace{1mm}\}=\{\hspace{1mm}Ha^1, Ha^3, ... , Ha^9\hspace{1mm}\}$.}
+
+\vspace{8mm}
+
+Thus, $G\backslash H=\{[a^0], [a^1]\}$.
+
+\newpage
+
+\textbf{(b). }Let $G$ be a group of order 10, and let $H=\langle a^5\rangle$ be a subgroup of $G$. Then by the same reasoning in \textbf{(a)}, $\abs{H}=2$. By \textsc{Theorem 5.3}, we have $\abs{Ha^k}=2$, for all $a^k\in G$. \textsc{Lagrange's Theorem} then tells us that there are $5$ distinct right cosets. They are listed below:\par
+
+\vspace{4mm}
+
+\begin{description}
+\item{$k=0 : $}\hspace{1mm}$Ha^0=\{a^0, a^5\}$
+\item{$k=1 : $}\hspace{1mm}$Ha^1=\{a^1, a^6\}$
+\item{$k=2 : $}\hspace{1mm}$Ha^2=\{a^2, a^7\}$
+\item{$k=3 : $}\hspace{1mm}$Ha^3=\{a^3, a^8\}$
+\item{$k=4 : $}\hspace{1mm}$Ha^4=\{a^4, a^9\}$
+\end{description}
+
+\vspace{8mm}
+
+\textbf{(c). }Let $G=A_3$, where $A_3$ is the alternating group formed from the collection of all $\sigma\in S_3$, such that $\sigma$ can be expressed as the product of an even number of transpositions. Let $H$ be a subgroup of $G$, such that $H=\{\sigma\in G\mid \sigma(1)=1\}$. $H$ is the set of all even permutations that fix the number $1$. Since the elements of $A_3$ are either 1-cycles or 3-cycles (this is because these cycle lengths can be expressed as an even number of transpositions), then the elements of $H$ must be 1-cycles or 3-cycles. However, any 3-cycle permutation would require $1$ to be permuted. Thus, no 3-cycles are contained in $H$. The only permutation left, and thus the only element in $H$ is the identity permutation. The calculation of the right coset(s) are then as follows:\par
+
+\vspace{4mm}
+
+\begin{description}
+\item{\hspace{4mm}$(1) : $}\hspace{1mm}$H(1)=\{(1)\}$
+\item{$(123) : $}\hspace{1mm}$H(123)=\{(123)\}$
+\item{$(132) : $}\hspace{1mm}$H(132)=\{(132)\}$
+\end{description}
+
+\vspace{2mm}
+
+\begin{flushleft}
+\textbf{\textsc{Exercise 5.3}}
+\end{flushleft}
+
+\vspace{2mm}
+
+Let $\mathbb{Z}$ be a group with respect to addition, and let $n\mathbb{Z}$ be a subgroup of $\mathbb{Z}$, for some $n\in\mathbb{Z}$. We now consider the set of all right cosets of $n\mathbb{Z}$ in $\mathbb{Z}$. Specifically, we are interested in the set\par
+
+\vspace{6mm}
+
+\centerline{$\mathbb{Z}\backslash n\mathbb{Z}=\{n\mathbb{Z}+k\in\mathscr{P}(\mathbb{Z})\mid k\in\mathbb{Z}\}$.}
+
+\vspace{8mm}
+
+It is worth noting that \textsc{Example 5.1}, part (a), states that $\mathbb{Z}\backslash n\mathbb{Z}=\mathbb{Z}/n\mathbb{Z}$. Thus, we will refer to the set of all left cosets henceforth.
+
+\newpage
+
+The index of the subgroup $n\mathbb{Z}$ can be determined with the aid of \textsc{Proposition 4.21}, which states that for any arbitrary $r\in\mathbb{Z}$, there exists $s\in \{0, ... , (n-1)\}$, such that $r+n\mathbb{Z}=s+n\mathbb{Z}$. This is consistent with the notion of equivalence classes, which is how the cosets are defined. This also tells us the index of the subgroup. The index being $n$. We can see this by considering the set from which $s$ comes from in \textsc{Proposition 4.21}. Another way to state this is that there does not exist any $r\in\mathbb{Z}$ such that the corresponding coset $r+\n\mathbb{Z}\in\mathbb{Z}/n\mathbb{Z}$ is not equivalent to some $s+n\mathbb{Z}\in\mathbb{Z}/n\mathbb{Z}$, such that $s\in\{0, ... , (n-1)\}$. This brings us to the following list of all cosets:\par
+
+\vspace{6mm}
+
+\centerline{$\mathbb{Z}/n\mathbb{Z}=\{n\mathbb{Z}, 1+n\mathbb{Z}, ... , (n-1)+n\mathbb{Z}\}$.}
+
+\vspace{4mm}
+
+\begin{flushleft}
+\textsc{\textbf{Exercise 5.4}}
+\end{flushleft}
+
+\vspace{2mm}
+
+Let $G$ be a group and let $H$ be a subgroup of $G$. Then for any $g_1,g_2\in G$, we have the following:\par
+
+\vspace{6mm}
+
+\begin{list}
+\item{(a) \textsc{Proposition:} \textit{$g_1H=g_2H$ iff $Hg^{-1}_1=Hg^{-1}_2$.}}
+\end{list}
+
+\vspace{2mm}
+
+\textsc{Proof.}
+
+\vspace{4mm}
+
+
+$g_1H=g_2H$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow(g_1H\subseteq g_2H)\wedge(g_2H\subseteq g_1H)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow[\forall h_1\in H\colon\exists h_2\in H\colon (g_1h_1=g_2h_2)]\wedge [\forall h_2\in H\colon\exists h_1\in H\colon (g_1h_1=g_2h_2)]$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_1h_1=g_2h_2)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow ((g_1h_1)^{-1}=(g_2h_2)^{-1})$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (h^{-1}_1g^{-1}_1=h^{-1}_2g^{-1}_2)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (h_3g^{-1}_1=h_4g^{-1}_2)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow[\forall h_3\in H\colon\exists h_4\in H\colon (h_3g^{-1}_1=h_4g^{-1}_2)]\wedge [\forall h_4\in H\colon\exists h_3\in H\colon (h_3g^{-1}_1=h_4g^{-1}_2)]$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (Hg^{-1}_1\subseteq Hg^{-1}_2)\wedge (Hg^{-1}_2\subseteq Hg^{-1}_1)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow Hg^{-1}_1=Hg^{-1}_2$\par
+\vspace{5mm}
+\hspace{8.2mm}$\therefore\hspace{1mm} g_1H=g_2H\Longleftrightarrow Hg^{-1}_1=Hg^{-1}_2$\par
+
+\vspace{12mm}
+
+\begin{list}
+\item{(b) \textsc{Proposition:} \textit{$Hg^{-1}_1=Hg^{-1}_2$ iff $g_1H\subseteq g_2H$.}}
+\end{list}
+
+\newpage
+
+\textsc{Proof. }The proof of this is a consequence of the equivalence proven in part (a).
+
+\vspace{6mm}
+
+\begin{list}
+\item{(c) \textsc{Proposition:} \textit{$g_1H\subseteq g_2H$ iff $g_2\in g_1H$.}}
+\end{list}
+
+\vspace{2mm}
+
+\textsc{Proof.}
+
+\vspace{4mm}
+
+$g_1H\subseteq g_2H$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow \forall g_1h\colon [(g_1h\in g_1H)\implies (g_1h\in g_2H)]$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow \forall g_1h\colon [(g_1h\in g_1H)\implies(\exists \hat{h}\in H\colon (g_1h=g_2\hat{h}))]$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_1h=g_2\hat{h})$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_1h(\hat{h}^{-1})=g_2(\hat{h}^{-1}))$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_1h(\hat{h}^{-1})=g_2)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (h\hat{h}^{-1})\in H)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (\tilde{h}=h\hat{h}^{-1})$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_2=g_1\tilde{h})$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_2\in g_1H)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\therefore\hspace{1mm} g_1H\subseteq g_2H\Longleftrightarrow g_2\in g_1H$\par
+
+\vspace{12mm}
+
+\begin{list}
+\item{(d) \textsc{Proposition:} \textit{$g_2\in g_1H$ iff $g^{-1}_1g_2\in H$.}}
+\end{list}
+
+\vspace{2mm}
+
+\textsc{Proof.}
+
+\vspace{4mm}
+
+$g_2\in g_1H$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow \exists h\in H\colon (g_2=g_1h)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_2=g_1h)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow ((g^{-1}_1)g_2=(g^{-1}_1)g_1h)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g^{-1}_1g_2=h)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g^{-1}_1g_2\in H)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\therefore g_2\in g_1H\Longleftrightarrow g^{-1}_1g_2\in H$\par
+
+\newpage
+
+\begin{list}
+\item{(e) \textsc{Proposition:} \textit{$g^{-1}_1g_2\in H$ iff $g_1H=g_2H$.}}
+\end{list}
+
+\vspace{2mm}
+
+\textsc{Proof.}
+
+\vspace{4mm}
+
+$g^{-1}_1g_2\in H$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow \exists h\in H\colon (g^{-1}_1g_2=h)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow ((g_1)g^{-1}_1g_2=(g_1)h)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_2=g_1h)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_2\in g_1H)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_1H\subseteq g_2H)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (Hg^{-1}_1=Hg^{-1}_2)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\Leftrightarrow (g_1H=g_2H)$\par
+\vspace{5mm}
+\hspace{8.2mm}$\therefore g^{-1}_1g_2\in H\Longleftrightarrow g_1H=g_2H$\par
+
+\vspace{8mm}
+
+\begin{flushleft}
+\textsc{\textbf{Exercise 5.5}}
+\end{flushleft}
+
+\textsc{Proposition: }\textit{If $[G\colon H]=2$, then $gH=Hg$ for all $g\in G$.}
+
+\vspace{6mm}
+
+\textsc{Proof. } Assume $G$ is a group, $H$ is a subgroup of $G$, and $[G\colon H]=2$. Then there are only two left cosets and two right cosets. We may denote one of the cosets by $H$, since this is the coset formed when $g=e$. The remaining coset we may denote as $aH$, for some $a\not\in H$. Now let $g_1$ be any element in $G$. If $g_1\in H$, then by the closure of subgroups, we have $g_1H=Hg_1$. If $g_1\in aH$, then $g_1\not\in H$ and $g_1H=aH$. Now assume $g_1\in Ha$, then $g_1\not\in H$ and $Hg_1=Ha$. Since for any $g_1\in aH$ and $g_1\in Ha$, we have $g_1\not\in H$, then $g_1H=aH=G-H=Ha=Hg_1$.
+
+
+\vspace{8mm}
+
+\begin{flushleft}
+\textsc{\textbf{Exercise 5.6}}
+\end{flushleft}
+
+\textsc{Proposition: } \textit{If $ghg^{-1}\in H$ for all $h\in H$ and all $g\in G$, then $gH=Hg$ for all $g\in G$.}
+
+\vspace{6mm}
+
+\textsc{Proof. }Assume $ghg^{-1}\in H$ for all $h\in H$ and for all $g\in G$. Let $g_1\in G$ and consider the cosets $g_1H$ and $Hg_1$:\par
+
+\vspace{8mm}
+
+\centerline{$g_1H=\{g_1h\in G\mid h\in H\}$.}
+
+\newpage
+
+\centerline{$Hg_1=\{hg_1\in G\mid h\in H\}$.}
+
+\vspace{8mm}
+
+By assumption, we have that $g_1hg^{-1}_1\in H$ and $g^{-1}_1hg_1\in H$. Thus, $(g_1)g^{-1}_1hg_1\in g_1H$ and $g_1hg^{-1}_1(g_1)\in Hg_1$. This can be stated equivalently as\par
+
+\vspace{8mm}
+
+\hspace{30mm}$\forall g\in G\colon\exists h\in H\colon (gh=hg)$\par
+\vspace{2mm}
+\hspace{30mm}$\Leftrightarrow \forall g\in G\colon\exists h\in H\colon [(gh\in gH)\implies (gh\in Hg)]$\par
+\vspace{2mm}
+\hspace{30mm}$\Leftrightarrow \forall g\in G\colon\exists h\in H\colon [(hg\in Hg)\implies (hg\in gH)]$\par
+\vspace{2mm}
+\hspace{30mm}$\Leftrightarrow \forall g\in G\colon (gH\subseteq Hg\wedge Hg\subseteq gH)$\par
+\vspace{2mm}
+\hspace{30mm}$\Leftrightarrow \forall g\in G\colon (gH=Hg)$\par
+\vspace{2mm}
+\hspace{30mm}$\therefore\hspace{1mm}[\forall g\in G\colon\forall h\in H\colon (ghg^{-1}\in H)]\implies[\forall g\in G\colon (gH=Hg)]$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

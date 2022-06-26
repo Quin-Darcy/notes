@@ -1,0 +1,425 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+\usepackage{scrextend}
+\usepackage{lscape}
+\usepackage{relsize}
+
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{polynom}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+ \setlist[description]{leftmargin=12.8mm,labelindent=4mm}
+ 
+\begin{document}
+
+\begin{flushleft}
+  
+    Quin Darcy\par
+    Dr. Ebrahimzadeh\par
+    MATH 117\par
+    11/27/18
+  
+\end{flushleft}
+  
+\centerline{\boxed{\text{Homework 10F-11F}}}
+ 
+\vspace{4mm}
+ 
+\section{10F}
+ 
+\vspace{4mm}
+
+\noindent\textbf{58.} Let $V$ be an $n$-dimensional vector space with $T\colon V\rightarrow V$ being a linear operator. Additionally, assume $3$ is an eigenvalue of $T$.
+
+\begin{description}
+    \item\textbf{(i.) } Prove $E_3=N(T-3I)$ which implies $\dim(E_3)=\text{\textbf{nullity}}(T-3I)$.
+    \item\textbf{(ii.)} Which Theorem gives $\dim(E_3)=n-\text{\textbf{rank}}(T-3I)$?
+\end{description}
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.} (i.)} Consider the following set 
+
+\begin{equation*}
+    \begin{split}
+    E_3 &= \{v\in V\mid T(v)=3v\} \\
+    &= \{v\in V\mid I(T(v))=I(3v)\} \\
+    &= \{v\in V\mid T(v)=3(Iv)\} \\
+    &= \{v\in V\mid T(v)-3(Iv)=0_v\} \\
+    &= \{v\in V\mid (T-3I)(v)=0_v\} \\
+    &= N(T-3I).
+    \end{split}
+\end{equation*}
+
+\vspace{2mm}
+
+\noindent Therefore, $E_3=N(T-3I)$. \square
+
+\vspace{4mm}
+
+\textbf{Solution (ii.)}
+
+\vspace{6mm}
+
+\noindent\textbf{59.}
+
+\begin{description}
+    \item\textbf{(i)  } Let $V$ be a 2-dimensional vector space, and let $T\colon V\rightarrow V$ be a linear operator. Then the degree of the characteristic polynomial of $T$ is equal to $2$.
+    \item\textbf{(ii) } Let $V$ be a 3-dimensional vector space, and let $T\colon V\rightarrow V$ be a linear operator. Then the degree of the characteristic polynomial of $T$ is equal to $3$.
+    \item\textbf{(iii)} Suppose $T$ is a linear operator on an $n$-dimensional vector space, and suppose the characteristic polynomial splits. If the eigenvalues are $\{\lambda_i\}_{i=1}^k$, with multiplicities $\{m_i\}_{i=1}^r$. Prove that it follows that $\sum_{i=1}^k m_i=n$.
+\end{description}
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.} (i)} Let the matrix representation of $T$ be written as follows.
+
+\begin{equation*}
+    T(x) =
+    \begin{bmatrix}
+       a & b \\
+       c & d
+    \end{bmatrix}
+    (x).
+\end{equation*}
+
+\newpage
+
+\noindent Now consider
+
+\begin{equation*}
+    \begin{split}
+        \det\Bigg(
+        \begin{bmatrix}
+            a-\lambda & b \\
+            c & d-\lambda
+        \end{bmatrix}\Bigg) &= (a-\lambda)(d-\lambda)-bc \\
+        &= ad-a\lambda-d\lambda+\lambda^2-bc \\
+        &= \lambda^2-(a+d)\lambda+(ad-bc).
+    \end{split}
+\end{equation*}
+
+\vspace{2mm}
+
+\noindent It is clear that the degree of this polynomial is 2. \square
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.} (ii)}
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.} (iii)} Since $T$ splits, it is diagonalizable. Thus, the characteristic polynomial can be expressed as the product of $n$ linear factors. Thus,
+
+\begin{equation*}
+    f(t)=\prod_{i=1}^k(t-\lambda_i)^{m_i}
+\end{equation*}
+
+\vspace{4mm}
+
+\noindent\textbf{60.} Let $T\colon\mathbb{R}^3\rightarrow\mathbb{R}^3$ be a linear operator where, for each $(x,y,z)\in\mathbb{R}^3$
+
+\begin{equation*}
+    T(x,y,z)=
+    \begin{bmatrix}
+        1 & 1 & 1 \\
+        0 & 1 & 0 \\
+        0 & 1 & 2
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y \\
+        z
+    \end{bmatrix}.
+\end{equation*}
+
+\vspace{2mm}
+
+\noindent Prove $T$ is diagonalizable and find a basis $\beta$ such that $[T]_{\beta}^{\beta}$ is diagonal.
+
+\vspace{6mm}
+
+\textbf{Solution:} First we must find the eigenvalues of $T$. Thus, consider the following
+
+\begin{equation*}
+    \begin{split}
+        \det(T-\lambda I) &= \det(\begin{bmatrix}
+                                    1-\lambda & 1 & 1 \\
+                                    0 & 1-\lambda & 0 \\
+                                    0 & 1 & 2-\lambda \end{bmatrix}) \\
+        &= (1-\lambda)^2(2-\lambda).
+    \end{split}
+\end{equation*}
+
+\vspace{2mm}
+
+\noindent Thus, the eigenvalues of $T$ are $\lambda_1=1$ and $\lambda_2=2$. From a previous theorem, we can show that $T$ is diagonalizable if the multipicity of each eigenvalue is equal to the dimension corresponding to that eigenvalue. We start with $\lambda_1=1$. Thus, we have that the eigenspace corresponding to this eigenvalue is $E_1=N(T-I)$. The vectors in this nullspace must be all those $(x,y,z)\in\mathbb{R}^3$ such that
+
+\begin{equation*}
+    \begin{bmatrix}
+        0 & 1 & 1 \\
+        0 & 0 & 0 \\
+        0 & 1 & 1 
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y \\
+        z
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        0
+    \end{bmatrix}.
+\end{equation*}
+
+\newpage
+
+\noindent The resulting system of equation yields that $y=-z$. Thus, $E_1=\{(t,-s,s)\mid t,s\in\mathbb{R}\}$. A basis for this space is thus $\{(1,0,0), (0,-1,1)\}$ which shows $E_1$ is 2-dimensional. Thus, the dimension of the eigenspace corresponding to $1$ is equal to the multiplicity of the eigenvalue $1$. Now we must find $E_2$. We have that $E_2=N(T-2I)$. Thus, the vectors in $E_1$ are all those $(x,y,z)\in\mathbb{R}^3$ such that
+
+\begin{equation*}
+    \begin{bmatrix}
+        -1 & 1 & 1 \\
+         0 & -1 & 0 \\
+         0 & 1 & 0 
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y \\
+        z
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        0
+    \end{bmatrix}.
+\end{equation*}
+
+\vspace{2mm}
+
+\noindent Solving for the resulting system of equations yields
+
+\begin{equation*}
+    \begin{split}
+        -x+y+z=0 \\
+        y=0 \rightarrow z=x
+    \end{split}
+\end{equation*}
+
+\vspace{2mm}
+
+\noindent Thus, $E_2=\{(t,0,t)\in\mathbb{R}^3\mid t\in\mathbb{R}\}$. A basis for $E_2$ is $\{(1,0,1)\}$. Now let $\beta=\{(1,0,0),(0,-1,1),(1,0,1)\}$. Thus, 
+
+\begin{equation*}
+    [T]_{\beta}^{\beta} = [T]_{\gamma}^{\beta}[T]_{\gamma}^{\gamma}[T]_{\beta}^{\gamma}.
+\end{equation*}
+
+\vspace{2mm}
+
+\noindent Thus,
+
+\begin{equation*}
+    \begin{split}
+        [T]_{\beta}^{\beta} &=
+        \begin{bmatrix}
+            1 & 0 & 1 \\
+            0 & -1 & 0 \\
+            0 & 1 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 1 & 1 \\
+            0 & 1 & 0 \\
+            0 & 1 & 2
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 0 & -1 \\
+            0 & -1 & 0 \\
+            0 & 0 & 1
+        \end{bmatrix} \\
+        &=
+        \begin{bmatrix}
+            1 & 2 & 3 \\
+            0 & -1 & 0 \\
+            0 & 2 & 2
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 0 & -1 \\
+            0 & -1 & 0 \\
+            0 & 0 & 1
+        \end{bmatrix} \\
+        &=
+        \begin{bmatrix}
+            1 & 2 & 3 \\
+            0 & -1 & 0 \\
+            0 & 2 & 2
+        \end{bmatrix}2
+    \end{split}    
+\end{equation*}
+
+\vspace{2mm}
+
+
+
+\newpage
+
+\section{11W}
+
+\noindent\textbf{66.} Prove that if $W_i$ is a subspace of $V$, for $1\leq i\leq 3$, then
+
+\vspace{2mm}
+
+\centerline{$W_1\cap W_2+W_1\cap W_3\subseteq W_1\cap(W_2+W_3)$.}
+
+\vspace{4mm}\par
+
+\textbf{\textit{Proof.}} Assume $v\in W_1\cap W_2+W_1\cap W_3$. Then we can write $v=u+u'$, where $u\in W_1\cap W_2$ and $u'\in W_1\cap W_3$. Thus, $u\in W_1$ and $u'\in W_1$. So then since $W_1$ is a subspace, it is closed under addition. Hence, $u+u'\in W_1$. Lastly, since $u\in W_2$ and $u'\in W_3$, then $u+u'\in W_2+W_3$. Thus, $v\in W_1$ and $v\in W_2+W_3$. Therefore, $v\in W_1\cap(W_2+W_3)$.
+
+\vspace{4mm}
+
+\noindent\textbf{67.} Let $V=W_1\oplus W_2\oplus W_3$ and let $\beta_1=\{v_{11},v_{12}\}$ be a basis for $W_1$, $\beta_2=\{v_{21},v_{22},v_{23}\}$ be a basis for $W_2$, and $\beta_3=\{v_{31},v_{32}\}$ be a basis for $W_3$. Then $\beta_1\cup\beta_2\cup\beta_3$ is a basis for $V$.
+
+\vspace{4mm}\par
+
+\textbf{\textit{Proof.}} Assume there exists scalars $c_{ij}\in F$ such that $\sum_{i=1}^3\sum_{j=1}^{k_i}c_{ij}v_{ij}=0$, where $k_i=\abs{\beta_i}$. Then we have that for each $i$, $\sum_{j=1}^{k_i}c_{ij}v_{ij}=0$. Thus, for $i=1$ we have
+
+\begin{equation}
+    \begin{split}
+        &\sum\limits_{j=1}^2 c_{1j}v_{1j} = c_{11}v_{11}+c_{12}v_{12} = 0.
+    \end{split}
+\end{equation}
+
+\vspace{2mm}
+
+\noindent For $i=2$, we have
+
+\begin{equation}
+    \begin{split}
+        &\sum\limits_{j=1}^3c_{2j}v_{2j} = c_{21}v_{21}+c_{22}v_{22}+c_{23}v_{23}=0.
+    \end{split}
+\end{equation}
+
+\vspace{2mm}
+
+\noindent And for $i=3$, we have
+
+\begin{equation}
+    \begin{split}
+        &\sum\limits_{j=1}^2c_{3j}v_{3j} = c_{31}v_{31}+c_{32}v_{32} = 0.
+    \end{split}
+\end{equation}
+
+\vspace{4mm}
+
+\noindent Since (1) is a sum of the vectors from $\beta_1$, (2) is a sum of the vectors from $\beta_2$, and (3) is a sum of the vectors from $\beta_3$, and all these are bases, then (1), (2), and (3) imply $c_{ij}=0$ for all $i$. Therefore $\bigcup_{i=1}^3\beta_i$ is linearly independent. 
+
+\newpage Now let $v\in V$. Then $v\in\bigoplus_{i=1}^3 W_i$. Thus, there exists $w_1\in W_1$, $w_2\in W_2$, and $w_3\in W_3$ such that $v=w_1+w_2+w_3$. Thus,
+
+\begin{equation*}
+    \begin{split}
+        &w_1\in W_1\rightarrow\forall v_{1j}\in\beta_1\colon\exists c_{1j}\in F\colon w_1=\sum\limits_{j=1}^2 c_{1j}v_{1j} \\
+        &w_2\in W_2\rightarrow\forall v_{2j}\in\beta_2\colon\exists c_{2j}\in F\colon w_2=\sum\limits_{j=1}^3 c_{2j}v_{2j} \\
+        &w_3\in W_3\rightarrow\forall v_{3j}\in\beta_3\colon\exists c_{3j}\in F\colon w_3=\sum\limits_{j=1}^2 c_{3j}v_{3j} \\
+    \end{split}
+\end{equation*}
+
+\vspace{2mm}
+
+\noindent Thus,
+
+\begin{equation*}
+    \begin{split}
+        v &= w_1+w_2+w_3 \\
+        &= \sum_{j=1}^2 c_{1j}v_{1j}+\sum_{j=1}^2 c_{2j}v_{2j}+\sum_{j=1}^3 c_{3j}v_{3j} \\
+        &= \sum_{i=1}^3\sum_{j=1}^{k_i}c_{ij}v_{ij}\in\text{span }(\bigcup_{i=1}^3\beta_i).
+    \end{split}
+\end{equation*}
+
+\vspace{4mm}
+
+\noindent Thus, $V\subseteq\text{span}(\beta_1\cup\beta_2\cup\beta_3)$. Therefore, $\beta_1\cup\beta_2\cup\beta_3$ is a basis for $V$. \square
+
+\vspace{6mm}
+
+\noindent\textbf{68.}
+
+\begin{description}
+    \item\textbf{i. } If $V=\bigoplus_{i=1}^3 W_i$, then $\dim(V)\geq 3$.
+    \item\textbf{ii.} If $\dim(V)=3$, then $V\neq\bigoplus_{i=1}^4 W_i$, for all possible subspaces $W_i\subseteq V$.
+\end{description}
+
+\vspace{4mm}\par
+
+\textbf{\textit{Proof.} (i.)} Assume $V=\bigoplus_{i=1}^3 W_i$. If we assume that each $W_i\neq \{0_v\}$, then we know that for any vector $w_i\in W_i$, the set consisting of precisely that vector, $\{w_i\}$, is linearly independent in $W_i$. Thus, we can have at least three linearly independent vectors in $V$, namely $w_1\in W_1$, $w_2\in W_2$, and $w_3\in W_3$. Thus, since a vector space has a dimension which is always greater than or equal to any linearly independent subset of itself, then it follows that $\dim(V)\geq 3$. \square
+
+\vspace{4mm}\par
+
+\textbf{\textit{Proof.} (ii.)} Assume $V$ is a finite dimensional vector space with dimension $3$, and assume there exists nonempty subspaces $W_i\subseteq W$ such that $V=\bigoplus_{i=1}^4 W_i$. Now consider a set $\gamma=\{w_1,w_2,w_3,w_4\}$, where $w_i\in W_i$. Then since $\bigcap_{i=1}^4 W_i=0_v$, by definition, $\gamma$ is linearly independent. Thus, $V$ contains a subset with 4 linearly independent vectors. This is a contradiction. Thus, there does not exists subspaces $W_i\in V$ such that $V=\bigoplus_{i=1}^4 W_i$. \square
+
+\newpage
+
+\section{11F}
+
+\newpage
+
+\noindent\textbf{Theorem} \textit{Let $A$ be an $n\times n$ matrix. Then $A$ is diagonalizable if and only if $\mathbb{F}^n$ has a basis of eigenvectors of $A$.}
+
+\vspace{4mm}
+
+\textbf{\textit{Proof.}} Suppose $\mathbb{F}^n$ has a basis of eigenvectors $\{\bold{v}_i\}_{i=1}^n$ where $A\bold{v}_i=\gamma\bold{v}_i$
+
+\end{document}

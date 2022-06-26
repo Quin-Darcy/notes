@@ -1,0 +1,201 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.2in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 134}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 5/2/19   \\
+{ \textbf{Instructor:}} \ Dr. Krauel \hspace{\fill} \textbf{Assignment:} Homework 11 \\ \hrule}
+
+\justifying
+
+\begin{enumerate}[leftmargin=*]
+    \item[4.] Find a representation for the function 
+    
+        \begin{equation*}
+            f(z)=\frac{1}{1+z}=\frac{1}{z}\cdot\frac{1}{1+(1/z)}
+        \end{equation*}
+        
+        \noindent in negative powers of $z$ that is valid when $1<\abs{z}<\infty$.
+        
+        \begin{solution}
+            We begin by re-writing the function and using the identity given in the chapter notes. We have that
+            
+            \begin{equation*}
+                \begin{split}
+                    &\frac{1}{z}\cdot\frac{1}{1+(1/z)}=\frac{1}{z}\cdot\frac{1}{1-(-1/z)} 
+                    =\frac{1}{z}\cdot\sum_{n=0}^{\infty}(-1)^n\bigg(\frac{1}{z}\bigg)^n \\
+                    &= \frac{1}{z}\sum_{n=0}^{\infty}(-1)^nz^{-n} 
+                    = z^{-1}\sum_{n=0}^{\infty}(-1)^nz^{-n} 
+                    = \sum_{n=0}^{\infty}(-1)z^{-(n+1)}.
+                \end{split}
+            \end{equation*}
+            
+            \noindent So this converges for $\abs{z^{-2}}<1$, which is equivalent to $1<\abs{z^2}$. Thus, this series holds for all $z$ such that $1<\abs{z}$.
+        \end{solution}
+        
+    \item[6.] Find the Taylor series for the function
+    
+        \begin{equation*}
+            \frac{1}{z}=\frac{1}{2+(z-2)}=\frac{1}{2}\cdot\frac{1}{1+(z-2)/2}
+        \end{equation*}
+        
+        \noindent about the point $z_0=2$. Then, by differentiating that series term by term, show that 
+        
+        \begin{equation*}
+            \frac{1}{z^2}=\frac{1}{4}\sum_{n=0}^{\infty}(-1)^n(n+1)\bigg(\frac{z-2}{2}\bigg)^n\quad(\;\abs{z-2}<2\;).
+        \end{equation*}
+        
+        \begin{solution} 
+            The Taylor series for the function can be obtained by noting
+            
+            \begin{equation*}
+                \frac{1}{2}\cdot\frac{1}{1+(z-2)/2}=\frac{1}{2}\cdot\frac{1}{1-\big(-(z-2)/2\big)}.
+            \end{equation*}
+            
+            \noindent We then get that 
+            
+            \begin{equation*}
+                \frac{1}{z}=\frac{1}{2}\sum_{n=0}^{\infty}(-1)^n\bigg(\frac{z-2}{2}\bigg)^n.
+            \end{equation*}
+            
+            \noindent Expanding out to the first few terms, we find that 
+            
+            \begin{equation*}
+                \begin{split}
+                    \frac{d}{dz}\Bigg(\frac{1}{2}\sum_{n=0}^{\infty}(-1)^n\bigg(\frac{z-2}{2}\bigg)^n\Bigg) &= \frac{d}{dz}\bigg(\frac{1}{2}-\frac{1}{4}(z-2)+\frac{1}{8}(z-2)^2-\cdots\bigg) \\
+                    &= -\frac{1}{4}+\frac{1}{4}(z-2)-\frac{3}{16}(z-2)^2+\frac{1}{8}(z-2)^3-\cdots \\
+                    &= \frac{1}{4}\bigg(-1+(z-2)-\frac{3}{4}(z-2)^2+\frac{4}{8}(z-2)^3-\cdots\bigg) \\
+                    &= \frac{1}{4}\bigg(-1+\cdots+(-1)^k\frac{k+1}{2^k}(z-2)^k-\cdots\bigg) \\
+                    &= -\frac{1}{4}\sum_{n=0}^{\infty}(-1)^{n-1}(n+1)\bigg(\frac{z-2}{2}\bigg)^n.
+                \end{split}
+            \end{equation*}
+            
+            \noindent Finally, since $\frac{d}{dz}\frac{1}{z}=-\frac{1}{z^2}$, then by multiplying both sides of 
+            
+            \begin{equation*}
+                -\frac{1}{z^2}=-\frac{1}{4}\sum_{n=0}^{\infty}(-1)^{n-1}(n+1)\bigg(\frac{z-2}{2}\bigg)^n,
+            \end{equation*}
+            
+            \noindent by $-1$, we get 
+            
+            \begin{equation*}
+                \frac{1}{z^2}=\frac{1}{4}\sum_{n=0}^{\infty}(-1)^n(n+1)\bigg(\frac{z-2}{2}\bigg)^n,
+            \end{equation*}
+            
+            \noindent as desired.
+        \end{solution}
+        
+    \item[7.] Integrate the Taylor series expansion 
+    
+        \begin{equation*}
+            \frac{1}{w}=\sum_{n=0}^{\infty}(-1)^n(w-1)^n\quad(\;\abs{w-1}<1\;)
+        \end{equation*}
+        
+        \noindent along a contour interior of the circle of convergence from $w=1$ to $w=z$ to obtain the representation 
+        
+        \begin{equation*}
+            \text{Log}(z)=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}(z-1)^n\quad(\;\abs{z-1}<1\;).
+        \end{equation*}
+        
+        \newpage
+        
+        \begin{solution}
+            Since $\text{Log}(w)$ is the antiderivative of $\frac{1}{w}$ on the region $\abs{w-1}<1$, then if we let $\gamma(t)$ be a curve inside $D$ from $\gamma(a)=1$ to $\gamma(b)=z$, then by Theorem 3.9, we have that
+            
+            \begin{equation*}
+                \begin{split}
+                    \int_{\gamma}\frac{1}{w}&=\int_{\gamma}\sum_{n=0}^{\infty}(-1)^n(w-1)^n=\sum_{n=0}^{\infty}\int_{\gamma}(-1)^n(w-1)^n \\
+                    &= \sum_{n=0}^{\infty}\int_{a}^{b}(-1)^n\big(\gamma(t)-1\big)\gamma'(t)dt \\
+                    &= \sum_{n=0}^{\infty}\int_{a}^{b}(-1)^n u^n du, \quad\quad(u=\gamma(t)-1) \\
+                    &= \sum_{n=0}^{\infty}\bigg[\frac{(-1)^n}{n+1}\big(\gamma(t)-1\big)^{n+1}\bigg]_{a}^{b} \\
+                    &= \sum_{n=0}^{\infty}\frac{(-1)^n}{n+1}\big(z-1\big)^{n+1} \\
+                    &=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\big(z-1\big)^n \\
+                    &= \text{Log}(z).
+                \end{split}
+            \end{equation*}
+        \end{solution}
+        
+\end{enumerate}
+
+
+
+\end{document}

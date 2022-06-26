@@ -1,0 +1,187 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{commath}
+\usepackage{colonequals}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\newcolumntype{C}{>$c<$}
+
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=0mm,labelindent=10mm}
+
+
+
+\begin{document}
+
+
+\justifying
+
+\begin{flushleft}
+
+\blacksquare \textbf{ AXIOMS [Frege-Lukasiewicz]}
+
+\vspace{4mm}
+
+\hspace{4mm} Let $p,q,$ and $r$ be propositional forms.
+
+\begin{description}
+
+    \item \bullet \textbf{ [FL1] } $p \to(q\to p)$
+    \item \bullet \textbf{ [FL2] } $p \to(q\to r)\to(p\to q\to[p\to r])$
+    \item \bullet \textbf{ [FL3] } $\neg p\to\neg q\to(q\to p)$.
+
+\end{description}
+
+\vspace{8mm}
+
+\blacksquare \textbf{ INFERENCE RULES }
+
+\vspace{4mm}
+
+\hspace{4mm} Let $p,q,r,$ and $s$ be propositional forms.
+
+\begin{description}
+
+    \item \bullet \textbf{ Modus Ponens [MP]}\par
+    \hspace{15mm}$p\to q, p\Rightarrow q$\par
+    
+    \item \bullet \textbf{ Modus Tolens [MT]}\par
+    \hspace{15mm}$p\to q, \neg q\Rightarrow\neg p$\par
+    
+    \item \bullet \textbf{ Constructive Dilemma [CD]}\par\hspace{15mm}
+    $(p\to q)\wedge(r\to s), p\vee r\Rightarrow q\vee s$\par
+    
+    \item \bullet \textbf{ Destructive Dilemma [DD]}\par\hspace{15mm}
+    $(p\to q)\wedge(r\to s),\neg q\vee\neg s\Rightarrow \neg p\vee\neg r$
+    
+    \item \bullet \textbf{ Disjunctive Syllogism [DS]}\par\hspace{15mm}
+    $p\vee q,\neg p\Rightarrow q$
+    
+    \item \bullet \textbf{ Hypothetical Syllogism [HS]}\par\hspace{15mm}
+    $p\to q,q\to r, r\Rightarrow p\to r$
+    
+    \item \bullet \textbf{ Conjunction [Conj]}\par\hspace{15mm}
+    $p,q\Rightarrow p\wedge q$
+    
+    \item \bullet \textbf{ Simplification [Simp]}\par\hspace{15mm}
+    $p\wedge q\Rightarrow p$
+    
+    \item \bullet \textbf{ Addition [Add]}\par\hspace{15mm}
+    $p\Rightarrow p\vee q$.
+
+
+\end{description}
+
+\end{flushleft}
+
+\newpage
+
+\begin{flushleft}
+
+\blacksquare \textbf{ REPLACEMENT RULES }
+
+\vspace{4mm}
+
+\hspace{4mm} Let $p,q,$ and $r$ be propositional forms. 
+
+\begin{description}
+
+    \item \bullet \textbf{ Associative Laws [Assoc] }\par\hspace{15mm}
+    $p\wedge q\wedge r\Leftrightarrow p\wedge(q\wedge r)$\par\hspace{15mm}
+    $p\vee q\vee r\Leftrightarrow p\vee(q\vee r)$
+    
+    \item \bullet \textbf{ Commutative Laws [Com] }\par\hspace{15mm}
+    $p\wedge q\Leftrightarrow q\wedge p$\par\hspace{15mm}
+    $p\vee q\Leftrightarrow q\vee p$
+    
+    \item \bullet \textbf{ Distributive Laws [Distr] }\par\hspace{15mm}
+    $p\wedge(q\vee r)\Leftrightarrow p\wedge q\vee p\wedge r$\par\hspace{15mm}
+    $p\vee q\wedge r\Leftrightarrow (p\vee q)\wedge(p\vee r)$
+    
+    \item \bullet \textbf{ Contrapositive Law [Contra] }\par\hspace{15mm}
+    $p\to q\Leftrightarrow\neg q\to\neg p$\par\hspace{15mm}
+    
+    \item \bullet \textbf{ Double Negation [DN] }\par\hspace{15mm}
+    $p\Leftrightarrow\neg\neg p$\par\hspace{15mm}
+    
+    \item \bullet \textbf{ De Morgan's Laws [DeM] }\par\hspace{15mm}
+    $\neg(p\wedge q)\Leftrightarrow\neg p\vee\neg q$\par\hspace{15mm}
+    $\neg(p\vee q)\Leftrightarrow\neg p\wedge\neg q$
+    
+    \item \bullet \textbf{ Idempotentcy [Idem] }\par\hspace{15mm}
+    $p\wedge p\Leftrightarrow p$\par\hspace{15mm}
+    $p\vee p\Leftrightarrow p$
+    
+    \item \bullet \textbf{ Material Equivalence [Equiv] }\par\hspace{15mm}
+    $p\leftrightarrow q\Leftrightarrow(p\to q)\wedge(q\to p)$\par\hspace{15mm}
+    $p\leftrightarrow q\Leftrightarrow p\wedge q\vee\neg p\wedge\neg q$
+    
+    \item \bullet \textbf{ Material Implication [Impl] }\par\hspace{15mm}
+    $p\to q\Leftrightarrow\neg p\vee q$\par\hspace{15mm}
+    
+    \item \bullet \textbf{ Exportation [Exp] }\par\hspace{15mm}
+    $p\wedge q\to r\Leftrightarrow p\to(q\to r)$
+
+\end{description}
+
+\end{flushleft}
+
+\newpage
+
+\begin{flushleft}
+
+\blacksquare \textbf{ DEFINITION }
+
+\vspace{4mm}
+
+\hspace{4mm} A \textbf{predicate} is an expression that ascribes a property to the objects identified by the variables of the sentence.\par
+
+\end{flushleft}
+
+\begin{flushleft}
+
+\blacksquare \textbf{ REPLACEMENT RULES [Quantifier Negation (QN)] }
+
+\end{flushleft}
+
+Let S be theory symbols and $p$ be an S-formula.\par
+
+\begin{description}
+
+    \item \bullet $ \neg\forall xp\Leftrightarrow \exists x\neg p$
+    
+    \item \bullet $ \neg\exists xp\Leftrightarrow \forall x\neg p$
+
+\end{description}
+
+\end{document}

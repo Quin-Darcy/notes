@@ -1,0 +1,214 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 210B}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}\thispagestyle{empty}\hline
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210B}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 4/8/20   \\
+{ \textbf{Instructor:}}\ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 8 \\ \hrule}
+
+\justifying
+
+    \begin{enumerate}[leftmargin=*]
+        \item[13.] For each of the following extensions, $E$, of $F$, determine if $E/F$ is a Galois extension, find the elements of $G(E/F)$, and determine what group $G(E/F)$ is isomorphic to.
+            \begin{enumerate}
+                \item $E=\mathbb{Q}(\omega,\sqrt[3]{2})$, $F=\mathbb{Q}$.
+                    \begin{solution}
+                        Note that by HW 5, $E$ is the splitting field for $x^3-2\in F[x]$, which factors as $(x-\sqrt[3]{2})(x-\omega\sqrt[3]{2})(\omega^2i^2\sqrt[3]{2})$. Since the roots of $x^3-2$, are all distinct, then $x^3-2$ is separable over $F$, so that $E$ is the splitting field of an irreducible polynomial in $F[x]$. By Theorem (??), $E/F$ is Galois.\par\hspace{4mm} Let $\varphi\in G(E/F)$. Then $\varphi\in\text{Aut}(E)$ and for all $a\in F$, $\varphi(a)=a$. By HW/Thm (??), the minimal polynomials for $\sqrt[3]{2},\omega$ over $F$, $p(x)=x^3-2$ and $x^2+x+1$, have roots $\alpha,\beta$, respectively, such that $\varphi(\alpha)\in\{\sqrt[3]{2}, \omega\sqrt[3]{2},\omega^2\sqrt[3]{2}\}$ and $\varphi(\beta)\in\{\omega, \omega^2\}$. This gives us $6=[E\colon F]=\abs{G(E/F)}$ automorphisms. These are defined as follows:
+                            \begin{align*}
+                                &\varphi_1:=
+                                    \begin{cases}
+                                        a\in F\mapsto a \\
+                                        \sqrt[3]{2}\mapsto\sqrt[3]{2}\\
+                                        \omega\mapsto\omega
+                                    \end{cases} 
+                                    && 
+                                \varphi_2:=
+                                    \begin{cases} 
+                                        a\in F\mapsto a \\
+                                        \sqrt[3]{2}\mapsto\omega\sqrt[3]{2}\\
+                                        \omega\mapsto\omega
+                                    \end{cases} 
+                                    && 
+                                \varphi_3:=
+                                    \begin{cases} 
+                                        a\in F\mapsto a \\
+                                        \sqrt[3]{2}\mapsto\omega^2\sqrt[3]{2}\\
+                                        \omega\mapsto\omega
+                                    \end{cases} \\
+                                &\varphi_4:=
+                                    \begin{cases} 
+                                        a\in F\mapsto a \\
+                                        \sqrt[3]{2}\mapsto\sqrt[3]{2}\\
+                                        \omega\mapsto\omega^2
+                                    \end{cases} 
+                                    && 
+                                \varphi_5:=
+                                    \begin{cases} 
+                                        a\in F\mapsto a \\
+                                        \sqrt[3]{2}\mapsto\omega\sqrt[3]{2}\\
+                                        \omega\mapsto\omega^2
+                                    \end{cases} 
+                                    && 
+                                \varphi_6 :=
+                                    \begin{cases} 
+                                        a\in F\mapsto a \\
+                                        \sqrt[3]{2}\mapsto\omega^2\sqrt[3]{2}\\
+                                        \omega\mapsto\omega^2.
+                                    \end{cases}
+                            \end{align*}
+                        By Thm/HW (??) $G(E/F)$ is a group. The cayley table for this group is
+                            \begin{table}[htp]
+                                \centering
+                                \begin{tabular}{|l|llllll}
+                                    \hline
+                                    & \multicolumn{1}{l|}{$\varphi_1$} & \multicolumn{1}{l|}{$\varphi_2$} & \multicolumn{1}{l|}{$\varphi_3$} & \multicolumn{1}{l|}{$\varphi_4$} & \multicolumn{1}{l|}{$\varphi_5$} & \multicolumn{1}{l|}{$\varphi_6$} \\ \hline
+                                        $\varphi_1$ & $\varphi_1$ & $\varphi_2$ & $\varphi_3$ & $\varphi_4$ & $\varphi_5$ & $\varphi_6$ \\ \cline{1-1}
+                                        $\varphi_2$ & $\varphi_2$ & $\varphi_3$ & $\varphi_1$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                        $\varphi_3$ & $\varphi_3$ & $\varphi_1$ & $\varphi_2$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                        $\varphi_4$ & $\varphi_4$ & $\varphi_6$ & $\varphi_5$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                        $\varphi_5$ & $\varphi_5$ & $\varphi_4$ & $\varphi_6$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                        $\varphi_6$ & $\varphi_6$  & $\varphi_5$ & $\varphi_4$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                \end{tabular}$\longrightarrow$         
+                                \centering
+                                \begin{tabular}{|l|llllll}
+                                    \hline
+                                    & \multicolumn{1}{l|}{$(1)$} & \multicolumn{1}{l|}{$(123)$} & \multicolumn{1}{l|}{$(132)$} & \multicolumn{1}{l|}{$(23)$} & \multicolumn{1}{l|}{$(132)$} & \multicolumn{1}{l|}{$(123)$} \\ \hline
+                                        $(1)$ & $(1)$ & $(123)$ & $(132)$ & $(23)$ & $(132)$ & $(123)$ \\ \cline{1-1}
+                                        $(123)$ & $(123)$ & $(132)$ & $(1)$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                        $(132)$ & $(13)$ & $(1)$ & $\varphi_2$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                        $(23)$ & $(23)$ & $\varphi_6$ & $\varphi_5$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                        $(132)$ & $(132)$ & $\varphi_4$ & $\varphi_6$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                        $(123)$ & $(123)$  & $\varphi_5$ & $\varphi_4$ & $\varphi_$ & $\varphi_$ & $\varphi_$ \\ \cline{1-1}
+                                \end{tabular}
+                            \end{table}
+                    \end{solution}
+                \item $E=\mathbb{Q}(\sqrt[4]{5},i)$, $F=\mathbb{Q}$.
+                    \begin{solution}
+                        The minimal polynomial of $\sqrt[4]{5}$ over $F$ is $x^4-5$. The roots of this polynomial are $\sqrt[4]{5},-\sqrt[4]{5},i\sqrt[4]{5},-i\sqrt[4]{5}$ and so $x^4-5$ splits over $E$. Additionally, $E$ is the smallest field containing $F$ and the roots of $x^4-5$ and as such, $E$ is the splitting field for $x^4-5$. Since $\sqrt[4]{5}\notin F(i)$, then $x^2-\sqrt[4]{25}$ is irreducible over $F(i)$ and so $[E\colon F(i)]=2$. Similarly, since $x^2+1$ is irreducible over $F$, then $[F(i)\colon F]=2$. Thus, $[E\colon F]=[E\colon F(i)][F(i)\colon F]=4$. Now note that any automorphism of $E$ fixes $F$ by HW 1 and so $G(E/F)=\text{Aut}(E)$. Moreover, for any $\varphi\in\text{Aut}(E)$, we have that 
+                            \begin{equation*}
+                                \varphi(\sqrt[4]{5})=\pm\sqrt[4]{5}\quad\text{and}\quad\varphi(i)=\pm i.
+                            \end{equation*}
+                        Thus, $\abs{\text{Aut}(E)}=\abs{G(E/F)}=4$ and so $\abs{G(E/F)}=[E\colon F]$. Thus, by Theorem 5, $E/F$ is Galois. Finally, let $\varphi,\tau\in G(E/F)$ such that 
+                            \begin{equation*}
+                                \varphi(\sqrt[4]{5})=-\sqrt[4]{5},\;\varphi(i)=i\quad\text{and}\quad\tau(\sqrt[4]{5})=\sqrt[4]{5},\;\tau(i)=-i.
+                            \end{equation*}\newpage
+                        Letting $\alpha_1=\sqrt[4]{5},\alpha_2=-\sqrt[4]{5},\alpha_3=i\sqrt[4]{5},$ and $\alpha_4=-i\sqrt[4]{5}$, then\par 
+                            \begin{table}[htp]
+                                \centering
+                                \begin{tabular}{|l|l|l|l|l|l|}
+                                \hline
+                                    & $\alpha_1$ & $\alpha_2$ & $\alpha_3$ & $\alpha_4$ &          \\ \hline
+                                    $1_E$        & $\alpha_1$ & $\alpha_2$ & $\alpha_3$ & $\alpha_4$ & (1)      \\ \hline
+                                    $\varphi$     & $\alpha_2$ & $\alpha_1$ & $\alpha_3$ & $\alpha_4$ & (12)     \\ \hline
+                                    $\tau$       & $\alpha_1$ & $\alpha_2$ & $\alpha_4$ & $\alpha_3$ & (34)     \\ \hline
+                                    $\varphi\tau$ & $\alpha_2$ & $\alpha_1$ & $\alpha_4$ & $\alpha_3$ & (12)(34) \\ \hline
+                                \end{tabular}
+                            \end{table}\par 
+                        From this table we can see that $G(E/F)\cong\{(1),(12),(34),(12)(34)\}\cong\mathbb{Z}_2\times\mathbb{Z}_2$.
+                    \end{solution}
+                \item $E=\mathbb{Q}(\sqrt[4]{5},i)$, $F=\mathbb{Q}(i)$.
+                    \begin{solution}
+                        By part (b), we know that $\abs{\text{Aut}(E)}=4$ and two of these automorphisms map $i$ to $-i$. Thus, $G(E/F)=\{1_E,\varphi\}$, where $1_E$ is the identity on $E$ and $\varphi(\sqrt[4]{5})=-\sqrt[4]{5}$ and $\varphi(i)=-i$. Thus, $\abs{G(E/F)}=2$. Additionally, the minimal polynomial of $\sqrt[4]{5}$ over $F$ is $x^2-\sqrt[4]{25}$ and so $[E\colon F]=2$. Thus, $\abs{G(E/F)}=[E\colon F]$ and by Theorem 5, $E/F$ is Galois. Finally, by part (b), it follows that $G(E/F)=\{1_E,\varphi\}\cong\{(1),(12)\}\cong\mathbb{Z}_2$.
+                    \end{solution}
+                \item $E=\mathbb{Q}(\sqrt[4]{5},i)$, $F=\mathbb{Q}(\sqrt[4]{5})$.
+                    \begin{solution}
+                        By parts (b) and (c) it follows that $G(E/F)=\{1_E,\tau\}$. Additionally, since the minimal polynomial of $i$ over $F$ is $x^2+1$, then $[E\colon F]=2$. Thus, $\abs{G(E/F)}=[E\colon F]$ and by Theorem 5, $E/F$ is Galois. Finally, $G(E/F)\cong\{(1),(34)\}\cong\mathbb{Z}_2$.
+                    \end{solution}
+                \item $E=\mathbb{Q}(\sqrt{2},\sqrt{3})$, $F=\mathbb{Q}$.
+                    \begin{solution}
+                        Since $E$ is the splitting field of the separable polynomial $(x^2-2)(x^2-3)$, then $\abs{G(E/F)}=[E\colon F]=4$ and so $E/F$ is Galois. Thus, for any $\varphi\in G(E/F)$ we'll have that $\varphi(\sqrt{2})=\pm\sqrt{2}$ and $\varphi(\sqrt{3})=\pm \sqrt{3}$. In particular, we can find $\varphi_1,\varphi_2\in G(E/F)$ such that 
+                            \begin{align*}
+                                &\varphi_1(\sqrt{2})=\sqrt{2}, &\varphi_1(\sqrt{3})=-\sqrt{3} \\
+                                &\varphi_2(\sqrt{2})=-\sqrt{2} &\varphi_2(\sqrt{3})=\sqrt{3}.
+                            \end{align*}
+                        This results in $G(E/F)=\{\varphi_0,\varphi_1,\varphi_2,\varphi_1\varphi_2\}\cong\mathbb{Z}_2\times\mathbb{Z}_2$.
+                    \end{solution}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

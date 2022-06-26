@@ -1,0 +1,449 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+
+
+
+
+\begin{document}
+
+\title{Final Review}
+\author{Quin Darcy}
+\affil{\small{California State University, Sacramento}}
+\maketitle
+
+\section{An Unorganized Review of The Course}
+
+\subsection{Paths}
+
+Before we give the definition of a path, it is important to remember the distinction between a path as a map $\gamma$ from a real interval $[a,b]$ into the complex plane, and the image of a path. Visually we are usually only shown the image of a path which is represented as points $\gamma(t)\in\mathbb{C}$ that run through the image as $t$ runs through $[a,b]$. Keeping this distinction in mind, we introduce the following definition.
+
+\begin{definition}
+    A \textbf{path} in the complex plane is a continuous function
+        \begin{equation*}
+            \gamma\colon[a,b]\rightarrow\mathbb{C}\quad(a\leq b\in\mathbb{R})
+        \end{equation*}
+\end{definition}
+
+\noindent As noted earlier, there is a distinction to be made between the map and its image. To emphasize this, we introduce a further definition.
+
+\begin{definition}
+    A \textbf{curve} $C$ from $z_1$ to $z_2$ in the complex plane is a subset of $\mathbb{C}$ that is equal to the image of a path $\gamma[a,b]\rightarrow\mathbb{C}$, where $\gamma(a)=z_1$ and $\gamma(b)=z_2$.\par Given a curve $C$, a \textbf{parametrization} of $C$ is a path $\sigma\colon[c,d]\rightarrow\mathbb{C}$ such that $C$ is the image of $\sigma$, where $\sigma(a)=z_1$ and $\sigma(b)=z_2$.
+\end{definition}
+
+\subsection{Zeros and Singularities}
+
+A point $z_0$ is a \textbf{zero} of a function $f$ if $f(z_0)=0$. Suppose $f$ is a holomorphic function. We say $z_0$ is a zero of order $m$, where $m\in\mathbb{N}$, if 
+
+\begin{equation*}
+    f(z_0)=f'(z_0)=f''(z_0)=\dots=f^{(m-1)}(z_0)=0, 
+\end{equation*}
+
+\noindent but $f^{(m)}(z_0)\neq 0$. 
+
+\newpage
+
+\begin{theorem}
+    Suppose $f\colon D\rightarrow\mathbb{C}$ is holomorphic on the region $D\subseteq\mathbb{C}$ and $f$ has a zero at $\alpha\in D$. Then either
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item $f$ is identically zero on $D$, that is $f(z)=0$ for all $z\in D$, or
+        \item there exists an $m\in\mathbb{N}$ and a holomorphic function $g\colon D\rightarrow\mathbb{C}$ with $g(\alpha)\neq 0$ such that
+        
+        \begin{equation*}
+            f(z)=(z-\alpha)^mg(z)
+        \end{equation*}
+        
+        \noindent for all $z\in D$.
+    \end{enumerate}
+\end{theorem}
+
+\noindent A point $z_0$ is said to be a \textbf{singularity} of a function $f$ if $f$ is not analytic at $z_0$. If $f$ is holomorphic on $0<\abs{z-z_0}<R$, for $R>0$, but not holomorphic at $z_0$, the we call $z_0$ an \textbf{isolated signularity}. 
+
+\begin{theorem}
+    Let $f$ have an isolated singularity at $\alpha$ with Laurent series expansion $\sum\limits_{n\in\mathbb{Z}}a_n(z-\alpha)^n$ for $0<\abs{z-\alpha}<R$. Then 
+    
+    \begin{enumerate}[label=(\roman*)]
+        \item $\alpha$ is a \textbf{removable singularity} if $a_n=0$ for $n<0$;
+        \item $\alpha$ is a \textbf{pole of order} $k\in\mathbb{N}$ if $a_{-k}\neq0$ but $a_n=0$ for $n<-k$. That is $f(z)=\sum_{n=-k}^{\infty}a_n(z-z_0)^n$;
+        \item $\alpha$ is an \textbf{essential singularity} if $a_n\neq 0$ for all $n\in\mathbb{Z}$. 
+    \end{enumerate}
+\end{theorem}
+
+\newpage
+
+\section{Exercises for the New Material}
+
+\begin{enumerate}[leftmargin=*]
+    \item[9.] Find the residue at $z=0$ of the functions
+    
+        \begin{align*}
+            (a)\;&\frac{1}{z+z^2} & (b)\;\frac{z-\sin{z}}{z}. 
+        \end{align*}
+        
+        \begin{solution}\hfill\par\vspace{2mm}
+            \begin{enumerate}[label=(\alph*)]
+                \item Let us begin by rewriting this function.
+            
+                    \begin{equation*}
+                        \frac{1}{z+z^2}=\frac{1}{z}\cdot\frac{1}{1+z}=\frac{1}{z}\cdot\frac{1}{1-(-z)}=\frac{1}{z}\sum_{n=0}^{\infty}(-1)^nz^n.
+                    \end{equation*}
+            
+                    \noindent Now let's simplify and try to get it into the form of a Laurent Series.
+            
+                    \begin{equation*}
+                        \frac{1}{z}\sum_{n=0}^{\infty}(-1)^nz^n&=\sum_{n=0}^{\infty}(-1)^nz^{n-1}= \frac{1}{z}+\sum_{n=1}^{\infty}(-1)^nz^{n-1}.
+                    \end{equation*}
+            
+                    Thus, the coefficient on the $z^{-1}$ term is 1, which means 
+            
+                    \begin{equation*}
+                        \text{Res}_{z=0}\big(f(z)\big)=1.
+                    \end{equation*}
+                
+            \item First, let us simplify a bit
+            
+                \begin{equation*}
+                    \frac{z-\sin{z}}{z}=1-\frac{\sin{z}}{z}=1-\frac{1}{z}\cdot\sin{z}.
+                \end{equation*}
+                
+                \noindent Thus, we can use the known power series expansion for $\sin{z}$ and write
+                
+                \begin{equation*}
+                    f(z)=1-\frac{1}{z}\sum_{n=0}^{\infty}\frac{(-1)^nz^{2n+1}}{(2n+1)!}=1-\sum_{n=0}^{\infty}\frac{(-1)^nz^{2n}}{(2n+1)!}.
+                \end{equation*}
+                
+                \noindent We can see that this series has no $z^{-1}$ term and thus 
+                
+                \begin{equation*}
+                    \text{Res}_{z=0}\big(f(z)\big)=0.
+                \end{equation*}
+                
+            \end{enumerate}
+        \end{solution}
+        
+    \item[10.] Use the Residue Theorem to evaluate the integral of each of these functions around the circle $\abs{z}=3$ in the positive direction: 
+    
+        \begin{align*}
+            (a)&\;\frac{\exp{(-z)}}{(z-1)^2} & (d)\;\frac{z+1}{z^2-2z}.
+        \end{align*}
+        
+    \noindent The solution starts on the next page
+    
+    \newpage
+    
+    \begin{solution}\hfill\par\vspace{2mm}
+        \begin{enumerate}[label=(\alph*)]
+            \item Before presenting a solution, it is worth summarizing the Residue Theorem. We have that if $f$ is meromorphic in the region $D\subseteq\mathbb{C}$ with singularities $z_0, z_1, \dots, z_k$ in $D$, and $\gamma$ is a positively oriented, closed, simple, piecewise smooth path that contains these singularities inside it, then 
+            
+            \begin{equation*}
+                \int_{\gamma}f=2\pi i\sum_{j=0}^k\text{Res}_{z=z_j}\big(f(z)\big).
+            \end{equation*}
+            
+             Alright so let us see if we have what we need to be able to use this theorem on the current problem. Well first, let $\gamma(t)=3e^{2\pi it}$, where $0\leq t\leq 1$. And since this function has only one singularity at $z=1$, we can be sure that its enclosed by the path.  So let's go ahead and rewrite this function.
+             
+             \begin{equation*}
+                 \begin{split}
+                     f(z) &= \frac{\exp{(-z)}}{(z-1)^2}=\frac{1}{e^z(z-1)^2}=\frac{1}{e(z-1)^2}e^{-(z-1)} \\
+                     &= \frac{1}{e(z-1)^2}\sum_{n=0}^{\infty}\frac{(-1)^n(z-1)^n}{n!} \\
+                     &= \frac{1}{e}\sum_{n=0}^{\infty}\frac{(-1)^n(z-1)^{n-2}}{n!} \\
+                     &= \frac{1}{e}\bigg(\frac{1}{(z-1)^2}-\frac{1}{z-1}+\sum_{n=3}^{\infty}\frac{(-1)^n(z-1)^{n-2}}{n!}\bigg) \\ 
+                     &= \frac{1}{e(z-1)^2}-\frac{1}{e(z-1)}+\frac{1}{e}\sum_{n=2}^{\infty}\frac{(-1)^n(z-1)^{n-2}}{n!}.
+                 \end{split}
+             \end{equation*}
+             
+             \noindent Thus, Res$_{z=1}\big(f(z)\big)=-1/e$. Since there is only one singularity, then it follows that 
+             
+             \begin{equation*}
+                 \int_{\gamma}\frac{\exp{(-z)}}{(z-1)^2}\;dz=-2\pi i\frac{1}{e}=-\frac{2\pi i}{e}.
+             \end{equation*}
+             
+             \item[(d)] So now let us take a look at the following function 
+             
+             \begin{equation*}
+                 f(z)=\frac{z+1}{z^2-2z}.
+             \end{equation*}
+             
+             \noindent This function has two singularities, $z_0=0$ and $z_1=2$. Both of these singularities are enclosed within the circle $\abs{z}=3$. Let's start by expanding about $z=0$. We have that 
+             
+             \begin{equation*}
+                 \frac{z+1}{z(z-2)}=\frac{1}{z-2}+\frac{1}{z(z-2)}=-\frac{1}{2}\cdot\frac{1}{1-(z/2)}-\frac{1}{2z}\cdot\frac{1}{1-(z/2)}.
+             \end{equation*}
+             
+             \newpage Thus, 
+             
+             \begin{equation*}
+                \begin{split}
+                    -\frac{1}{2}\cdot\frac{1}{1-(z/2)}-\frac{1}{2z}\cdot\frac{1}{1-(z/2)} &= -\frac{1}{2}\sum_{n=0}^{\infty}\bigg(\frac{z}{2}\bigg)^n+\bigg(-\frac{1}{2z}\bigg)\sum_{n=0}^{\infty}\bigg(\frac{z}{2}\bigg)^n \\
+                    &= -\frac{1}{2}\bigg(\sum_{n=0}^{\infty}\frac{z^n}{2^n}+\sum_{n=0}^{\infty}\frac{z^{n-1}}{2^n}\bigg) \\
+                    &= -\sum_{n=0}^{\infty}\frac{z^n}{2^{n+1}}-\sum_{n=0}^{\infty}\frac{z^{n-1}}{2^{n+1}}. \\
+                \end{split}
+             \end{equation*}
+             \noindent We see that the coefficient the first $z^{-1}$ term occurs when $n=0$, which gives
+             
+             \begin{equation*}
+                 \text{Res}_{z_0=0}\big(f(z)\big)=-\frac{1}{2}.
+             \end{equation*}
+             
+             \noindent Now let us expand this function around the second pole, $z=2$. We have that 
+             
+             \begin{equation*}
+                 \begin{split}
+                     \frac{z+1}{z^2-2z} &= \frac{1}{z-2}+\frac{1}{z-2}\cdot\frac{1}{z} \\
+                     &= \frac{1}{z-2}+\frac{1}{z-2}\cdot\frac{1}{2+z-2} \\
+                     &= \frac{1}{z-2}+\frac{1}{z-2}\cdot\frac{1}{2}\cdot\frac{1}{1+\frac{(z-2)}{2}} \\
+                     &= \frac{1}{z-2}+\frac{1}{z-2}\cdot\frac{1}{2}\cdot\frac{1}{1-\big(-\frac{(z-2)}{2}\big)} \\
+                     &= \frac{1}{z-2}+\frac{1}{z-2}\cdot\frac{1}{2}\sum_{n=0}^{\infty}\frac{(-1)^n(z-2)^n}{2^n} \\
+                     &= \frac{1}{z-2}+\bigg(\frac{1}{z-2}\bigg)\sum_{n=0}^{\infty}\frac{(-1)^n(z-2)^n}{2^{n+1}} \\
+                     &= \frac{1}{z-2}+\sum_{n=0}^{\infty}\frac{(-1)^n(z-2)^{n-1}}{2^{n+1}}.
+                 \end{split}
+             \end{equation*}
+             
+             \noindent Here we see that the coefficient on the $z^{-1}$ term occurs when $n=0$ and that gives 
+             
+             \begin{equation*}
+                 \frac{1}{z-2}+\frac{(z-2)^{-1}}{2}=\frac{1}{z-2}+\frac{1}{2(z-2)}=\frac{3}{2}\cdot(z-2)^{-1}.
+             \end{equation*}
+             
+             \noindent Thus, 
+             
+             \begin{equation*}
+                 \text{Res}_{z_1=2}\big(f(z)\big)=\frac{3}{2}.
+             \end{equation*}
+             
+             \noindent Thus, by Cauchy's Residue Theorem, we have that 
+             
+             \begin{equation*}
+                \begin{split}
+                    \int_{\gamma}f(z)\;dz&=2\pi          i\sum_{n=0}^{1}\text{Res}_{z=z_n}\big(f(z)\big) \\
+                    &=2\pi i\bigg(-\frac{1}{2}+\frac{3}{2}\bigg) \\
+                    &=2\pi i(1) \\
+                    &= 2\pi i.
+                 \end{split}
+             \end{equation*}
+        \end{enumerate}
+    \end{solution}
+    
+    \item[12.] In each case, write the principal part of the function at its isolated singular point and determine whether that point is a pole, a removable singular point, or an essential singular point. 
+    
+    \begin{align*}
+        (a)&\;\;z\exp{\bigg(\frac{1}{z}\bigg)} & (c)\;\;\frac{\sin{z}}{z} & &(e)\;\;\frac{1}{(2-z)^3}.
+    \end{align*}
+    
+    \begin{solution}\hfill\par\vspace{2mm}
+        \begin{enumerate}[label=(\alph*)]
+            \item Recall that the principal part of a function is the negative sum of the function's Laurent series expansion. Note, this function has a singularity at $z=0$. Let us get our first function into a Laurent series. We'll begin by re-writing it as
+            
+            \begin{equation*}
+                \begin{split}
+                    z\exp{\bigg(\frac{1}{z}\bigg)}&=ze^{\frac{1}{z}}.
+                \end{split}
+            \end{equation*}
+            
+            \noindent Using the identity, $e^z=\sum_{n=0}^{\infty}z^n/n!$, it follows that 
+            
+            \begin{equation*}
+                ze^{\frac{1}{z}}=z\sum_{n=0}^{\infty}\frac{z^{-n}}{n!}=\sum_{n=0}^{\infty}\frac{z^{-n+1}}{n!}=z+1+\sum_{n=2}^{\infty}\frac{z^{-n+1}}{n!}.
+            \end{equation*}
+            
+            \noindent Thus, since $1/n!\neq 0$ for all $n\geq 2$, we conclude that this is the case for infinite $n$. Therefore, $z=0$ is an essential singularity.
+            
+            \vspace{2mm}
+            
+            \item[(c)] Moving on, we see that this function has a singularity at $z=0$. Like before, let us get this function into the form of a Laurent series. 
+            
+            \begin{equation*}
+                \begin{split}
+                    \frac{\sin{z}}{z}&= \frac{1}{z}\sin{z}=\frac{1}{z}\sum_{n=0}^{\infty}\frac{(-1)^nz^{2n+1}}{(2n+1)!}=\sum_{n=0}^{\infty}\frac{(-1)^nz^{2n}}{(2n+1)!}
+                \end{split}
+            \end{equation*}
+            
+            \noindent We can see here that there is no $z^{-k}$ term for any $k\in\mathbb{N}$. Thus, the principal part for $f(z)=0$. It follows then that this is a removable singularity.
+            
+            \newpage
+            
+            \item[(e)] Clearly this function has a singularity at $z=2$. Since we can write
+            
+            \begin{equation*}
+                \frac{1}{(2-z)^3}=-\frac{1}{(z-2)^3},
+            \end{equation*}
+            
+            and since $(z-2)^3$ is holomorphic everywhere, then there exists $n\in\mathbb{Z}$, namely $n=3$, such that $(z-2)^3\cdot\big(-(z-2)^{-3}\big)$ is holomorphic and non-zero. Moreover, since $n>0$, then it follows that $z=2$ is a pole of order $3$.
+        \end{enumerate}
+    \end{solution}
+    
+\end{enumerate}
+
+\section{Midterm 2}
+
+    \begin{enumerate}[leftmargin=*]
+        \item Compute the following, leaving your answer as a complex number in the form $a+bi$, $a,b\in\mathbb{R}$, or as a set, depending on the problem.
+        
+        \begin{enumerate}[label=(\alph*)]
+            \item Find all $z\in\mathbb{C}$ such that $e^z=1+i$.
+                \begin{solution}
+                    First we will calculate the magnitude and argument of $1+i$. Doing so yields
+                    
+                    \begin{align*}
+                        \abs{1+i}&=\sqrt{2}, & \text{arg}(1+i)=\{z\in\mathbb{C}\mid\exists k\in\mathbb{Z}\colon z=\frac{\pi}{4}+2\pi k\}.
+                    \end{align*}
+                    
+                    \noindent Having calculated these two things, we can put $1+i$ into exponential form using the identity $z=\abs{z}e^{i\text{arg}(z)}$. Thus, we get that
+                    
+                    \begin{equation*}
+                        1+i=\sqrt{2}e^{i(\frac{\pi}{4}+2\pi k)}.
+                    \end{equation*}
+                    
+                    \noindent Setting this equal to $e^z=e^xe^{iy}$, we get that
+                    
+                    \begin{equation*}
+                        \sqrt{2}e^{i(\frac{\pi}{4}+2\pi k)}=e^xe^{iy}.
+                    \end{equation*}
+                    
+                    \noindent This equality implies that $e^x=\sqrt{2}$. From this we can deduce $x=\frac{1}{2}\ln{2}$. Next, we have that $y=\frac{\pi}{4}+2\pi k$. Finally, it follows that the set of all such $z$ in which $e^z=1+i$ is any z for which $z=\frac{1}{2}\ln{2}+i(\frac{\pi}{4}+2\pi k)$, for $k\in\mathbb{Z}$.
+                \end{solution}
+                
+            \item Find the principal value of $i^{1+i}$.
+            
+                \begin{solution}
+                    By virtue of general exponentiation, we have that $a^b=e^{b\text{log}(a)}$ for $a,b\in\mathbb{C}$. Thus, we can re-write our number as 
+                    
+                    \begin{equation*}
+                        i^{1+i}=e^{(1+i)\text{Log}(i)}.
+                    \end{equation*}
+                    
+                    \noindent Here we chose Log$(z)$ as opposed to log$(z)$ since we are calculating the principal value. Now we will simplify. We have that 
+                    
+                    \begin{equation*}
+                        \text{Log}(i)=\ln{1}+i\text{Arg}(i) = \frac{\pi i}{2}.
+                    \end{equation*}
+                    
+                    \noindent Thus, 
+                    
+                    \begin{equation*}
+                        i^{1+i}=e^{(1+i)\frac{\pi i}{2}}=e^{\frac{\pi i}{2}-\frac{\pi}{2}}=e^{-\frac{\pi}{2}}\big(\cos{\frac{\pi}{2}}+i\sin{\frac{\pi}{2}}\big)=ie^{-\frac{\pi}{2}}.
+                    \end{equation*}
+                \end{solution}
+                
+            \item Calculate log$(-1-i)$, where log is the complex logarithm. 
+            
+            \begin{solution}
+                Using the identity $\text{log}(z)=\ln{\big(\;\abs{z}\big)}+i\text{arg}(z)$, then it follows that 
+                
+                \begin{equation*}
+                    \text{log}(-1-i)=\ln{\sqrt{2}}+i\big(-\frac{3\pi}{4}+2\pi k\big), \quad k\in\mathbb{Z}.
+                \end{equation*}
+                
+                \noindent Thus, 
+                
+                \begin{equation*}
+                    \text{log}(-1-i)=\big\{z\in\mathbb{C}\mid\exists k\in\mathbb{Z}\colon z=\frac{1}{2}\ln{2}+i\big(-\frac{3\pi}{4}+2\pi k\big)\big\}.
+                \end{equation*}
+            \end{solution}
+            
+            \item Find  $\text{Log}(-1-i)$.
+            
+            \begin{solution}
+                Here we can just use the results from part (c). In other words, it is the $z$ from the set for which $k=0$. Hence, 
+                
+                \begin{equation*}
+                    \text{Log}(-1-i)=\frac{1}{2}\ln{2}-\frac{3\pi i}{4}.
+                \end{equation*}
+            \end{solution}
+        \end{enumerate}
+    \end{enumerate}
+    
+    \newpage
+    
+    \section{Random Shit} 
+    
+    \subsection{The Cauchy-Riemann Equations}
+    
+    \begin{theorem}
+        \begin{enumerate}[label=(\alph*)]
+            \item Suppose $f$ is differentiable at $z_0=x_0+iy_0$. Then the partial derivatives of $f$ exist and satisfy
+            
+            \begin{equation}
+                \frac{\partial f}{\partial x}(z_0)=-i\frac{\partial f}{\partial y}(z_0).
+            \end{equation}
+            
+            \item Suppose $f$ is a complex function such that the partial derivatives $\frac{\partial f}{\partial x}$ and $\frac{\partial f}{\partial y}$ exist in an open disc centered at $z_0$ and are continuous at $z_0$. If these partial derivatives satisfy (1), then $f$ is differentiable at $z_0$.
+        \end{enumerate}
+    \end{theorem}
+    
+    
+
+\end{document}

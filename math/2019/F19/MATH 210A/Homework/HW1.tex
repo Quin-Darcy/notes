@@ -1,0 +1,252 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=4mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 210A}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 9/4/19   \\
+{ \textbf{Instructor:}} \ Dr. Shannon \hspace{\fill} \textbf{Assignment:} Homework 1 \\ \hrule}
+
+\justifying
+
+% Document begins here
+
+\begin{enumerate}[leftmargin=*]
+
+    \item Assume that $(a,b)=g$ and that $d\mid a$ and $d\mid b$. Prove that $d\mid g$.
+    
+    \begin{proof}
+        Since $d$ divides both $a$ and $b$, then there exists $k_1,k_2\in\mathbb{Z}$ such that $a=k_1d$ and $b=k_2d$. Additionally, since $g$ is the greatest common factor of $a$ and $b$, then there exists integers $x$ and $y$ such that $g=ax+by$, by result (b) on handout 1. Thus, substituting in our values from earlier we obtain
+        
+        \begin{equation*}
+            \begin{split}
+                g&=ax+by \\
+                &=(k_1d)x+(k_2d)y \\
+                &=(k_1x+k_2y)d.
+            \end{split}
+        \end{equation*}
+        
+        \noindent Hence, there exists an integer $k=k_1x+k_2y$ such that $g=kd$. Therefore, $d\mid g$.
+    \end{proof}
+    
+    \item \par\hfill
+        \begin{enumerate}[label=(\alph*)]
+            \item Prove that if $(a,c)=1$ and $(b,c)=1$, then $(ab,c)=1$.
+            
+            \begin{proof}
+                By result (b) on handout 1, our two assumptions imply the existence of $x,y,w,z\in\mathbb{Z}$ such that $ax+cy=1$ and $bw+cz=1$. Multiplying both of these together we obtain
+                
+                \begin{equation}
+                    \begin{split}
+                        (ax+cy)(bw+cz) &= (ab)xw+(ac)xz+(bc)yw+(c^2)yz \\
+                                       &= (ab)xw+(c)\big((a)xz+(b)yw+(c)yz\big) \\
+                                       &= 1.
+                    \end{split}
+                \end{equation}
+                
+                Since the integers are closed under multiplication, we may write (1) as\par $(ab)m+(c)n=1$, where $m,n\in\mathbb{Z}$. Thus, by (b) of handout 1, it follows that $(ab,c)=1$.
+            \end{proof}
+            
+            \item Assume that $(a,n)=1$. Prove that there exists $x\in\mathbb{Z}$ such that $ax\equiv 1(\text{mod }n)$ and $(x,n)=1$.
+            
+            \begin{proof}
+                Since $(a,n)=1$, then there exists $x,y\in\mathbb{Z}$ such that $ax+ny=1$. Subtracting $ax$ from both sides, we obtain $ny=1-ax$. Thus, $n\mid (1-ax)$. Hence, $ax\equiv1(\text{mod }n)$. Additionally, since $a,y\in\mathbb{Z}$, then the equation $ax+ny=1$ also implies that $(x,n)=1$. 
+            \end{proof}
+            
+            \newpage
+            
+            \item Let $\mathbb{Z}_{(n)}=\{[k]\in\mathbb{Z}_{n}\colon (k,n)=1\}$. Prove that $(\mathbb{Z}_{(n)},\odot)$ is a group, and find $\abs{\mathbb{Z}_{(n)}}$.
+            
+            \begin{proof}
+                Let $[a],[b]\in\mathbb{Z}_{(n)}$. Then it follows that $(a,n)=1$ and $(b,n)=1$. We want to show that $[a]\odot[b]\in\mathbb{Z}_{(n)}$. Thus, we need to show that $[ab]\in\mathbb{Z}_{n}$ such that $(ab,n)=1$. Since the integers are closed under multiplication, we have that $[a]\odot[b]=[ab]\in\mathbb{Z}_{n}$. Next, we can use the result from part (a) of question 2 to confirm that $(ab,n)=1$ since $(a,n)=1$ and $(b,n)=1$ by assumption. Thus, for all $[a],[b]\in\mathbb{Z}_{(n)}$, we have that $[a]\odot[b]\in\mathbb{Z}_{(n)}$. Thus, $\odot$ is an operation, i.e., $\odot\colon\mathbb{Z}_{(n)}\times\mathbb{Z}_{(n)}\rightarrow\mathbb{Z}_{(n)}$.\par\hspace{4mm} Next, we need to show that $\odot$ is an associative operation on $\mathbb{Z}_{(n)}$. This fact follows from multiplication being associative on $\mathbb{Z}$.\par\hspace{4mm} Now we need to show that there exists a unique identity with respect to $\odot$. Consider the element $[1]\in\mathbb{Z}_{n}$. We have that $(1,n)=1$ which means that $[1]\in\mathbb{Z}_{(n)}$. Next, let $[a]\in\mathbb{Z}_{(n)}$. Then $[a]\odot[1]=[a\cdot 1]=[a]$. Similarly, since multiplication is commutative in $\mathbb{Z}$, it follows that $[a]\odot[1]=[1]\odot[a]$.\par\hspace{4mm} Finally, we must show that for each $[a]\in\mathbb{Z}_{(n)}$, there exists $[a]^{-1}\in\mathbb{Z}_{(n)}$ such that $[a]\odot[a]^{-1}=[1]$. By part (b) of question 2, since for each $[a]\in\mathbb{Z}_{(n)}$, we have that $(a,n)=1$, then there exists some $x\in\mathbb{Z}$ such that $ax\equiv 1(\text{mod }n)$. Thus, for all $[a]$, there is some $x\in\mathbb{Z}$ such that $[a]\odot[x]=[1]$. Therefore, $(\mathbb{Z}_{(n)},\odot)$ is a group.\par\hspace{4mm} To determine the $\abs{\mathbb{Z}_{(n)}}$ note that for each $[a]\in\mathbb{Z}_{(n)}$, $(a,n)=1$ which means $a$ and $n$ are relatively prime. Thus, the order of this group should be equal to the number of integers $k\leq n$ which are relatively prime to $n$. Hence, $\abs{\mathbb{Z}_{(n)}}=\varphi(n)$. 
+            \end{proof}
+            
+        \end{enumerate}
+        
+    \item\par\hfill
+        \begin{enumerate}[label=(\alph*)]
+        
+        \item Assume that $(c,n)=1$. Prove that if $ca\equiv cb(\text{mod }n)$, then $a\equiv b(\text{mod }n)$.
+        
+        \begin{proof}
+            Since $ca\equiv cb(\text{mod }n)$, then $n\mid(cb-ca)$. Thus, $n\mid c(b-a)$. Additionally, we have that $(c,n)=1$ and so by Euclid's lemma, it follows that $n\mid(b-a)$. Therefore, $a\equiv b(\text{mod }n)$.
+        \end{proof}
+        
+        \item Assume that $c_1, c_2, \dots, c_{\varphi(n)}$ is a RRS mod $n$, and that $(a,n)=1$. Prove that $ac_1,ac_2,\dots,ac_{\varphi(n)}$ is a RRS mod $n$.
+        
+        \begin{proof}
+            Let $ac_i$ be in the collection $ac_1,\dots,ac_{\varphi(n)}$. We know that $(c_i,n)=1$ and $(a,n)=1$ both by assumption. Then by part (c) of question 3., it follows that $(ac_i,n)=1$ for all $i$. Now let $ac_i$ and $ac_j$ be in the collection $ac_1,\dots,ac_{\varphi(n)}$. Assume for contradiction that $ac_i\equiv ac_j(\text{mod }n)$. Then $n\mid a(c_j-c_i)$. Since $(a,n)=1$, then by Euclid's lemma, it follows that $n\mid(c_j-c_i)$. Thus, $c_i\equiv c_j(\text{mod }n)$ which is a contradiction. Thus, for all $i$ and $j$ where $i\neq j$, we have that $ac_i\not\equiv ac_j(\text{mod }n)$. Therefore, $ac_1,\dots,ac_{\varphi(n)}$ is a RRS mod $n$. 
+        \end{proof}
+        
+        \end{enumerate}
+        
+    \newpage
+        
+    \item 
+    
+    \begin{table}[htb]
+    \centering
+    \begin{tabular}{c|cccccccccc}
+    
+    $\circ$ & $\mu_1$ & $\mu_2$ & $\mu_3$ & $\mu_4$ & $\mu_5$ & $\mu_6$ & $\mu_7$ & $\mu_8$ & $\mu_9$ & $\mu_{10}$ \\
+    
+    \hline
+    
+    $\mu_1$ & $\mathbin{\textcolor{red}{\mu_1}}$ & $\mu_2$ & $\mu_3$ & $\mu_4$ & $\mu_5$ & $\mu_6$ & $\mu_7$ & $\mu_8$ & $\mu_9$ & $\mu_{10}$ \\
+    $\mu_2$ & $\mu_2$ & $\mu_3$ & $\mu_4$ & $\mu_5$ & $\mathbin{\textcolor{red}{\mu_1}}$ & $\mu_9$ & $\mu_{10}$ & $\mu_6$ & $\mu_7$ & $\mu_8$ \\
+    $\mu_3$ & $\mu_3$ & $\mu_4$ & $\mu_5$ & $\mathbin{\textcolor{red}{\mu_1}}$ & $\mu_2$ & $\mu_7$ & $\mu_8$ & $\mu_9$ & $\mu_{10}$ & $\mu_6$ \\
+    $\mu_4$ & $\mu_4$ & $\mu_5$ & $\mathbin{\textcolor{red}{\mu_1}}$ & $\mu_2$ & $\mu_3$ & $\mu_{10}$ & $\mu_6$ & $\mu_7$ & $\mu_8$ & $\mu_9$ \\
+    $\mu_5$ & $\mu_5$ & $\mathbin{\textcolor{red}{\mu_1}}$ & $\mu_2$ & $\mu_3$ & $\mu_4$ & $\mu_8$ & $\mu_9$ & $\mu_{10}$ & $\mu_6$ & $\mu_7$ \\
+    $\mu_6$ & $\mu_6$ & $\mu_8$ & $\mu_{10}$ & $\mu_7$ & $\mu_9$ & $\mathbin{\textcolor{red}{\mu_1}}$ & $\mu_4$ & $\mu_2$ & $\mu_5$ & $\mu_3$ \\
+    $\mu_7$ & $\mu_7$ & $\mu_9$ & $\mu_6$ & $\mu_8$ & $\mu_{10}$ & $\mu_3$ & $\mathbin{\textcolor{red}{\mu_1}}$ & $\mu_4$ & $\mu_2$ & $\mu_5$ \\
+    $\mu_8$ & $\mu_8$ & $\mu_{10}$ & $\mu_7$ & $\mu_9$ & $\mu_6$ & $\mu_5$ & $\mu_3$ & $\mathbin{\textcolor{red}{\mu_1}}$ & $\mu_4$ & $\mu_2$ \\
+    $\mu_9$ & $\mu_9$ & $\mu_6$ & $\mu_8$ & $\mu_{10}$ & $\mu_7$ & $\mu_2$ & $\mu_5$ & $\mu_3$ & $\mathbin{\textcolor{red}{\mu_1}}$ & $\mu_4$ \\
+    $\mu_{10}$ & $\mu_{10}$ & $\mu_7$ & $\mu_9$ & $\mu_6$ & $\mu_8$ & $\mu_4$ & $\mu_2$ & $\mu_5$ & $\mu_3$ & $\mathbin{\textcolor{red}{\mu_1}}$
+    
+    \end{tabular}
+\end{table}
+
+\begin{align*}
+    \mu_1 &= (a) &\mu_6 &=(ac)(de) &(\mu_1)^{-1} &= \mu_1 &(\mu_6)^{-1} &=\mu_6 \\
+    \mu_2 &= (abcde) &\mu_7 &=(ae)(bd) &(\mu_2)^{-1} &= \mu_5 &(\mu_7)^{-1} &=\mu_7\\
+    \mu_3 &= (abcde)^2 &\mu_8 &= (ab)(ce) &(\mu_3)^{-1} &= \mu_4 &(\mu_8)^{-1} &= \mu_8\\ 
+    \mu_4 &= (abcde)^3 &\mu_9 &= (ad)(bc) &(\mu_4)^{-1} &= \mu_3 &(\mu_9)^{-1} &= \mu_9\\
+    \mu_5 &= (abcde)^4 &\mu_{10}&=(be)(cd) &(\mu_5)^{-1} &= \mu_2 &(\mu_{10})^{-1}&=\mu_{10}
+\end{align*}
+
+\noindent Consider the two rotations $\mu_2$ and $\mu_3$ and the two flips $\mu_6$ and $\mu_8$. Composing $\mu_2$ and $\mu_6$ we obtain 
+
+\begin{equation*}
+    \mu_2\circ\mu_6 =\mu_9.
+\end{equation*}
+
+\noindent Composing $\mu_6$ with $(\mu_2)^{-1}$ we obtain
+
+\begin{equation*}
+    \mu_6\circ(\mu_2)^{-1}=\mu_6\circ\mu_5=\mu_9.
+\end{equation*}
+
+Thus, $\mu_2\circ\mu_6=\mu_6\circ(\mu_2)^{-1}$. Similarly, for elements $\mu_3$ and $\mu_8$, we find that 
+
+\begin{equation*}
+    \mu_3\circ\mu_8=\mu_9=\mu_8\circ\mu_4=\mu_8\circ(\mu_3)^{-1}.
+\end{equation*}
+
+\newpage
+
+\item Assume that $(G,\star)$ is a finite group, and that $\abs{G}=n$. Prove that if $g\in G$, then $o(g)$ is finite, and that if $g^t=e$, then $o(g)\mid t$.
+
+\begin{proof}
+    Let $G$ be a finite group with order $n$. Take $g\in G$ and assume $o(g)$ is not finite. Then there does not exist $k\in\mathbb{Z}$ with $k>0$ such that $g^k=e$. Now let $k_1,k_2\in\mathbb{Z}$ where $k_1,k_2>0$ and $k_1\neq k_2$. Assume $g^{k_1}=g^{k_2}$. Then $g^{k_2-k_1}=e$. Since $k_2-k_1\in\mathbb{Z}$, and $o(g)\leq k_2-k_1$, then $o(g)$ is finite. Since this is a contradiction, then it is the case that for all $k_1,k_2\in\mathbb{Z}$ where $k_1,k_2>0$ and $k_1\neq k_2$, then $g^{k_1}\neq g^{k_2}$. Thus, there exists a one-to-one and onto correspondence between $\langle g\rangle$ and $\mathbb{Z}$. However, since $\langle g\rangle\subseteq G$ and $\abs{G}=n$, then we a contradiction and $o(g)$ must be finite.\par\hspace{4mm} Let $t\in\mathbb{Z}$ such that $g^t=e$. Then $g^t=g^{o(g)}$ which implies $g^{t-o(g)}=e$. We now have that either $t=o(g)$, in which case $o(g)\mid t$, or $t\neq o(g)$. If $t\neq o(g)$, then either $o(g)\nmid t$ or $o(g)\mid t$. If $o(g)\nmid t$, then by the division algorithm, there exists $q,r\in\mathbb{Z}$ with $0\leqr<o(g)$, such that $t=q(o(g))+r$. Thus,
+    
+    \begin{equation*}
+        \begin{split}
+            g^t &= g^{q(o(g))+r} \\
+                &= g^{q(o(g))}\star g^r \\
+                &= \big(g^{o(g)}\big)^q\star g^r \\
+                &= e^q\star g^r \\
+                &= g^r.
+        \end{split}
+    \end{equation*}
+    
+    However, since $g^t=e$ and $g^r=g^t$, then $g^r=e$. This is a contradiction since $r<o(g)$. Therefore, $o(g)\mid t$.
+\end{proof}
+
+\item Assume $(G,\star)$ is a group, $\abs{G}=2n$. Prove that there exists $a\in G$, $a\neq e$, such that $a^2=e$.
+
+\begin{proof}
+    Let $(G,\star)$ be a group with $\abs{G}=2n$. Assume for contradiction that for all $a\in G$, if $a\neq e$, then $a^2\neq e$. Denote $G=\{e,a_1,a_2,\dots,a_{2n-1}\}$. Now take the subset $H$ of $G$ containing all the elements not equal to the identity. Since $G$ is a group, each element of $G$ must have a unique inverse. Thus, for every $a\in H$, it must be the case that $a^{-1}\in H$. Consider the element $a_1\in H$. By assumption, it follows that $a_1^{-1}\neq a_1$. Without loss of generality, let $a_1^{-1}=a_2$. Similarly, let $a_2^{-1}=a_3$. Continuing in this fashion, we let $a_i^{-1}=a_{i+1}$, for all $1\leq i<2n-1$. Thus, for the element $a_{2n-1}$ it follows that $a_{2n-1}^{-1}=a_1$ is the only choice left. However, since $a_1^{-1}=a_2$ and $a_1=a_{2n-1}^{-1}$, then $a_{2n-1}=a_1^{-1}$ and $a_1=a_2^{-1}$, but $a_2^{-1}=a_3$. Thus, $a_1=a_3$ which implies $\abs{G}<2n$ which is a contradiction. Therefore, there must exist some $a\in G$ such that $a\neq e$ and $a^2=e$.
+\end{proof}
+
+\newpage
+
+\item Assume that $(G,\star)$ is a group. Prove in each of the three cases: $o(G)=3$, $o(G)=4$, and $o(G)=5$.
+
+\begin{proof}
+    Let $G=\{e,a_1,a_2\}$. Suppose we let $a_1^2=e$. Then if $a_2\star a_1=e$ this would mean $a_2$ is the inverse of $a_1$ which cannot be the case since $a_1^2=e$. Thus, if we let $a_2\star a_1$ equal to either $a_1$ or $a_2$, then that would imply the other is equal to the identity which cannot be the case. Thus, $a_1^2\neq e$. Moreover, we see that $a_1^2\neq a_1$ since this would also imply that $a_1=e$. Thus, $a_1^2=a_2$. This forces $a_2^2=a_1$. Lastly, using the fact that each row and column of a Cayley table must contain one of each element means that $a_1\star a_2=e=a_2\star a_1$. Therefore, if $o(G)=3$, $G$ is abelian.\par\hspace{4mm} Considering the case where $o(G)=4$, and letting $G=\{e,a_1,a_2,a_3\}$ then we can ask what $a_1\star a_2$ must equal. It cannot equal either $a_1$ or $a_2$ since this would imply the other is the identity. Thus, we have that $a_1\star a_2=e$ or $a_1\star a_2=a_3$. If $a_1\star a_2=e$, then considering what $a_2\star a_1$ must equal, we can choose either $e$ or $a_3$. If we choose $a_3$, then using the fact that each column of the Cayley table must contain one of each element, this means that $a_3\star a_1=e$ and $a_1^2=a_2$. On the other hand, if we had let $a_2\star a_1=e$. Did not have enough time to finish this problem. My apologies!
+\end{proof}
+
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,211 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\addfont{OT1}{rsfs10}{\rsfs}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+\newcounter{proofc}
+\renewcommand\theproofc{(\arabic{proofc})}
+\DeclareRobustCommand\stepproofc{\refstepcounter{proofc}\theproofc}
+\newenvironment{twoproof}{\tabular{@{\stepproofc}c|l}}{\endtabular}
+\newcolumntype{C}{>$c<$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\usepackage{titlesec}
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+  
+  \setlist[description]{leftmargin=10mm,labelindent=10mm}
+
+\begin{document}
+
+\noindent Quin Darcy\par
+\noindent MATH 117\par
+\noindent Dr. Ebrahimzadeh\par
+\noindent 8/29/18\par
+
+\vspace{4mm}
+
+\centerline{Homework 1W}
+
+\vspace{4mm}
+
+\noindent\textbf{1.} Let $V$ be a set and $F$ be a field whose multiplicative inverse is denoted as\par 1. Then $V$ is a vector space over $F$ if the following axioms are satisfied.\par
+
+\begin{description}
+
+\item\textbf{VS1:} $\forall v_1,v_2\in V\colon v_1\oplus v_2=v_2\oplus v_1$\par
+
+\vspace{2mm}
+
+This axiom contains vector addition only.
+
+\vspace{4mm}
+
+\item\textbf{VS2:} $\forall v_1,v_2,v_3\in V\colon(v_1\oplus v_2)\oplus v_3=v_1\oplus(v_2\oplus v_3)$\par
+
+This axiom contains vector addition only.
+
+\vspace{4mm}
+
+\item\textbf{VS3:} $\exists v_o\in V\colon\forall v\in V\colon v\oplus v_o=v$\par
+
+This axiom contains vector addition only.
+
+\vspace{4mm}
+
+\item\textbf{VS4:} $\forall v\in V\colon\exists v^{-1}\in V\colon v\oplus v^{-1}=v_o$\par
+
+This axiom contains vector addition only.
+
+\vspace{4mm}
+
+\item\textbf{VS5:} $\forall v\in V\colon 1\odot v=v$\par
+
+This axiom contains only scalar multiplication.
+
+\vspace{4mm}
+
+\item\textbf{VS6:} $\forall c,d\in F\colon\forall c\in V\colon (cd)\odot v=c\odot(d\odot v)$\par
+
+This axiom contains field multiplication and scalar multiplication.
+
+\vspace{4mm}
+
+\item\textbf{VS7:} $\forall c\in F\colon\forall v_1,v_2\in V\colon c\odot(v_1\oplus v_2)=c\odot v_1\oplus c\odot v_2$\par
+
+This axiom contains scalar multiplication and vector addition.
+
+\vspace{4mm}
+
+\end{description}
+
+\vspace{4mm}
+
+\noindent\textbf{2.} Let $E=\{m\in\mathbb{Z}$\hspace{1mm}$|$\hspace{1mm}$\exists k (k\in\mathbb{Z}\wedge m=2k)\}$ and $O=\{n\in\mathbb{Z}$\hspace{1mm}$|$\hspace{1mm}$\exists k(k\in\mathbb{Z}\wedge n=2k-1)\}$.\par
+
+\begin{description}
+
+\item\textbf{i.} Let $F=\mathbb{R}$ and define $\odot$ to be standard vector multiplication. Prove $E$ is not closed under $\odot$.\par
+
+\vspace{2mm}
+
+\textbf{Proof}\par
+
+Let $a\in F$ and $v\in E$. If $a$ is any integer, then $a\odot v\in E$. If $a\notin\mathbb{Z}$, then $a\odot v\notin\mathbb{Z}$ which implies $a\odot v\notin E$. Thus, it is not true that for all $a\in F$ and $v\in E$, $a\odot v\in E$. Therefore, $E$ is not closed under scalar multiplication.
+
+\end{description}
+
+\newpage
+
+\begin{description}
+
+\item\textbf{ii.} Define $\oplus$ to be standard vector addition. Prove $O$ is not closed under $\oplus$.
+
+\vspace{2mm}
+
+\textbf{Proof}\par
+
+Let $u,v\in O$. Then $\exists k\in\mathbb{Z}$ and $l\in\mathbb{Z}$, such that $u=2k-1$ and $v=2l-1$. Now consider the vector sum of $u$ and $v$\par
+
+\vspace{2mm}
+
+\centerline{$u\oplus v=(2k-1)+(2l-1)=2(k+l)-2=2(k+l-1)$.}
+
+\vspace{2mm}
+
+Since $k+l-1\in\mathbb{Z}$, we may relabel it $r=k+l-1$. Thus, $u\oplus v=2r$. However, since there exists an $r\in\mathbb{Z}$ such that $u\oplus v=2r$, then $u\oplus v\in E$. Now assume there exists $a\in E\cap O$. Then $a\in E$ and $a\in O$. Thus, for some $h,j\in\mathbb{Z}$, we have $a=2h$ and $a=2j-1$. Since $a=a$, it follows that $2h=2j-1$. Thus, $2(h-j)+1=0$. Since $h$ and $j$ are integers, let $h-j=g$. Then $2g+1=0$ which implies $g=-\frac{1}{2}$. Since $-\frac{1}{2}\notin\mathbb{Z}$, then $h-j\notin\mathbb{Z}$. This implies that either $h$ or $j$ is not an integer. This is a contradiction since $h$ and $j$ are both integers. Thus, assuming $a\in E\cap O$ led to a contradiction. Thus, $E\cap O=\varnothing$. Therefore, $u\oplus v\in E\rightarrow u\oplus v\notin O$ and $O$ is not closed under vector addition.
+
+\end{description}
+
+\vspace{4mm}
+
+\noindent\textbf{3.} Let $V=\{a\in\mathbb{R}$\hspace{1mm}$|$\hspace{1mm}$ 0<a\}$. Define vector addition as $\forall x,y\in V\colon x\oplus y=xy$, and define scalar multiplication as $\forall x\in V\colon\forall c\in\mathbb{R}\colon c\odot v=x^c$.\par
+
+
+\begin{description}
+
+\item\textbf{Closure(1):} Let $u,v\in V$. Then $u,v\in\mathbb{R}$, $u>0$, and $v>0$, and $u\oplus v=uv$. Thus, since the product of any two positive real numbers is positive, we have $u\oplus v=uv>0$. Since the reals are closed with respect to multiplication, then $uv\in\mathbb{R}$. Therefore, $u\oplus v\in V$.
+
+\item\textbf{Closure(2):} Let $v\in V$ and $ a\in\mathbb{R}$. Then $a\odot v= v^a$. Since $v>0$ by definition, then by the properties of exponentiation, we have that $v^a>0$ and $v^a\in\mathbb{R}$. Therefore, $a\odot v\in V$.
+
+\item\textbf{VS1-VS4:} Since vector addition is defined as field multiplication, then vector addition is associative, and commutative. The field contains a multiplicative identity and for each element in $V$, there is an multiplicative inverse also in $V$.
+
+\item\textbf{VS5:} Let $v\in V$. Then $1\odot v=v^1=v$. 
+
+\item\textbf{VS6:} Let $c,d\in\mathbb{R}$ and $v\in V$. Then $(cd)\odot v=(dc)\odot v=v^{dc}=(v^d)^c$. Further, we have $(v^d)^c=c\odot(v^d)=c\odot(d\odot v)$. Thus, $(cd)\odot v=c\odot(d\odot v)$.
+
+\item\textbf{VS7: }Let $c\in\mathbb{R}$ and $v,u\in V$. Then $c\odot(v\oplus u)=(v\oplus u)^c=(vu)^c=v^cu^c$. Further, we have $v^cu^c=v^c\oplus u^c=c\odot v\oplus c\odot v$. Therefore, $c\odot(v\oplus u)=c\odot v\oplus c\odot v$.
+
+\item\textbf{VS8:} Let $c,d\in\mathbb{R}$ and $v\in V$. Then $(c+d)\odot v=v^{c+d}=v^cv^d=v^c\oplus v^d$. Further, we have $v^c\oplus v^d= c\odot v\oplus d\odot v$. Therefore, $(c+d)\odot v=c\odot v\oplus d\odot v$.
+
+\end{description}
+
+\newpage
+
+\noindent\textbf{4.} Let $V=\mathbb{R}$ and $F=\mathbb{R}$ and define vector addition and scalar multiplication in its standard way. Then we have
+
+\begin{description}
+
+\item\textbf{Closure(1)-VS4: }Since our vectors are real numbers and the operations are standard addition and multiplication, then it follows that our vector space is closed under vector addition and scalar multiplication. Additionally, vector addition is commutative, associative, and our vector space contains an additive inverse for each vector. Our operators can be thought of as\par
+
+\vspace{2mm}
+
+\centerline{$\oplus\colon\mathbb{R}\times\mathbb{R}\rightarrow\mathbb{R}$, $(u,v)\mapsto u+v$,}
+
+\vspace{2mm}
+
+\centerline{$\odot\colon\mathbb{R}\times\mathbb{R}\rightarrow\mathbb{R}$, $(c,d)\mapsto cd$.}
+
+\item\textbf{VS5:} Let $v\in V$. Then $1\odot v= 1\cdot v=v$.
+
+\item\textbf{VS6:} Let $c,d,v\in\mathbb{R}$. Then $(cd)\odot v=(cd) v=c(dv)=c\odot(d\odot v)$.
+
+\item\textbf{VS7:} Let $u,v,c\in\mathbb{R}$. Then $c\odot(u\oplus v)=c(u+v)=cu+cv=c\odot u\oplus c\odot v$.
+
+\item\textbf{VS8:} Let $v,c,d\in\mathbb{R}$. Then $(c+d)\odot v=(c+d)v=cv+dv=c\odot v\oplus d\odot v$.
+
+\end{description}
+
+
+\end{document}

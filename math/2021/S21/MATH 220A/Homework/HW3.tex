@@ -1,0 +1,335 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Darcy}
+\lhead{MATH 220A}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+\begin{document} \thispagestyle{empty}\hrule
+
+    \begin{center}
+        \vspace{.4cm} { \large MATH 220A}
+    \end{center}
+    {Name:\ Quin Darcy \hspace{\fill} Due Date: 3/14/21 \\
+    { Instructor:}\ Dr. Martins \hspace{\fill} Assignment:
+    Homework 3 \\ \hrule}
+
+    \begin{enumerate}
+        \item[6.] Let $A, B$ and $A_{\alpha}$ denote subsets of a space $X$.
+            Prove the following:
+            \begin{enumerate}[label=(\alph*)]
+                \item If $A\subset B$, then $\overline{A}\subset\overline{B}$.
+                    \begin{proof}
+                        Let $x\in\overline{A}$. Then either $x\in A$ or $x\in
+                        A'$. If $x\in A$, then as $A\subset B$, it follows that
+                        $x\in B\subset\overline{B}$. If instead, $x\in A'$,
+                        then since $x$ is a limit point of $A$, 
+                        we have for every neighborhood, $U$, of $x$, 
+                        there exists $a\in U$ such that $a\neq x$ and
+                        $a\in A$. Since $A\subset B$, then it follows that for
+                        every neighborhood of $x$, there exists $a\in U$ such
+                        that $a\neq x$ and $a\in B$. Hence, $x$ is a limit
+                        point of $B$. Thus, $x\in B'\subset\overline{B}$.
+                        Therefore, $\overline{A}\subset\overline{B}$.
+                    \end{proof}
+                \item $\overline{A\cup B}=\overline{A}\cup\overline{B}$.
+                    \begin{proof}
+                        Let $x\in\overline{A\cup B}$. Then either $x\in A\cup
+                        B$ or $x\in (A\cup B)'$. In the former case, it follows
+                        from $A\subset\overline{A}$ and $B\subset\overline{B}$,
+                        that $x\in A\cup B\subset\overline{A}\cup\overline{B}$.
+                        If $x\in(A\cup B)'$, then for any neighborhood, $U$, of
+                        $x$, there exits $y\in U$ such that $y\neq x$ and $y\in
+                        A\cup B$. This implies that for every neighborhood,
+                        $U$, of $x$, there exists $y\in U$ such that $y\neq x$
+                        and $y\in A$ or $y\in B$. Thus $x$ is a limit point of
+                        either $A$ or $B$. Hence, $x\in A'\cup
+                        B'\subset\overline{A}\cup\overline{B}$. Thus
+                        $\overline{A\cup
+                        B}\subset\overline{A}\cup\overline{B}$.\par\hspace{4mm}
+                        Let $x\in\overline{A}\cup\overline{B}$. Then
+                        $x\in\overline{A}$ or $x\in\overline{B}$. If
+                        $x\in\overline{A}$, then either $x\in A$ or $x\in A'$.
+                        If $x\in A$, then $x\in A\cup B\subset\overline{A\cup
+                        B}$. If $x\in A'$, then for every neighborhood, $U$, of
+                        $x$, there exists $y\in U$ such that $y\neq x$ and
+                        $y\in A\subset A\cup B$. Hence, $x$ is a limit point of
+                        $A\cup B$ and so $x\in(A\cup B)'\subset\overline{A\cup
+                        B}$. An identical argument can be used if we take
+                        $x\in\overline{B}$. Hence,
+                        $\overline{A}\cup\overline{B}\subset\overline{A\cup
+                        B}$. Therefore, $\overline{A\cup
+                        B}=\overline{A}\cup\overline{B}$.
+                    \end{proof}
+                \item $\overline{\bigcup A_{\alpha}}\supset\bigcup\overline{A}_{\alpha}$; 
+                    give an example where equality fails.
+                    \begin{proof}
+                        Let $x\in\bigcup\overline{A}_{\alpha}$. Then for some
+                        particular $\alpha$, we have that
+                        $x\in\overline{A}_{\alpha}$. This implies that either
+                        $x\in A_{\alpha}$ or $x\in A_{\alpha}'$. If $x\in
+                        A_{\alpha}$, then $x\in\bigcup
+                        A_{\alpha}\subset\overline{\bigcup A_{\alpha}}$. If
+                        $x\in A_{\alpha}'$, then for any neighborhood, $U$, of
+                        $x$, there exists $a\in U$ such that $a\neq x$ and
+                        $a\in A_{\alpha}\subset\bigcup A_{\alpha}$. This
+                        implies that $x$ is a limit point of $\bigcup
+                        A_{\alpha}$. Hence, $x\in(\bigcup
+                        A_{\alpha})'\subset\overline{\bigcup A_{\alpha}}$.
+                        Therefore
+                        $\bigcup\overline{A}_{\alpha}\subset\overline{\bigcup
+                        A_{\alpha}}$.\par\hspace{4mm} For an example where
+                        equality fails, consider the following: Take
+                        $q\in\mathbb{Q}$ and let $U_q=\{q\}$. Then as any
+                        finite set is closed, it follows that
+                        $\overline{U_q}=U_q$ and thus 
+                        \begin{equation*}
+                            \bigcup_{q\in\mathbb{Q}}\overline{U}_q=\mathbb{Q},
+                        \end{equation*}
+                        whereas
+                        \begin{equation*}
+                            \overline{\bigcup_{q\in\mathbb{Q}}U_{q}}=\overline{\mathbb{Q}}=\mathbb{R}.
+                        \end{equation*}
+                    \end{proof}
+            \end{enumerate}
+        \item[13.] Show that $X$ is Hausdorff if and only if the
+            \textbf{\textit{diagonal}} $\Delta=\{x\times x\mid x\in X\}$ is
+            closed in $X\times X$.
+            \begin{proof}
+                Assume that $X$ is Hausdorff. Then we want to show that
+                $\Delta$ contains all of its limit points. So then let $a\times
+                b$ be a limit point of $\Delta$ and assume that $a\neq b$. Then
+                since $X$ is Hausdorff, there exists neighborhoods $U_1$, $U_2$
+                such that $U_1\cap U_2=\varnothing$ and $a\in U_1$ and $b\in
+                U_2$. As open sets, we have that $U_1\times U_2$ is itself an
+                open set containing $a\times b$. Moreover, since $a\times b$ is
+                a limit point of $\Delta$, then there exists some $x\times x\in
+                U_1\times U_2$ such that $x\times x\in\Delta$. However, this
+                implies that $x\in U_1\cap U_2$, which is a contradiction.
+                Therefore, $a=b$ and $a\times b\in\Delta$. Thus $\Delta$
+                contains all of its limit points.\par\hspace{4mm} Assume that
+                $\Delta$ is closed in $X\times X$. Consider $a, b\in X$ such
+                that $a\neq b$. Since $\Delta$ is closed, then its complement
+                is open and $a\times b$ is an element of the complement. Thus
+                there exists $U_1$ and $U_2$ such that $a\times b\in U_1\times
+                U_2$ and $U_1\times U_2\subset\Delta^c$. Suppose that $U_1\cap
+                U_2\neq\varnothing$, then there exists $u\times u\in U_1\times
+                U_2$. However, $u\times u\in\Delta$ and so
+                $\Delta\cap\Delta^c\neq\varnothing$, which is a contradiction.
+                Therefore, $U_1\cap U_2=\varnothing$ and thus $X$ is Hausdorff.
+            \end{proof}
+        \item[19.] If $A\subset X$, we define the \textbf{\textit{boundary}} of $A$
+            by the equation
+            \begin{equation*}
+                \text{Bd}A=\overline{A}\cap(\overline{X-A}).
+            \end{equation*}
+            \begin{enumerate}[label=(\alph*)]
+                \item Show that $\text{Int}A$ and $\text{Bd}A$ are disjoint,
+                    and $\overline{A}=\text{Int}A\cup\text{Bd}A$.
+                    \begin{proof}
+                        By definition, we may write 
+                        \begin{equation*}
+                            \text{Int}A = \bigcup_{U\subset A} U,\quad\text{$U$ is open in $A$}.
+                        \end{equation*}
+                        For contradiction, assume that $x\in\text{Int}A\cap\text{Bd}A$.
+                        Then for some set, $U$, open in $A$, we have that $x\in U$ 
+                        and so $x\in A$. Additionally, we have that 
+                        $x\in \overline{A}$ and $x\in(\overline{X-A})$. The first 
+                        implying the either $x\in A$ or $x\in A'$. However, we 
+                        know that $x\in U\subset A$. Moreover, with $x\in(\overline{X-A})$, 
+                        we get that either $x\in X-A$ or $x\in(X-A)'$. As $x\in X-A$ 
+                        is not possible, then we conclude that $x\in (X-A)'$. In summary, 
+                        we have shown that $x$ is contained in an open set, $U$, of 
+                        $A$ and that $x$ is a limit point of $X-A$. Being an element 
+                        $U$ implies that there exists a neighborhood, $N$ of $x$ such 
+                        that $N\subset U$. Also, being a limit point of $X-A$, 
+                        we have that for any neighborhood, say $N$, there 
+                        exists a point $y\in N$ such that $x\neq y$ and 
+                        $y\in X-A$. However, this would imply that $N\not\subset U$, 
+                        which is a contradiction. Therefore, $\text{Int}A\cap\text{Bd}A=\varnothing$.
+                        \par\hspace{4mm} Now assume that $x\in\overline{A}$. 
+                        Then either $x\in A$ or $x\in A'$. If $x\in A$, then there are two possibilities: 
+                        $x$ is an isolated point, i.e., it is an element of $A$ but not 
+                        contained in any neighborhood, or there is some neighborhood 
+                        $U\subset A$ which contains $x$. The latter implies that $x$ 
+                        is in the interior of $A$ and we are done. Otherwise, 
+                        if $x$ is an isolated point, then for every neighborhood 
+                        $U$ containing $x$, there exists $y\in U$ such that $y\neq x$ 
+                        and $y\in X-A$. Thus $x\in(\overline{X-A})'$. Hence, 
+                        $x\in\text{Bd}A$. In short, if $x\in A$, then $x\in\text{Int}A\cup\text{Bd}A$.
+                        \par\hspace{4mm} If $x\in A'$ and there exists $U\subset A$ such that 
+                        $x\in U$, then $x\in\text{Int}A$. Otherwise, if for every neighborhood, 
+                        $U$, of $x$, we have that $U\not\subset A$ and $U\cap A\neq\varnothing$, t
+                        hen as before, every neighborhood of $x$ contains points not in $A$ 
+                        and thus making $x$ a limit point of $X-A$. Hence, if $x\in A'$, 
+                        then $x\in\text{Int}A\cup\text{Bd}A$. And so $\overline{A}\subset\text{Int}A\cup\text{Bd}A$.
+                        \par\hspace{4mm} Assume that $x\in\text{Int}A\cup\text{Bd}A$. 
+                        If $x\in\text{Int}A$, then $x\in U\subset A\subset\overline{A}$, for 
+                        some open set $U$. If $x\in\text{Bd}A$, then by definition, 
+                        $x\in\overline{A}$. Therefore, $\text{Int}A\cup\text{Bd}A\subset\overline{A}$. 
+                    \end{proof}
+                \item Show that $\text{Bd}A=\varnothing\Leftrightarrow$ $A$ is both open and closed.
+                    \begin{proof}
+                        Assume that $\text{Bd}A=\varnothing$, then every point 
+                        of $A$ is an interior point. Meaning, for every $x\in A$, 
+                        there exists an open set $U\subset A$ such that $x\in U$. 
+                        Thus $A$ is open. On the other hand, if $x$ is a limit point of 
+                        $A$, then $x\in\overline{A}$, and for any neighborhood, 
+                        $U$, of $x$ we have that if there exists $y\in U$ such 
+                        that $y\notin A$, then that implies $x$ is a limit point of 
+                        $X-A$, which would imply that $x\in\overline{X-A}$ and hence 
+                        $x\in\overline{A}\cap(\overline{X-A})$, a contradiction. 
+                        Therefore, $A$ contains all of its limit points and $A$ is 
+                        thereby closed.\par\hspace{4mm} Assume that $A$ is 
+                        both open and closed. Since $A$ is open, then for every point, 
+                        $x$, in $A$, there exists a neighborhood, $U$, of 
+                        $x$ such that $U\subset A$. Hence $A=\text{Int}A$, 
+                        and since, by (a), the interior and boundary are disjoint, 
+                        then it follows that $\text{Bd}A=\varnothing$.  
+                    \end{proof}
+                \item Show that $U$ is open $\Leftrightarrow\text{Bd}U=\overline{U}-U$.
+                    \begin{proof}
+                        Assume that $U$ is open. Then $X-U$ is closed. Thus $\overline{X-U}=X-U$ 
+                        and so $\text{Bd}U=\overline{U}\cap(X-U)$. Then if 
+                        $x\in\text{Bd}U$, we have that $x\in\overline{U}$ 
+                        and $x\notin U$. Hence, $x\in\overline{U}-U$.\par\hspace{4mm} 
+                        Now assume that $\text{Bd}U=\overline{U}-U$ and let 
+                        $x\in U$. Then $x$ cannot be an isolated point since 
+                        that would imply that $x\in\text{Bd}U$ which implies 
+                        $x\notin U$. Thus $x$ is either an interior point 
+                        or a limit point. If $x$ is an interior point, 
+                        then we are done. If $x$ is a limit point, then 
+                        $x\in U'=\overline{U}-U$ and this implies $x\notin U$. 
+                        Hence, every point of $U$ is an interior point. 
+                        Therefore, $U$ is open. 
+                    \end{proof}
+                \item If $U$ is open, is it true that $U=\text{Int}(\overline{U})$? Justify your answer.
+                    \begin{proof}
+                        This is not true. Suppose $A$ is open. Then $A\subset\text{Int}A$, 
+                        since the interior is the union of all open sets 
+                        containing $A$. By definition of interior, we also 
+                        have that $\text{Int}A\subset A$. Thus if $A$ 
+                        is open, then $A=\text{Int}A$. Now the question is, 
+                        if $A$ is open does $\text{Int}A=\text{Int}(\overline{A})$. 
+                        For a counter example, consider the set 
+                        $A=(-1,0)\cup(0,1)$. We have that $A$ is open and 
+                        that $\text{Int}A=A$. However, $\overline{A}=[-1,1]$ 
+                        and so $\text{Int}(\overline{A})=(-1,1)$. Thus the two sets 
+                        are not equal.
+                    \end{proof}
+            \end{enumerate}
+        \item[20.] Find the boundary and interior of each of the following subsets of $\mathbb{R}^2$.
+            \begin{enumerate}[label=(\alph*)]
+                \item $A=\{x\times y\mid y=0\}$.
+                    \begin{proof}
+                        We claim that $\text{Int}A=\varnothing$ and that
+                        $\text{Bd}A = A$. To show this we need to compute
+                        $\overline{A}$ and $\overline{\mathbb{R}^2-A}$.
+                        Consider $\mathbb{R}^2-A=A^c=\{x\times y\mid y\neq 0\}$.
+                        Then for any $x\times y\in A^c$, if we let
+                        $r=\abs{y}/2$, then the neighborhood with radius $r$,
+                        call it $U_r$ contains $x\times y$ and $U_r\subset A^c$. 
+                        Hence, $A^c$ is open, which implies $A$ is
+                        closed. Hence, $\overline{A}=A$. Moreover, for any
+                        $x\times 0\in A$, we have that
+                        $\lim_{n\to\infty}x\times\frac{1}{n}=x\times 0$. Hence,
+                        every point of $A$ is a limit  point of
+                        $\mathbb{R}^2-A$. Hence, for any $x\times 0\in A$, we
+                        have that $x\times 0\in\overline{A}$ and $x\times
+                        0\in\overline{\mathbb{R}^2-A}$. Thus every point of $A$
+                        is a boundary point which implies $\text{Bd}A=A$ and
+                        $\text{Int}A=\varnothing$.
+                    \end{proof}
+                \item $B=\{x\times y\mid x>0\text{ and }y\neq 0\}$.
+                    \begin{proof}
+                        Similar to the process before, we will first compute
+                        $\overline{B}$. That is we need to find the limit
+                        points of $B$. Suppose that $u\times v$ is a limit
+                        point of $B$ such that $u\times v\notin\text{Int}B$. Then for every $r>0$, the neighborhood
+                        $U_r$ around $u\times v$, with radius $r$, contains
+                        a point $x\times y\in B$. Observe that if $u<0$, then
+                        $u\times v$ could not be a limit point of $B$. Hence,
+                        $B'=\{x\times y\mid x\geq 0\}$ and so
+                        $\overline{B}=\{x\times y\mid x\geq0\}$. Next, we
+                        observe that for any $x\times y\in B$, letting
+                        $r=\min\{\abs{x}, \abs{y}\}/2$, then $U_r(x\times
+                        y)\subset B$. Hence, $B$ is open in $\mathbb{R}^2$ and
+                        so $\overline{\mathbb{R}^2-B}=\mathbb{R}^2-B$. This
+                        implies that 
+                        \begin{equation*}
+                            \text{Bd}B=\overline{B}\cap(\mathbb{R}^2-B)=\overline{B}-B
+                        \end{equation*}
+                        which consists of the points formed from the positive
+                        $x$-axis and the positive and negative $y$-axis.
+                    \end{proof}
+                \item $C=A\cup B$.
+                    \begin{proof}
+                        The set $C$ contains the entire right side of the
+                        Cartesian plane, plus the points on the negative
+                        $x$-axis, and does not contain the points on the $y$-axis.
+                        This implies that $\overline{C}=\{x\times y\mid x\geq
+                        0\text{ or  }y=0\}$. We also have that
+                        $\mathbb{R}^2-C=\{x\times y\mid x<0\text{ and }y\neq
+                        0\}$. Thus $\overline{\mathbb{R}^2-C}=\{x\times y\mid
+                        x\leq 0\}$. Thus the boundary of $C$ is the set of
+                        points along the $y$-axis and the negative $x$-axis.
+                    \end{proof}
+                \item $D=\{x\times y\mid x\text{ is rational}\}$.
+                    \begin{proof}
+                        Like before, we want to first compute the closure of
+                        $D$. As $\overline{\mathbb{Q}}=\mathbb{R}$ then
+                        $\overline{D}=\mathbb{R}^2$. Then as for the
+                        closure of the complement, we first observe that every
+                        irrational number can be expressed as the limit of
+                        a sequence of rational numbers and vice versa,
+                        therefore $\overline{\mathbb{R}^2-D}=\mathbb{R}^2$.
+                        Hence,
+                        $\text{Bd}D=\mathbb{R}^2\cap\mathbb{R}^2=\mathbb{R}^2$.
+                    \end{proof}
+                \item $E=\{x\times y\mid 0<x^2-y^2\leq 1\}$.
+                    \begin{proof}
+                                
+                    \end{proof}
+                \item $F=\{x\times y\mid x\neq 0\text{ and }y\leq 1/x\}$.
+                    \begin{proof}
+                                
+                    \end{proof}
+            \end{enumerate}
+    \end{enumerate}
+\end{document}

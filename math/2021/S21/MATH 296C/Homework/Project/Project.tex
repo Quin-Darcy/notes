@@ -1,0 +1,192 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{slashed}
+\usepackage{colonequals}
+\usepackage{fancyhdr}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{}{#1.pdf_tex}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{}
+\rfoot{\thepage}
+\setlength{\headheight}{10pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\bigabs}[1]{\Bigl \lvert #1 \Bigr \rvert}
+\newcommand{\bigbracket}[1]{\Bigl [ #1 \Bigr ]}
+\newcommand{\bigparen}[1]{\Bigl ( #1 \Bigr )}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\bigceil}[1]{\Bigl \lceil #1 \Bigr \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\bigfloor}[1]{\Bigl \lfloor #1 \Bigr \rfloor}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\bignorm}[1]{\Bigl \| #1 \Bigr \| #1}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{{ #1 }}
+
+
+\begin{document}
+\title{Plotting eigenvalues of $\mathfrak{sl}_n(\mathbb{C})$ and its generating roots}
+\author{Quin Darcy}
+\date{April, 15 2021}
+\maketitle
+    \section{How the roots are calculated}
+    \begin{enumerate}
+        \item Generate basis for $\mathfrak{sl}_n(\mathbb{C})$, given some
+            $n\in\mathbb{Z}_{\geq 1}$: This is done in 3 parts.
+            \begin{enumerate}
+                \item Calculate dimension of $\mathfrak{sl}_n(\mathbb{C})$. We
+                    use the formula 
+                    \begin{equation*}
+                        \text{dim}(\mathfrak{sl}_n(\mathbb{C}))=n-1+2\sum_{i=1}^{n-1}i,
+                    \end{equation*}
+                    where the $n-1$ term is a count of how many basis elements have
+                    entries only on the main diagonal, and the sum is a count of
+                    all the basis elements with entries off the main diagonal.
+                \item As the formula suggests, we simply fill an array with 1's at
+                    all entries $a_{ij}$, where $i\neq j$, i.e., 
+                    \begin{equation*}
+                        \begin{split}
+                            &\texttt{for i in range(n):} \\
+                            &\quad\quad\texttt{for j in range(n):} \\
+                            &\quad\quad\quad\quad\texttt{if (i != j)} \\
+                            &\quad\quad\quad\quad\quad\quad\texttt{B[matnum][i][j] = 1} \\ 
+                            &\quad\quad\quad\quad\quad\quad\texttt{matnum++}.
+                        \end{split} 
+                    \end{equation*}
+                    Similarly, for the diagonal elements, we use 
+                    \begin{equation*}
+                        \begin{split}
+                            &\texttt{for i in range(n-1):} \\
+                            &\quad\quad\texttt{B[matnum][i][i] = 1} \\
+                            &\quad\quad\texttt{B[matnum][i+1][i+1] = -1} \\
+                            &\quad\quad\texttt{matnum++}.
+                        \end{split} 
+                    \end{equation*}
+                    Here \texttt{n} is the number the user entered and
+                    \texttt{matnum} is a count of the matrices since \texttt{B}
+                    is an array containing as many matrices as there are
+                    dimensions in $\mathfrak{sl}_n(\mathbb{C})$, and each
+                    matrix is $n\times n$.
+            \end{enumerate}
+    \end{enumerate}
+    \subsection{A Quick Visual Detour}
+        We stop here after step 1 for a moment since there is something
+        interesting that we can look at with what we have so far. With a basis
+        in hand, we can, in theory, generate all of
+        $\mathfrak{sl}_n(\mathbb{C})$. However, this is not possible on
+        a physical computer, as it
+        would require taking the span of the basis elements which is an
+        uncountably infinite set.\par\hspace{4mm} We can instead consider a finite spanning
+        set. Suppose for instance that we want to see how the eigenvalues of
+        $\mathfrak{sl}_n(\mathbb{C})$ are distributed in $\mathbb{C}$ as we
+        range over $n$. To do this, we can, as stated before, take a particular
+        finite spanning set of the basis, and plot all of the complex
+        eigenvalues of each element in this spanning set.\par\hspace{4mm} But how do we choose
+        the elements which populate our finite spanning set? In other words,
+        any finite selection would in a sense be arbitrary. I could not think
+        of a way around this aside from making the choice as natural and
+        uniform as possible. With this I ask you, dear reader, what is more
+        uniform and natural that the complex unit circle? Each point is unit
+        length, and it occupies all 4 quadrants. As you ponder the
+        answer to that question, let us just roll with it (``roll" $\dots$
+        ``circle"$\dots$, you get it) and see where it takes
+        us.\par\hspace{4mm} Let $N\in\mathbb{N}_{\geq 0}$, then we can choose $N$ 
+        many points from the complex unit circle by letting $\theta
+        = 2\pi/N$ and taking $M=\{c\in\mathbb{C}\mid \cos(\theta
+        k)+i\sin(\theta k)=c, \text{ for }0\leq k<N\}$. We can now thing of the set 
+        $M$ as the set containing all the multiples which we shall use to form our 
+        linear combinations. For example, suppose $M=\{\alpha_1, \alpha_2\}$ and 
+        our basis $B=\{x, y, h\}$. Then we want to calculate the following linear 
+        combinations (which we'll denote $A_i$):
+        \begin{align*}
+            &A_{1}=\alpha_1x+\alpha_1y+\alpha_1h& 
+            &A_{2}=\alpha_1x+\alpha_1y+\alpha_2h& \\ 
+            &A_{3}=\alpha_1x+\alpha_2y+\alpha_1h& 
+            &A_{4}=\alpha_1x+\alpha_2y+\alpha_2h& \\ 
+            &A_5=\alpha_2x+\alpha_1y+\alpha_1h&   
+            &A_6=\alpha_2x+\alpha_1y+\alpha_2h& \\
+            &A_7=\alpha_2x+\alpha_2y+\alpha_1h&   &A_8=\alpha_2x+\alpha_2y+\alpha_2h&
+        \end{align*}
+        If it is not already clear, given a basis with $b$ many elements, and a 
+        set of $N$ many multiples, then we will have a spanning set containing 
+        $N^b$ many elements. So in our particular case our spanning set will contain
+        \begin{equation*}
+            N^{\text{dim}(\mathfrak{sl}_n(\mathbb{C}))}
+        \end{equation*}
+        many elements.\par\hspace{4mm} Alright, now with our linear combinations, 
+        we need only calculate the eigenvalues for each $A_i$. So finally, supposing 
+        all such eigenvalues are collected neatly into a set, then the last step is 
+        to plot each element of this set. Below are the results of this.\newpage
+        \begin{figure}[htp!]
+            \centering
+            \incfig{sl_22}
+            \caption{14,706,125 2x2 matrices; 29,411,760 distinct eigenvalues}
+            \label{fig:14,706,125 2x2 matrices}
+        \end{figure}\newpage
+        \begin{figure}[htb!]
+            \centering
+            \incfig{sl_33}
+            \caption{16,777,216 3x3 matrices; 50,322,992 distinct eigenvalues}
+            \label{fig:2}
+        \end{figure}\newpage
+        \begin{figure}[htb!]
+            \centering
+            \incfig{sl_44}
+            \caption{14,348,907 4x4 matrices; 57,138,453 distinct eigenvalues}
+            \label{fig:}
+        \end{figure}\newpage
+        \begin{figure}[htb!]
+            \centering
+            \incfig{sl_55}
+            \caption{16,777,216 5x5 matrices; 81,914,833 distinct eigenvalues}
+            \label{fig:}
+        \end{figure}\newpage
+    \subsection{Continuing where we left off}
+    \begin{enumerate}
+        \item[3.] Obtain the Cartan subalgebra. This step is actually quite
+            easy in the case of $\mathfrak{sl}_n(\mathbb{C})$ since a basis for this
+            subalgebra can be found by simply selecting, from the elements of the
+            entire basis, those elements with entries on the main diagonal.
+        \item[4.] Calculate the adjoint representation of each basis element of
+            the Cartan subalgebra. The reason we are doing this is because we
+            can think of the roots of the Lie algebra as the nonzero weights of
+            the adjoint representation. Calculating the adjoint representaion
+            is relatively simple on paper, but quite dry in code. Essentially,
+            we take each (Cartan) basis element, bracket it with every (entire)
+            basis element, express the result as a linear combination of the
+            (entire) basis elements, and use the coefficients in this linear
+            combination as a row in the adjoint representaion matrix.
+        \item[5.] Calculate the eigenvectors of each adjoint representation.
+            The weight vectors are those who are eigenvectors to every adjoint
+            representation matrix. Hence, the weights are the eigenvalues of
+            such eigenvectors.
+        \item[6.] Filter through these eigenvalues, removing those with 0 in
+            ever component and voila you have your roots!
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,269 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{commath}
+\usepackage{colonequals}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\renewcommand{\baselinestretch}{1.1}
+\usepackage[mathscr]{euscript}
+\let\euscr\mathscr \let\mathscr\relax
+\usepackage[scr]{rsfso}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcolumntype{C}{>$c<$}
+\usepackage{stackengine}
+
+
+
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
+
+\setlist[description]{leftmargin=60mm,labelindent=60mm}
+
+
+
+\begin{document}
+
+
+\section*{\centerline{Tensors}}
+
+\justifying
+
+
+\begin{flushleft}
+
+    Consider two alternative coordinate systems $Z^i$ and $Z^{i'}$ in an $N$-dimensional space. Let us also use the symbols $Z^{i}$ and $Z^{i'}$ to denote the functions that express the relationships between the coordinates:\par
+    
+\vspace{4mm}
+
+        \centerline{$Z^{i'}=Z^{i'}(Z)$}
+
+\vspace{2mm}
+
+        \centerline{$Z^i=Z^i(Z')$.}
+        
+\vspace{4mm}
+
+    For the sake of clarity, let us expand these two equations into what they are supposed to represent. We will use the example of Cartesian and polar coordiantes. The relationship between these two coordinate systems are as follows:\par
+
+\vspace{4mm}
+
+        \centerline{$r(x,y)=\sqrt{x^2+y^2}$,}
+
+\vspace{2mm}
+
+        \centerline{$\theta(x,y)=\arctan{\frac{y}{x}}$,}
+        
+\vspace{2mm}
+
+        \centerline{$x(r,\theta)=r\cos{\theta}$,}
+        
+\vspace{2mm}
+
+        \centerline{$y(r,\theta)=r\sin{\theta}$.}
+        
+\vspace{4mm}
+
+    With these relationships in front of us we can now see how our first two equations would represent them.\par
+    
+\vspace{4mm}
+
+        \centerline{$Z^{1'}=r$}
+        
+\vspace{2mm}
+
+        \centerline{$Z^{2'}=\theta$}
+        
+\vspace{2mm}
+
+        \centerline{$Z^1=x$}
+        
+\vspace{2mm}
+
+        \centerline{$Z^2=y$}
+        
+\vspace{2mm}
+
+    Thus, we have\par
+    
+\vspace{2mm}
+
+        \centerline{$Z^{i'}=Z^{i'}(Z)\coloneqq \left\{ \begin{array}{rcl} Z^{1'}=Z^{1'}(Z^1,Z^2)=r(x,y) \\ Z^{2'}=Z^{2'}(Z^1,Z^2)=\theta(x,y) \end{array}\right $}
+        
+\vspace{4mm}
+
+        \centerline{$Z^{i}=Z^{i}(Z')\coloneqq \left \{ \begin{array}{rcl} Z^{1}=Z^{1}(Z^{1'},Z^{2'})=x(r,\theta) \\ Z^{2}=Z^{2}(Z^{1'},Z^{2'})=y(r,\theta) \end{array}\right$.}
+        
+\vspace{10mm}
+
+    Now that we have a clearer understanding of the notation, we may proceed.
+    
+\end{flushleft}
+
+\newpage
+
+    We now consider the two following identities:\par
+
+\vspace{4mm}
+
+        \centerline{$Z^i(Z'(Z))\equiv Z^i$}
+        
+\vspace{2mm}
+
+        \centerline{$Z^{i'}(Z(Z'))\equiv Z^{i'}$}
+        
+\vspace{4mm}
+
+    The first of the two identities represents $N$ relationships and each of the $N$ relationships can be differentiated with respect to each of the $N$ independent variables. This will yield $N^2$ relationships for the first partial derivatives of the functions $Z^i$ and $Z^{i'}$.\par
+    
+    With the help of tensor notation, all of the operations can be carried out in a single step. We differentiate the identity $Z^i(Z'(Z))=Z^i$ with respect to $Z^j$. It is essential that the differentiation is to take place wit respect to $Z^j$ rather than $Z^i$ because our intention is to differentiate \textit{each} of the identities in $Z^i(Z'(Z))=Z^i$ with respect to \textit{each} of the variables. The resulting expression will have two \textit{live} indices $i$ and $j$.\par
+    
+    The result of the differentiation reads\par
+    
+\vspace{8mm}
+
+        \centerline{\Large{$\frac{\partial Z^i}{\partial Z^{i'}}\frac{\partial Z^{i'}}{\partial Z^j}=\frac{\partial Z^i}{\partial Z^j}$}.}
+        
+\vspace{8mm}
+
+\begin{flushleft}
+
+    \textbf{The Position Vector as a Function of Coordinates}
+
+\end{flushleft}
+
+    Refer the Euclidean space to any arbitrary coordinate system $Z^i$. In a Euclidean space referred to a coordinate system, the position vector $\mathbf{R}$ is a function of the coordinates $Z^i$. That is, to each valid combination of $Z^1$, $Z^2$, and $Z^3$, there corresponds a specific value of the position vector $\mathbf{R}$. Denote this function by $\mathbf{R}(Z)$:\par
+
+\vspace{4mm}
+
+    \centerline{$\mathbf{R}=\mathbf{R}(Z)$.}
+    
+\vspace{4mm}
+
+    On the left side of this equation, $\mathbf{R}$ represents the geometric position vector, while on the right it represents a vector-valued function that yields the position vector for every valid combination of coordinates.\par
+    
+\vspace{8mm}
+
+\begin{flushleft}
+    \textbf{The Covariant Basis $\mathbf{Z_i}$}
+\end{flushleft}
+
+    The \textit{covariant basis} is obtained from the position vector $\mathbf{R}(Z)$ by differentiation with respect to each of the coordinates:\par
+
+\vspace{4mm}
+
+        \centerline{\Large{$\mathbf{Z_i}=\frac{\partial\mathbf{R}(Z)}{\partial Z^i}$}.}
+        
+\vspace{4mm}
+
+    The covariant basis is a generalization of the \textit{affine coordinate basis} to curvilinear coordinate systems. It is called the \textit{local coordinate basis} since it varies from one point to another. The symbols $\mathbf{Z_i}$ and $Z^i$ cannot be mistaken for eachother since the bold $\mathbf{Z}$ in $\mathbf{Z_i}$ is a vector while the plain $Z$ in $Z^i$ is a scalar. Assuming we are in three dimensional Euclidean space, we may write these basis vectors as follows:\par
+    
+\vspace{8mm}
+
+        \centerline{\Large{$\mathbf{Z_1}=\frac{\partial\mathbf{R}(Z^1,Z^2,Z^3)}{\partial Z^1}$}}
+        
+\vspace{2mm}
+
+        \centerline{\Large{$\mathbf{Z_2}=\frac{\partial\mathbf{R}(Z^1,Z^2,Z^3)}{\partial Z^2}$}}
+        
+\vspace{2mm}
+
+        \centerline{\Large{$\mathbf{Z_3}=\frac{\partial\mathbf{R}(Z^1,Z^2,Z^3)}{\partial Z^3}$}}
+        
+\vspace{8mm}
+
+    At all the points of Euclidean space, the covariant basis $\mathbf{Z_i}$ provides a convenient basis for decomposing other vectors. The components $V^i$ of a vector $\mathbf{V}$ are the scalar values that produce $\mathbf{V}$ when used in a linear combination with the vectors $\mathbf{Z_i}$:\par
+    
+\vspace{4mm}
+
+        \centerline{$\mathbf{V}=V^1\mathbf{Z_1}+V^2\mathbf{Z_2}+V^3\mathbf{Z_3}$,}
+        
+\vspace{4mm}
+
+    or in tensor notation,\par
+    
+\vspace{4mm}
+
+        \centerline{$\mathbf{V}=V^i\mathbf{Z_i}$.}
+        
+\vspace{4mm}
+
+    The values $V^i$ are called the \textit{contravariant components} of the vector $\mathbf{V}$. Since $\mathbf{Z_i}$ varies from one point to another, two identical vectors $\mathbf{U}$ and $\mathbf{V}$ decomposed at different points may have different contravariant components.\par
+    
+\vspace{8mm}
+
+\begin{flushleft}
+    \textbf{The Covariant Metric Tensor $\mathbf{Z_{ij}}$}
+\end{flushleft}
+
+    By definition, the \textit{covariant metric tensor} $Z_{ij}$ consists of the pairwise dot products of the covariant basis vectors:\par
+    
+\vspace{8mm}
+
+        \centerline{$Z_{ij}=\mathbf{Z_i}\cdot\mathbf{Z_j}=$ $\left \{ \begin{array}{rcl} Z_{11}=\mathbf{Z_1}\cdot\mathbf{Z_1} & Z_{12}=\mathbf{Z_1}\cdot\mathbf{Z_2} & Z_{13}=\mathbf{Z_1}\cdot\mathbf{Z_3} \\ Z_{21}=\mathbf{Z_2}\cdot\mathbf{Z_1} & Z_{22}=\mathbf{Z_2}\cdot\mathbf{Z_2} & Z_{23}=\mathbf{Z_2}\cdot\mathbf{Z_3} \\ Z_{31}=\mathbf{Z_3}\cdot\mathbf{Z_3} & Z_{32}=\mathbf{Z_3}\cdot\mathbf{Z_2} & Z_{33}=\mathbf{Z_3}\cdot\mathbf{Z_3} \end{array}\right $}
+        
+\vspace{8mm}
+
+    However, since the dot product is commutative this implies that the covariant metric tensor is symmetric. Thus, $Z_{ij}=Z_{ji}$. Hence,\par
+    
+\vspace{8mm}
+
+        \centerline{$Z_{ij}=\mathbf{Z_i}\cdot\mathbf{Z_j}=\left \{ \begin{array}{rcl} Z_{11}=\mathbf{Z_1}\cdot\mathbf{Z_1} \\ Z_{12}=\mathbf{Z_1}\cdot\mathbf{Z_2} \\ Z_{13}=\mathbf{Z_1}\cdot\mathbf{Z_3} \\ Z_{22}=\mathbf{Z_2}\cdot\mathbf{Z_2} \\ Z_{23}=\mathbf{Z_2}\cdot\mathbf{Z_3} \\ Z_{33}=\mathbf{Z_3}\cdot\mathbf{Z_3} \end{array}\right $}
+        
+\newpage
+
+    The metric tensor is one of the central objects in tensor calculus. It carries complete information about the dot product and is therefore the main tool in measuring lengths, areas, and volumes. Suppose that two vectors $\mathbf{U}$ and $\mathbf{V}$ are located at the same point and that their components are $U^i$ and $V^j$. Then the dot product $\mathbf{U}\cdot\mathbf{V}$ is given by:\par
+    
+\vspace{4mm}
+
+        \centerline{$\mathbf{U}\cdot\mathbf{V}=U^i\mathbf{Z_i}\cdot V^j\mathbf{Z_j}=(\mathbf{Z_i}\cdot\mathbf{Z_j})U^iV^j=Z_{ij}U^iV^j$.}
+        
+\vspace{4mm}
+
+\begin{flushleft}
+    \textbf{The Contravariant Metric Tensor $\mathbf{Z^{ij}}$}
+\end{flushleft}
+
+    The \textit{contravariant metric tensor} $Z^{ij}$ is the inverse of the covariant metric tensor $Z_{jk}$:\par
+    
+\vspace{4mm}
+
+        \centerline{$Z^{ij}Z_{jk}=\delta^i_k$}
+        
+\vspace{4mm}
+
+    The contravariant basis $\mathbf{Z^i}$ is defined as\par
+    
+\vspace{4mm}
+
+        \centerline{$\mathbf{Z^i}=Z^{ij}\mathbf{Z_j}$.}
+        
+\vspace{4mm}
+
+    The bases $\mathbf{Z^i}$ and $\mathbf{Z_j}$ are mutually orthonormal:\par
+    
+\vspace{4mm}
+
+        \centerline{$\mathbf{Z^i}\cdot\mathbf{Z_j}=\delta^i_j$.}
+        
+\vspace{4mm}
+
+    That is, each vector $\mathbf{Z^i}$ is orthogonal for each $\mathbf{Z_j}$, for which $i\neq j$.
+    
+\vspace{8mm}
+
+
+
+\end{document}

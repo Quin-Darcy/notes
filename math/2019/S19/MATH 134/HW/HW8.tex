@@ -1,0 +1,361 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.2in]{geometry} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\usepackage[inline]{enumitem}
+\pagestyle{fancy}
+\setlength{\headheight}{10pt}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+ 
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\newenvironment{solution}[1][\bf{\textit{Solution}}]{\par
+  
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm
+          \rightmargin=0mm
+          \settowidth{\itemindent}{\itshape#1}%
+          \labelwidth=\itemindent
+          \parsep=0pt \listparindent=\parindent 
+  }
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+\newlist{mylist}{enumerate*}{1}
+\setlist[mylist]{label=(\alph*)}
+
+\begin{document}
+
+\begin{center}
+	\vspace{.4cm} {\textbf { \large MATH 134}}
+\end{center}
+{\textbf{Name:}\ Quin Darcy \hspace{\fill} \textbf{Due Date:} 4/2/19   \\
+{ \textbf{Instructor:}} \ Dr. Krauel \hspace{\fill} \textbf{Assignment:} Homework 8 \\ \hrule}
+
+\justifying
+
+% Document begins here
+
+\begin{enumerate}[leftmargin=*]
+
+    \item[2.] Evaluate the following integrals:
+    
+    \begin{align*}
+        (\text{a})\,\int\limits_{1}^{2}\bigg(\frac{1}{t}-i\bigg)^2 dt;\quad\quad\quad\quad (\text{b})\,\int\limits_{0}^{\pi/6}e^{i2t}dt;\quad\quad\quad\quad(\text{c})\,\int\limits_{0}^{\infty}e^{-zt}dt\;\text{Re}z>0.
+    \end{align*}
+    
+    \begin{solution}\hfill
+        \begin{enumerate}[label=(\alph*)]
+            \item We begin by squaring both sides of $f(t)$. Doing this, the integral becomes
+            
+            \begin{equation*}
+                \int_{1}^{2}\bigg(\frac{1}{t}-i\bigg)^2 = \int_{1}^{2}\frac{1}{t^2}-\frac{2i}{t}+1\;dt 
+                = \int_{1}^{2}\frac{1}{t^2}-2i\int_{1}^{2}\frac{1}{t}\;dt. 
+            \end{equation*}
+            
+            \noindent Finally, integrating these two real valued functions and evaluating, we get
+            
+            \begin{equation*}
+                \begin{split}
+                    -\frac{1}{t}\bigg\rvert_{1}^{2}-2i\ln{t}\bigg\rvert_{1}^{2} &= \bigg(-1+\frac{1}{2}\bigg)-2i\bigg(0-\ln{2}\bigg) \\
+                    &= -\frac{1}{2}+i\ln{4}.
+                \end{split}
+            \end{equation*}
+            
+            \item[(c)] Since this is an improper integral, we will replace the upper bound of integration with a variable $n$, and take the limit as $n$ tends to infinity. Doing this we get that
+            
+            \begin{equation*}
+                \int_{0}^{\infty}e^{-zt}\;dt = \lim_{n\rightarrow\infty}\bigg(\int_{0}^{n}e^{-zt}\;dt\bigg).
+            \end{equation*}
+            
+            \noindent Now we will do a $u$ substitution and let $u=-zt$ and $du=-z\;dt$. So then 
+            
+            \begin{equation*}
+                \lim_{n\rightarrow\infty}\bigg(\int_{0}^{n}e^{-zt}\;dt\bigg) = \lim_{n\rightarrow\infty}\bigg(-\frac{1}{z}\int_{-zn}^{0}e^u\;du\bigg)=\lim_{n\rightarrow\infty}\bigg(-\frac{e^u}{z}\bigg\rvert_{-zn}^{0}\bigg).
+            \end{equation*}
+            
+            \noindent Evaluating and taking the limit yields
+            
+            \begin{equation*}
+                \lim_{n\rightarrow\infty}\bigg(-\frac{1}{ze^{zn}}+\frac{1}{z}\bigg) =\frac{1}{z}.
+            \end{equation*}
+            
+            \newpage
+            
+        \end{enumerate}
+        
+    \end{solution}
+    
+    \item[4.] Evaluate
+    
+    \begin{equation*}
+        \int\limits_{C} f(z)\;dz
+    \end{equation*}
+    
+    \noindent for the function $f(z)=(z+2)/z$ and contours $C$ and parametric representations for $C$ given by:
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item the semicircle $z=2e^{i\theta}$ $(0\leq\theta\leq\pi)$;
+        \item the semicircle $z=2e^{i\theta}$ $(\pi\leq\theta\leq 2\pi)$;
+        \item the circle $z=2e^{i\theta}$ $(0\leq\theta\leq 2\pi)$.
+    \end{enumerate}
+    
+    \begin{solution} *I was quite confused about the differences between a path $\gamma(t)$ and a contour $C$. So I apologize if this is completely incorrect as a result.* \hfill\par\hfill
+        \begin{enumerate}[label=(\alph*)]
+            \item Letting $C_1(t)=2e^{it}$, where $0\leq t\leq\pi$, this this will serve as our parametrization for the semicircle. Now that we have this, we can compute the integral as
+            
+            \begin{equation*}
+                \begin{split}
+                    \int_{C_1}f(z)\;dz &=\int_{0}^{\pi}f(C_1(t))C_1'(t)\;dt  =2i\int_{0}^{\pi}\bigg(1+\frac{1}{e^{it}}\bigg)e^{it}\;dt \\ 
+                    &=2i\int_{0}^{\pi}e^{it}+1\;dt 
+                    = 2i\int_{0}^{\pi}\cos{t}+i\sin{t}+1\;dt \\
+                    &= \int_{0}^{\pi}2i\cos{t}-2\sin{t}+2i\;dt 
+                    = -2\int_{0}^{\pi}\sin{t}\;dt +2i\int_{0}^{\pi}\cos{t}+1\;dt \\
+                    &= -\cos{t}\bigg\rvert_{0}^{\pi}+2i\bigg(\sin{t}+t\bigg\rvert_{0}^{\pi}\bigg) = 2+2\pi i.
+                \end{split}
+            \end{equation*}
+            
+            \item Using the same parametrization as in part (a), we'll define $C_2$ the same way but take $t$ to be $\pi\leq t\leq 2\pi$. We then have
+            
+            \begin{equation*}
+                \int_{C_2}f(z)\;dz = -\cos{t}\bigg\rvert_{\pi}^{2\pi}+2i\bigg(\sin{t}+t\bigg\rvert_{\pi}^{2\pi}\bigg) = -2+2\pi i.
+            \end{equation*}
+            
+            \item Lastly, defining $C_3$ as $C_1$ with the interval changed to take $t$ from $0\leq t\leq 2\pi$, then we have
+            
+            \begin{equation*}
+                \int_{C_3}f(z)\;dz = -\cos{t}\bigg\rvert_{0}^{2\pi}+2i\bigg(\sin{t}+t\bigg\rvert_{0}^{2\pi}\bigg) = 4\pi i.
+            \end{equation*}
+            
+        \end{enumerate}    
+    \end{solution}
+    
+    \newpage
+    
+    \item[5.] Evaluate
+    
+    \begin{equation*}
+        \int\limits_{C}f(z)\;dz
+    \end{equation*}
+    
+    \noindent for the function $f(z)=z-1$ and $C$ is the arc from $z=0$ to $z=2$ consisting of
+    \begin{enumerate}[label=(\alph*)]
+        \item the semicircle $z=1+e^{i\theta}$ $(\pi\leq\theta\leq 2\pi)$; 
+        \item the segment $0\leq x\leq 2$ of the real axis.
+    \end{enumerate}
+    
+    \begin{solution}\hfill
+        \begin{enumerate}[label=(\alph*)]
+            \item Letting $C_1(t)=1+e^{it}$, where $\pi\leq t\leq 2\pi$, then we get
+            
+            \begin{equation*}
+                \begin{split}
+                    \int_{C_1}f(z)\;dz = \int_{\pi}^{2\pi}f(C_1(t))C_1'(t)\;dt =\int_{\pi}^{2\pi}\big(e^{it}\big)ie^{it}\;dt.
+                \end{split}
+            \end{equation*}
+            
+            \noindent Substituting $u=e^{it}$ and $du=ie^{it}dt$, then evaluating the indefinite integral we get
+            
+            \begin{equation*}
+                \int u\;du = \frac{1}{2}u^2+C.
+            \end{equation*}
+            
+            \noindent So then substituting back we obtain
+            
+            \begin{equation*}
+                \begin{split}
+                    \frac{1}{2}e^{2it}\bigg\rvert_{\pi}^{2\pi}&=\frac{1}{2}e^{4\pi i}-\frac{1}{2}e^{2\pi i} \\ &=\frac{1}{2}\bigg(\cos{4\pi}+i\sin{4\pi}-\cos{2\pi}-i\sin{2\pi}\bigg) \\
+                    &=0.
+                \end{split}
+            \end{equation*}
+            
+            \item Letting $C_2(t)=t$, where $0\leq t\leq 2$, then 
+            
+            \begin{equation*}
+                \int_{C_2}f(z)\;dz&=\int_{0}^{2}t\;dt=\frac{1}{2}t^2\bigg\rvert_{0}^{2}=2.
+            \end{equation*}
+            
+        \end{enumerate}
+    \end{solution}
+    
+    \newpage
+    
+    \item[7.] Let $f(z)=f(x+iy)=y+ix$ and $\gamma$ be the boundary of the triangle with vertices at the points 0, 1, and $i$, the orientation of $\gamma$ being in the counterclockwise direction. Evaluate
+    
+    \begin{equation*}
+        \int\limits_{\gamma}f(z)\;dz.
+    \end{equation*}
+    
+    \begin{solution}
+        Let us begin by constructing 3 parametrizations to represent each edge of the desired triangle. Let
+        
+        \begin{enumerate}
+            \item $C_1=t$, where $0\leq t\leq 1$;
+            \item $C_2=1+t(i-1)$, where $0\leq t\leq 1$;
+            \item $C_3=(1-t)i$, where $0\leq t\leq 1$.
+        \end{enumerate}
+        
+        \noindent Equipped with our curves, we now integrate.
+        
+        \begin{equation*}
+            \begin{split}
+                \int_{C_1}f(z)\;dz &=\int_{0}^{1}f(C_1(t))C_1'(t)\;dt=\int_{0}^{1}it\;dt \\
+                &= \frac{i}{2}t^2\bigg\rvert_{0}^{1} = \frac{i}{2}.
+            \end{split}
+        \end{equation*}
+        
+        \noindent Integrating with $C_2$ we have
+        
+        \begin{equation*}
+            \begin{split}
+                \int_{C_2}f(z)\;dz &= \int_{0}^{1}f(C_2(t))C_2'(t)\;dt =\int_{0}^{1}\big(t+(1-t)i\big)(i-1)\;dt \\
+                &= \int_{0}^{1}2it-1-i\;dt = -\int_{0}^{1}1\;dt+i\int_{0}^{1}2t-1\;dt=-t\bigg\rvert_{0}^{1}+i\bigg(t^2-t\bigg\rvert_{0}^{1}\bigg) \\
+                &=-1.
+            \end{split}
+        \end{equation*}
+        
+        \noindent Finally, integrating with $C_3$, we get 
+        
+        \begin{equation*}
+            \begin{split}
+                \int_{C_3}f(z)\;dz &=\int_{0}^{1}f(C_3(t))C'(t)\;dt=\int_{0}^{1}(1-t)(-i)\;dt=i\int_{0}^{1}t-1\;dt \\
+                &=i\bigg(\frac{1}{2}t^2-t\bigg\rvert_{0}^{1}\bigg) = -\frac{i}{2}.
+            \end{split}
+        \end{equation*}
+        
+        \noindent So taking the sum of these three integrals we get -1.
+    \end{solution}
+    
+    \newpage
+    
+    \item[8.] Consider the path $\gamma$ of the unit circle about the origin. Find the length of $\gamma$ using 
+    
+    \begin{equation*}
+        \text{length}(\gamma)=\int\limits_{a}^{b}\abs{\gamma'(t)}\;dt.
+    \end{equation*}
+    
+    \begin{solution}
+        Letting $\gamma(t)=e^{it}$, where $0\leq t\leq 2\pi$, then $\gamma'(t)=ie^{it}$. Writing this in polar form we get that $\gamma'(t)=i(\cos{t}+i\sin{t})=-\sin{t}+i\cos{t}$. Finally, taking the modulus of this expression, we obtain
+        
+        \begin{equation*}
+            \abs{\gamma'(t)}=\sqrt{\sin^2{t}+\cos^2{t}}=1.
+        \end{equation*}
+        
+        \noindent Thus, 
+        
+        \begin{equation*}
+            \text{length}(\gamma)=\int_{0}^{2\pi}1\;dt=t\bigg\rvert_{0}^{2\pi}=2\pi.
+        \end{equation*}
+    \end{solution}
+    
+    \item[9.] Let $C_0$ denote the circle $\abs{z-z_0}=R$, taken counterclockwise. Use the parametric representation $z=z_0+Re^{i\theta}$ $(-\pi\leq\theta\leq \pi)$ for $C_0$ to derive the following integration formulas:
+    
+    \begin{align*}
+        (\text{a})\;\int\limits_{C_0}\frac{dz}{z-z_0}=2\pi i;\quad\quad\quad\quad (\text{b})\;\int\limits_{C_0}(z-z_0)^{n-1}\;dz=0\quad(n=\pm1, \pm2, \dots).
+    \end{align*}
+    
+    \begin{solution}\hfill\par\hfill
+        \begin{enumerate}[label=(\alph*)]
+            \item Letting $C_0(t)=z_0+Re^{it}$, where $-\pi\leq t\leq \pi$, then it follows that 
+            
+            \begin{equation*}
+                \begin{split}
+                    \int_{C_0}f(z)\;dz &= \int_{C_0}\frac{dz}{z-z_0}=\int_{-\pi}^{\pi}\bigg(\frac{1}{C(t)-z_0}\bigg)C'(t)\;dt \\
+                    &=\int_{-\pi}^{\pi}\bigg(\frac{1}{(z_0+Re^{it})-z_0}\bigg)\big(iRe^{it}\big)\;dt=\int_{-\pi}^{\pi}\big(R^{-1}e^{-it}\big)\big(iRe^{it}\big)\;dt \\ 
+                    &=\int_{-\pi}^{\pi}i\;dt=it\bigg\rvert_{-\pi}^{\pi} = i\big(\pi-(-\pi)\big) = 2\pi i.
+                \end{split}
+            \end{equation*}
+            
+            \item Taking $C_0(t)$ to be the same as before, we see that 
+            
+            \begin{equation*}
+                \int_{C_0}(z-z_0)^{n-1}\;dz=\int_{-\pi}^{\pi}\big(Re^{it}\big)^{n-1}\;dt=R^{n-1}\int_{-\pi}^{\pi}e^{int}e^{-it}\;dt
+            \end{equation*}
+            
+            \noindent Now we will simplify and do two consecutive substitutions. First, we will let $u=it$ and $du=i\;dt$ and we get
+            
+            \newpage
+            
+            \begin{equation*}
+                R^{n-1}\int_{-\pi}^{\pi}e^{(n-1)it}\;dt = \frac{1}{iR}\int e^{u(n-1)}\;du.
+            \end{equation*}
+            
+            \noindent Then substituting $w=un-u$ and $dw=n-1\;du$, we get
+            
+            \begin{equation*}
+                \frac{1}{iR}\int e^{u(n-1)}\;du = \frac{1}{iR(n-1)}\int e^w\;dw=\frac{e^w}{iR(n-1)}.
+            \end{equation*}
+            
+            \noindent Finally, substituting back and evaluating, we get
+            
+            \begin{equation*}
+                \begin{split}
+                    \frac{e^w}{iR(n-1)} &= \frac{e^{u(n-1)}}{iR(n-1)} = \frac{e^{it(n-1)}}{iR(n-1)}\bigg\rvert_{-\pi}^{\pi} \\
+                    &= \frac{1}{iR(n-1)}\bigg(\cos\big((n-1)t\big)+i\sin\big((n-1)t\big)\bigg\rvert_{-\pi}^{\pi}\bigg) \\
+                    &= \frac{1}{iR(n-1)}\bigg[\bigg(\cos\big((n-1)\pi\big)+i\sin\big((n-1)\pi\big)\bigg) \\&-\bigg(\cos\big((n-1)\pi\big)-i\sin\big((n-1)\pi\big)\bigg)\bigg] \\
+                    &=\frac{1}{iR(n-1)}(0) \\
+                    &= 0,
+                \end{split}
+            \end{equation*}
+            
+            \noindent for all $n\in\mathbb{Z}$.\par\hspace{4mm} However, throughout this whole calculation we had an $(n-1)$ in the denominator. This is concerning since the claim is that the integral holds for all $n$, which would include $n=1$. I was not sure how to address this, so I chose to complete the calculation. That said, this problem does not seem insignificant and might in fact render the whole demonstration invalid. 
+            
+        \end{enumerate}
+    \end{solution}
+
+\end{enumerate}
+
+\end{document}

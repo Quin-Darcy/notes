@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+
+
+\begin{document}
+
+\title{A Long Winded and Non-Rigorous Introduction to Matrix Lie Groups}
+\author{Quin Darcy}
+\date{09 March 2019\\\small{(Last Edited : 09 March 2019)}}
+\affil{\small{California State University Sacramento}}
+\maketitle
+
+\section{Definitions}
+
+Before introducing our definitions, let us consider a motivating example which will set the stage for the following definitions. Consider the set of all $2\times 2$ real matrices with determinant 1. This set is typically denoted $SL(2;\mathbb{R})$. Now suppose that $A$ and $B$ are both $2\times 2$ real matrices, and let
+
+\begin{equation*}
+    A=\begin{bmatrix} a & b \\ c & d \end{bmatrix}, \qquad B=\begin{bmatrix} e & f \\ g & h\end{bmatrix}.
+\end{equation*}
+
+Computing the determinant of both these matrices, we find that $\det(A)=ad-cb$ and $\det(B)=eh-gf$. Now let us consider the product of these two matrices. We have
+
+\begin{equation*}
+    A\cdot B=\begin{bmatrix} a & b\\c & d\end{bmatrix}\cdot\begin{bmatrix} e & f\\ g & h\end{bmatrix} =\begin{bmatrix} ae+bg & af+bh\\ce+dg & cf+dh\end{bmatrix}.
+\end{equation*}
+
+\noindent Computing the determinant of $A\cdot B$, we notice
+
+\begin{equation}
+    \begin{split}
+        \det(A\cdot B) &= [(ae+bg)(cf+dh)]-[(ce+dg)(af+bh)] \\
+        &= aedh+bcgf-cebh-dgaf \\
+        &= (ad-cb)eh-(ad-cb)gf \\
+        &= (ad-cb)(eh-gf) \\
+        &= \det(A)\cdot\det(B).
+    \end{split}
+\end{equation}
+
+So at least in the case of real valued $2\times 2$ matrices, the product of the determinants is equal to the determinant of the product. This observation opens up a very significant doorway into algebra. Because the calculation above was independent on the value of the determinant of each matrix, the property of determinants we have observed implies that if $A,B\in SL(2;\mathbb{R})$, then $A\cdot B\in SL(2;\mathbb{R})$.\par
+To illustrate why this is, consider the following facts. If $A,B\in SL(2;\mathbb{R})$, then $\det(A)=1$ and $\det(B)=1$, by definition. And by (1), we have that $\det(A\cdot B)=\det(A)\cdot\det(B)=1\cdot 1=1$. Thus, since $A\cdot B$ is $2\times 2$, and since $\det(A\cdot B)=1$, then we have $A\cdot B\in SL(2;\mathbb{R})$, as desired.\par 
+Now from linear algebra we know that there exists a real valued $2\times 2$ matrix $I$ such that for all  $A\in SL(2;\mathbb{R})$, we have $A\cdot I=I\cdot A= A$. And since $\det(I)=1$, then $I\in SL(2;\mathbb{R})$. Additionally, because the elements of $SL(2;\mathbb{R})$ have non-zero determinants, then they are all invertible matrices. But are their inverses also elements of $SL(2;\mathbb{R})$? To check this, let $A\in SL(2;\mathbb{R})$ and let
+
+\begin{equation*}
+    A=\begin{bmatrix} a & b\\c & d\end{bmatrix}.
+\end{equation*}
+
+\noindent We know from linear algebra that
+
+\begin{equation*}
+    A^{-1}=\frac{1}{\det(A)}\begin{bmatrix} d & -b\\-c & a\end{bmatrix}=(1)\begin{bmatrix} d & -b\\-c & a\end{bmatrix}
+\end{equation*}
+
+\noindent So then since $\det(A)=ad-bc=1$, then $\det(A^{-1})=da-cb=ad-cb=1$. Thus, for any $A\in SL(2;\mathbb{R})$, it is true that $A^{-1}\in SL(2;\mathbb{R})$. Lastly, we also know that matrix multiplication is associative. So in summary, we showed that the set $SL(2;\mathbb{R})$ is \textit{closed} under matrix multiplication, it contains a multiplicative \textit{identity}, each element has a multiplicative \textit{inverse}, and the operation of matrix multiplication is \textit{associative}. BINGO! We gotta group, folks! Yes, $SL(2;\mathbb{R})$ is a group with respect to matrix multiplication ... wait, so what?\par 
+Why did we spend all of that time proving the set was a group? Well the short answer is that we could have just stated it was a group and moved on to the more interesting stuff, but now we are totally convinced and did not have to take anything on faith. So, what now?
+
+\subsection{A Surprising Connection}
+
+If we think of a $2\times 2$ matrix with entries $a,b,c,$ and $d$, it is clear that this matrix is completely determined by these entries. Meaning, what distinguishes one $2\times 2$ matrix from another are their respective entries. This is very similar to how points are identified in $\mathbb{R}^k$. For any $\mathbf{x}\in\mathbb{R}^k$, we know that this point is defined to be (and thus identified by) a particular $k-$tuple ($x_1,x_2,\dots,x_k)$, where $x_i\in\mathbb{R}$, for all $i$.\par 
+Hopefully the connection is starting to become clear. If matrices are defined by their entries, and points in space are defined by their components, can we not treat matrices like points and associate an $n\times n$ matrix with a $n^2-$tuple, whose components are the entries of the matrix? Yeah sure why not who cares. It follows then that $SL(2;\mathbb{R})$ is the set of points in $\mathbb{R}^4$ for which the smooth function $ad-bc$ has the value 1.\par 
+Okay, so there is a lot to say here. First, the correspondence between $SL(2;\mathbb{R})$ and $\mathbb{R}^4$ that we made was only possible for reasons that go beyond the scope of this paper. But to conclude this example we will touch on it for just a moment ... $SL(2;\mathbb{R})$ is not just a group, but it is also a topological space. It's topology is the product topology between two other topologies. These topologies are the set of all \textit{special orthogonal matrices} and the set of \textit{Hermitian matrices}. Both these sets have their own topology and when you take the cartesian product of the two sets, you get the topology on $SL(2;\mathbb{R})$, loosely speaking. So since $SL(2;\mathbb{R})$ is a topological space, we can show that it locally looks like $\mathbb{R}^4$ and is in fact a manifold for that very reason. Specifically, it is an \textit{embedded submanifold} in $\mathbb{R}^4$, which is homeomorphic to the 3 dimensional surface defined by $xw-yz=1$. We would then say that $SL(2;\mathbb{R})$ is a Lie group of dimension 3.
+
+\begin{definition}
+    The \textbf{general linear group} over the real numbers, denoted $GL(n;\mathbb{R})$, is the group of all $n\times n$ invertible matrices with real entries. The general linear group over the complex numbers, denoted $GL(n;\mathbb{C})$, is the group of all invertible $\n\times n$ matrices with complex entries.
+\end{definition}
+
+\begin{definition}
+    Let $M_n(\mathbb{C})$ denote the space of all $n\times n$ matrices with complex entries.
+\end{definition}
+
+We may identify $M_n(\mathbb{C})$ with $\mathbb{C}^{n^2}$ and use the standard notion of convergence in $\mathbb{C}^{n^2}$. Explicitly, this means the following.
+
+\begin{definition}
+    Let $A_m$ be a sequence of complex matrices in $M_n(\mathbb{C})$. We say that $A_m$ \textbf{converges} to a matrix $A$ if each entry of $A_m$ converges (as $m\rightarrow\infty$) to the corresponding entry of $A$ (i.e., if $(A_m)_{jk}$ converges to $A_{jk}$ for all $1\leq k$, $k\leq n$). 
+\end{definition}
+
+We now consider \textit{subgroups} of $GL(n;\mathbb{C})$, that is, subsets $G$ of $GL(n;\mathbb{C})$ such that the identity matrix is in $G$ and such that for all $A$ and $B$ in $G$, the matrices $AB$ and $A^{-1}$ are also in $G$.
+
+\begin{definition}
+    A \textbf{matrix Lie group} is a subgroup $G$ of $GL(n;\mathbb{C})$ with the following property: If $A_m$ is any sequence of matrices in $G$, and $A_m$ converges to some matrix $A$, then either $A$ is in $G$ or $A$ is not invertible.
+\end{definition}
+
+The condition on $G$ amounts to saying that $G$ is a closed subset of $GL(n;\mathbb{C})$. Thus, Definition 1.4 is equivalent to saying that a matrix Lie group is a \textbf{closed subgroup} of $GL(n;\mathbb{C})$. To see this, think of the topological definition of closed, which states that a set is closed if it contains all of its limit points. Here, the matrices $A$ to which the sequences $A_m$ converge, can be thought of as the limit points of the set $G$.\par 
+Alrighty, that about wraps it up. I will hopefully type up more notes soon. Seeya!
+
+\end{document}

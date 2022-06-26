@@ -1,0 +1,764 @@
+% This is in AMSLaTeX.
+\documentclass[10pt]{amsart}
+\usepackage{amssymb}
+% \renewcommand{\baselinestretch}{1.27}
+
+\renewcommand{\S}{\subset}
+\newcommand{\M}{\setminus}
+\newcommand{\E}{\varnothing}
+\renewcommand{\O}{\overline}
+\newcommand{\I}{\infty}
+\newcommand{\andeqn}{\qquad {\mbox{and}} \qquad}
+
+\newenvironment{pff}{{\emph{Proof:}}}{\end{proof}}
+
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\beqr}{\begin{eqnarray*}}
+\newcommand{\eeqr}{\end{eqnarray*}}
+\newcommand{\limi}[1]{\lim_{{#1} \to \infty}}
+
+\newcommand{\af}{\alpha}
+\newcommand{\bt}{\beta}
+\newcommand{\gm}{\gamma}
+\newcommand{\dt}{\delta}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\zt}{\zeta}
+\newcommand{\et}{\eta}
+\newcommand{\ch}{\chi}
+\newcommand{\io}{\iota}
+\newcommand{\te}{\theta}
+\newcommand{\ld}{\lambda}
+\newcommand{\sm}{\sigma}
+\newcommand{\kp}{\kappa}
+\newcommand{\ph}{\varphi}
+\newcommand{\ps}{\psi}
+\newcommand{\rh}{\rho}
+\newcommand{\om}{\omega}
+\newcommand{\ta}{\tau}
+
+\newcommand{\Gm}{\Gamma}
+\newcommand{\Dt}{\Delta}
+\newcommand{\Et}{\Eta}
+\newcommand{\Th}{\Theta}
+\newcommand{\Ld}{\Lambda}
+\newcommand{\Sm}{\Sigma}
+\newcommand{\Ph}{\Phi}
+\newcommand{\Ps}{\Psi}
+\newcommand{\Om}{\Omega}
+
+\newcommand{\Q}{{\mathbb{Q}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\C}{{\mathbb{C}}}
+% \newcommand{\N}{{\mathbb{N}}}
+\newcommand{\N}{{\mathbb{Z}}_{> 0}}
+\newcommand{\Nz}{{\mathbb{Z}}_{\geq 0}}
+
+\pagenumbering{arabic}
+
+\newcommand{\id}{{\mathrm{id}}}
+\newcommand{\sint}{{\mathrm{int}}}
+\newcommand{\diam}{{\mathrm{diam}}}
+\newcommand{\dist}{{\mathrm{dist}}}
+
+\newcommand{\A}{\qquad {\mbox{and}} \qquad}
+
+\newcommand{\ct}{continuous}
+\newcommand{\nbhd}{neighborhood}
+\newcommand{\cpt}{compact}
+\newcommand{\wolog}{without loss of generality}
+\newcommand{\Wolog}{Without loss of generality}
+\newcommand{\Tfae}{The following are equivalent}
+\newcommand{\tfae}{the following are equivalent}
+\newcommand{\ifo}{if and only if}
+\newcommand{\ms}{metric space}
+\newcommand{\cms}{compact metric space}
+\newcommand{\cfn}{continuous function}
+
+\newcommand{\wrt}{with respect to}
+
+\title{Math 413 [513] (Phillips) Solutions to Homework 4}
+\date{22 October 2001}
+
+\begin{document}
+
+% \setcounter{section}{-1}
+
+\maketitle
+
+Generally, a ``solution'' is something that would be acceptable
+if turned in in the form presented here, although the solutions
+given are often close to minimal in this respect.
+A ``solution (sketch)'' is too sketchy to be considered a
+complete solution if turned in;
+varying amounts of detail would need to be filled in.
+
+\vspace{3ex}
+
+\noindent
+{\textbf{Problem 3.1:}}
+Prove that if $(s_n)_{n \in \N}$ converges,
+then $( |s_n| )_{n \in \N}$ converges.
+Is the converse true?
+
+\vspace{1ex}
+
+\begin{proof}[Solution (sketch)]
+Use the inequality
+$\left| \rule{0em}{2ex} |s_n| - |s| \right| \le |s_n - s|$ and
+the definition of the limit.
+The converse is false.
+Take $s_n = (-1)^n$ for $n \in \N$.
+(This requires proof, of course.)
+\end{proof}
+
+\vspace{2ex}
+
+\noindent
+{\textbf{Problem 3.2:}}
+Calculate $\lim_{n \to \I} \left( \sqrt{n^2+1} - n \right)$.
+
+\vspace{1ex}
+
+\begin{proof}[Solution (sketch)]
+\[
+\sqrt{n^2 + 1} - n = \frac{n}{\sqrt{n^2 + 1} + n}
+    = \frac{1}{\sqrt{1 + \frac{1}{n^2} } + 1} \to \frac{1}{2}.
+\]
+(Of course, the last step requires proof.
+You will need to show that if $(y_n)_{n \in \N}$
+is a sequence in $[0, \I)$
+and $y_n \to 1$,
+then $\sqrt{y_n} \to 1$.)
+\end{proof}
+
+\vspace{2ex}
+
+\noindent
+{\textbf{Problem 3.3:}}
+Let $s_1 = \sqrt{2}$, and recursively define
+\[
+s_{n + 1} = \sqrt{2 + \sqrt{s_n}}
+\]
+for $n \in \N$.
+Prove that $(s_n)_{n \in \N}$ converges,
+and that $s_n < 2$ for all $n \in \N$.
+
+\vspace{1ex}
+
+\begin{proof}[Solution]
+We know from earlier work that $x \mapsto \sqrt{x}$
+is strictly increasing on $[0, \I)$,
+and we use this fact without comment below.
+
+By induction, it is immediate that $s_n > 0$ for all $n$, so that
+$s_{n + 1}$ is always defined.
+
+Next, we show by induction that $s_n < 2$ for all $n \in \N$.
+This is clear for $n = 1$.
+The computation for the induction step is
+\[
+s_{n + 1}
+ = \sqrt{2 + \sqrt{s_n}}
+ \leq \sqrt{2 + \sqrt{2}}
+ < \sqrt{2 + 2}
+ = 2.
+\]
+We have proved that $s_n < 2$ for all $n \in \N$.
+
+We now claim that $(s_n)_{n \in \N}$ is strictly increasing.
+We prove by induction on $n \in \N$ that
+$s_{n+1} - s_n \geq 0$.
+The base case is
+\[
+s_2
+ = \sqrt{2 + \sqrt{s_1}}
+ = \sqrt{2 + \sqrt{\sqrt{2}}}
+ > \sqrt{2}
+ = s_1.
+\]
+For the induction step,
+let $n \in \N$ satisfy $n \geq 2$,
+and assume $s_{n} - s_{n - 1} > 0$.
+
+Then,
+using the induction hypothesis at the last step
+to see that $\sqrt{s_n} - \sqrt{s_{n - 1}} > 0$,
+%
+\begin{align*}
+s_{n+1} - s_n
+& = \sqrt{2 + \sqrt{s_n}} - \sqrt{2 + \sqrt{s_{n - 1}}}
+\\
+& = \left( \sqrt{2 + \sqrt{s_n}} - \sqrt{2 + \sqrt{s_{n - 1}}} \right)
+    \left( \frac{\sqrt{2 + \sqrt{s_n}} + \sqrt{2 + \sqrt{s_{n - 1}}}}{
+         \sqrt{2 + \sqrt{s_n}} + \sqrt{2 + \sqrt{s_{n - 1}}}} \right)
+\\
+& = \frac{\sqrt{s_n} - \sqrt{s_{n - 1}}}{\sqrt{2 + \sqrt{s_n}} +
+                      \sqrt{2 + \sqrt{s_{n - 1}}}} > 0.
+\end{align*}
+%
+The induction is complete,
+and the claim is proved.
+
+Convergence of $(s_n)_{n \in \N}$
+now follows from Theorem~3.14
+of Rudin's book
+(bounded monotone sequences in~$\R$ converge).
+\end{proof}
+
+\vspace{2ex}
+
+\noindent
+{\textbf{Problem 3.4:}}
+Let $s_1 = 0$, and recursively define
+\[
+s_{n + 1} = \left\{ \begin{array}{ll}
+  {\textstyle{\frac{1}{2}}} + s_n & \hspace{3em} \mbox{$n$ is even} \\
+  {\textstyle{\frac{1}{2}}} s_n & \hspace{3em} \mbox{$n$ is odd}
+                                              \end{array} \right..   % }
+\]
+for $n \in \N$.
+Find $\limsup_{n \to \I} s_n$ and $\liminf_{n \to \I} s_n$.
+
+\vspace{1ex}
+
+\begin{proof}[Solution (sketch)]
+Use induction to show that
+\[
+s_{2 m} = \frac{2^{m - 1} - 1}{2^m} \andeqn
+s_{2m + 1} = \frac{2^m - 1}{2^m}.
+\]
+It follows that
+\[
+\limsup_{n \to \I} s_n = 1 \andeqn
+ \liminf_{n \to \I} s_n = {\textstyle{\frac{1}{2}}}.
+\]
+This completes the sketch.
+\end{proof}
+
+\vspace{2ex}
+
+\noindent
+{\textbf{Problem~3.5:}}
+Let $(a_n)_{n \in \N}$ and $(b_n)_{n \in \N}$ be sequences in $\R$.
+Prove that
+\[
+\limsup_{n \to \I} (a_n + b_n)
+   \leq \limsup_{n \to \I} a_n + \limsup_{n \to \I} b_n,
+\]
+provided that the right hand side is defined, that is, not of the
+form $\I - \I$ or $- \I + \I$.
+
+\vspace{1ex}
+
+Four solutions are presented or sketched.
+The first is what I presume to be the solution Rudin intended.
+The second is a variation of the first, which minimizes the
+amount of work that must be done in different cases.
+The third shows what must be done if one wants to work directly
+from Rudin's definition.
+The fourth is the ``traditional'' proof of the result, and proceeds
+via the traditional definition.
+
+\vspace{1ex}
+
+\begin{proof}[Solution~1 (sketch)]
+We give a complete solution for the case
+\[
+\limsup_{n \to \I} a_n \in (-\I, \I)
+ \A \limsup_{n \to \I} b_n \in (-\I, \I).
+\]
+One needs to consider several other cases,
+but the basic method is the same.
+
+Define
+\[
+a = \limsup_{n \to \I} a_n \A b = \limsup_{n \to \I} b_n.
+\]
+Let $c > a + b$.
+We show that $c$ is not a subsequential limit
+of $(a_n + b_n)_{n \in \N}$.
+
+Let $\ep = \frac{1}{3} (c - a - b) > 0$.
+Use Theorem~3.17~(b) of Rudin to choose $N_1 \in \N$ such that
+$n \geq N_1$ implies $a_n < a + \ep$, and also to
+choose $N_2 \in \N$ such that $n \geq N_2$ implies $b_n < b + \ep$.
+For $n \geq \max (N_1, N_2)$, we then have
+$a_n + b_n < a + b + 2 \ep$.
+It follows that every subsequential limit $l$ of
+$(a_n + b_n)_{n \in \N}$ satisfies $l \leq a + b + 2 \ep$.
+Since $c = a + b + 3 \ep > a + b + 2 \ep$, it follows that
+$c$ is not a subsequential limit of $(a_n + b_n)_{n \in \N}$.
+
+We conclude that $a + b$ is an upper bound for the set of
+subsequential limits of $(a_n + b_n)_{n \in \N}$.
+Therefore $\limsup_{n \to \I} (a_n + b_n) \leq a + b$.
+\end{proof}
+
+\vspace{1ex}
+
+\begin{proof}[Solution~2]
+This solution is a variation of Solution~1, designed to handle
+all cases at once.
+(You will see, though, that the case breakdown can't be avoided
+entirely.)
+
+As in  Solution~1, define
+\[
+a = \limsup_{n \to \I} a_n \A b = \limsup_{n \to \I} b_n,
+\]
+and let $c > a + b$.
+We show that $c$ is not a subsequential limit
+of $(a_n + b_n)_{n \in \N}$.
+
+We first claim that there are $r, \, s, \, t \in \R$ such that
+\[
+a < r, \qquad b < s, \qquad t > 0, \A r + s + t \leq c.
+\]
+
+We prove the claim.
+If $a = \I$ or $b = \I$, the claim is vacuous,
+since no such $c$ can exist.
+Next, suppose $a$ and $b$ are finite.
+If $c = \I$, then
+\[
+r = a + 1, \qquad s = b + 1, \A t = 1
+\]
+will do.
+Otherwise, let $\ep = \frac{1}{3} (c - a - b) > 0$, and take
+\[
+r = a + \ep, \qquad s = b + \ep, \A t = \ep.
+\]
+Finally, suppose at least one of $a$ and $b$ is $-\I$,
+but neither is $\I$.
+Exchanging the sequences if necessary, assume that $a = - \I$.
+Choose any $s > b$, choose any $t > 0$, and set $r = c - s - t$,
+which is certainly greater than $- \I$.
+The claim is proved.
+
+Having $r$, $s$, and $t$,
+use Theorem~3.17~(b) of Rudin to choose $N_1 \in \N$ such that
+$n \geq N_1$ implies $a_n < r$, and also to
+choose $N_2 \in \N$ such that $n \geq N_2$ implies $b_n < s$.
+For $n \geq \max (N_1, N_2)$, we then have
+$a_n + b_n < r + s$.
+It follows that every subsequential limit $l$ of
+$(a_n + b_n)_{n \in \N}$ satisfies $l \leq r + s$.
+Since $c = r + s + t > r + s$, it follows that
+$c$ is not a subsequential limit of $(a_n + b_n)_{n \in \N}$.
+
+We conclude that $a + b$ is an upper bound for the set of
+subsequential limits of $(a_n + b_n)_{n \in \N}$.
+Therefore $\limsup_{n \to \I} (a_n + b_n) \leq a + b$.
+\end{proof}
+
+\begin{proof}[Solution~3 (sketch)]
+We only consider the case that both
+$a = \limsup_{n \to \I} a_n$
+and $b = \limsup_{n \to \I} b_n$ are finite.
+Let $s = \limsup_{n \to \I} (a_n + b_n)_{n \in \N}$.
+Then there is a subsequence $(a_{k (n)} + b_{k (n)})_{n \in \N}$
+of $(a_{n} + b_{n})_{n \in \N}$ which converges to $s$.
+
+We claim that $(a_{k (n)})_{n \in \N}$ is bounded.
+To prove the claim,
+observe that this sequence is bounded above
+because $\limsup_{n \to \I} a_n$ is finite.
+It is bounded below
+because $(a_{k (n)} + b_{k (n)})_{n \in \N}$ is convergent,
+hence bounded,
+and $(b_{k (n)})_{n \in \N}$ is bounded above
+(since $\limsup_{n \to \I} b_n$ is finite).
+The claim is proved.
+
+By the claim, there is a subsequence $(a_{l (n)})_{n \in \N}$
+of $(a_{k (n)})_{n \in \N}$ which converges.
+(That is, there is a strictly increasing function
+$n \to r (n)$ such that
+the sequence $(a_{k \circ r (n)})_{n \in \N}$ converges, and we let
+$l = k \circ r  \colon \N \to \N$.
+If we used traditional subsequence notation, we would have
+the subsequence $j \mapsto a_{n_{k_{j}}}$ at this point.)
+Let $c = \lim_{n \to \I} a_{l (n)}$.
+By similar reasoning to that given above,
+the sequence $(b_{l (n)})_{n \in \N}$
+is bounded.
+Therefore it has a convergent subsequence,
+say $(b_{m (n)})_{n \in \N}$.
+(With traditional subsequence notation, we would now have
+the subsequence $i \mapsto a_{n_{k_{j_i}}}$.
+You can see why I don't like traditional notation.)
+Let $d = \lim_{n \to \I} b_{m (n)}$.
+Since $(a_{m (n)})_{n \in \N}$
+is a subsequence of $(a_{l (n)})_{n \in \N}$,
+we still have $\lim_{n \to \I} a_{m (n)} = c$.
+So $\lim_{n \to \I} ( a_{m (n)} + b_{m (n)} ) = c + d$.
+But also $(a_{m (n)} + b_{m (n)})_{n \in \N}$ is a subsequence of
+$(a_{k (n)} + b_{k (n)})_{n \in \N}$, and so converges to $s$.
+Therefore $s = c + d$.
+We have $c \leq a$ and $d \leq b$ by the definition of
+$\limsup_{n \to \I} a_n$ and $\limsup_{n \to \I} b_n$,
+giving the result.
+\end{proof}
+
+\begin{proof}[Solution~4 (sketch)]
+First prove that
+\[
+\limsup_{n \to \I} x_n = \lim_{n \to \I} \sup_{k \geq n} x_k.
+\]
+(We will probably prove this result in class; otherwise, see
+Problem~A in Homework~6.
+This formula is closer to the usual definition of
+$\limsup_{n \to \I} x_n$, which is
+\[
+\limsup_{n \to \I} x_n = \inf_{n \in \N} \sup_{k \geq n} x_k,
+\]
+using a limit instead of an infimum.)
+
+Then prove that
+\[
+\sup_{k \geq n} (a_k + b_k)
+ \leq \sup_{k \geq n} a_k + \sup_{k \geq n} b_k,
+\]
+provided that the right hand side is defined.
+(For example, if both terms on the right are finite, then the right hand
+side is clearly an upper bound for $\{ a_k + b_k \colon k \geq n \}$.)
+Now take limits to get the result.
+\end{proof}
+
+\vspace{1ex}
+
+\noindent
+{\emph{Remark:}}
+It is quite possible to have
+\[
+\limsup_{n \to \I} (a_n + b_n)
+   < \limsup_{n \to \I} a_n + \limsup_{n \to \I} b_n.
+\]
+
+\vspace{2ex}
+
+\noindent
+{\textbf{Problem 3.6:}}
+Investigate the convergence or divergence of the following series.
+
+(Note: I have supplied lower limits of summation, which I have chosen
+for maximum convenience.
+Of course, convergence is independent of the lower limit, provided none
+of the individual terms is infinite.)
+
+(a)
+\[
+\sum_{n = 0}^{\I} \left( \sqrt{n + 1} - \sqrt{n} \right).
+\]
+
+\begin{proof}[Solution]
+The $n$-th partial sum is
+\[
+\left( \sqrt{n + 1} - \sqrt{n} \right)
+  + \left( \sqrt{n} - \sqrt{n-1} \right) + \cdots
+  + \left( \sqrt{1} - \sqrt{0} \right) = \sqrt{n + 1}.
+\]
+We have $\limi{n} \sqrt{n} = \I$, so $\limi{n} \sqrt{n + 1} = \I$.
+Therefore the series diverges.
+\end{proof}
+
+
+\noindent
+{\emph{Remark:}}
+This sort of series is known as a telescoping series.
+The more interesting cases of telescoping series
+are the ones that converge.
+
+\begin{proof}[Alternate solution]
+We calculate:
+\begin{align*}
+\sqrt{n + 1} - \sqrt{n}
+  & = \left( \sqrt{n + 1} - \sqrt{n} \right) \cdot
+         \left( \frac{\sqrt{n + 1}
+               + \sqrt{n}}{\sqrt{n + 1} + \sqrt{n}} \right)
+\\
+  & = \frac{1}{\sqrt{n + 1} + \sqrt{n}}
+    \geq \frac{1}{\sqrt{n + 1} + \sqrt{n + 1}}
+     = \frac{1}{2 \sqrt{n + 1}}.
+\end{align*}
+Now $\sum_{n = 1}^{\I} \frac{1}{\sqrt{n}}$ diverges
+by Theorem~3.28 of Rudin's book.
+Therefore $\sum_{n = 1}^{\I} \frac{1}{2 \sqrt{n}}$ diverges, and hence
+so does $\sum_{n = 0}^{\I} \frac{1}{2 \sqrt{n + 1}}$.
+So the Comparison Test implies that
+\[
+\sum_{n = 0}^{\I} \left( \sqrt{n + 1} - \sqrt{n} \right)
+\]
+diverges.
+\end{proof}
+
+
+(b) 
+\[
+\sum_{n = 1}^{\I} \frac{\sqrt{n + 1} - \sqrt{n}}{n}.
+\]
+
+\begin{proof}[Solution]
+For $n \in \N$ we have
+\[
+0 \leq \frac{\sqrt{n + 1} - \sqrt{n}}{n}
+  = \frac{1}{n \left( \sqrt{n + 1} + \sqrt{n} \right)}
+   \leq \frac{1}{n^{3/2}}.
+\]
+Since $\sum_{n = 1}^{\I} 1 / n^{3/2}$ converges
+(by Theorem~3.28 of Rudin's book),
+our series converges by the Comparison Test.
+\end{proof}
+
+
+(c) 
+\[
+\sum_{n = 1}^{\I} \left( \sqrt[n]{n} - 1 \right)^n.
+\]
+
+\begin{proof}[Solution]
+We use the Root Test (Theorem~3.33 of Rudin).
+With $a_n = \left( \sqrt[n]{n} - 1 \right)^n$, we have
+$\sqrt[n]{a_n} = \sqrt[n]{n} - 1$.
+Theorem~3.20(c) of Rudin implies that $\limi{n} \sqrt[n]{n} = 1$.
+Therefore $\limi{n} \sqrt[n]{a_n} = 0$.
+Since $\limi{n} \sqrt[n]{a_n} < 1$, convergence follows.
+\end{proof}
+
+\begin{proof}[Alternate solution (sketch)]
+Let $x_n = \sqrt[n]{n} - 1$,
+so that
+\[
+\left( \sqrt[n]{n} - 1 \right)^n = x_n^n  \A  (1 + x_n)^n = n.
+\]
+The binomial formula implies that 
+\[
+n = (1 + x_n)^n = 1 + n x_n + \frac{n (n - 1)}{2} \cdot x_n^2 + \cdots
+   \geq \frac{n (n - 1)}{2} \cdot x_n^2,
+\]
+from which it follows that
+\[
+0 \leq x_n \leq \sqrt{ \frac{2}{n - 1}}
+\]
+for $n \geq 2$.
+Hence, for $n \geq 4$,
+\[
+\left( \sqrt[n]{n} - 1 \right)^n
+  = x_n^n \leq \left( \frac{2}{n - 1} \right)^{n/2}
+   \leq \left( \left( {\textstyle{\frac{2}{3} }} \right)^{1/2} \right)^n.
+\]
+Since $\left( {\textstyle{\frac{2}{3} }} \right)^{1/2} < 1$,
+the series converges by the Comparison Test.
+\end{proof}
+
+
+(d) 
+\[
+\sum_{n = 0}^{\I} \frac{1}{1 + z^n},
+\]
+for $z \in \C$ arbitrary.
+
+\begin{proof}[Solution]
+We show that the series converges \ifo\  $| z | > 1$.
+
+If there are an
+odd integer $k$ and  an even integer $l$
+such that $z = \exp (2 \pi i k / l)$,
+then $z^n = -1$ for infinitely
+many values of $n$, so that infinitely many of the terms of the
+series are undefined.
+Convergence is therefore clearly impossible.
+
+In all other cases with $|z| \leq 1$, we have
+\[
+|1 + z^n| \leq 1 + |z^n| \leq 1 + 1 = 2,
+\]
+which implies that
+\[
+\left| \frac{1}{1 + z^n} \right| \geq \frac{1}{2}.
+\]
+The terms thus don't converge to $0$,
+and again the series diverges.
+
+Now let $|z| >1$.
+Then $|1 + z^n| \geq | z^n | - 1 = |z|^n - 1$.
+Choose $N$ such that if $n \geq N$ then $| z |^n > 2$.
+For such $n$, we have
+\[
+\frac{| z |^n}{2} > 1,
+\]
+whence
+\[
+|1 + z^n| \geq |z|^n - 1 = \frac{| z |^n}{2}
+   + \left( \frac{| z |^n}{2} - 1 \right) > \frac{| z |^n}{2}.
+\]
+So
+\[
+\left| \frac{1}{1 + z^n} \right| \leq 2 \cdot \frac{1}{| z |^n}
+\]
+for all $n \geq N$.
+Since $| z | > 1$, the Comparison Test implies that
+\[
+\sum_{n = 0}^{\I} \frac{1}{1 + z^n}
+\]
+converges.
+\end{proof}
+
+\vspace{2ex}
+\noindent
+{\textbf{Problem 3.10:}}
+Suppose the coefficients of the power series
+$\sum_{n = 0}^{\I} a_n z^n$ are integers,
+infinitely many of which are nonzero.
+Prove that the radius of convergence is at most $1$.
+
+\begin{proof}[Solution~1]
+For infinitely many $n$, the numbers $a_n$ are nonzero integers,
+and therefore satisfy $| a_n | \geq 1$.
+So, if $|z| \geq 1$, then infinitely many of the terms $a_n z^n$
+have absolute value $|a_n z^n| \geq | a_n | \geq 1$,
+and the terms of the series
+$\sum_{n = 0}^{\I} a_n z^n$ don't approach zero.
+This shows that $\sum_{n = 0}^{\I} a_n z^n$ diverges for $|z| \geq 1$,
+and therefore that its radius of convergence is at most $1$.
+\end{proof}
+
+\begin{proof}[Solution~2 (sketch)]
+There is a subsequence $(a_{k (n)})_{n \in \N}$
+of $(a_n)_{n \in \N}$ such that
+$| a_{k (n)} | \geq 1$ for all $n$.
+So $\sqrt[k (n)]{| a_{k (n)} |} \geq 1$ for all $n$,
+whence $\limsup_{n \to \I} \sqrt[n]{| a_n |} \geq 1$.
+\end{proof}
+
+
+\noindent
+{\emph{Remarks:}}
+(1) It is quite possible that infinitely many of the $a_n$ are zero,
+so that $\liminf_{n \to \I} \sqrt[n]{| a_n |}$ could be zero.
+For example, we could have $a_n = 0$ for all odd $n$.
+
+(2) In Solution~2, the expression $\sqrt[n]{| a_{k (n)} |}$, and
+its possible limit as $n \to \I$, have no relation to the
+radius of convergence.
+
+\vspace{2ex}
+
+\noindent
+{\textbf{Problem 3.21:}}
+Prove the following analog of Theorem~3.10(b):
+If
+\[
+E_1 \supset E_2 \supset E_3 \supset \cdots
+\]
+are closed bounded nonempty subsets of a complete metric space $X$,
+and if
+\[
+\limi{n} {\operatorname{diam}} (E_n) = 0,
+\]
+then $\bigcap_{n = 1}^{\I} E_n$ consists of exactly one point.
+
+\vspace{1ex}
+
+\begin{proof}[Solution (sketch)]
+It is clear that $\bigcap_{n = 1}^{\I} E_n$ can contain no more
+than one point, so we need to prove that
+$\bigcap_{n = 1}^{\I} E_n \neq \E$.
+
+For each $n$, choose some $x_n \in E_n$.
+Then, for each $n$, we have
+\[
+\bigl\{ x_n, \, x_{n + 1}, \, \dots \bigr\} \S E_n,
+\]
+whence
+\[
+{\operatorname{diam}}
+         \bigl( \bigl\{ x_n, \, x_{n + 1}, \, \dots \bigr\} \bigr)
+      \leq {\operatorname{diam}} (E_n).
+\]
+Therefore $(x_n)_{n \in \N}$ is a Cauchy sequence.
+Since $X$ is complete, $x = \limi{n} x_n$ exists in $X$.
+For every $n \in \N$,
+the set $E_n$ is closed, so $x \in E_n$.
+Thus $x \in \bigcap_{n = 1}^{\I} E_n$.
+\end{proof}
+
+\vspace{2ex}
+
+\noindent
+{\textbf{Problem 3.22:}}
+Prove the Baire Category Theorem:
+If $X$ is a complete metric space,
+and if $(U_n)_{n \in \N}$ is a sequence
+of dense open subsets of $X$, then $\bigcap_{n = 1}^{\I} U_n$ is dense
+in $X$.
+
+\vspace{1ex}
+
+In this formulation, the statement is true even if $X = \E$.
+
+\begin{proof}[Solution (sketch)]
+Let $x \in X$ and let $\ep > 0$.
+We recursively construct points $x_n \in X$ and numbers $\ep_n > 0$
+such that
+\[
+d (x, x_1) < \frac{\ep}{3}, \qquad \ep_1 < \frac{\ep}{3},
+\qquad \ep_n \to 0,
+\]
+and
+\[
+\O{ N_{\ep_{n + 1}} (x_{n + 1} )} \S U_{n + 1} \cap \O{ N_{\ep_n} (x_n )}
+\]
+for all $n \in \N$.
+Using ${\operatorname{diam}}
+ \bigl( \O{ N_{\ep_n} (x_n )} \bigr) \leq 2 \ep_n$
+and Problem~3.21, it will follow that
+\[
+\bigcap_{n = 1}^{\I} \O{ N_{\ep_n} (x_n ) } \neq \E.
+\]
+One easily checks that
+\[
+\bigcap_{n = 1}^{\I} \O{ N_{\ep_n} (x_n ) }
+   \S N_{\ep} (x) \cap \bigcap_{n = 1}^{\I} U_n.
+\]
+Thus, we will have shown that $\bigcap_{n = 1}^{\I} U_n$ contains points
+arbitrarily close to $x$, proving density.
+
+Since $U_1$ is dense in $X$, there is $x_1 \in U_1$ such that
+$d (x, x_1) < \frac{\ep}{3}$.
+Choose $\ep_1 > 0$ so small that
+\[
+\ep_1 < 1,  \qquad \ep_1 < \frac{\ep}{3},
+ \andeqn N_{2 \ep_1} (x_1 ) \S U_1.
+\]
+Then also
+\[
+\O{ N_{\ep_1} (x_1 )} \S U_1.
+\]
+Given $\ep_n$ and $x_n$,
+use the density of $U_{n + 1}$ in $X$ to choose
+\[
+x_{n + 1} \in U_{n + 1} \cap N_{\ep_n / 2} (x_n ).
+\]
+Choose $\ep_{n + 1} > 0$ so small that
+\[
+\ep_{n + 1} < \frac{1}{n + 1},
+ \qquad \ep_{n + 1} < \frac{\ep_n}{2},
+ \andeqn N_{2 \ep_{n + 1}} (x_{n + 1} ) \S U_{n + 1}.
+\]
+Then also
+\[
+\O{ N_{\ep_{n + 1}} (x_{n + 1} )} \S U_{n + 1}.
+\]
+This gives all the required properties.
+(We have $\ep_n \to 0$ since $\ep_n < \frac{1}{n}$ for all $n$.)
+\end{proof}
+
+We don't really need to use Problem~3.21 here.
+If we always require $\ep_n < 2^{-n}$ in the argument above, we will
+get $d (x_n, \, x_{n + 1}) < 2^{-n - 1}$ for all $n$.
+This inequality implies that $(x_n)_{n \in \N}$ is a Cauchy sequence.
+
+\end{document}

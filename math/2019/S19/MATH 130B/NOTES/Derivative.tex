@@ -1,0 +1,434 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage{commath}
+\usepackage{lipsum}
+\usepackage{colonequals}
+\usepackage{addfont}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+
+\subsectionfont{\itshape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\bf{\textit{\oldproofname}}}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\newtheorem*{discussion}{Discussion}
+
+
+
+
+
+\begin{document}
+
+\title{Developing Differentiability}
+\author{Quin Darcy}
+\date{09 March 2019\\\small{(Last Edited : 09 March 2019)}}
+\affil{\small{California State University Sacramento}}
+\maketitle
+
+\section{Preliminaries}
+
+Before diving into how the derivative is defined, let us first look at some other notions that will prove to be important considerations later on. We want to make sure we have a masterful understanding of continuity and discontinuity of functions. Also, we will prove all of the necessary and relevant theorems. Let's go!
+
+\subsection{Perfect Sets}
+
+\begin{definition}
+    A set $P\subseteq\mathbb{R}$ is \textbf{perfect} if it is closed and contains no isolated points. 
+\end{definition}
+
+An obvious class of perfect sets would be singleton sets, but we will consider more interesting examples of perfect sets down below.
+
+\begin{example}
+    (\textbf{Cantor Set}) To see why this set is perfect, let us remember how to construct the Cantor Set. Let $C_0$ be the closed interval $[0,1]$, and define $C_1$ to be the set that results when the open middle third is removed; that is, 
+    
+    \begin{equation*}
+        C_1=C_0\backslash\bigg(\frac{1}{3},\frac{2}{3}\bigg)=\bigg[0,\frac{1}{3}\bigg]\cup\bigg[\frac{2}{3},1\bigg].
+    \end{equation*}
+    
+    \noindent Now construct $C_2$ in a similar way by removing the open middle thirds from each of the two components of $C_1$:
+    
+        \begin{equation*}
+            \bigg(\bigg[0,\frac{1}{9}\bigg]\cup\bigg[\frac{2}{9},\frac{1}{3}\bigg]\bigg)\cup\bigg(\bigg[\frac{2}{3}, \frac{7}{9}\bigg]\cup\bigg[\frac{8}{9},1\bigg]\bigg)
+        \end{equation*}
+        
+    \noindent Continuing this process inductively for $n=0,1,2,\dots$, we obtain a set $C_n$ of consisting of $2^n$ closed intervals, where each interval has length $1/3^n$. Finally, the \textit{Cantor set} is defined as
+    
+    \begin{equation*}
+        C=\bigcap_{n=0}^{\infty}C_n.
+    \end{equation*}
+    
+    \newpage
+    
+    \noindent To see if this set is perfect, we must first show that it is closed. Recall that one way to show that a set is closed is to show that its complement is open. Using this fact and letting $C_n^c$ denote the complement of $C_n$ (which is the union of $3^{n-1}$ open sets, for $n\geq 1$), we see that from De Morgan's Laws, we have
+    
+    \begin{equation*}
+        C=\bigcap_{n=0}^{\infty}C_n=\bigcap_{n=0}^{\infty}(C_n^c)^c=\bigg(\bigcup_{n=0}^{\infty}C_n^c\bigg)^c.
+    \end{equation*}
+    
+    \noindent Thus, since for each $C_n$, we know that $C_n^c$ is open and the infinite union of open sets is open. Therefore, its complement must be closed.\par 
+    Okay, so now that we have shown that the set is closed, we must show that is contains no isolated points. Recall, a point $a\in A$ is an \textit{isolated point} of $A$ if it is not a limit point of $A$. Hmm, okay ... so then how does one show that a set does not contain any isolated points? Well, one way is to show that every point in the set is a limit point. Another way is to assume the set does contain a limit point and look for a contradiction. The former might be more interesting so we will try that one.
+    
+\end{example}
+
+\begin{discussion}
+    Let us discuss a game plan for the upcoming proof. So we want to show that every point $x\in C$ is a limit point of $C$. So let $x\in C$ be arbitrary, then we must construct a sequence $(x_n)$ of points from $C$, different from $x$, that converges to $x$. With some thought, it should be clear that $C$ at least contains the endpoints of each closed interval that make up each $C_n$. The reason here is that if we consider the number 0, then would it make any sense for it not to be in $C$? Or another way to word this is whether or not it ever gets removed in any of the $C_n$'s? Certainly not! For 0 is not in the middle third of any interval contained in $[0,1]$. In fact, every $\varepsilon$-neighborhood around 0 would necessarily contain points not in $C$. The same argument can be applied to every end point of every closed set in every $C_n$.\par
+    With these endpoints in mind, lets see if we can construct a sequence. Let $x\in C_1$. Then 
+    
+    \begin{equation*}
+        x\in\bigg[0,\frac{1}{3}\bigg]\cup\bigg[\frac{2}{3},1\bigg].
+    \end{equation*}
+    
+    Now let us ask if there exists $x_1\in C\cap C_1$ such that $x_1\neq x$. Well the since $C\cap C_1$ at least contains its endpoints, in which there is more than one, then yes, there is such an $x_1$. Now recall that the length of $C_1$ is equal to the sum of the lengths of each of its intervals. Thus, since $[0,1/3]$ has length $1/3$ and $[2/3,1]$ has length $1/3$, then the length of $C_1$ is $2/3$. The reason why we bring this up is because we are trying to construct a sequence which converges to $x$, and so we need to keep in mind that the distance between each $x_i$ in our sequence and the point $x$ must be smaller than some chosen $\varepsilon$.\par 
+    From the above statement, we can see that if $x\in C_1$, then we can find $x_1\in C\cap C_1$ such that $\abs{x_1-x}\leq 1/3$. To convince you of this, suppose $x=2/15$. Then what $x_1\in C\cap C_1$ such that $\abs{x_1-2/15}\leq 1/3$? Well $x_1=0$ would certainly work. Okay, okay let's try another. Suppose $x=270/273$. This would mean $x$ was an element of the interval in the right. So then is there some $x_1\in C\cap C_1$ such that $\abs{x_1-270/273}\leq 1/3$? Well heck yeah, just let $x_1=1$. Then $1-270/273\approx0.011\leq 1/3$.\par  Alright, still not convinced? Let's let $x$ be equal to a point furthest away from the endpoints, namely the center of either $[0,1/3]$ or $[2/3,1]$. The center of the first is $1/6$. Okay, then let $x=1/6$. Then just let $x_1=0$ again. This works since $\abs{x_1-x}=\abs{0-1/6}=1/6\leq1/3$. Alright alright, what's the big idea bob? Well, let's see if we can do the same thing for $C_2$.\par 
+    Let $x\in C_2$, then we know two things
+    
+    \begin{equation*}
+        x\in\bigg(\bigg[0,\frac{1}{9}\bigg]\cup\bigg[\frac{2}{9},\frac{1}{3}\bigg]\bigg)\cup\bigg(\bigg[\frac{2}{3}, \frac{7}{9}\bigg]\cup\bigg[\frac{8}{9},1\bigg]\bigg)
+    \end{equation*}
+    
+    \noindent and that 
+    
+    \begin{equation*}
+        0,\frac{1}{9},\frac{2}{9},\frac{1}{3},\frac{2}{3},\frac{7}{9},\frac{8}{9},1\in C\cap C_2.
+    \end{equation*}
+    
+    \noindent So then since $x\in C_2$, can we find an $x_2\in C\cap C_2$ such that $x_2\neq x$ and $\abs{x_2-x}\leq 1/3^2$? Well sure, the furthest that $x$ can be from any of the endpoints is in the center of any of those intervals. So, for instance, if $x=13/18$, which would put it in the middle of the third interval, then simply letting $x_2=2/3$ or $x_2=7/9$ would work. This is because $\abs{2/3-13/18}=\abs{7/9-13/18}\approx 0.056\leq1/3^2$.\par 
+    The intuition here is that if $x\in C_2$, then it is in one of the four intervals listed above. Thus, we simply choose $x_2$ to be one of the endpoints of that interval in which $\abs{x_2-x}\leq1/3^2$. This is always possible since the furthest point from any of the endpoints is in the center of the interval, but we saw that if $x$ was in the center of any of these intervals, then just let $x_2$ be equal to either of the endpoints in the interval and we have that $\abs{x_2-x}\approx0.05\leq1/3^2$. So then is this true for all $C_n$?\par 
+    Let $x\in C_n$. Then $x$ is an element of one of the $2^n$ closed intervals in $C_n$. Okay, so then does there exist $x_n\in C\cap C_n$ such that $x_n\neq x$ and  that $\abs{x_n-x}\leq 1/3^n$? Well let's suppose $x\in[a,b]$ where $[a,b]$ is one of the closed intervals in $C_n$. We know that the length of $[a,b]$ is equal to $1/3^n$, as in $b-a=1/3^n$. If this isn't clear, prove it to yourself. But! anyways, since we are supposing that $x$ is in this interval, then simply let $x_n=a$ if $\abs{a-x}\leq 1/3^n$ or let $x_n=b$ if $\abs{b-x}\leq 1/3^n$. We are just about ready for our proof! \par 
+    To summarize, we have ``shown'' that if for all $n\in\mathbb{N}$, if $x\in C_n$, then there exists $x_n\in C\cap C_n$ such that $x_n\neq x$ and $\abs{x_n-x}\leq 1/3^n$. To understand how this will be the basis of our proof, consider the following. If $x\in C$, then $x\in C_1$ and $x\in C_2$ and $\cdots$ and $x\in C_n$ and $\cdots$, for all $n\in \mathbb{N}$. Alright, well we just showed that if $x$ is in anyone of these $C_i$, then we can find an $x_i\in C\cap C_i$ such that $x_i\neq x$ and $\abs{x_i-x}\leq 1/3^i$. So now comes the proof, well first let's define our sequence with a little more rigour and prove the intuitive notions used above.
+    
+\end{discussion}
+    
+\newpage
+    
+\begin{lemma}
+    For all $n\in\mathbb{N}$, let $E_n$ be the collection of the endpoints of each of the $2^n$ closed intervals in $C_n$, and let 
+        
+    \begin{equation*}
+        E=\bigcup_{n=1}^{\infty} E_n.
+    \end{equation*}
+        
+    \noindent Then $E\subseteq C$.
+\end{lemma}
+    
+\begin{proof}
+    Let $x\in E$. Then for some $k\in\mathbb{N}$, it follows that $x\in E_k$. Assume $x\notin C$. Then $x\in C^c$. This is equivalent to 
+        
+    \begin{equation*}
+        x\in\bigg(\bigcap_{n=1}^{\infty}C_n\bigg)^c=\bigcup_{n=1}^{\infty}C_n^c.
+    \end{equation*}
+        
+    \noindent Thus, there exists $k\in\mathbb{N}$ such that $x\in C_k^c$. However, since $x\in E_k$, then $x=\sup(C_k)$ or $x=\inf(C_k)$. In either case, since $C_k$ is closed, then $\sup(C_k)\in C_k$ and $\inf(C_k)\in C_k$. Thus, $x\in C_k$. Hence, $x\in C_k$ and $x\in C_k^c$. This is a contradiction. Therefore, if $x\in E$, then $x\in C$. 
+\end{proof}
+    
+\begin{lemma}
+    For all $n\in\mathbb{N}$, if $x\in C_n$, then there exists $x'\in C\cap C_n$ such that $x'\neq x$ and $\abs{x'-x}\leq 1/3^n$.
+\end{lemma}
+    
+\begin{proof}
+    Let $n\in\mathbb{N}$ and assume $x\in C_n$. Then for some $a,b\in\mathbb{R}$ such that $b-a=1/3^n$, $x\in[a,b]$. By Lemma 1.1, $a,b\in C$ and thus $a,b\in C\cap C_n$. Since for all $x'\in[a,b]$, we have  $\abs{x'-x}\leq 1/3^n$, then if $x=a$, let $x'=b$. If $x=b$, then let $x'=a$. Otherwise, let $x'$ be equal to $a$ or $b$. Then $x'\neq x$ and $\abs{x'-x}\leq 1/3^n$.
+\end{proof}
+    
+\begin{theorem}
+    The Cantor set is perfect.
+\end{theorem}
+    
+\begin{proof}
+    Since $C$ is equal to the complement of the union of open sets, which is open, then $C$ is closed. Let $x\in C$. Then $x\in \bigcap_{n=1}^{\infty}C_n$. By Lemma 1.2, we can define the following sequence $(x_n)$ of terms from $C$. For each $n\in\mathbb{N}$, let $x_n\in C$ such that $x_n\neq x$ and $\abs{x_n-x}\leq 1/3^n$.\par
+    Let $\varepsilon>0$ and let $N\in\mathbb{N}$ such that $1/3^N<\varepsilon$. Then for all $n\geq N$, $x_n\neq x$, and  
+        
+    \begin{equation*}
+        \abs{x_n-x}\leq \frac{1}{3^n}\leq\frac{1}{3^N}<\varepsilon.
+    \end{equation*}
+        
+    \noindent Thus, $\lim_{n\rightarrow\infty}(x_n)=x$. Hence, if $x\in C$, then $x$ is a limit point of $C$. Thus, $C$ contains no isolated points. Therefore, $C$ is perfect.
+\end{proof}
+    
+\newpage
+    
+\noindent Before stating and proving the next theorem about perfect sets, we must prove another theorem about compact sets. To refresh ourselves about compact sets, consider the following definition.
+    
+\begin{definition}
+    (\textbf{Compactness}) A set $K\subseteq\mathbb{R}$ is \textbf{compact} if every sequence in $K$ has a subsequence that converges to a limit that is also in $K$.
+\end{definition}
+    
+\begin{theorem}
+    \normalfont{(\textbf{Nested Compact Set Property})} \textit{If}
+        
+    \begin{equation*}
+        K_1\supseteq K_2\supseteq K_3\supseteq K_4\supseteq\cdots 
+    \end{equation*}
+        
+    \noindent \textit{is a nested sequence of nonempty compact sets, then the intersection $\bigcap_{n=1}^{\infty} K_n$ is not empty.}
+\end{theorem}
+    
+\begin{proof}
+    For each $n\in\mathbb{N}$, pick a point $x_n\in K_n$. Since the compact sets are nested, it follows that the sequence $(x_n)$ is entirely contained in $K_1$. By Definition 1.2, $(x_n)$ has a convergent subsequence $(x_{n_k})$ whose limit is a point $x=\lim x_{n_k}$, that is an element of $K_1$.\par Moreover, $x$ is an element of \textit{every} $K_n$. The reason being is that for any $n_0\in\mathbb{N}$, the terms of the sequence $(x_n)$ are all contained in $K_{n_0}$ if $n\geq n_0$, since 
+        
+    \begin{equation*}
+        K_{n_0}\supseteq K_{n_1}\supseteq K_{n_2} \supseteq\cdots.
+    \end{equation*}
+        
+    \noindent Thus, by ignoring the finite number of terms for which $n_k<n_0$, then for all the remaining infinite terms of the subsequence $(x_{n_k})$ where $n_k\geq n_0$, all of these terms are contained in $K_{n_0}$. What follows is that the limit of the subsequence $x=\lim x_{n_k}$ is an element of $K_{n_0}$. Because $n_0$ was arbitrary, then $x\in\bigcap_{n=1}^{\infty} K_n$.  
+\end{proof}
+    
+\begin{theorem}
+    A nonempty perfect set is uncountable.
+\end{theorem}
+    
+\begin{proof}
+    If $P$ is perfect, then it must be infinite. Otherwise, if it were finite, then to each of the points $x$ in $P$ we would fail to be able to construct a sequence which get's \textit{arbitrarily} close to $x$. So then now let's assume, for contradiction, that $P$ is countable. We can then write
+        
+    \begin{equation*}
+        P=\{x_1,x_2,x_3,\dots\},
+    \end{equation*}
+        
+    \noindent where every element of $P$ appears in this list. \par 
+    Let $I_1\subseteq P$ be a closed interval that contains $x_1$ in its interior (i.e., $x_1$ is not an endpoint of $I_1$). Now, since $x_1\in I_1\subseteq P$, then we know it is not an isolated point. Thus, there exists some other $x_2\in P$ that is also in the interior of $I_1$. Construct a closed interval $I_2$, centered at $x_2$, so that $I_2\subseteq I_1$ and such that $x_1\notin I_2$. Explicitly, if $I_1=[a,b]$, let
+        
+    \begin{equation*}
+        \varepsilon=\min\{x_2-a,\quad b-x_2,\quad\abs{x_1-x_2}\}.
+    \end{equation*}
+        
+    \noindent Then the interval $I_2=\{x_2-\varepsilon/2,x_2+\varepsilon/2\}$ has the desired properties which can be seen in the diagram below
+        
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[>={Latex[width=50mm]} line width=0.5pt,-] (0, 0) -- (8, 0);
+            \draw[>={Bracket[width=9mm,line width=0.5pt,length=1.5mm]},<->] (0, 0) -- (8, 0);
+            \draw[>={Bracket[width=4mm,line width=0.5pt,length=1.5mm]},<->] (5, 0) -- (7, 0);
+            \draw[decorate, decoration={brace}, line width=1pt,  yshift=6.5ex]  (0,0) -- node[above=0.6ex] {$x_2-a$}  (6,0);
+            \draw[decorate, decoration={brace}, line width=1pt, yshift=6.5ex]  (6,0) -- node[above=0.4ex] {$b-x_2$}  (8,0);
+            \draw[decorate, decoration={brace, mirror}, line width=1pt, yshift=2ex]  (6,0) -- node[above=0.5ex] {$\abs{x_2-x_1}$}  (4,0);
+            \draw[decorate, decoration={brace, mirror}, line width=1pt, yshift=-5ex]  (5,0) -- node[below=0.5ex] {$\varepsilon/2$}  (6,0);
+            \draw[decorate, decoration={brace, mirror}, line width=1pt, yshift=-12ex]  (5,0) -- node[below=0.5ex] {$I_2$}  (7,0);
+            \draw[decorate, decoration={brace, mirror}, line width=1pt, yshift=-16ex]  (0,0) -- node[below=0.5ex] {$I_1$}  (8,0);
+            \draw[dotted] (5,-1.8)--(5,-0.2);
+            \draw[dotted] (7,-1.8)--(7,-0.2);
+            \draw[dotted] (0,-2.4)--(0,-0.8);
+            \draw[dotted] (8,-2.4)--(8,-0.8);
+            \draw[dotted] (0,0.5)--(0,1);
+            \draw[dotted] (6,0)--(6,1);
+            \draw[dotted] (8,0.5)--(8,1);
+            \fill[black] (4,0) circle (0.75mm) node[below=2mm] {$x_1$};
+            \fill[black] (6,0) circle (0.75mm) node[below=2mm] {$x_2$};
+            \fill[black] (0,0) node[below=5mm] {$a$};
+            \fill[black] (8,0) node[below=5mm] {$b$};
+        \end{tikzpicture}
+    \end{center}
+    
+    \noindent This same process can be continued. Since $x_2\in P$, it is not an isolated point. Thus, we can find a point $x_3\in P$ such that $x_3$ is in the interior of $I_2$ and $x_3\neq x_2$. Now, we construct $I_3$ centered around $x_3$ small enough that $x_2\notin I_3$ and $I_3\subseteq I_2$. Observe that $I_3\cap P\neq\varnothing$ because this intersection contains at least $x_3$.\par 
+    We can visualize $I_3$ as 
+    
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[>={Latex[width=50mm]} line width=0.5pt,-] (0, 0) -- (8, 0);
+            \draw[>={Bracket[width=9mm,line width=0.5pt,length=1.5mm]},<->] (0, 0) -- (8, 0);
+            \draw[>={Bracket[width=4mm,line width=0.5pt,length=1mm]},<->] (5, 0) -- (7, 0);
+            \draw[>={Bracket[width=2mm,line width=0.5pt,length=0.5mm]},<->] (5.2, 0) -- (5.8, 0);
+            \draw[decorate, decoration={brace, mirror}, line width=1pt, yshift=-6ex]  (5.2,0) -- node[below=0.5ex] {$I_3$}  (5.8,0);
+            \draw[decorate, decoration={brace, mirror}, line width=1pt, yshift=-10ex]  (5,0) -- node[below=0.5ex] {$I_2$}  (7,0);
+            \draw[decorate, decoration={brace, mirror}, line width=1pt, yshift=-14ex]  (0,0) -- node[below=0.5ex] {$I_1$}  (8,0);
+            \draw[dotted] (0,-2.1)--(0,-0.7);
+            \draw[dotted] (8,-2.1)--(8,-0.9);
+            \draw[dotted] (5,-1.4)--(5,-0.3);
+            \draw[dotted] (7,-1.4)--(7,-0.3);
+            \draw[dotted] (5.2,-0.9)--(5.2,-0.1);
+            \draw[dotted] (5.8,-0.9)--(5.8,-0.1);
+            \fill[black] (4,0) circle (0.40mm) node[below=2mm] {$x_1$};
+            \fill[black] (6,0) circle (0.40mm) node[below=2mm] {$x_2$};
+            \fill[black] (5.5,0) circle (0.40mm) node[below=2mm] {$x_3$};
+            \fill[black] (0,0) node[below=5mm] {$a$};
+            \fill[black] (8,0) node[below=5mm] {$b$};
+        \end{tikzpicture}
+    \end{center}
+    
+    \noindent If we carry out this construction inductively, the result is a sequence of closed intervals $I_n$ satisfying
+    
+    \begin{enumerate}[label=(\roman*)]
+        \item $I_{n+1}\subseteq I_n$,
+        \item $x_n\notin I_{n+1}$, and 
+        \item $I_n\cap P\neq\varnothing$.
+    \end{enumerate}
+    
+    \noindent To complete this proof, we let $K_n=I_n\cap P$. For each $n\in\mathbb{N}$, we have that $K_n$ is closed because it is the intersection of closed sets, and bounded because it is contained in the bounded set $I_n$. Hence, $K_n$ is compact. By construction, $K_n$ is not empty and $K_{n+1}\subseteq K_n$. Thus, by Theorem 1.4, we conclude that 
+    
+    \begin{equation*}
+        \bigcap_{n=1}^{\infty} K_n\neq\varnothing.
+    \end{equation*}
+    
+    \noindent But each $K_n$ is a subset of $P$, and the fact that $x_n\notin I_{n+1}$ leads to the conclusion that $\bigcap_{n=1}^{\infty}K_n=\varnothing$, which is the sought after contradiction.
+            
+\end{proof}
+
+\newpage
+
+\subsection{Connected Sets}
+
+Although the two intervals $(1,2)$ and $(2,5)$ have the limit point $x=2$ in common, there is still some space between them in the sense that no limit point of one of these intervals is actually contained in the other. Another way to phrase this is that the closure of $(1,2)$ (i.e., $[1,2]$), is disjoint from $(2,5)$, and the closure of $(2,5)$ does not intersect $(1,2)$. Notice that the same observation cannot be made about $(1,2]$ and $(2,5)$, even though these latter sets are disjoint.
+
+\begin{definition}
+    Given a set $A\subseteq\mathbb{R}$, let $L$ be the set of all limit points of $A$. The \textbf{closure} of $A$ is defined to be $\overline{A}=A\cup L$.
+\end{definition}
+
+\begin{definition}
+    Two nonempty sets $A,B\subseteq\mathbb{R}$ are \textbf{separated} if $\overline{A}\cap B$ and $A\cap\overline{B}$ are both empty. A set $E\subseteq\mathbb{R}$ is \textbf{disconnected} if it can be written as $E=A\cup B$, where $A$ and $B$ are nonempty separated sets.\par 
+    A set that is not disconnected is called a \textbf{connected} set.
+\end{definition}
+
+\begin{example}
+    Let's show that the set of rational numbers is disconnected. If we let 
+    
+    \begin{equation*}
+        A=\mathbb{Q}\cap(-\infty,\sqrt{2})\quad\text{ and }\quad B=\mathbb{Q}\cap(\sqrt{2},\infty),
+    \end{equation*}
+    
+    \noindent then we certainly have $\mathbb{Q}=A\cup B$. The fact that $A\subseteq(-\infty,\sqrt{2})$ implies that any limit point of $A$ will necessarily fall in $(-\infty, \sqrt{2}]$. Because this is disjoint from $B$, we get $\overline{A}\cap B=\varnothing$. We can similarly show that $A\cap\overline{B}=\varnothing$, which implies $A$ and $B$ are separated.
+\end{example}
+
+Essentially, a set $E$ is connected if, no matter how it is partitioned into two nonempty disjoint sets, it is always possible to show that at least one of the sets contains a limit point of the other.
+
+\begin{theorem}
+    A set $E\subseteq\mathbb{R}$ is connected if and only if, for all nonempty disjoint sets $A$ and $B$ satisfying $E=A\cup B$, there always exists a convergent sequence $(x_n)\rightarrow x$ with $(x_n)$ contained in one of $A$ or $B$, and $x$ an element of the other. 
+\end{theorem}
+
+\begin{proof}
+    Give it a shot, fella. $(\Rightarrow)$ Let $A,B\subseteq\mathbb{R}$ such that both are nonempty, $A\cap B=\varnothing$, and $E=A\cup B$. Assume there always exists a sequence $(x_n)\rightarrow x$ with $(x_n)$ contained in one of $A$ or $B$, and $x$ and element of the other. Then $\dots$ Therefore, $E$ is connected. $(\Leftarrow)$ Assume $E$ is connected. Let $A,B\subseteq\mathbb{R}$ such that neither are empty, $A\cap B=\varnothing$, and $E=A\cup B$. Then $\dots$ Therefore, there always exists a sequence $(x_n)\rightarrow x$, with $(x_n)$ contained in $A$ or $B$, and with $x$ an element of the other.
+\end{proof}
+
+\begin{theorem}
+    A set $E\subseteq\mathbb{R}$ is connected if and only if whenever $a<c<b$ with $a,b\in E$, it follows that $c\in E$ as well.
+\end{theorem} 
+
+\begin{proof}
+    Give this one a shot too! 
+\end{proof}
+
+\newpage
+
+\section{The Derivative}
+
+Although the definition would technically make sense for more complicated domains, all of the interesting results about the relationship between a function and its derivative require the domain of the given function be an interval.
+
+\begin{definition}
+    (\textbf{Differentiability}) Let $g\colon A\rightarrow\mathbb{R}$ be a function defined on an interval $A$. Given $c\in A$, the \textbf{derivative of $g$ at $c$} is defined by
+    
+    \begin{equation*}
+        g'(c)=\lim_{x\rightarrow c}\frac{g(x)-g(c)}{x-c},
+    \end{equation*}
+    
+    \noindent provided this limit exists. In this case we say \textbf{$g$ is differentiable at $c$}. If $g'$ exists for all points $c\in A$, we say that \textbf{$g$ is differentiable on $A$.}
+\end{definition}
+
+\begin{example}
+    Consider $f(x)=x^n$, where $n\in\mathbb{N}$, and let $c$ be any arbitrary point in $\mathbb{R}$. Using the algebraic identity
+    
+    \begin{equation*}
+        x^n-c^n=(x-c)(x^{n-1}+cx^{n-2}+c^2x^{n-3}+\cdots+c^{n-1}),
+    \end{equation*}
+    
+    \noindent we can calculate the familiar formula
+    
+    \begin{equation*}
+        \begin{split}
+            f'(c)=\lim_{x\rightarrow c}\frac{x^n-c^n}{x-c} &= \lim_{x\rightarrow c}(x^{n-1}+cx^{n-2}+c^2x^{n-3}+\cdots+c^{n-1}) \\
+            &= c^{n-1}+c^{n-1} +c^{n-1}+\cdots+ c^{n-1} \\
+            &= nc^{n-1}.
+        \end{split}
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    If $g(x)=\abs{x}$, then attempting to compute the derivative at $c=0$ produces the limit
+    
+    \begin{equation*}
+        g'(0)=\lim_{x\rightarrow 0}\frac{\abs{x}}{x},
+    \end{equation*}
+    
+    \noindent which is $+1$ or $-1$ depending on whether $x$ approaches the zero from the right or left. Consequently, this limit does not exist, and we conclude that $g$ is \textit{not} differentiable at $0$.
+\end{example}
+
+Example 2.2 is a reminder that continuity of $g$ does not imply that $g$ is necessarily differentiable. However, the converse is true and we will state and prove as much in the next theorem.
+
+\begin{theorem}
+    If $g\colon A\rightarrow\mathbb{R}$ is differentiable at a point $c\in A$, then $g$ is continuous at $c$ as well.
+\end{theorem}
+
+\newpage
+
+\begin{theorem}
+    Let $I\subseteq\mathbb{R}$ be an interval and $f\colon I\rightarrow\mathbb{R}$ be a function differentiable on $I$. Then if $f'$ is bounded, $f$ is uniformly continuous.
+\end{theorem}
+
+\begin{discussion}
+    There are a number of terms in this theorem which it wouldn't hurt to review. So first let us remind ourselves what it means for a function to be bounded. Well, this means that if $g\colon I\subseteq\mathbb{R}\rightarrowJ\subseteq\mathbb{R}$ is a bounded function, then there exists some $M\in\mathbb{R}^+$, such that for all $x\in I$, $\abs{g(x)}\leq M$. Or in other words
+    
+    \begin{equation*}
+        \exists M[M\in\mathbb{R}^+\wedge\forall x(x\in I\rightarrow\exists y[y\in J\wedge y=g(x)\wedge \abs{y}\leq M])].
+    \end{equation*}
+    
+    \noindent Alright, well that was a little excessive ... anyways. Now let's discuss what it means for a function to be uniformly continuous. Let $f$ be a function whose domain is some interval $I$ of $\mathbb{R}$. Then $f$ is uniformly continuous if for all $\varepsilon>0$, there exists a $\delta>0$, such that for all $x,y\in I$, if $\abs{x-y}<\delta$, then $\abs{f(x)=f(y)}<\varepsilon$.
+    Or stated differently,
+    
+    \begin{equation*}
+        (\forall\varepsilon>0)(\exists\delta>0)[\forall x\forall y(\abs{x-y}<\delta\rightarrow\abs{f(x)-f(y)}<\varepsilon)].
+    \end{equation*}
+    
+    \noindent Lastly, let us discuss what it means for a function to be differentiable. A function $h$ with domain an interval $I\subseteq\mathbb{R}$, is differentiable at a point $c\in\mathbb{R}$ if
+    
+    \begin{equation*}
+        \lim_{x\rightarrow c}\frac{f(x)-f(c)}{x-c}
+    \end{equation*}
+    
+    \noindent exists.
+    
+    \noindent\par 
+    So then what does it mean for a function's derivative to be bounded? Well the geometric interpretation of this is that the slopes of the function evaluated at each point $x\in I$ are limited, or they `tilt' only a finite amount. So if $f'$ is bounded, then for all $x\in I$,
+    
+    \begin{equation*}
+        -M\leq\lim_{x\rightarrow\infty}\frac{f(x)-f(c)}{x-c}\leq M.
+    \end{equation*}
+    
+    \noindent Moving on ... will edit later
+\end{discussion}
+
+\begin{theorem}[\textbf{The Intermediate Value Theorem}]
+    Let $f\colon[a,b]\rightarrow\mathbb{R}$ be continuous. If $L$ is a real number satisfying $f(a)<L<f(b)$ or $f(b)<L<f(a)$, then there exists a point $c\in(a,b)$ where $f(c)=L$. 
+\end{theorem}
+
+\begin{proof}
+    (1) Let $D=\{x\in[a,b]\colon f(x)\leq L\}$. Then $a\in D$ since $a\in[a,b]$ and $f(a)<L$. Thus, $D$ is nonempty. Let $x\in D$. Then $x\leq b$ since $D\subseteq[a,b]$. Thus, $D$ is bounded above by $b$. Thus, by the Axiom of Completeness, there exists $c\in\mathbb{R}$ such that $\sup(D)=c$. So then we have that $f(c)<L$ or $f(c)>L$ or $f(c)=L$. Since $b$ is an upper bound for $D$ and $c$ is the least upper bound, then $c\leq b$. But also $a\leq c$. Thus, $c\in[a,b]$. If $f(c)< L$, then $c\in D$. Now let $E=\{x\in[a,b]\colon f(x)\geq L\}.$ We see that $b\in E$, and $a$ bounds $E$ from below. Thus the infimum exists. Let $e=\inf(E)$. Then clearly $e\in[a,b]$. Assume $e\neq c$. Then there exists $p\in\mathbb{R}$ such that $c<p<e$. Then either $f(p)<L$, $f(p)>L$ or $f(p)=L$. $f(p)<L\rightarrow p\in D$ but $p>c$ and so $c
+    \eq\sup(D)$. If $f(p)>L$ then $p\in E$, but $p<e$ and so $e\neq\inf(E)$. If $f(p)=L$, then $p\in D$ and $c<p$ and $c\neq\sup(D)$. Thus, $e=c$. Thus, $f(c)\leq L$ and $f(c)<L$. Thus, $[(f(c)<L)\vee(f(c)=L)]\wedge(f(c)>L)$. $[(f(c)<L)\wedge(f(c)>L)]\vee[(f(c)=L)\wedge(f(c)>L)]$ ... $f(c)=L$.
+    
+\end{proof}
+
+\section{Sequences and Series of Functions}
+
+\n\end{document}

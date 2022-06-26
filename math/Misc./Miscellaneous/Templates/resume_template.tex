@@ -1,0 +1,260 @@
+%-------------------------
+% Resume in Latex
+% Based off of: https://github.com/sb2nov/resume
+% and Jake Gutierrez's version of it
+% at https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs
+% inspired by https://practicaltypography.com/resumes.html
+% License : MIT
+%------------------------
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin = 1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+
+%--------------UNDERLINING---------------
+% taken from https://alexwlchan.net/2017/10/latex-underlines/
+
+\usepackage{contour}
+\usepackage{ulem}
+
+\renewcommand{\ULdepth}{3.8pt}
+\contourlength{0.8pt}
+
+\newcommand{\myuline}[1]{%
+  \uline{\phantom{#1}}%
+  \llap{\contour{white}{#1}}%
+}
+
+%----------------------------------------
+
+\graphicspath{ {./Images/} }
+
+%----------FONT OPTIONS----------
+\usepackage{fontspec}
+\usepackage{fontawesome5}
+
+% I could have just used the charter package here for the font I wanted...
+% but I'd still need to change compiler to XeLaTeX to include the title font
+% \usepackage{charter}
+
+\setmainfont{XCharter}
+
+\newfontfamily{\basictitle}{basictitlefont}[
+Path = Fonts/,
+Extension = .ttf,
+UprightFont = basictitlefont
+]
+% to use:
+% {\basictitle This text uses the basictitle font}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\iffalse
+% \iftrue
+\addtolength{\oddsidemargin}{0.3in}
+\addtolength{\marginparsep}{0.3in}
+\addtolength{\evensidemargin}{0.3in}
+\addtolength{\textwidth}{-0.5in}
+\addtolength{\topmargin}{0.3in}
+\addtolength{\textheight}{0.3in}
+\fi
+
+\urlstyle{same}
+
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+    {\color{gray}\titlerule} \vspace{-5pt}
+    \vspace{8pt}\scshape\raggedright\normalfont
+}{}{0pt}{}
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+% ----- TOGGLE PHOTO --------
+% comment out \iffalse and remove the % from \iftrue to toggle photo
+\iffalse
+% \iftrue
+\begin{wrapfigure}{R}{0.15\textwidth}
+\vspace{-35pt}
+\includegraphics[scale=0.20]{dp_cropped}
+\end{wrapfigure}
+\fi
+
+%----------HEADING----------
+
+{\basictitle \Huge Quin Darcy}
+\\
+
+% ----- TOGGLE FOR PHOTO ----
+% \vspace{10pt}
+
+\href{mailto:quintondarcy@csus.edu}{
+    \faEnvelope
+    \thinspace \thinspace
+    \myuline{quintondarcy@csus.edu}} $|$
+\href{https://www.emoryward.com/}{
+    \thinspace \thinspace        
+    \myuline{My Website}} $|$
+\href{https://github.com/Duin-Darcy}{
+    \faGithub
+    \thinspace \thinspace
+    \myuline{Quin-Darcy}} $|$
+\faPhone
+\thinspace \thinspace
+(916) 202-1315
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+   \resumeSubheading
+      {California State University, Sacramento}{US}
+      {Master's in Mathematics. }{Aug. 2019 -- May 2022}
+      \resumeItemListStart
+      \resumeItemListEnd
+    \resumeSubheading
+      {California State University, Sacramento}{US}
+      {Bachelor's in Mathematics. Focus: Pure}{Aug. 2017 -- May 2019}
+      \resumeItemListStart
+      
+        \resumeItem{Awarded Pi Mu Epsilon Membership}
+      
+  \resumeSubHeadingListEnd
+  
+    %-----------PROJECTS-----------
+\section{A Few Coding Projects}
+\vspace{-6.1mm}
+    \resumeSubHeadingListStart
+    \resumeProjectHeading
+          {\href{https://github.com/Quin-Darcy/RL-Path-Finder}{\myuline{\textbf{RL Path Finder}}} $|$ \textit{Javascript}}{Dec 2021}\vspace{0.2mm}
+          \resumeItemListStart
+            \resumeItem{Uses epsilon-greedy and lower confidence bound sample average methods of reinforcement learning to find shortest path in lattice.}
+          \resumeItemListEnd
+    \resumeProjectHeading
+          {\href{https://github.com/Quin-Darcy/Proxy-Server}{\myuline{\textbf{DNS Packet Generator}}} $|$ \textit{Python}}{Nov 2021}\vspace{0.2mm}
+          \resumeItemListStart
+            \resumeItem{Generates DNS Packet response based on user provided IP address. For the use of redirecting network traffic to user proxy server.}
+          \resumeItemListEnd
+    \resumeProjectHeading
+          {\href{https://github.com/Quin-Darcy/Eigenvalues}{\myuline{\textbf{Eigenvalues of} $\mathfrak{s}_n(\mathbb{C})$}} $|$ \textit{Python}}{Sep 2021}\vspace{0.2mm}
+          \resumeItemListStart
+            \resumeItem{Generates .GIF of eigenvalues of the adjoint representation of Cartan subalgebra based on user specified parameters. }
+          \resumeItemListEnd
+    \resumeProjectHeading
+          {\href{https://github.com/Quin-Darcy/PseudoColorings}{\myuline{\textbf{Pseudo-Coloring}}} $|$ \textit{C++}}{June 2018}\vspace{0.2mm}
+          \resumeItemListStart
+            \resumeItem{Counts the number of monochromatic $k$-length $m$-pseudo progressions.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------
+\section{Recent Experience}
+\vspace{-5.1mm}
+\resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Help Desk Technician}{Sep 2021 -- Present}
+      {Nelson \& Kennard }{Sacramento, CA, USA}
+      \resumeItemListStart
+        \resumeItem{Account management in Active Directory, VB macros, basic VDA, general networking.}
+      \resumeItemListEnd
+  
+    \resumeSubheading
+      {Assistant Manager}{Sep 2015 -- Present}
+      {House of Hits Rehearsal Studios}{Sacramento, CA, USA}
+      \resumeItemListStart
+        \resumeItem{Monitored cash intake and deposit records.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Math Tutor}{Dec 2019 -- Present}
+      {Self-Employed}{Sacramento, CA, USA}
+      \resumeItemListStart
+        \resumeItem{Explained math concepts in caring and encouraging environment  to help both kids and adults thrive and learn.}
+      \resumeItemListEnd
+\resumeItemListEnd
+      
+      
+
+%-----------RESEARCH-----------
+\section{Research (papers linked)}
+\vspace{-5.1mm}
+  \resumeSubHeadingListStart
+  
+    \resumeSubheading
+      {\href{https://msp.org/involve/2020/13-5/p03.xhtml}{\myuline{Counting pseudo progressions}}}{Feb 2019 -- Jun 2019}
+      {with Prof Jay Cummings}{California State University, Sacramento}
+      \resumeItemListStart
+        \resumeItem{Contributed Theorems to paper and wrote program to confirm results.}
+        \resumeItem{Published results in \textit{Involve: a journal of mathematics}}
+      \resumeItemListEnd
+      
+%-----------PROGRAMMING SKILLS-----------
+
+
+%-------------------------------------------
+\end{document}
