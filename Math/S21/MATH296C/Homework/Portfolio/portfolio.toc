@@ -1,8 +1,0 @@
-\contentsline {section}{\numberline {1}Introduction}{3}{}%
-\contentsline {section}{\numberline {2}Exercise Solutions}{3}{}%
-\contentsline {section}{\numberline {3}Section Writing}{10}{}%
-\contentsline {section}{\numberline {4}How the roots are calculated}{10}{}%
-\contentsline {subsection}{\numberline {4.1}A Quick Visual Detour}{10}{}%
-\contentsline {subsection}{\numberline {4.2}Continuing where we left off}{16}{}%
-\contentsline {section}{\numberline {5}Referring}{16}{}%
-\contentsline {section}{\numberline {6}Reflections}{17}{}%
