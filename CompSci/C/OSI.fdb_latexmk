@@ -1,9 +1,0 @@
-# Fdb version 3
-["pdflatex"] 1609231892 "OSI.tex" "OSI.pdf" "OSI" 1609231892
-  "/usr/share/texmf-dist/web2c/texmf.cnf" 1607249373 33301 a3134070eacafb10b1f371612ce2650d ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1608935386 2635866 3755b4a3f68323d0981acf9ea77b7855 ""
-  "OSI.aux" 1609231375 8 a94a2480d3289e625eea47cd1b285758 ""
-  "OSI.tex" 1609230628 0 d41d8cd98f00b204e9800998ecf8427e ""
-  (generated)
-  "OSI.pdf"
-  "OSI.log"
